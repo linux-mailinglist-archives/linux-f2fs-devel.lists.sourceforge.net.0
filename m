@@ -2,88 +2,90 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id YLhDEuy5lWm7UQIAu9opvQ
+	id 2A1lFOy5lWm7UQIAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
 	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 18 Feb 2026 14:09:00 +0100
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7C0BD156863
+	by mail.lfdr.de (Postfix) with ESMTPS id 835AD156864
 	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 18 Feb 2026 14:08:59 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:MIME-Version:Message-ID:Date:To:Sender:
-	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
-	Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Owner;
-	bh=CN75/WozDYP0NZJ7H5Yq4UELVB/pIdz5yX+5nzu4PE4=; b=QGNb8a+TLzZBNrT7ckZIGeHWAO
-	1ctTsRIRQ/23+1RVOVMhs73LOHJSn0g6UgaInOwUhZtMBei+2S24X1Iw8j9TB+8LRxnQfu6h6KWkT
-	NgMZTVbYP6vCP8bup3rkTlz9LwmHbnBU57p1KmlTyJjpL3mJoah6a/CoPTXqLj8AWvUw=;
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	List-Unsubscribe:List-Id:Subject:MIME-Version:References:In-Reply-To:
+	Message-ID:Date:To:Sender:Content-ID:Content-Description:Resent-Date:
+	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
+	bh=7AfYJGhvIpf0bvYiR/qqf3KklLjZs8AXSNyEkk/c9sI=; b=B3oEQ2MTcytIkusBwHe7l73hS5
+	ZxdgZsqloRg+PvzwkoWpMmwbfv4L73Tebb0WC/1GMbME+amO6pIxovq40V7vgNZ3LImVyAeyzJiXK
+	uLt5Hi99wGUlLK4fIR39q8jvKxNVhjgJiXiFfazvSEwZLdqf3Yy49U64GrA5V+j9va80=;
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vshIO-0004dm-TX;
-	Wed, 18 Feb 2026 13:08:49 +0000
+	id 1vshIR-0000vb-Vf;
+	Wed, 18 Feb 2026 13:08:51 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
  (envelope-from <prvs=502ed4ed6=shinichiro.kawasaki@wdc.com>)
- id 1vshIN-0004dc-Sq for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 18 Feb 2026 13:08:48 +0000
+ id 1vshIP-0000vT-A8 for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 18 Feb 2026 13:08:49 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
+ In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=DysxMvVR+2mhNFdmOvOLDkzsKJY3Io7UVUy4+KZQ4nY=; b=JldMq39W7TIlqQYZ7rpqh8bZey
- p0AtPm06fcIHYvvVqtudCINMgQ3qq3210OET9nDVtxDTqn6mZauJyXR0zW0gn1nWpq0UEZ8K3Hab5
- 9PQi8x4aEooX8Mume0QNYJWeMhF6JjzKyemDLAGm3XFcqVjR+oH6vmDcDoR6S1NFRy5w=;
+ bh=JXW9nq9v44O5MPSsQDBlwGaRp7ZiVlfa/hOP/0vkiJY=; b=a+Hhnn8oQ8b4CS2Fw+GAXe5/eq
+ R8/qYzUWXDCj6aoU9v6D6Uk+WTWlDOsJx1zAOenOQFsf2NlHbV36V5PuJa7gzTCSnxcXTdCDbEwzn
+ 8rp7a7fzJyPbXywNexOt1TgtEX5IDwS5dtiz0BcrhkDjYyOwMK3bxuMFRDTvJPX+WQ5Y=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=DysxMvVR+2mhNFdmOvOLDkzsKJY3Io7UVUy4+KZQ4nY=; b=l
- mzyhUjcvyijD1G/Bblq18h0VwB3YqV73ZG0VhvvcOf4iYk/tNBQymZ+wAPc+d/qReukq2VWE579g+
- r5Fv9p8OVbFvEz8FumI83FWnhdKPGd+v5oxJ7ACcZfwqm4ihvj0VAL/cG5GQQtQ7frr4Lq+sUBC1R
- IUH4iU59j7u6sQfs=;
+ h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=JXW9nq9v44O5MPSsQDBlwGaRp7ZiVlfa/hOP/0vkiJY=; b=VTcvg3JbT7lwhXCI+9eGfpqpSX
+ 2bTki+4SyqmxJrJ2FZQjaAe8x5Kh9c0SnV8chTHRdbFdVrJFY1K2nMdo0/yTZCqKq48RCW694TCkj
+ 61TaW+5cAP+7FcoeCh+++QOnOyPIAbiiC/k+bwWZcjTU9vc/QnquZymWpzgA7m/5ZOLs=;
 Received: from esa5.hgst.iphmx.com ([216.71.153.144])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vshIN-0001c1-MG for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 18 Feb 2026 13:08:48 +0000
+ id 1vshIO-0001c1-M6 for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 18 Feb 2026 13:08:49 +0000
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
  d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1771420127; x=1802956127;
- h=from:to:cc:subject:date:message-id:mime-version:
- content-transfer-encoding;
- bh=V8n8n2I8qXR5fdQ3acT0j4iS1HTGtdbKA9KI2QouPvY=;
- b=ElozphmZX6ZUkuSeyeJBsIqQar4DD7WhrPMaPdfO0B+ol2RbF24LrpTT
- V2tPqPDYyt1iXOmf9VMyBCiDmKSGGpuqSb9O4WrN2vpOMeTBdrMqkg7Jp
- tOx0QcFaciRETPjiOKZHLc4TFDClAezxXJPob75nXM0/H0EPNZoUYUSkl
- hbuZ6lA9YtuHJoLeeO8ygN/wx05rHKjOSwBbWUSSMsDUwahzUq3bJigi+
- jMrxqR+KnWq1xte2s2rCnrFuGAE/avsZsvW3TFJBcravQnURZbNAKxaKz
- 5ubo7uSitaOS4HwVwiee0AswT2jDZ54szzjBsbIuIzBgdbSpNBXdoI6vo A==;
-X-CSE-ConnectionGUID: sNoKRZ9iSYyjNGaWgu5O7Q==
-X-CSE-MsgGUID: RIfs+5jMTkiUpqZeqPPCiQ==
-X-IronPort-AV: E=Sophos;i="6.21,298,1763395200"; d="scan'208";a="140592975"
+ t=1771420128; x=1802956128;
+ h=from:to:cc:subject:date:message-id:in-reply-to:
+ references:mime-version:content-transfer-encoding;
+ bh=nD2cft06qvrOoIcvYeTj6huruJ70ktxCXRedmsa/tkc=;
+ b=KX1zVZx+lUZxXeJAl268DDW8MWLr1DC/emSx/KWM1gK8o330fPQI5/Hz
+ fi3gS03miEOrvlqohdcQggpNWWMWfDWVZJtMAI5sOg93UfIlxLwCbFerD
+ qE/sH6D72KUvUGVhjUaTpnk9E+ZAnXXPSoNcpeEP2v8h4JnTEYosceaAz
+ WnIL73Yj8isWtn2FHwcTWkXH9hkSOHlvvnKqjDSDYOA5bRTTANptD+TqR
+ 4GYQ6413o1lZ2UFoWSWk3H5BeobK7W1FTR3DOmeZXiiU5KowzrWidiLE6
+ 8eQEMsYFcZLGDjeIirzVjAb/VVRpxrF63FaAyiECmNJ/ZHeV8ve2myDhh A==;
+X-CSE-ConnectionGUID: N/t8pD4NRcq1+d2BzJROpA==
+X-CSE-MsgGUID: ZQQEytJ3QJuFgaJqn12yZw==
+X-IronPort-AV: E=Sophos;i="6.21,298,1763395200"; d="scan'208";a="140592977"
 Received: from uls-op-cesaip01.wdc.com (HELO uls-op-cesaep01.wdc.com)
  ([199.255.45.14])
- by ob1.hgst.iphmx.com with ESMTP; 18 Feb 2026 20:52:58 +0800
-IronPort-SDR: 6995b62a_Dhgjc+TMqwghn2lQCCh1e+GVCLC2ZTPKt1TLxICAeAjq/Ke
- IQONikOhu08f+KuqATRHaEKmOzrZbv2uue7k4aQ==
+ by ob1.hgst.iphmx.com with ESMTP; 18 Feb 2026 20:52:59 +0800
+IronPort-SDR: 6995b62b_+3R4PAE7Xr5KGCosaXpEO/pEdJYrCLuOvKPeSqJuAgIVnSG
+ lTpYB0Ubv3E1rDsJArgGVEPhJh7bc9g+nwVaE3A==
 Received: from uls-op-cesaip01.wdc.com ([10.248.3.36])
  by uls-op-cesaep01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256;
- 18 Feb 2026 04:52:58 -0800
+ 18 Feb 2026 04:52:59 -0800
 WDCIronportException: Internal
 Received: from unknown (HELO shindev.ssa.fujisawa.hgst.com) ([10.149.67.30])
- by uls-op-cesaip01.wdc.com with ESMTP; 18 Feb 2026 04:52:58 -0800
+ by uls-op-cesaip01.wdc.com with ESMTP; 18 Feb 2026 04:52:59 -0800
 To: linux-f2fs-devel@lists.sourceforge.net, Jaegeuk Kim <jaegeuk@kernel.org>,
  Chao Yu <chao@kernel.org>
-Date: Wed, 18 Feb 2026 21:52:36 +0900
-Message-ID: <20260218125237.3340441-1-shinichiro.kawasaki@wdc.com>
+Date: Wed, 18 Feb 2026 21:52:37 +0900
+Message-ID: <20260218125237.3340441-2-shinichiro.kawasaki@wdc.com>
 X-Mailer: git-send-email 2.49.0
+In-Reply-To: <20260218125237.3340441-1-shinichiro.kawasaki@wdc.com>
+References: <20260218125237.3340441-1-shinichiro.kawasaki@wdc.com>
 MIME-Version: 1.0
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
@@ -92,12 +94,12 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: A lockdep WARN [1] was observed recently with linux-next
- kernel
- when I run the workload with the following steps for a zoned TCMU device:
- 1) Create a zoned TCMU device 2) Create a f2fs filesystem on the zoned TCMU
- device and mount it 3) Fill the filesystem with files and trigger GC 4) Unmout
- the filesystem 5) Remove the zoned TCMU devic [...] 
+ Content preview: From: Shin'ichiro Kawasaki via Linux-f2fs-devel
+ <linux-f2fs-devel@lists.sourceforge.net>
+ A lockdep WARN is observed recently under the following steps: 1) Create
+ a zoned TCMU device 2) Create a f2fs filesystem on the zoned TCMU device and
+ mount it 3) Fill the filesystem with files and trigger GC 4) Unmout the
+ filesystem 5) Remove the zoned TCMU devic [...] 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -108,8 +110,8 @@ X-Spam-Report: Spam detection software,
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-X-Headers-End: 1vshIN-0001c1-MG
-Subject: [f2fs-dev] [PATCH v2 0/1] f2fs: fix lockdep WARN of
+X-Headers-End: 1vshIO-0001c1-M6
+Subject: [f2fs-dev] [PATCH v2 1/1] f2fs: fix lockdep WARN of
  sbi->cp_global_sem and q->q_usage_counter
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
@@ -135,37 +137,38 @@ X-Spamd-Result: default: False [-8.61 / 15.00];
 	WHITELIST_DMARC(-7.00)[sourceforge.net:D:+];
 	DMARC_POLICY_ALLOW_WITH_FAILURES(-0.50)[];
 	RWL_MAILSPIKE_EXCELLENT(-0.40)[216.105.38.7:from];
+	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7];
 	MAILLIST(-0.20)[mailman];
 	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
-	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7:c];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	DKIM_MIXED(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
-	RECEIVED_HELO_LOCALHOST(0.00)[];
-	ARC_NA(0.00)[];
+	DKIM_MIXED(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
-	TO_DN_SOME(0.00)[];
+	ARC_NA(0.00)[];
+	RECEIVED_HELO_LOCALHOST(0.00)[];
 	MIME_TRACE(0.00)[0:+];
+	TO_DN_SOME(0.00)[];
+	DMARC_POLICY_ALLOW(0.00)[lists.sourceforge.net,none];
 	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,wdc.com:s=dkim.wdc.com];
-	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
 	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,wdc.com:-];
+	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
 	RCVD_COUNT_FIVE(0.00)[6];
 	FROM_NEQ_ENVFROM(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
 	FROM_HAS_DN(0.00)[];
-	DMARC_POLICY_ALLOW(0.00)[lists.sourceforge.net,none];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[wdc.com:mid,wdc.com:replyto,lists.sourceforge.net:rdns,lists.sourceforge.net:helo,lists.sourceforge.net:dkim];
+	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.sourceforge.net:rdns,lists.sourceforge.net:helo,lists.sourceforge.net:dkim,wdc.com:mid,wdc.com:email,wdc.com:replyto];
 	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
 	TAGGED_RCPT(0.00)[linux-f2fs-devel];
 	RCPT_COUNT_FIVE(0.00)[5];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	HAS_REPLYTO(0.00)[shinichiro.kawasaki@wdc.com]
-X-Rspamd-Queue-Id: 7C0BD156863
+X-Rspamd-Queue-Id: 835AD156864
 X-Rspamd-Action: no action
 
-A lockdep WARN [1] was observed recently with linux-next kernel when I
-run the workload with the following steps for a zoned TCMU device:
+From: Shin'ichiro Kawasaki via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
+
+A lockdep WARN is observed recently under the following steps:
 
 1) Create a zoned TCMU device
 2) Create a f2fs filesystem on the zoned TCMU device and mount it
@@ -173,250 +176,61 @@ run the workload with the following steps for a zoned TCMU device:
 4) Unmout the filesystem
 5) Remove the zoned TCMU device
 
-The WARN is reported at the step 5).
+The lockdep WARN indicates that a circular lock depedency formed by four
+contexts, as described below.
 
-The WARN is recreated in stable manner. I bisected and found the trigger
-is commit 4a210a5be279 ("f2fs: improve check for enough free sections").
-However, this commit does not look like the cause of the WARN. It just
-changes GC trigger conditions. I think the lockdep WARN was hidden from
-the beginning, and the trigger commit unveiled it.
+a) TCMU device removal context:
+ - call del_gendisk() to get q->q_usage_counter
+ - call start_flush_work() to get work_completion of wb->dwork
+b) f2fs writeback context:
+ - in wb_workfn(), which holds work_completion of wb->dwork
+ - call f2fs_balance_fs() to get sbi->gc_lock
+c) f2fs vfs_write context:
+ - call f2fs_gc() to get sbi->gc_lock
+ - call f2fs_write_checkpoint() to get sbi->cp_global_sem
+d) f2fs mount context:
+ - call recover_fsync_data() to get sbi->cp_global_sem
+ - call f2fs_check_and_fix_write_pointer() to call blkdev_report_zones()
+   that goes down to blk_mq_alloc_request and get q->q_usage_counter
 
-The single patch in this series addresses the WARN. The whole WARN
-message is long, then I share it in this cover letter as below.
+To suppress the WARN, cut the dependency d) between sbi->cp_global_sem
+and q->q_usage_counter. For that purpose, move the
+f2fs_check_and_fix_write_pointer() call outside of the critical section
+of sbi->cp_global_sem in f2fs_recovery_fsync_data(). This change is fine
+because the write pointer fix operation only affects the main segments
+and does not interact with the check point metadata. Furthermore,
+conflicts between the write pointer fix operation and data/node flush
+operations remain protected by SBI_POR_DOING.
 
-I confirmed that the WARN is recreated with the kernel at the latest
-Linus master branch tip with the git hash 2961f841b025. Also I confirmed
-that this patch can be applied to the master branch tip and it avoids
-the WARN.
-
-Changes from v1:
-- Added a Reviewed-by tag
-- Link to v1: https://lore.kernel.org/linux-f2fs-devel/20260201122258.3168119-1-shinichiro.kawasaki@wdc.com/
-
-
-[1]
-
-[75353.324919][T552007] f2fs_gc_1762815636
-[75353.914212][T552022] F2FS-fs (sdg): f2fs_recover_fsync_data: recovery fsync data, check_only: 0
-[75353.934136][T552022] F2FS-fs (sdg): Checking entire write pointers
-[75353.947159][T552022] F2FS-fs (sdg): Mounted with checkpoint version = dc0885
-[75645.583261][T572068] [KTS]     f2fs_gc:  /dev/sdg: 0:04:53
-[75645.781944][T572081] devconf_clean_061-fsgc-tcmu.config_1762815929
-[75646.811854][T572171] 
-[75646.814712][T572171] ======================================================
-[75646.822242][T572171] WARNING: possible circular locking dependency detected
-[75646.829746][T572171] 6.18.0-rc5-kts #1 Not tainted
-[75646.835082][T572171] ------------------------------------------------------
-[75646.842599][T572171] targetcli/572171 is trying to acquire lock:
-[75646.849151][T572171] ffff8881145703e0 ((work_completion)(&(&wb->dwork)->work)){+.+.}-{0:0}, at: start_flush_work+0x5a8/0xc20
-[75646.860952][T572171] 
-[75646.860952][T572171] but task is already holding lock:
-[75646.869479][T572171] ffff88817deba820 (&q->q_usage_counter(queue)#23){++++}-{0:0}, at: del_gendisk+0x106/0x190
-[75646.880080][T572171] 
-[75646.880080][T572171] which lock already depends on the new lock.
-[75646.880080][T572171] 
-[75646.892312][T572171] 
-[75646.892312][T572171] the existing dependency chain (in reverse order) is:
-[75646.902481][T572171] 
-[75646.902481][T572171] -> #3 (&q->q_usage_counter(queue)#23){++++}-{0:0}:
-[75646.912498][T572171]        __lock_acquire+0x55d/0xbf0
-[75646.918218][T572171]        lock_acquire.part.0+0xb8/0x230
-[75646.924284][T572171]        blk_queue_enter+0x4d3/0x640
-[75646.930090][T572171]        blk_mq_alloc_request+0x47f/0xa10
-[75646.936327][T572171]        scsi_execute_cmd+0x256/0x700
-[75646.942207][T572171]        sd_zbc_do_report_zones+0x1a6/0x450
-[75646.948602][T572171]        sd_zbc_report_zones+0x320/0x980
-[75646.954724][T572171]        blkdev_report_zones+0x1b4/0x390
-[75646.960844][T572171]        do_fix_curseg_write_pointer+0x2f6/0x1420 [f2fs]
-[75646.968431][T572171]        f2fs_check_and_fix_write_pointer+0x381/0x790 [f2fs]
-[75646.976361][T572171]        f2fs_recover_fsync_data+0x2d9/0x720 [f2fs]
-[75646.983496][T572171]        f2fs_fill_super+0x31eb/0x3e60 [f2fs]
-[75646.990108][T572171]        get_tree_bdev_flags+0x322/0x610
-[75646.996224][T572171]        vfs_get_tree+0x8b/0x2f0
-[75647.001637][T572171]        vfs_cmd_create+0xbd/0x280
-[75647.007218][T572171]        __do_sys_fsconfig+0x659/0xa40
-[75647.013139][T572171]        do_syscall_64+0x94/0x7f0
-[75647.018619][T572171]        entry_SYSCALL_64_after_hwframe+0x76/0x7e
-[75647.025486][T572171] 
-[75647.025486][T572171] -> #2 (&sbi->cp_global_sem){+.+.}-{4:4}:
-[75647.034489][T572171]        __lock_acquire+0x55d/0xbf0
-[75647.040122][T572171]        lock_acquire.part.0+0xb8/0x230
-[75647.046103][T572171]        down_write+0x90/0x1e0
-[75647.051308][T572171]        f2fs_write_checkpoint+0x315/0x14c0 [f2fs]
-[75647.058314][T572171]        f2fs_gc+0x1a2e/0x28e0 [f2fs]
-[75647.064185][T572171]        f2fs_balance_fs+0x613/0x740 [f2fs]
-[75647.070573][T572171]        f2fs_map_blocks+0x22ac/0x3da0 [f2fs]
-[75647.077130][T572171]        f2fs_preallocate_blocks+0x3f1/0x640 [f2fs]
-[75647.084192][T572171]        f2fs_file_write_iter+0x482/0x11c0 [f2fs]
-[75647.091077][T572171]        vfs_write+0x524/0x1010
-[75647.096342][T572171]        ksys_write+0xff/0x200
-[75647.101510][T572171]        do_syscall_64+0x94/0x7f0
-[75647.106930][T572171]        entry_SYSCALL_64_after_hwframe+0x76/0x7e
-[75647.113745][T572171] 
-[75647.113745][T572171] -> #1 (&sbi->gc_lock){+.+.}-{4:4}:
-[75647.122122][T572171]        __lock_acquire+0x55d/0xbf0
-[75647.127711][T572171]        lock_acquire.part.0+0xb8/0x230
-[75647.133634][T572171]        down_write+0x90/0x1e0
-[75647.138762][T572171]        f2fs_balance_fs+0x5a6/0x740 [f2fs]
-[75647.145094][T572171]        f2fs_write_inode+0x50e/0x9d0 [f2fs]
-[75647.151489][T572171]        write_inode+0x147/0x380
-[75647.156773][T572171]        __writeback_single_inode+0x391/0x870
-[75647.163184][T572171]        writeback_sb_inodes+0x547/0xe20
-[75647.169165][T572171]        __writeback_inodes_wb+0xf2/0x270
-[75647.175235][T572171]        wb_writeback+0x5ca/0x810
-[75647.180606][T572171]        wb_do_writeback+0x536/0x7d0
-[75647.186232][T572171]        wb_workfn+0x9f/0x400
-[75647.191246][T572171]        process_one_work+0x86b/0x14c0
-[75647.197033][T572171]        worker_thread+0x5f2/0xfd0
-[75647.202475][T572171]        kthread+0x3a4/0x760
-[75647.207397][T572171]        ret_from_fork+0x2d6/0x3e0
-[75647.212840][T572171]        ret_from_fork_asm+0x1a/0x30
-[75647.218454][T572171] 
-[75647.218454][T572171] -> #0 ((work_completion)(&(&wb->dwork)->work)){+.+.}-{0:0}:
-[75647.228870][T572171]        check_prev_add+0xe1/0xcf0
-[75647.234324][T572171]        validate_chain+0x4c5/0x730
-[75647.239859][T572171]        __lock_acquire+0x55d/0xbf0
-[75647.245383][T572171]        lock_acquire.part.0+0xb8/0x230
-[75647.251258][T572171]        start_flush_work+0x5c4/0xc20
-[75647.256959][T572171]        __flush_work+0xca/0x1a0
-[75647.262227][T572171]        wb_shutdown+0x15e/0x210
-[75647.267493][T572171]        bdi_unregister+0x170/0x5b0
-[75647.273016][T572171]        __del_gendisk+0x81c/0xa20
-[75647.278447][T572171]        del_gendisk+0x106/0x190
-[75647.283709][T572171]        sd_remove+0x8a/0x140
-[75647.288707][T572171]        device_release_driver_internal+0x36d/0x520
-[75647.295619][T572171]        bus_remove_device+0x1ef/0x3f0
-[75647.301396][T572171]        device_del+0x3be/0x9b0
-[75647.306566][T572171]        __scsi_remove_device+0x27f/0x340
-[75647.312610][T572171]        scsi_remove_device+0x3f/0x50
-[75647.318305][T572171]        tcm_loop_port_unlink+0xcb/0x160 [tcm_loop]
-[75647.325214][T572171]        target_fabric_port_unlink+0xdd/0x170 [target_core_mod]
-[75647.333237][T572171]        configfs_unlink+0x386/0x7a0
-[75647.338853][T572171]        vfs_unlink+0x2a8/0x8c0
-[75647.344035][T572171]        do_unlinkat+0x3e7/0x5c0
-[75647.349299][T572171]        __x64_sys_unlink+0xae/0x120
-[75647.354906][T572171]        do_syscall_64+0x94/0x7f0
-[75647.360252][T572171]        entry_SYSCALL_64_after_hwframe+0x76/0x7e
-[75647.366991][T572171] 
-[75647.366991][T572171] other info that might help us debug this:
-[75647.366991][T572171] 
-[75647.378454][T572171] Chain exists of:
-[75647.378454][T572171]   (work_completion)(&(&wb->dwork)->work) --> &sbi->cp_global_sem --> &q->q_usage_counter(queue)#23
-[75647.378454][T572171] 
-[75647.396298][T572171]  Possible unsafe locking scenario:
-[75647.396298][T572171] 
-[75647.404571][T572171]        CPU0                    CPU1
-[75647.410281][T572171]        ----                    ----
-[75647.415986][T572171]   lock(&q->q_usage_counter(queue)#23);
-[75647.421960][T572171]                                lock(&sbi->cp_global_sem);
-[75647.429584][T572171]                                lock(&q->q_usage_counter(queue)#23);
-[75647.438078][T572171]   lock((work_completion)(&(&wb->dwork)->work));
-[75647.444841][T572171] 
-[75647.444841][T572171]  *** DEADLOCK ***
-[75647.444841][T572171] 
-[75647.454283][T572171] 8 locks held by targetcli/572171:
-[75647.459829][T572171]  #0: ffff88815b388420 (sb_writers#14){.+.+}-{0:0}, at: do_unlinkat+0x18f/0x5c0
-[75647.469302][T572171]  #1: ffff888192ca46d8 (&sb->s_type->i_mutex_key#20/1){+.+.}-{4:4}, at: do_unlinkat+0x20f/0x5c0
-[75647.480177][T572171]  #2: ffff888192ca1a20 (&sb->s_type->i_mutex_key#21){++++}-{4:4}, at: vfs_unlink+0xbb/0x8c0
-[75647.490711][T572171]  #3: ffff8881427300e0 (&shost->scan_mutex){+.+.}-{4:4}, at: scsi_remove_device+0x37/0x50
-[75647.501077][T572171]  #4: ffff888161396380 (&dev->mutex){....}-{4:4}, at: device_release_driver_internal+0x90/0x520
-[75647.511970][T572171]  #5: ffff8881427303c0 (&set->update_nr_hwq_lock){++++}-{4:4}, at: del_gendisk+0xfe/0x190
-[75647.522345][T572171]  #6: ffff88817deba820 (&q->q_usage_counter(queue)#23){++++}-{0:0}, at: del_gendisk+0x106/0x190
-[75647.533249][T572171]  #7: ffffffffaad25720 (rcu_read_lock){....}-{1:3}, at: start_flush_work+0x34/0xc20
-[75647.543119][T572171] 
-[75647.543119][T572171] stack backtrace:
-[75647.549972][T572171] CPU: 0 UID: 0 PID: 572171 Comm: targetcli Not tainted 6.18.0-rc5-kts #1 PREEMPT(lazy) 
-[75647.549978][T572171] Hardware name: Supermicro Super Server/X11SPi-TF, BIOS 3.5 05/18/2021
-[75647.549980][T572171] Call Trace:
-[75647.549983][T572171]  <TASK>
-[75647.549986][T572171]  dump_stack_lvl+0x6e/0xa0
-[75647.549993][T572171]  print_circular_bug.cold+0x38/0x46
-[75647.550000][T572171]  check_noncircular+0x14a/0x170
-[75647.550007][T572171]  ? unwind_get_return_address+0x6b/0xe0
-[75647.550015][T572171]  check_prev_add+0xe1/0xcf0
-[75647.550019][T572171]  ? look_up_lock_class+0x59/0x140
-[75647.550026][T572171]  validate_chain+0x4c5/0x730
-[75647.550032][T572171]  __lock_acquire+0x55d/0xbf0
-[75647.550037][T572171]  lock_acquire.part.0+0xb8/0x230
-[75647.550041][T572171]  ? start_flush_work+0x5a8/0xc20
-[75647.550045][T572171]  ? mark_held_locks+0x40/0x70
-[75647.550048][T572171]  ? lock_acquire+0xf6/0x140
-[75647.550052][T572171]  ? start_flush_work+0x5a8/0xc20
-[75647.550056][T572171]  start_flush_work+0x5c4/0xc20
-[75647.550059][T572171]  ? start_flush_work+0x5a8/0xc20
-[75647.550065][T572171]  __flush_work+0xca/0x1a0
-[75647.550069][T572171]  ? __pfx___flush_work+0x10/0x10
-[75647.550073][T572171]  ? __lock_release.isra.0+0x59/0x170
-[75647.550076][T572171]  ? __pfx_wq_barrier_func+0x10/0x10
-[75647.550086][T572171]  ? __pfx___might_resched+0x10/0x10
-[75647.550093][T572171]  ? lockdep_hardirqs_on_prepare.part.0+0x9b/0x150
-[75647.550098][T572171]  wb_shutdown+0x15e/0x210
-[75647.550102][T572171]  bdi_unregister+0x170/0x5b0
-[75647.550105][T572171]  ? find_held_lock+0x2b/0x80
-[75647.550110][T572171]  ? __pfx_bdi_unregister+0x10/0x10
-[75647.550113][T572171]  ? __lock_release.isra.0+0x59/0x170
-[75647.550117][T572171]  ? __up_write+0x192/0x4f0
-[75647.550122][T572171]  __del_gendisk+0x81c/0xa20
-[75647.550128][T572171]  ? down_read+0x1b6/0x480
-[75647.550133][T572171]  ? __pfx___del_gendisk+0x10/0x10
-[75647.550137][T572171]  ? __pfx_down_read+0x10/0x10
-[75647.550142][T572171]  ? __lock_release.isra.0+0x59/0x170
-[75647.550145][T572171]  ? __up_write+0x192/0x4f0
-[75647.550150][T572171]  del_gendisk+0x106/0x190
-[75647.550155][T572171]  sd_remove+0x8a/0x140
-[75647.550159][T572171]  device_release_driver_internal+0x36d/0x520
-[75647.550165][T572171]  bus_remove_device+0x1ef/0x3f0
-[75647.550170][T572171]  device_del+0x3be/0x9b0
-[75647.550175][T572171]  ? attribute_container_device_trigger+0x181/0x1f0
-[75647.550181][T572171]  ? __pfx_device_del+0x10/0x10
-[75647.550184][T572171]  ? __pfx_attribute_container_device_trigger+0x10/0x10
-[75647.550191][T572171]  __scsi_remove_device+0x27f/0x340
-[75647.550197][T572171]  scsi_remove_device+0x3f/0x50
-[75647.550202][T572171]  tcm_loop_port_unlink+0xcb/0x160 [tcm_loop]
-[75647.550211][T572171]  ? __pfx_target_fabric_port_unlink+0x10/0x10 [target_core_mod]
-[75647.550276][T572171]  target_fabric_port_unlink+0xdd/0x170 [target_core_mod]
-[75647.550336][T572171]  configfs_unlink+0x386/0x7a0
-[75647.550342][T572171]  vfs_unlink+0x2a8/0x8c0
-[75647.550348][T572171]  do_unlinkat+0x3e7/0x5c0
-[75647.550353][T572171]  ? __pfx_do_unlinkat+0x10/0x10
-[75647.550358][T572171]  ? check_heap_object+0x6a/0x4c0
-[75647.550362][T572171]  ? __check_object_size.part.0+0x61/0x150
-[75647.550369][T572171]  __x64_sys_unlink+0xae/0x120
-[75647.550374][T572171]  do_syscall_64+0x94/0x7f0
-[75647.550381][T572171]  ? __pfx___do_sys_newfstatat+0x10/0x10
-[75647.550387][T572171]  ? trace_hardirqs_on_prepare+0x101/0x150
-[75647.550393][T572171]  ? do_syscall_64+0x137/0x7f0
-[75647.550400][T572171]  ? trace_hardirqs_on_prepare+0x101/0x150
-[75647.550403][T572171]  ? do_syscall_64+0x137/0x7f0
-[75647.550407][T572171]  ? trace_hardirqs_on_prepare+0x101/0x150
-[75647.550411][T572171]  ? do_syscall_64+0x137/0x7f0
-[75647.550414][T572171]  ? trace_hardirqs_on_prepare+0x101/0x150
-[75647.550418][T572171]  ? do_syscall_64+0x137/0x7f0
-[75647.550422][T572171]  ? trace_hardirqs_on_prepare+0x101/0x150
-[75647.550426][T572171]  ? do_syscall_64+0x137/0x7f0
-[75647.550429][T572171]  ? trace_hardirqs_on_prepare+0x101/0x150
-[75647.550433][T572171]  ? do_syscall_64+0x137/0x7f0
-[75647.550436][T572171]  ? clear_bhb_loop+0x30/0x80
-[75647.550440][T572171]  ? clear_bhb_loop+0x30/0x80
-[75647.550444][T572171]  entry_SYSCALL_64_after_hwframe+0x76/0x7e
-[75647.550448][T572171] RIP: 0033:0x7f952a6f715b
-[75647.550452][T572171] Code: ff e8 a9 8d 01 00 66 0f 1f 84 00 00 00 00 00 f3 0f 1e fa b8 5f 00 00 00 0f 05 c3 0f 1f 40 00 f3 0f 1e fa b8 57 00 00 00 0f 05 <48> 3d 00 f0 ff ff 77 05 c3 0f 1f 40 00 48 8b 15 71 ec 0f 00 f7 d8
-[75647.550456][T572171] RSP: 002b:00007fff23eeed18 EFLAGS: 00000202 ORIG_RAX: 0000000000000057
-[75647.550461][T572171] RAX: ffffffffffffffda RBX: 0000000000000000 RCX: 00007f952a6f715b
-[75647.550464][T572171] RDX: 0000000000000001 RSI: 0000000000000000 RDI: 00007f951929bd50
-[75647.550466][T572171] RBP: 00007fff23eeed40 R08: 0000000000000053 R09: 0000000000000002
-[75647.550469][T572171] R10: 00007f952ab15b10 R11: 0000000000000202 R12: 00007f952ad507d0
-[75647.550471][T572171] R13: 00007fff23eeed60 R14: 0000000000000001 R15: 00007f952ad507d0
-[75647.550477][T572171]  </TASK>
-[75648.073649][T572171] sd 11:0:1:0: [sdg] Synchronizing SCSI cache
-
-
-Shin'ichiro Kawasaki via Linux-f2fs-devel (1):
-  f2fs: fix lockdep WARN of sbi->cp_global_sem and q->q_usage_counter
-
+Fixes: c426d99127b1 ("f2fs: Check write pointer consistency of open zones")
+Reviewed-by: Damien Le Moal <dlemoal@kernel.org>
+Signed-off-by: Shin'ichiro Kawasaki <shinichiro.kawasaki@wdc.com>
+---
  fs/f2fs/recovery.c | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
 
+diff --git a/fs/f2fs/recovery.c b/fs/f2fs/recovery.c
+index a26071f2b0bc..87fd6cd436fe 100644
+--- a/fs/f2fs/recovery.c
++++ b/fs/f2fs/recovery.c
+@@ -922,6 +922,8 @@ int f2fs_recover_fsync_data(struct f2fs_sb_info *sbi, bool check_only)
+ 		truncate_inode_pages_final(META_MAPPING(sbi));
+ 	}
+ 
++	f2fs_up_write_trace(&sbi->cp_global_sem, &lc);
++
+ 	/*
+ 	 * If fsync data succeeds or there is no fsync data to recover,
+ 	 * and the f2fs is not read only, check and fix zoned block devices'
+@@ -933,8 +935,6 @@ int f2fs_recover_fsync_data(struct f2fs_sb_info *sbi, bool check_only)
+ 	if (!err)
+ 		clear_sbi_flag(sbi, SBI_POR_DOING);
+ 
+-	f2fs_up_write_trace(&sbi->cp_global_sem, &lc);
+-
+ 	/* let's drop all the directory inodes for clean checkpoint */
+ 	destroy_fsync_dnodes(&dir_list, err);
+ 
 -- 
 2.49.0
 
