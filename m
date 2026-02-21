@@ -2,42 +2,42 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id wFhKGjQQmmn+YAMAu9opvQ
+	id uGG6K7UPmmn9YAMAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 21 Feb 2026 21:06:12 +0100
+	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 21 Feb 2026 21:04:05 +0100
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1708316DC6D
-	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 21 Feb 2026 21:06:12 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 600F916DC55
+	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 21 Feb 2026 21:04:05 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
 	List-Unsubscribe:List-Id:Subject:In-Reply-To:MIME-Version:References:
 	Message-ID:To:Date:Sender:Content-ID:Content-Description:Resent-Date:
 	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=ydrOZQh2fYqFy6XvCkYiIEwCMuEzfpWMP4Z3RiwcZTc=; b=Y/1cx1NsR7uLwgxBYrpczPAOEE
-	wtMTs8RR7vfD5mZVG3Amwlu/RL8Q0GlTfWGn8cZO9JaeESbFqZM8PkSOaWwCv/f8+YzCSDJPNQBFj
-	Db2c2Bc+2N8x6NgsqVELU3cqCOVmvSl4mqyVImKwNHV/J5uadYjlBxaocNnKVyen4tsk=;
+	bh=3uTxQQAR6eje62fM48MVQHY1Lv2a849u4KCZlUiZH1M=; b=hN/YvyAWXpfBjJdFVnfEC6/fp5
+	dCsZQGaOQSQxARcmozOe0P3Jk36IHNoS9ieVwnFEkQu3vEHjTtuSU+Ff5sckhhK2Q1WWkEmej47En
+	toTT9z+snHbdgYpV3mhJvmqu81MOEiv6OwimAnYUKYrGDkB0hvOQNhPkftIM8ICD95Ls=;
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vttEu-0002yL-VU;
-	Sat, 21 Feb 2026 20:06:08 +0000
+	id 1vttCo-0002sE-SJ;
+	Sat, 21 Feb 2026 20:03:58 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <ebiggers@kernel.org>) id 1vttEH-0002wm-Gf
+ (envelope-from <ebiggers@kernel.org>) id 1vttCn-0002ry-Eu
  for linux-f2fs-devel@lists.sourceforge.net;
- Sat, 21 Feb 2026 20:05:29 +0000
+ Sat, 21 Feb 2026 20:03:57 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=pvPas3UDgY5PKp/J22NXOJGt9f12HnY609mP3p8dH8o=; b=fjRjqXikeG1YbGyi23V1JivIYr
- BiVFykF3fJ43m6n0rWbdAKxBWvYc+EdYaWc4X1AEeuxPlJ/aGSKbBxDakz+TXE/pF/0PGrYvCQBOX
- JKYRUcPcPJ2d29Rk7o1+3olTOhou//YusPtSFzNelObrLWZgbl9+IwhmEbdqxRgdT+uI=;
+ bh=FSJ82d+sAzOOIffqCdt0h910MQHz2A3ao9YgvURAiVo=; b=m2IVrkwEko3AagFQNps2UWAIu3
+ emUWpTYKeT1pXOc7D6T/nsOsyj2a6XJk/NfFVyM97+6gtc2xqi4R9EyJw4K0wfHakSXRAm4Gk7WoO
+ nAgy6ussacW16PaNp2LSy7DPwMAysmgMmfz825yJpAhfhXRvM4ReL6EE7902XI9uxD2I=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -45,37 +45,37 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=pvPas3UDgY5PKp/J22NXOJGt9f12HnY609mP3p8dH8o=; b=PCF2F1Bg7W4hWVNLC5lJCsho3d
- mMk6gUFa2bWk4eAW9tvhxTrJZUoQtdaetD6dNZbqQQmzvTqRWVi3FNsXEtnszDHzvrfnNrQSTL5Xn
- +sIgnZidbBxUJ0GHY4xehLQ24lgGGkJOQLAnCaEcqSeYfnNHoy+034MLZieKxcL73sKA=;
+ bh=FSJ82d+sAzOOIffqCdt0h910MQHz2A3ao9YgvURAiVo=; b=MKu1U9/mdMXxPh4L0zaL2kLAUn
+ c7SDG4+Algsl7bJWyiYrGFKFBQcsvtpTROgF6msaeyWOXOmMoX1IQAsS/8f7Pvgc+5eY4Su/gILXz
+ bWpCR58d7ai60zK5pU1IZdIPkFz3TbQEu9tdLiKXdde941h9ZdOAkF04k32HbVoGef9Y=;
 Received: from sea.source.kernel.org ([172.234.252.31])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vtsv8-0002rL-50 for linux-f2fs-devel@lists.sourceforge.net;
- Sat, 21 Feb 2026 19:45:42 +0000
+ id 1vtswj-0002uS-Fu for linux-f2fs-devel@lists.sourceforge.net;
+ Sat, 21 Feb 2026 19:47:21 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id BAB96441E6;
- Sat, 21 Feb 2026 19:45:36 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4F133C4CEF7;
- Sat, 21 Feb 2026 19:45:36 +0000 (UTC)
+ by sea.source.kernel.org (Postfix) with ESMTP id 1469943968;
+ Sat, 21 Feb 2026 19:47:11 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9D4F4C4CEF7;
+ Sat, 21 Feb 2026 19:47:10 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1771703136;
- bh=mFAiNSqsxsqOGhfi6yj61qlg7slrIqYxPPaW9O9Y60Q=;
+ s=k20201202; t=1771703230;
+ bh=+Lml4KArtsOCi5pvVS/O/dpytCcmSTUlIcJifnlJFd4=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=WEZIXEN5w0Og2gE8E5z1Crq5s0FzNg+4ErjWqUno3rrR6oGCcIwt4lcuDLkDA8fWz
- aePZIq5glzoDCW7sKquOgRO3wXyVzqSdF9RY5GAq51Ms3BwoWLd365JqTysUvqnpro
- Brik2jrScJl13SC7NgueLJwNS/zoIpD4qE+gF/JmgcpVEfEhGdFDp8SblpEv4wiGHj
- UOPSUdg3+HqN78Ow6K4gpBWm708TRX7ZYlIHfvORn6ka71mA4Vs/eWVSh7WVMj5T6Q
- XBaHgX/w3rR6cXkvfIt7zO8bPtKtMFeosoRV5zShagB0YEHK4UlfaKYdvmVJVJcZ6H
- oMKy2BZ3PpWkQ==
-Date: Sat, 21 Feb 2026 11:45:34 -0800
+ b=oZ9sJa10y84CZ5/eOp0f3PDnfgoLrpv8H4nZHgyDKOe5krFzC0L1WMqYXMQnAC2nB
+ tbiKSihxbaa1i831qZ4QbOC/pAbF14wcc+QnSESdEj5Av1fofrw4g+fxbsN64O//rQ
+ sQsHen82gDPeJ5lUbKfupjfHYoGmxAF38HSRnJPJeJueOQE7qxs26gSn/3fXANU3xO
+ uO3iSPrNADCHffxawoLnKmiL+hs+UHGAn5+UYbh4wgeohPgVFJn6UqtoBMiAs6+E6N
+ zcvfS8pd6vDZkh8mNNQ+HRUFHD5lQ18cmsyO31kczSbmmpzZqQX6JKzQB4puy7Q+Kb
+ iwE7nZosrTlFQ==
+Date: Sat, 21 Feb 2026 11:47:08 -0800
 To: Christoph Hellwig <hch@lst.de>
-Message-ID: <20260221194534.GC2536@quark>
+Message-ID: <20260221194708.GD2536@quark>
 References: <20260218061531.3318130-1-hch@lst.de>
- <20260218061531.3318130-4-hch@lst.de>
+ <20260218061531.3318130-7-hch@lst.de>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20260218061531.3318130-4-hch@lst.de>
+In-Reply-To: <20260218061531.3318130-7-hch@lst.de>
 X-Spam-Score: -0.3 (/)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
@@ -83,9 +83,9 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Wed, Feb 18, 2026 at 07:14:41AM +0100, Christoph Hellwig
- wrote: > diff --git a/fs/crypto/inline_crypt.c b/fs/crypto/inline_crypt.c
- [...] > /** > * fscrypt_set_bio_crypt_ctx_bh() - prepare a file co [...] 
+ Content preview:  On Wed, Feb 18, 2026 at 07:14:44AM +0100, Christoph Hellwig
+ wrote: > @@ -331,7 +331,7 @@ static bool bh_get_inode_and_lblk_num(const
+ struct buffer_head *bh, > inode = mapping->host; > > *inode_ret = i [...] 
  Content analysis details:   (-0.3 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -97,9 +97,9 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1vtsv8-0002rL-50
-Subject: Re: [f2fs-dev] [PATCH 3/9] fscrypt: pass a byte offset to
- fscrypt_set_bio_crypt_ctx
+X-Headers-End: 1vtswj-0002uS-Fu
+Subject: Re: [f2fs-dev] [PATCH 6/9] fscrypt: return a byte offset from
+ bh_get_inode_and_lblk_num
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -147,13 +147,13 @@ X-Spamd-Result: default: False [-8.11 / 15.00];
 	ARC_NA(0.00)[];
 	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,kernel.org:-];
+	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
 	RCVD_COUNT_FIVE(0.00)[5];
 	NEURAL_HAM(-0.00)[-1.000];
 	FORGED_SENDER_FORWARDING(0.00)[];
 	FROM_HAS_DN(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
-	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
+	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,kernel.org:-];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	TAGGED_RCPT(0.00)[linux-f2fs-devel];
 	HAS_REPLYTO(0.00)[ebiggers@kernel.org];
@@ -162,23 +162,23 @@ X-Spamd-Result: default: False [-8.11 / 15.00];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.sourceforge.net:rdns,lists.sourceforge.net:helo,lists.sourceforge.net:dkim]
-X-Rspamd-Queue-Id: 1708316DC6D
+X-Rspamd-Queue-Id: 600F916DC55
 X-Rspamd-Action: no action
 
-On Wed, Feb 18, 2026 at 07:14:41AM +0100, Christoph Hellwig wrote:
-> diff --git a/fs/crypto/inline_crypt.c b/fs/crypto/inline_crypt.c
-[...]
-> /**
->  * fscrypt_set_bio_crypt_ctx_bh() - prepare a file contents bio for inline
->  *				    crypto
->  * @bio: a bio which will eventually be submitted to the file
->  * @first_bh: the first buffer_head for which I/O will be submitted
->  * @gfp_mask: memory allocation flags
->  *
->  * Same as fscrypt_set_bio_crypt_ctx(), except this takes a buffer_head instead
->  * of an inode and block number directly.
+On Wed, Feb 18, 2026 at 07:14:44AM +0100, Christoph Hellwig wrote:
+> @@ -331,7 +331,7 @@ static bool bh_get_inode_and_lblk_num(const struct buffer_head *bh,
+>  	inode = mapping->host;
+>  
+>  	*inode_ret = inode;
+> -	*lblk_num_ret = (folio_pos(folio) + bh_offset(bh)) >> inode->i_blkbits;
+> +	*pos_ret = folio_pos(folio) + bh_offset(bh);
+>  	return true;
+>  }
 
-Similarly, the above needs "block number" => "file position"
+Rename bh_get_inode_and_lblk_num() to bh_get_inode_and_pos() to reflect
+the new semantics.
+
+(And s/logical block number/file position/ in the comment above it)
 
 - Eric
 
