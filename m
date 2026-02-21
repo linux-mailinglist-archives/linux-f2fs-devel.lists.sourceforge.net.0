@@ -2,42 +2,42 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id uGG6K7UPmmn9YAMAu9opvQ
+	id JSW5LGAPmmn+YAMAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 21 Feb 2026 21:04:05 +0100
+	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 21 Feb 2026 21:02:40 +0100
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 600F916DC55
-	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 21 Feb 2026 21:04:05 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id EBE9516DC2F
+	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 21 Feb 2026 21:02:39 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
 	List-Unsubscribe:List-Id:Subject:In-Reply-To:MIME-Version:References:
 	Message-ID:To:Date:Sender:Content-ID:Content-Description:Resent-Date:
 	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=3uTxQQAR6eje62fM48MVQHY1Lv2a849u4KCZlUiZH1M=; b=hN/YvyAWXpfBjJdFVnfEC6/fp5
-	dCsZQGaOQSQxARcmozOe0P3Jk36IHNoS9ieVwnFEkQu3vEHjTtuSU+Ff5sckhhK2Q1WWkEmej47En
-	toTT9z+snHbdgYpV3mhJvmqu81MOEiv6OwimAnYUKYrGDkB0hvOQNhPkftIM8ICD95Ls=;
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=V8dj4DP+6hTnPaCpGrW4EouB/+qFnYKkxOt1xx59+R8=; b=aIp2hml3tULF9/WxD6KqJZ6aV+
+	Tr29OqehZGGyJnA/pNAbvGux/8EknQukjhmPVgivpaaxk1PLnSYqz9DRANZjGTWpA12CjJqhpthM+
+	y6CrDBDu8CBE9D6naS4ZFN3UeoV83MPyjTfyluWRqJnvgD5Q4BlJHu1uTcKkxum4v1dQ=;
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vttCo-0002sE-SJ;
-	Sat, 21 Feb 2026 20:03:58 +0000
+	id 1vttBO-0005wq-3c;
+	Sat, 21 Feb 2026 20:02:30 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <ebiggers@kernel.org>) id 1vttCn-0002ry-Eu
+ (envelope-from <ebiggers@kernel.org>) id 1vttB5-0005uz-0K
  for linux-f2fs-devel@lists.sourceforge.net;
- Sat, 21 Feb 2026 20:03:57 +0000
+ Sat, 21 Feb 2026 20:02:11 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=FSJ82d+sAzOOIffqCdt0h910MQHz2A3ao9YgvURAiVo=; b=m2IVrkwEko3AagFQNps2UWAIu3
- emUWpTYKeT1pXOc7D6T/nsOsyj2a6XJk/NfFVyM97+6gtc2xqi4R9EyJw4K0wfHakSXRAm4Gk7WoO
- nAgy6ussacW16PaNp2LSy7DPwMAysmgMmfz825yJpAhfhXRvM4ReL6EE7902XI9uxD2I=;
+ bh=jiEOuJqnSLJuN4QxZKAQZ7nwPl5035Ck/wEiCECCbPE=; b=mfsvxj28rN7M1GEf+6f7m6W2w8
+ KITNkctkBgfmrlJ9seOwlHLP3cxpoGIA5u8vFWR2WPNwpKzPEbTDJQCR1kjCwxZxvd8QqJs5qY3al
+ pNnDyjDlZMgFrmk2pp6Wk8pbA7YSVMjo8LoBrqNm5wZVpurPLYw4yVSa8KODv2ihcsTY=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -45,61 +45,65 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=FSJ82d+sAzOOIffqCdt0h910MQHz2A3ao9YgvURAiVo=; b=MKu1U9/mdMXxPh4L0zaL2kLAUn
- c7SDG4+Algsl7bJWyiYrGFKFBQcsvtpTROgF6msaeyWOXOmMoX1IQAsS/8f7Pvgc+5eY4Su/gILXz
- bWpCR58d7ai60zK5pU1IZdIPkFz3TbQEu9tdLiKXdde941h9ZdOAkF04k32HbVoGef9Y=;
+ bh=jiEOuJqnSLJuN4QxZKAQZ7nwPl5035Ck/wEiCECCbPE=; b=J6YRl5Jnhh5ix3T8l5JJJti1ox
+ lQuZZhXfFbumRid5i7SnvrUTL8/W+iFANfIY2J3i6o8YbXYg3O7nZSY7nMEh6WsgqanJ6aDF296EW
+ hrY6ttEdJ5niLo4PSSf6eV0MRL4Yveu7dXFKOugpMYd4060+ekvqnEvo29RWoXUlru1w=;
 Received: from sea.source.kernel.org ([172.234.252.31])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vtswj-0002uS-Fu for linux-f2fs-devel@lists.sourceforge.net;
- Sat, 21 Feb 2026 19:47:21 +0000
+ id 1vtsyy-0002ze-Ki for linux-f2fs-devel@lists.sourceforge.net;
+ Sat, 21 Feb 2026 19:49:41 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 1469943968;
- Sat, 21 Feb 2026 19:47:11 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9D4F4C4CEF7;
- Sat, 21 Feb 2026 19:47:10 +0000 (UTC)
+ by sea.source.kernel.org (Postfix) with ESMTP id 3EDA3443C7;
+ Sat, 21 Feb 2026 19:49:30 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id C835FC4CEF7;
+ Sat, 21 Feb 2026 19:49:29 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1771703230;
- bh=+Lml4KArtsOCi5pvVS/O/dpytCcmSTUlIcJifnlJFd4=;
+ s=k20201202; t=1771703370;
+ bh=Y6CakBup81NzTHNSAM8tNOwbYIAPWvfjsed/7M38DSo=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=oZ9sJa10y84CZ5/eOp0f3PDnfgoLrpv8H4nZHgyDKOe5krFzC0L1WMqYXMQnAC2nB
- tbiKSihxbaa1i831qZ4QbOC/pAbF14wcc+QnSESdEj5Av1fofrw4g+fxbsN64O//rQ
- sQsHen82gDPeJ5lUbKfupjfHYoGmxAF38HSRnJPJeJueOQE7qxs26gSn/3fXANU3xO
- uO3iSPrNADCHffxawoLnKmiL+hs+UHGAn5+UYbh4wgeohPgVFJn6UqtoBMiAs6+E6N
- zcvfS8pd6vDZkh8mNNQ+HRUFHD5lQ18cmsyO31kczSbmmpzZqQX6JKzQB4puy7Q+Kb
- iwE7nZosrTlFQ==
-Date: Sat, 21 Feb 2026 11:47:08 -0800
+ b=c8RKHW3v646t0sP75rq0a6ORsgJc2TtU6IdLNp05j+GKNcxcOOOaOLy1FcWYGZeG7
+ BmePywNnr0OAmdZfLZ+XsofQytwbivdBcOT8yDiiQwsSLS+/QnHLKjsudU5OKQxtBu
+ FaSTYr69Iqi5W0kHpjcwgc/iXxgLnmG1D4Eld1qhXPceHcdfKkcamHzKWWAtinK38u
+ HV4if1HmF3+cjMBXvGRjMew23/PKXEBcU7/7skxPh6Lj53bvsGXyJ/0Ujre2WL8DtG
+ +Zlxc2wwIiWmQ+txYhSOz3oXZ8kAVgTjWVk8VinEp7BhTatcBNoyL76jM/4AqqH9Cg
+ qdF+dIv5VUnRQ==
+Date: Sat, 21 Feb 2026 11:49:22 -0800
 To: Christoph Hellwig <hch@lst.de>
-Message-ID: <20260221194708.GD2536@quark>
+Message-ID: <20260221194922.GE2536@quark>
 References: <20260218061531.3318130-1-hch@lst.de>
- <20260218061531.3318130-7-hch@lst.de>
+ <20260218061531.3318130-8-hch@lst.de>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20260218061531.3318130-7-hch@lst.de>
-X-Spam-Score: -0.3 (/)
+In-Reply-To: <20260218061531.3318130-8-hch@lst.de>
+X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Wed, Feb 18, 2026 at 07:14:44AM +0100, Christoph Hellwig
- wrote: > @@ -331,7 +331,7 @@ static bool bh_get_inode_and_lblk_num(const
- struct buffer_head *bh, > inode = mapping->host; > > *inode_ret = i [...] 
- Content analysis details:   (-0.3 points, 5.0 required)
+ Content preview:  On Wed, Feb 18, 2026 at 07:14:45AM +0100, Christoph Hellwig
+ wrote: > Logical offsets into an inode are usually expresssed as bytes in
+ the VFS. > Switch fscrypt_zeroout_range to that convention. > > Si [...] 
+ Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
+ 0.0 RCVD_IN_DNSWL_BLOCKED  RBL: ADMINISTRATOR NOTICE: The query to DNSWL
+ was blocked.  See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#DnsBlocklists-dnsbl-block
+ for more information. [172.234.252.31 listed in list.dnswl.org]
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1vtswj-0002uS-Fu
-Subject: Re: [f2fs-dev] [PATCH 6/9] fscrypt: return a byte offset from
- bh_get_inode_and_lblk_num
+X-Headers-End: 1vtsyy-0002ze-Ki
+Subject: Re: [f2fs-dev] [PATCH 7/9] fscrypt: pass a byte offset to
+ fscrypt_zeroout_range
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -161,24 +165,55 @@ X-Spamd-Result: default: False [-8.11 / 15.00];
 	MISSING_XM_UA(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.sourceforge.net:rdns,lists.sourceforge.net:helo,lists.sourceforge.net:dkim]
-X-Rspamd-Queue-Id: 600F916DC55
+	DBL_BLOCKED_OPENRESOLVER(0.00)[lst.de:email]
+X-Rspamd-Queue-Id: EBE9516DC2F
 X-Rspamd-Action: no action
 
-On Wed, Feb 18, 2026 at 07:14:44AM +0100, Christoph Hellwig wrote:
-> @@ -331,7 +331,7 @@ static bool bh_get_inode_and_lblk_num(const struct buffer_head *bh,
->  	inode = mapping->host;
->  
->  	*inode_ret = inode;
-> -	*lblk_num_ret = (folio_pos(folio) + bh_offset(bh)) >> inode->i_blkbits;
-> +	*pos_ret = folio_pos(folio) + bh_offset(bh);
->  	return true;
->  }
+On Wed, Feb 18, 2026 at 07:14:45AM +0100, Christoph Hellwig wrote:
+> Logical offsets into an inode are usually expresssed as bytes in the VFS.
+> Switch fscrypt_zeroout_range to that convention.
+> 
+> Signed-off-by: Christoph Hellwig <hch@lst.de>
+> ---
+>  fs/crypto/bio.c         | 6 +++---
+>  fs/ext4/inode.c         | 3 ++-
+>  fs/f2fs/file.c          | 4 +++-
+>  include/linux/fscrypt.h | 4 ++--
+>  4 files changed, 10 insertions(+), 7 deletions(-)
+> 
+> diff --git a/fs/crypto/bio.c b/fs/crypto/bio.c
+> index 36025ce7a264..e41e605cf7e6 100644
+> --- a/fs/crypto/bio.c
+> +++ b/fs/crypto/bio.c
+> @@ -113,7 +113,7 @@ static int fscrypt_zeroout_range_inline_crypt(const struct inode *inode,
+>  /**
+>   * fscrypt_zeroout_range() - zero out a range of blocks in an encrypted file
+>   * @inode: the file's inode
+> - * @lblk: the first file logical block to zero out
+> + * @pos: the first file logical offset (in bytes) to zero out
+>   * @pblk: the first filesystem physical block to zero out
+>   * @len: number of blocks to zero out
+>   *
+> @@ -127,7 +127,7 @@ static int fscrypt_zeroout_range_inline_crypt(const struct inode *inode,
+>   *
+>   * Return: 0 on success; -errno on failure.
+>   */
+> -int fscrypt_zeroout_range(const struct inode *inode, pgoff_t lblk,
+> +int fscrypt_zeroout_range(const struct inode *inode, loff_t pos,
+>  			  sector_t pblk, unsigned int len)
+>  {
+>  	const struct fscrypt_inode_info *ci = fscrypt_get_inode_info_raw(inode);
+> @@ -135,7 +135,7 @@ int fscrypt_zeroout_range(const struct inode *inode, pgoff_t lblk,
+>  	const unsigned int du_size = 1U << du_bits;
+>  	const unsigned int du_per_page_bits = PAGE_SHIFT - du_bits;
+>  	const unsigned int du_per_page = 1U << du_per_page_bits;
+> -	u64 du_index = (u64)lblk << (inode->i_blkbits - du_bits);
+> +	u64 du_index = pos >> du_bits;
+>  	u64 du_remaining = (u64)len << (inode->i_blkbits - du_bits);
+>  	loff_t pos = (loff_t)lblk << inode->i_blkbits;
 
-Rename bh_get_inode_and_lblk_num() to bh_get_inode_and_pos() to reflect
-the new semantics.
-
-(And s/logical block number/file position/ in the comment above it)
+This is a bisection hazard because the 'pos' local variable isn't
+removed until a later patch.  It needs to be removed in this patch.
 
 - Eric
 
