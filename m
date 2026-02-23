@@ -2,112 +2,99 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 0LPjButym2kizwMAu9opvQ
+	id yIpoCJtSnGktDwQAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 22 Feb 2026 22:19:39 +0100
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 23 Feb 2026 14:14:03 +0100
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id A3D3A170654
-	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 22 Feb 2026 22:19:38 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9BE9D176974
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 23 Feb 2026 14:14:02 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:
-	MIME-Version:Cc:Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive
-	:List-Unsubscribe:List-Id:Subject:To:Date:Message-Id:References:In-Reply-To:
-	Sender:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
-	Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=pWIlVoKB7hwINJgUgyRlbMAwFNo235ClMMaJIMwwusQ=; b=aaBIa2/p9LoWDcK49Rh0FD7ZBE
-	bc2TIrIgHlH3F7aO01PQZdhT1WqtoXhZZDnFyVbB7UvDl+yUDanRSfXa2iw3qlAlBa6IoVmK17MyY
-	BX7N8WYIEDrychOxNSaweqVVZSc6eBudXE4jy54RHQ4DsT3kMRNvPaRsFdwpZ9MHH0HQ=;
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
+	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
+	Subject:In-Reply-To:MIME-Version:References:Message-ID:To:From:Date:Sender:
+	Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
+	:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
+	bh=e8qfyoSPyPfjE0jCCqLhRQvm/sqiAGHIjfAWqfboNlU=; b=dhlHScm4J+oZ7/eg3K9cidqCbN
+	rTk36um5sp/cV4k75RQ7JBNbLiDxerGDFHZUdWMqibg/HyTvQJRBQAkRYnQ44JbMYlMRzU70aJeyA
+	ZPN7ukEIzgdfdqWtAHA+0GBkXpPMfR+HxShLcMuZAjk+0EhTUAu5bFQkIbHJ4LN2ApA0=;
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vuGrT-0001MB-KX;
-	Sun, 22 Feb 2026 21:19:31 +0000
+	id 1vuVkz-0002B2-Gq;
+	Mon, 23 Feb 2026 13:13:49 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
- TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <pr-tracker-bot@kernel.org>) id 1vuGrR-0001M4-V5
- for linux-f2fs-devel@lists.sourceforge.net;
- Sun, 22 Feb 2026 21:19:29 +0000
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95) (envelope-from
+ <BATV+48176073e30864d8fa6b+8219+infradead.org+hch@bombadil.srs.infradead.org>)
+ id 1vuVkw-0002At-Ir for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 23 Feb 2026 13:13:47 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Cc:To:Date:Message-Id:References:In-Reply-To:From:
- Subject:Sender:Reply-To:MIME-Version:Content-Type:Content-Transfer-Encoding:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=cziqwwDSQPgv5zZZ4jPqUhtOtRXtDJs64dxlVFALIzg=; b=SYEcmFYMBi3v0cDJU+3lI/3Cjf
- 7rzVc1ybmPSu9xEwHQyunIcEu7MSImRCY5vWqwCESiy55WAATo1vW66k0YIhv+H4z5CP1XE9BH49Z
- Hb6Q4UQIc12E3L2oX5+E1kI6EXbjf8sRkHAjtcGwYCfOiEc8eQ9pbxwUKh1xdfsfhVsg=;
+ bh=M7NmYC/Iylm9myghHwqILim55SAUt9QrM+UZYk0eJlw=; b=XZ+vrH7MpTGKMKM+Q9L/z2XSbn
+ xV+BM5adBKXevd4a7bS0ySqlYMLnth6JSv4K1DaKOm8BQ4QWEh8ZALe7AyfN0mP2YYi8YSsr05SzF
+ nrCIyS/90uTT65l1HZ0RKChYLqlFSIoeueLDh8upZCn4DRDo8eBGk3F+3/H+aPg5MkI8=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Cc:To:Date:Message-Id:References:In-Reply-To:From:Subject:Sender:Reply-To
- :MIME-Version:Content-Type:Content-Transfer-Encoding:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=cziqwwDSQPgv5zZZ4jPqUhtOtRXtDJs64dxlVFALIzg=; b=RjG6y6YHgrECF+72fFSP++UWzL
- tB/g1V3kpebetjQh2nifM+GEvYtAAkv+V1nn4m/euMNRq63tJcsrmSr0fABTRybKmzOXdHKBrIVOu
- dN35AbYVRjOg1t/z1KgnZoQCk3Ul8CiXE06YcBpu4rWrHSqOA10655WstzP6avgE3ieU=;
-Received: from tor.source.kernel.org ([172.105.4.254])
+ bh=M7NmYC/Iylm9myghHwqILim55SAUt9QrM+UZYk0eJlw=; b=FpT7KhGHDMuJpneUaLZZAFbJ2+
+ xuUEuV493W4GZwoXBTrVAA/VEYCY2CednQKuFCxSRXkMhP3yhfMdLANj+yPUON2p5CNtOacMUro5D
+ IS3+QAZYMkx/YbMNRCEAuOewd4kAIxzhIMYUMjrC2O6TFa1pG19sI0jr0CkTpVhSYGyM=;
+Received: from bombadil.infradead.org ([198.137.202.133])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vuGrR-00015U-7J for linux-f2fs-devel@lists.sourceforge.net;
- Sun, 22 Feb 2026 21:19:29 +0000
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 8BFA36001D;
- Sun, 22 Feb 2026 21:19:18 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3F3ADC116D0;
- Sun, 22 Feb 2026 21:19:18 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1771795158;
- bh=afpqdyAmZQo051wBoQc670asvU5IJJ/hbFwXXRabVII=;
- h=Subject:From:In-Reply-To:References:Date:To:Cc:From;
- b=ap9aAScCIeD94C8UFbwfKTip4hEM+lLce+5csLYi/S1ny/4nu+ZfcpJMgm0LLSqeU
- UqEVC4qKeYzuV6vz+pq4lef5yFAjh4ObMhgnxKk/XA4r2kbWpJgCtSKI2GWCvgKMzp
- IrxSFj4gD9m3B8rbcd2TMsekuyLjTQz1AtOIY7lQ3I989NA93ej8gkIQRxSgQJ+ENO
- TnDCCQGTpexewaGaDbN0QbXHsxTCCLvnpBEqd3uhR5b3gxBytXlaUbUxW+5ORufZYW
- 4i7MyOq8M1xw4xXUBnxknD38L8JNK5e1hXx9Lu3gTrAnG90DBm9rEpMR9TmiVTMBA/
- 3DrFNsk1kiEKg==
-Received: from [10.30.226.235] (localhost [IPv6:::1])
- by aws-us-west-2-korg-oddjob-rhel9-1.codeaurora.org (Postfix) with ESMTP id
- 402283808200; Sun, 22 Feb 2026 21:19:26 +0000 (UTC)
-In-Reply-To: <20260222203843.GD37806@quark>
-References: <20260222203843.GD37806@quark>
-X-PR-Tracked-List-Id: <linux-f2fs-devel.lists.sourceforge.net>
-X-PR-Tracked-Message-Id: <20260222203843.GD37806@quark>
-X-PR-Tracked-Remote: https://git.kernel.org/pub/scm/fs/fsverity/linux.git
- tags/fsverity-for-linus
-X-PR-Tracked-Commit-Id: 693680b9add63dbebb2505a553ff52f8c706c8c0
-X-PR-Merge-Tree: torvalds/linux.git
-X-PR-Merge-Refname: refs/heads/master
-X-PR-Merge-Commit-Id: fbf33803618ad4f531f78fe15cf328fe6c7f9978
-Message-Id: <177179516477.1502390.5255504502545822685.pr-tracker-bot@kernel.org>
-Date: Sun, 22 Feb 2026 21:19:24 +0000
-To: Eric Biggers via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
-X-Spam-Score: -0.2 (/)
+ id 1vuVkv-00042N-Uc for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 23 Feb 2026 13:13:46 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=infradead.org; s=bombadil.20210309; h=In-Reply-To:Content-Type:MIME-Version
+ :References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+ Content-Transfer-Encoding:Content-ID:Content-Description;
+ bh=M7NmYC/Iylm9myghHwqILim55SAUt9QrM+UZYk0eJlw=; b=tq3wFb+A/83Qww07qI+bjaPz9f
+ r2HWrPYAc5LQQnj9ppl8hn38dfuzv6Fi1pUT2sew48u+foBbxm44ge+Tzdts6Skoq413eZwM1/YRc
+ ihwuQ9U+Ve3vY0lQjxDEvWSUgCEMuAoZ8kcraweAKD0lzpmohmJ8VujbNb/h3W6bZ7h1DVG7XDtTQ
+ M7C/05MrA+mPuL0QiaVxIrJ3LBRRWwnesqHgGEUZ+GEE3FzGj8Pfwh5CmPoW/dA/1xs4a0JP83nwt
+ XRRqiMurFuzFjsLzvlxRk/i872uxmLy4iKKOMgtaO60nGswzQ7lqvEm67gmBOmrLhSJrw8rNccpDj
+ Npb/KWRw==;
+Received: from hch by bombadil.infradead.org with local (Exim 4.98.2 #2 (Red
+ Hat Linux)) id 1vuVkq-00000000Ktk-1ty7;
+ Mon, 23 Feb 2026 13:13:40 +0000
+Date: Mon, 23 Feb 2026 05:13:40 -0800
+From: Christoph Hellwig <hch@infradead.org>
+To: Eric Biggers <ebiggers@kernel.org>
+Message-ID: <aZxShDPF9K4h4ZfI@infradead.org>
+References: <20260221201316.22025-1-ebiggers@kernel.org>
+MIME-Version: 1.0
+Content-Disposition: inline
+In-Reply-To: <20260221201316.22025-1-ebiggers@kernel.org>
+X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by
+ bombadil.infradead.org. See http://www.infradead.org/rpr.html
+X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  The pull request you sent on Sun, 22 Feb 2026 12:38:43 -0800:
- > https://git.kernel.org/pub/scm/fs/fsverity/linux.git tags/fsverity-for-linus
- has been merged into torvalds/linux.git:
- https://git.kernel.org/torvalds/c/fbf33803618ad4f531f78fe15cf328fe6c7f9978
- Content analysis details:   (-0.2 points, 5.0 required)
+ Content preview:  Looks good: Reviewed-by: Christoph Hellwig <hch@lst.de> 
+ Content analysis details:   (-0.1 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1vuGrR-00015U-7J
-Subject: Re: [f2fs-dev] [GIT PULL] fsverity fixes for v7.0-rc1
+X-Headers-End: 1vuVkv-00042N-Uc
+Subject: Re: [f2fs-dev] [PATCH] f2fs: remove unreachable code in
+ f2fs_encrypt_one_page()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -119,64 +106,53 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: pr-tracker-bot--- via Linux-f2fs-devel
- <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: pr-tracker-bot@kernel.org
-Cc: fsverity@lists.linux.dev, Theodore Ts'o <tytso@mit.edu>,
- linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
- linux-fsdevel@vger.kernel.org, Linus Torvalds <torvalds@linux-foundation.org>
-MIME-Version: 1.0
+Cc: linux-f2fs-devel@lists.sourceforge.net,
+ Christoph Hellwig <hch@infradead.org>, linux-fscrypt@vger.kernel.org,
+ Jaegeuk Kim <jaegeuk@kernel.org>, Vlastimil Babka <vbabka@suse.cz>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-8.61 / 15.00];
-	WHITELIST_DMARC(-7.00)[sourceforge.net:D:+];
-	DMARC_POLICY_ALLOW_WITH_FAILURES(-0.50)[];
+X-Spamd-Result: default: False [-1.01 / 15.00];
 	RWL_MAILSPIKE_EXCELLENT(-0.40)[216.105.38.7:from];
-	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
-	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7];
 	MAILLIST(-0.20)[mailman];
+	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7];
+	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
+	DMARC_POLICY_SOFTFAIL(0.10)[infradead.org : SPF not aligned (relaxed), DKIM not aligned (relaxed),none];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_TLS_LAST(0.00)[];
-	DKIM_MIXED(0.00)[];
-	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,kernel.org:s=k20201202];
-	DMARC_POLICY_ALLOW(0.00)[lists.sourceforge.net,none];
 	RECEIVED_HELO_LOCALHOST(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[6];
+	RCVD_COUNT_THREE(0.00)[4];
+	FORGED_RECIPIENTS(0.00)[m:ebiggers@kernel.org,m:linux-f2fs-devel@lists.sourceforge.net,m:hch@infradead.org,m:linux-fscrypt@vger.kernel.org,m:jaegeuk@kernel.org,m:vbabka@suse.cz,s:lists@lfdr.de];
 	ARC_NA(0.00)[];
-	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
-	TO_DN_SOME(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
-	TAGGED_RCPT(0.00)[linux-f2fs-devel];
-	RCPT_COUNT_SEVEN(0.00)[7];
-	NEURAL_HAM(-0.00)[-0.999];
-	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,kernel.org:-];
-	FROM_HAS_DN(0.00)[];
-	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
+	FORGED_SENDER(0.00)[hch@infradead.org,linux-f2fs-devel-bounces@lists.sourceforge.net];
+	TO_DN_SOME(0.00)[];
+	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
+	MIME_TRACE(0.00)[0:+];
+	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,infradead.org:s=bombadil.20210309];
+	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,infradead.org:-];
+	RCPT_COUNT_FIVE(0.00)[6];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	NEURAL_HAM(-0.00)[-1.000];
+	FROM_NEQ_ENVFROM(0.00)[hch@infradead.org,linux-f2fs-devel-bounces@lists.sourceforge.net];
+	FROM_HAS_DN(0.00)[];
+	DKIM_MIXED(0.00)[];
+	MID_RHS_MATCH_FROM(0.00)[];
+	TAGGED_RCPT(0.00)[linux-f2fs-devel];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	MISSING_XM_UA(0.00)[];
-	HAS_REPLYTO(0.00)[pr-tracker-bot@kernel.org]
-X-Rspamd-Queue-Id: A3D3A170654
+	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[lst.de:email,infradead.org:mid]
+X-Rspamd-Queue-Id: 9BE9D176974
 X-Rspamd-Action: no action
 
-The pull request you sent on Sun, 22 Feb 2026 12:38:43 -0800:
+Looks good:
 
-> https://git.kernel.org/pub/scm/fs/fsverity/linux.git tags/fsverity-for-linus
+Reviewed-by: Christoph Hellwig <hch@lst.de>
 
-has been merged into torvalds/linux.git:
-https://git.kernel.org/torvalds/c/fbf33803618ad4f531f78fe15cf328fe6c7f9978
-
-Thank you!
-
--- 
-Deet-doot-dot, I am a bot.
-https://korg.docs.kernel.org/prtracker.html
 
 
 _______________________________________________
