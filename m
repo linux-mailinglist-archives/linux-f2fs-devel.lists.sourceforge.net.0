@@ -2,80 +2,86 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id UEfFL/xBnWkMOAQAu9opvQ
+	id KMv7EDc8nWkGNwQAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 24 Feb 2026 07:15:24 +0100
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 24 Feb 2026 06:50:47 +0100
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 10E6E182583
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 24 Feb 2026 07:15:24 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id D807A182336
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 24 Feb 2026 06:50:46 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
 	List-Unsubscribe:List-Id:Subject:In-Reply-To:MIME-Version:References:
 	Message-ID:To:Date:Sender:Content-ID:Content-Description:Resent-Date:
 	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=wjbUJ1rqWA67ZMlFcSLzVDwf0bUxOn7z2cvJ6NurC1E=; b=YFiI+mzObVVpnrejhStJ9b/2L/
-	ei4ADUvUnRv2sXiDgeeeveJC6R6ptxV65wLBwS7miUEyDa0WHKKcqiRvWMDio/rLG/LrlvL1CdBHB
-	WpKCJH16/0o3RgLE10gbRuhOizWJmIyAmBO4aSOTwJyN/oSUK73mywW5hVhlM4M3qfck=;
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=xsBi6TEpw48sB4fD9RhGAlH4ZRLR5wSOs+P1injuUmw=; b=i69Ja4avFbZAb5mRNTc598O/gZ
+	5Oqe9E6wBDNBb6E11nQWHD+YqDnKQHjqRBjOyBIPLfDdiqUGlGiPMM5qYag2IzgmRAC39DaMSPFI0
+	eJ1wvFS1qaSlIN7SVcA0AMbSws+konUNCw/nxzBDoBnnltcR7dAuEK3CTsUblLpqHXrg=;
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vulhT-0006by-D6;
-	Tue, 24 Feb 2026 06:15:15 +0000
+	id 1vulJd-0007UQ-Of;
+	Tue, 24 Feb 2026 05:50:38 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jaegeuk@kernel.org>) id 1vulhR-0006br-Nn
+ (envelope-from <jaegeuk@kernel.org>) id 1vulJc-0007UE-MD
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 24 Feb 2026 06:15:13 +0000
+ Tue, 24 Feb 2026 05:50:37 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Transfer-Encoding:Content-Type:
- MIME-Version:References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=xIkyglO/48lFTe/SAoznGQ7wzo8jpSmUcIHC/CjKGH0=; b=INyHzNM0zthcAV97VYlOfN0SWL
- /zIS8byNcNMXtF8us0Ku5amxB5gFiF9gf8tuy0WHKW0qFP5mYDmzWpPTVkC6IolJbgbaRuB9ZV0Gy
- xpbhsgcbx17W8ewFAR4C3MEzxR7j+RnIxDgkaw33l5M+0rbejW4yVFPdyR8pjKQPBqLs=;
+ bh=uHgyNFCWv6VDdJj18WLxBrvr3wvre81Tz6FYHe104QQ=; b=IWUvsKwjyzV1J7gHFKVinIS2ob
+ REzh8jDOOWF3z7oAU4+O92SCdG4//YNE2wCvh6Skkj6aIaUvjPh7rvNQshC8Sn0SEKKiKNWrJ71hG
+ b15V7pauByYKDu7gTDwbNpvyBr2vG14+5TkORX6ELtYTxjs3riDmRirLxMowd8YMCr/s=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Transfer-Encoding:Content-Type:MIME-Version:
- References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=xIkyglO/48lFTe/SAoznGQ7wzo8jpSmUcIHC/CjKGH0=; b=eeeDq+GSW79RgYISVemjcfFDNs
- xqcxMrE8Jest2WOyO1IhHhHkiytm1nijhw+G2U0y0HiQ/NUA11cHb/bWgSKVbiIG6bC8hWHxiboFJ
- f/nPwsJsiemQ2zPrIo6k5zlWmbsievrUvRMLc0dMSZt7ODCnJHxGmdPcaUGHbFr8hARg=;
-Received: from sea.source.kernel.org ([172.234.252.31])
+ bh=uHgyNFCWv6VDdJj18WLxBrvr3wvre81Tz6FYHe104QQ=; b=ezZTVwrQdH46Ybbm/rXqgxMt5u
+ wgCPPtEQeFMZ8gVieV5jx7v7qocBjvjlpqmcIL89dEVIj/qqEPPMibFtZTL7Y8MgXxJrb8Qn9z4p8
+ Qs2vSba28CoSUcRsMvxNfVBtuMcnm/etfTDX8cLPT0/AT060jVabCsCg1VohBcTG443w=;
+Received: from tor.source.kernel.org ([172.105.4.254])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vulhQ-0006Lw-CJ for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 24 Feb 2026 06:15:13 +0000
+ id 1vulJd-0005AF-2l for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 24 Feb 2026 05:50:37 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id D46CD4449B;
- Tue, 24 Feb 2026 03:48:46 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 81E6BC116D0;
- Tue, 24 Feb 2026 03:48:46 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id 1AD2A600AE;
+ Tue, 24 Feb 2026 03:55:44 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8B299C116D0;
+ Tue, 24 Feb 2026 03:55:43 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1771904926;
- bh=cMuF0yTZUeQfLXBVfycmqm9pJY/HIhFbIAHjVFuZ3+E=;
+ s=k20201202; t=1771905343;
+ bh=O+MIarzvf6kjqxVQyd3WMBAO83/rjG8t85W7MzgUUDA=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=hYRTIF1xvVxWykO0YZikfymL8vDOKh2PRuc8IjB8aedPenJx+vVGVnBlCzKxN6Lb3
- wgg7Nm97+Y28mEBkmElTDitdXDn8Gq2mMA3cgIdUcfs3AOf8W6y10kQ+XH1eGUDVMT
- jlQLjIRHdHrhyBQ2JQzqPXAD6lpfxnmwnFMqNo1awu+AinKpn81bCHlh+afpBtEH47
- IfbavTzO7Vm+ln9h5qvYAPelYC6dyt7Nct6HrfyT+ut76c+5Np0N0LiVcGgHIrBFb+
- Rg5NckJKjFs+2dWI5Y+15Fj1huDz2v6HAUJ3IQwQYbPn314NF4py5wcmu3IihSMRLs
- V2rfSAb5NEUgA==
-Date: Tue, 24 Feb 2026 03:48:44 +0000
-To: Yongpeng Yang <monty_pavel@sina.com>
-Message-ID: <aZ0fnM-sJqRTt6v5@google.com>
-References: <20260203133635.3942502-2-monty_pavel@sina.com>
- <20260203133635.3942502-5-monty_pavel@sina.com>
+ b=ikEl1rCcdZ7BbDDefOVqu2uHJiOoTzsFGVam4q+7g20QoxFgDbjLwqudI7rDf4sJ6
+ bHEzFpIM+SZByrQlr6GBZOyg2AwXPDErGmypBoJuxKZr+vKbbXg1mFjS0acwCTcUPD
+ LH9rbWjopDGSNBnAwluuh37WTYKqwBqp71ziJzyz5S9vvXWnnG0J4BWov1YQnJUkXV
+ Qx0YeqNzyAYh7qWD3lUg16TCxxBm2q7InD5WKZSZ8a9YT5dsFXtvvPISQYmt0fwEMX
+ F0gpb4dwQBlj7H0tTxeGB5Gghvtfexp7fk+y3WRIgp+BceSiPKCiPGdvLH7t5uCbPq
+ FsDBeGL7c6qkg==
+Date: Tue, 24 Feb 2026 03:55:41 +0000
+To: Nanzhe Zhao <nzzhao@126.com>
+Message-ID: <aZ0hPcllsNzYn03k@google.com>
+References: <20260109024716.12047-1-chao@kernel.org>
+ <CAGsJ_4wjXMXk4YKsYebmtTa5dKVO21b91ieY=foYULWS+DyroQ@mail.gmail.com>
+ <2cdd4281-7e37-4dd0-91b1-1ab16ef772aa@kernel.org>
+ <CAGsJ_4weE5T1uBA1-JoJdbZY4E91eN_OL3hMdqixLcoKSrmuzw@mail.gmail.com>
+ <8c13ca69-a08a-41c7-bbef-0a79a5f44f93@kernel.org>
+ <83419982-77ba-4dac-880e-bf59669a006f@126.com>
+ <aXKuTRfZXE4z0j1_@google.com>
+ <43f34976.480b.19be98c144d.Coremail.nzzhao@126.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20260203133635.3942502-5-monty_pavel@sina.com>
+In-Reply-To: <43f34976.480b.19be98c144d.Coremail.nzzhao@126.com>
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
@@ -83,10 +89,10 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 02/03,
- Yongpeng Yang wrote: > From: Yongpeng Yang <yangyongpeng@xiaomi.com>
- > > f2fs_fiemap() calls f2fs_map_blocks() to obtain the block mapping a >
- file, and then merges contiguous mappings into [...] 
+ Content preview:  On 01/23,
+ Nanzhe Zhao wrote: > Hi Kim: > At 2026-01-23 07:10:05, 
+ "Jaegeuk Kim" <jaegeuk@kernel.org> wrote: > > > > >Yes, I was hitting some
+ issues when I convert the mapping while inode is alive. > >S [...] 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -98,9 +104,9 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1vulhQ-0006Lw-CJ
-Subject: Re: [f2fs-dev] [PATCH 3/4] f2fs: fix fiemap boundary handling when
- read extent cache is incomplete
+X-Headers-End: 1vulJd-0005AF-2l
+Subject: Re: [f2fs-dev] [PATCH] f2fs: fix to prevent clearing immutable for
+ large folio supported inode
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -114,13 +120,13 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>,
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
 From: Jaegeuk Kim via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
 Reply-To: Jaegeuk Kim <jaegeuk@kernel.org>
-Cc: Yongpeng Yang <yangyongpeng@xiaomi.com>,
+Cc: Barry Song <21cnbao@gmail.com>, linux-kernel@vger.kernel.org,
  linux-f2fs-devel@lists.sourceforge.net
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-8.51 / 15.00];
+X-Spamd-Result: default: False [-8.61 / 15.00];
 	WHITELIST_DMARC(-7.00)[sourceforge.net:D:+];
 	DMARC_POLICY_ALLOW_WITH_FAILURES(-0.50)[];
 	RWL_MAILSPIKE_EXCELLENT(-0.40)[216.105.38.7:from];
@@ -128,99 +134,62 @@ X-Spamd-Result: default: False [-8.51 / 15.00];
 	MAILLIST(-0.20)[mailman];
 	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7];
 	MIME_GOOD(-0.10)[text/plain];
-	MIME_BASE64_TEXT(0.10)[];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORGED_RECIPIENTS(0.00)[m:monty_pavel@sina.com,m:yangyongpeng@xiaomi.com,m:linux-f2fs-devel@lists.sourceforge.net,s:lists@lfdr.de];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	RECEIVED_HELO_LOCALHOST(0.00)[];
+	DMARC_POLICY_ALLOW(0.00)[lists.sourceforge.net,none];
 	DKIM_MIXED(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
-	RECEIVED_HELO_LOCALHOST(0.00)[];
-	FREEMAIL_TO(0.00)[sina.com];
-	FORGED_SENDER(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
-	TO_DN_SOME(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	FORGED_RECIPIENTS(0.00)[m:nzzhao@126.com,m:21cnbao@gmail.com,m:linux-kernel@vger.kernel.org,m:linux-f2fs-devel@lists.sourceforge.net,s:lists@lfdr.de];
+	FREEMAIL_TO(0.00)[126.com];
 	MIME_TRACE(0.00)[0:+];
-	ARC_NA(0.00)[];
+	TO_DN_SOME(0.00)[];
+	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,kernel.org:s=k20201202];
 	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
-	DMARC_POLICY_ALLOW(0.00)[lists.sourceforge.net,none];
+	FORGED_SENDER(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
+	ARC_NA(0.00)[];
+	FREEMAIL_CC(0.00)[gmail.com,vger.kernel.org,lists.sourceforge.net];
+	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,kernel.org:-];
 	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
-	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
 	RCVD_COUNT_FIVE(0.00)[5];
-	NEURAL_HAM(-0.00)[-0.998];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	NEURAL_HAM(-0.00)[-1.000];
 	FORGED_SENDER_FORWARDING(0.00)[];
 	FROM_HAS_DN(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
-	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,kernel.org:s=k20201202];
-	TAGGED_RCPT(0.00)[linux-f2fs-devel];
-	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
-	HAS_REPLYTO(0.00)[jaegeuk@kernel.org];
+	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,kernel.org:-];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	TAGGED_RCPT(0.00)[linux-f2fs-devel];
+	RCPT_COUNT_THREE(0.00)[4];
+	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
 	MISSING_XM_UA(0.00)[];
-	RCPT_COUNT_THREE(0.00)[3];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[xiaomi.com:email,lists.sourceforge.net:rdns,lists.sourceforge.net:helo,lists.sourceforge.net:dkim]
-X-Rspamd-Queue-Id: 10E6E182583
+	HAS_REPLYTO(0.00)[jaegeuk@kernel.org]
+X-Rspamd-Queue-Id: D807A182336
 X-Rspamd-Action: no action
 
-T24gMDIvMDMsIFlvbmdwZW5nIFlhbmcgd3JvdGU6Cj4gRnJvbTogWW9uZ3BlbmcgWWFuZyA8eWFu
-Z3lvbmdwZW5nQHhpYW9taS5jb20+Cj4gCj4gZjJmc19maWVtYXAoKSBjYWxscyBmMmZzX21hcF9i
-bG9ja3MoKSB0byBvYnRhaW4gdGhlIGJsb2NrIG1hcHBpbmcgYQo+IGZpbGUsIGFuZCB0aGVuIG1l
-cmdlcyBjb250aWd1b3VzIG1hcHBpbmdzIGludG8gZXh0ZW50cy4gSWYgdGhlIG1hcHBpbmcKPiBp
-cyBmb3VuZCBpbiB0aGUgcmVhZCBleHRlbnQgY2FjaGUsIG5vZGUgYmxvY2tzIGRvIG5vdCBuZWVk
-IHRvIGJlIHJlYWQuCj4gSG93ZXZlciwgaW4gdGhlIGZvbGxvd2luZyBzY2VuYXJpbywgYSBjb250
-aWd1b3VzIGV4dGVudCBjYW4gYmUgc3BsaXQKPiBpbnRvIHR3byBleHRlbnRzOgo+IAo+IHJvb3RA
-dm06L21udC9mMmZzIyBkZCBpZj0vZGV2L3plcm8gb2Y9ZGF0YS40TSBicz0xTSBjb3VudD00ICYm
-IHN5bmMKPiByb290QHZtOi9tbnQvZjJmcyMgZGQgaWY9L2Rldi96ZXJvIG9mPWRhdGEuNE0gYnM9
-MU0gY291bnQ9MiBzZWVrPTIgY29udj1ub3RydW5jICYmIHN5bmMKPiByb290QHZtOi9tbnQvZjJm
-cyMgZWNobyAzID4gL3Byb2Mvc3lzL3ZtL2Ryb3BfY2FjaGVzICMgZHJvcCAyTX40TSBleHRlbnQg
-Y2FjaGUKPiByb290QHZtOi9tbnQvZjJmcyMgZGQgaWY9L2Rldi96ZXJvIG9mPWRhdGEuNE0gYnM9
-MU0gY291bnQ9MiBzZWVrPTAgY29udj1ub3RydW5jICYmIHN5bmMKPiByb290QHZtOi9tbnQvZjJm
-cyMgZjJmc19pbyBmaWVtYXAgMCAxMDI0IGRhdGEuNE0KPiBGaWVtYXA6IG9mZnNldCA9IDAgbGVu
-ID0gMTAyNAo+IGxvZ2ljYWwgYWRkci4gICAgcGh5c2ljYWwgYWRkci4gICBsZW5ndGggICAgICAg
-ICAgIGZsYWdzCj4gMAkwMDAwMDAwMDAwMDAwMDAwIDAwMDAwMDAwMDY0MDAwMDAgMDAwMDAwMDAw
-MDIwMDAwMCAwMDAwMTAwMAo+IDEJMDAwMDAwMDAwMDIwMDAwMCAwMDAwMDAwMDA2NjAwMDAwIDAw
-MDAwMDAwMDAyMDAwMDAgMDAwMDEwMDEKPiAKPiBBbHRob3VnaCB0aGUgcGh5c2ljYWwgYWRkcmVz
-c2VzIG9mIHRoZSByYW5nZXMgMO+9njJNQiBhbmQgMk3vvZ40TUIgYXJlCj4gY29udGlndW91cywg
-dGhlIG1hcHBpbmcgZm9yIHRoZSAyTe+9njRNQiByYW5nZSBpcyBub3QgcHJlc2VudCBpbiBtZW1v
-cnkuCj4gV2hlbiB0aGUgcGh5c2ljYWwgYWRkcmVzc2VzIGZvciB0aGUgMO+9njJNQiByYW5nZSBh
-cmUgdXBkYXRlZCwgbm8gbWVyZ2UKPiBoYXBwZW5zIGJlY2F1c2UgdGhlIGFkamFjZW50IG1hcHBp
-bmcgaXMgbWlzc2luZyBmcm9tIHRoZSBpbi1tZW1vcnkKPiBjYWNoZS4gQXMgYSByZXN1bHQsIGZp
-ZW1hcCByZXBvcnRzIHR3byBzZXBhcmF0ZSBleHRlbnRzIGluc3RlYWQgb2YgYQo+IHNpbmdsZSBj
-b250aWd1b3VzIG9uZS4KPiAKPiBUaGUgcm9vdCBjYXVzZSBpcyB0aGF0IHRoZSByZWFkIGV4dGVu
-dCBjYWNoZSBkb2VzIG5vdCBndWFyYW50ZWUgdGhhdCBhbGwKPiBibG9ja3Mgb2YgYW4gZXh0ZW50
-IGFyZSBwcmVzZW50IGluIG1lbW9yeS4gVGhlcmVmb3JlLCB3aGVuIHRoZSBleHRlbnQKPiBsZW5n
-dGggcmV0dXJuZWQgYnkgZjJmc19tYXBfYmxvY2tzX2NhY2hlZCgpIGlzIHNtYWxsZXIgdGhhbiBt
-YXhibG9ja3MsCj4gdGhlIHJlbWFpbmluZyBtYXBwaW5ncyBhcmUgcmV0cmlldmVkIHZpYSBmMmZz
-X2dldF9kbm9kZV9vZl9kYXRhKCkgdG8KPiBlbnN1cmUgY29ycmVjdCBmaWVtYXAgZXh0ZW50IGJv
-dW5kYXJ5IGhhbmRsaW5nLgo+IAo+IEZpeGVzOiBjZDhmYzUyMjZiZWYgKCJmMmZzOiByZW1vdmUg
-dGhlIGNyZWF0ZSBhcmd1bWVudCB0byBmMmZzX21hcF9ibG9ja3MiKQo+IFNpZ25lZC1vZmYtYnk6
-IFlvbmdwZW5nIFlhbmcgPHlhbmd5b25ncGVuZ0B4aWFvbWkuY29tPgo+IC0tLQo+ICBmcy9mMmZz
-L2RhdGEuYyB8IDE0ICsrKysrKysrKysrKy0tCj4gIDEgZmlsZSBjaGFuZ2VkLCAxMiBpbnNlcnRp
-b25zKCspLCAyIGRlbGV0aW9ucygtKQo+IAo+IGRpZmYgLS1naXQgYS9mcy9mMmZzL2RhdGEuYyBi
-L2ZzL2YyZnMvZGF0YS5jCj4gaW5kZXggNDJmMTVmZDljNjhlLi5lZWRhZGNjZjg2YmIgMTAwNjQ0
-Cj4gLS0tIGEvZnMvZjJmcy9kYXRhLmMKPiArKysgYi9mcy9mMmZzL2RhdGEuYwo+IEBAIC0xNjIz
-LDggKzE2MjMsMTggQEAgaW50IGYyZnNfbWFwX2Jsb2NrcyhzdHJ1Y3QgaW5vZGUgKmlub2RlLCBz
-dHJ1Y3QgZjJmc19tYXBfYmxvY2tzICptYXAsIGludCBmbGFnKQo+ICAJbGZzX2Rpb193cml0ZSA9
-IChmbGFnID09IEYyRlNfR0VUX0JMT0NLX0RJTyAmJiBmMmZzX2xmc19tb2RlKHNiaSkgJiYKPiAg
-CQkJCW1hcC0+bV9tYXlfY3JlYXRlKTsKPiAgCj4gLQlpZiAoIW1hcC0+bV9tYXlfY3JlYXRlICYm
-IGYyZnNfbWFwX2Jsb2Nrc19jYWNoZWQoaW5vZGUsIG1hcCwgZmxhZykpCj4gLQkJZ290byBvdXQ7
-Cj4gKwlpZiAoIW1hcC0+bV9tYXlfY3JlYXRlKSB7Cj4gKwkJaWYgKGYyZnNfbWFwX2Jsb2Nrc19j
-YWNoZWQoaW5vZGUsIG1hcCwgZmxhZykpIHsKPiArCQkJaWYgKG1hcC0+bV9sZW4gPT0gbWF4Ymxv
-Y2tzKQo+ICsJCQkJZ290byBvdXQ7Cj4gKwkJCWVsc2Ugewo+ICsJCQkJcGdvZnMgPQkocGdvZmZf
-dCltYXAtPm1fbGJsayArIG1hcC0+bV9sZW47Cj4gKwkJCQllbmQgPSBtYXAtPm1fbGJsayArIG1h
-eGJsb2NrczsKPiArCQkJCW9mcyA9IG1hcC0+bV9sZW47Cj4gKwkJCQlnb3RvIG5leHRfZG5vZGU7
-Cj4gKwkJCX0KPiArCQl9Cj4gKwl9CgpDbGVhbmVkIHVwIGFzIGJlbG93OgoKLSAgICAgICBpZiAo
-IW1hcC0+bV9tYXlfY3JlYXRlICYmIGYyZnNfbWFwX2Jsb2Nrc19jYWNoZWQoaW5vZGUsIG1hcCwg
-ZmxhZykpCi0gICAgICAgICAgICAgICBnb3RvIG91dDsKKyAgICAgICBpZiAoIW1hcC0+bV9tYXlf
-Y3JlYXRlICYmIGYyZnNfbWFwX2Jsb2Nrc19jYWNoZWQoaW5vZGUsIG1hcCwgZmxhZykpIHsKKyAg
-ICAgICAgICAgICAgIGlmIChtYXAtPm1fbGVuID09IG1heGJsb2NrcykKKyAgICAgICAgICAgICAg
-ICAgICAgICAgZ290byBvdXQ7CisKKyAgICAgICAgICAgICAgIHBnb2ZzID0gKHBnb2ZmX3QpbWFw
-LT5tX2xibGsgKyBtYXAtPm1fbGVuOworICAgICAgICAgICAgICAgZW5kID0gbWFwLT5tX2xibGsg
-KyBtYXhibG9ja3M7CisgICAgICAgICAgICAgICBvZnMgPSBtYXAtPm1fbGVuOworICAgICAgICAg
-ICAgICAgZ290byBuZXh0X2Rub2RlOworICAgICAgIH0KCj4gIAo+ICAJbWFwLT5tX2JkZXYgPSBp
-bm9kZS0+aV9zYi0+c19iZGV2Owo+ICAJbWFwLT5tX211bHRpZGV2X2RpbyA9Cj4gLS0gCj4gMi40
-My4wCgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTGlu
-dXgtZjJmcy1kZXZlbCBtYWlsaW5nIGxpc3QKTGludXgtZjJmcy1kZXZlbEBsaXN0cy5zb3VyY2Vm
-b3JnZS5uZXQKaHR0cHM6Ly9saXN0cy5zb3VyY2Vmb3JnZS5uZXQvbGlzdHMvbGlzdGluZm8vbGlu
-dXgtZjJmcy1kZXZlbAo=
+On 01/23, Nanzhe Zhao wrote:
+> Hi Kim:
+> At 2026-01-23 07:10:05, "Jaegeuk Kim" <jaegeuk@kernel.org> wrote:
+> 
+> >
+> >Yes, I was hitting some issues when I convert the mapping while inode is alive.
+> >So, for now, we should set it in f2fs_iget() only.
+> >
+> 
+> What about using mapping_set_xxx functions in f2fs_new_inode  then?
+
+How can we guarantee this will be a read-only file?
+
+> It maybe be a bit odd to me that we create a immutable file but we can
+> only get large folios for this inode  when the inode is evicted and get
+> by f2fs_iget again, not get large folios by the first place.
+> 
+> Thanks,
+> Nanzhe Zhao
+
+
+_______________________________________________
+Linux-f2fs-devel mailing list
+Linux-f2fs-devel@lists.sourceforge.net
+https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
