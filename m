@@ -2,144 +2,139 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id mM2DL87XnWk0SQQAu9opvQ
+	id eCFdMQf/nWkNTAQAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 24 Feb 2026 17:54:38 +0100
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 24 Feb 2026 20:41:59 +0100
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9607518A22F
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 24 Feb 2026 17:54:37 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id D0A8118C2B0
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 24 Feb 2026 20:41:58 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
-	Subject:MIME-Version:References:In-Reply-To:Message-ID:Date:To:From:Sender:
-	Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
-	:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=odlApoRTZqbZ0mPF9BvtnMIkjf25mpvJIsHSQPTiFK0=; b=k+8EHjflYRs0GE/a/oBdDKjFZP
-	PF52KbPApLz/3zkyFsfbz1yRJM7rjRRKit7cqHumBtfEktzWgJrYZPhIBPdhJ3cServ+H+YmFB8py
-	OJqxQ6a6aFAji8+Z0Bqd/BZxMfoOFmsFVljI53lqaZQ2kE0lNQADvQqDKsqohhln+t6A=;
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	Subject:MIME-Version:Message-ID:To:From:Date:Sender:Reply-To:Content-ID:
+	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+	:Resent-Message-ID:In-Reply-To:References:List-Owner;
+	bh=DuMXmC9Hnw5jURgSx94V5QXTMqszhjcLshdTF49qKHM=; b=H887ajATpkWEpRZjOJpa4UA/ns
+	4dOZYcBUztQj8CcQpumBQP65y3UdEsCqSHDHChj/XQJoCqR29GIfToIN1qmb1hqgx3qjl5KBwa9d8
+	GB9TCgSPCjw3ys2/By8t42T6FCE7daSGicnmYn7fJIT7+ZTQKO8WtDtgd7qYy58PhHQI=;
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vuvg2-0002ju-Qs;
-	Tue, 24 Feb 2026 16:54:26 +0000
+	id 1vuyI3-0006Yj-Cx;
+	Tue, 24 Feb 2026 19:41:51 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <kth5965@gmail.com>) id 1vuvg1-0002jm-11
+ (envelope-from <dan.carpenter@linaro.org>) id 1vuyI1-0006Yc-N8
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 24 Feb 2026 16:54:25 +0000
+ Tue, 24 Feb 2026 19:41:49 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
- In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Type:MIME-Version:Message-ID:Subject:Cc:To:
+ From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=+9GXa4UNt9CSm+kLhVLx7XY7ItraJjuFAoNvdJgLB50=; b=Z+svAxfmSIS8SejNQcidU0SNpj
- 5+WDVhI344KyYWh0UMvSu9TbnxVHTpL2n+Xd0ufYkrFS7HsHjVmp19wN7LykMM7jsVOXxoZ59s+Tm
- Ier+uKYZ8HG9P1sAGoCHlm0r84tBS8Mrsw5pdBKLLj11ZGoyLQls4FTgMQ6xOhDz6EkY=;
+ bh=uG3AIgK7voMXHUPfr4e60Rlgz5PJvFDIhOo0j1uw0Rs=; b=R7lb9Zj3sw0Gu2SAjgocaofYG4
+ smANNbFLObF+ghnkIKzKGUqL+P+QXlAT9yHECB3dpwsH60qd46zvLAUnreppotuqECpV1fTOQRDLK
+ rKP+8AyoqHlpNpBlGCzrSmeqqNFl1jZK6yCmy319oxNMPu7MaXW0KITb6io7uv+YqCTs=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=+9GXa4UNt9CSm+kLhVLx7XY7ItraJjuFAoNvdJgLB50=; b=OXnMkDcj6VAKrT8PprDNrNqGqZ
- b1mHt9d3hQFlZGoa2tlGpHIwM8DJBkvzuANioQOExF1VZJhh5JvcsYc8Oqitxxjp55DMRRB2WIB3s
- 6a+9fQ6Qn5nAADqzU6uYxAb2VBhvHNn9FeMGlzGaXMebpi4yF9ZGzilSkVR0ScRkW1y4=;
-Received: from mail-pl1-f173.google.com ([209.85.214.173])
+ h=Content-Type:MIME-Version:Message-ID:Subject:Cc:To:From:Date:Sender:
+ Reply-To:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date
+ :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=uG3AIgK7voMXHUPfr4e60Rlgz5PJvFDIhOo0j1uw0Rs=; b=k
+ 3yHjmMWdjvDxKV89WcNmvVlZNARolqB16bF5sGG7MB9mtJLQGnvaZsyUaiaTd/NhGx9o4yTFsLI9Z
+ lHpxyh5BEhI+2LJ7n6DKcrWqJca5hqHqEv3fyWrEbkG7Fi4Zi57DXZaqKAGQQ3itDHDpdUWh0fh0+
+ t9CpFgiXWpZTKhyU=;
+Received: from mail-ej1-f51.google.com ([209.85.218.51])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1vuvg0-0000Vw-Ay for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 24 Feb 2026 16:54:24 +0000
-Received: by mail-pl1-f173.google.com with SMTP id
- d9443c01a7336-2ab1c8fdc40so6199625ad.1
+ id 1vuyI0-0000Mp-Lq for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 24 Feb 2026 19:41:49 +0000
+Received: by mail-ej1-f51.google.com with SMTP id
+ a640c23a62f3a-b90bc00578cso284272666b.0
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Tue, 24 Feb 2026 08:54:24 -0800 (PST)
+ Tue, 24 Feb 2026 11:41:48 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1771952054; x=1772556854; darn=lists.sourceforge.net;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=+9GXa4UNt9CSm+kLhVLx7XY7ItraJjuFAoNvdJgLB50=;
- b=ClFtXql19vQ+GHgdFWfKM1GqrRlUsHYwLklF60MhMez4S5dftUT8+Hf/ep+DbsAtFe
- 3h3Q+9RCLqz7+s4OrkU6qAaWNNMdqx/rONwLubmCF+HCF2NPAQLMtfKR82oaZ2PTNl4c
- LhEebF76e35pq4NXcvZhbj44eW3Tce8SbQzJ+1b4GJVu8lpoYx5lVOWbiSOjp0c4pYe4
- DXu7Clw19RXeVB7SZQ8zRZ1HLXl6O7B11Rw1zJcnJQd4RdVT9gYFLAi+AG5hYcwR6aWK
- 7iTHA+RoPStfY6blXXpuertQo6htEx4vZ/+X1Stg7UIV0tuCklInSA3g5LgcVSR+wqOS
- zLTA==
+ d=linaro.org; s=google; t=1771962097; x=1772566897; darn=lists.sourceforge.net;
+ h=content-disposition:mime-version:message-id:subject:cc:to:from:date
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=uG3AIgK7voMXHUPfr4e60Rlgz5PJvFDIhOo0j1uw0Rs=;
+ b=Nxaeff9+K+YilZzfkWE7HESWDxTynRseGMR9XaoGYsRXhXza2N9uP99+giVCTzRDoo
+ jw/TBb6nwKD3Xixp+8h/vEQwkj10aMf1v2a9ilCe+ZEfOEHitm2nnPJ/y7gQuFLXp9dR
+ 0znaA1SzMGQDUiSEoV0Z3zZYtxXHjZ4l78gbcVBgayCgpaNxoYjK4k3jNM+JlbvOzDwt
+ OD2e80BYT8STm5VlYZFB7CHFHuVw+xYZulPyQII8b2kbfFqCrq0e4OPM87tJ/0tCJVTA
+ U27ixCu3STiynVueEXWpD2cnncyp7GNmCBPt4wVuMdxCvZL/9WPPxNYkV+9tivK7kghb
+ PSnw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1771952054; x=1772556854;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=+9GXa4UNt9CSm+kLhVLx7XY7ItraJjuFAoNvdJgLB50=;
- b=xD8AaVt5eaSjHtseRTK3dDec902/8OhWsmqB+m0/IJAfhEsReRStFssc1/gmsxGTrt
- BmYS2e4a6VLmtve5i0XDpKBe8/plY6uHEyq+agBefxh1jYmGGvhTJeZ3OWAzc1KWA3zQ
- HUwk99o35rm0gUaXHMrw9sN402he5AzNag1zLXeCFuxmZDAFwQtMPUi8IXve7/wOgmL0
- zk+MisgJWABbdPfd/Fcvnl84x6HrkSavRp6V9A6RNMnxc9Ealolvv6RT7HK6CnA+ClY5
- Xsz9+tkjMAwu40FBPhX95I9r0ZH/gvj3Tqe1lWfVEbmajN3m4JSkrvKBuzGe1KDG3q3w
- akUQ==
-X-Gm-Message-State: AOJu0YxFGHbYRhCmeaQM5JWmczQL5u9QPkZOFrd+ELq7wxxYYHSyhrnd
- oaxaWwtCrLkdIyjoQp1FJiqlNGmA3aB9W0N+Ca8SA1wvt9AJPJUJlgF3
-X-Gm-Gg: ATEYQzxtezswO3r7VkMg2QMhhXlUqq3VXcrUfu2HExMsAmqp6bYkQE+Z0hTCyo8sG2K
- MI8Z+r/eY7j42gE28FclMLnCRSqb3bfIxBWGTqfeCguyJ9SoPAXtD+nHsR/4siabHaJHINP8oYE
- A3OZSgKT6PeVs6I3RewQ8fxxjt2EOXitQ4KLNlCYklrxEISkGFXrQGbqGPosmouXM2pZhukVIaY
- TxMBd1uekb34a58Gf4rny8YCUrX/luN8xtNQzxXStsYxh6Y0CJYMYRu/B3QfHlQX0sj2YFwzUQd
- FJrSsCb6AGRo+ZyBInFaT8tyt1R+HHB0/bJWO1Tcq0nlTfxnLiDa6xUQmaUI64MgVi87wmDXe6g
- 0I9kReVoVkTQajSQAP+FW1BJYL8AJ9pRrXWAcne5WDW48/jr1viNDE7sJnPCUk190Bed86LRsN/
- mmdRppkT8usIgzZmPZGW6wbtQD6eXO4w==
-X-Received: by 2002:a17:902:cf05:b0:2aa:de29:65c with SMTP id
- d9443c01a7336-2ad7452014emr85930935ad.6.1771952053477; 
- Tue, 24 Feb 2026 08:54:13 -0800 (PST)
-Received: from kt5965-NUC8i3BEH.. ([182.217.14.201])
- by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2ad7505bf1asm112635745ad.92.2026.02.24.08.54.10
+ d=1e100.net; s=20230601; t=1771962097; x=1772566897;
+ h=content-disposition:mime-version:message-id:subject:cc:to:from:date
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=uG3AIgK7voMXHUPfr4e60Rlgz5PJvFDIhOo0j1uw0Rs=;
+ b=d/aeD9bIj6nqXcp0Tkehn0Uuk/0g2CYKXGJkQA3AASlwvHnQfQ1mXMwbDmvkxuk8lx
+ YuyOEkcLaZOZa+cf1jbaSbGSOGW9FiVHeiT8y6AUuhC9BbmrNeD5bXsnPx5i2Qcesr5m
+ 7cGn1KwM3BDujs7D18nVGYLxWiArohTQ7sxYHm6J1+Qswjhd7pPGnIPNgtFgYCpAYqjM
+ Ok4sCek+Ux+Q32BDMxnjp62qU2JWE8IyTBkEmFgEd8OA/h4yf1F7zjxTPvwn9Vqg68Cy
+ tUCl8INxGE+L5JvGaPgfDaNG6RLZEl+Ye+WBhabujYXeSircKy2yGfBmAHsI70uG7AJu
+ HEQA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCV4sTkiLs0nuVd7VT7ynEUV0x2Mp4eLw97pjVKiybBzN7MoKjHATVH0F1TlEp5IAeTrwYKpw4kF4V0lhOJKYNBz@lists.sourceforge.net
+X-Gm-Message-State: AOJu0YzSx9DOYlVI1pE9gcITXm+uvpS5Q+nvonpmMfpwEFKA91+EOcrL
+ WmKaR7kuTrZi4CdlbsSaVHChVsTOBJMyQHkxZjDCbNlYZZktj8eKhKvUmm1V6vqD2pzdd2eRo/8
+ FHBiM
+X-Gm-Gg: ATEYQzzAghL5VQo0tI/6MbAH823pkJtMflYKE840fs8p1DkNQyu1MlVMir5LhydQJVk
+ D5XigEmq18ieFY7urLj4ldq9WlMDj1Cm1k2lquAG3WKOcUGVnUrGVcxc/hVO8bd54ub59CxFoAi
+ UZZo4rWwr8bUcM20f6/Z84eUNYqJND1w87PvoKJLaMBtpSoTX0HHFj4SYtRKevc51VvM6GeGcne
+ zlf6GalCOt2skKSce+EdFezQMyqeszJcV3i0GEZGd/znsPfwyucXCBF5rMNGPH5R9QnX8VvaAah
+ n/sGlqxTORF+5obK2MaOQxbkOtcjWfHDkVqCMZlFq7JcecTTOtVPEsqEMAo8rBxAOiiC4yYI4UU
+ Au45TG74lRkE0BvrYW5vowsukGrLpLASaVAjcsB3bQ/c/h56fFIaVsnBuNAYY2+KTxLxOLdWQqz
+ mHYUjgHRMFnpuVnYZnSUw0CJgWoLyU
+X-Received: by 2002:a05:600c:46cd:b0:476:4efc:8ed4 with SMTP id
+ 5b1f17b1804b1-483a95beff3mr252835335e9.11.1771958470397; 
+ Tue, 24 Feb 2026 10:41:10 -0800 (PST)
+Received: from localhost ([196.207.164.177]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-43970d3ff27sm30190203f8f.22.2026.02.24.10.41.08
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 24 Feb 2026 08:54:12 -0800 (PST)
-From: Taerang Kim <kth5965@gmail.com>
-To: jaegeuk@kernel.org,
-	chao@kernel.org
-Date: Wed, 25 Feb 2026 01:54:08 +0900
-Message-ID: <20260224165408.450957-1-kth5965@gmail.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260224160654.448538-1-kth5965@gmail.com>
-References: <20260224160654.448538-1-kth5965@gmail.com>
+ Tue, 24 Feb 2026 10:41:09 -0800 (PST)
+Date: Tue, 24 Feb 2026 21:41:05 +0300
+From: Dan Carpenter <dan.carpenter@linaro.org>
+To: oe-kbuild@lists.linux.dev, Jianan Huang <huangjianan@xiaomi.com>
+Message-ID: <202602242237.boCX8y4A-lkp@intel.com>
 MIME-Version: 1.0
-X-Spam-Score: 0.1 (/)
+Content-Disposition: inline
+X-Spam-Score: 0.8 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: syzbot reports a BUG_ON(inode->i_data.nrpages) in
- clear_inode()
- when mounting a corrupted f2fs image. I agree with Dmitry's RFC that dropping
- page #0 in f2fs_truncate() can address this reproducer,
- since f2fs_convert_inline_inode()
- may grab page #0 via f2fs_grab_cache_folio() and leave it cached on th [...]
- Content analysis details:   (0.1 points, 5.0 required)
+ Content preview: tree:
+ https://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs.git
+ dev-test head: 0c3712423755e851debb4021af26802b75d1cb9d commit:
+ 0c3712423755e851debb4021af26802b75d1cb9d
+ [5/5] f2fs: avoid readin [...] 
+ Content analysis details:   (0.8 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 1.0 RCVD_IN_UCE2           RBL: IP Subnet Listed in UCEPROTECT Level 2
+ [196.207.164.177 listed in dnsbl-2.uceprotect.net]
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
- 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
- [kth5965(at)gmail.com]
- 0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends in
- digit [kth5965(at)gmail.com]
  0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.214.173 listed in wl.mailspike.net]
+ [209.85.218.51 listed in wl.mailspike.net]
  0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1vuvg0-0000Vw-Ay
-Subject: [f2fs-dev] [PATCH v2] f2fs: evict: truncate page cache before
- clear_inode
+X-Headers-End: 1vuyI0-0000Mp-Lq
+Subject: [f2fs-dev] [jaegeuk-f2fs:dev-test 5/5] fs/f2fs/gc.c:1286
+ ra_data_block() warn: missing error code 'err'
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -151,98 +146,164 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Taerang Kim <kth5965@gmail.com>,
- syzbot+fc026e87558558f75c00@syzkaller.appspotmail.com,
- linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Cc: Jaegeuk Kim <jaegeuk@kernel.org>, Sheng Yong <shengyong1@xiaomi.com>,
+ linux-f2fs-devel@lists.sourceforge.net, lkp@intel.com,
+ oe-kbuild-all@lists.linux.dev
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [1.49 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
-	MID_CONTAINS_FROM(1.00)[];
+X-Spamd-Result: default: False [-1.01 / 15.00];
 	RWL_MAILSPIKE_EXCELLENT(-0.40)[216.105.38.7:from];
-	MAILLIST(-0.20)[mailman];
-	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
 	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7];
-	DMARC_POLICY_SOFTFAIL(0.10)[gmail.com : SPF not aligned (relaxed), DKIM not aligned (relaxed),none];
+	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
+	MAILLIST(-0.20)[mailman];
 	MIME_GOOD(-0.10)[text/plain];
+	DMARC_POLICY_SOFTFAIL(0.10)[linaro.org : SPF not aligned (relaxed), DKIM not aligned (relaxed),none];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORGED_SENDER(0.00)[kth5965@gmail.com,linux-f2fs-devel-bounces@lists.sourceforge.net];
-	FREEMAIL_CC(0.00)[gmail.com,syzkaller.appspotmail.com,vger.kernel.org,lists.sourceforge.net];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:jaegeuk@kernel.org,m:chao@kernel.org,m:kth5965@gmail.com,m:syzbot+fc026e87558558f75c00@syzkaller.appspotmail.com,m:linux-kernel@vger.kernel.org,m:linux-f2fs-devel@lists.sourceforge.net,m:syzbot@syzkaller.appspotmail.com,s:lists@lfdr.de];
+	RCVD_TLS_LAST(0.00)[];
 	ARC_NA(0.00)[];
+	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,linaro.org:s=google];
+	TO_DN_SOME(0.00)[];
+	RECEIVED_HELO_LOCALHOST(0.00)[];
+	FORGED_RECIPIENTS(0.00)[m:oe-kbuild@lists.linux.dev,m:huangjianan@xiaomi.com,m:jaegeuk@kernel.org,m:shengyong1@xiaomi.com,m:linux-f2fs-devel@lists.sourceforge.net,m:lkp@intel.com,m:oe-kbuild-all@lists.linux.dev,s:lists@lfdr.de];
 	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
 	MIME_TRACE(0.00)[0:+];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	RECEIVED_HELO_LOCALHOST(0.00)[];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	TO_DN_SOME(0.00)[];
+	FORGED_SENDER(0.00)[dan.carpenter@linaro.org,linux-f2fs-devel-bounces@lists.sourceforge.net];
 	DKIM_MIXED(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[kth5965@gmail.com,linux-f2fs-devel-bounces@lists.sourceforge.net];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	TAGGED_RCPT(0.00)[linux-f2fs-devel,fc026e87558558f75c00];
-	NEURAL_HAM(-0.00)[-0.997];
+	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,linaro.org:-];
+	MISSING_XM_UA(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
 	RCVD_COUNT_FIVE(0.00)[5];
 	PREVIOUSLY_DELIVERED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
-	RCVD_TLS_LAST(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[dan.carpenter@linaro.org,linux-f2fs-devel-bounces@lists.sourceforge.net];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,gmail.com:s=20230601];
+	NEURAL_HAM(-0.00)[-1.000];
+	RCPT_COUNT_SEVEN(0.00)[7];
 	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
-	RCPT_COUNT_FIVE(0.00)[6];
-	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,gmail.com:-];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[syzkaller.appspot.com:url,appspotmail.com:email]
-X-Rspamd-Queue-Id: 9607518A22F
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	TAGGED_RCPT(0.00)[linux-f2fs-devel];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[intel.com:mid,intel.com:email,linaro.org:email]
+X-Rspamd-Queue-Id: D0A8118C2B0
 X-Rspamd-Action: no action
 
-syzbot reports a BUG_ON(inode->i_data.nrpages) in clear_inode() when
-mounting a corrupted f2fs image.
+tree:   https://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs.git dev-test
+head:   0c3712423755e851debb4021af26802b75d1cb9d
+commit: 0c3712423755e851debb4021af26802b75d1cb9d [5/5] f2fs: avoid reading already updated pages during GC
+config: csky-randconfig-r071-20260224 (https://download.01.org/0day-ci/archive/20260224/202602242237.boCX8y4A-lkp@intel.com/config)
+compiler: csky-linux-gcc (GCC) 15.2.0
+smatch version: v0.5.0-8994-gd50c5a4c
 
-I agree with Dmitry's RFC that dropping page #0 in f2fs_truncate()
-can address this reproducer, since f2fs_convert_inline_inode() may
-grab page #0 via f2fs_grab_cache_folio() and leave it cached on the
-clear_out success path.
+If you fix the issue in a separate patch/commit (i.e. not just a new version of
+the same patch/commit), kindly add following tags
+| Reported-by: kernel test robot <lkp@intel.com>
+| Reported-by: Dan Carpenter <dan.carpenter@linaro.org>
+| Closes: https://lore.kernel.org/r/202602242237.boCX8y4A-lkp@intel.com/
 
-However, clear_inode() requires the inode mapping to be empty, and it is
-hard to guarantee that the page cache can only be populated from this
-truncate/inline-conversion path. Make f2fs_evict_inode() defensively
-truncate any remaining page cache before calling clear_inode(), so
-nrpages is guaranteed to be 0 regardless of how the cache was populated.
+smatch warnings:
+fs/f2fs/gc.c:1286 ra_data_block() warn: missing error code 'err'
 
-Link: https://lore.kernel.org/linux-f2fs-devel/20260206092958.578191-1-dmantipov@yandex.ru/
-Reported-by: syzbot+fc026e87558558f75c00@syzkaller.appspotmail.com
-Closes: https://syzkaller.appspot.com/bug?extid=fc026e87558558f75c00
-Signed-off-by: Taerang Kim <kth5965@gmail.com>
----
-v2: rebase onto torvalds/master (fsverity_cleanup_inode() not present);
-    fix patch context, no functional change.
+vim +/err +1286 fs/f2fs/gc.c
 
- fs/f2fs/inode.c | 7 +++++++
- 1 file changed, 7 insertions(+)
+6aa58d8ad20a332 Chao Yu                 2018-08-14  1217  static int ra_data_block(struct inode *inode, pgoff_t index)
+6aa58d8ad20a332 Chao Yu                 2018-08-14  1218  {
+6aa58d8ad20a332 Chao Yu                 2018-08-14  1219  	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
+f18d00769336897 Sunmin Jeong            2024-07-10  1220  	struct address_space *mapping = f2fs_is_cow_file(inode) ?
+f18d00769336897 Sunmin Jeong            2024-07-10  1221  				F2FS_I(inode)->atomic_inode->i_mapping : inode->i_mapping;
+6aa58d8ad20a332 Chao Yu                 2018-08-14  1222  	struct dnode_of_data dn;
+e0b89d00ea9f846 Chao Yu                 2025-10-14  1223  	struct folio *folio, *efolio;
+6aa58d8ad20a332 Chao Yu                 2018-08-14  1224  	struct f2fs_io_info fio = {
+6aa58d8ad20a332 Chao Yu                 2018-08-14  1225  		.sbi = sbi,
+6aa58d8ad20a332 Chao Yu                 2018-08-14  1226  		.ino = inode->i_ino,
+6aa58d8ad20a332 Chao Yu                 2018-08-14  1227  		.type = DATA,
+6aa58d8ad20a332 Chao Yu                 2018-08-14  1228  		.temp = COLD,
+6aa58d8ad20a332 Chao Yu                 2018-08-14  1229  		.op = REQ_OP_READ,
+6aa58d8ad20a332 Chao Yu                 2018-08-14  1230  		.op_flags = 0,
+6aa58d8ad20a332 Chao Yu                 2018-08-14  1231  		.encrypted_page = NULL,
+2eae077e6e46f90 Chao Yu                 2023-02-02  1232  		.in_list = 0,
+6aa58d8ad20a332 Chao Yu                 2018-08-14  1233  	};
+0c3712423755e85 Jianan Huang            2026-02-09  1234  	int err = 0;
+6aa58d8ad20a332 Chao Yu                 2018-08-14  1235  
+0d53be232343c16 Matthew Wilcox (Oracle  2025-03-31  1236) 	folio = f2fs_grab_cache_folio(mapping, index, true);
+0d53be232343c16 Matthew Wilcox (Oracle  2025-03-31  1237) 	if (IS_ERR(folio))
+0d53be232343c16 Matthew Wilcox (Oracle  2025-03-31  1238) 		return PTR_ERR(folio);
+6aa58d8ad20a332 Chao Yu                 2018-08-14  1239  
+04a91ab01684744 Christoph Hellwig       2022-11-28  1240  	if (f2fs_lookup_read_extent_cache_block(inode, index,
+04a91ab01684744 Christoph Hellwig       2022-11-28  1241  						&dn.data_blkaddr)) {
+93770ab7a6e9631 Chao Yu                 2019-04-15  1242  		if (unlikely(!f2fs_is_valid_blkaddr(sbi, dn.data_blkaddr,
+93770ab7a6e9631 Chao Yu                 2019-04-15  1243  						DATA_GENERIC_ENHANCE_READ))) {
+10f966bbf521bb9 Chao Yu                 2019-06-20  1244  			err = -EFSCORRUPTED;
+0d53be232343c16 Matthew Wilcox (Oracle  2025-03-31  1245) 			goto put_folio;
+93770ab7a6e9631 Chao Yu                 2019-04-15  1246  		}
+6aa58d8ad20a332 Chao Yu                 2018-08-14  1247  		goto got_it;
+6aa58d8ad20a332 Chao Yu                 2018-08-14  1248  	}
+6aa58d8ad20a332 Chao Yu                 2018-08-14  1249  
+6aa58d8ad20a332 Chao Yu                 2018-08-14  1250  	set_new_dnode(&dn, inode, NULL, NULL, 0);
+6aa58d8ad20a332 Chao Yu                 2018-08-14  1251  	err = f2fs_get_dnode_of_data(&dn, index, LOOKUP_NODE);
+6aa58d8ad20a332 Chao Yu                 2018-08-14  1252  	if (err)
+0d53be232343c16 Matthew Wilcox (Oracle  2025-03-31  1253) 		goto put_folio;
+6aa58d8ad20a332 Chao Yu                 2018-08-14  1254  	f2fs_put_dnode(&dn);
+6aa58d8ad20a332 Chao Yu                 2018-08-14  1255  
+93770ab7a6e9631 Chao Yu                 2019-04-15  1256  	if (!__is_valid_data_blkaddr(dn.data_blkaddr)) {
+93770ab7a6e9631 Chao Yu                 2019-04-15  1257  		err = -ENOENT;
+0d53be232343c16 Matthew Wilcox (Oracle  2025-03-31  1258) 		goto put_folio;
+93770ab7a6e9631 Chao Yu                 2019-04-15  1259  	}
+6aa58d8ad20a332 Chao Yu                 2018-08-14  1260  	if (unlikely(!f2fs_is_valid_blkaddr(sbi, dn.data_blkaddr,
+93770ab7a6e9631 Chao Yu                 2019-04-15  1261  						DATA_GENERIC_ENHANCE))) {
+10f966bbf521bb9 Chao Yu                 2019-06-20  1262  		err = -EFSCORRUPTED;
+0d53be232343c16 Matthew Wilcox (Oracle  2025-03-31  1263) 		goto put_folio;
+6aa58d8ad20a332 Chao Yu                 2018-08-14  1264  	}
+6aa58d8ad20a332 Chao Yu                 2018-08-14  1265  got_it:
+0d53be232343c16 Matthew Wilcox (Oracle  2025-03-31  1266) 	/* read folio */
+d342b7adad71e5a Matthew Wilcox (Oracle  2025-07-08  1267) 	fio.folio = folio;
+6aa58d8ad20a332 Chao Yu                 2018-08-14  1268  	fio.new_blkaddr = fio.old_blkaddr = dn.data_blkaddr;
+6aa58d8ad20a332 Chao Yu                 2018-08-14  1269  
+9bf1a3f73927492 Yunlong Song            2018-09-18  1270  	/*
+9bf1a3f73927492 Yunlong Song            2018-09-18  1271  	 * don't cache encrypted data into meta inode until previous dirty
+9bf1a3f73927492 Yunlong Song            2018-09-18  1272  	 * data were writebacked to avoid racing between GC and flush.
+9bf1a3f73927492 Yunlong Song            2018-09-18  1273  	 */
+0d53be232343c16 Matthew Wilcox (Oracle  2025-03-31  1274) 	f2fs_folio_wait_writeback(folio, DATA, true, true);
+9bf1a3f73927492 Yunlong Song            2018-09-18  1275  
+9bf1a3f73927492 Yunlong Song            2018-09-18  1276  	f2fs_wait_on_block_writeback(inode, dn.data_blkaddr);
+9bf1a3f73927492 Yunlong Song            2018-09-18  1277  
+e0b89d00ea9f846 Chao Yu                 2025-10-14  1278  	efolio = f2fs_filemap_get_folio(META_MAPPING(sbi), dn.data_blkaddr,
+6aa58d8ad20a332 Chao Yu                 2018-08-14  1279  					FGP_LOCK | FGP_CREAT, GFP_NOFS);
+e0b89d00ea9f846 Chao Yu                 2025-10-14  1280  	if (IS_ERR(efolio)) {
+e0b89d00ea9f846 Chao Yu                 2025-10-14  1281  		err = PTR_ERR(efolio);
+0d53be232343c16 Matthew Wilcox (Oracle  2025-03-31  1282) 		goto put_folio;
+6aa58d8ad20a332 Chao Yu                 2018-08-14  1283  	}
+6aa58d8ad20a332 Chao Yu                 2018-08-14  1284  
+0c3712423755e85 Jianan Huang            2026-02-09  1285  	if (folio_test_uptodate(efolio))
+0c3712423755e85 Jianan Huang            2026-02-09 @1286  		goto put_encrypted_page;
 
-diff --git a/fs/f2fs/inode.c b/fs/f2fs/inode.c
-index e0f850b3f0c3..e7942e6e312c 100644
---- a/fs/f2fs/inode.c
-+++ b/fs/f2fs/inode.c
-@@ -1006,6 +1006,13 @@ void f2fs_evict_inode(struct inode *inode)
- 	}
- out_clear:
- 	fscrypt_put_encryption_info(inode);
-+	/*
-+	 * Defensively truncate any remaining page cache, e.g.
-+	 * f2fs_convert_inline_inode() called from f2fs_truncate()
-+	 * may leave page #0 behind in the page cache when the
-+	 * inline conversion takes the clear_out success path.
-+	 */
-+	truncate_inode_pages_final(&inode->i_data);
- 	clear_inode(inode);
- }
- 
+Is this an error path?  It looks like it is...
+
+0c3712423755e85 Jianan Huang            2026-02-09  1287  
+e0b89d00ea9f846 Chao Yu                 2025-10-14  1288  	fio.encrypted_page = &efolio->page;
+e0b89d00ea9f846 Chao Yu                 2025-10-14  1289  
+6aa58d8ad20a332 Chao Yu                 2018-08-14  1290  	err = f2fs_submit_page_bio(&fio);
+6aa58d8ad20a332 Chao Yu                 2018-08-14  1291  	if (err)
+6aa58d8ad20a332 Chao Yu                 2018-08-14  1292  		goto put_encrypted_page;
+89c16629e3136f0 Yongpeng Yang           2025-10-27  1293  	f2fs_put_page(fio.encrypted_page, false);
+0d53be232343c16 Matthew Wilcox (Oracle  2025-03-31  1294) 	f2fs_folio_put(folio, true);
+8b83ac81f4283ae Chao Yu                 2020-04-16  1295  
+34a23525601a16f Chao Yu                 2022-08-20  1296  	f2fs_update_iostat(sbi, inode, FS_DATA_READ_IO, F2FS_BLKSIZE);
+34a23525601a16f Chao Yu                 2022-08-20  1297  	f2fs_update_iostat(sbi, NULL, FS_GDATA_READ_IO, F2FS_BLKSIZE);
+8b83ac81f4283ae Chao Yu                 2020-04-16  1298  
+6aa58d8ad20a332 Chao Yu                 2018-08-14  1299  	return 0;
+6aa58d8ad20a332 Chao Yu                 2018-08-14  1300  put_encrypted_page:
+89c16629e3136f0 Yongpeng Yang           2025-10-27  1301  	f2fs_put_page(fio.encrypted_page, true);
+0d53be232343c16 Matthew Wilcox (Oracle  2025-03-31  1302) put_folio:
+0d53be232343c16 Matthew Wilcox (Oracle  2025-03-31  1303) 	f2fs_folio_put(folio, true);
+6aa58d8ad20a332 Chao Yu                 2018-08-14  1304  	return err;
+6aa58d8ad20a332 Chao Yu                 2018-08-14  1305  }
+
 -- 
-2.43.0
+0-DAY CI Kernel Test Service
+https://github.com/intel/lkp-tests/wiki
 
 
 
