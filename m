@@ -2,41 +2,41 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id sDfpKddvoGk3jgQAu9opvQ
+	id mI9SK/NvoGk4jwQAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 26 Feb 2026 17:07:51 +0100
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 26 Feb 2026 17:08:19 +0100
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0CF2F1A9A6A
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 26 Feb 2026 17:07:51 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3E8BF1A9AA0
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 26 Feb 2026 17:08:19 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
 	List-Unsubscribe:List-Id:Subject:To:In-Reply-To:References:Message-Id:
 	MIME-Version:Date:Sender:Content-ID:Content-Description:Resent-Date:
 	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=XYkGnWC0vjQw22AlN9E+DYofb71W9N6KiO13Ic4KRdk=; b=X39RaeuAtrysvTfjnhS8Y0/zea
-	r1niHQtgEpe6pRdZMQ/afCuU9uXEmFrEqblDyTZhGIH6shNTA4Q/4LowGjHn7dV+6z0A97HOVeimH
-	B29thRrKP0SObDgfJ5l9TixUAdip2qov+JbK3O8AHlpe7RHp+zQPFdbuzJ4/AxL5uuqw=;
+	bh=BUFlxnxbxbXUuqn/MC/fVsyv6oxuYzyyA+bg4lNwBCM=; b=YndsXEvyRn191fJIJ0pGLOXvAd
+	PqWvgpX3s4Bj8AbOJ1AxJ9LL9jXaIaroVtW4vc5AzcZb2pbBKdD5XjXjUerjkhs0wJ5mU2/7XqHkC
+	KLvOQYK3XA7+/uAGwzcXYPinS2ObrEDuU4QSlxMJ/MoyqwE7EoJveEdOyJARXJbbW2Zw=;
 Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
 	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vvdu0-00032g-Tz;
-	Thu, 26 Feb 2026 16:07:48 +0000
+	id 1vvduS-00035n-Ik;
+	Thu, 26 Feb 2026 16:08:16 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
  by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jlayton@kernel.org>) id 1vvdu0-00032K-3f;
- Thu, 26 Feb 2026 16:07:48 +0000
+ (envelope-from <jlayton@kernel.org>) id 1vvduQ-00035R-Mn;
+ Thu, 26 Feb 2026 16:08:14 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Cc:To:In-Reply-To:References:Message-Id:
  Content-Transfer-Encoding:Content-Type:MIME-Version:Subject:Date:From:Sender:
  Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
  :Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=bgzNRDBJO4amFMycpMMRf+vfqwK1IXnNEgqjgztAPqw=; b=bhzbNaPHQTFLXhc1cjg82k6piI
- 75jkmyjyAgJ396TiS6ouQehJKppQ6UowieSXRMV9HCZqZVgwBeZglWxMzwvLpMFKZYanbjdvcsAyU
- v+wXLw98S1bhRrqvgTbB53Fcvn4T2Tt8/DUdSZSK1t1eNaDTrHWAV7uk/YwIRTG02MFI=;
+ bh=sBNw2TJpVq9dqBuZ8KYKuWHBMXom1bt4ItAxvrvlyQw=; b=lGsTpmmPNHg1lOMusSiD8sMS1E
+ hNEsI/Yt5WhIZoNqcFMlnmg9XJ6N8VA6LFx3x4MXRYf2C/HtPu+OgbxWslw9lsB4kKXHd876Df6Bj
+ y4fe/NNikbvVtjK4Dk4M6bViuE8rFmtoy+oPGpt9nnvleX9xoQeU9Dwge8vPJwnAQcno=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Cc:To:In-Reply-To:References:Message-Id:Content-Transfer-Encoding:
@@ -44,31 +44,31 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=bgzNRDBJO4amFMycpMMRf+vfqwK1IXnNEgqjgztAPqw=; b=jHvxMQdTpyGBosV/BllwtTZZHx
- rpgdL/XezJ1b+AG8gI6J1lwE8Oro3Y4cTyZ6AYrGuhOeL3Od5w/vNcT3oezT2tY00AaTVvy0G55SS
- zLdHbouikfe2LnYhQgHUs6n/FB3r2+Gc5e7ZBeQ50kKnibkaCcIw7+RkHoJFjnqwkuNg=;
+ bh=sBNw2TJpVq9dqBuZ8KYKuWHBMXom1bt4ItAxvrvlyQw=; b=ZHnl1rp+DnovjodYy6S3Ayhd2t
+ 9ihtGQoOTZQtuQovOG+tbZhkKg+/qHHLMaAtgVLqYVdN/L7mc3T5fWDGajwmhukqRH5OqmWtauHsm
+ HlC5vDmw6jTnvEJPL3IAc92t33L24ATFlD8WLL6iG26TMg1sIWzyrO93XCZE2yfzymJ8=;
 Received: from sea.source.kernel.org ([172.234.252.31])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vvdtw-0006Cq-Ae; Thu, 26 Feb 2026 16:07:47 +0000
+ id 1vvdu8-0006EX-My; Thu, 26 Feb 2026 16:08:14 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id F1CB041B34;
- Thu, 26 Feb 2026 16:07:33 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9DB8CC19423;
- Thu, 26 Feb 2026 16:07:21 +0000 (UTC)
+ by sea.source.kernel.org (Postfix) with ESMTP id 656224404F;
+ Thu, 26 Feb 2026 16:07:46 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 182BFC19424;
+ Thu, 26 Feb 2026 16:07:34 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1772122053;
- bh=g3n1nCxYMXEXDsu2ySJk4rG4mNa4qrBoj39gl+KTRp8=;
+ s=k20201202; t=1772122066;
+ bh=87RomnifO0cL5ulL+HismKZkw+RwFQPeGoOI69KOx40=;
  h=From:Date:Subject:References:In-Reply-To:To:Cc:From;
- b=JK5x+DGZZZUuI0edwhDsoOLVacQSr2/2YCXlaFfdQqIunLA1rkj5wQ9VamvSO3bCA
- A5nWTz3DvoXB5ol7feKJES0oIZcWbjYxY4HE/9ngdNeySq7KWFTfmCF5VsALncqJTm
- aFulpOAiFtNLP68xa4SaFWpTjyOtA7E3xPHi08mdDQfxDUfAVmHBfIsRrP4fTKI2OP
- /IjobM+teyuaj6/j3CVBQvJaTbr8dqEm9vVNEVt+zOpTOoD6yX+lBPZsXS0fG50YVd
- UE40mkB0rrqxWqWmutULB0BzzxTD4xqLxmhEY4ebRz8xEj+XODgaa1cGYt6lx4MDP3
- g01ujiPYpLTCw==
-Date: Thu, 26 Feb 2026 10:55:56 -0500
+ b=KwAsXlRovpo0h09a4MZbAKFc9uk/4A+aQTF4aProFCmuL6hG40MvhhxJUI+VqfRud
+ O6lcHDeBshiWkZIDgRdaxnaj+C8AFUJ8rOsvkPj8ib0pFg4RybCP12WGycXssGRPxa
+ Y/xp2kWbPY1WqWMEVzYgJzKmhnM6MZrgeBQmZGeQodKg6IrAj1UkJKygD1YzzHn800
+ 2KSHklBObDd+M72oyka/zzgTKj/HvjXOsXi5hwZU4h9ENuru/sXV6fqZycHFM07/gy
+ TXu1xft5ywD39PmN4it9lfO1rB+zJedqmopTLvG6GcEsbLoqlHekI8H2PY5/Dz/XKO
+ EXxVq4IYq56zw==
+Date: Thu, 26 Feb 2026 10:55:57 -0500
 MIME-Version: 1.0
-Message-Id: <20260226-iino-u64-v1-54-ccceff366db9@kernel.org>
+Message-Id: <20260226-iino-u64-v1-55-ccceff366db9@kernel.org>
 References: <20260226-iino-u64-v1-0-ccceff366db9@kernel.org>
 In-Reply-To: <20260226-iino-u64-v1-0-ccceff366db9@kernel.org>
 To: Alexander Viro <viro@zeniv.linux.org.uk>, 
@@ -144,50 +144,47 @@ To: Alexander Viro <viro@zeniv.linux.org.uk>,
  James Clark <james.clark@linaro.org>, "Darrick J. Wong" <djwong@kernel.org>, 
  Martin Schiller <ms@dev.tdt.de>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=716; i=jlayton@kernel.org;
- h=from:subject:message-id; bh=g3n1nCxYMXEXDsu2ySJk4rG4mNa4qrBoj39gl+KTRp8=;
- b=owEBbQKS/ZANAwAKAQAOaEEZVoIVAcsmYgBpoG0R0ftkUVIgNWqRLpd6PjX/F6VzDmk1dabAF
- WFJS0/tvhyJAjMEAAEKAB0WIQRLwNeyRHGyoYTq9dMADmhBGVaCFQUCaaBtEQAKCRAADmhBGVaC
- FbWzD/0YwIWbFt/wgPSYpzAoZ+dvSXhYUNv1qSOgWuZe/51x7ywGmtwlS+4pzvJVeUBrlxRp7yP
- UUIL4k3r2vgnjv5AbwRjtmB5HXfWlJ8gvx0bL9FPlxPP3sa/Q4JdlMIzJQDBxPQTPLv4WiOkUGI
- r+q0zTk77AVk/IELx074i7//bQBt+CGIiGRrD75P/ybl/IpF9ChoNKDKQhUB3g44T79ggU1A+VR
- eEP9NRAmIT9zaHIi0ZxuPtEERuECX+IosPUx85+UjTw7T2RvpPBwQTZAQKMyQWRaL/BVRzqzc63
- hGptdBZnmMgfDRh9zcCtZloAPd0wXeKNQh65r+MkW9yV+6cyzZypkA53Au9S+h1YFxWRv4q7P+p
- 5Zd6+fG1C1PVFaNu5I1e91bs6LjWWhkE1D+I+PDj54RnPpzl4jGHfRLcIWlCGqO/FaHY/lTcfhv
- ioQXIQKh+cMjH/Gbq/OI01UMmaM0g4DsroUqoDPwKwevT1tUD8lSgbKv0mC08VZaMqEE7XNeOzI
- 3lWP97M3d25pq/AJz98IKhSCNg6GcDc2v95IhToNIzeiW2tLT7qcWSUg9Xvm2jjTNsyltIi5egT
- itiO0drEKuORLrzOiZKvkEM0f0A1llbTYHIjitVM3x+tT5ARx5ZXL6QBynHiCaiRNETRgJuk3ar
- 6/G5xOXPzR5hAjw==
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1424; i=jlayton@kernel.org;
+ h=from:subject:message-id; bh=87RomnifO0cL5ulL+HismKZkw+RwFQPeGoOI69KOx40=;
+ b=owEBbQKS/ZANAwAKAQAOaEEZVoIVAcsmYgBpoG0SgH+gJAN29PyQUVILDrGJ9juPunMjNerJ8
+ p9n6L8XweWJAjMEAAEKAB0WIQRLwNeyRHGyoYTq9dMADmhBGVaCFQUCaaBtEgAKCRAADmhBGVaC
+ FbzND/0RW8OwdDIsMNP/tE/3wHlHzbrhC6zVA5x3k2XukHz7HwfDr/1AV6nP0+2rs1tmoxOCBKd
+ uB3bC8zaWu2bOdmlNB9AJp3YtiZ29kD1TqBZi1fg1uq98Y/F/YDGSspkxIMu+tzuTcHFRtSvSH+
+ IDpK337hFool4tBRuBOST6DrvXm4ihW7o/zqDFmgaHeyGIDcdBbFcKIxKOW/ed+5ntAUUpCTw6S
+ WArcCdtpB+8odYkpEtb8hvj0sWMIjlyxxNrrW4J4XRzKGcpx9s3vB00xdJzCpRnJ29X09oG9ccg
+ +h4daAbfsXU83CBHtze+Y4734lKaOKw62NnpIOhMZIMYloPgKNEFOTW632ULNN5gWWaucAc/OjE
+ VcXPJeL90s+LzWRjIxIqZNYEZzGcQLv1xUM2ji5x1ieTov8j07uiFW/SZtoylEhw2qKExhXny0Y
+ B4T8eiCR3m4FwoK0/kWQJwZ8wkZP+ZWlMtJ7B4cUavNhFHR3KpsAajcjpAd39hYsLMh0SszZaTM
+ awizdyLsgkfNtdVqMmGQgIHN4K2CS6rGe/1MWiNMu6vcdBTvw1FEWSCzJHb+ZV4mXxYAIVewcMo
+ Tm+/Akh931ithtTOjIZe3mE3UFxpvTvcptAA47mL0syU01j4yq0zP683Uhp3KJk7UeNzlCO1Nn8
+ UAMj/f2rI4uvZhQ==
 X-Developer-Key: i=jlayton@kernel.org; a=openpgp;
  fpr=4BC0D7B24471B2A184EAF5D3000E684119568215
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Update %lu to %llu in sockfs_dname() for printing i_ino,
- since
- i_ino is now u64. Signed-off-by: Jeff Layton <jlayton@kernel.org> ---
- net/socket.c
- | 2 +- 1 file changed, 1 insertion(+), 1 deletion(-) diff --git a/net/socket.c
- b/net/socket.c index
- 7aa94fce7a8b3d6beec7594e311e73fb52f371cc..3f4d2a867aa15b2d2aec1c9dfa004bca94f6d5de
- 100644 --- a/net/socket.c +++ b/net/socket.c @@ -399,7 +399,7 @@ stati [...]
+ Content preview:  Update %lx to %llx in uprobe warning messages for printing
+ inode->i_ino,
+ since i_ino is now u64. Signed-off-by: Jeff Layton <jlayton@kernel.org>
+ --- kernel/events/uprobes.c | 4 ++-- 1 file changed, 2 insertions(+),
+ 2 deletions(-)
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1vvdtw-0006Cq-Ae
-Subject: [f2fs-dev] [PATCH 54/61] net: update socket dname format for u64
+X-Headers-End: 1vvdu8-0006EX-My
+Subject: [f2fs-dev] [PATCH 55/61] uprobes: update format strings for u64
  i_ino
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
@@ -244,8 +241,8 @@ X-Spamd-Result: default: False [-7.11 / 15.00];
 	ARC_NA(0.00)[];
 	MIME_TRACE(0.00)[0:+];
 	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,kernel.org:s=k20201202];
-	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
 	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,kernel.org:-];
+	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
 	RCVD_COUNT_FIVE(0.00)[5];
 	RCPT_COUNT_GT_50(0.00)[146];
 	FROM_NEQ_ENVFROM(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
@@ -258,30 +255,39 @@ X-Spamd-Result: default: False [-7.11 / 15.00];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.sourceforge.net:rdns,lists.sourceforge.net:helo,lists.sourceforge.net:dkim]
-X-Rspamd-Queue-Id: 0CF2F1A9A6A
+X-Rspamd-Queue-Id: 3E8BF1A9AA0
 X-Rspamd-Action: no action
 
-Update %lu to %llu in sockfs_dname() for printing i_ino, since i_ino
-is now u64.
+Update %lx to %llx in uprobe warning messages for printing
+inode->i_ino, since i_ino is now u64.
 
 Signed-off-by: Jeff Layton <jlayton@kernel.org>
 ---
- net/socket.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ kernel/events/uprobes.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/net/socket.c b/net/socket.c
-index 7aa94fce7a8b3d6beec7594e311e73fb52f371cc..3f4d2a867aa15b2d2aec1c9dfa004bca94f6d5de 100644
---- a/net/socket.c
-+++ b/net/socket.c
-@@ -399,7 +399,7 @@ static const struct super_operations sockfs_ops = {
-  */
- static char *sockfs_dname(struct dentry *dentry, char *buffer, int buflen)
+diff --git a/kernel/events/uprobes.c b/kernel/events/uprobes.c
+index 923b24b321cc0fbdecaf016645cdac0457a74463..4084e926e284487ea7e28b63721797b20f0dfefd 100644
+--- a/kernel/events/uprobes.c
++++ b/kernel/events/uprobes.c
+@@ -344,7 +344,7 @@ __update_ref_ctr(struct mm_struct *mm, unsigned long vaddr, short d)
+ static void update_ref_ctr_warn(struct uprobe *uprobe,
+ 				struct mm_struct *mm, short d)
  {
--	return dynamic_dname(buffer, buflen, "socket:[%lu]",
-+	return dynamic_dname(buffer, buflen, "socket:[%llu]",
- 				d_inode(dentry)->i_ino);
- }
- 
+-	pr_warn("ref_ctr %s failed for inode: 0x%lx offset: "
++	pr_warn("ref_ctr %s failed for inode: 0x%llx offset: "
+ 		"0x%llx ref_ctr_offset: 0x%llx of mm: 0x%p\n",
+ 		d > 0 ? "increment" : "decrement", uprobe->inode->i_ino,
+ 		(unsigned long long) uprobe->offset,
+@@ -982,7 +982,7 @@ static struct uprobe *insert_uprobe(struct uprobe *uprobe)
+ static void
+ ref_ctr_mismatch_warn(struct uprobe *cur_uprobe, struct uprobe *uprobe)
+ {
+-	pr_warn("ref_ctr_offset mismatch. inode: 0x%lx offset: 0x%llx "
++	pr_warn("ref_ctr_offset mismatch. inode: 0x%llx offset: 0x%llx "
+ 		"ref_ctr_offset(old): 0x%llx ref_ctr_offset(new): 0x%llx\n",
+ 		uprobe->inode->i_ino, (unsigned long long) uprobe->offset,
+ 		(unsigned long long) cur_uprobe->ref_ctr_offset,
 
 -- 
 2.53.0
