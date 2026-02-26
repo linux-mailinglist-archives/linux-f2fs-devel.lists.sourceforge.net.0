@@ -2,41 +2,41 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id mOIkH89toGkHjwQAu9opvQ
+	id GASTCuFtoGk3jgQAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 26 Feb 2026 16:59:11 +0100
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 26 Feb 2026 16:59:29 +0100
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0F7121A9514
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 26 Feb 2026 16:59:11 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 681FB1A9562
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 26 Feb 2026 16:59:28 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
 	List-Unsubscribe:List-Id:Subject:To:In-Reply-To:References:Message-Id:
 	MIME-Version:Date:Sender:Content-ID:Content-Description:Resent-Date:
 	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=C9qkMKitTtryCLu92VcO8oxFNEg0TGcjeDqok5vIeB8=; b=H44Bygm2HveKNQENt9pC13e/+f
-	nkY6lTlAZbMzyvlb41b7UuixZm/1Kaik8yCwawAIybcN0Jy6LmlllqYWuEZUXsbhENkQsrqGYYfv9
-	6wXTbN4R8UKvvDV/8Elfwg3Vco8PXVN0av/U28f/eb72K3vOL52MQW9DDqw1VRkp7Y4U=;
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=KjxQZp0HDXaOPyX69Spuplktc/tBoPCjOax2PkHBjrI=; b=Wv0ElKplNaye5Vgd32rO0WDaCZ
+	C1c23glfhuSLVdgtWkSljLGf9mXDB8kpGWQRdQfLw/+8PHSB/pRDjugWh/FEnq4Z6S2iEr4tzq64s
+	3abylJFKaQ2ABJFk13byFEH1ed66QkN9tLeuH9zMqdVxy4jsIT2Y997jw9EWzmsXlgMc=;
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vvdld-00020u-Md;
-	Thu, 26 Feb 2026 15:59:09 +0000
+	id 1vvdlp-0000UI-SE;
+	Thu, 26 Feb 2026 15:59:21 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jlayton@kernel.org>) id 1vvdlb-00020U-OJ;
- Thu, 26 Feb 2026 15:59:07 +0000
+ (envelope-from <jlayton@kernel.org>) id 1vvdln-0000Ts-Eg;
+ Thu, 26 Feb 2026 15:59:19 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Cc:To:In-Reply-To:References:Message-Id:
  Content-Transfer-Encoding:Content-Type:MIME-Version:Subject:Date:From:Sender:
  Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
  :Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=tYvMnqYYGJrgx3nCuVQdb2rOZ0tIhWDeI0hsrrzbkW0=; b=XvJ0iY+EqPoWnR0cN89tFnOCOM
- KjxaXUpNwTNvkuMI24mER5KqfUhHSBMeQFkfcrlESTLXsSCF3gAYbuNUgXfqXEk1OTLN5SZsCy+pj
- MF0EVCx4LyOv9D76it1l448omPo7jo0/5z+JXPVkDh+qIWXWH9Blx9CbRAdndyjq9Boo=;
+ bh=9HBs/W2OsHvbC4szBpYqwLx4PHsJY1fChLiM73vzfEM=; b=mI1oc8yMl0FH4RlmUTTNOJ5DJR
+ ox/klK/mdZacK3hBhPdci5T6Y6oQC2jIm6rHTdUnY7eE8kZNOqho08zZ0H/ABQyOujpjVV5nVGooa
+ vCbFrGVwpdFqyhNMua3KHClMHCqHvGxABorshpbMyZJInhrXekxj+XHl0w9HTwDCy5Mg=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Cc:To:In-Reply-To:References:Message-Id:Content-Transfer-Encoding:
@@ -44,31 +44,31 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=tYvMnqYYGJrgx3nCuVQdb2rOZ0tIhWDeI0hsrrzbkW0=; b=UG9B4KMuTi+Nf9VC7rXqShcsjj
- 6A67mHHDZTNkUu99ZazSkvAKePf5R4f6ZBOOpjiUmgE1jZEJ5AQQ8zJN5dZ5fRBuTZ6NSDlrphprY
- jdtyoRg4hx8SlL07uRc8PhYwC1X/2oKna/H3pQYRNb+ilZZpTnfkhW+Mw6lolyW6qk3g=;
+ bh=9HBs/W2OsHvbC4szBpYqwLx4PHsJY1fChLiM73vzfEM=; b=PL4OpX6L2KgcKKT1+rdiB7fMRY
+ dkelL2rzNwD64efUT5M03YghGXbJbEcTXcbaNgq0tta0xOsKa0KqP3eaXOQa/RntcFTaAxjN7DDfn
+ T9Tly0+DUAdrp5wwJeM/X8qKICeGU1j3qr7FLScPl3F7C+7Q0M/oW9k9hMVBed31mSVI=;
 Received: from sea.source.kernel.org ([172.234.252.31])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vvdla-00050i-AH; Thu, 26 Feb 2026 15:59:07 +0000
+ id 1vvdlm-00052W-TT; Thu, 26 Feb 2026 15:59:19 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 067DF4458D;
+ by sea.source.kernel.org (Postfix) with ESMTP id 8568B44329;
+ Thu, 26 Feb 2026 15:59:13 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 21497C2BCB2;
  Thu, 26 Feb 2026 15:59:01 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7611EC2BCB1;
- Thu, 26 Feb 2026 15:58:48 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1772121540;
- bh=L7XUWaooTPJJGvd9q6jSAUTNKJML0XZHotIv5n8H4j4=;
+ s=k20201202; t=1772121553;
+ bh=/dIyAeV0SWp+d5wV41a2YQTvW0T+tDEAvSeW39MxQrw=;
  h=From:Date:Subject:References:In-Reply-To:To:Cc:From;
- b=LDYCUhykrUdWv3Pvas2rdur0i6GL1s/gViKIjWTYOQk415nXtcRy1qub/d8XbSUUM
- D+/aIzVlWqyiVLePUBCzKm79lnQ1Xr/wPlu8hJz+p30Ci3TFMeSOk2X8J6c0Q6CD4P
- wqxpbdVNoiUFgiqF3pP6i9tkGZpZiFsHB2ZNh7AULTRNWpNsa6ywW5AUy1dN2Kcfe/
- Vx5kFsXJbZRj/SIYHdOcyOOJCt2ZrUoavPeoIuA6h1ix26kDvpcIxPd9hWIadzGtzi
- je2BpQkmmncKfavwQ3rkUY8N8k7blVwDs4zRekpa7E2wuHdmSCgnhha8D4eMzH/c5i
- ELYCW2P9Sj9NQ==
-Date: Thu, 26 Feb 2026 10:55:15 -0500
+ b=ghaIMgZ0Kc9sSFxLqN3M3k3TK+60uJC0pPBBx9i2Lxpt0oo/B72RlYrHZ5doKyEj4
+ p/nyNLpPDIidxOkEnm7U3/35E11ov0+Rb0jIejiEJmkHCz0aVwJZRyvIN1zXco/Yjz
+ d6H2cjgr2HTg0vooB26P2lu8M8somfn6uC4kg8yaF3AKM7eZGMimt73uTMiqXnPm0N
+ yhIX1ErPK7xbvUpa2Y3UR81NlDwbK+tc3MCOm3fD704u1tguf4hCtEdOipJWTvG+90
+ W0dnZ3lqQTX5vShOId2hTZvCGE6hOF7cSapC3LXaJJboq6djJCIAwfUZQXky+bBZKX
+ KEYsgUDdZmazA==
+Date: Thu, 26 Feb 2026 10:55:16 -0500
 MIME-Version: 1.0
-Message-Id: <20260226-iino-u64-v1-13-ccceff366db9@kernel.org>
+Message-Id: <20260226-iino-u64-v1-14-ccceff366db9@kernel.org>
 References: <20260226-iino-u64-v1-0-ccceff366db9@kernel.org>
 In-Reply-To: <20260226-iino-u64-v1-0-ccceff366db9@kernel.org>
 To: Alexander Viro <viro@zeniv.linux.org.uk>, 
@@ -144,48 +144,46 @@ To: Alexander Viro <viro@zeniv.linux.org.uk>,
  James Clark <james.clark@linaro.org>, "Darrick J. Wong" <djwong@kernel.org>, 
  Martin Schiller <ms@dev.tdt.de>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2164; i=jlayton@kernel.org;
- h=from:subject:message-id; bh=L7XUWaooTPJJGvd9q6jSAUTNKJML0XZHotIv5n8H4j4=;
- b=owEBbQKS/ZANAwAKAQAOaEEZVoIVAcsmYgBpoG0HunOlD0IWmS5NY8qKmprauVZ/+4AaY/kFb
- 2frMDh17OOJAjMEAAEKAB0WIQRLwNeyRHGyoYTq9dMADmhBGVaCFQUCaaBtBwAKCRAADmhBGVaC
- FWspD/9kh7G8p9Lzfl68UqO9nfBVJdbhEa18mWKyCpykfsHfHVCWcZlNY8T54jBx2zYSKQAm200
- 1Z0WRIhfDjcGIOJIuO1X9JkMJk74ESENbCRK1QIf+n2vy9a5+cGUx1mEKpvq0E5TqwAXHAOoFC6
- 3NSHGd431TY35kp8fNX9Pv8z2qXr/BrZtf64mNkWZ+/pgmbU4lwAMmANpFvRPRnZqDD4h55PgKa
- lRo93MwRT/GFVpdhyvySZu0ylZqlFqaKbT+XlbjplF26+5RjXAyunICxi6rDIPXVGD+aibZ7EPn
- dM3dAr+QTk+c4IRV6A1q2wP27vVBRHznWmq5Z7eCnNBGaaIG8v+XzuAkLBejSZi7qst5JE4qtvd
- CC2R1LYEW6s5Jgvz/eOxoK3G4Fr/Lbqcn2BVBH5846qvSmHY/tv+80Svxawf31ts+zo8j3TcCyA
- 3Bb3UAA6oh6ycWf79FO6g6bY5UQpB1HNGB0wUIW7DiG2qplnSGUTlZQuhos0ulGYVhDfOziO0by
- eGvFmxwnDmQm47WJ3l6yO+WZ865DhG4wuBmhoMjmQ/e8qkfYmrpArIHr2WNzFK9Hl+9tCXAz3oN
- +BFn6v+B/UueV6kf5rFpJzAJiyu3TKMJH4KK2uGs1vnYofltFVpo96fk1iXzdofYRCPQa9M4uut
- SbvrPRHyi0Vl/Dw==
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2241; i=jlayton@kernel.org;
+ h=from:subject:message-id; bh=/dIyAeV0SWp+d5wV41a2YQTvW0T+tDEAvSeW39MxQrw=;
+ b=owEBbQKS/ZANAwAKAQAOaEEZVoIVAcsmYgBpoG0HEnCSKK/SHb3sYW/c+eUblqdBA7d53olyL
+ 4HBWYDiVJmJAjMEAAEKAB0WIQRLwNeyRHGyoYTq9dMADmhBGVaCFQUCaaBtBwAKCRAADmhBGVaC
+ FZpYEACU6I0oc4IB+ERKTJODeo5sUbUQRcurbkTkmeBdHU+MAD5YdiZ6z83x8OfcmpXWliPk5Ya
+ u7AmLMTAsggh98Rh4QxIO+fwJLpw4ZIK1sEPEhfrzx2Mgoa9MXxpfxwLrHMTDktm0UmImLGKuIf
+ yIsqBYSeqK50NLbrZmGWoz6GnXH2YyhrZboFMWnt3vm2eKyCA2IfY5cpb8RmBEzOhc2MIYSUKJp
+ c1vDjKmB5HdCEbItlJxl0T+SLOrSQSDwqM2tt75fI2d0FL4k36/L5myAi/kfDy85B/w7xVV6VpB
+ EPgaEOCOTjEOfCNsZ3dMpzRZ1OxTuEfuYWvqD/qrQYx30qYjjv2BTr6x8/8i0AjFF2MxCT6cMUF
+ JEtme2MWU9XZ6fOnYlbsXvScqGY89Xrq0gULrm//VGWgzKBiZRLR9JDj+rpklL65JZvEyXG9ODI
+ v2DH1wdJq7wy+QuXfNJrHleTpkA1Efl7+FFi1OBwkJVrdFEKMDxkFUDYJlRUXEFaZqcaBZZwazU
+ QjNwVDsgfKk44TmlVoSyAOa9vYw/0LYojdfN8/k6ojhYSAyaCwmTTWi8n7vY7cgmuqoJXf+DuEV
+ bTHCuOqlSQp/scKU84C72kyiBfqs3OKPxgoG0kfTlDICkZK3DbX/LfyRxd4grRdimZjMkLQgkOf
+ Qzu15dS5Cp6Qypw==
 X-Developer-Key: i=jlayton@kernel.org; a=openpgp;
  fpr=4BC0D7B24471B2A184EAF5D3000E684119568215
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  With i_ino now u64,
- CIFS/SMB can store the full 64-bit uniqueid
- in i_ino without the XOR-folding hack previously needed on 32-bit
- architectures.
- - Simplify cifs_uniqueid_to_ino_t() to return u64 directly - Update hash
- variable type in cifs_get_inode_info() - Update format strings from %lu to
- %llu Content analysis details:   (-0.2 points, 5.0 required)
+ Content preview:  Now that i_ino is u64, cifs_uniqueid_to_ino_t() is a trivial
+ identity function. Remove it and use fattr->cf_uniqueid directly at both
+ call sites. Also remove the now-unused #include <linux/hash.h>, which was
+ only needed for the old XOR-folding logic. 
+ Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1vvdla-00050i-AH
-Subject: [f2fs-dev] [PATCH 13/61] smb: store full 64-bit uniqueid in i_ino
+X-Headers-End: 1vvdlm-00052W-TT
+Subject: [f2fs-dev] [PATCH 14/61] smb: remove cifs_uniqueid_to_ino_t()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -255,69 +253,73 @@ X-Spamd-Result: default: False [-7.11 / 15.00];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.sourceforge.net:rdns,lists.sourceforge.net:helo,lists.sourceforge.net:dkim]
-X-Rspamd-Queue-Id: 0F7121A9514
+X-Rspamd-Queue-Id: 681FB1A9562
 X-Rspamd-Action: no action
 
-With i_ino now u64, CIFS/SMB can store the full 64-bit uniqueid in
-i_ino without the XOR-folding hack previously needed on 32-bit
-architectures.
+Now that i_ino is u64, cifs_uniqueid_to_ino_t() is a trivial identity
+function. Remove it and use fattr->cf_uniqueid directly at both call
+sites.
 
-- Simplify cifs_uniqueid_to_ino_t() to return u64 directly
-- Update hash variable type in cifs_get_inode_info()
-- Update format strings from %lu to %llu
+Also remove the now-unused #include <linux/hash.h>, which was only
+needed for the old XOR-folding logic.
 
 Signed-off-by: Jeff Layton <jlayton@kernel.org>
 ---
- fs/smb/client/cifsfs.h | 12 +++---------
- fs/smb/client/inode.c  |  4 ++--
- 2 files changed, 5 insertions(+), 11 deletions(-)
+ fs/smb/client/cifsfs.h  | 11 -----------
+ fs/smb/client/inode.c   |  2 +-
+ fs/smb/client/readdir.c |  2 +-
+ 3 files changed, 2 insertions(+), 13 deletions(-)
 
 diff --git a/fs/smb/client/cifsfs.h b/fs/smb/client/cifsfs.h
-index e320d39b01f5eca8033cc516f6f1a2f07276676c..4a1f18022c711a7ff5b141d08ec6cac8483a6b6a 100644
+index 4a1f18022c711a7ff5b141d08ec6cac8483a6b6a..f71b490b548c0274f314dd0dc76bf570ee3cfd09 100644
 --- a/fs/smb/client/cifsfs.h
 +++ b/fs/smb/client/cifsfs.h
-@@ -14,18 +14,12 @@
+@@ -9,19 +9,8 @@
+ #ifndef _CIFSFS_H
+ #define _CIFSFS_H
+ 
+-#include <linux/hash.h>
+-
  #define ROOT_I 2
  
- /*
-- * ino_t is 32-bits on 32-bit arch. We have to squash the 64-bit value down
-- * so that it will fit. We use hash_64 to convert the value to 31 bits, and
-- * then add 1, to ensure that we don't end up with a 0 as the value.
-+ * With i_ino being u64, we can store the full 64-bit uniqueid directly.
-  */
--static inline ino_t
-+static inline u64
- cifs_uniqueid_to_ino_t(u64 fileid)
- {
--	if ((sizeof(ino_t)) < (sizeof(u64)))
--		return (ino_t)hash_64(fileid, (sizeof(ino_t) * 8) - 1) + 1;
+-/*
+- * With i_ino being u64, we can store the full 64-bit uniqueid directly.
+- */
+-static inline u64
+-cifs_uniqueid_to_ino_t(u64 fileid)
+-{
+-	return fileid;
+-}
 -
--	return (ino_t)fileid;
--
-+	return fileid;
- }
- 
  static inline void cifs_set_time(struct dentry *dentry, unsigned long time)
+ {
+ 	dentry->d_fsdata = (void *) time;
 diff --git a/fs/smb/client/inode.c b/fs/smb/client/inode.c
-index d4d3cfeb6c90ee6dc71fcd9a8de31a1785cbb9ef..102e7615b658726551e9b01ba25065d1f0c505ac 100644
+index 102e7615b658726551e9b01ba25065d1f0c505ac..a82f4fbf8146572e522080bcd7df41153403978d 100644
 --- a/fs/smb/client/inode.c
 +++ b/fs/smb/client/inode.c
-@@ -1611,13 +1611,13 @@ inode_has_hashed_dentries(struct inode *inode)
- struct inode *
- cifs_iget(struct super_block *sb, struct cifs_fattr *fattr)
- {
--	unsigned long hash;
-+	u64 hash;
- 	struct inode *inode;
- 
- retry_iget5_locked:
+@@ -1618,7 +1618,7 @@ cifs_iget(struct super_block *sb, struct cifs_fattr *fattr)
  	cifs_dbg(FYI, "looking for uniqueid=%llu\n", fattr->cf_uniqueid);
  
--	/* hash down to 32-bits on 32-bit arch */
-+	/* With u64 i_ino, we can use the full uniqueid */
- 	hash = cifs_uniqueid_to_ino_t(fattr->cf_uniqueid);
+ 	/* With u64 i_ino, we can use the full uniqueid */
+-	hash = cifs_uniqueid_to_ino_t(fattr->cf_uniqueid);
++	hash = fattr->cf_uniqueid;
  
  	inode = iget5_locked(sb, hash, cifs_find_inode, cifs_init_inode, fattr);
+ 	if (inode) {
+diff --git a/fs/smb/client/readdir.c b/fs/smb/client/readdir.c
+index 8615a8747b7f0127a781b9b3795535df4c9b73cd..cec74bd2e2302c3baeba8d7e1348ba5114d4b1e4 100644
+--- a/fs/smb/client/readdir.c
++++ b/fs/smb/client/readdir.c
+@@ -919,7 +919,7 @@ static bool cifs_dir_emit(struct dir_context *ctx,
+ {
+ 	size_t delta_bytes = 0;
+ 	bool rc, added = false;
+-	ino_t ino = cifs_uniqueid_to_ino_t(fattr->cf_uniqueid);
++	ino_t ino = fattr->cf_uniqueid;
+ 
+ 	rc = dir_emit(ctx, name, namelen, ino, fattr->cf_dtype);
+ 	if (!rc)
 
 -- 
 2.53.0
