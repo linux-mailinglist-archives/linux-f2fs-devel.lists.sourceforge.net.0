@@ -2,12 +2,12 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id wkIHK6VdoGlSiwQAu9opvQ
+	id 8zDlNqVdoGleiwQAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
 	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 26 Feb 2026 15:50:13 +0100
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 153EF1A7EAE
+	by mail.lfdr.de (Postfix) with ESMTPS id 30A381A7EB4
 	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 26 Feb 2026 15:50:12 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
@@ -15,29 +15,29 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	Subject:MIME-Version:References:In-Reply-To:Message-ID:Date:To:From:Sender:
 	Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
 	:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=me91S43xwu22vIv0ptuBMHifWNHxtWrCcxz59WyRE7g=; b=MXralPv8DPReyUSHH05bslrc5j
-	BuxuFzH9rKDod0I8B05py5qxYgdokKaPxBqFPTsWzoZXitat3EHHSjogvkaoycSqgTI8+yLwCC10h
-	EdzKfMDNoqt1O0cs/u94YnJWjKU9n9sJjDsLwHFk4IKp9SfoHfZBOysXFLEB0gEBQjpM=;
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=aFjJjk+DDG9mRxXaSZT/TW0Tuw9bOcWiytyDDDML4oY=; b=K4t656BCreLLNW2FT9v6+Ir5MA
+	oN16UIk2ALAF7//eNy2522/yynm6rWBNdeIytplxcJOPDsAbwzTFvAhvszm/k26RbQTGaOwWlitwL
+	ui2NSF9EGHq9ADQgA3HHZZSH5hHAeXy1EC64ZIYmzSi/7y2siGivAtx1rQbjnhfrEdh4=;
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vvcgs-0003q7-JG;
+	id 1vvcgs-0000TZ-0C;
 	Thu, 26 Feb 2026 14:50:10 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95) (envelope-from
  <BATV+c5cab09b19de097b6dd3+8222+infradead.org+hch@bombadil.srs.infradead.org>)
- id 1vvcgr-0003py-Pc for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 26 Feb 2026 14:50:09 +0000
+ id 1vvcgn-0000TB-3d for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 26 Feb 2026 14:50:05 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=SiNWzpJZ1Wfv02Erml8bTB6xkGMGQzWqEZOwAf2CgLQ=; b=NNBOs4TyPIe0qlFgCXcHjEMzRS
- hWrYU2m4CJtvlGX7eQNB23HSrkA709YexH1UAToXhXDKPKGmOgoHGb7QxaFPPHfWY+Is1332BJZKN
- bHYCBEayrFxVXlPtmWloTjrw87Z4twgkJ+JOGWNIhx08x5PweG6wzwChJSAVU53kpbKc=;
+ bh=vJIR63fOKuGqtgGoQQV4cldpXLTqze0KpgUsQCTuVLs=; b=DZXB8ZIo/gR0OU9dVY+l2bEJ0x
+ GCEhBQMR8RHd77ERmPipCcPhgJqOSt7lmaZXFuQbZ0dF1xIOpMLh9wjpKoeEW2ZkgzGnrf67skeLX
+ WkLdnsR4r6LQddPFH3uxA+5+QngDyQRhxzvTXGWyZgNe6oRqq877exXqKZgUDM49iWgw=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:
@@ -45,31 +45,31 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=SiNWzpJZ1Wfv02Erml8bTB6xkGMGQzWqEZOwAf2CgLQ=; b=REo+D4T00fWy7dNoJ8ZxZBH3+p
- ox+JmRyLW7/kS8I21XIrq3EZnjsMdlvRfc0sSiGKm7YEXSokRPAxm7I7uFavqQcZSFGqieyXq78f0
- 6pX8VhSxrtsEoQmFM+U4frFHAOi6lhcA0TZUDPt2bOVxk30OOxT1UV8doHDt/jxsyqEk=;
+ bh=vJIR63fOKuGqtgGoQQV4cldpXLTqze0KpgUsQCTuVLs=; b=lUmv3zNp2hwGD6i5qXgTgfbLLy
+ cNP41vBDds4IL4Mm5sp84xgNACT9/6GRLqXWfcWxEP2KnuFVgLZ69qTVst2w+TTcdQhaf/v59kRef
+ FYhQ5ikLAJIcWcg+mMwEBnpRpqAhaKqz0yrUFJTcGaO0xTyyACbWZVAXLsk2eYR/48Fc=;
 Received: from bombadil.infradead.org ([198.137.202.133])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vvcgr-0000Si-90 for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 26 Feb 2026 14:50:09 +0000
+ id 1vvcgm-0000Rv-FR for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 26 Feb 2026 14:50:05 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
  MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender
  :Reply-To:Content-Type:Content-ID:Content-Description;
- bh=SiNWzpJZ1Wfv02Erml8bTB6xkGMGQzWqEZOwAf2CgLQ=; b=LGCVb2mwZ+4Q98nJp4KxIoJkUW
- 1BgfxKsdGZg6e9CEoAzOe4jGYlwQNo5NfaCM/qiMjUK/bahtR65oIzyvjnaE/SR2uRxaEoj1mw1c3
- ++Vzf1pFBh7n5LAMvDlEM5XpN+iXZhixyo2KPCzaquRZ3o4A3timCEP3xzi5P45xjVSWAv+nMtt1j
- epf7D917rrx6diXpWQAnfKeieA5Vh18s8Riso6T2kSDTqFWGPrEEVizaXH8R4T/Y7NFsfszVzAkat
- lyJHkzGpqgQ8iik0rZQCfSi2pZX1eC0cAScIFcP2Vg2I/T0wMEZF+zGyRm/ZkoivkR12ZUHwfHkwO
- vWqqvZkg==;
+ bh=vJIR63fOKuGqtgGoQQV4cldpXLTqze0KpgUsQCTuVLs=; b=ffRKHdZCrwomuJXjaqakcRkgAt
+ bnIrLIxmZ9u6mlM+vTai5rKYee30S1uzlHj/rbKDjSeMGjzqxn0gDCU7U6UHxzqLNdK4maQhr+ajb
+ JaeGFwtjUH9jMf9yC/ZlAzFil/H6359zvr8kvmcCi69+jON+I8gvmjuyb+F3jVjrJztinXX8hF+Ah
+ zZmJSKg7E8BiFr1guq4VsaMc3tThEZMwVRI9QD6N7b6RHoLAZViV6PUI8iuPAKmCbZW3nWHYEz4/x
+ jgZv7rO3wJ7DkJFgriRX6puFv6jemi7Hc37moB1gvquEQP2FrRVMOxCv2hl5QhShSFYsFbD5+fJm2
+ tnQ+5Sxw==;
 Received: from [4.28.11.157] (helo=localhost)
  by bombadil.infradead.org with esmtpsa (Exim 4.98.2 #2 (Red Hat Linux))
- id 1vvcgg-00000006NcH-1qqF; Thu, 26 Feb 2026 14:49:58 +0000
+ id 1vvcgg-00000006NcU-2es9; Thu, 26 Feb 2026 14:49:58 +0000
 From: Christoph Hellwig <hch@lst.de>
 To: Eric Biggers <ebiggers@kernel.org>
-Date: Thu, 26 Feb 2026 06:49:32 -0800
-Message-ID: <20260226144954.142278-13-hch@lst.de>
+Date: Thu, 26 Feb 2026 06:49:33 -0800
+Message-ID: <20260226144954.142278-14-hch@lst.de>
 X-Mailer: git-send-email 2.47.3
 In-Reply-To: <20260226144954.142278-1-hch@lst.de>
 References: <20260226144954.142278-1-hch@lst.de>
@@ -83,12 +83,9 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Range lengths are usually expressed as bytes in the VFS,
- switch
- fscrypt_zeroout_range to this convention. Signed-off-by: Christoph Hellwig
- <hch@lst.de> --- fs/crypto/bio.c | 10 +++++----- fs/ext4/inode.c | 3 ++-
- fs/f2fs/file.c | 2 +- include/linux/fscrypt.h | 6 +++--- 4 files changed,
- 11 insertions(+), 10 [...] 
+ Content preview: While the pblk argument to fscrypt_zeroout_range is declared
+ as a sector_t, it actually is interpreted as a logical block size unit, which
+ is highly unusual. Switch to passing the 512 byte units that [...] 
  Content analysis details:   (0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -97,8 +94,8 @@ X-Spam-Report: Spam detection software,
  not necessarily valid
  0.2 HEADER_FROM_DIFFERENT_DOMAINS From and EnvelopeFrom 2nd level mail
  domains are different
-X-Headers-End: 1vvcgr-0000Si-90
-Subject: [f2fs-dev] [PATCH 12/14] fscrypt: pass a byte length to
+X-Headers-End: 1vvcgm-0000Rv-FR
+Subject: [f2fs-dev] [PATCH 13/14] fscrypt: pass a real sector_t to
  fscrypt_zeroout_range
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
@@ -152,108 +149,91 @@ X-Spamd-Result: default: False [-0.01 / 15.00];
 	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[]
-X-Rspamd-Queue-Id: 153EF1A7EAE
+X-Rspamd-Queue-Id: 30A381A7EB4
 X-Rspamd-Action: no action
 
-Range lengths are usually expressed as bytes in the VFS, switch
-fscrypt_zeroout_range to this convention.
+While the pblk argument to fscrypt_zeroout_range is declared as a
+sector_t, it actually is interpreted as a logical block size unit, which
+is highly unusual.  Switch to passing the 512 byte units that sector_t is
+defined for.
 
 Signed-off-by: Christoph Hellwig <hch@lst.de>
 ---
- fs/crypto/bio.c         | 10 +++++-----
- fs/ext4/inode.c         |  3 ++-
- fs/f2fs/file.c          |  2 +-
- include/linux/fscrypt.h |  6 +++---
- 4 files changed, 11 insertions(+), 10 deletions(-)
+ fs/crypto/bio.c         | 5 ++---
+ fs/ext4/inode.c         | 3 ++-
+ fs/f2fs/file.c          | 2 +-
+ include/linux/fscrypt.h | 6 +++---
+ 4 files changed, 8 insertions(+), 8 deletions(-)
 
 diff --git a/fs/crypto/bio.c b/fs/crypto/bio.c
-index a4f4ee86c573..7d57ffb1e8c6 100644
+index 7d57ffb1e8c6..4a45bd28e0da 100644
 --- a/fs/crypto/bio.c
 +++ b/fs/crypto/bio.c
-@@ -71,7 +71,7 @@ static void fscrypt_zeroout_range_end_io(struct bio *bio)
- 
- static int fscrypt_zeroout_range_inline_crypt(const struct inode *inode,
- 					      loff_t pos, sector_t sector,
--					      unsigned int len)
-+					      u64 len)
- {
- 	struct fscrypt_zero_done done = {
- 		.pending	= ATOMIC_INIT(1),
-@@ -115,7 +115,7 @@ static int fscrypt_zeroout_range_inline_crypt(const struct inode *inode,
+@@ -114,7 +114,7 @@ static int fscrypt_zeroout_range_inline_crypt(const struct inode *inode,
+  * fscrypt_zeroout_range() - zero out a range of blocks in an encrypted file
   * @inode: the file's inode
   * @pos: the first file position (in bytes) to zero out
-  * @pblk: the first filesystem physical block to zero out
-- * @len: number of blocks to zero out
-+ * @len: bytes to zero out
+- * @pblk: the first filesystem physical block to zero out
++ * @sector: the first sector to zero out
+  * @len: bytes to zero out
   *
   * Zero out filesystem blocks in an encrypted regular file on-disk, i.e. write
-  * ciphertext blocks which decrypt to the all-zeroes block.  The blocks must be
 @@ -128,7 +128,7 @@ static int fscrypt_zeroout_range_inline_crypt(const struct inode *inode,
   * Return: 0 on success; -errno on failure.
   */
  int fscrypt_zeroout_range(const struct inode *inode, loff_t pos,
--			  sector_t pblk, unsigned int len)
-+			  sector_t pblk, u64 len)
+-			  sector_t pblk, u64 len)
++			  sector_t sector, u64 len)
  {
  	const struct fscrypt_inode_info *ci = fscrypt_get_inode_info_raw(inode);
  	const unsigned int du_bits = ci->ci_data_unit_bits;
-@@ -136,7 +136,7 @@ int fscrypt_zeroout_range(const struct inode *inode, loff_t pos,
- 	const unsigned int du_per_page_bits = PAGE_SHIFT - du_bits;
+@@ -137,7 +137,6 @@ int fscrypt_zeroout_range(const struct inode *inode, loff_t pos,
  	const unsigned int du_per_page = 1U << du_per_page_bits;
  	u64 du_index = pos >> du_bits;
--	u64 du_remaining = (u64)len << (inode->i_blkbits - du_bits);
-+	u64 du_remaining = len >> du_bits;
- 	sector_t sector = pblk << (inode->i_blkbits - SECTOR_SHIFT);
+ 	u64 du_remaining = len >> du_bits;
+-	sector_t sector = pblk << (inode->i_blkbits - SECTOR_SHIFT);
  	struct page *pages[16]; /* write up to 16 pages at a time */
  	unsigned int nr_pages;
-@@ -150,7 +150,7 @@ int fscrypt_zeroout_range(const struct inode *inode, loff_t pos,
- 
- 	if (fscrypt_inode_uses_inline_crypto(inode))
- 		return fscrypt_zeroout_range_inline_crypt(inode, pos, sector,
--				len << inode->i_blkbits);
-+				len);
- 
- 	BUILD_BUG_ON(ARRAY_SIZE(pages) > BIO_MAX_VECS);
- 	nr_pages = min_t(u64, ARRAY_SIZE(pages),
+ 	unsigned int i;
 diff --git a/fs/ext4/inode.c b/fs/ext4/inode.c
-index 945613c95ffa..675ef741cb30 100644
+index 675ef741cb30..d0028d6d3de1 100644
 --- a/fs/ext4/inode.c
 +++ b/fs/ext4/inode.c
 @@ -406,7 +406,8 @@ int ext4_issue_zeroout(struct inode *inode, ext4_lblk_t lblk, ext4_fsblk_t pblk,
  
  	if (IS_ENCRYPTED(inode) && S_ISREG(inode->i_mode))
  		return fscrypt_zeroout_range(inode,
--				(loff_t)lblk << inode->i_blkbits, pblk, len);
-+				(loff_t)lblk << inode->i_blkbits, pblk,
-+				len << inode->i_blkbits);
+-				(loff_t)lblk << inode->i_blkbits, pblk,
++				(loff_t)lblk << inode->i_blkbits,
++				pblk << (inode->i_blkbits - SECTOR_SHIFT),
+ 				len << inode->i_blkbits);
  
  	ret = sb_issue_zeroout(inode->i_sb, pblk, len, GFP_NOFS);
- 	if (ret > 0)
 diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
-index 239c2666ceb5..5b7013f7f6a1 100644
+index 5b7013f7f6a1..ad435dea656a 100644
 --- a/fs/f2fs/file.c
 +++ b/fs/f2fs/file.c
-@@ -4164,7 +4164,7 @@ static int f2fs_secure_erase(struct block_device *bdev, struct inode *inode,
+@@ -4163,7 +4163,7 @@ static int f2fs_secure_erase(struct block_device *bdev, struct inode *inode,
+ 	if (!ret && (flags & F2FS_TRIM_FILE_ZEROOUT)) {
  		if (IS_ENCRYPTED(inode))
  			ret = fscrypt_zeroout_range(inode,
- 					(loff_t)off << inode->i_blkbits, block,
--					len);
-+					len << inode->i_blkbits);
+-					(loff_t)off << inode->i_blkbits, block,
++					(loff_t)off << inode->i_blkbits, sector,
+ 					len << inode->i_blkbits);
  		else
  			ret = blkdev_issue_zeroout(bdev, sector, nr_sects,
- 					GFP_NOFS, 0);
 diff --git a/include/linux/fscrypt.h b/include/linux/fscrypt.h
-index 9fc15e1fbe57..90ac62fda926 100644
+index 90ac62fda926..54712ec61ffb 100644
 --- a/include/linux/fscrypt.h
 +++ b/include/linux/fscrypt.h
 @@ -450,8 +450,8 @@ u64 fscrypt_fname_siphash(const struct inode *dir, const struct qstr *name);
  
  /* bio.c */
  bool fscrypt_decrypt_bio(struct bio *bio);
--int fscrypt_zeroout_range(const struct inode *inode, loff_t pos,
--			  sector_t pblk, unsigned int len);
-+int fscrypt_zeroout_range(const struct inode *inode, loff_t pos, sector_t pblk,
-+			  u64 len);
+-int fscrypt_zeroout_range(const struct inode *inode, loff_t pos, sector_t pblk,
+-			  u64 len);
++int fscrypt_zeroout_range(const struct inode *inode, loff_t pos,
++			  sector_t sector, u64 len);
  
  /* hooks.c */
  int fscrypt_file_open(struct inode *inode, struct file *filp);
@@ -261,8 +241,8 @@ index 9fc15e1fbe57..90ac62fda926 100644
  }
  
  static inline int fscrypt_zeroout_range(const struct inode *inode, loff_t pos,
--					sector_t pblk, unsigned int len)
-+					sector_t pblk, u64 len)
+-					sector_t pblk, u64 len)
++					sector_t sector, u64 len)
  {
  	return -EOPNOTSUPP;
  }
