@@ -2,41 +2,41 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id +JbyKGlvoGkHjwQAu9opvQ
+	id iNxGDn9voGkHjwQAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 26 Feb 2026 17:06:01 +0100
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 26 Feb 2026 17:06:23 +0100
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 065451A997E
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 26 Feb 2026 17:06:00 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id BF7A31A99BB
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 26 Feb 2026 17:06:22 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
 	List-Unsubscribe:List-Id:Subject:To:In-Reply-To:References:Message-Id:
 	MIME-Version:Date:Sender:Content-ID:Content-Description:Resent-Date:
 	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=opj5eHGhPgFQ0M2FS149Xf1zsxLEB7aUWA5+ULmMXes=; b=e/hw1BvUPjJ1Hf2ATrgrNIBypT
-	J/QV85k+54u//AshTg6qAe2RfEI1HFvO2xV2q0UWIP+M+IuMw5RP1GYNV6tOteMrAnBiY0KG81ZdW
-	dSLgMFM0Gbj83K8pfSnhYqu1FcTHxhuh8kPOtD3SvsbMVFHnM0EC7zRZLAV65sCUHmsY=;
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=QyccM2o5saKl2LcBiEPVorq7PnRBvl8lJuoQhgZLeps=; b=gd3FvScO6xVT9RbvFKgbzw++O/
+	XbzHXnQOaE2xHSrTUCrR30V3O6w6sPJdi/ABVfrY3oJlyFzuO5fFdMZlwEbQHkboOoE9oR0H85KMt
+	n5OEhGLFt/KQk63b21BO9YmEAyPV1uQGDE38GbIQLTh7DjWrhfnCU0hYKLhFpVgYf3oU=;
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vvdsE-00016X-MZ;
-	Thu, 26 Feb 2026 16:05:58 +0000
+	id 1vvdsb-0002uW-2v;
+	Thu, 26 Feb 2026 16:06:21 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jlayton@kernel.org>) id 1vvdsC-00016B-UW;
- Thu, 26 Feb 2026 16:05:56 +0000
+ (envelope-from <jlayton@kernel.org>) id 1vvdsN-0002tO-F3;
+ Thu, 26 Feb 2026 16:06:07 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Cc:To:In-Reply-To:References:Message-Id:
  Content-Transfer-Encoding:Content-Type:MIME-Version:Subject:Date:From:Sender:
  Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
  :Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=v5AbxXI96ps7KW41leLCWpoTwGHyFZf5Nrw5tw2XdvA=; b=jZMtufLrxwBgQPCfjN7tR2MkmK
- QWEqF/NBU10BhfPxxEhQG8p0+g6zNu6dqRQKMBiGnbMy740IXP3fxlk9FH89Vf57CT8r97byC5/m9
- 2DuYA64Ofz+UCkv+QgbrOYTmXhTXrJmXG25hBPyHGGIdRVJ5UP7ERBm4x9ckPxPhlt9Y=;
+ bh=632Oc+/xQ9ATwp0eW/zLiAhkamlJnV+MujUlnjodaZI=; b=JAOC5PMBBltKk6+Z/vR9t0nP+o
+ 4JSfFxNlcVkwebw5srNxYx1OtTqNZTOXHis3ScSg3wURCEx3qxsEbmtJxHS6GEUGb9M7eQZNnGjkw
+ QA3GdwnfJWZXrqHDBPCrTjrIV29ibBwaV+BryjRt2LRktM8uRdmXjiPR1jMorHcyWQUc=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Cc:To:In-Reply-To:References:Message-Id:Content-Transfer-Encoding:
@@ -44,31 +44,31 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=v5AbxXI96ps7KW41leLCWpoTwGHyFZf5Nrw5tw2XdvA=; b=QkKlG3d0llbFHyJOsOO9ZlOOtV
- 6i0NXsei4s6v/VjvVovjUVumz21lSHoSQCKpWgQ1uRskZezWeRtfFbKfCr0UMKUVCMy0QDErUUMcu
- aZWNN0+I+npnxh1D2kAFB9/doxL+6t4E6D6n5z70/3zVXTF+lFAG561P+u519WjJCRLE=;
-Received: from tor.source.kernel.org ([172.105.4.254])
+ bh=632Oc+/xQ9ATwp0eW/zLiAhkamlJnV+MujUlnjodaZI=; b=ixleHS3ppEBvzIMfOTpNisH7rH
+ G333dqoN6yzfEMUQG4xzeB3OgysbmNCOnV7J8Ib/Wv0S41srw5d+3B0UNLX+rNU4LzfEu62KdnA4X
+ PbuTDF49qxmlw6gJluZ/nyw/x3bYJDUeiDC46o9vxX5f6ZTd4GDJrHAEw+EcqdqTEj7g=;
+Received: from sea.source.kernel.org ([172.234.252.31])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vvds8-0005vn-JM; Thu, 26 Feb 2026 16:05:56 +0000
+ id 1vvdsK-0005x7-Cq; Thu, 26 Feb 2026 16:06:07 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id ABB08600AE;
+ by sea.source.kernel.org (Postfix) with ESMTP id E8E1A40284;
+ Thu, 26 Feb 2026 16:05:53 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9B825C2BCB0;
  Thu, 26 Feb 2026 16:05:41 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2C81BC19424;
- Thu, 26 Feb 2026 16:05:29 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1772121941;
- bh=p3nWAP5CT1ulwpvJRakx7FIjnQBi7GhZAUzGirZ6VUs=;
+ s=k20201202; t=1772121953;
+ bh=NT9GoCKrhJHxzJaFVzYs+iwgpSzcQsNFzrkjPRxmI4A=;
  h=From:Date:Subject:References:In-Reply-To:To:Cc:From;
- b=ul3rovIH2+WUunaOYEP63DXql7KMYk2OV0h8NQoCk4Kg7NS4RElLfpNXq6VkHpZUF
- 1FaZT+UHC7xzNc3esBZDQ5GI1UkEzyM8DSFM+56SIG49C/PsrUztxUcJar2c4DBdc1
- Us/TQodxJKiYzavt//nVqe+ZxU9a18FeSlv5iv6L7LYafpMQHbYTs1SuK/u2PBZzN8
- TyuT6HlZdnsuqxFciXTSKosJFTYXcaCZkUMXgPm29KMqfQHFiSek83336xSBoqWuSi
- G6qIXvakzPqVAtgMSstXPG8G69SBqGgIZCqM1+aRQxCs/psd6sO/o6gSUXc3aaSNl7
- +OWhK5JG9EBng==
-Date: Thu, 26 Feb 2026 10:55:47 -0500
+ b=TeEU7zeUNxSpMMkN46e9L3j3aOlE0vDkwCXGq1PJj/CHTmYVutZnXL5F8MKin4JrP
+ A2G7qUafg3ehXB/Blk5az8FIg9TANb7MNemEsXrYya0b5Fvst66jtyIF6YUJ7v27VK
+ z3EYy1wCaHSO5b901ZxcnOkCEAbffwTCLfaayIvm7hBm7inmuRzrEp8G8PGlf7TbUl
+ iQJDbzU/9ZKHv9IW/GHirGk7LZ1m1u23z3/nlVfBjjNaKKqYUxY3x72+ZQPhCC4a0+
+ ObSwwws+YwOg9yQP55KRghBkVnGX8DhzzxIwaxbgZGpifL5ay0WcCfXOGZzl3mHLfb
+ GCRq348a4qFaQ==
+Date: Thu, 26 Feb 2026 10:55:48 -0500
 MIME-Version: 1.0
-Message-Id: <20260226-iino-u64-v1-45-ccceff366db9@kernel.org>
+Message-Id: <20260226-iino-u64-v1-46-ccceff366db9@kernel.org>
 References: <20260226-iino-u64-v1-0-ccceff366db9@kernel.org>
 In-Reply-To: <20260226-iino-u64-v1-0-ccceff366db9@kernel.org>
 To: Alexander Viro <viro@zeniv.linux.org.uk>, 
@@ -144,20 +144,20 @@ To: Alexander Viro <viro@zeniv.linux.org.uk>,
  James Clark <james.clark@linaro.org>, "Darrick J. Wong" <djwong@kernel.org>, 
  Martin Schiller <ms@dev.tdt.de>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1182; i=jlayton@kernel.org;
- h=from:subject:message-id; bh=p3nWAP5CT1ulwpvJRakx7FIjnQBi7GhZAUzGirZ6VUs=;
- b=owEBbQKS/ZANAwAKAQAOaEEZVoIVAcsmYgBpoG0PCoBESlfHnrvoNKvSIwMyJsP5Qf69ywFk0
- e4gXuH1Qw+JAjMEAAEKAB0WIQRLwNeyRHGyoYTq9dMADmhBGVaCFQUCaaBtDwAKCRAADmhBGVaC
- FbpiEADCqc+dmVuH/SW2kJZwzUG4seXV1W2jOXg3GTT0JJy47XDvMOa8ny7NPegQxcow4mjxnbM
- ehu+ktF+TsX60rUeNgzMRJ0aAV8Vpg1+exq9jZpO0yl2KYdWD0E8gCEBTEkk8vJ9Ezs7FZMP+Ws
- atYkMvvR5NACbKcg3TplPWBHeuRZQYNGB4sys4SpnzbQYzrjGhGF+93wr4t3NbPzsGi+oJ3lq5u
- WuHvq/KfudmAqIKUkrOsLZTgy/3K2ZBAF+1KQUwsskGcQqTZf3gcV+/sfZnUOv+5RwtxamY/q3f
- fpgJRyIBtliqfUB9+JI4VVhhAcvbeYSRj5z+U4DSQSA8uS+2vC6Bf/5NOe0LqwZRJdTBpdPDwZX
- apworER0Ru6pzxPYAnQUedV093TdPsPEGUEWAWIm+fVS2g3o1jnpYc6hb2yVePETtvxYezV/EqN
- qNEhYWvIqK4OgjbR5THIy1ZW4L6H2cJsNx20BXCfRVXn8rKkGwD9LiSqiBa1O3TUezCFyh0zApD
- UHdBxb9ZUqwbFqirtM3i34p/PQjOnakjp8g0MHzIyHhP+8k4X+qYzvQ8BrWcmZ7a9Pmt7t9ongz
- jIAROU3o/STE7n93o27h1jhhMdHxLxf0USTG/ySW4Ahx6Ll8okGWAajR6kmvwz3afWFISufeTXF
- vGbWAiNibA8+Ryw==
+X-Developer-Signature: v=1; a=openpgp-sha256; l=757; i=jlayton@kernel.org;
+ h=from:subject:message-id; bh=NT9GoCKrhJHxzJaFVzYs+iwgpSzcQsNFzrkjPRxmI4A=;
+ b=owEBbQKS/ZANAwAKAQAOaEEZVoIVAcsmYgBpoG0PPx4vgLzFRyqyCgx4J34+XZiyaw/sSPdij
+ GSRivfac1mJAjMEAAEKAB0WIQRLwNeyRHGyoYTq9dMADmhBGVaCFQUCaaBtDwAKCRAADmhBGVaC
+ FbT2D/9FjLqJOuCZ/iHUB6fXfFS0PRvj7GjtXh3TEl7mBaBqwoKn2tiJVhj8uIoLDInua9zDarS
+ kj49CPCKVHUju5nyjzd4AYbAyvz+bLNRXpkiv+wwBafITWWLDAUBYHd3khfRwC7Zf2/GsbtOqra
+ G0PjEIwc+ggLzHWlwJkaatzkAnwHg5mOg4skMPzKOTrAesBH0B/ud00dXWV41oUIPXO/zVBKa5j
+ HlgW2VN0KHdXbenXBNwgZCva8rq2Yk0gvoe4F+hxSCKC6jVrstMcij8oTQRe4XdYBLW6j93GZ1l
+ Bz+pZzyG/BEAqMQlDpq02p1pUK3Iq8wVtspVp+kenzKWBcRFzQzrgTze7VnpKUlLX/zqVduXx5+
+ I31MduvitvhgUpJGk5SMbjgZhl650TRGucqbdCl51NzVhjfbT2ynMIyUE9lydocd6jRa34VJ4lV
+ 8HsbsnPB7bZvLUBGy9FSb03giKnQ5Af6PWhWgr/PZU63A9s3GhqIyla4lD3Bv/7vZ3poxaSpFb0
+ UZOZoc19F0oKz49lInvML8oh0Zc+DLugGv49Fg2/DhdKc/ZNcLda4sZOipoNBhNkB5PhTVKOi1M
+ Undibt3NU51UZyvlBAQGdE+ZbWo/s/gnPJPNhUQcUFSn86PjjdYzZ1wCSODoogl3UhmOdIQbV9R
+ R0VSmXPaEkSynww==
 X-Developer-Key: i=jlayton@kernel.org; a=openpgp;
  fpr=4BC0D7B24471B2A184EAF5D3000E684119568215
 X-Spam-Score: -0.2 (/)
@@ -167,10 +167,10 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Update format strings and local variable types in qnx4 for
+ Content preview:  Update format strings and local variable types in qnx6 for
  the i_ino type change from unsigned long to u64. Signed-off-by: Jeff Layton
- <jlayton@kernel.org> --- fs/qnx4/inode.c | 4 ++-- 1 file changed,
- 2 insertions(+), 2 deletions(-) 
+ <jlayton@kernel.org> --- fs/qnx6/inode.c | 2 +- 1 file changed, 1 insertion(+),
+ 1 deletion(-) 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -182,8 +182,8 @@ X-Spam-Report: Spam detection software,
  envelope-from domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1vvds8-0005vn-JM
-Subject: [f2fs-dev] [PATCH 45/61] qnx4: update format strings for u64 i_ino
+X-Headers-End: 1vvdsK-0005x7-Cq
+Subject: [f2fs-dev] [PATCH 46/61] qnx6: update format strings for u64 i_ino
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -253,39 +253,30 @@ X-Spamd-Result: default: False [-7.11 / 15.00];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.sourceforge.net:rdns,lists.sourceforge.net:helo,lists.sourceforge.net:dkim]
-X-Rspamd-Queue-Id: 065451A997E
+X-Rspamd-Queue-Id: BF7A31A99BB
 X-Rspamd-Action: no action
 
-Update format strings and local variable types in qnx4 for the
+Update format strings and local variable types in qnx6 for the
 i_ino type change from unsigned long to u64.
 
 Signed-off-by: Jeff Layton <jlayton@kernel.org>
 ---
- fs/qnx4/inode.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ fs/qnx6/inode.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/fs/qnx4/inode.c b/fs/qnx4/inode.c
-index 8aeb63d397cfd6c87b7862f0dc7a34cdfdf02f9b..9305b8bb556efda2be578c75fe3eb35ca095f8ef 100644
---- a/fs/qnx4/inode.c
-+++ b/fs/qnx4/inode.c
-@@ -62,7 +62,7 @@ static int qnx4_get_block( struct inode *inode, sector_t iblock, struct buffer_h
+diff --git a/fs/qnx6/inode.c b/fs/qnx6/inode.c
+index c4049bb8bd60d47f9edd3d724a5d5be6b5deb5ee..73c9c456ecdfcbecee677877e9b1d5dc65071d43 100644
+--- a/fs/qnx6/inode.c
++++ b/fs/qnx6/inode.c
+@@ -75,7 +75,7 @@ static int qnx6_get_block(struct inode *inode, sector_t iblock,
  {
- 	unsigned long phys;
+ 	unsigned phys;
  
--	QNX4DEBUG((KERN_INFO "qnx4: qnx4_get_block inode=[%ld] iblock=[%ld]\n",inode->i_ino,iblock));
-+	QNX4DEBUG((KERN_INFO "qnx4: qnx4_get_block inode=[%lld] iblock=[%ld]\n", inode->i_ino, iblock));
+-	pr_debug("qnx6_get_block inode=[%ld] iblock=[%ld]\n",
++	pr_debug("qnx6_get_block inode=[%lld] iblock=[%ld]\n",
+ 		 inode->i_ino, (unsigned long)iblock);
  
- 	phys = qnx4_block_map( inode, iblock );
- 	if ( phys ) {
-@@ -128,7 +128,7 @@ unsigned long qnx4_block_map( struct inode *inode, long iblock )
- 			brelse( bh );
- 	}
- 
--	QNX4DEBUG((KERN_INFO "qnx4: mapping block %ld of inode %ld = %ld\n",iblock,inode->i_ino,block));
-+	QNX4DEBUG((KERN_INFO "qnx4: mapping block %ld of inode %lld = %ld\n", iblock, inode->i_ino, block));
- 	return block;
- }
- 
+ 	phys = qnx6_block_map(inode, iblock);
 
 -- 
 2.53.0
