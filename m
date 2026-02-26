@@ -2,41 +2,41 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id mG1LOw5zoGmDjwQAu9opvQ
+	id 8G45HFFzoGlZjwQAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 26 Feb 2026 17:21:34 +0100
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 26 Feb 2026 17:22:41 +0100
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3A4C71AA17A
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 26 Feb 2026 17:21:34 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id DD0461AA20C
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 26 Feb 2026 17:22:38 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
 	List-Unsubscribe:List-Id:Subject:In-Reply-To:MIME-Version:References:
 	Message-ID:To:Date:Sender:Content-ID:Content-Description:Resent-Date:
 	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=CwKjv0wBJ4wPzug1HWmYG7QzZ79X/XushJP/qGf+Lvg=; b=THgrcjLHd7js5YFd92QGlWe1jn
-	42nV4GYuONvfYZek2blmVzzMcatLCviMHKLhzKkaI1A0zIiNG1uH4WE+zsncyku4tFZQJ9Aliy9lr
-	4RaHwNOSpgATC/OhS9aqARvadltBrURnzHM2u6JW6gujiyaGVfj2LFTs7/HNrKUgTZes=;
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=qPcn8kEXiGBgHmyLRC5CyphBiz+VHsgcATNY3grMl3k=; b=nO02vFxlPayzft78BVRDqt7bWD
+	a/EU3q355Nroz8EPVCAm/66THwHy22V6dKxFhBkvUd7vc+gFKVIpWWOOLoqsdT28BFM9pYU6ORdQ+
+	qZCrrWgWPWU33VCJKRYJUOemn6B3UU4896rwTb2YwY8EEXlF+Q2FrusHi+KbciFJvbII=;
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vve7B-0003Ec-4t;
-	Thu, 26 Feb 2026 16:21:25 +0000
+	id 1vve8F-0003cw-Mb;
+	Thu, 26 Feb 2026 16:22:31 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <djwong@kernel.org>) id 1vve79-0003EM-ES;
- Thu, 26 Feb 2026 16:21:23 +0000
+ (envelope-from <djwong@kernel.org>) id 1vve8D-0003cd-VN;
+ Thu, 26 Feb 2026 16:22:29 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=wVB2nRE2FG3NLF9HZTUTaFJC5JX8an1BLHt8rWCue3I=; b=gJN7XHrpDHjGOeJmLe80bXvdEh
- NCVeR3U1utuT7YaE1rFW1DMJjl8etMd2PDNwKg9AUrl4T8wPDRLy9rEVxauh5X5BAdnyb71lucPLW
- 1XMcZaZ6LI0gdfE9hFIfJOoLV82mLz5nz8I+bAvoOAfHDHqS8krRdfn49gE89Q6Pud1E=;
+ bh=FEJyjbicGOzFjiYzXKTkera7jYDMXPs4gjGho33QAb4=; b=T54QOwDBlPC7TOgH/Oa27jDc0H
+ Z6ZBUeGUyUcYmCYtyyWBDfvh1eSAK1br8Rr92hBYW2u6xHIKcTtebTvV0zzbBl+R8SPiesjNaJ6kF
+ m8acQ9Rz6bOx/BE6qoNhf04Gd0KEgJyRUxElClffw9wL67lNIaGNw9fybpPI7j3NubC0=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -44,60 +44,60 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=wVB2nRE2FG3NLF9HZTUTaFJC5JX8an1BLHt8rWCue3I=; b=bk1KUBfFDTFdKoKzNcHWZ7d4OM
- bEO+o3QY2WdEBCWQRAtVAoqKaRKLcNvtQaCCC7fHgFP7A/8MYVgDE95ycshMuO6x/Qa3PQf8JE+6G
- GV4ip9KMRAwmZ68CHpwOg+xZxA3JVu1Y2lOeu8DmKfFI7dWqitiyvVGHcln+d3PSZBhU=;
+ bh=FEJyjbicGOzFjiYzXKTkera7jYDMXPs4gjGho33QAb4=; b=IDjLOTXNrrqNzE2n5g4ACM1GSw
+ MI5eN3DY1VrhGmiSrT3LtUifGKLELDodmN3QT+2UT/pUNBiT8DO2cmqP62y+r1G8pMS26z2NMpo6B
+ +k1LdrgbP+yFd+IZXbylvO1SIfMlr289kOz36HYiq2UENoW+O+8X5f1Qmi0I3YKQCDUk=;
 Received: from tor.source.kernel.org ([172.105.4.254])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vve78-0007Qs-Jm; Thu, 26 Feb 2026 16:21:23 +0000
+ id 1vve8D-0007X5-Dq; Thu, 26 Feb 2026 16:22:29 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id ABFAD60134;
- Thu, 26 Feb 2026 16:21:16 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2C94FC116C6;
- Thu, 26 Feb 2026 16:21:16 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id A6E5A6013A;
+ Thu, 26 Feb 2026 16:22:23 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1FBF5C116C6;
+ Thu, 26 Feb 2026 16:22:23 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1772122876;
- bh=V1fVfV5JdygsYqqvdLgkTi9eHo8yzA5OHJNuP74kT5M=;
+ s=k20201202; t=1772122943;
+ bh=zBSOHROIWzwnJvs9/9cwNsUSUVDRgXIG4XZCDyNzlZs=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=sDDw8eYqwACHaj4O7vDcEY3Z3DSJW484PKPOPXOKy0boTF8UTmzICoiE1cyykKiIM
- xOBYZnf88DGWi93IfTOYIQmn8jqOXrSJr2ShZA56rqbg0hmfpRiu0o0LAQFqCN3kbN
- l7bFZXaFkR1tNue7G1SE2sRPdcliKClo/uCAM6VErQTG1ybCP3jdOu/hVxSSjxEks3
- VUzWScs/xItv1vurP+yGi08YkgXCjGpKTqvsk5MSnA/Lz7IU4uGDaXbH0vz/GujZLV
- De4HiUvA9a6pugKUqRxzcuDcG+x6k8c7HKvA0XOAeCpB6hQxZsN26OBFzIyNkqkG3n
- aZJXtG7dphM0g==
-Date: Thu, 26 Feb 2026 08:21:15 -0800
+ b=JssZjrPw1BO0Mw8Q9yfwnQsgaD6FpgkNgIWpbVUWXLyeJnokKKg4hk1SAaRN/4Pl2
+ p5YBVNEqJjiqtkjLnya4b8Ga67KiibEKKFpBd87HHM6a9Nr/QZeAv6psBrGRdFMMiz
+ A9DSSr/iUARrTgSnBid48sZtR6nbfqnBEMtEEnmZIzWpuH9bLY6kY9ErKk7lBImyBm
+ /Lk4+mloyiRijQ2SiVpy8mPc9oycbHcUIEINyu+Tm3ChF79dz7yAux92+Q0KlVrv/G
+ LUTkHVEDI976MFOVD4JvxorvgEXP2iFNe7YZQj9uo/QF6AdIL6XZAAV6xKOXhQSqTF
+ qLmaMxW89/z7g==
+Date: Thu, 26 Feb 2026 08:22:22 -0800
 To: Jeff Layton <jlayton@kernel.org>
-Message-ID: <20260226162115.GG13829@frogsfrogsfrogs>
+Message-ID: <20260226162222.GH13829@frogsfrogsfrogs>
 References: <20260226-iino-u64-v1-0-ccceff366db9@kernel.org>
- <20260226-iino-u64-v1-59-ccceff366db9@kernel.org>
+ <20260226-iino-u64-v1-61-ccceff366db9@kernel.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20260226-iino-u64-v1-59-ccceff366db9@kernel.org>
+In-Reply-To: <20260226-iino-u64-v1-61-ccceff366db9@kernel.org>
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Thu, Feb 26, 2026 at 10:56:01AM -0500, Jeff Layton wrote:
- > Update format string from %lu to %llu for inode->i_ino now that > i_ino
- is u64 instead of unsigned long. > > Signed-off-by: Jeff Layton < [...] 
+ Content preview:  On Thu, Feb 26, 2026 at 10:56:03AM -0500, Jeff Layton wrote:
+ > Update format strings from %lu/%lx to %llu/%llx and 0UL literal to > 0ULL
+ in pipe, dcache, fserror, and eventpoll, now that i_ino is u64 [...] 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1vve78-0007Qs-Jm
-Subject: Re: [f2fs-dev] [PATCH 59/61] iomap: update format string for u64
- i_ino
+X-Headers-End: 1vve8D-0007X5-Dq
+Subject: Re: [f2fs-dev] [PATCH 61/61] vfs: update core format strings for
+ u64 i_ino
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -199,24 +199,24 @@ X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [-6.61 / 15.00];
 	WHITELIST_DMARC(-7.00)[sourceforge.net:D:+];
 	SUSPICIOUS_RECIPS(1.50)[];
-	DMARC_POLICY_ALLOW_WITH_FAILURES(-0.50)[];
 	MID_RHS_NOT_FQDN(0.50)[];
+	DMARC_POLICY_ALLOW_WITH_FAILURES(-0.50)[];
 	RWL_MAILSPIKE_EXCELLENT(-0.40)[216.105.38.7:from];
-	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7];
-	MAILLIST(-0.20)[mailman];
 	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
+	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7:c];
+	MAILLIST(-0.20)[mailman];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	TO_DN_SOME(0.00)[];
-	DKIM_MIXED(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	RCVD_TLS_LAST(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	RECEIVED_HELO_LOCALHOST(0.00)[];
-	ARC_NA(0.00)[];
 	REPLYTO_DOM_EQ_TO_DOM(0.00)[];
-	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,kernel.org:s=k20201202];
+	RCVD_TLS_LAST(0.00)[];
+	RECEIVED_HELO_LOCALHOST(0.00)[];
+	DKIM_MIXED(0.00)[];
+	ARC_NA(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
 	FREEMAIL_CC(0.00)[ionkov.net,lists.linux.dev,manguebit.org,alarsen.net,lists.freedesktop.org,vger.kernel.org,linaro.org,omnibond.com,kernel.org,namei.org,tyhicks.com,infradead.org,lists.orangefs.org,microsoft.com,dev.tdt.de,cs.cmu.edu,google.com,zeniv.linux.org.uk,gmail.com,physik.fu-berlin.de,oracle.com,suse.com,amd.com,arm.com,linux.ibm.com,redhat.com,ffwll.ch,paul-moore.com,coda.cs.cmu.edu,vivo.com,lists.linaro.org,schaufler-ca.com,mit.edu,fluxnic.net,linux.dev,huawei.com,davemloft.net,linux.intel.com,lists.sourceforge.net,lists.infradead.org,auristor.com,themaw.net,wdc.com,szeredi.hu,dubeyko.com,brown.name,hallyn.com,goodmis.org,efficios.com,intel.com,suse.de,paragon-software.com,kvack.org,lists.samba.org,samba.org,suse.cz,codewreck.org,crudebyte.com,linux.alibaba.com,dilger.ca,artax.karlin.mff.cuni.cz,nod.at,fasheh.com,lists.ubuntu.com,talpey.com,canonical.com,evilplan.org];
+	TO_DN_SOME(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,kernel.org:s=k20201202];
 	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,kernel.org:-];
 	DMARC_POLICY_ALLOW(0.00)[lists.sourceforge.net,none];
 	RCPT_COUNT_GT_50(0.00)[143];
@@ -232,39 +232,84 @@ X-Spamd-Result: default: False [-6.61 / 15.00];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	MISSING_XM_UA(0.00)[];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.sourceforge.net:rdns,lists.sourceforge.net:helo,lists.sourceforge.net:dkim]
-X-Rspamd-Queue-Id: 3A4C71AA17A
+X-Rspamd-Queue-Id: DD0461AA20C
 X-Rspamd-Action: no action
 
-On Thu, Feb 26, 2026 at 10:56:01AM -0500, Jeff Layton wrote:
-> Update format string from %lu to %llu for inode->i_ino now that
-> i_ino is u64 instead of unsigned long.
+On Thu, Feb 26, 2026 at 10:56:03AM -0500, Jeff Layton wrote:
+> Update format strings from %lu/%lx to %llu/%llx and 0UL literal to
+> 0ULL in pipe, dcache, fserror, and eventpoll, now that i_ino is u64
+> instead of unsigned long.
 > 
 > Signed-off-by: Jeff Layton <jlayton@kernel.org>
 
-Looks fine to me, though I'm a bit sad there's no xfs_inode::i_ino ->
-inode::i_ino conversion patch... ;)
-
-Reviewed-by: "Darrick J. Wong" <djwong@kernel.org>
+Acked-by: "Darrick J. Wong" <djwong@kernel.org>
 
 --D
 
 > ---
->  fs/iomap/ioend.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+>  fs/dcache.c    | 4 ++--
+>  fs/eventpoll.c | 2 +-
+>  fs/fserror.c   | 2 +-
+>  fs/pipe.c      | 2 +-
+>  4 files changed, 5 insertions(+), 5 deletions(-)
 > 
-> diff --git a/fs/iomap/ioend.c b/fs/iomap/ioend.c
-> index 4d1ef8a2cee90b91591d387f8e1c3f75350c1da0..94d9a3c77bd68581d752fef4c16b88e1cb5f88da 100644
-> --- a/fs/iomap/ioend.c
-> +++ b/fs/iomap/ioend.c
-> @@ -48,7 +48,7 @@ static u32 iomap_finish_ioend_buffered(struct iomap_ioend *ioend)
->  		mapping_set_error(inode->i_mapping, ioend->io_error);
->  		if (!bio_flagged(bio, BIO_QUIET)) {
->  			pr_err_ratelimited(
-> -"%s: writeback error on inode %lu, offset %lld, sector %llu",
-> +"%s: writeback error on inode %llu, offset %lld, sector %llu",
->  				inode->i_sb->s_id, inode->i_ino,
->  				ioend->io_offset, ioend->io_sector);
->  		}
+> diff --git a/fs/dcache.c b/fs/dcache.c
+> index 24f4f3acaa8cffd6f98124eec38c1a92d6c9fd8e..9e8425ecd88955c72027d21591b1d12c87e7e8aa 100644
+> --- a/fs/dcache.c
+> +++ b/fs/dcache.c
+> @@ -1637,11 +1637,11 @@ static enum d_walk_ret umount_check(void *_data, struct dentry *dentry)
+>  	if (dentry == _data && dentry->d_lockref.count == 1)
+>  		return D_WALK_CONTINUE;
+>  
+> -	WARN(1, "BUG: Dentry %p{i=%lx,n=%pd} "
+> +	WARN(1, "BUG: Dentry %p{i=%llx,n=%pd} "
+>  			" still in use (%d) [unmount of %s %s]\n",
+>  		       dentry,
+>  		       dentry->d_inode ?
+> -		       dentry->d_inode->i_ino : 0UL,
+> +		       dentry->d_inode->i_ino : 0ULL,
+>  		       dentry,
+>  		       dentry->d_lockref.count,
+>  		       dentry->d_sb->s_type->name,
+> diff --git a/fs/eventpoll.c b/fs/eventpoll.c
+> index 5714e900567c499739bb205f43bb6bf73f7ebe54..4ccd4d2e31adf571f939d2e777123e40302e565f 100644
+> --- a/fs/eventpoll.c
+> +++ b/fs/eventpoll.c
+> @@ -1080,7 +1080,7 @@ static void ep_show_fdinfo(struct seq_file *m, struct file *f)
+>  		struct inode *inode = file_inode(epi->ffd.file);
+>  
+>  		seq_printf(m, "tfd: %8d events: %8x data: %16llx "
+> -			   " pos:%lli ino:%lx sdev:%x\n",
+> +			   " pos:%lli ino:%llx sdev:%x\n",
+>  			   epi->ffd.fd, epi->event.events,
+>  			   (long long)epi->event.data,
+>  			   (long long)epi->ffd.file->f_pos,
+> diff --git a/fs/fserror.c b/fs/fserror.c
+> index 06ca86adab9b769dfb72ec58b9e51627abee5152..1e4d11fd9562fd158a23b64ca60e9b7e01719cb8 100644
+> --- a/fs/fserror.c
+> +++ b/fs/fserror.c
+> @@ -176,7 +176,7 @@ void fserror_report(struct super_block *sb, struct inode *inode,
+>  lost:
+>  	if (inode)
+>  		pr_err_ratelimited(
+> - "%s: lost file I/O error report for ino %lu type %u pos 0x%llx len 0x%llx error %d",
+> + "%s: lost file I/O error report for ino %llu type %u pos 0x%llx len 0x%llx error %d",
+>  		       sb->s_id, inode->i_ino, type, pos, len, error);
+>  	else
+>  		pr_err_ratelimited(
+> diff --git a/fs/pipe.c b/fs/pipe.c
+> index b44a756c0b4165edc2801b2290bf35480245d7a6..9841648c9cf3e8e569cf6ba5c792624fe92396f5 100644
+> --- a/fs/pipe.c
+> +++ b/fs/pipe.c
+> @@ -873,7 +873,7 @@ static struct vfsmount *pipe_mnt __ro_after_init;
+>   */
+>  static char *pipefs_dname(struct dentry *dentry, char *buffer, int buflen)
+>  {
+> -	return dynamic_dname(buffer, buflen, "pipe:[%lu]",
+> +	return dynamic_dname(buffer, buflen, "pipe:[%llu]",
+>  				d_inode(dentry)->i_ino);
+>  }
+>  
 > 
 > -- 
 > 2.53.0
