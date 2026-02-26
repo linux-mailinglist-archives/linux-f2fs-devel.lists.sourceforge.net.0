@@ -2,41 +2,41 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id KEVYIV9uoGk3jgQAu9opvQ
+	id oHyLDHBuoGkHjwQAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 26 Feb 2026 17:01:35 +0100
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 26 Feb 2026 17:01:52 +0100
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9D2C71A968C
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 26 Feb 2026 17:01:30 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9FE341A96CA
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 26 Feb 2026 17:01:46 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
 	List-Unsubscribe:List-Id:Subject:To:In-Reply-To:References:Message-Id:
 	MIME-Version:Date:Sender:Content-ID:Content-Description:Resent-Date:
 	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=4ZUOQt8MVL4HwzbdnmJjS1IL173r+yJBhXTJ6vy2m5U=; b=ih98bSHc/tkF7fExvt4qY1P/8R
-	7sQbP2jTbPEkInxqRqxVnf7OD2BySp7c1GA39WZoSAzbW3SnR02Slq/NGUD1jrfuCr+GyJPTMkU9f
-	v0m6W6nwSIjC0LdarIXV3nI/oUcEFmpsx/cfIMj8PxUaVdk9oNtGiMw01IXagip+1vpk=;
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=D8tL0Ebzi++PgXM9ii8w0u18naRGOQclj4U6EqsHhFk=; b=PnrcvGiVExNwx1QEwV1PtkWg1x
+	l1BUpaW1bcDQgBHqBee/UoIyEMTZogw2HSicMQn72FZZ47Kt1Xgm46QC7MySwHVu8fFx0vFkI5Q5N
+	M0qieFsMmSist/7z4f+5079FQUzT6rV2tLvH7j9Q4kEtxB/Tc9D1G+2Z4eVWtx2KuTSU=;
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vvdnr-0000gi-TO;
-	Thu, 26 Feb 2026 16:01:27 +0000
+	id 1vvdo8-0002VX-UZ;
+	Thu, 26 Feb 2026 16:01:44 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jlayton@kernel.org>) id 1vvdnq-0000gR-01;
- Thu, 26 Feb 2026 16:01:26 +0000
+ (envelope-from <jlayton@kernel.org>) id 1vvdo6-0002V5-P8;
+ Thu, 26 Feb 2026 16:01:42 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Cc:To:In-Reply-To:References:Message-Id:
  Content-Transfer-Encoding:Content-Type:MIME-Version:Subject:Date:From:Sender:
  Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
  :Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=eFz/5KKDyFJwt0X0ie7sTH96u/9wUvnP11ZGhBkKsO8=; b=f8wOFyxhhspl8TsvsEG2gxHb/1
- FD7Qw8dKF9/Cw+OaSguOQV3GqXDrjQzaLLmNP1ctkcNKX1YqBSpYF9S+HNldj5cMdcLrb1sBLnaE0
- l0699pT/rYdZKZM7xHgG+zAmAqeEZ2g1f6q1CZ0IqItwVbZfj9tVdFfDeJntsSTr5o2k=;
+ bh=ZHVUPVtMd5duBp5tkF0pwwpHBYGNNJMRhg4z7ilrOBw=; b=Dlf+D7fN1POxHi4MojvNPZPzHs
+ F3c4pP8E8CS9UTQyAj4cHxgo7WSYa6EXmZ9R8hERniJvNrWhepoOv+BPxHSVshkWvdYcAmqbEMoEb
+ l370zvLLWuqPvFxSuzxhD5MXyKW5JM226//+ueOOzHed5QYVtcojpObm6l3PuACwIqK8=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Cc:To:In-Reply-To:References:Message-Id:Content-Transfer-Encoding:
@@ -44,31 +44,31 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=eFz/5KKDyFJwt0X0ie7sTH96u/9wUvnP11ZGhBkKsO8=; b=EnGg7MMOM6oibzZuClniWaMWm6
- vhmCnjGv6LUYXrofUvlqhodZQKDagrEvKbcnkeTSExYX4At00VzzmMbd+BZYhWDmNlkmN3u5F5oAg
- rNF08IYytcegzzvcMwbg06Anje/jpFmGKGOFpL1BMdJ5MEOBcAhoYsb4OWJLLIF/W5mg=;
+ bh=ZHVUPVtMd5duBp5tkF0pwwpHBYGNNJMRhg4z7ilrOBw=; b=CmMIj5l2P8uRGNbaA5Tyd2ajHI
+ +qvkTiT3PcRQnf9cmxxqZKP6ZMCV7erskYgIP6dDSgFi5IVWBOvhOla+qQyznAHiI/UVS/MGCdXJc
+ DToxgPPaGKcL2S8t8Zyh5WNs89IRr3xmFk51fspjMsaGpc16EFzAhYd+H2HfYjJiqVGM=;
 Received: from sea.source.kernel.org ([172.234.252.31])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vvdno-0005IC-M8; Thu, 26 Feb 2026 16:01:25 +0000
+ id 1vvdo6-0005L3-7o; Thu, 26 Feb 2026 16:01:42 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 3BF274180E;
+ by sea.source.kernel.org (Postfix) with ESMTP id AF20B41905;
+ Thu, 26 Feb 2026 16:01:31 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5362EC19423;
  Thu, 26 Feb 2026 16:01:19 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id D8AE2C2BCB4;
- Thu, 26 Feb 2026 16:01:06 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1772121679;
- bh=MwavyxIYlS9bWn9ErxsqoDmGcaV0lMqgZ3OvxFOJWq0=;
+ s=k20201202; t=1772121691;
+ bh=6STFW9zzEEyw18JQAD1ltwRNCpZJhA9BXLfx6yM4ajE=;
  h=From:Date:Subject:References:In-Reply-To:To:Cc:From;
- b=Ivmk1v7V3CJiICUlcp+XecxQ8lV8EsvWNHo7eR+YxOQbmYtedtALPPtlvxelp6hjh
- en8jABiMzMb/OrtCHXYcM4ik86k8b/NdKS6iQNsceskhDSrUAGrthU+Mluo9Y3k5OY
- hLGGzCNMcAx+HcJMRHPgHxCwW6zWxH6VTPO2mshnW9Ta5etwpt94k3KwJKKWDvu9ZO
- wzvN5qcZ0hcx3Fb9eoFa+y7vAEMv+EMzEtIsC5mu61EwaXjr9g30suDQA0zhULrwLi
- r1tYEXKRj5sFs5LaOuPmEij4Gg2A3MbYdnp+GKNGqW6icNTxudYs2jchlG7ZcVlSJW
- TlOBjKksVvQ6A==
-Date: Thu, 26 Feb 2026 10:55:26 -0500
+ b=BAz8BQ528eKk6MadOHyevQx+qjL4wSDuyHJ87ThNPK/31CgqwA0vCscM33MiSFeUX
+ UkjyU2+pJs8CiD1ANW0EkPSn94NDfhCzaoz/wHYGvEzrGjIXtw6cGrHR9fUMKpOxwc
+ aHB99roC1dbDycq/l3AfKBSf6ZVpAE9VisEZoRWAnWVxc0cfvexcFOEf83sd5JX7BA
+ G62tfcuJa9RTisoUfOdbNsEM+UwHtomPnSDSEJzYqiM5p0VgIq5s3Chch2BAtdIwBJ
+ nlz4vOM6bWrPaflfIkDMsV85NZ7E4ngPFIcFmtwNuWUfhHrGf6FA4rFQnSdooF6puO
+ MX1o+qh9KowLw==
+Date: Thu, 26 Feb 2026 10:55:27 -0500
 MIME-Version: 1.0
-Message-Id: <20260226-iino-u64-v1-24-ccceff366db9@kernel.org>
+Message-Id: <20260226-iino-u64-v1-25-ccceff366db9@kernel.org>
 References: <20260226-iino-u64-v1-0-ccceff366db9@kernel.org>
 In-Reply-To: <20260226-iino-u64-v1-0-ccceff366db9@kernel.org>
 To: Alexander Viro <viro@zeniv.linux.org.uk>, 
@@ -144,49 +144,46 @@ To: Alexander Viro <viro@zeniv.linux.org.uk>,
  James Clark <james.clark@linaro.org>, "Darrick J. Wong" <djwong@kernel.org>, 
  Martin Schiller <ms@dev.tdt.de>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=4391; i=jlayton@kernel.org;
- h=from:subject:message-id; bh=MwavyxIYlS9bWn9ErxsqoDmGcaV0lMqgZ3OvxFOJWq0=;
- b=owEBbQKS/ZANAwAKAQAOaEEZVoIVAcsmYgBpoG0KNFRsbW5kG/p9PtFPpXWeEzWzPxJtHpHVp
- a6torUfDXmJAjMEAAEKAB0WIQRLwNeyRHGyoYTq9dMADmhBGVaCFQUCaaBtCgAKCRAADmhBGVaC
- FbHIEACZSDMJAqAwQ0UXgiwJ0jC+ChGbMCd/Sa5yBvlpCfjSmkn4n6HEjHw/4s1+fMmd0m/LwmE
- 8jH1uSEVla1iJBWmZN4Xmpo5/oGmeKxuCJiBT+T//EpjIq1eV366Wwlq7KQ+yOwNIpAewI1OK4N
- PRlmobIu63prMJmjcVGhaMWtjg/olAgXr+44X79kcORF1excabF2OOgoAE237OZrMV/pXS/EyUw
- cRh+8Bqx0o/fII34tA4kAWOou4JBmxxBQGz7pB1yGKxbzrM/hUf1apOp6sY1tIB/EHW+XUJ1135
- UimmosoXllhYTYz7gsjIEu9frAYnYwXkrfuEUag+2PAjWfNTIqHI8PxPEuTcmY6erOvzxw88LzW
- jsGnRh3iUm7XUez/cpw0Ara59XzP/RWYuRYzwSLHWaub8hRyUrvdC/6X6DMrvMmABzLvFNoXMum
- U+NXn/y/d8sMb1KpWcJZtq8Fh4VtPJi9afupJhGnOXq+JGgNjjpUhCxAd3M1JBxNo/ueFIhhIbb
- wwcyV7LsjMJhwseMYJqWooz6vpkd/aGCbLkFfbdVky/iO7E0YpZ10MzPRZpsqsOpn9pAxtkPhh+
- EucWjJg2UwqxM6ydVT7EBx2NgQD6V+NpF2Mg83BX551O6BuZMAl01ktREHrwHp3YwbqnlZsQdVI
- BaUUCgERHQ6vaqA==
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1288; i=jlayton@kernel.org;
+ h=from:subject:message-id; bh=6STFW9zzEEyw18JQAD1ltwRNCpZJhA9BXLfx6yM4ajE=;
+ b=owEBbQKS/ZANAwAKAQAOaEEZVoIVAcsmYgBpoG0KC6VVADOiHRXYxr4+UxXwlyOI0WrSk39r8
+ mtg6o3CGE6JAjMEAAEKAB0WIQRLwNeyRHGyoYTq9dMADmhBGVaCFQUCaaBtCgAKCRAADmhBGVaC
+ FWhcD/96J0LtP/SNwu6Aiyx9nYWaYBUlQ8MM2Sys+a9iz6XZV1X/Xdw6jIyXLk5xCQPRxmP7fIh
+ krswUI7GBDbLj5FlKf0r2I+RyfKx/amG4chw75EvB0akEjH851AfuKMiBYDl4YMlWQCmWX7d/Tz
+ YN73d+XlOzLOIxIiOdCs2GuO8kIvv6nvvgUM2zde2TPB3Qbz0GjQMG6lDwTMbrwP0RXod6mJ17W
+ 2f3J7fKr1w0QzlRaC3Wib+xWz+MhZcdjt83xDg5fpHmy+8qhqCYS/VJFx4bHMvFvtsbsHr/fDI7
+ FKMWiBzcDUfywjyviXUCVTlnmAceADnIYvtlAGknGODLQppEdBHpM9pBjUy9oCq3G6EQq/NsiGt
+ BLDa4hE0VL6n3cP1oS4GOC5DBIspUpFHOVyVVaeYY/D0jJclLog94O6JfiIPJtQXjCPCimBG4np
+ zeGhchHHoeNwJS2ox8udxtNA/k6nNe3eUIbxV4nD9p2pIDtnTSv4cYIw0dTvtj9EqSetVjcZAn8
+ wmae8v8+ggHlRCPT44+8JbmF9zckck49XmFkszctY/Hf8KeP4+d50OE+RuwyAOUmFTwP6JGgoLa
+ lnB8Ki0PDsonP+9iqvPevGlYNndyClx4DgO2ptfO4kRUjALpmeLFrPuMY3V00l+rkYRH2DB8Eb3
+ NI/h0Gz1yXbpXlw==
 X-Developer-Key: i=jlayton@kernel.org; a=openpgp;
  fpr=4BC0D7B24471B2A184EAF5D3000E684119568215
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: Update format strings and local variable types in cachefiles
- for the i_ino type change from unsigned long to u64. Signed-off-by: Jeff
- Layton <jlayton@kernel.org> --- fs/cachefiles/io.c | 6 +++---
- fs/cachefiles/namei.c
- | 12 ++++++------ fs/cachefiles/xattr.c | 2 +- 3 files changed,
- 10 insertions(+), 10 deletions(- [...] 
+ Content preview:  Update format strings and local variable types in ceph for
+ the i_ino type change from unsigned long to u64. Signed-off-by: Jeff Layton
+ <jlayton@kernel.org> --- fs/ceph/crypto.c | 4 ++-- 1 file changed,
+ 2 insertions(+), 2 deletions(-) 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1vvdno-0005IC-M8
-Subject: [f2fs-dev] [PATCH 24/61] cachefiles: update format strings for u64
- i_ino
+X-Headers-End: 1vvdo6-0005L3-7o
+Subject: [f2fs-dev] [PATCH 25/61] ceph: update format strings for u64 i_ino
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -227,21 +224,21 @@ X-Spamd-Result: default: False [-7.11 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	DMARC_POLICY_ALLOW_WITH_FAILURES(-0.50)[];
 	RWL_MAILSPIKE_EXCELLENT(-0.40)[216.105.38.7:from];
+	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7];
 	MAILLIST(-0.20)[mailman];
 	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
-	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7:c];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
-	DKIM_MIXED(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	DMARC_POLICY_ALLOW(0.00)[lists.sourceforge.net,none];
+	TO_DN_SOME(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
+	ARC_NA(0.00)[];
+	DKIM_MIXED(0.00)[];
+	MIME_TRACE(0.00)[0:+];
 	RECEIVED_HELO_LOCALHOST(0.00)[];
 	FREEMAIL_TO(0.00)[zeniv.linux.org.uk,kernel.org,suse.cz,goodmis.org,efficios.com,intel.com,infradead.org,mit.edu,linux.dev,suse.de,redhat.com,manguebit.org,dilger.ca,suse.com,oracle.com,brown.name,talpey.com,samba.org,gmail.com,microsoft.com,dubeyko.com,ionkov.net,codewreck.org,crudebyte.com,auristor.com,themaw.net,cs.cmu.edu,fluxnic.net,tyhicks.com,physik.fu-berlin.de,vivo.com,artax.karlin.mff.cuni.cz,nod.at,paragon-software.com,fasheh.com,evilplan.org,linux.alibaba.com,omnibond.com,szeredi.hu,alarsen.net,huawei.com,wdc.com,canonical.com,paul-moore.com,namei.org,hallyn.com,linux.ibm.com,schaufler-ca.com,amd.com,ffwll.ch,linaro.org,google.com,davemloft.net,arm.com,linux.intel.com,dev.tdt.de];
-	FORGED_SENDER_MAILLIST(0.00)[];
 	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,kernel.org:s=k20201202];
-	TO_DN_SOME(0.00)[];
-	ARC_NA(0.00)[];
-	MIME_TRACE(0.00)[0:+];
 	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,kernel.org:-];
@@ -249,129 +246,47 @@ X-Spamd-Result: default: False [-7.11 / 15.00];
 	RCPT_COUNT_GT_50(0.00)[146];
 	FROM_NEQ_ENVFROM(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
 	FROM_HAS_DN(0.00)[];
-	DMARC_POLICY_ALLOW(0.00)[lists.sourceforge.net,none];
+	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
 	NEURAL_HAM(-0.00)[-0.999];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	HAS_REPLYTO(0.00)[jlayton@kernel.org];
 	TAGGED_RCPT(0.00)[linux-f2fs-devel];
-	RSPAMD_EMAILBL_FAIL(0.00)[linux-f2fs-devel.lists.sourceforge.net:server fail];
+	RSPAMD_EMAILBL_FAIL(0.00)[linux-f2fs-devel.lists.sourceforge.net:query timed out];
 	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.sourceforge.net:rdns,lists.sourceforge.net:helo,lists.sourceforge.net:dkim]
-X-Rspamd-Queue-Id: 9D2C71A968C
+X-Rspamd-Queue-Id: 9FE341A96CA
 X-Rspamd-Action: no action
 
-Update format strings and local variable types in cachefiles for the
+Update format strings and local variable types in ceph for the
 i_ino type change from unsigned long to u64.
 
 Signed-off-by: Jeff Layton <jlayton@kernel.org>
 ---
- fs/cachefiles/io.c    |  6 +++---
- fs/cachefiles/namei.c | 12 ++++++------
- fs/cachefiles/xattr.c |  2 +-
- 3 files changed, 10 insertions(+), 10 deletions(-)
+ fs/ceph/crypto.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/fs/cachefiles/io.c b/fs/cachefiles/io.c
-index eaf47851c65f4736a7a27f13c498028c7c8dd1b4..d879b80a0bedc95533ce05361ed8cb79c7ed3826 100644
---- a/fs/cachefiles/io.c
-+++ b/fs/cachefiles/io.c
-@@ -93,7 +93,7 @@ static int cachefiles_read(struct netfs_cache_resources *cres,
- 	object = cachefiles_cres_object(cres);
- 	file = cachefiles_cres_file(cres);
+diff --git a/fs/ceph/crypto.c b/fs/ceph/crypto.c
+index f3de43ccb470ddbd7945426d79f9024ae615c127..3c8a21a572d8230b558f20bb02721184cae35ee6 100644
+--- a/fs/ceph/crypto.c
++++ b/fs/ceph/crypto.c
+@@ -272,7 +272,7 @@ int ceph_encode_encrypted_dname(struct inode *parent, char *buf, int elen)
+ 	/* To understand the 240 limit, see CEPH_NOHASH_NAME_MAX comments */
+ 	WARN_ON(elen > 240);
+ 	if (dir != parent) // leading _ is already there; append _<inum>
+-		elen += 1 + sprintf(p + elen, "_%ld", dir->i_ino);
++		elen += 1 + sprintf(p + elen, "_%lld", dir->i_ino);
  
--	_enter("%pD,%li,%llx,%zx/%llx",
-+	_enter("%pD,%llu,%llx,%zx/%llx",
- 	       file, file_inode(file)->i_ino, start_pos, len,
- 	       i_size_read(file_inode(file)));
+ out:
+ 	kfree(cryptbuf);
+@@ -377,7 +377,7 @@ int ceph_fname_to_usr(const struct ceph_fname *fname, struct fscrypt_str *tname,
+ 	if (!ret && (dir != fname->dir)) {
+ 		char tmp_buf[BASE64_CHARS(NAME_MAX)];
  
-@@ -214,7 +214,7 @@ static int cachefiles_query_occupancy(struct netfs_cache_resources *cres,
- 	file = cachefiles_cres_file(cres);
- 	granularity = max_t(size_t, object->volume->cache->bsize, granularity);
- 
--	_enter("%pD,%li,%llx,%zx/%llx",
-+	_enter("%pD,%llu,%llx,%zx/%llx",
- 	       file, file_inode(file)->i_ino, start, len,
- 	       i_size_read(file_inode(file)));
- 
-@@ -294,7 +294,7 @@ int __cachefiles_write(struct cachefiles_object *object,
- 	fscache_count_write();
- 	cache = object->volume->cache;
- 
--	_enter("%pD,%li,%llx,%zx/%llx",
-+	_enter("%pD,%llu,%llx,%zx/%llx",
- 	       file, file_inode(file)->i_ino, start_pos, len,
- 	       i_size_read(file_inode(file)));
- 
-diff --git a/fs/cachefiles/namei.c b/fs/cachefiles/namei.c
-index e5ec90dccc27f71dc19219f7632f3e48eaf51545..4fdf7687aacb8285ae38d9b5d7e5129897b3ca03 100644
---- a/fs/cachefiles/namei.c
-+++ b/fs/cachefiles/namei.c
-@@ -147,7 +147,7 @@ struct dentry *cachefiles_get_directory(struct cachefiles_cache *cache,
- 		}
- 		ASSERT(d_backing_inode(subdir));
- 
--		_debug("mkdir -> %pd{ino=%lu}",
-+		_debug("mkdir -> %pd{ino=%llu}",
- 		       subdir, d_backing_inode(subdir)->i_ino);
- 		if (_is_new)
- 			*_is_new = true;
-@@ -158,7 +158,7 @@ struct dentry *cachefiles_get_directory(struct cachefiles_cache *cache,
- 	end_creating_keep(subdir);
- 
- 	if (!__cachefiles_mark_inode_in_use(NULL, d_inode(subdir))) {
--		pr_notice("cachefiles: Inode already in use: %pd (B=%lx)\n",
-+		pr_notice("cachefiles: Inode already in use: %pd (B=%llx)\n",
- 			  subdir, d_inode(subdir)->i_ino);
- 		goto mark_error;
- 	}
-@@ -183,7 +183,7 @@ struct dentry *cachefiles_get_directory(struct cachefiles_cache *cache,
- 	    !d_backing_inode(subdir)->i_op->unlink)
- 		goto check_error;
- 
--	_leave(" = [%lu]", d_backing_inode(subdir)->i_ino);
-+	_leave(" = [%llu]", d_backing_inode(subdir)->i_ino);
- 	return subdir;
- 
- check_error:
-@@ -529,7 +529,7 @@ static bool cachefiles_create_file(struct cachefiles_object *object)
- 
- 	set_bit(FSCACHE_COOKIE_NEEDS_UPDATE, &object->cookie->flags);
- 	set_bit(CACHEFILES_OBJECT_USING_TMPFILE, &object->flags);
--	_debug("create -> %pD{ino=%lu}", file, file_inode(file)->i_ino);
-+	_debug("create -> %pD{ino=%llu}", file, file_inode(file)->i_ino);
- 	object->file = file;
- 	return true;
- }
-@@ -549,7 +549,7 @@ static bool cachefiles_open_file(struct cachefiles_object *object,
- 	_enter("%pd", dentry);
- 
- 	if (!cachefiles_mark_inode_in_use(object, d_inode(dentry))) {
--		pr_notice("cachefiles: Inode already in use: %pd (B=%lx)\n",
-+		pr_notice("cachefiles: Inode already in use: %pd (B=%llx)\n",
- 			  dentry, d_inode(dentry)->i_ino);
- 		return false;
- 	}
-@@ -657,7 +657,7 @@ bool cachefiles_look_up_object(struct cachefiles_object *object)
- 	if (!ret)
- 		return false;
- 
--	_leave(" = t [%lu]", file_inode(object->file)->i_ino);
-+	_leave(" = t [%llu]", file_inode(object->file)->i_ino);
- 	return true;
- 
- new_file:
-diff --git a/fs/cachefiles/xattr.c b/fs/cachefiles/xattr.c
-index 52383b1d0ba63d4a09413177d8c0d841b5b5b43c..f8ae78b3f7b6d368526a86b454bf0febd1ccc509 100644
---- a/fs/cachefiles/xattr.c
-+++ b/fs/cachefiles/xattr.c
-@@ -179,7 +179,7 @@ int cachefiles_remove_object_xattr(struct cachefiles_cache *cache,
- 			ret = 0;
- 		else if (ret != -ENOMEM)
- 			cachefiles_io_error(cache,
--					    "Can't remove xattr from %lu"
-+					    "Can't remove xattr from %llu"
- 					    " (error %d)",
- 					    d_backing_inode(dentry)->i_ino, -ret);
- 	}
+-		name_len = snprintf(tmp_buf, sizeof(tmp_buf), "_%.*s_%ld",
++		name_len = snprintf(tmp_buf, sizeof(tmp_buf), "_%.*s_%lld",
+ 				    oname->len, oname->name, dir->i_ino);
+ 		memcpy(oname->name, tmp_buf, name_len);
+ 		oname->len = name_len;
 
 -- 
 2.53.0
