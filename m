@@ -2,41 +2,41 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id CNOBGyBwoGk3jgQAu9opvQ
+	id oNR2FC5woGk3jgQAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 26 Feb 2026 17:09:04 +0100
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 26 Feb 2026 17:09:18 +0100
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8B6B21A9AF1
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 26 Feb 2026 17:09:03 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id E04BD1A9B1E
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 26 Feb 2026 17:09:17 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
 	List-Unsubscribe:List-Id:Subject:To:In-Reply-To:References:Message-Id:
 	MIME-Version:Date:Sender:Content-ID:Content-Description:Resent-Date:
 	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=o4TTHEQHucm2HfszgNqKeZA5GLIe6ulR5CRCJpI0oyw=; b=SCuidtnS7mbwkPcdlpiQaJHfxI
-	wavfimURHA6FhzxzRdIuZrRXkSQ74v9ogDze0pSFQODwQRreTyy85xA0b169vbo0WTKVtlXLqZ6Gt
-	eQ+6r+bhfrfAxuQDHyWwUVXSm0g0VXVaCrR0sOkGWv+3N+0CuY+NUyplMRo4BBKmuZ+I=;
+	bh=xB+uTMl0O30Qf/aivoFGNTsdbRWw4w0g3eF52GnnUPg=; b=lpESdvox5q4x6lgnfqMkERHfQI
+	/H1arkTPKvkvCFjgSnu+lkcComjOeKLP7PbZB5xZskjATPXPhNQQBdjp7UBP2TeE4iwzh3onnYwNJ
+	3KJFtuRGg2EcfOH8BesiCxIyQlxEbHP4xCFudLfvHC2SF+ZtxGu7j9byBmC2Wn+WlF1A=;
 Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
 	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vvdvB-0003D0-Lz;
-	Thu, 26 Feb 2026 16:09:01 +0000
+	id 1vvdvQ-0003Fk-Cw;
+	Thu, 26 Feb 2026 16:09:16 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
  by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jlayton@kernel.org>) id 1vvdvA-0003CX-8a;
- Thu, 26 Feb 2026 16:09:00 +0000
+ (envelope-from <jlayton@kernel.org>) id 1vvdvP-0003FL-62;
+ Thu, 26 Feb 2026 16:09:15 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Cc:To:In-Reply-To:References:Message-Id:
  Content-Transfer-Encoding:Content-Type:MIME-Version:Subject:Date:From:Sender:
  Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
  :Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=O9LAoJV9LH+taYO5AwamiyX+EB2QV+KeNUvGXrYq1jg=; b=fW6rRGuz6A7VgzqPGpDV0wrldX
- C/RRxL9vH2DiUiba+JC/wp/pWxyzUTLtcow99iUe5knLDOplKJ+tmLpsCFlz2WzxhJU5J+ArbrVDF
- clUfm9RKC/NT27zkRw3RopDg8PJIWvG3bwcABCSWCEJIuEiG3eh+k9z4cXrBKS3P5M0w=;
+ bh=NPAQGlZWtF3twqInmv8UBV7lhOjoWbAcM+Xf1T0CoNE=; b=ZoJnbT1S0JlO68OJkz8mAICxy8
+ aKX1KDKES3QvaWI78MXPO60YkxtKqOWYzcS7Ei1Oswm7UKrwK5fy9WBB0tpXWEYDC0koQ7e4qQT9t
+ YRslZeZCNFsPCfq0Hy8Qz7r9HhFddKPJ5KhuI/KWBT8VcwjX1QqAuEEhsiX1GGlMhQMQ=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Cc:To:In-Reply-To:References:Message-Id:Content-Transfer-Encoding:
@@ -44,31 +44,31 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=O9LAoJV9LH+taYO5AwamiyX+EB2QV+KeNUvGXrYq1jg=; b=Kt4025FzvNBoAQhUFFRbWMDcXH
- 92NGJGcZlhs4JZcn0XLJW5NH7/CW7SZE4p8JgXAt0wa9o56+z5YqyY+IZARmoGKQ3+KQQ51iFPSdT
- qNhstg7fgIPzwo5fitmmTKEgE06Wfco3hA6SnZ7bl9ymkY7aaoKZ/94E18oMN0EN51fw=;
+ bh=NPAQGlZWtF3twqInmv8UBV7lhOjoWbAcM+Xf1T0CoNE=; b=Gw3sHwWPe4MJBBZjXflF3vgrKH
+ MkzDqheAszTTWMdex3kiFweXL3aCrUS/OuA2JtwIaInI/wzAWvK+35e1KNvo5ZOLvNt0OTPDDt8BI
+ r0R+wphpvzgnknNZjoCg/M6JwaPy5jBlyPHVam+eHfLMRtrVC40B36l4oKqeQ15xfZmA=;
 Received: from sea.source.kernel.org ([172.234.252.31])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vvdv9-0006OK-4R; Thu, 26 Feb 2026 16:09:00 +0000
+ id 1vvdvL-0006Ps-G8; Thu, 26 Feb 2026 16:09:15 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id BB63941737;
+ by sea.source.kernel.org (Postfix) with ESMTP id 2AE95423BD;
+ Thu, 26 Feb 2026 16:09:01 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id CFF4AC2BCB0;
  Thu, 26 Feb 2026 16:08:48 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4276CC19424;
- Thu, 26 Feb 2026 16:08:36 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1772122128;
- bh=yMxrwlo1L23M3jdcu34tHVP1Ixv5RcybzgMboES2iR8=;
+ s=k20201202; t=1772122141;
+ bh=ohZEfeuOi4xkg2naUuFketibeULdy5VGYUJnnORD2g0=;
  h=From:Date:Subject:References:In-Reply-To:To:Cc:From;
- b=geD1d/Cl0KUpz2YfLhxC/AoZZfxKJA4u9lIBS2HkxWA8Hx7hsjnAbYXEih/CGmRqD
- LVWTT0tSwjcIL+SAjJSCMAIJwI7Rh0cedz8CQdt+grwr3gDHQBBOp4kUUC5IZh2rCD
- YozSERTGvmg0Ab5/3zB0bT1WiK3o0F/7IHPNE4/nv63d9pnsI6ho8dTgnAWMRSdwz3
- 7QSjm7ClZ0YiZe6R735Pz+tuGDS9OlvIjxswkNZzz+I7FprQdo4MIoPL8+WYVpqM2Z
- Al/96Nx23hsJUR/l9PdZvKwm023EifedygUH2OxYAqr8jBPDsnBJjIWPsRDM9vRwnA
- 3HY2y42nlluBQ==
-Date: Thu, 26 Feb 2026 10:56:02 -0500
+ b=Idts03oyKH96SfAopisoKaTLc9SLusBKptp8k/MDagLyPeOPplHCfbxiFlufDFLUc
+ 5K4x+4vaAaBsfCpythF7s9D8EXByli3J3u+iy7xATN3OlRJcUBEcuJN4S7kWV8Q8G4
+ kOfdNs81HdEuVdL2gjffCyo3XQcO4jO4Dnwu4cYxFGG1cqCeDmWXs52Am2xXWjWgS4
+ OHldjywAYIMuMJotzrCl3t6dbCEWDiOdxjpl+MI3bIDcoO73xuazQ8k66fi6Admx/j
+ nWxyaEUpqRkV/SeIHZG9VWpdqkUZ5a5E8jjeNvQO8d/KJ1BO0kCzaj91GgaIrGYKnL
+ sd5mww8Joksmg==
+Date: Thu, 26 Feb 2026 10:56:03 -0500
 MIME-Version: 1.0
-Message-Id: <20260226-iino-u64-v1-60-ccceff366db9@kernel.org>
+Message-Id: <20260226-iino-u64-v1-61-ccceff366db9@kernel.org>
 References: <20260226-iino-u64-v1-0-ccceff366db9@kernel.org>
 In-Reply-To: <20260226-iino-u64-v1-0-ccceff366db9@kernel.org>
 To: Alexander Viro <viro@zeniv.linux.org.uk>, 
@@ -144,20 +144,20 @@ To: Alexander Viro <viro@zeniv.linux.org.uk>,
  James Clark <james.clark@linaro.org>, "Darrick J. Wong" <djwong@kernel.org>, 
  Martin Schiller <ms@dev.tdt.de>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=3384; i=jlayton@kernel.org;
- h=from:subject:message-id; bh=yMxrwlo1L23M3jdcu34tHVP1Ixv5RcybzgMboES2iR8=;
- b=owEBbQKS/ZANAwAKAQAOaEEZVoIVAcsmYgBpoG0TNF9E4LLtLcsmECJBuNkdznTFUOqAaHS51
- /JvsKaS9z+JAjMEAAEKAB0WIQRLwNeyRHGyoYTq9dMADmhBGVaCFQUCaaBtEwAKCRAADmhBGVaC
- FVEfEAC1TwV64E1qKBJGckhNYVvwlSnX3rZDmQIxDFcxGZxtVBrVBOh2xoX2257tybZOBJSqjCY
- /Jte1PxTGc4kxiGRavFnxhO0wlYVPsTLoPG94BoDKhz1miBESmIct0tKqcpeXaw2MHdWCplxDch
- X1cRMKR9hwR4/ixDuEsCW1iKfbQNuXMWZBr3BrVhNzZK1xNPDr7dxd9AmAPY1LrHouzZQ1ggbqQ
- rWD41Lvbt3AavTNMr2XWEkgwFo0b8KJFx/9kxmZER1NumwIwrPm0KnWdFiT1ZSdWDFCXY3/sgqu
- Yjw7fVD1U93qqOOQ09+rlcBcw3yDs/8NMx/lcKaZ8hm5z//43tn1RSsUAN4Ya7t7Y9oB394tHbV
- oZdHQoaKvs0HWGmKOSpvuWdtQuyGheZPeqJz808UIJLyoznw/bt28KM+4Lzf1c+nh+5Y98vRab+
- zi7dLUSdsiLpZ4IQqrlDNeeXLj7jGLq0XlBl5h9wpsD/98SsO7OTNibIvHqI24iBQ75a3kAjcvs
- CjOAywQF2a235aopSFuUxa98gkkLPR9m3KrCaCyx2k9QVxmzJAQbpLeHCHmgVKXJvcSgjYeIJEl
- bncoKnZPdp5XWo+5rqsQv3t8nmBbMQnY1qRoz1JUtZeIcY8c4mGkjZO1gWpQ3Fdr3BEinAdwtmG
- zqw5ZXLeAS2FUbg==
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2734; i=jlayton@kernel.org;
+ h=from:subject:message-id; bh=ohZEfeuOi4xkg2naUuFketibeULdy5VGYUJnnORD2g0=;
+ b=owEBbQKS/ZANAwAKAQAOaEEZVoIVAcsmYgBpoG0TArPB/A14lA7MwkzhIW1OToQ0CsW6q2kMJ
+ NMIT4N0RQ2JAjMEAAEKAB0WIQRLwNeyRHGyoYTq9dMADmhBGVaCFQUCaaBtEwAKCRAADmhBGVaC
+ Fd2vEAC7kuwrOi18JaQDOOAKwnH+i9pcIGDqiGslLsrUPbu1STWmcsQX2/GZrZEiyYKHKP0S6Wl
+ zcMnbPl3utwH6hWUgGtAY+gzzjhdicih0FDyp40jJOzpKVKjISFyGXmUR+d+WyX5NpbL6x7qZu9
+ 1Miz3ZXPbvTnSNhE8UDHtPJWb2LmH5aKdBmNvDuy1kUOZgpWBZN0V+Ugpt5CfHOpb07X6niHBko
+ zYIXIl6b8SQvksIwttBHLHM7QD8ow6T8ami6Pv1KXGhOOsW5PIUcgKu7c6qD1Ir8/ZfUUAlgFgV
+ C9+vZOR5mC4QnKJBd++VbAJ3ULe7TCMOJv3o9H2kRNMQGl5ztzX6aB9BGpF+YXEKrIeFwlVdTJs
+ Wd6qjLkpJj32hltK0IEZaYfHtDb2wBvKqYxVW6nrow+NnCFN/ks1A7JF6fvNPLkiVzv6bsthwaT
+ hT6eCv8yxReYIOkkcqbBpyYIyRStZuKDMahsoKkn/NLlvFbCqB06XLmdAHID33m0jXIuroMxuC5
+ el7Oug4tahBPWWr4msK1xsxlFlcvwmzmYJvLsGrgik6EThKzRuz1zmh3kfJ5AOnN+pKoArTRBQK
+ SunbKJEttAFl0PfaA332vCGW9ETR82ytCvG59Wew+5CiziepSNpMW6ZDKu0oYg5nww31TsjGKV6
+ lhC0Z4ASG6kR0mg==
 X-Developer-Key: i=jlayton@kernel.org; a=openpgp;
  fpr=4BC0D7B24471B2A184EAF5D3000E684119568215
 X-Spam-Score: -0.2 (/)
@@ -167,12 +167,13 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Update format strings from %ld to %lld and 0L literals to
- 0LL in x25, netrom, and rose proc output, now that i_ino is u64 instead of
- unsigned long. Signed-off-by: Jeff Layton <jlayton@kernel.org> ---
- net/netrom/af_netrom.c
- | 4 ++-- net/rose/af_rose.c | 4 ++-- net/x25/x25_proc.c | 4 ++-- 3 files
- changed, 6 insertions(+), 6 deletions(-) 
+ Content preview: Update format strings from %lu/%lx to %llu/%llx and 0UL
+ literal
+ to 0ULL in pipe, dcache, fserror, and eventpoll, now that i_ino is u64 instead
+ of unsigned long. Signed-off-by: Jeff Layton <jlayton@kernel.org> ---
+ fs/dcache.c
+ | 4 ++-- fs/eventpoll.c | 2 +- fs/fserror.c | 2 +- fs/pipe.c | 2 +- 4 files
+ changed, 5 insertions(+), 5 deletions(-) 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -184,9 +185,9 @@ X-Spam-Report: Spam detection software,
  envelope-from domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1vvdv9-0006OK-4R
-Subject: [f2fs-dev] [PATCH 60/61] net: update legacy protocol format strings
- for u64 i_ino
+X-Headers-End: 1vvdvL-0006Ps-G8
+Subject: [f2fs-dev] [PATCH 61/61] vfs: update core format strings for u64
+ i_ino
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -249,93 +250,85 @@ X-Spamd-Result: default: False [-7.11 / 15.00];
 	FROM_NEQ_ENVFROM(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
 	FROM_HAS_DN(0.00)[];
 	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
+	NEURAL_HAM(-0.00)[-0.999];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	HAS_REPLYTO(0.00)[jlayton@kernel.org];
 	TAGGED_RCPT(0.00)[linux-f2fs-devel];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.sourceforge.net:rdns,lists.sourceforge.net:helo,lists.sourceforge.net:dkim]
-X-Rspamd-Queue-Id: 8B6B21A9AF1
+X-Rspamd-Queue-Id: E04BD1A9B1E
 X-Rspamd-Action: no action
 
-Update format strings from %ld to %lld and 0L literals to 0LL in
-x25, netrom, and rose proc output, now that i_ino is u64 instead
-of unsigned long.
+Update format strings from %lu/%lx to %llu/%llx and 0UL literal to
+0ULL in pipe, dcache, fserror, and eventpoll, now that i_ino is u64
+instead of unsigned long.
 
 Signed-off-by: Jeff Layton <jlayton@kernel.org>
 ---
- net/netrom/af_netrom.c | 4 ++--
- net/rose/af_rose.c     | 4 ++--
- net/x25/x25_proc.c     | 4 ++--
- 3 files changed, 6 insertions(+), 6 deletions(-)
+ fs/dcache.c    | 4 ++--
+ fs/eventpoll.c | 2 +-
+ fs/fserror.c   | 2 +-
+ fs/pipe.c      | 2 +-
+ 4 files changed, 5 insertions(+), 5 deletions(-)
 
-diff --git a/net/netrom/af_netrom.c b/net/netrom/af_netrom.c
-index b816c56124ab8b7e59689e612d36007bb11aacaa..c9f12ea75f2f8f941d9bc2f3167b91608448819d 100644
---- a/net/netrom/af_netrom.c
-+++ b/net/netrom/af_netrom.c
-@@ -1305,7 +1305,7 @@ static int nr_info_show(struct seq_file *seq, void *v)
- 		seq_printf(seq, "%-9s ", ax2asc(buf, &nr->user_addr));
- 		seq_printf(seq, "%-9s ", ax2asc(buf, &nr->dest_addr));
- 		seq_printf(seq,
--"%-9s %-3s  %02X/%02X %02X/%02X %2d %3d %3d %3d %3lu/%03lu %2lu/%02lu %3lu/%03lu %3lu/%03lu %2d/%02d %3d %5d %5d %ld\n",
-+"%-9s %-3s  %02X/%02X %02X/%02X %2d %3d %3d %3d %3lu/%03lu %2lu/%02lu %3lu/%03lu %3lu/%03lu %2d/%02d %3d %5d %5d %lld\n",
- 			ax2asc(buf, &nr->source_addr),
- 			devname,
- 			nr->my_index,
-@@ -1329,7 +1329,7 @@ static int nr_info_show(struct seq_file *seq, void *v)
- 			nr->window,
- 			sk_wmem_alloc_get(s),
- 			sk_rmem_alloc_get(s),
--			s->sk_socket ? SOCK_INODE(s->sk_socket)->i_ino : 0L);
-+			s->sk_socket ? SOCK_INODE(s->sk_socket)->i_ino : 0LL);
+diff --git a/fs/dcache.c b/fs/dcache.c
+index 24f4f3acaa8cffd6f98124eec38c1a92d6c9fd8e..9e8425ecd88955c72027d21591b1d12c87e7e8aa 100644
+--- a/fs/dcache.c
++++ b/fs/dcache.c
+@@ -1637,11 +1637,11 @@ static enum d_walk_ret umount_check(void *_data, struct dentry *dentry)
+ 	if (dentry == _data && dentry->d_lockref.count == 1)
+ 		return D_WALK_CONTINUE;
  
- 		bh_unlock_sock(s);
- 	}
-diff --git a/net/rose/af_rose.c b/net/rose/af_rose.c
-index 841d62481048def8d800779efb6e4ea8cbe419fe..bbecad799c60cd74c62f2b2a01909f03547a0d4f 100644
---- a/net/rose/af_rose.c
-+++ b/net/rose/af_rose.c
-@@ -1479,7 +1479,7 @@ static int rose_info_show(struct seq_file *seq, void *v)
- 			callsign = ax2asc(buf, &rose->source_call);
+-	WARN(1, "BUG: Dentry %p{i=%lx,n=%pd} "
++	WARN(1, "BUG: Dentry %p{i=%llx,n=%pd} "
+ 			" still in use (%d) [unmount of %s %s]\n",
+ 		       dentry,
+ 		       dentry->d_inode ?
+-		       dentry->d_inode->i_ino : 0UL,
++		       dentry->d_inode->i_ino : 0ULL,
+ 		       dentry,
+ 		       dentry->d_lockref.count,
+ 		       dentry->d_sb->s_type->name,
+diff --git a/fs/eventpoll.c b/fs/eventpoll.c
+index 5714e900567c499739bb205f43bb6bf73f7ebe54..4ccd4d2e31adf571f939d2e777123e40302e565f 100644
+--- a/fs/eventpoll.c
++++ b/fs/eventpoll.c
+@@ -1080,7 +1080,7 @@ static void ep_show_fdinfo(struct seq_file *m, struct file *f)
+ 		struct inode *inode = file_inode(epi->ffd.file);
  
- 		seq_printf(seq,
--			   "%-10s %-9s %-5s %3.3X %05d  %d  %d  %d  %d %3lu %3lu %3lu %3lu %3lu %3lu/%03lu %5d %5d %ld\n",
-+			   "%-10s %-9s %-5s %3.3X %05d  %d  %d  %d  %d %3lu %3lu %3lu %3lu %3lu %3lu/%03lu %5d %5d %lld\n",
- 			rose2asc(rsbuf, &rose->source_addr),
- 			callsign,
- 			devname,
-@@ -1498,7 +1498,7 @@ static int rose_info_show(struct seq_file *seq, void *v)
- 			rose->idle / (60 * HZ),
- 			sk_wmem_alloc_get(s),
- 			sk_rmem_alloc_get(s),
--			s->sk_socket ? SOCK_INODE(s->sk_socket)->i_ino : 0L);
-+			s->sk_socket ? SOCK_INODE(s->sk_socket)->i_ino : 0LL);
- 	}
- 
- 	return 0;
-diff --git a/net/x25/x25_proc.c b/net/x25/x25_proc.c
-index 0412814a2295bba5e26f4c95697ef7b7ba5fb34f..697fdfef297826e2dc267b89e34fd6a54f862a3f 100644
---- a/net/x25/x25_proc.c
-+++ b/net/x25/x25_proc.c
-@@ -96,7 +96,7 @@ static int x25_seq_socket_show(struct seq_file *seq, void *v)
- 		devname = x25->neighbour->dev->name;
- 
- 	seq_printf(seq, "%-10s %-10s %-5s %3.3X  %d  %d  %d  %d %3lu %3lu "
--			"%3lu %3lu %3lu %5d %5d %ld\n",
-+			"%3lu %3lu %3lu %5d %5d %lld\n",
- 		   !x25->dest_addr.x25_addr[0] ? "*" : x25->dest_addr.x25_addr,
- 		   !x25->source_addr.x25_addr[0] ? "*" : x25->source_addr.x25_addr,
- 		   devname, x25->lci & 0x0FFF, x25->state, x25->vs, x25->vr,
-@@ -104,7 +104,7 @@ static int x25_seq_socket_show(struct seq_file *seq, void *v)
- 		   x25->t21 / HZ, x25->t22 / HZ, x25->t23 / HZ,
- 		   sk_wmem_alloc_get(s),
- 		   sk_rmem_alloc_get(s),
--		   s->sk_socket ? SOCK_INODE(s->sk_socket)->i_ino : 0L);
-+		   s->sk_socket ? SOCK_INODE(s->sk_socket)->i_ino : 0LL);
- out:
- 	return 0;
+ 		seq_printf(m, "tfd: %8d events: %8x data: %16llx "
+-			   " pos:%lli ino:%lx sdev:%x\n",
++			   " pos:%lli ino:%llx sdev:%x\n",
+ 			   epi->ffd.fd, epi->event.events,
+ 			   (long long)epi->event.data,
+ 			   (long long)epi->ffd.file->f_pos,
+diff --git a/fs/fserror.c b/fs/fserror.c
+index 06ca86adab9b769dfb72ec58b9e51627abee5152..1e4d11fd9562fd158a23b64ca60e9b7e01719cb8 100644
+--- a/fs/fserror.c
++++ b/fs/fserror.c
+@@ -176,7 +176,7 @@ void fserror_report(struct super_block *sb, struct inode *inode,
+ lost:
+ 	if (inode)
+ 		pr_err_ratelimited(
+- "%s: lost file I/O error report for ino %lu type %u pos 0x%llx len 0x%llx error %d",
++ "%s: lost file I/O error report for ino %llu type %u pos 0x%llx len 0x%llx error %d",
+ 		       sb->s_id, inode->i_ino, type, pos, len, error);
+ 	else
+ 		pr_err_ratelimited(
+diff --git a/fs/pipe.c b/fs/pipe.c
+index b44a756c0b4165edc2801b2290bf35480245d7a6..9841648c9cf3e8e569cf6ba5c792624fe92396f5 100644
+--- a/fs/pipe.c
++++ b/fs/pipe.c
+@@ -873,7 +873,7 @@ static struct vfsmount *pipe_mnt __ro_after_init;
+  */
+ static char *pipefs_dname(struct dentry *dentry, char *buffer, int buflen)
+ {
+-	return dynamic_dname(buffer, buflen, "pipe:[%lu]",
++	return dynamic_dname(buffer, buflen, "pipe:[%llu]",
+ 				d_inode(dentry)->i_ino);
  }
+ 
 
 -- 
 2.53.0
