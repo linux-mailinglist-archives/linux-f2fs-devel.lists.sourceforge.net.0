@@ -2,129 +2,148 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id GID1Eni8oGnrmAQAu9opvQ
+	id iHADMeO3oGnClwQAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 26 Feb 2026 22:34:48 +0100
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 26 Feb 2026 22:15:15 +0100
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6C2DF1AFDE4
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 26 Feb 2026 22:34:47 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id E606C1AF937
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 26 Feb 2026 22:15:14 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
-	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
-	Subject:To:Message-ID:Date:From:In-Reply-To:References:MIME-Version:Sender:
-	Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
-	:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=4Z4dH3U0+0VgE7Nk87AgIZ2XA3htaiqUh1v8Fj91Hqc=; b=hp/o7HOqhI0LZT60KdbiCmOch9
-	tZhtT2Pr1ajXW5AcHaygZ085bY0TKSNidYShQtXsrKb+OUP7JczBvvXC/GkUc8V4l6ud7vNvcQmTm
-	85Vl3pSdHNZloebb60ESnYsPB8HnPFJHgyoGWy3hyAZZj+VoaeZTgQZCQg0zm2YPTTso=;
+	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
+	List-Unsubscribe:List-Id:Subject:MIME-Version:References:In-Reply-To:
+	Message-ID:Date:To:Sender:Content-ID:Content-Description:Resent-Date:
+	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
+	bh=pkdec/tyyFsTAYCP2ArIHRJ4oXxaewj1wkAzlKPb2Qg=; b=ebSal4RNSOtw4zNAChXj9Q9PQ9
+	ng0TEkYqIYU1+hHwqaR1gIyget1pMKMzAdX7QJat5C3yiN4S9aGv7jm93a7NQ6WRosKIb0CIM/XMD
+	RFIINSB2QvVbOgBNMgliRaRxUS8vCwByas0FKrXy1Y+Q+6RjSK2DIKxy8JVM9XWshL0w=;
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vvj0N-0001m8-D3;
-	Thu, 26 Feb 2026 21:34:43 +0000
+	id 1vvihP-0001MD-Az;
+	Thu, 26 Feb 2026 21:15:07 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <paul@paul-moore.com>) id 1vvj0E-0001lu-5p
+ (envelope-from <ziy@nvidia.com>) id 1vvihN-0001M3-6x
  for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 26 Feb 2026 21:34:34 +0000
+ Thu, 26 Feb 2026 21:15:05 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:Cc:To:
- Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version:Sender:
- Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
- :Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=MIME-Version:Content-Type:References:In-Reply-To:
+ Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=zmNhsrxkJsNmzJoSll+GD0SvmHq0rQdZiw5NaBd3y6o=; b=PgWsQeILZjHmXVIcyIGa37cfPO
- ShoyS67dRjSwH4yor3k2i6NJdwWPm/MJ6r9f2S/TOh9pOFI0OHNKifKlzeZs6+2gz43TG2Zb3wg7I
- DGkZ5e+kiOevifh/fVmmdfENzCYnkTc+wicJapgsejjQz01cuBMaXF5l/nnyt62NlaEs=;
+ bh=b3Gmtf7Td04ChZy3/FFngKnJvaZXnMZrfEPVFmQZ2gk=; b=D+pcXe0XMt8nvAJ/fy18anGvgn
+ gb0/3x85mhtgXjWTWN2gXW+DVdtCL4Ir6TwbXo2VTxaRxDpq7Mas0ISO5SUCuMYO9YpxQ3y4WLeLj
+ p1GBz4DIFupvRBeG0vT5ZL1XXW3NE0bxFRp9z+S4ejOGL/ynI0hCukK8dFbjkFCFgxiU=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:Cc:To:Subject:Message-ID:Date:From
- :In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-ID:
+ h=MIME-Version:Content-Type:References:In-Reply-To:Message-ID:Date:Subject:
+ Cc:To:From:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=zmNhsrxkJsNmzJoSll+GD0SvmHq0rQdZiw5NaBd3y6o=; b=Syuu+fjr9Mf8E//jtkooXjBzce
- JbLsvqwLn+eRMMjomowTLPVJprPefqvR1myhfxiqwoT9EQ2FpXRj4vKPTyR66+QKNEAPqXV51jftf
- KyIzp2yQ7ph8F4FKxFEcotn1E1+kiTdFtB4NuSWWdqkqxmmaFCtTj6QO7BQinUTJsuUY=;
-Received: from mail-qk1-f181.google.com ([209.85.222.181])
+ bh=b3Gmtf7Td04ChZy3/FFngKnJvaZXnMZrfEPVFmQZ2gk=; b=TyRQF0hqoWuFQ2mAWx6/FyqrDs
+ CchI8+OGrAaEongGlhWGpczkJu1rR14ZBWCX43QgS/ZF7qbH9vLGH/tTBrMM4LxF6Tb0H8peXyFqV
+ wDorikuqfKCH3f+lKn8oJnt5bm8U3KdxdWXfD9xMGxcqH/Ryqnnux0CMQlGmdhglU8hQ=;
+Received: from mail-northcentralusazon11013063.outbound.protection.outlook.com
+ ([40.107.201.63] helo=CH4PR04CU002.outbound.protection.outlook.com)
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1vvj0D-0006R2-PE for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 26 Feb 2026 21:34:34 +0000
-Received: by mail-qk1-f181.google.com with SMTP id
- af79cd13be357-8cb4136d865so160114485a.1
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Thu, 26 Feb 2026 13:34:33 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1772141668; cv=none;
- d=google.com; s=arc-20240605;
- b=EEqAU/tXxgjszrC9vIX4qWl2JzCZC2OyDDeHFdV74/wrXfDavfTytAByz3eZ9Q5waL
- OeABaeKzXC8bcKI0u6I8G7N1UQdfLz3qouNMi0Y2O6Oj0HAiMfzYKqFC0i/IHznlzRS1
- 7T0HQoimOhXDn2P46YJDOHlFzCTIg85v6fon0RYnbQR8GMB6CHkCyP8N87h6UknPNKPe
- 3+s8LZ99OlylUP91Kqvnd3HsfHmAXcXPfwoxCeMJNxYpoNxLIbFWES+XOIHuPY7CTQuc
- XONbxIC7A+21N/aloOxBMKelh/zIZeA2W+pi/qVxl8Lm/gn9UrOkpzui67sfXjvAcqoq
- qZlg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
- s=arc-20240605; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:dkim-signature;
- bh=zmNhsrxkJsNmzJoSll+GD0SvmHq0rQdZiw5NaBd3y6o=;
- fh=AQz7umQE4h09KfNWl0WmECbVjCbIcvZv2gTOtScJ6bE=;
- b=OMxm8eD74zxgx28HqOPmMmuDLOzNyMozf8KBjVPZDi+h14isBAXBXFdtDCizO5HwW6
- nXoX5c/JsXVatqD0CBPn0pb7r0FEVNtrbgZnhchtP/OUcvFP6eQ1WpfKbeDgPHQR9Dlr
- DkUC72APSd81MfC17RGP8q09zZdKsCbQJcUkOMvyYaOjnmUtWS/5AiJQXDQ/z2pkREX+
- eP6Qev0Z/MdKqhD80OExJkvizjov1G6dIM64VdqDEEV8lJ2uM6ZxpMvdnYdIc2WtCPRg
- 20EjrKfa87GF2hsonsdf7UuhwwKJ4LA8oxogc9Nnw3IYO6QrPyV2nQjttAykgiUvIe3v
- WW8Q==; darn=lists.sourceforge.net
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=paul-moore.com; s=google; t=1772141668; x=1772746468;
- darn=lists.sourceforge.net; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=zmNhsrxkJsNmzJoSll+GD0SvmHq0rQdZiw5NaBd3y6o=;
- b=DVmz8Zpww5JtIp3Fxt7yyGYGNDTXfEju0H8VXerRblxCsziBNWg1atZH4g/ApPCxkb
- y3D95gyJe+z0/MzzQRWUjZr/asTYUm8mbHS7Z7yiEPqFkh3gstpipz0thyV8A0lSTqqJ
- ckEqeBPWytSUGJh0+SI88366Y97/Tpy/XPxKnMvSUHBYQ9Klqgdo9XDEPvKQOw57cVWJ
- d1ClCz7I6vxV8R37D/8G4Quhi025sSh/kg8nv5Sf6UWXwGktMJw27mZzna8mW3BOUxw/
- zNgZhm/unc3XSZ2KnptJHJwF80lAW/XL68m5qx2T+UqbbHw0kzuR1dLyOtc56kbCAyjZ
- 3sOw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1772141668; x=1772746468;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-gg:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=zmNhsrxkJsNmzJoSll+GD0SvmHq0rQdZiw5NaBd3y6o=;
- b=peqGvTDJtQoGoSiIqLP7XxxRKDtTc9TXEskOq4dfYUgzJwONtaADDDKaFoNNk6C6/u
- uoudfHvfEIM6XVprpnRCJYHPu2cft2XgStcbmDtz+eZxm9/1a+Mz7gOy9RPMkQBKI8BE
- ZPkG3R559u9VGaisGjUIjIiDkhT0sXNLuvAzZY/AeSLlAisPOwMyVKfBVAaJURAF/I5J
- 0E0hctq8nqewdIwlUJX+akwLcA6vGoMmrcxGZCkJ7YbFxDBak6A0sxC9bth6+wtIoj6m
- vjOpQe4gIxIZ7/WqhtMM1Y3kUz5PWqHxWSFU5aRjeM1yowlwwkbh5T0iGWxNvEarRJ1K
- +B3A==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUOj60Qju0OAji/o8+SuSkRKD3vI9jqHEZBAmiyHRgpCfUT80xpO3+U9x0jWF3YIfc5eB9L3wwWRkwiMbE/EtDt@lists.sourceforge.net
-X-Gm-Message-State: AOJu0YzuWPF/kbham2zFk7vAw1reruvryDJY4vhMea29CpdJOCgTwyvj
- 0ldALIzcI4srWrX7QMmNrz2U7oUKJZMt2r7s0d8HSUELGgnztLiGAJ/761JAIFTvkkfnlMVM+wK
- 4p0BdWBS5YFrJSCf1yUqbH5Gw+hFsnqF/LJDpUGotGLt+gSanVJ2OAQ==
-X-Gm-Gg: ATEYQzwxK8jVJ4jV5xIQZyAnhclIie00FM8rfEt4K4LdCZ15EtT5xR0qcxjQ/7vV64j
- 1KBIJAm860CDHnBG9gmbmlir49cG1b4xipCuMLWigsshh1pLjU9PD7yqfZCTLw/e5Aezynlr+g4
- oblv1JetswZHcXGoOgdheHReZshFjhO839AW5UzJECV2nNBmtx6GqKT/1FbScw5FtWM2ufAwCP6
- hEccFkbBphrFSWoO7c52xNKKdvIikj/xzwQCQRBmObVdM76/rNyOybFadTR0jaLEW/mWZcXSyKS
- KkwDde4=
-X-Received: by 2002:a17:90b:574f:b0:359:877:370f with SMTP id
- 98e67ed59e1d1-35965ccf029mr498632a91.17.1772140313953; Thu, 26 Feb 2026
- 13:11:53 -0800 (PST)
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
+ id 1vvihM-0005lV-Q0 for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 26 Feb 2026 21:15:05 +0000
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=SoXsuVhoDKcaHHtXDgyTDWBYBR7mNt0n3HDbYU7XBvmt/9rOaEEVIT7APVcO100x4LOb0Esh53/n/Gkng8uccgj4BAwEX5uYCqeeNa8D3csRrFoHbP1niDyJbCRPV1OSkAtBW2qFxemgHTrEOyecGQQKyGzK2Q87ezepb2kZvZ5MwO64Zz4QNGmoi8g+JkuA50oHRLtyTShoY19jF1wafRqzcK1cDQZzEMMxXB9L0q9KuOgr1bAJ7mgx0qY1wEjkvFyduBgT9udPvB2bHvBkm6yNaLUP+OXPyBPPGrJIj+RmA4SMZWzaWShj6nLSsiG0YCQRoLRXnYr6ozqoEa5d2w==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=b3Gmtf7Td04ChZy3/FFngKnJvaZXnMZrfEPVFmQZ2gk=;
+ b=S5N2WzsAZQlJVGxpXShTS64ePwieLoTzWSApN7C43/Ewl4e3aXIhOwlqeAzv1v653jk6TTynEQaNEfqXG6mD0NwqVENs9m480M1i6Q4B7yO/CvYv++Rc6II6SRLSuyDGH/QvBHPPDPmY0awf85vYpOPOl0XKVgT86uhFbM0JLhNPW6SP7rF2wyxRUAzR7J6a7RbCS1blfh53Il02t4KwZj4ttbvPcRRnUWG5VIjKK+e+Y7ghGK7iF9au81hGmimIqxHlVsYbHbzXvZc6+ZXorPc+Ne28xAcUz2OeTmkzOll4VNLRznyWRba4IHonGZL3axhoKjkBCe8KJq70q9+n9A==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
+ dkim=pass header.d=nvidia.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=b3Gmtf7Td04ChZy3/FFngKnJvaZXnMZrfEPVFmQZ2gk=;
+ b=bVEhwNNIrCwp37J3ZqiEAKarc6Ow5M6ockdubJ6FrvucBettQwNr24hWejxpmabM5hFE/inEDw4mSvmEbDIsZWBO2eMrAPu0JU1SErcK0SE8Z7Y9+EW5Hp/ut97utzG8WiECcwrw6XoZ1sVgGJGj4Qq6vxbrdEInkyB5wq0Chq50TE7rFGXHtUMdf3prNgPGJleWDEFMzQme8+1fYOehBvL4LvOlSQgtR2DOSxgHMSGz0aCyONIfCcP0kf2Zz4B6ain4e9HNK8qMdCPuXTlikTNaS2MgiQHlupHSpN9wZPAuB6e4x6iLQKPpiyqZsAZl7CfWdcJppDUTte/sd35hBA==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=nvidia.com;
+Received: from DS7PR12MB9473.namprd12.prod.outlook.com (2603:10b6:8:252::5) by
+ MN2PR12MB4454.namprd12.prod.outlook.com (2603:10b6:208:26c::18) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9611.15; Thu, 26 Feb
+ 2026 21:14:53 +0000
+Received: from DS7PR12MB9473.namprd12.prod.outlook.com
+ ([fe80::f01d:73d2:2dda:c7b2]) by DS7PR12MB9473.namprd12.prod.outlook.com
+ ([fe80::f01d:73d2:2dda:c7b2%4]) with mapi id 15.20.9654.014; Thu, 26 Feb 2026
+ 21:14:53 +0000
+To: Tal Zussman <tz2294@columbia.edu>
+Date: Thu, 26 Feb 2026 16:14:39 -0500
+X-Mailer: MailMate (2.0r6290)
+Message-ID: <75A87D9B-5A04-4679-AF82-56332A786A63@nvidia.com>
+In-Reply-To: <20260225-pagevec_cleanup-v2-1-716868cc2d11@columbia.edu>
+References: <20260225-pagevec_cleanup-v2-0-716868cc2d11@columbia.edu>
+ <20260225-pagevec_cleanup-v2-1-716868cc2d11@columbia.edu>
+X-ClientProxiedBy: BYAPR05CA0087.namprd05.prod.outlook.com
+ (2603:10b6:a03:e0::28) To DS7PR12MB9473.namprd12.prod.outlook.com
+ (2603:10b6:8:252::5)
 MIME-Version: 1.0
-References: <20260226-iino-u64-v1-0-ccceff366db9@kernel.org>
- <20260226-iino-u64-v1-51-ccceff366db9@kernel.org>
-In-Reply-To: <20260226-iino-u64-v1-51-ccceff366db9@kernel.org>
-From: Paul Moore <paul@paul-moore.com>
-Date: Thu, 26 Feb 2026 16:11:41 -0500
-X-Gm-Features: AaiRm51CHDvKlRV2Z04ZUK5c4lU9AiJhpRFTzD6a70HHA0FgEKDqsojtRqG1Wpw
-Message-ID: <CAHC9VhTPutzjNfYoRJigC2AQS4wz1A3vTEYn2koeR0kKetYk0w@mail.gmail.com>
-To: Jeff Layton <jlayton@kernel.org>
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DS7PR12MB9473:EE_|MN2PR12MB4454:EE_
+X-MS-Office365-Filtering-Correlation-Id: 778fb806-5f7a-4743-6000-08de757c157f
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|1800799024|366016|376014|7416014|7053199007; 
+X-Microsoft-Antispam-Message-Info: oIrjYQCjzHwV66EA/F/RvgiiCGK2SjRSsvoYLeWWsoMYaYN1K6RfFBio3SzGatwPMqyoaF7raYf1lqr6IIN/lp1/0B32swRRcPHJo0PW5aIuWZyzl085KeAu8PyU9RlQygn2Xz3ou1KM/q6M8rlnyjxH0MKVmAeBcEym4ZswzDb1jsTShcKiQdpNRWVI3ge/x6qODNbLOlZHkLY9v8uwcnNcgudpcrr2tOe5gqeyxan+TN8utD86RUCdsLB4YHVrpHzF2uW0SUPEaDUUjafqr48Co1wWmI6Lvzyxht4R7kxnUmdoiVbztgO/UtTI9kWr+OjfQ4Fh8rnExTcNSaCl+w5x2wdWF4w+e3BYfnBfPkbSREbLPlPGa6FOqNJNgltjap0Rr4YvZXHDm9xcGGWN/hP2nfNS39Q6C7LnC1vP4dc/1BBlb+OJY+12XgnF9VGWxJZPpL/VcLqOkCEDBaePzMOHenMMhfOxdrq4ZUKf1JocHY1Y3Dyv5P+y3VMuHd5ctracwU9elS4R5y/HyL4joniVK6eAoDtniJZQ2EQ3SkU0tYMGEdvNsNO4Tx5ofGiJYRhq0Utt/5/ls5T8tqxHeSZVufptD7nU4HpAxNOyE/Em/c2SuwnKzE0nZ74qbUMAhmuQ72t/nZh/6vJqKVqDNzeuwiFXBzVJLpty6wZHK0XZObdU00/c1TYd8v3OUdk6gTno69YSnOWzY3I2otuvY8fOk3TvVz2FV0tT4z3QtSE=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:DS7PR12MB9473.namprd12.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(366016)(376014)(7416014)(7053199007); DIR:OUT;
+ SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?+Ks3JtFwKq97fATos9G60W0NtQYFj7BfxB+vcrdvP/c9OM2nh0Z+sVWSA/Vp?=
+ =?us-ascii?Q?03eVycCnXnDZ4oreSgHW2zI6PbJR4yEue/hULEy/og9dTWseTDXlWdxmQRFZ?=
+ =?us-ascii?Q?AWTJHzzqGdJ9nQQqUbWdkVmTeqqKE+ZYun7ren9+6UU5Fk+/e04J2ATx1gPA?=
+ =?us-ascii?Q?2pg6Y4cty3PQ9YugMH77ODTRfJE7nas+r776Bun04Z29AAvAnMVdwYFnAP9F?=
+ =?us-ascii?Q?H1K+xu7SCsRvLZZ+++szV+vmcaAD9yf2lmzLn7soVtbjt7vHYSHoW+rCbXa4?=
+ =?us-ascii?Q?uHJv/jEuasPJ7dRLFsTu69sb6eisuijQxnsEBvpR/1LGnN4UMPX96fgwBT28?=
+ =?us-ascii?Q?uSZ4Mzzuz2v2QQFLtSaL+F4b3Pn49IYStFUPQKey8lNGAE3GmNhLxRKhEtTP?=
+ =?us-ascii?Q?9JtlK9Nd7V3pdHe73ryzEM6A0o06bfgfDdGgePyLphlDCIKXBbqHl6uw6d88?=
+ =?us-ascii?Q?86+AfYx2MD0kkPoB7gGS4jt9fqHUAip4r0KGDFsdpm8e4sw+fvcr7SEwOvyS?=
+ =?us-ascii?Q?qHpCiCFuZ0mVGA03eG5J+UL30gBqe49eaBHOOgR4+8wEijJ/QCOFf7cRHwmE?=
+ =?us-ascii?Q?6zc/F5Uju2vPVtraRZK0RcH/IcK4dOO4+BYncRNQmkI0rfnh5yI+vwtTqm1s?=
+ =?us-ascii?Q?qyacSJXVlR5+p4/Ba39lZSFgJwhdJDkUzOEkow7R68H+V/dg5vV9fVifo1Ox?=
+ =?us-ascii?Q?0L/CZchRHg8ROnLTiAm+9hMqStIY9eewOJ7IRPKQmfvYAffVpjsCtHBXtTI3?=
+ =?us-ascii?Q?hk5WXwXUQZMhF4bPxavzskVvnRsNbD2YqSPSleXFj+viloMNloVEAfpFagCM?=
+ =?us-ascii?Q?8dpGQw5kU+EjokmBR0qgi0ahcL0ydbNFxpcg6qTPe9zmCoUADAIIocASoBjj?=
+ =?us-ascii?Q?1dlf90cNmzxanZ9LXK7aWNNCT4K3WREfdoNsMDcr+/gj116eZgqcF5yjpDFJ?=
+ =?us-ascii?Q?G2c35WaP1t2z4nbGJzmyerqHFMFHCv9jk8yVVyuZuZfiyM7JoBtZCvsNi1le?=
+ =?us-ascii?Q?aq3krk3HpVIOwO9OOMYASlCLGghJoxyrv3u4sOWrMjRFCmpqQXhSUvMOo0mI?=
+ =?us-ascii?Q?Mgg3HC80H9fSfdL6c4dPNZ1/bFXsfkyRnJJOauCKM1FrovmUilDPccCfNEK2?=
+ =?us-ascii?Q?wIiYqLrhAv5b+XW2yYnmcEfGn+q5EdSkK5fFFXDOOlRJEoo4rg3mXzuUviw5?=
+ =?us-ascii?Q?RqACNu5BFhOA9yMkQ/ESCw1JYPu6JZ2VZB8mB2xA03yuki8XSz97Qc7vF9MB?=
+ =?us-ascii?Q?Z7W6zQSyti9CzaNto+PAOuE5cyMUjF5ZgK4d6aY55qzVMxTEvlAdDntTPeX0?=
+ =?us-ascii?Q?0qXHIn06MCM0fBgfF3EkcJ/zMYDlq1IqzGu5QsKBZOT1wID6mrDyXNdbvVT4?=
+ =?us-ascii?Q?lIlnJYPZGw4tF4krqsq1Lq4wKD6kxH+MEXP4aqWsSzTG7/M/9PU4XJ9Z9VA5?=
+ =?us-ascii?Q?zmfXH0fi8fgmpSeKDCU5O1Ewjb4jxxwyCLyZZ3yuMV00IOz0aLspOhCJnT1X?=
+ =?us-ascii?Q?EbqM/6uQ3lvdI5rO63AjRFW95Ul8J58x1Fg2hCVZZI+NXYHAPVepUevSlUxH?=
+ =?us-ascii?Q?dsnTJ6CP68+UsNFKxi4+aDwV2rCSabNjHAhcKrvGqy6jhnSNzIM2+YqOefZi?=
+ =?us-ascii?Q?IbgdSjyGA7JlYQ4iOk5isyPOVP5MVP1X7x/G0TORFHhxb8eTBdG7tJMz4N94?=
+ =?us-ascii?Q?obs/99pZ6tsotOkm3Hx4ZgUrrM6JIOpInYV+s00t+mw2+9WKD3/s2DgYH6WF?=
+ =?us-ascii?Q?4BCtE5mHcg=3D=3D?=
+X-OriginatorOrg: Nvidia.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 778fb806-5f7a-4743-6000-08de757c157f
+X-MS-Exchange-CrossTenant-AuthSource: DS7PR12MB9473.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Feb 2026 21:14:53.1535 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: /CVAdwAlPYswiAFQdCqMXX+tLaqoZy5w/VFXl8Qw9Ruo3df9eUUvUFk8Hg/25zE3
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN2PR12MB4454
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
@@ -132,10 +151,10 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Thu, Feb 26,
- 2026 at 11:06 AM Jeff Layton <jlayton@kernel.org>
- wrote: > > Update %lu/%ld to %llu/%lld in security audit logging functions
- that > print inode->i_ino, since i_ino is now u64. > > File [...] 
+ Content preview:  On 25 Feb 2026, at 18:44, Tal Zussman wrote: > struct pagevec
+ was removed in commit 1e0877d58b1e ("mm: remove struct > pagevec"). Remove
+ remaining forward declarations and change > __folio_batch_release()'s
+ declaration to match its definition. > [...] 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -148,10 +167,11 @@ X-Spam-Report: Spam detection software,
  not necessarily valid
  0.0 ARC_VALID              Message has a valid ARC signature
  0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.222.181 listed in wl.mailspike.net]
-X-Headers-End: 1vvj0D-0006R2-PE
-Subject: Re: [f2fs-dev] [PATCH 51/61] security: update audit format strings
- for u64 i_ino
+ [40.107.201.63 listed in wl.mailspike.net]
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1vvihM-0005lV-Q0
+Subject: Re: [f2fs-dev] [PATCH v2 1/4] mm: Remove stray references to struct
+ pagevec
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -163,165 +183,132 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Latchesar Ionkov <lucho@ionkov.net>, nvdimm@lists.linux.dev,
- Paulo Alcantara <pc@manguebit.org>, "Darrick J. Wong" <djwong@kernel.org>,
- Anders Larsen <al@alarsen.net>, dri-devel@lists.freedesktop.org,
- linux-hams@vger.kernel.org, Sumit Semwal <sumit.semwal@linaro.org>,
- Mike Marshall <hubcap@omnibond.com>, linux-xfs@vger.kernel.org,
- Fan Wu <wufan@kernel.org>, ceph-devel@vger.kernel.org,
- James Morris <jmorris@namei.org>, Tyler Hicks <code@tyhicks.com>,
- Christoph Hellwig <hch@infradead.org>, devel@lists.orangefs.org,
- Shyam Prasad N <sprasad@microsoft.com>, Martin Schiller <ms@dev.tdt.de>,
- Jan Harkes <jaharkes@cs.cmu.edu>, Willem de Bruijn <willemb@google.com>,
- Arnaldo Carvalho de Melo <acme@kernel.org>, linux-fscrypt@vger.kernel.org,
- Alexander Viro <viro@zeniv.linux.org.uk>,
+From: Zi Yan via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Zi Yan <ziy@nvidia.com>
+Cc: nvdimm@lists.linux.dev, Paulo Alcantara <pc@manguebit.org>,
+ "Darrick J. Wong" <djwong@kernel.org>, dri-devel@lists.freedesktop.org,
+ ceph-devel@vger.kernel.org, linux-xfs@vger.kernel.org,
+ Lorenzo Stoakes <lorenzo.stoakes@oracle.com>,
+ Brendan Jackman <jackmanb@google.com>, Tvrtko Ursulin <tursulin@ursulin.net>,
+ Shyam Prasad N <sprasad@microsoft.com>, Chris Li <chrisl@kernel.org>,
+ John Hubbard <jhubbard@nvidia.com>, Alexander Viro <viro@zeniv.linux.org.uk>,
  Ronnie Sahlberg <ronniesahlberg@gmail.com>,
- John Paul Adrian Glaubitz <glaubitz@physik.fu-berlin.de>,
- David Hildenbrand <david@kernel.org>, Eric Van Hensbergen <ericvh@kernel.org>,
- Christian Brauner <brauner@kernel.org>,
- Dmitry Kasatkin <dmitry.kasatkin@gmail.com>,
- Stephen Smalley <stephen.smalley.work@gmail.com>, linux-kernel@vger.kernel.org,
- linux-perf-users@vger.kernel.org, Chuck Lever <chuck.lever@oracle.com>,
- Masami Hiramatsu <mhiramat@kernel.org>, Jiri Olsa <jolsa@kernel.org>,
- Jan Kara <jack@suse.com>, Alex Deucher <alexander.deucher@amd.com>,
- linux-media@vger.kernel.org, Trond Myklebust <trondmy@kernel.org>,
- Mark Rutland <mark.rutland@arm.com>, Dave Kleikamp <shaggy@kernel.org>,
- Mimi Zohar <zohar@linux.ibm.com>, Oleg Nesterov <oleg@redhat.com>,
- Eric Dumazet <edumazet@google.com>, Simona Vetter <simona@ffwll.ch>,
- linux-cifs@vger.kernel.org, Kuniyuki Iwashima <kuniyu@google.com>,
- linux-nilfs@vger.kernel.org, codalist@coda.cs.cmu.edu,
- linux-trace-kernel@vger.kernel.org, Olga Kornievskaia <okorniev@redhat.com>,
- Yangtao Li <frank.li@vivo.com>, selinux@vger.kernel.org,
- linaro-mm-sig@lists.linaro.org, Casey Schaufler <casey@schaufler-ca.com>,
- netfs@lists.linux.dev, Jaegeuk Kim <jaegeuk@kernel.org>,
- fsverity@lists.linux.dev, "Theodore Y. Ts'o" <tytso@mit.edu>,
- Nicolas Pitre <nico@fluxnic.net>, Muchun Song <muchun.song@linux.dev>,
- Roberto Sassu <roberto.sassu@huawei.com>,
- "David S. Miller" <davem@davemloft.net>, Anna Schumaker <anna@kernel.org>,
- linux-integrity@vger.kernel.org, Alex Markuze <amarkuze@redhat.com>,
- Martin Brandenburg <martin@omnibond.com>,
- Alexander Shishkin <alexander.shishkin@linux.intel.com>,
- ocfs2-devel@lists.linux.dev, jfs-discussion@lists.sourceforge.net,
- linux-mtd@lists.infradead.org, amd-gfx@lists.freedesktop.org,
- Marc Dionne <marc.dionne@auristor.com>, linux-afs@lists.infradead.org,
- Ian Kent <raven@themaw.net>, Naohiro Aota <naohiro.aota@wdc.com>,
- Eric Biggers <ebiggers@kernel.org>, Miklos Szeredi <miklos@szeredi.hu>,
- Matthew Wilcox <willy@infradead.org>, coda@cs.cmu.edu,
- Viacheslav Dubeyko <slava@dubeyko.com>, NeilBrown <neil@brown.name>,
- Ilya Dryomov <idryomov@gmail.com>, Paolo Abeni <pabeni@redhat.com>,
- "Serge E. Hallyn" <serge@hallyn.com>, Amir Goldstein <amir73il@gmail.com>,
- James Clark <james.clark@linaro.org>, autofs@vger.kernel.org,
- Steven Rostedt <rostedt@goodmis.org>, Damien Le Moal <dlemoal@kernel.org>,
- Mathieu Desnoyers <mathieu.desnoyers@efficios.com>,
- Dan Williams <dan.j.williams@intel.com>, Oscar Salvador <osalvador@suse.de>,
- Konstantin Komarov <almaz.alexandrovich@paragon-software.com>,
- linux-nfs@vger.kernel.org, linux-ext4@vger.kernel.org, linux-mm@kvack.org,
- samba-technical@lists.samba.org, Ondrej Mosnacek <omosnace@redhat.com>,
- Steve French <sfrench@samba.org>, linux-fsdevel@vger.kernel.org,
- ntfs3@lists.linux.dev,
- =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
- Ian Rogers <irogers@google.com>, Alexander Aring <alex.aring@gmail.com>,
- Jan Kara <jack@suse.cz>, Peter Zijlstra <peterz@infradead.org>,
- Dominique Martinet <asmadeus@codewreck.org>,
- Christian Schoenebeck <linux_oss@crudebyte.com>, ecryptfs@vger.kernel.org,
- linux-unionfs@vger.kernel.org, David Howells <dhowells@redhat.com>,
- Joseph Qi <joseph.qi@linux.alibaba.com>,
- Andreas Dilger <adilger.kernel@dilger.ca>,
- Mikulas Patocka <mikulas@artax.karlin.mff.cuni.cz>,
- linux-f2fs-devel@lists.sourceforge.net, David Airlie <airlied@gmail.com>,
- Eric Snowberg <eric.snowberg@oracle.com>, linux-x25@vger.kernel.org,
- Richard Weinberger <richard@nod.at>, Mark Fasheh <mark@fasheh.com>,
- Dai Ngo <Dai.Ngo@oracle.com>, Ingo Molnar <mingo@redhat.com>,
- Jakub Kicinski <kuba@kernel.org>, Salah Triki <salah.triki@gmail.com>,
- Simon Horman <horms@kernel.org>, apparmor@lists.ubuntu.com,
- Tom Talpey <tom@talpey.com>, Bharath SM <bharathsm@microsoft.com>,
- "Tigran A. Aivazian" <aivazian.tigran@gmail.com>,
- David Sterba <dsterba@suse.com>, Namhyung Kim <namhyung@kernel.org>,
- Ryusuke Konishi <konishi.ryusuke@gmail.com>,
- John Johansen <john.johansen@canonical.com>,
- Luis de Bethencourt <luisbg@kernel.org>, netdev@vger.kernel.org,
- v9fs@lists.linux.dev, Adrian Hunter <adrian.hunter@intel.com>,
- linux-security-module@vger.kernel.org, Johannes Thumshirn <jth@kernel.org>,
- David Woodhouse <dwmw2@infradead.org>, Joel Becker <jlbec@evilplan.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+ David Hildenbrand <david@kernel.org>, Suren Baghdasaryan <surenb@google.com>,
+ Christian Brauner <brauner@kernel.org>, linux-kernel@vger.kernel.org,
+ Chuck Lever <chuck.lever@oracle.com>, linux-fsdevel@vger.kernel.org,
+ Andrew Morton <akpm@linux-foundation.org>,
+ Trond Myklebust <trondmy@kernel.org>, samba-technical@lists.samba.org,
+ Simona Vetter <simona@ffwll.ch>, linux-cifs@vger.kernel.org,
+ linux-nilfs@vger.kernel.org, Vlastimil Babka <vbabka@kernel.org>,
+ Hugh Dickins <hughd@google.com>, Olga Kornievskaia <okorniev@redhat.com>,
+ Maxime Ripard <mripard@kernel.org>, ocfs2-devel@lists.linux.dev,
+ Jani Nikula <jani.nikula@linux.intel.com>, Jaegeuk Kim <jaegeuk@kernel.org>,
+ Barry Song <baohua@kernel.org>, Kairui Song <kasong@tencent.com>,
+ Theodore Ts'o <tytso@mit.edu>, Muchun Song <muchun.song@linux.dev>,
+ linux-f2fs-devel@lists.sourceforge.net, Anna Schumaker <anna@kernel.org>,
+ Alex Markuze <amarkuze@redhat.com>, Kemeng Shi <shikemeng@huaweicloud.com>,
+ Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+ Peter Xu <peterx@redhat.com>, Chris Mason <clm@fb.com>,
+ Pedro Falcato <pfalcato@suse.de>, Marc Dionne <marc.dionne@auristor.com>,
+ linux-afs@lists.infradead.org, Baoquan He <bhe@redhat.com>,
+ Matthew Wilcox <willy@infradead.org>, Viacheslav Dubeyko <slava@dubeyko.com>,
+ NeilBrown <neil@brown.name>, Ilya Dryomov <idryomov@gmail.com>,
+ linux-ext4@vger.kernel.org, intel-gfx@lists.freedesktop.org,
+ Baolin Wang <baolin.wang@linux.alibaba.com>,
+ Rodrigo Vivi <rodrigo.vivi@intel.com>, cgroups@vger.kernel.org,
+ Shakeel Butt <shakeel.butt@linux.dev>, Dan Williams <dan.j.williams@intel.com>,
+ Oscar Salvador <osalvador@suse.de>, gfs2@lists.linux.dev,
+ linux-nfs@vger.kernel.org, Nhat Pham <nphamcs@gmail.com>, linux-mm@kvack.org,
+ Jeff Layton <jlayton@kernel.org>, Steve French <sfrench@samba.org>,
+ netfs@lists.linux.dev, Mike Rapoport <rppt@kernel.org>,
+ Michal Hocko <mhocko@suse.com>, Jan Kara <jack@suse.cz>,
+ Roman Gushchin <roman.gushchin@linux.dev>,
+ Qi Zheng <zhengqi.arch@bytedance.com>, Yuanchu Xie <yuanchu@google.com>,
+ David Howells <dhowells@redhat.com>, Joseph Qi <joseph.qi@linux.alibaba.com>,
+ Andreas Dilger <adilger.kernel@dilger.ca>, David Airlie <airlied@gmail.com>,
+ Andreas Gruenbacher <agruenba@redhat.com>, Mark Fasheh <mark@fasheh.com>,
+ Dai Ngo <Dai.Ngo@oracle.com>, Jason Gunthorpe <jgg@ziepe.ca>,
+ Axel Rasmussen <axelrasmussen@google.com>, Jann Horn <jannh@google.com>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ "Liam R. Howlett" <Liam.Howlett@oracle.com>, Tom Talpey <tom@talpey.com>,
+ Bharath SM <bharathsm@microsoft.com>, David Sterba <dsterba@suse.com>,
+ Ryusuke Konishi <konishi.ryusuke@gmail.com>, Wei Xu <weixugc@google.com>,
+ Thomas Zimmermann <tzimmermann@suse.de>, Johannes Weiner <hannes@cmpxchg.org>,
+ linux-btrfs@vger.kernel.org, Joel Becker <jlbec@evilplan.org>
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [1.59 / 15.00];
+X-Spamd-Result: default: False [-6.11 / 15.00];
+	WHITELIST_DMARC(-7.00)[sourceforge.net:D:+];
 	SUSPICIOUS_RECIPS(1.50)[];
-	ARC_REJECT(1.00)[signature check failed: fail, {[1] = sig:google.com:reject}];
+	ARC_REJECT(1.00)[signature check failed: fail, {[1] = sig:microsoft.com:reject}];
+	DMARC_POLICY_ALLOW_WITH_FAILURES(-0.50)[];
 	RWL_MAILSPIKE_EXCELLENT(-0.40)[216.105.38.7:from];
-	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
-	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7];
 	MAILLIST(-0.20)[mailman];
-	DMARC_POLICY_SOFTFAIL(0.10)[paul-moore.com : SPF not aligned (relaxed), DKIM not aligned (relaxed),none];
+	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
+	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7:c];
 	MIME_GOOD(-0.10)[text/plain];
-	MIME_BASE64_TEXT(0.10)[];
 	HAS_LIST_UNSUB(-0.01)[];
-	RECEIVED_HELO_LOCALHOST(0.00)[];
 	DKIM_MIXED(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	FORGED_SENDER_MAILLIST(0.00)[];
+	FORGED_RECIPIENTS(0.00)[m:tz2294@columbia.edu,m:nvdimm@lists.linux.dev,m:pc@manguebit.org,m:djwong@kernel.org,m:dri-devel@lists.freedesktop.org,m:ceph-devel@vger.kernel.org,m:linux-xfs@vger.kernel.org,m:lorenzo.stoakes@oracle.com,m:jackmanb@google.com,m:tursulin@ursulin.net,m:sprasad@microsoft.com,m:chrisl@kernel.org,m:jhubbard@nvidia.com,m:viro@zeniv.linux.org.uk,m:ronniesahlberg@gmail.com,m:david@kernel.org,m:surenb@google.com,m:brauner@kernel.org,m:linux-kernel@vger.kernel.org,m:chuck.lever@oracle.com,m:linux-fsdevel@vger.kernel.org,m:akpm@linux-foundation.org,m:trondmy@kernel.org,m:samba-technical@lists.samba.org,m:simona@ffwll.ch,m:linux-cifs@vger.kernel.org,m:linux-nilfs@vger.kernel.org,m:vbabka@kernel.org,m:hughd@google.com,m:okorniev@redhat.com,m:mripard@kernel.org,m:ocfs2-devel@lists.linux.dev,m:jani.nikula@linux.intel.com,m:jaegeuk@kernel.org,m:baohua@kernel.org,m:kasong@tencent.com,m:tytso@mit.edu,m:muchun.song@linux.dev,m:linux-f2fs-devel@lists.sourceforge.net,m:anna@ker
+ nel.org,m:amarkuze@redhat.com,m:shikemeng@huaweicloud.com,m:joonas.lahtinen@linux.intel.com,m:peterx@redhat.com,m:clm@fb.com,m:pfalcato@suse.de,m:marc.dionne@auristor.com,m:linux-afs@lists.infradead.org,m:bhe@redhat.com,m:willy@infradead.org,m:slava@dubeyko.com,m:neil@brown.name,m:idryomov@gmail.com,m:linux-ext4@vger.kernel.org,m:intel-gfx@lists.freedesktop.org,m:baolin.wang@linux.alibaba.com,m:rodrigo.vivi@intel.com,m:cgroups@vger.kernel.org,m:shakeel.butt@linux.dev,m:dan.j.williams@intel.com,m:osalvador@suse.de,m:gfs2@lists.linux.dev,m:linux-nfs@vger.kernel.org,m:nphamcs@gmail.com,m:linux-mm@kvack.org,m:jlayton@kernel.org,m:sfrench@samba.org,m:netfs@lists.linux.dev,m:rppt@kernel.org,m:mhocko@suse.com,m:jack@suse.cz,m:roman.gushchin@linux.dev,m:zhengqi.arch@bytedance.com,m:yuanchu@google.com,m:dhowells@redhat.com,m:joseph.qi@linux.alibaba.com,m:adilger.kernel@dilger.ca,m:airlied@gmail.com,m:agruenba@redhat.com,m:mark@fasheh.com,m:Dai.Ngo@oracle.com,m:jgg@ziepe.ca,m:axelrasmussen@go
+ ogle.com,m:jannh@google.com,m:maarten.lankhorst@linux.intel.com,m:Liam.Howlett@oracle.com,m:tom@talpey.com,m:bharathsm@microsoft.com,m:dsterba@suse.com,m:konishi.ryusuke@gmail.com,m:weixugc@google.com,m:tzimmermann@suse.de,m:hannes@cmpxchg.org,m:linux-btrfs@vger.kernel.org,m:jlbec@evilplan.org,s:lists@lfdr.de];
+	FREEMAIL_CC(0.00)[lists.linux.dev,manguebit.org,kernel.org,lists.freedesktop.org,vger.kernel.org,oracle.com,google.com,ursulin.net,microsoft.com,nvidia.com,zeniv.linux.org.uk,gmail.com,linux-foundation.org,lists.samba.org,ffwll.ch,redhat.com,linux.intel.com,tencent.com,mit.edu,linux.dev,lists.sourceforge.net,huaweicloud.com,fb.com,suse.de,auristor.com,lists.infradead.org,infradead.org,dubeyko.com,brown.name,linux.alibaba.com,intel.com,kvack.org,samba.org,suse.com,suse.cz,bytedance.com,dilger.ca,fasheh.com,ziepe.ca,talpey.com,cmpxchg.org,evilplan.org];
 	MIME_TRACE(0.00)[0:+];
-	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
-	FORGED_SENDER(0.00)[paul@paul-moore.com,linux-f2fs-devel-bounces@lists.sourceforge.net];
-	FORGED_RECIPIENTS(0.00)[m:jlayton@kernel.org,m:lucho@ionkov.net,m:nvdimm@lists.linux.dev,m:pc@manguebit.org,m:djwong@kernel.org,m:al@alarsen.net,m:dri-devel@lists.freedesktop.org,m:linux-hams@vger.kernel.org,m:sumit.semwal@linaro.org,m:hubcap@omnibond.com,m:linux-xfs@vger.kernel.org,m:wufan@kernel.org,m:ceph-devel@vger.kernel.org,m:jmorris@namei.org,m:code@tyhicks.com,m:hch@infradead.org,m:devel@lists.orangefs.org,m:sprasad@microsoft.com,m:ms@dev.tdt.de,m:jaharkes@cs.cmu.edu,m:willemb@google.com,m:acme@kernel.org,m:linux-fscrypt@vger.kernel.org,m:viro@zeniv.linux.org.uk,m:ronniesahlberg@gmail.com,m:glaubitz@physik.fu-berlin.de,m:david@kernel.org,m:ericvh@kernel.org,m:brauner@kernel.org,m:dmitry.kasatkin@gmail.com,m:stephen.smalley.work@gmail.com,m:linux-kernel@vger.kernel.org,m:linux-perf-users@vger.kernel.org,m:chuck.lever@oracle.com,m:mhiramat@kernel.org,m:jolsa@kernel.org,m:jack@suse.com,m:alexander.deucher@amd.com,m:linux-media@vger.kernel.org,m:trondmy@kernel.org,m:mark.rutland
- @arm.com,m:shaggy@kernel.org,m:zohar@linux.ibm.com,m:oleg@redhat.com,m:edumazet@google.com,m:simona@ffwll.ch,m:linux-cifs@vger.kernel.org,m:kuniyu@google.com,m:linux-nilfs@vger.kernel.org,m:codalist@coda.cs.cmu.edu,m:linux-trace-kernel@vger.kernel.org,m:okorniev@redhat.com,m:frank.li@vivo.com,m:selinux@vger.kernel.org,m:linaro-mm-sig@lists.linaro.org,m:casey@schaufler-ca.com,m:netfs@lists.linux.dev,m:jaegeuk@kernel.org,m:fsverity@lists.linux.dev,m:tytso@mit.edu,m:nico@fluxnic.net,m:muchun.song@linux.dev,m:roberto.sassu@huawei.com,m:davem@davemloft.net,m:anna@kernel.org,m:linux-integrity@vger.kernel.org,m:amarkuze@redhat.com,m:martin@omnibond.com,m:alexander.shishkin@linux.intel.com,m:ocfs2-devel@lists.linux.dev,m:jfs-discussion@lists.sourceforge.net,m:linux-mtd@lists.infradead.org,m:amd-gfx@lists.freedesktop.org,m:marc.dionne@auristor.com,m:linux-afs@lists.infradead.org,m:raven@themaw.net,m:naohiro.aota@wdc.com,m:ebiggers@kernel.org,m:miklos@szeredi.hu,m:willy@infradead.org,m:coda@c
- s.cmu.edu,m:slava@dubeyko.com,m:neil@brown.name,m:idryomov@gmail.com,m:pabeni@redhat.com,m:serge@hallyn.com,m:amir73il@gmail.com,m:james.clark@linaro.org,m:autofs@vger.kernel.org,m:rostedt@goodmis.org,m:dlemoal@kernel.org,m:mathieu.desnoyers@efficios.com,m:dan.j.williams@intel.com,m:osalvador@suse.de,m:almaz.alexandrovich@paragon-software.com,m:linux-nfs@vger.kernel.org,m:linux-ext4@vger.kernel.org,m:linux-mm@kvack.org,m:samba-technical@lists.samba.org,s:lists@lfdr.de];
-	FREEMAIL_CC(0.00)[ionkov.net,lists.linux.dev,manguebit.org,kernel.org,alarsen.net,lists.freedesktop.org,vger.kernel.org,linaro.org,omnibond.com,namei.org,tyhicks.com,infradead.org,lists.orangefs.org,microsoft.com,dev.tdt.de,cs.cmu.edu,google.com,zeniv.linux.org.uk,gmail.com,physik.fu-berlin.de,oracle.com,suse.com,amd.com,arm.com,linux.ibm.com,redhat.com,ffwll.ch,coda.cs.cmu.edu,vivo.com,lists.linaro.org,schaufler-ca.com,mit.edu,fluxnic.net,linux.dev,huawei.com,davemloft.net,linux.intel.com,lists.sourceforge.net,lists.infradead.org,auristor.com,themaw.net,wdc.com,szeredi.hu,dubeyko.com,brown.name,hallyn.com,goodmis.org,efficios.com,intel.com,suse.de,paragon-software.com,kvack.org,lists.samba.org,samba.org,suse.cz,codewreck.org,crudebyte.com,linux.alibaba.com,dilger.ca,artax.karlin.mff.cuni.cz,nod.at,fasheh.com,lists.ubuntu.com,talpey.com,canonical.com,evilplan.org];
 	TO_DN_SOME(0.00)[];
-	PREVIOUSLY_DELIVERED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
-	RCPT_COUNT_GT_50(0.00)[143];
+	RECEIVED_HELO_LOCALHOST(0.00)[];
+	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
+	FORGED_SENDER(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	DMARC_POLICY_ALLOW(0.00)[lists.sourceforge.net,none];
+	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,Nvidia.com:-];
+	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[5];
+	RCPT_COUNT_GT_50(0.00)[95];
 	FORGED_SENDER_FORWARDING(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[paul@paul-moore.com,linux-f2fs-devel-bounces@lists.sourceforge.net];
-	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,paul-moore.com:s=google];
-	NEURAL_HAM(-0.00)[-0.937];
+	FROM_NEQ_ENVFROM(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
+	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,Nvidia.com:s=selector2];
+	NEURAL_HAM(-0.00)[-0.970];
 	TAGGED_RCPT(0.00)[linux-f2fs-devel];
-	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,paul-moore.com:-];
+	HAS_REPLYTO(0.00)[ziy@nvidia.com];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
 	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
-	MISSING_XM_UA(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.sourceforge.net:rdns,lists.sourceforge.net:helo,lists.sourceforge.net:dkim,paul-moore.com:url,mail.gmail.com:mid]
-X-Rspamd-Queue-Id: 6C2DF1AFDE4
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[infradead.org:email,nvidia.com:mid,nvidia.com:email,nvidia.com:replyto,lists.sourceforge.net:rdns,lists.sourceforge.net:helo,lists.sourceforge.net:dkim,columbia.edu:email]
+X-Rspamd-Queue-Id: E606C1AF937
 X-Rspamd-Action: no action
 
-T24gVGh1LCBGZWIgMjYsIDIwMjYgYXQgMTE6MDbigK9BTSBKZWZmIExheXRvbiA8amxheXRvbkBr
-ZXJuZWwub3JnPiB3cm90ZToKPgo+IFVwZGF0ZSAlbHUvJWxkIHRvICVsbHUvJWxsZCBpbiBzZWN1
-cml0eSBhdWRpdCBsb2dnaW5nIGZ1bmN0aW9ucyB0aGF0Cj4gcHJpbnQgaW5vZGUtPmlfaW5vLCBz
-aW5jZSBpX2lubyBpcyBub3cgdTY0Lgo+Cj4gRmlsZXMgdXBkYXRlZDogYXBwYXJtb3IvYXBwYXJt
-b3Jmcy5jLCBpbnRlZ3JpdHkvaW50ZWdyaXR5X2F1ZGl0LmMsCj4gaXBlL2F1ZGl0LmMsIGxzbV9h
-dWRpdC5jLgo+Cj4gU2lnbmVkLW9mZi1ieTogSmVmZiBMYXl0b24gPGpsYXl0b25Aa2VybmVsLm9y
-Zz4KPiAtLS0KPiAgc2VjdXJpdHkvYXBwYXJtb3IvYXBwYXJtb3Jmcy5jICAgICAgIHwgIDQgKyst
-LQo+ICBzZWN1cml0eS9pbnRlZ3JpdHkvaW50ZWdyaXR5X2F1ZGl0LmMgfCAgMiArLQo+ICBzZWN1
-cml0eS9pcGUvYXVkaXQuYyAgICAgICAgICAgICAgICAgfCAgMiArLQo+ICBzZWN1cml0eS9sc21f
-YXVkaXQuYyAgICAgICAgICAgICAgICAgfCAxMCArKysrKy0tLS0tCj4gIHNlY3VyaXR5L3NlbGlu
-dXgvaG9va3MuYyAgICAgICAgICAgICB8ICA0ICsrLS0KPiAgc2VjdXJpdHkvc21hY2svc21hY2tf
-bHNtLmMgICAgICAgICAgIHwgMTIgKysrKysrLS0tLS0tCj4gIDYgZmlsZXMgY2hhbmdlZCwgMTcg
-aW5zZXJ0aW9ucygrKSwgMTcgZGVsZXRpb25zKC0pCgouLi4KCj4gZGlmZiAtLWdpdCBhL3NlY3Vy
-aXR5L2xzbV9hdWRpdC5jIGIvc2VjdXJpdHkvbHNtX2F1ZGl0LmMKPiBpbmRleCA3ZDYyM2IwMDQ5
-NWMxNGIwNzllMTBlOTYzYzIxYTlmOTQ5YzExZjA3Li43MzdmNWEyNjNhOGY3OTQxNjEzMzMxNWVk
-ZjM2M2VjZTNkNzljNzIyIDEwMDY0NAo+IC0tLSBhL3NlY3VyaXR5L2xzbV9hdWRpdC5jCj4gKysr
-IGIvc2VjdXJpdHkvbHNtX2F1ZGl0LmMKCkV2ZXJ5dGhpbmcgaW4gc2VjdXJpdHkvbHNtX2F1ZGl0
-LmMgbG9va3Mgb2theS4KCj4gZGlmZiAtLWdpdCBhL3NlY3VyaXR5L3NlbGludXgvaG9va3MuYyBi
-L3NlY3VyaXR5L3NlbGludXgvaG9va3MuYwo+IGluZGV4IGQ4MjI0ZWExMTNkMWFjMjczYWFjMWZi
-NTIzMjRmMDBiMzMwMWFlNzUuLjE1MGVhODZlYmMxZjdjN2Y4MzkxYWY0MTA5YTNkYTgyYjEyZDAw
-ZDIgMTAwNjQ0Cj4gLS0tIGEvc2VjdXJpdHkvc2VsaW51eC9ob29rcy5jCj4gKysrIGIvc2VjdXJp
-dHkvc2VsaW51eC9ob29rcy5jCj4gQEAgLTE0MDAsNyArMTQwMCw3IEBAIHN0YXRpYyBpbnQgaW5v
-ZGVfZG9pbml0X3VzZV94YXR0cihzdHJ1Y3QgaW5vZGUgKmlub2RlLCBzdHJ1Y3QgZGVudHJ5ICpk
-ZW50cnksCj4gICAgICAgICBpZiAocmMgPCAwKSB7Cj4gICAgICAgICAgICAgICAgIGtmcmVlKGNv
-bnRleHQpOwo+ICAgICAgICAgICAgICAgICBpZiAocmMgIT0gLUVOT0RBVEEpIHsKPiAtICAgICAg
-ICAgICAgICAgICAgICAgICBwcl93YXJuKCJTRUxpbnV4OiAlczogIGdldHhhdHRyIHJldHVybmVk
-ICVkIGZvciBkZXY9JXMgaW5vPSVsZFxuIiwKPiArICAgICAgICAgICAgICAgICAgICAgICBwcl93
-YXJuKCJTRUxpbnV4OiAlczogIGdldHhhdHRyIHJldHVybmVkICVkIGZvciBkZXY9JXMgaW5vPSVs
-bGRcbiIsCj4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBfX2Z1bmNfXywgLXJjLCBp
-bm9kZS0+aV9zYi0+c19pZCwgaW5vZGUtPmlfaW5vKTsKPiAgICAgICAgICAgICAgICAgICAgICAg
-ICByZXR1cm4gcmM7Cj4gICAgICAgICAgICAgICAgIH0KCkFkZGl0aW9uYWxseSwgbGF0ZXIgaW4g
-dGhpcyBmdW5jdGlvbiB0aGVyZSBhcmUgcHJfbm90aWNlX3JhdGVsaW1pdGVkKCkKYW5kIHByX3dh
-cm4oKSBjYWxscyB0aGF0IHByaW50IGlub2RlIG51bWJlcnMgYW5kIG5lZWQgdG8gYmUgdXBkYXRl
-ZC4KCi0tIApwYXVsLW1vb3JlLmNvbQoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fCkxpbnV4LWYyZnMtZGV2ZWwgbWFpbGluZyBsaXN0CkxpbnV4LWYyZnMt
-ZGV2ZWxAbGlzdHMuc291cmNlZm9yZ2UubmV0Cmh0dHBzOi8vbGlzdHMuc291cmNlZm9yZ2UubmV0
-L2xpc3RzL2xpc3RpbmZvL2xpbnV4LWYyZnMtZGV2ZWwK
+On 25 Feb 2026, at 18:44, Tal Zussman wrote:
+
+> struct pagevec was removed in commit 1e0877d58b1e ("mm: remove struct
+> pagevec"). Remove remaining forward declarations and change
+> __folio_batch_release()'s declaration to match its definition.
+>
+> Reviewed-by: Matthew Wilcox (Oracle) <willy@infradead.org>
+> Acked-by: David Hildenbrand (Arm) <david@kernel.org>
+> Acked-by: Chris Li <chrisl@kernel.org>
+> Signed-off-by: Tal Zussman <tz2294@columbia.edu>
+> ---
+>  fs/afs/internal.h       | 1 -
+>  fs/f2fs/f2fs.h          | 2 --
+>  include/linux/pagevec.h | 2 +-
+>  include/linux/swap.h    | 2 --
+>  4 files changed, 1 insertion(+), 6 deletions(-)
+>
+LGTM.
+
+Acked-by: Zi Yan <ziy@nvidia.com>
+
+
+Best Regards,
+Yan, Zi
+
+
+_______________________________________________
+Linux-f2fs-devel mailing list
+Linux-f2fs-devel@lists.sourceforge.net
+https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
