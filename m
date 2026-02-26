@@ -2,102 +2,113 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id YJk+LEObn2mucwQAu9opvQ
+	id kGQHLMbln2ntegQAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 26 Feb 2026 02:00:51 +0100
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 26 Feb 2026 07:18:46 +0100
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id E168219FB06
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 26 Feb 2026 02:00:50 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id EB4D21A148B
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 26 Feb 2026 07:18:45 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
+	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:
 	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
-	Subject:Mime-Version:References:In-Reply-To:Message-Id:To:From:Date:Sender:
-	Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
-	:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=h9Cnw0JHCUHqqHArn+sXYOrgyoplKK3UUk/MbB5ybbs=; b=YuFMrGhWm9qXAByCmQNJHjxM7m
-	bSluynLnWK8G8oL7SKXubi05mNAO/01damFk5CMC9It1bG9lQwm0u2OhweWdjlNZBQqtzndh83+Ph
-	pu08MBlyYm742opLDS26Ea1oo82peCHZ8vZi+N5sBxOoh1mxsU5wYtp5T4D9foY+gnXI=;
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	Subject:To:From:Message-ID:Date:MIME-Version:Sender:Reply-To:Cc:Content-ID:
+	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+	:Resent-Message-ID:In-Reply-To:References:List-Owner;
+	bh=QlCwu9+9W8JAb1jSi+vKCJI4vAENWgMa7Rq4I33xmjw=; b=B7/BygSa0VpCtz4/s34tbBFcbs
+	uhdiWu88ExMsSAmvVUunf0IEMOswPVZTrxzxhV89VRu2Kgwu/qJ6lJWVWnpLmWMbn4OZpbzKfagdC
+	VsMdgvWUv7MWKlbl5WKxkXqyN26dIfoEWUIMgRBGdirtypF3asUOWzyB3VaHJGMH3XcY=;
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vvPk8-0008Ox-JY;
-	Thu, 26 Feb 2026 01:00:40 +0000
+	id 1vvUhl-0006Au-RD;
+	Thu, 26 Feb 2026 06:18:33 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
- TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <akpm@linux-foundation.org>) id 1vvPk6-0008Op-Uy
- for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 26 Feb 2026 01:00:39 +0000
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95) (envelope-from
+ <3rOWfaQkbAEs5BCxnyyr4n22vq.t11tyr75r4p106r06.p1z@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com>)
+ id 1vvUhf-0006Ak-J0 for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 26 Feb 2026 06:18:27 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:Mime-Version
- :References:In-Reply-To:Message-Id:Subject:Cc:To:From:Date:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Type:To:From:Subject:Message-ID:Date:
+ MIME-Version:Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=kzBboXRq2m0Xbzbb5Eqzgnd6HDbE7nrSUbmDE0s8g3A=; b=Ag1GfOh+zcwoHW9gHUB65jAXTx
- EUVV0jqTyGG8tILmx4LUBebVXrR8Av3NQyEos5kMDvpG3+1s2Rs7Sq0dct6JL+S0NBxGW4gz4ZAK6
- 6HaGck9KnheuDySI8cY/nP66QfmU9Fu+NG++sLu41MVHJ4yT6U6kRAFwdv14FKh+JqeM=;
+ bh=pfEp6IXCKbLOFmkdSl5qd6w1nd5cyXI9rCt5gVdNXws=; b=L6PP6EPfqVaN8yM11bB3Oj4R9N
+ NtqujqftqP5S0BE1rOIIkZycfNIC6M3NxdoiYxXvdtSDl/yr040XxZmm69azdSAJM9Kvq8kTp4cGW
+ mxztaTK/e+g1pqR/gvU8R28hHoPSOa3MRCwKEhnW/bw33mCKo8XJLEiSNCDpDMvKkI2A=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:Mime-Version:References:
- In-Reply-To:Message-Id:Subject:Cc:To:From:Date:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=kzBboXRq2m0Xbzbb5Eqzgnd6HDbE7nrSUbmDE0s8g3A=; b=Y2MR5nrtgc0uZP3Eos7TamoWFi
- f78bDZdUEsuu6Heu72fyBYydZ7bFUJ5TO/kZbUeCh4Adp/1J478ffSV36OVt2npi+bLFRbuCroLlO
- cRz3SR1oLHzoMnLeqYRSccXdnLgeGp5CsmJT9R2AZUxaGBNWyE1uPEUnF2vPpyfK6/BA=;
-Received: from tor.source.kernel.org ([172.105.4.254])
+ h=Content-Type:To:From:Subject:Message-ID:Date:MIME-Version:Sender:Reply-To
+ :Cc:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=pfEp6IXCKbLOFmkdSl5qd6w1nd5cyXI9rCt5gVdNXws=; b=h
+ CthKLlg8bxmrdyXwOd6vO6HGolPrVnjWZOhC+EBXwGsR9Lw8ro0TOFeTkqtF0Hzy5RjiGnVF4f2E/
+ B+oSmtPIc6u5FPBZMlJVinI0aotOMpIsTjcBW+dNCz/3x2CQ4Jc1q2FN/bsdxPFYN3mv1mslWkF+A
+ HRFex3oG/K5yqGz4=;
+Received: from mail-oo1-f71.google.com ([209.85.161.71])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vvPk6-00009v-1Y for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 26 Feb 2026 01:00:38 +0000
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 1381C60053;
- Thu, 26 Feb 2026 00:41:48 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 03CC4C116D0;
- Thu, 26 Feb 2026 00:41:44 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linux-foundation.org;
- s=korg; t=1772066507;
- bh=a5b15Ngqo2bOOdUHSjsT/sSuPPfkZQCQF/naFXI2QkI=;
- h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
- b=CcOiuO7NEI5etysy42JpjnremhTiWgG4lUGW8vs+Kti8TdTA3xkAw8m9bRPHQw/jW
- UtviHmXGTs0EojsHSlFb7e+3Lc6f61/dMS61S/znrah0BD8VlKfWckTXVq5rOTTIiN
- OwOPmCyouWxjyK/Ldx7pApiM6o9/4J5sMHRRG9vY=
-Date: Wed, 25 Feb 2026 16:41:44 -0800
-From: Andrew Morton <akpm@linux-foundation.org>
-To: Tal Zussman <tz2294@columbia.edu>
-Message-Id: <20260225164144.76e14a362e0d7cae49f20787@linux-foundation.org>
-In-Reply-To: <20260225-pagevec_cleanup-v2-0-716868cc2d11@columbia.edu>
-References: <20260225-pagevec_cleanup-v2-0-716868cc2d11@columbia.edu>
-X-Mailer: Sylpheed 3.8.0beta1 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
-Mime-Version: 1.0
-X-Spam-Score: -2.5 (--)
+ (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
+ id 1vvUhe-0007fX-BI for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 26 Feb 2026 06:18:27 +0000
+Received: by mail-oo1-f71.google.com with SMTP id
+ 006d021491bc7-679c51b2d6cso9569417eaf.2
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Wed, 25 Feb 2026 22:18:26 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1772086700; x=1772691500;
+ h=to:from:subject:message-id:date:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=pfEp6IXCKbLOFmkdSl5qd6w1nd5cyXI9rCt5gVdNXws=;
+ b=mmISvJhdJwtXvxF8mqVhTHsaQEpXPxA21tKwRAdvv2xL9wiR6n78PBiFxYfiXH1C8X
+ Bztxb7ZUuP113EUBD386kHcwGnyNk+4vo6Kdty/tEURT3CdwF6wemE0hGAQCqf4AtFZq
+ Yvd5vFmsXRGtIPnCiezUuVIQOqqY0BULq5omS9/6gdKJGEicXAMbHtUhiOqZwz6IqXqX
+ BOCiieqy5tUN6kn4Ydn0NdaK+8PFXqUeUYYUEC7YypEbAMVsp/PmiIfwPNavM36AtebE
+ 4z6qO8Dx/tT61hLwLxev6iTkHo0D7413kGYOZjyL4MPO/H03H92WCpifqNreCs0fK9ax
+ +LBA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWhx1ggWIaqEQcT+jM6gdmSVvt4gApBAY9y5rbZj0oirLXU3CNbeKPZYGcwUa2bh1vdzwoXYOxTrp5NlhEPM9Eq@lists.sourceforge.net
+X-Gm-Message-State: AOJu0YwuQ9kV5JfdUdReJwJwDo4V54vx3sZFtuVHFIy7Z8DYAlbzZhoU
+ qbLN85KGSPv2K9CZklkNagRYmi23UFxv3G2RpTzJAi0fPQTPnp9qqlEYwCPkRyJh1nr1eiX3Lb7
+ Rx1U0l+svmQol70Vm7GEQs6gUO7j4e43VNzIr/cncdAaeKB5+7Dqf+P4wR1Q=
+MIME-Version: 1.0
+X-Received: by 2002:a05:6820:622:b0:679:e7b2:9fc8 with SMTP id
+ 006d021491bc7-679e7b2a0c2mr2993612eaf.1.1772086700739; Wed, 25 Feb 2026
+ 22:18:20 -0800 (PST)
+Date: Wed, 25 Feb 2026 22:18:20 -0800
+X-Google-Appengine-App-Id: s~syzkaller
+X-Google-Appengine-App-Id-Alias: syzkaller
+Message-ID: <699fe5ac.050a0220.2fcbed.0003.GAE@google.com>
+From: syzbot <syzbot+73d18077a2323a1fdb5e@syzkaller.appspotmail.com>
+To: chao@kernel.org, jaegeuk@kernel.org, 
+ linux-f2fs-devel@lists.sourceforge.net, linux-kernel@vger.kernel.org, 
+ syzkaller-bugs@googlegroups.com
+X-Spam-Score: 0.6 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Wed,
- 25 Feb 2026 18:44:24 -0500 Tal Zussman <tz2294@columbia.edu>
- wrote: > struct pagevec was removed in commit 1e0877d58b1e ("mm: remove struct
- > pagevec"). Remove any stray references to it and rename relevant files
- > and macros accordingly. > > While at it, remove unnec [...] 
- Content analysis details:   (-2.5 points, 5.0 required)
+ Content preview:  Hello,
+ syzbot found the following issue on: HEAD commit: d4906ae14a5f
+ Add linux-next specific files for 20260220 git tree: linux-next console
+ output:
+ https://syzkaller.appspot.com/x/log.txt?x=13f24006580000 kernel config:
+ https://syzkaller.apps [...] 
+ Content analysis details:   (0.6 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -2.3 NICE_REPLY_A           Looks like a legit reply (A)
-X-Headers-End: 1vvPk6-00009v-1Y
-Subject: Re: [f2fs-dev] [PATCH v2 0/4] mm: Remove stray references to pagevec
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [209.85.161.71 listed in wl.mailspike.net]
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+ 0.3 FROM_LOCAL_HEX         From: localpart has long hexadecimal sequence
+ 0.2 HEADER_FROM_DIFFERENT_DOMAINS From and EnvelopeFrom 2nd level mail
+ domains are different
+X-Headers-End: 1vvUhe-0007fX-BI
+Subject: [f2fs-dev] [syzbot] [f2fs?] INFO: task hung in f2fs_fallocate (6)
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -109,114 +120,134 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: nvdimm@lists.linux.dev, Paulo Alcantara <pc@manguebit.org>,
- "Darrick J. Wong" <djwong@kernel.org>, dri-devel@lists.freedesktop.org,
- ceph-devel@vger.kernel.org, linux-xfs@vger.kernel.org,
- Lorenzo Stoakes <lorenzo.stoakes@oracle.com>,
- Brendan Jackman <jackmanb@google.com>, Tvrtko Ursulin <tursulin@ursulin.net>,
- Zi Yan <ziy@nvidia.com>, Shyam Prasad N <sprasad@microsoft.com>,
- Chris Li <chrisl@kernel.org>, John Hubbard <jhubbard@nvidia.com>,
- Alexander Viro <viro@zeniv.linux.org.uk>,
- Ronnie Sahlberg <ronniesahlberg@gmail.com>,
- David Hildenbrand <david@kernel.org>, Suren Baghdasaryan <surenb@google.com>,
- Christian Brauner <brauner@kernel.org>, linux-kernel@vger.kernel.org,
- Chuck Lever <chuck.lever@oracle.com>, linux-fsdevel@vger.kernel.org,
- Trond Myklebust <trondmy@kernel.org>, samba-technical@lists.samba.org,
- Simona Vetter <simona@ffwll.ch>, linux-cifs@vger.kernel.org,
- linux-nilfs@vger.kernel.org, Vlastimil Babka <vbabka@kernel.org>,
- Hugh Dickins <hughd@google.com>, Olga Kornievskaia <okorniev@redhat.com>,
- Maxime Ripard <mripard@kernel.org>, ocfs2-devel@lists.linux.dev,
- Jani Nikula <jani.nikula@linux.intel.com>, Jaegeuk Kim <jaegeuk@kernel.org>,
- Barry Song <baohua@kernel.org>, Kairui Song <kasong@tencent.com>,
- Theodore Ts'o <tytso@mit.edu>, Muchun Song <muchun.song@linux.dev>,
- linux-f2fs-devel@lists.sourceforge.net, Anna Schumaker <anna@kernel.org>,
- Alex Markuze <amarkuze@redhat.com>, Kemeng Shi <shikemeng@huaweicloud.com>,
- Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
- Peter Xu <peterx@redhat.com>, Chris Mason <clm@fb.com>,
- Pedro Falcato <pfalcato@suse.de>, Marc Dionne <marc.dionne@auristor.com>,
- linux-afs@lists.infradead.org, Baoquan He <bhe@redhat.com>,
- Matthew Wilcox <willy@infradead.org>, Viacheslav Dubeyko <slava@dubeyko.com>,
- NeilBrown <neil@brown.name>, Ilya Dryomov <idryomov@gmail.com>,
- linux-ext4@vger.kernel.org, intel-gfx@lists.freedesktop.org,
- Baolin Wang <baolin.wang@linux.alibaba.com>,
- Rodrigo Vivi <rodrigo.vivi@intel.com>, cgroups@vger.kernel.org,
- Shakeel Butt <shakeel.butt@linux.dev>, Dan Williams <dan.j.williams@intel.com>,
- Oscar Salvador <osalvador@suse.de>, gfs2@lists.linux.dev,
- linux-nfs@vger.kernel.org, Nhat Pham <nphamcs@gmail.com>, linux-mm@kvack.org,
- Jeff Layton <jlayton@kernel.org>, Steve French <sfrench@samba.org>,
- netfs@lists.linux.dev, Mike Rapoport <rppt@kernel.org>,
- Michal Hocko <mhocko@suse.com>, Jan Kara <jack@suse.cz>,
- Roman Gushchin <roman.gushchin@linux.dev>,
- Qi Zheng <zhengqi.arch@bytedance.com>, Yuanchu Xie <yuanchu@google.com>,
- David Howells <dhowells@redhat.com>, Joseph Qi <joseph.qi@linux.alibaba.com>,
- Andreas Dilger <adilger.kernel@dilger.ca>, David Airlie <airlied@gmail.com>,
- Andreas Gruenbacher <agruenba@redhat.com>, Mark Fasheh <mark@fasheh.com>,
- Dai Ngo <Dai.Ngo@oracle.com>, Jason Gunthorpe <jgg@ziepe.ca>,
- Axel Rasmussen <axelrasmussen@google.com>, Jann Horn <jannh@google.com>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- "Liam R. Howlett" <Liam.Howlett@oracle.com>, Tom Talpey <tom@talpey.com>,
- Bharath SM <bharathsm@microsoft.com>, David Sterba <dsterba@suse.com>,
- Ryusuke Konishi <konishi.ryusuke@gmail.com>, Wei Xu <weixugc@google.com>,
- Thomas Zimmermann <tzimmermann@suse.de>, Johannes Weiner <hannes@cmpxchg.org>,
- linux-btrfs@vger.kernel.org, Joel Becker <jlbec@evilplan.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [0.89 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
-	MV_CASE(0.50)[];
+X-Spamd-Result: default: False [-0.01 / 15.00];
+	URI_HIDDEN_PATH(1.00)[https://syzkaller.appspot.com/x/.config?x=cdf9388b212a2b28];
 	RWL_MAILSPIKE_EXCELLENT(-0.40)[216.105.38.7:from];
+	MAILLIST(-0.20)[mailman];
 	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
 	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7];
-	MAILLIST(-0.20)[mailman];
 	MIME_GOOD(-0.10)[text/plain];
+	DMARC_POLICY_SOFTFAIL(0.10)[appspotmail.com : SPF not aligned (relaxed), DKIM not aligned (relaxed),none];
 	HAS_LIST_UNSUB(-0.01)[];
 	RECEIVED_HELO_LOCALHOST(0.00)[];
-	TO_DN_SOME(0.00)[];
-	DKIM_MIXED(0.00)[];
-	RCVD_TLS_LAST(0.00)[];
-	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
-	FORGED_RECIPIENTS(0.00)[m:tz2294@columbia.edu,m:nvdimm@lists.linux.dev,m:pc@manguebit.org,m:djwong@kernel.org,m:dri-devel@lists.freedesktop.org,m:ceph-devel@vger.kernel.org,m:linux-xfs@vger.kernel.org,m:lorenzo.stoakes@oracle.com,m:jackmanb@google.com,m:tursulin@ursulin.net,m:ziy@nvidia.com,m:sprasad@microsoft.com,m:chrisl@kernel.org,m:jhubbard@nvidia.com,m:viro@zeniv.linux.org.uk,m:ronniesahlberg@gmail.com,m:david@kernel.org,m:surenb@google.com,m:brauner@kernel.org,m:linux-kernel@vger.kernel.org,m:chuck.lever@oracle.com,m:linux-fsdevel@vger.kernel.org,m:trondmy@kernel.org,m:samba-technical@lists.samba.org,m:simona@ffwll.ch,m:linux-cifs@vger.kernel.org,m:linux-nilfs@vger.kernel.org,m:vbabka@kernel.org,m:hughd@google.com,m:okorniev@redhat.com,m:mripard@kernel.org,m:ocfs2-devel@lists.linux.dev,m:jani.nikula@linux.intel.com,m:jaegeuk@kernel.org,m:baohua@kernel.org,m:kasong@tencent.com,m:tytso@mit.edu,m:muchun.song@linux.dev,m:linux-f2fs-devel@lists.sourceforge.net,m:anna@kernel.org,m:a
- markuze@redhat.com,m:shikemeng@huaweicloud.com,m:joonas.lahtinen@linux.intel.com,m:peterx@redhat.com,m:clm@fb.com,m:pfalcato@suse.de,m:marc.dionne@auristor.com,m:linux-afs@lists.infradead.org,m:bhe@redhat.com,m:willy@infradead.org,m:slava@dubeyko.com,m:neil@brown.name,m:idryomov@gmail.com,m:linux-ext4@vger.kernel.org,m:intel-gfx@lists.freedesktop.org,m:baolin.wang@linux.alibaba.com,m:rodrigo.vivi@intel.com,m:cgroups@vger.kernel.org,m:shakeel.butt@linux.dev,m:dan.j.williams@intel.com,m:osalvador@suse.de,m:gfs2@lists.linux.dev,m:linux-nfs@vger.kernel.org,m:nphamcs@gmail.com,m:linux-mm@kvack.org,m:jlayton@kernel.org,m:sfrench@samba.org,m:netfs@lists.linux.dev,m:rppt@kernel.org,m:mhocko@suse.com,m:jack@suse.cz,m:roman.gushchin@linux.dev,m:zhengqi.arch@bytedance.com,m:yuanchu@google.com,m:dhowells@redhat.com,m:joseph.qi@linux.alibaba.com,m:adilger.kernel@dilger.ca,m:airlied@gmail.com,m:agruenba@redhat.com,m:mark@fasheh.com,m:Dai.Ngo@oracle.com,m:jgg@ziepe.ca,m:axelrasmussen@google.com,m:
- jannh@google.com,m:maarten.lankhorst@linux.intel.com,m:Liam.Howlett@oracle.com,m:tom@talpey.com,m:bharathsm@microsoft.com,m:dsterba@suse.com,m:konishi.ryusuke@gmail.com,m:weixugc@google.com,m:tzimmermann@suse.de,m:hannes@cmpxchg.org,m:linux-btrfs@vger.kernel.org,m:jlbec@evilplan.org,s:lists@lfdr.de];
-	DMARC_NA(0.00)[linux-foundation.org];
-	ARC_NA(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	FORGED_SENDER(0.00)[akpm@linux-foundation.org,linux-f2fs-devel-bounces@lists.sourceforge.net];
-	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,linux-foundation.org:s=korg];
-	FREEMAIL_CC(0.00)[lists.linux.dev,manguebit.org,kernel.org,lists.freedesktop.org,vger.kernel.org,oracle.com,google.com,ursulin.net,nvidia.com,microsoft.com,zeniv.linux.org.uk,gmail.com,lists.samba.org,ffwll.ch,redhat.com,linux.intel.com,tencent.com,mit.edu,linux.dev,lists.sourceforge.net,huaweicloud.com,fb.com,suse.de,auristor.com,lists.infradead.org,infradead.org,dubeyko.com,brown.name,linux.alibaba.com,intel.com,kvack.org,samba.org,suse.com,suse.cz,bytedance.com,dilger.ca,fasheh.com,ziepe.ca,talpey.com,cmpxchg.org,evilplan.org];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
-	RCPT_COUNT_GT_50(0.00)[95];
+	RCVD_TLS_LAST(0.00)[];
+	TAGGED_FROM(0.00)[73d18077a2323a1fdb5e];
+	FORGED_SENDER(0.00)[syzbot@syzkaller.appspotmail.com,linux-f2fs-devel-bounces@lists.sourceforge.net];
+	RCVD_COUNT_THREE(0.00)[4];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_RECIPIENTS(0.00)[m:chao@kernel.org,m:jaegeuk@kernel.org,m:linux-f2fs-devel@lists.sourceforge.net,m:linux-kernel@vger.kernel.org,m:syzkaller-bugs@googlegroups.com,s:lists@lfdr.de];
+	ARC_NA(0.00)[];
+	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
+	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x];
+	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-];
+	RCPT_COUNT_FIVE(0.00)[5];
+	TO_DN_NONE(0.00)[];
+	PREVIOUSLY_DELIVERED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
 	FORGED_SENDER_FORWARDING(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[akpm@linux-foundation.org,linux-f2fs-devel-bounces@lists.sourceforge.net];
-	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,linux-foundation.org:-];
-	MID_RHS_MATCH_FROM(0.00)[];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
-	NEURAL_HAM(-0.00)[-0.656];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[syzbot@syzkaller.appspotmail.com,linux-f2fs-devel-bounces@lists.sourceforge.net];
+	DKIM_MIXED(0.00)[];
+	NEURAL_HAM(-0.00)[-1.000];
 	TAGGED_RCPT(0.00)[linux-f2fs-devel];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[columbia.edu:email,linux-foundation.org:mid]
-X-Rspamd-Queue-Id: E168219FB06
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	MISSING_XM_UA(0.00)[];
+	REDIRECTOR_URL(0.00)[goo.gl];
+	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
+	SUBJECT_HAS_QUESTION(0.00)[]
+X-Rspamd-Queue-Id: EB4D21A148B
 X-Rspamd-Action: no action
 
-On Wed, 25 Feb 2026 18:44:24 -0500 Tal Zussman <tz2294@columbia.edu> wrote:
+Hello,
 
-> struct pagevec was removed in commit 1e0877d58b1e ("mm: remove struct
-> pagevec"). Remove any stray references to it and rename relevant files
-> and macros accordingly.
-> 
-> While at it, remove unnecessary #includes of pagevec.h (now
-> folio_batch.h) in .c files. There are probably more of these that could
-> be removed in .h files, but those are more complex to verify.
+syzbot found the following issue on:
 
-Dang that's a lot of cc's ;)
+HEAD commit:    d4906ae14a5f Add linux-next specific files for 20260220
+git tree:       linux-next
+console output: https://syzkaller.appspot.com/x/log.txt?x=13f24006580000
+kernel config:  https://syzkaller.appspot.com/x/.config?x=cdf9388b212a2b28
+dashboard link: https://syzkaller.appspot.com/bug?extid=73d18077a2323a1fdb5e
+compiler:       Debian clang version 21.1.8 (++20251221033036+2078da43e25a-1~exp1~20251221153213.50), Debian LLD 21.1.8
+syz repro:      https://syzkaller.appspot.com/x/repro.syz?x=1312395a580000
+C reproducer:   https://syzkaller.appspot.com/x/repro.c?x=13a4855a580000
 
-Thanks, I'll add this series to mm.git's mm-new branch.
+Downloadable assets:
+disk image: https://storage.googleapis.com/syzbot-assets/1537e9684d19/disk-d4906ae1.raw.xz
+vmlinux: https://storage.googleapis.com/syzbot-assets/dd6c9977a9cf/vmlinux-d4906ae1.xz
+kernel image: https://storage.googleapis.com/syzbot-assets/f1d85a2d6c78/bzImage-d4906ae1.xz
+mounted in repro: https://storage.googleapis.com/syzbot-assets/2471b6f6a299/mount_0.gz
+  fsck result: failed (log: https://syzkaller.appspot.com/x/fsck.log?x=149a0202580000)
+
+IMPORTANT: if you fix the issue, please add the following tag to the commit:
+Reported-by: syzbot+73d18077a2323a1fdb5e@syzkaller.appspotmail.com
+
+INFO: task syz.1.18:6046 blocked for more than 143 seconds.
+      Not tainted syzkaller #0
+"echo 0 > /proc/sys/kernel/hung_task_timeout_secs" disables this message.
+task:syz.1.18        state:D stack:28832 pid:6046  tgid:6042  ppid:6019   task_flags:0x400040 flags:0x00080002
+Call Trace:
+ <TASK>
+ context_switch kernel/sched/core.c:5295 [inline]
+ __schedule+0x1585/0x5340 kernel/sched/core.c:6907
+ __schedule_loop kernel/sched/core.c:6989 [inline]
+ schedule+0x164/0x360 kernel/sched/core.c:7004
+ schedule_preempt_disabled+0x13/0x30 kernel/sched/core.c:7061
+ rwsem_down_write_slowpath+0x899/0x1040 kernel/locking/rwsem.c:1185
+ __down_write_common kernel/locking/rwsem.c:1317 [inline]
+ __down_write kernel/locking/rwsem.c:1326 [inline]
+ down_write+0x1bc/0x200 kernel/locking/rwsem.c:1591
+ inode_lock include/linux/fs.h:1028 [inline]
+ f2fs_fallocate+0x24e/0x9b0 fs/f2fs/file.c:2013
+ vfs_fallocate+0x669/0x7e0 fs/open.c:340
+ ksys_fallocate fs/open.c:364 [inline]
+ __do_sys_fallocate fs/open.c:369 [inline]
+ __se_sys_fallocate fs/open.c:367 [inline]
+ __x64_sys_fallocate+0xc0/0x110 fs/open.c:367
+ do_syscall_x64 arch/x86/entry/syscall_64.c:63 [inline]
+ do_syscall_64+0x14d/0xf80 arch/x86/entry/syscall_64.c:94
+ entry_SYSCALL_64_after_hwframe+0x77/0x7f
+RIP: 0033:0x7fa61c59c629
+RSP: 002b:00007fa61d448028 EFLAGS: 00000246
+ ORIG_RAX: 000000000000011d
+RAX: ffffffffffffffda RBX: 00007fa61c816090 RCX: 00007fa61c59c629
+RDX: 0000000000004000 RSI: 0000000000000008 RDI: 0000000000000004
+RBP: 00007fa61c632b39 R08: 0000000000000000 R09: 0000000000000000
+R10: 0000000000010000 R11: 0000000000000246 R12: 0000000000000000
+R13: 00007fa61c816128 R14: 00007fa61c816090 R15: 00007ffcfdb9b178
+ </TASK>
+
+Showing all locks held in the system:
+
+
+---
+This report is generated by a bot. It may contain errors.
+See https://goo.gl/tpsmEJ for more information about syzbot.
+syzbot engineers can be reached at syzkaller@googlegroups.com.
+
+syzbot will keep track of this issue. See:
+https://goo.gl/tpsmEJ#status for how to communicate with syzbot.
+
+If the report is already addressed, let syzbot know by replying with:
+#syz fix: exact-commit-title
+
+If you want syzbot to run the reproducer, reply with:
+#syz test: git://repo/address.git branch-or-commit-hash
+If you attach or paste a git patch, syzbot will apply it before testing.
+
+If you want to overwrite report's subsystems, reply with:
+#syz set subsystems: new-subsystem
+(See the list of subsystem names on the web dashboard)
+
+If the report is a duplicate of another one, reply with:
+#syz dup: exact-subject-of-another-report
+
+If you want to undo deduplication, reply with:
+#syz undup
 
 
 _______________________________________________
