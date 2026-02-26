@@ -2,41 +2,41 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id ME3QFvtvoGk4jwQAu9opvQ
+	id oLlNJhpwoGk4jwQAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 26 Feb 2026 17:08:27 +0100
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 26 Feb 2026 17:08:58 +0100
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 91F011A9AAE
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 26 Feb 2026 17:08:26 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 251C21A9AD4
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 26 Feb 2026 17:08:58 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
 	List-Unsubscribe:List-Id:Subject:To:In-Reply-To:References:Message-Id:
 	MIME-Version:Date:Sender:Content-ID:Content-Description:Resent-Date:
 	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=YQyDntNdB1nq+8Jhsftp+3WCg+nR4UTYdOmwHZfW2co=; b=Nswrc9jn933McsXEzn200dYQyk
-	f0J/o6HQPPDZ5urNVf+DCE2ip5F6rTwAZfvfx49nk5pvfJnYbPX7dqH+/E3N7HGtfn13aZviHnout
-	dKQCoZq5dqtbRvpA7yCS8AHJHB26uqjJAnwGRhGODaiS+xN/krr/ZMdr7Hy67UFePzgw=;
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=74T+Eo/3IuR6MH1b8qLB+c/eDCM5Z7RlHJ5GHy7T828=; b=NhCUqi/njITcvZMwtZfrwilgZu
+	Vs8clOPAcEbMib+jMx4vdBmaTj9hMT66Y7alowHs+6fVLo5hdZL9S895YnKgIT3NZlrvGgXQFziEt
+	sFayOxNfter5ygo+SCQNc/lQi4v+zbqzpJkRJC641a3tPJhmOntFZ4FDSB9YQPhFVrzY=;
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vvdua-0002sO-Qw;
-	Thu, 26 Feb 2026 16:08:24 +0000
+	id 1vvdv5-0004yx-SK;
+	Thu, 26 Feb 2026 16:08:56 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jlayton@kernel.org>) id 1vvduZ-0002s3-Qv;
- Thu, 26 Feb 2026 16:08:23 +0000
+ (envelope-from <jlayton@kernel.org>) id 1vvdv4-0004yT-BD;
+ Thu, 26 Feb 2026 16:08:55 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Cc:To:In-Reply-To:References:Message-Id:
  Content-Transfer-Encoding:Content-Type:MIME-Version:Subject:Date:From:Sender:
  Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
  :Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=6IfDemJd2MNf/WGrf31oPvRz2UGhOevGnanKtJhuV+E=; b=QBVFUsufQpgUqZ5qgWFVVZF585
- APqQ48koSUf1VhdHqVFk24XXCGfbJnUZVOkjMwqRfR9BLr/YomWdWQ/Y34TVyf7fGcLMXzdxkMJ7H
- ZT/ccCbARJtW5VKA9bbjtp/b4JVQFFmAdQN0U3yfUmV0ACDCUCsrkk6+OUhISjT0AzQE=;
+ bh=Y6DvddIVJLNMey0h1CCuTB2r8rD+LmKag9tJBJQAQE8=; b=RWe+vER22gbwsi1ub0yarUXzNq
+ iFrgMjAhEX/fGevYqyLmPfntWriQAPWxRz5atSB7OxycH6i+PFXt8HPK2tGO/FevdaLnONySwTU0L
+ z4UrmwHqbv1z8UfJlb4HTWhr4CRMXcvtyghyqFHfiQzbnl3xs1pR50blUcwmnCVFopFE=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Cc:To:In-Reply-To:References:Message-Id:Content-Transfer-Encoding:
@@ -44,31 +44,31 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=6IfDemJd2MNf/WGrf31oPvRz2UGhOevGnanKtJhuV+E=; b=aOvXiYbyUuQda/CYeNUFuCdi5U
- rjH9eQTiJEx0BAIB5L96NB0WUg0R2JTwn7qyt465iZk2Lk7RyatPHxk7HBHQVYW0xxBy5lqpPN9K1
- rWJo/bZSu3nkMTa+mecAai6J2SpNTefNAWUxB78D8YedGvwZAlgrHt/BRf6rFZFCf/TQ=;
-Received: from tor.source.kernel.org ([172.105.4.254])
+ bh=Y6DvddIVJLNMey0h1CCuTB2r8rD+LmKag9tJBJQAQE8=; b=bHMFr/QbY13lErp6iepkd6bPtQ
+ WXx65VbXsgb16AwcFe5aQkt7hVLlgNlKzZ4R2WjNBST17mjoH5e3CsNj3rSqc59tyCI6BIAmqcIB+
+ 9bj72cVyAHcCui7IGC98LmlqVKWPNQNtE4dPPREtF5O8w+VRfcCb05vO+Z0bNPIyficc=;
+Received: from sea.source.kernel.org ([172.234.252.31])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vvduY-0006Im-8R; Thu, 26 Feb 2026 16:08:23 +0000
+ id 1vvduk-0006KV-6J; Thu, 26 Feb 2026 16:08:55 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 745C86013C;
+ by sea.source.kernel.org (Postfix) with ESMTP id B85EA4090F;
+ Thu, 26 Feb 2026 16:08:23 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6370AC2BCAF;
  Thu, 26 Feb 2026 16:08:11 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id ECC59C19423;
- Thu, 26 Feb 2026 16:07:58 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1772122091;
- bh=QVP/A0Wr2Abx3BWIf3M/CTqVpPmV8SXmSE5S4tBQdB8=;
+ s=k20201202; t=1772122103;
+ bh=DKhApmyz97hHNqRDBfnn+HmbPok4RTPICktaKEFjeAw=;
  h=From:Date:Subject:References:In-Reply-To:To:Cc:From;
- b=N/iU9fkY7C+X0gBA8Fi8wI+B9cgJ3ZSt6kN4EuqYE+eP8vng3qyDWNfsyIhvtKLdH
- b+b4Aulfg3FxrO0Nm/YcWTCOcXO8KCjAYbQRgQ7mVqFUqT4sm4WDf0eBVloGkV76Qr
- nzuEqM5tBQz8ltYFpBlQxn9/JiVP72na6rLnacqYsI4nNdpxGTgdAMyZLHYRXq/4hX
- iUesVZMqUqLc1V+1j2OQrGrDnS19dzjRGvGlWMVyWmletccEF567lF82pATRt0e1O/
- TjpBPU5Ieg1IbZKo5hjqzncuK/qa9dvo9N2Li7BzU0aNxcuEYodPJfkpyZdtWwQ3zU
- M4VIYqh/JOBMg==
-Date: Thu, 26 Feb 2026 10:55:59 -0500
+ b=k5dYSDIBAPQzqW+BguNSbxXsI77/BBR1Zqkb2GTl5B+wNZoLV877xFojJINgg+Hfc
+ UrOVLQI/YLOUBa4a3ST9a0Igdn6L8rKk+lTiknPRPXqyYw1a4Ly58655gQuh8GP9Y9
+ rs4kvUwYSS+RyO9nii4FBh0CFg9GIl8SJdAnjcjlt/dTjcLvW0ePiFCs7YE0MHvU60
+ DC6hyGIImi5K1WDNQGddQrz0a2NwQ8qfapAn52bH5aHlz6kpMX6qiGAwc3l5RsMMi5
+ TWpwAqf4c35siWMewXwkgGem7qGmVkQMu6wwPk3bFQPYe1ZnYG7S+4zzzLfGJLMoyL
+ yuwTxLt9qHLnQ==
+Date: Thu, 26 Feb 2026 10:56:00 -0500
 MIME-Version: 1.0
-Message-Id: <20260226-iino-u64-v1-57-ccceff366db9@kernel.org>
+Message-Id: <20260226-iino-u64-v1-58-ccceff366db9@kernel.org>
 References: <20260226-iino-u64-v1-0-ccceff366db9@kernel.org>
 In-Reply-To: <20260226-iino-u64-v1-0-ccceff366db9@kernel.org>
 To: Alexander Viro <viro@zeniv.linux.org.uk>, 
@@ -144,47 +144,46 @@ To: Alexander Viro <viro@zeniv.linux.org.uk>,
  James Clark <james.clark@linaro.org>, "Darrick J. Wong" <djwong@kernel.org>, 
  Martin Schiller <ms@dev.tdt.de>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2279; i=jlayton@kernel.org;
- h=from:subject:message-id; bh=QVP/A0Wr2Abx3BWIf3M/CTqVpPmV8SXmSE5S4tBQdB8=;
- b=owEBbQKS/ZANAwAKAQAOaEEZVoIVAcsmYgBpoG0Sq+j7M9feeeWsEEfnIcsU2CbAxEDqyZD2b
- 80+R1w14vOJAjMEAAEKAB0WIQRLwNeyRHGyoYTq9dMADmhBGVaCFQUCaaBtEgAKCRAADmhBGVaC
- FVKJEAC5sid11Go6fuJI7CWXgk/4O9Urmq5+faYtXDswS3e3Xney5z3y6yARF5s8jF6mfhgzQla
- vQ5vaTZ4z5mXQy/RAzR9sUFhWtITbMTuDCT5t/OkYsBp8k7TwPqeEVypA51Ep4SVoYatBJBiLQf
- 2fat2kabGqKEdxfCFhYZ/T/0dQV3iRAt9D43qR/WxIm6MSoTlo9YHWCG91yTvgD0CJW04McaD9e
- nABf28Ev6HbF1zoK9hLfjRiwAC29acMvnrI3Im5gXXzJ3e46OOwusoMZtJhXXd2agPTunLgXcRl
- +/ycDsR+Tty6dLu6VAPvTR3bnQezZb781kcYoTcQIWu/ddCkKz0VN6tP3bv0JkLuXRGp5oMuJvs
- FLd0RNjIJ8Ld9Cxg6Okd724968ObOXOBed5IGmMNSiyI1onguOK2GPh5Y4UcuvhDl3Hb9B3YLPv
- GQoEkhHN0x/lNXU8GCxcaTPkOHjEdaymP6yleBH4f2aw30WmtBhphVmnABJ3EIHcDVimT+dukC3
- 7UJg7jQn/8YGDHpTw5kC/uLPLgLMuwHYtsmRsnrvs61gYC+3Qtk3Y7gYe4FIJx76xaByCFyzY87
- rBIQo95KFdLZQVVKUfEH8H44JnZ0KGwlz9muKgqItA3T9f5veP4BQOKpi5i+iTywd4a4kYDOPcK
- EQzZuVxQyu+fRsA==
+X-Developer-Signature: v=1; a=openpgp-sha256; l=793; i=jlayton@kernel.org;
+ h=from:subject:message-id; bh=DKhApmyz97hHNqRDBfnn+HmbPok4RTPICktaKEFjeAw=;
+ b=owEBbQKS/ZANAwAKAQAOaEEZVoIVAcsmYgBpoG0ShJVaxVP99hosE1VCTn8mUr4e1D55bkFMr
+ JLwUwTrQ8WJAjMEAAEKAB0WIQRLwNeyRHGyoYTq9dMADmhBGVaCFQUCaaBtEgAKCRAADmhBGVaC
+ FW1wD/9n4D6Ggc73Uc+iboQycTz+zQzDx3YB6SvNvw5tExXkQWrmbQHXWE0jl7c6Vv/TMM5TYO9
+ XX6CptmWBNF0kABjqGkwrvHTDy/oyVFDYPaS78W5JcqRlHO+So3SlR23AEn9lhJAdZzlSzuZq+u
+ HzC3jaM5bQPJnbqqli463SyTOrMsBafb9RJYiHZJQsFE20MzfSqd5dIHjuKKTjil+qsqBx0H4vj
+ a3jlcDRGPwnJQ16+G1JcSgAbtFVslpI/FpVdkpOQItQ8Smhsffm5rqsWL3rKZVMbbc5+nwn4s6D
+ a3hxXNGxqd+96VN4BQUZ9f9pUlGCJOuj7Kc9nTOAadOsCObc52ugfbdTfElrTl7JLLTMXOx24SL
+ IQnmSBSw3tVQNQHOfdkYiiHKD9GjmZZtwYGU/X8jf+c0cejzd7lqJr+1k24qEFL5rNA8EicGvmo
+ UhNG0XQ7IWd9ji4Tn1Hnjb6iqL1cugOk4rx1ms9l4An0V5SjLmDJDtl04mdxf+3CYLhw7zN+bXb
+ Tj2y70Cdw++wiRSHr4B+1EHhS0mGBjuy9GC3CImYWdDJt1sMdK46feI5rvC5EpK+O7++Boc36rL
+ /5Z9a/w9FwsXha3/fp8uwVNalc/hucFqX7HnNt9MRtb3RIMdwskorXYS2D90WUhctvSUvMRRbM3
+ rmbMtROf0z871BA==
 X-Developer-Key: i=jlayton@kernel.org; a=openpgp;
  fpr=4BC0D7B24471B2A184EAF5D3000E684119568215
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: Update format strings from %lu to %llu for inode->i_ino now
+ Content preview:  Update format string from %lu to %llu for inode->i_ino now
  that i_ino is u64 instead of unsigned long. Signed-off-by: Jeff Layton
  <jlayton@kernel.org>
- --- fs/crypto/crypto.c | 2 +- fs/crypto/hooks.c | 2 +- fs/crypto/keysetup.c
- | 2 +- 3 files changed, 3 insertions(+), 3 deletions(-) 
+ --- fs/verity/init.c | 2 +- 1 file changed, 1 insertion(+), 1 deletion(-)
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1vvduY-0006Im-8R
-Subject: [f2fs-dev] [PATCH 57/61] fscrypt: update format strings for u64
+X-Headers-End: 1vvduk-0006KV-6J
+Subject: [f2fs-dev] [PATCH 58/61] fsverity: update format string for u64
  i_ino
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
@@ -241,8 +240,8 @@ X-Spamd-Result: default: False [-7.11 / 15.00];
 	ARC_NA(0.00)[];
 	MIME_TRACE(0.00)[0:+];
 	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,kernel.org:s=k20201202];
-	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
 	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,kernel.org:-];
+	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
 	RCVD_COUNT_FIVE(0.00)[5];
 	RCPT_COUNT_GT_50(0.00)[146];
 	FROM_NEQ_ENVFROM(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
@@ -255,58 +254,30 @@ X-Spamd-Result: default: False [-7.11 / 15.00];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.sourceforge.net:rdns,lists.sourceforge.net:helo,lists.sourceforge.net:dkim]
-X-Rspamd-Queue-Id: 91F011A9AAE
+X-Rspamd-Queue-Id: 251C21A9AD4
 X-Rspamd-Action: no action
 
-Update format strings from %lu to %llu for inode->i_ino now that
+Update format string from %lu to %llu for inode->i_ino now that
 i_ino is u64 instead of unsigned long.
 
 Signed-off-by: Jeff Layton <jlayton@kernel.org>
 ---
- fs/crypto/crypto.c   | 2 +-
- fs/crypto/hooks.c    | 2 +-
- fs/crypto/keysetup.c | 2 +-
- 3 files changed, 3 insertions(+), 3 deletions(-)
+ fs/verity/init.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/fs/crypto/crypto.c b/fs/crypto/crypto.c
-index 07f9cbfe3ea4115b8fcc881ae5154b3c3e898c04..570a2231c945a6c649cf8dc3b457f0b55657e0c3 100644
---- a/fs/crypto/crypto.c
-+++ b/fs/crypto/crypto.c
-@@ -365,7 +365,7 @@ void fscrypt_msg(const struct inode *inode, const char *level,
+diff --git a/fs/verity/init.c b/fs/verity/init.c
+index d6520660858386d3b7d69b20a459dc27d8017a5f..3aa55dec88fc919792a2cb4be476f8481ef78a9e 100644
+--- a/fs/verity/init.c
++++ b/fs/verity/init.c
+@@ -50,7 +50,7 @@ void fsverity_msg(const struct inode *inode, const char *level,
  	vaf.fmt = fmt;
  	vaf.va = &args;
- 	if (inode && inode->i_ino)
--		printk("%sfscrypt (%s, inode %lu): %pV\n",
-+		printk("%sfscrypt (%s, inode %llu): %pV\n",
+ 	if (inode)
+-		printk("%sfs-verity (%s, inode %lu): %pV\n",
++		printk("%sfs-verity (%s, inode %llu): %pV\n",
  		       level, inode->i_sb->s_id, inode->i_ino, &vaf);
- 	else if (inode)
- 		printk("%sfscrypt (%s): %pV\n", level, inode->i_sb->s_id, &vaf);
-diff --git a/fs/crypto/hooks.c b/fs/crypto/hooks.c
-index b97de0d1430fd6ec764f4a758dffe00263496118..a7a8a3f581a0460537f5ff955bc8b5d30573a033 100644
---- a/fs/crypto/hooks.c
-+++ b/fs/crypto/hooks.c
-@@ -62,7 +62,7 @@ int fscrypt_file_open(struct inode *inode, struct file *filp)
- 	dentry_parent = dget_parent(dentry);
- 	if (!fscrypt_has_permitted_context(d_inode(dentry_parent), inode)) {
- 		fscrypt_warn(inode,
--			     "Inconsistent encryption context (parent directory: %lu)",
-+			     "Inconsistent encryption context (parent directory: %llu)",
- 			     d_inode(dentry_parent)->i_ino);
- 		err = -EPERM;
- 	}
-diff --git a/fs/crypto/keysetup.c b/fs/crypto/keysetup.c
-index 40fa05688d3a1d4aa33d29e9508441faf4bca933..df58ca4a5e3cb1df94e2f08e3f3b093c33368993 100644
---- a/fs/crypto/keysetup.c
-+++ b/fs/crypto/keysetup.c
-@@ -91,7 +91,7 @@ select_encryption_mode(const union fscrypt_policy *policy,
- 	if (S_ISDIR(inode->i_mode) || S_ISLNK(inode->i_mode))
- 		return &fscrypt_modes[fscrypt_policy_fnames_mode(policy)];
- 
--	WARN_ONCE(1, "fscrypt: filesystem tried to load encryption info for inode %lu, which is not encryptable (file type %d)\n",
-+	WARN_ONCE(1, "fscrypt: filesystem tried to load encryption info for inode %llu, which is not encryptable (file type %d)\n",
- 		  inode->i_ino, (inode->i_mode & S_IFMT));
- 	return ERR_PTR(-EINVAL);
- }
+ 	else
+ 		printk("%sfs-verity: %pV\n", level, &vaf);
 
 -- 
 2.53.0
