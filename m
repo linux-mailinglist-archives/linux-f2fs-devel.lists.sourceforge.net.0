@@ -2,41 +2,41 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id QFSfJge6oGnClwQAu9opvQ
+	id QLYdMgW6oGnClwQAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 26 Feb 2026 22:24:23 +0100
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 26 Feb 2026 22:24:21 +0100
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 34D5F1AFB77
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 26 Feb 2026 22:24:23 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id EAA531AFB69
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 26 Feb 2026 22:24:20 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
 	Subject:MIME-Version:References:In-Reply-To:Message-ID:To:From:Date:Sender:
 	Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
 	:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=YkSh8vizhEGIE7NgAPAfI1EGrpkFWZ3Vdty1oAUkgTo=; b=US4hHUwUFZZJwaGT/g0HV4Bfym
-	wdEaNZ1fFbid3FYzWqBhcX3PBJYLOVV9zh93Xhp6Kme8nMnwDnPedLK8PxndHqpjnPYkcqwuJTSD7
-	X20qLOz/agOrmGooY8Wn6Hfjg1zF5aR4cWepG0HDSQZiRwUXGmmYjH/B6Ipo7gu3l4kE=;
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=AmitF10U6nYtm0L+Jl2jQ36FJaVrZ/g7RyYmHSRc6go=; b=j52pv8/Yp1FgXFqg5wKYn+fQH1
+	AaN+SyNtFQTzy0n5r7Fddk/DeAMDkrwxmAU81sbnu3Ayr3bs4enaegEMqfxisZ+mQG0aWizUWSPp3
+	lKScnUWdRyjsmU12vlkkCU/uL0pgdtwddqBB96OGoUS33U3CHRjfS/pdAFHhxGSDXg/E=;
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vviqL-0001Y1-T9;
-	Thu, 26 Feb 2026 21:24:21 +0000
+	id 1vviqG-0001wY-Hr;
+	Thu, 26 Feb 2026 21:24:16 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <richard@nod.at>) id 1vviqJ-0001Xa-NM;
- Thu, 26 Feb 2026 21:24:19 +0000
+ (envelope-from <richard@nod.at>) id 1vviqE-0001wG-JX;
+ Thu, 26 Feb 2026 21:24:14 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:MIME-Version
  :Subject:References:In-Reply-To:Message-ID:Cc:To:From:Date:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=b5speBzLOx9O3ZQa1YCvB0Y54PAq8tRZnmBFWuQK5aQ=; b=FcdMuxqvNnxwZ3mBFO0xTpVIiS
- z+iJSq9e38NPF0cVhvlRvPlIlogO/V68on2nbVpx7I4qCtR2RVHneLuJajZNS6U2ZDPFqRe02JF3Q
- 8CEwSxQ8cleqgYJfXK2gA8t1wsgPIMYH1EfIaYdLPOFap2/TUR58HlsGp999/3udM3ks=;
+ bh=wXm653hpUNbvhGny2Mqq3COutnyaY+n/e+zXIaJf8vo=; b=fpF8JXN1hiTk4KGyyKpNk7Sxba
+ BxEDK1au1K96Ch5EwrbFiJcPnXcIpQEviBtj7ukHcQxv4Mf0MpwKOX47e6njoNbbvHr7M3mdoe1n0
+ zl3TEbhmp3eVZNsi0QH1Tm3RT8+FvMInsBE6fKL7x3lqqShAbmLcYMTUyOjuNbmLTi2U=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:MIME-Version:Subject:References:
@@ -44,58 +44,58 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=b5speBzLOx9O3ZQa1YCvB0Y54PAq8tRZnmBFWuQK5aQ=; b=JaWF8AjFevR3pvTCPf/92h6AEG
- pQVWFHuTQNhm3c+GsRKhQzHFwPKSMKbKawjz29Cb5iY1U37ClqcxLyP+FCGoj3DFUfRn2WE1jglZJ
- YRxonTtilpPPk4Ns9bJp3//EufWKGVLCtM93BfHpnBlNkEBArRjcbG2TJWDk/qOBxE5s=;
+ bh=wXm653hpUNbvhGny2Mqq3COutnyaY+n/e+zXIaJf8vo=; b=eKuAGFBZ8SNH+bUBV9BPjFYoeB
+ kuC2OLSNnIH+mMFCabaGYMjDoPSVYmBFML7N+LHmWgU/QCrf8c/ZgCz6yhYW1GZStvoa58AeI7HGS
+ RnVgwgFDOhqfosKalhfdK2wN8wCl5fs0L4TI8Bh33LSmntaXO6jTaGxc6XxdlQDP6oxg=;
 Received: from mailout.nod.at ([116.203.167.152] helo=lithops.sigma-star.at)
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vviqI-000666-Vt; Thu, 26 Feb 2026 21:24:19 +0000
+ id 1vviqD-00065t-U0; Thu, 26 Feb 2026 21:24:14 +0000
 Received: from localhost (localhost [127.0.0.1])
- by lithops.sigma-star.at (Postfix) with ESMTP id 8F3C528F9E9;
- Thu, 26 Feb 2026 22:06:12 +0100 (CET)
+ by lithops.sigma-star.at (Postfix) with ESMTP id 325382A3C71;
+ Thu, 26 Feb 2026 22:06:35 +0100 (CET)
 Received: from lithops.sigma-star.at ([127.0.0.1])
  by localhost (lithops.sigma-star.at [127.0.0.1]) (amavisd-new, port 10032)
- with ESMTP id iWyiIX5CRUJd; Thu, 26 Feb 2026 22:06:11 +0100 (CET)
+ with ESMTP id wtNVnsVrigfw; Thu, 26 Feb 2026 22:06:33 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
- by lithops.sigma-star.at (Postfix) with ESMTP id 9FBFB29859D;
- Thu, 26 Feb 2026 22:06:10 +0100 (CET)
+ by lithops.sigma-star.at (Postfix) with ESMTP id 3D6F329ABD6;
+ Thu, 26 Feb 2026 22:06:33 +0100 (CET)
 Received: from lithops.sigma-star.at ([127.0.0.1])
  by localhost (lithops.sigma-star.at [127.0.0.1]) (amavisd-new, port 10026)
- with ESMTP id cwbgIi8mwQ6r; Thu, 26 Feb 2026 22:06:09 +0100 (CET)
+ with ESMTP id TTBOxwOFVdGm; Thu, 26 Feb 2026 22:06:32 +0100 (CET)
 Received: from lithops.sigma-star.at (lithops.sigma-star.at [195.201.40.130])
- by lithops.sigma-star.at (Postfix) with ESMTP id 1868E298580;
- Thu, 26 Feb 2026 22:06:08 +0100 (CET)
-Date: Thu, 26 Feb 2026 22:06:07 +0100 (CET)
+ by lithops.sigma-star.at (Postfix) with ESMTP id EFF89298599;
+ Thu, 26 Feb 2026 22:06:31 +0100 (CET)
+Date: Thu, 26 Feb 2026 22:06:31 +0100 (CET)
 From: Richard Weinberger <richard@nod.at>
 To: Jeff Layton <jlayton@kernel.org>
-Message-ID: <909001762.1963.1772139967060.JavaMail.zimbra@nod.at>
-In-Reply-To: <20260226-iino-u64-v1-47-ccceff366db9@kernel.org>
+Message-ID: <1889140340.1973.1772139991688.JavaMail.zimbra@nod.at>
+In-Reply-To: <20260226-iino-u64-v1-37-ccceff366db9@kernel.org>
 References: <20260226-iino-u64-v1-0-ccceff366db9@kernel.org>
- <20260226-iino-u64-v1-47-ccceff366db9@kernel.org>
+ <20260226-iino-u64-v1-37-ccceff366db9@kernel.org>
 MIME-Version: 1.0
 X-Originating-IP: [195.201.40.130]
 X-Mailer: Zimbra 8.8.12_GA_3807 (ZimbraWebClient - FF147
  (Linux)/8.8.12_GA_3809)
-Thread-Topic: ubifs: update format strings for u64 i_ino
-Thread-Index: W1YwJFGUiVxHsVs+FtVDAklXBDhaRQ==
+Thread-Topic: jffs2: update format strings for u64 i_ino
+Thread-Index: xD7TK6/dJ7pUGRHHehUamcKvWNrpNA==
 X-Spam-Score: 0.0 (/)
-X-Spam-Report: Spam detection software, running on the system "sfi-spamd-2.hosts.colo.sdot.me",
+X-Spam-Report: Spam detection software, running on the system "sfi-spamd-1.hosts.colo.sdot.me",
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
  
  Content preview:  ----- Ursprüngliche Mail ----- > Von: "Jeff Layton" <jlayton@kernel.org>
-    > Update format strings and local variable types in ubifs for the > i_ino
+    > Update format strings and local variable types in jffs2 for the > i_ino
     type change from unsigned long to u64. > > Signed-of [...] 
  
  Content analysis details:   (0.0 points, 5.0 required)
  
   pts rule name              description
  ---- ---------------------- --------------------------------------------------
-X-Headers-End: 1vviqI-000666-Vt
-Subject: Re: [f2fs-dev] [PATCH 47/61] ubifs: update format strings for u64
+X-Headers-End: 1vviqD-00065t-U0
+Subject: Re: [f2fs-dev] [PATCH 37/61] jffs2: update format strings for u64
  i_ino
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
@@ -204,7 +204,7 @@ X-Spamd-Result: default: False [0.49 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	RWL_MAILSPIKE_EXCELLENT(-0.40)[216.105.38.7:from];
 	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
-	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7:c];
+	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7];
 	MAILLIST(-0.20)[mailman];
 	MIME_BASE64_TEXT(0.10)[];
 	MIME_GOOD(-0.10)[text/plain];
@@ -212,10 +212,10 @@ X-Spamd-Result: default: False [0.49 / 15.00];
 	TO_DN_SOME(0.00)[];
 	DKIM_MIXED(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
-	MIME_TRACE(0.00)[0:+];
+	RECEIVED_HELO_LOCALHOST(0.00)[];
 	SUSPICIOUS_AUTH_ORIGIN(0.00)[];
 	ARC_NA(0.00)[];
-	RECEIVED_HELO_LOCALHOST(0.00)[];
+	MIME_TRACE(0.00)[0:+];
 	DMARC_NA(0.00)[nod.at];
 	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x];
 	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-];
@@ -228,25 +228,22 @@ X-Spamd-Result: default: False [0.49 / 15.00];
 	HAS_XOIP(0.00)[];
 	MID_RHS_MATCH_FROM(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	NEURAL_HAM(-0.00)[-0.246];
+	NEURAL_HAM(-0.00)[-0.304];
 	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
 	TAGGED_RCPT(0.00)[linux-f2fs-devel];
 	RCVD_COUNT_SEVEN(0.00)[8]
-X-Rspamd-Queue-Id: 34D5F1AFB77
+X-Rspamd-Queue-Id: EAA531AFB69
 X-Rspamd-Action: no action
 
 LS0tLS0gVXJzcHLDvG5nbGljaGUgTWFpbCAtLS0tLQo+IFZvbjogIkplZmYgTGF5dG9uIiA8amxh
 eXRvbkBrZXJuZWwub3JnPgo+IFVwZGF0ZSBmb3JtYXQgc3RyaW5ncyBhbmQgbG9jYWwgdmFyaWFi
-bGUgdHlwZXMgaW4gdWJpZnMgZm9yIHRoZQo+IGlfaW5vIHR5cGUgY2hhbmdlIGZyb20gdW5zaWdu
+bGUgdHlwZXMgaW4gamZmczIgZm9yIHRoZQo+IGlfaW5vIHR5cGUgY2hhbmdlIGZyb20gdW5zaWdu
 ZWQgbG9uZyB0byB1NjQuCj4gCj4gU2lnbmVkLW9mZi1ieTogSmVmZiBMYXl0b24gPGpsYXl0b25A
-a2VybmVsLm9yZz4KPiAtLS0KPiBmcy91Ymlmcy9kZWJ1Zy5jICAgfCAgOCArKysrLS0tLQo+IGZz
-L3ViaWZzL2Rpci5jICAgICB8IDI4ICsrKysrKysrKysrKysrLS0tLS0tLS0tLS0tLS0KPiBmcy91
-Ymlmcy9maWxlLmMgICAgfCAyOCArKysrKysrKysrKysrKy0tLS0tLS0tLS0tLS0tCj4gZnMvdWJp
-ZnMvam91cm5hbC5jIHwgIDYgKysrLS0tCj4gZnMvdWJpZnMvc3VwZXIuYyAgIHwgMTYgKysrKysr
-KystLS0tLS0tLQo+IGZzL3ViaWZzL3RuYy5jICAgICB8ICA0ICsrLS0KPiBmcy91Ymlmcy94YXR0
-ci5jICAgfCAxNCArKysrKysrLS0tLS0tLQo+IDcgZmlsZXMgY2hhbmdlZCwgNTIgaW5zZXJ0aW9u
-cygrKSwgNTIgZGVsZXRpb25zKC0pCgpBY2tlZC1ieTogUmljaGFyZCBXZWluYmVyZ2VyIDxyaWNo
-YXJkQG5vZC5hdD4KClRoYW5rcywKLy9yaWNoYXJkCgoKX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX18KTGludXgtZjJmcy1kZXZlbCBtYWlsaW5nIGxpc3QKTGlu
-dXgtZjJmcy1kZXZlbEBsaXN0cy5zb3VyY2Vmb3JnZS5uZXQKaHR0cHM6Ly9saXN0cy5zb3VyY2Vm
-b3JnZS5uZXQvbGlzdHMvbGlzdGluZm8vbGludXgtZjJmcy1kZXZlbAo=
+a2VybmVsLm9yZz4KPiAtLS0KPiBmcy9qZmZzMi9kaXIuYyAgfCAgNCArKy0tCj4gZnMvamZmczIv
+ZmlsZS5jIHwgIDQgKystLQo+IGZzL2pmZnMyL2ZzLmMgICB8IDE4ICsrKysrKysrKy0tLS0tLS0t
+LQo+IDMgZmlsZXMgY2hhbmdlZCwgMTMgaW5zZXJ0aW9ucygrKSwgMTMgZGVsZXRpb25zKC0pCgpB
+Y2tlZC1ieTogUmljaGFyZCBXZWluYmVyZ2VyIDxyaWNoYXJkQG5vZC5hdD4KClRoYW5rcywKLy9y
+aWNoYXJkCgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18K
+TGludXgtZjJmcy1kZXZlbCBtYWlsaW5nIGxpc3QKTGludXgtZjJmcy1kZXZlbEBsaXN0cy5zb3Vy
+Y2Vmb3JnZS5uZXQKaHR0cHM6Ly9saXN0cy5zb3VyY2Vmb3JnZS5uZXQvbGlzdHMvbGlzdGluZm8v
+bGludXgtZjJmcy1kZXZlbAo=
