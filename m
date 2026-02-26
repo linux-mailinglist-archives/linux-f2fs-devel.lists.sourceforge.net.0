@@ -2,75 +2,77 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id OevCLqVdoGlViwQAu9opvQ
+	id WE6TL6VdoGlSiwQAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
 	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 26 Feb 2026 15:50:13 +0100
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0EAD71A7EAC
+	by mail.lfdr.de (Postfix) with ESMTPS id 0FE6B1A7EAD
 	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 26 Feb 2026 15:50:12 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
-	Subject:MIME-Version:Message-ID:Date:To:From:Sender:Reply-To:Content-ID:
-	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
-	:Resent-Message-ID:In-Reply-To:References:List-Owner;
-	bh=6VbeXH3oykFt1end0qZsOjsGKoqutkriKwsiRs2mp40=; b=N3Ppg4tcMx7cR0Kxdvf9O5tqh/
-	ZyTI4OAyZf3954Ukfx8x88xBZCckXVnMBQ8wX8sbtmlYhJSyl/Ds9WEGmwbLGNwVBxqViHY78c0wl
-	6wXOLQp6x/kdbF42AYlIBZgmHxmmwjHWJDlTuEW75BYFYBmB2nptfk5lUITk/xhK1Y0w=;
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	Subject:MIME-Version:References:In-Reply-To:Message-ID:Date:To:From:Sender:
+	Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
+	:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
+	bh=M6sxQ0kAtrJUKuBCdmR9hoak2CcgK7AWGuvuUGOocS0=; b=aZQ/VowzlwKJXDOY86luNFiZz3
+	xHQqRgPwiCcqL5buMYzcGw9e2ewpdZwIXXGnreQ+CWBNUtDUckzXH/E1jfsXXpRTYw2CiD1xJyxp1
+	TC18VJpY0iFjLFSgiNw6Aon0HupiGpnL091khm655j9zEt8NWpmNylRXYFVHWBDDliSA=;
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vvcgr-0003pi-7p;
-	Thu, 26 Feb 2026 14:50:09 +0000
+	id 1vvcgp-0007Ej-C9;
+	Thu, 26 Feb 2026 14:50:08 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95) (envelope-from
  <BATV+c5cab09b19de097b6dd3+8222+infradead.org+hch@bombadil.srs.infradead.org>)
- id 1vvcgp-0003pH-UG for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 26 Feb 2026 14:50:07 +0000
+ id 1vvcgk-0007EB-Qf for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 26 Feb 2026 14:50:04 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
+ In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=mlW1GrWYPpKtXEVPnQNWBHiFH5LdPT6NCG40um9+2Jk=; b=lz3520WRTnZbk2d/QyO8e/jusf
- xliFp1/ML68P+GpUJuy4L7jWkysBzJ3JayyMxZM+Rbp8av3h4e3/rosYo6Je8aopBgwHdhTHWG3D9
- UAPJHJ2PSDxKyVekyTOyCg1lEU9c3MMr2klMbjScyCFoRHOak5i/2qw7KnJ/HCL3qLR4=;
+ bh=wdIEsKTzA9SnbF5IiASm761ocVgdBQM29TC5lUjPX2c=; b=ReEt7Z+yTHmyT4YK3OmK6YqJUD
+ tWspVDqXPo9OsMJDwMYWS+0VjVkh8lGgZU5PgH36RJpmX8/FxU3t4BjjY9ajiYL4KAmF+ZhU316JQ
+ ICIrnj7XTzloU+uUGQPqpX75CexfpC3jVKJGIP2cnKvaX4+CIbL2fMiyTkiw11sIa1sI=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=mlW1GrWYPpKtXEVPnQNWBHiFH5LdPT6NCG40um9+2Jk=; b=K
- v7VSOkyW8WOKFwtAA2c4yvLVU/Wz+bWtyhcs585oHuY2qoIbfAoDpNHuPShGp5Q2ji00Q6g3RNtn4
- zlO2e9yKTudBdLnF6IRSf9JxlUqRE54ccqvMpC0JxNEjOtOBo1U6r7QMfgQoOS8AqaOQ3G/r256Vz
- PhoSFjf9oLTTxw3M=;
+ h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=wdIEsKTzA9SnbF5IiASm761ocVgdBQM29TC5lUjPX2c=; b=VF1YjrGPoFIXs2u515a7oxufym
+ bxqeyTcq+S0aCPwYuf6UqHod2vhd3Jqtm7rC2WT8t0GTl4C7k1DKOxeEeysP9K9IN8ny4s0xhzxq3
+ dBDud939rcBc8nGZugjPp10OoWTh/0RlfqmIscu8m1B3OSqmAyaPe84VyGGI8VgYOmP8=;
 Received: from bombadil.infradead.org ([198.137.202.133])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vvcgp-0000SF-91 for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 26 Feb 2026 14:50:07 +0000
+ id 1vvcgk-0000Rn-GX for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 26 Feb 2026 14:50:03 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
- MIME-Version:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
- Content-ID:Content-Description:In-Reply-To:References;
- bh=mlW1GrWYPpKtXEVPnQNWBHiFH5LdPT6NCG40um9+2Jk=; b=mVvuPZbubKAsBHIRa9ZgMZp7up
- 6jBDAhlLzfognU5MoSboXf6xY+4hguYbUiwKibxPVZNaYznsY84WjoTE5yf8uVxB6akss0xbP5C36
- Ks+m6P1nleLZJXHAsDCZeGYMM3HYMk/1lek+KTxojvGRwVPwKsM27NHmQWolGybPywiXlR73dDj9i
- GcDV9T3ghCAv9BPC57TYLcYsvH1dMBaQnHdXjxgqqRus1ibChr9WNzVeBGoJCT2Svceg/apgIJp2p
- XwYc9djEQzWodISFIKsPptFLYEbAoFZVbTMApgTeYd+BwEgliKfM0g3NtLqc4S+ME81XCygCY8NkA
- /AKwlRbA==;
+ MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender
+ :Reply-To:Content-Type:Content-ID:Content-Description;
+ bh=wdIEsKTzA9SnbF5IiASm761ocVgdBQM29TC5lUjPX2c=; b=AM5a6lH8QBV7r3VGXzAiWJ9gB0
+ jgLPsfbFRfea51sZM7mCdiHd/UhEP0rcDgx13btlsfNyltlGpyrNMtC546mEPrU2FTEtQhgcJTfph
+ M+J38sFp6s6UHxmEfI3XMyow3APfefz4SjoJLx3ANk0vfud3F4ExMi4qu2nC8g120IaQloykKA/Kx
+ T5vJ8+sIDs0roUmhmJWurURtPawval24xcp30kWvFfvqAzSzxWebcdQ0ZvNw1FISH/h3l8oEfjYnV
+ 0dKG2ATg+R0cCvw2HoVo82/KokMlYai+gc8baTtQFYOSvdqVsX3Zvkko6Qv8Ib6OhHPHPT5b1yUQH
+ 72KOmYtA==;
 Received: from [4.28.11.157] (helo=localhost)
  by bombadil.infradead.org with esmtpsa (Exim 4.98.2 #2 (Red Hat Linux))
- id 1vvcgd-00000006NaB-1e5p; Thu, 26 Feb 2026 14:49:55 +0000
+ id 1vvcgd-00000006NaF-37tW; Thu, 26 Feb 2026 14:49:55 +0000
 From: Christoph Hellwig <hch@lst.de>
 To: Eric Biggers <ebiggers@kernel.org>
-Date: Thu, 26 Feb 2026 06:49:20 -0800
-Message-ID: <20260226144954.142278-1-hch@lst.de>
+Date: Thu, 26 Feb 2026 06:49:21 -0800
+Message-ID: <20260226144954.142278-2-hch@lst.de>
 X-Mailer: git-send-email 2.47.3
+In-Reply-To: <20260226144954.142278-1-hch@lst.de>
+References: <20260226144954.142278-1-hch@lst.de>
 MIME-Version: 1.0
 X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by
  bombadil.infradead.org. See http://www.infradead.org/rpr.html
@@ -81,12 +83,14 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Hi all, this series cleans up various fscrypt APIs to pass
- logical offsets in and lengths in bytes, and on-disk sectors as 512-byte
- sector units, like most of the VFS and block code. Changes since v1: - remove
- all buffer_head helpers, and do that before the API cleanups to simplify
- the series - fix a bisection hazard - spelling fixes in the commit logs -
- use "file position" to des [...] 
+ Content preview:  Make io_submit_init_bio complete by also initializing the
+ write hint. Signed-off-by: Christoph Hellwig <hch@lst.de> ---
+ fs/ext4/page-io.c | 8 ++++---- 1 file changed, 4 insertions(+),
+ 4 deletions(-) diff --git a/fs/ext4/page-io.c
+ b/fs/ext4/page-io.c index a8c95eee91b7..a3644d6cb65f 100644 ---
+ a/fs/ext4/page-io.c
+ +++ b/fs/ext4/page-io.c @@ -416,6 +416,7 @@ void ext4_io_submit_init(struct
+ ext4_io_s [...] 
  Content analysis details:   (0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -95,8 +99,9 @@ X-Spam-Report: Spam detection software,
  not necessarily valid
  0.2 HEADER_FROM_DIFFERENT_DOMAINS From and EnvelopeFrom 2nd level mail
  domains are different
-X-Headers-End: 1vvcgp-0000SF-91
-Subject: [f2fs-dev] fscrypt API cleanups v2
+X-Headers-End: 1vvcgk-0000Rn-GX
+Subject: [f2fs-dev] [PATCH 01/14] ext4: initialize the write hint in
+ io_submit_init_bio
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -120,21 +125,21 @@ X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [-0.01 / 15.00];
 	MID_CONTAINS_FROM(1.00)[];
 	RWL_MAILSPIKE_EXCELLENT(-0.40)[216.105.38.7:from];
-	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
 	MAILLIST(-0.20)[mailman];
-	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7];
-	DMARC_POLICY_SOFTFAIL(0.10)[lst.de : SPF not aligned (relaxed), DKIM not aligned (relaxed),none];
+	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7:c];
+	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
 	MIME_GOOD(-0.10)[text/plain];
+	DMARC_POLICY_SOFTFAIL(0.10)[lst.de : SPF not aligned (relaxed), DKIM not aligned (relaxed),none];
 	HAS_LIST_UNSUB(-0.01)[];
-	RECEIVED_HELO_LOCALHOST(0.00)[];
-	DKIM_MIXED(0.00)[];
-	RCVD_TLS_LAST(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:ebiggers@kernel.org,m:brauner@kernel.org,m:tytso@mit.edu,m:djwong@kernel.org,m:linux-f2fs-devel@lists.sourceforge.net,m:linux-fscrypt@vger.kernel.org,m:adilger.kernel@dilger.ca,m:linux-fsdevel@vger.kernel.org,m:jaegeuk@kernel.org,m:linux-ext4@vger.kernel.org,s:lists@lfdr.de];
-	FORGED_SENDER(0.00)[hch@lst.de,linux-f2fs-devel-bounces@lists.sourceforge.net];
 	MIME_TRACE(0.00)[0:+];
+	RCVD_TLS_LAST(0.00)[];
+	DKIM_MIXED(0.00)[];
+	ARC_NA(0.00)[];
+	FORGED_RECIPIENTS(0.00)[m:ebiggers@kernel.org,m:brauner@kernel.org,m:tytso@mit.edu,m:djwong@kernel.org,m:linux-f2fs-devel@lists.sourceforge.net,m:linux-fscrypt@vger.kernel.org,m:adilger.kernel@dilger.ca,m:linux-fsdevel@vger.kernel.org,m:jaegeuk@kernel.org,m:linux-ext4@vger.kernel.org,s:lists@lfdr.de];
 	RCVD_COUNT_THREE(0.00)[4];
 	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
-	ARC_NA(0.00)[];
+	FORGED_SENDER(0.00)[hch@lst.de,linux-f2fs-devel-bounces@lists.sourceforge.net];
+	RECEIVED_HELO_LOCALHOST(0.00)[];
 	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,infradead.org:s=bombadil.20210309];
 	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,infradead.org:-];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
@@ -149,37 +154,52 @@ X-Spamd-Result: default: False [-0.01 / 15.00];
 	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[]
-X-Rspamd-Queue-Id: 0EAD71A7EAC
+X-Rspamd-Queue-Id: 0FE6B1A7EAD
 X-Rspamd-Action: no action
 
-Hi all,
+Make io_submit_init_bio complete by also initializing the write hint.
 
-this series cleans up various fscrypt APIs to pass logical offsets in
-and lengths in bytes, and on-disk sectors as 512-byte sector units,
-like most of the VFS and block code.
+Signed-off-by: Christoph Hellwig <hch@lst.de>
+---
+ fs/ext4/page-io.c | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
-Changes since v1:
- - remove all buffer_head helpers, and do that before the API cleanups
-   to simplify the series
- - fix a bisection hazard
- - spelling fixes in the commit logs
- - use "file position" to describe the byte offset into an inode
- - add another small ext4 cleanup at the end
+diff --git a/fs/ext4/page-io.c b/fs/ext4/page-io.c
+index a8c95eee91b7..a3644d6cb65f 100644
+--- a/fs/ext4/page-io.c
++++ b/fs/ext4/page-io.c
+@@ -416,6 +416,7 @@ void ext4_io_submit_init(struct ext4_io_submit *io,
+ }
+ 
+ static void io_submit_init_bio(struct ext4_io_submit *io,
++			       struct inode *inode,
+ 			       struct buffer_head *bh)
+ {
+ 	struct bio *bio;
+@@ -430,6 +431,7 @@ static void io_submit_init_bio(struct ext4_io_submit *io,
+ 	bio->bi_end_io = ext4_end_bio;
+ 	bio->bi_private = ext4_get_io_end(io->io_end);
+ 	io->io_bio = bio;
++	io->io_bio->bi_write_hint = inode->i_write_hint;
+ 	io->io_next_block = bh->b_blocknr;
+ 	wbc_init_bio(io->io_wbc, bio);
+ }
+@@ -445,10 +447,8 @@ static void io_submit_add_bh(struct ext4_io_submit *io,
+ submit_and_retry:
+ 		ext4_io_submit(io);
+ 	}
+-	if (io->io_bio == NULL) {
+-		io_submit_init_bio(io, bh);
+-		io->io_bio->bi_write_hint = inode->i_write_hint;
+-	}
++	if (io->io_bio == NULL)
++		io_submit_init_bio(io, inode, bh);
+ 	if (!bio_add_folio(io->io_bio, io_folio, bh->b_size, bh_offset(bh)))
+ 		goto submit_and_retry;
+ 	wbc_account_cgroup_owner(io->io_wbc, folio, bh->b_size);
+-- 
+2.47.3
 
-Diffstat:
- fs/buffer.c                 |   17 ++++++++
- fs/crypto/bio.c             |   37 ++++++++----------
- fs/crypto/fscrypt_private.h |    3 -
- fs/crypto/inline_crypt.c    |   86 ++++----------------------------------------
- fs/crypto/keysetup.c        |    2 -
- fs/ext4/inode.c             |    5 ++
- fs/ext4/page-io.c           |   28 ++++++++++----
- fs/ext4/readpage.c          |   10 ++---
- fs/f2fs/data.c              |    7 ++-
- fs/f2fs/file.c              |    4 +-
- fs/iomap/direct-io.c        |    6 +--
- include/linux/fscrypt.h     |   37 ++++--------------
- 12 files changed, 89 insertions(+), 153 deletions(-)
 
 
 _______________________________________________
