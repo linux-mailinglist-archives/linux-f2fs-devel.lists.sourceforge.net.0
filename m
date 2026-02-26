@@ -2,41 +2,41 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id eG9EMylvoGkHjwQAu9opvQ
+	id 0AFeLzRvoGk3jgQAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 26 Feb 2026 17:04:57 +0100
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 26 Feb 2026 17:05:08 +0100
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5DB021A98A2
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 26 Feb 2026 17:04:57 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4BBA71A98D2
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 26 Feb 2026 17:05:08 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
 	List-Unsubscribe:List-Id:Subject:To:In-Reply-To:References:Message-Id:
 	MIME-Version:Date:Sender:Content-ID:Content-Description:Resent-Date:
 	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=S2UoxGy7t4zyht/d005B7djO/6bES6fmaXkYHw10K04=; b=LtN/6OeT5ZsSoYlru0gvyLTM3+
-	BmQznt9qRZr7Fnor+faBlWuzyo6wR3gUOp8HuCRI4hwPMdxYSVjtCKwYuK8w9xjOX/S3iDzwam1tp
-	MAiAYyDw+t22u49oC2CLsjxwSxLq3IN4vuHjF6lkNVck/KpqOAE+VSpMAOVu9mOAaSyo=;
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=jHsdpQSIamiLLnmREz/RKUJevZaCoFtqxRDCZvAEjWY=; b=QqAHiAIAvGUC29ZZ7BnyclDuRU
+	2v2WtKTXVHIo6x+kNwRrjDJMD9XUnmZ7ce/9XSROnWs0GyCo6v7m/rpDA07ECel3DU62m7X5iIa4k
+	q9xe9tmJDoO3TCw+XcvRJ5FEaAonhiEffe3TW9oiKMGyXBverqWrk6sY0cnNAi1u8Pxo=;
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vvdrC-0002Zq-Hy;
-	Thu, 26 Feb 2026 16:04:54 +0000
+	id 1vvdrO-0002nK-UD;
+	Thu, 26 Feb 2026 16:05:06 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jlayton@kernel.org>) id 1vvdrA-0002ZU-Pq;
- Thu, 26 Feb 2026 16:04:52 +0000
+ (envelope-from <jlayton@kernel.org>) id 1vvdrN-0002my-Ea;
+ Thu, 26 Feb 2026 16:05:05 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Cc:To:In-Reply-To:References:Message-Id:
  Content-Transfer-Encoding:Content-Type:MIME-Version:Subject:Date:From:Sender:
  Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
  :Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=lJ02/y4gZs0zdHYgnvIMhyk8aCHmXoHwnqi8QaUbMgo=; b=PcfnP6RaWcHfVQjZCHsuX9Jpb8
- 8e1bC8rvJyXWdvW7j2YSGDszXS1u6H+Wc+9OHxHqrSMXvcQU/ts7XXgHuuTTNRhBOlr3FC2TCQzMO
- CeEC8iChgHXX31XxGkRvMiwITRBuu4QfRp3aj66Dc1ljU90B0un0IzLTSuKbdK+ZAoB0=;
+ bh=xP2LNvm//fBUZ6GbH/eGhBCodP+vHpbGT+KmTNuV63c=; b=jEiTyAfksZqZMyrz4555RO7KBk
+ 6X1PKJAcHfY/FNNlSfBPLZzVPI7BABKWSPZIOrtry2bWVd+QfDgWKWEA/Jlw7vT0j6C1I77k1cSmR
+ c/sJkYFHtExLjO+2adfHyeeczquzE5socTErvsmpR/p65lxO5v+lhaBEyMD9tKdfLoVQ=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Cc:To:In-Reply-To:References:Message-Id:Content-Transfer-Encoding:
@@ -44,31 +44,31 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=lJ02/y4gZs0zdHYgnvIMhyk8aCHmXoHwnqi8QaUbMgo=; b=EpyX5yApl/PtqOW+MKWlf+GP9F
- aIUJB4JR0bi+XluK7+JoKOYPiivui73GRmOk0cIBBO4k3w7zfUZtFsL4SZEmCYpOKYDmguC8ptZie
- SAREjRy5IdGuJswV5+lgyNwE7s4nOnVG/UbtW5tHMU1PPm+HI4mlj2jzT7jdVbyER1FU=;
-Received: from sea.source.kernel.org ([172.234.252.31])
+ bh=xP2LNvm//fBUZ6GbH/eGhBCodP+vHpbGT+KmTNuV63c=; b=QVi5NWalb6sMxWi7RsQ04GlJsO
+ fjMItYX5GJWtv+ojFSS5wzRdjmBSA8YbbGYTmNl81Nm1d/S+fHGbhH9xahyvymZjiiy10VXUumP1d
+ 5f1mXmZJo4SO/vGK97sMws5q2BXfmmM5/bCI+Bm938E/DFrZQZP4+z2pUv2JNggh7U6M=;
+Received: from tor.source.kernel.org ([172.105.4.254])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vvdr7-0005jw-Jb; Thu, 26 Feb 2026 16:04:52 +0000
+ id 1vvdrK-0005mB-M7; Thu, 26 Feb 2026 16:05:05 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 3E91743BB9;
+ by tor.source.kernel.org (Postfix) with ESMTP id CA7186187B;
+ Thu, 26 Feb 2026 16:04:51 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4F9C5C116C6;
  Thu, 26 Feb 2026 16:04:39 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id D25D0C2BC9E;
- Thu, 26 Feb 2026 16:04:26 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1772121879;
- bh=/R13WlmCiqf+otA9FtjIvnhA88neDdZ1z3bo46wgKlk=;
+ s=k20201202; t=1772121891;
+ bh=wgaEh25KMLtfYap2XafuanTTSwLN7VDrZOEdlc+rhYE=;
  h=From:Date:Subject:References:In-Reply-To:To:Cc:From;
- b=ME/XYMrD0mbvHzirdHMfJIsfdtmPFxCfe6GE465X1RJF3PBm2jj4PJNJPYeT1iDOG
- LbsRm0hPLRDwtyDoOgB+Voef7jG8Y2KK22baj2rjclEI6wj5ibMesgE2ai+NJ/UR7X
- 6+QUTAooFfBgGcyast5Z94iyXho7rgdTdHdAwiZsKDxD+igqWK/cnx7ELcaU3fYIRy
- ng9wFCImfGsr/rZxhue+trQ/GIHKbB3bcg6whxFxw1Y2QglSKv4ojDEr74/nb1FFQ1
- tYyPsAGjzIDRWCtNI5FfKR1Aw/GoyUNOpP4KvVJnARaeqTNjVtrA4JR7sRW9jnU9kC
- 8v15Pgqa22BtA==
-Date: Thu, 26 Feb 2026 10:55:42 -0500
+ b=Ihikh0fHkFo5VHrN+kl5f9glGlinbKtpho2+DlzUtm4OmjkMCG2xnfPWMK+adJAp8
+ tuz6Jje9w4lDHKub6lxBIZ8ud/+PV8si/+Y6reMvHz/mbUAVxRyEIdTHk5Z5mvkoPq
+ fyAbSrYDacnT0cdxeMC4pv0CYMHBI9b/sdX91/uFj/jRCmQgRXjq7FZWkN2Pk80noT
+ 34bnbfnst9zjf3oFsUKAwoa98O9Wikot7oUadV+HG/IEoTHIOqKT7CYUabmNpaTAbE
+ TWndB177NRkSpiMjT0FnrM2tqfOsOweeQcR2wmf1L/VhsVCOC0fl9e3ZVPjeyLaajI
+ vcRLvdwNKn94g==
+Date: Thu, 26 Feb 2026 10:55:43 -0500
 MIME-Version: 1.0
-Message-Id: <20260226-iino-u64-v1-40-ccceff366db9@kernel.org>
+Message-Id: <20260226-iino-u64-v1-41-ccceff366db9@kernel.org>
 References: <20260226-iino-u64-v1-0-ccceff366db9@kernel.org>
 In-Reply-To: <20260226-iino-u64-v1-0-ccceff366db9@kernel.org>
 To: Alexander Viro <viro@zeniv.linux.org.uk>, 
@@ -144,46 +144,46 @@ To: Alexander Viro <viro@zeniv.linux.org.uk>,
  James Clark <james.clark@linaro.org>, "Darrick J. Wong" <djwong@kernel.org>, 
  Martin Schiller <ms@dev.tdt.de>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1097; i=jlayton@kernel.org;
- h=from:subject:message-id; bh=/R13WlmCiqf+otA9FtjIvnhA88neDdZ1z3bo46wgKlk=;
- b=owEBbQKS/ZANAwAKAQAOaEEZVoIVAcsmYgBpoG0O+wdqUvmhdzWRUaf/uRFQdKMMnnQ4hzPLX
- 9J0lNA/txOJAjMEAAEKAB0WIQRLwNeyRHGyoYTq9dMADmhBGVaCFQUCaaBtDgAKCRAADmhBGVaC
- FReqD/wINOu58ZOathcZxcR1CK7TMnX0vxSOJoULS3X1jMBCONSGbKTI4Mwm0CSAxlQ98Ny4Nnn
- rtBtuGY3VRIjCSjO47+h7GQ1YV0V6Hc+rMhcOISbfMFy81P+loguWdTSkab9YblDvqIBIo8D6MI
- aeO7eQcn3P3Amz+zf+MJyA4wHMa6kUeyvW9ZKGd0CGk4Nbpc2hWw8vyhzqBOW/Zowk/OAe9T9OD
- fi+nNVJoTHG5Noq62obje8GhGhhYR/s5tI7dhXDVjhEpPGT/sFn5ElbkZwU7xptq2KT4yauQ7/Z
- DicbI1P6DJ50SqUjzuGz935+4TaETa7GtJyOMH5p6f5NVnl9iAPRms08XEOh7yI92eChFW7TmWw
- UWmDE4w7QRmZyyfOTgl2q06EuSTKCXIEbyGz5L/24Gim9RqCoV48oqVEnIg/sAFpPzo5xi5BIXf
- V1O08+55HNciUF+beE4JnOTS0c0eA+gQG4KJKrK/vP28C/zZn1ASyS4G2vPv+b85tystcOOUs2y
- g3wQEGVlU4mGAe1eRf3tPrndsga/Y72dzsCKqLqF9DyeTNT7ZSXa6UQ06Ih334PtgWGBjQP6S2p
- ZL32WssPTyas96P4SaYWACeakyldlGnUtNJrwKQoqVchA+l5uktGdxteZLiNkIHXVwmcaZaU/Ql
- kKqNMyGtdnhOPGg==
+X-Developer-Signature: v=1; a=openpgp-sha256; l=815; i=jlayton@kernel.org;
+ h=from:subject:message-id; bh=wgaEh25KMLtfYap2XafuanTTSwLN7VDrZOEdlc+rhYE=;
+ b=owEBbQKS/ZANAwAKAQAOaEEZVoIVAcsmYgBpoG0OSIiUz1AkDZ6JYGrAoeFBgTB7iDZPyaD5c
+ NromnZp8+qJAjMEAAEKAB0WIQRLwNeyRHGyoYTq9dMADmhBGVaCFQUCaaBtDgAKCRAADmhBGVaC
+ FTqCD/9UYfDbK1XGdJjkbgOj5OvuREi9qNRYWSvCJQjp0V1l40Tc2SwR0HmU+EfwBlx6Txb4Wrq
+ QdcBO1GXudcSjsvJ/3hDOB4tWaT+HJWmU2xqpTs1Z1tyxrirA1E6eBgrFZFGzvOweegta67Cz7z
+ VI0eeOR1o4J4WhJeAmqXgEFNF70lduqS1RwWyH9HGET9JjZWgaQ2zaaEBbxgJ6A1kYGvZzSFdqE
+ 276PPffVIlQyNtpPaqDUqNQ2n71ynLyE/SxFTeMN40RwZQ9zLXYj7pEBMzCCe5aNctu9Pa+u3C3
+ opcZB2xSdWANY+EVsDRUBiP6xPoipYDMS5EoMOeUiNlpB0Umy6Z50lWTGn+4yRK//d8hbJg64Ur
+ i5bT2mFmy9QAVGKTGcqnn62Vm/lxRrCeklIgoH1O1dp3hgS3OnZYYrT+51ij1fkoEgpKYQzasJp
+ MQF1WYqqr9U3V6EWXm6UZPZ6qv1f5hvsNepUtngGu2BBedYjgk9HVNlFEcX5rUaDaza5rpxEzDW
+ D4yhFGSyaYUAKjHy+UjGu2sUAbiqM2qLyNtGqZPP4LMOwQAh3o/hAqoCj+8txericgHxp1879k+
+ gs9ZoEcZXM7zFmOIdIdPyEb/kup0f5KrRxobeyYYYoV+9YP/2uBa2lVyl9AxEdR9RzQIQ5ak+WK
+ VJL0ubImZpV5d2g==
 X-Developer-Key: i=jlayton@kernel.org; a=openpgp;
  fpr=4BC0D7B24471B2A184EAF5D3000E684119568215
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Update format strings and local variable types in nsfs for
+ Content preview: Update format strings and local variable types in ntfs3 for
  the i_ino type change from unsigned long to u64. Signed-off-by: Jeff Layton
- <jlayton@kernel.org> --- fs/nsfs.c | 4 ++-- 1 file changed, 2 insertions(+),
- 2 deletions(-) 
+ <jlayton@kernel.org> --- fs/ntfs3/super.c | 2 +- 1 file changed, 1 insertion(+),
+ 1 deletion(-) 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1vvdr7-0005jw-Jb
-Subject: [f2fs-dev] [PATCH 40/61] nsfs: update format strings for u64 i_ino
+X-Headers-End: 1vvdrK-0005mB-M7
+Subject: [f2fs-dev] [PATCH 41/61] ntfs3: update format strings for u64 i_ino
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -239,53 +239,44 @@ X-Spamd-Result: default: False [-7.11 / 15.00];
 	ARC_NA(0.00)[];
 	MIME_TRACE(0.00)[0:+];
 	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,kernel.org:s=k20201202];
-	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
 	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,kernel.org:-];
+	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
 	RCVD_COUNT_FIVE(0.00)[5];
 	RCPT_COUNT_GT_50(0.00)[146];
 	FROM_NEQ_ENVFROM(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
 	FROM_HAS_DN(0.00)[];
 	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
-	NEURAL_HAM(-0.00)[-0.999];
+	NEURAL_HAM(-0.00)[-1.000];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	HAS_REPLYTO(0.00)[jlayton@kernel.org];
 	TAGGED_RCPT(0.00)[linux-f2fs-devel];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.sourceforge.net:rdns,lists.sourceforge.net:helo,lists.sourceforge.net:dkim]
-X-Rspamd-Queue-Id: 5DB021A98A2
+X-Rspamd-Queue-Id: 4BBA71A98D2
 X-Rspamd-Action: no action
 
-Update format strings and local variable types in nsfs for the
+Update format strings and local variable types in ntfs3 for the
 i_ino type change from unsigned long to u64.
 
 Signed-off-by: Jeff Layton <jlayton@kernel.org>
 ---
- fs/nsfs.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ fs/ntfs3/super.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/fs/nsfs.c b/fs/nsfs.c
-index db91de2086456bb9fe0547be7dbbd2de87c97ca7..eac326b85314ac8080248347154d599c953969c7 100644
---- a/fs/nsfs.c
-+++ b/fs/nsfs.c
-@@ -46,7 +46,7 @@ static char *ns_dname(struct dentry *dentry, char *buffer, int buflen)
- 	struct ns_common *ns = inode->i_private;
- 	const struct proc_ns_operations *ns_ops = ns->ops;
+diff --git a/fs/ntfs3/super.c b/fs/ntfs3/super.c
+index 174a7cb202a08c550b3b8497cdf6105192be2e43..51aa008e126a8af18c39dd825a17c12df859329d 100644
+--- a/fs/ntfs3/super.c
++++ b/fs/ntfs3/super.c
+@@ -153,7 +153,7 @@ void ntfs_inode_printk(struct inode *inode, const char *fmt, ...)
+ 	vaf.fmt = printk_skip_level(fmt);
+ 	vaf.va = &args;
  
--	return dynamic_dname(buffer, buflen, "%s:[%lu]",
-+	return dynamic_dname(buffer, buflen, "%s:[%llu]",
- 		ns_ops->name, inode->i_ino);
- }
+-	printk("%c%cntfs3(%s): ino=%lx,%s %pV\n", KERN_SOH_ASCII, level,
++	printk("%c%cntfs3(%s): ino=%llx,%s %pV\n", KERN_SOH_ASCII, level,
+ 	       sb->s_id, inode->i_ino, name ? name : "", &vaf);
  
-@@ -394,7 +394,7 @@ static int nsfs_show_path(struct seq_file *seq, struct dentry *dentry)
- 	const struct ns_common *ns = inode->i_private;
- 	const struct proc_ns_operations *ns_ops = ns->ops;
- 
--	seq_printf(seq, "%s:[%lu]", ns_ops->name, inode->i_ino);
-+	seq_printf(seq, "%s:[%llu]", ns_ops->name, inode->i_ino);
- 	return 0;
- }
- 
+ 	va_end(args);
 
 -- 
 2.53.0
