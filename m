@@ -2,42 +2,42 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id KKhtOj0Lomk2ygQAu9opvQ
+	id eKK9E8oSomnQywQAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 27 Feb 2026 22:23:09 +0100
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 27 Feb 2026 22:55:22 +0100
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 334991BE275
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 27 Feb 2026 22:23:09 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 026FE1BE503
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 27 Feb 2026 22:55:21 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
 	List-Unsubscribe:List-Id:Subject:In-Reply-To:MIME-Version:References:
 	Message-ID:To:Date:Sender:Content-ID:Content-Description:Resent-Date:
 	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=ZZbxee3K9mAT/XLsDutFi3cG7cfeaSEfpKuprNU37CE=; b=N6KtTdY6Kzqsd2wjsZSKa9sakB
-	Q3OuOGCkdOFU3C/AIK9lZm6UE6ItxnlnvA4386xY+71YDc+drzx5z3g4xEwr4UGYgq4JHIBDtRmpr
-	lAGcS5BSiCSILzZtnXh9OS7UmJixjJBpJ6b6rMMvU5GIb/OnLfvmk0Up4X1M+gowyLBY=;
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=amyYyYvboBQZwMaNy/Ja2w2dXTUZoD1BxuqB8ojUrhA=; b=d9CwzbT9lI1qgiylzPBNL+Gx01
+	dyHu9UcJJqC5sVCvmEXck29ADmjQMXPVB0xvZQaWckiIPCntwWRhPkDy5TgjzZjYqsAf5OqMx/5i9
+	TJtBZ+rdSNK12EkPJr+A0pslybBbxtrGf6Ifk4c23YR4gkVyla6CiFXrq37rQ1fXsXx4=;
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vw5Ie-0001bD-P8;
-	Fri, 27 Feb 2026 21:23:04 +0000
+	id 1vw5nj-0000GU-3f;
+	Fri, 27 Feb 2026 21:55:11 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <ebiggers@kernel.org>) id 1vw5Id-0001b5-PF
+ (envelope-from <ebiggers@kernel.org>) id 1vw5nh-0000GE-B3
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 27 Feb 2026 21:23:03 +0000
+ Fri, 27 Feb 2026 21:55:10 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=OJh02u0NQVRUdBw4Dur+TyDu1G94ovO5DActNFkg/38=; b=gMmtq7l93ocv2wFHPDbEX1Rx7a
- 042LlGWtqMcx9kesNNLSw7H3aLddrw+/1AZA0V26hd9Ft2kPMhHeb3QtJgKaB+BXRdc/BzL/sDKGe
- mXSXlPh+6GaY4NxeBoKRrq1HHqH4pWE9r/yt/tYUdq4Ky1yeHAvjSRPb7akvrSULp29w=;
+ bh=UikkZbYLh7UkDKvyWFqmlnIn0V1F3Jk/3G9UbSWnjS8=; b=E6jRitT8NBUPGaYo/8qtFvcnEt
+ LRzN7+wfoCwyoKW2Bvms8Tmm8v8U++FFfTD90/vZ9IjeeoB/TxEjBvZrX6ALyWiZLkLSCoaIuWghJ
+ PB1BH3/yM0ZsxF7pRjRnHQjP7jEwA5obDi2nlOiVQgW9IBhvOFPz715ot+t1ewneofS8=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -45,66 +45,67 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=OJh02u0NQVRUdBw4Dur+TyDu1G94ovO5DActNFkg/38=; b=GI6Uq1GtcF/O+HhiQMlSMau7dI
- aTI4d9+IybSwdt3F4TGTpiFPqQ7QqTTmqxwqG1Im30Z+Ksxog8kViyUJP2xzCHvCs4gK4NAuL3OXk
- mx14E2s4rU6RM0W0xzG287+G7Gxgx4z38X3/aZdQfzaX97bMhx9oYAoTX9Qrlc4MyrUI=;
+ bh=UikkZbYLh7UkDKvyWFqmlnIn0V1F3Jk/3G9UbSWnjS8=; b=Ptxna57RLBYpj7WpMMBHIXf8js
+ 3/8g2rNEIermj1OsA8aWjQknx5N0Wt8dwJ/YMOgKEtMTfczRtFgc+/diP1F6gTCSJ4Qewd9t8dHwd
+ pkYCc3wWqA5bfnr4bdxJY8SgSrAWpmo67JmiFDwf+mDn6Lvb2VCyLmu+neEWCh3cZFKw=;
 Received: from tor.source.kernel.org ([172.105.4.254])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vw5Id-0005yD-8L for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 27 Feb 2026 21:23:03 +0000
+ id 1vw5nh-00082j-OU for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 27 Feb 2026 21:55:10 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 4FC686012B;
- Fri, 27 Feb 2026 21:22:52 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 263E2C116C6;
- Fri, 27 Feb 2026 21:22:50 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id 14B3160054;
+ Fri, 27 Feb 2026 21:54:59 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 303D9C116C6;
+ Fri, 27 Feb 2026 21:54:58 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1772227372;
- bh=gdzxoUn2gxhPxqAZE2wnuoB0K0GDDb9MlkGqZ/c6Edk=;
+ s=k20201202; t=1772229298;
+ bh=UikkZbYLh7UkDKvyWFqmlnIn0V1F3Jk/3G9UbSWnjS8=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=IG+0YFYYtUAUb+23rDHJYKFU8SK8o4070YARNt9N3Nj/qUn8Tq4dktYf6wZ2hqh06
- XZ8a5Cn7X4z2JY9gO7rFXYkCWHQDGqwWj4g28PUrzC46IgrG3tiir7tJuMpitY3gNg
- RFBwdzNFVmzfn969s0VhfYuE3DZx7QEMoBPM79w4+3acu0XOmfwxQ+sWyPRIt1BOvG
- t8h+rI7Cwfb3oqGHY5imm4je2+mBpxC0aBImRggF9jqarNyydQIe7IRUhtNxhZP1lX
- ErT/H4J8H8hSiZ0ehxMQK1LYebJMjhBIXoqqs8YjQurzDS3+I/RLRWj3sU540OtjDX
- rfm0CrtjlGykQ==
-Date: Fri, 27 Feb 2026 13:22:47 -0800
+ b=mvLbwleNM8TqC5QDCHByakJS6CS1NQf/QA0pwoOQE3EdCGWgekRNueF/YHffICUY1
+ i8rOse3dzLsCGgcQrGkZ7KXFS7jifPqH/PnV4QGFM1UH/LDk1iy+XXjkDrv39ZXXCg
+ eeqBkqUFVfi6y4+//0wss1dh254ZH13XedVZD71NDVpXK81nBwXHYEpB2BhGiO4Klx
+ Vwf/0sWjCo6jH70VW0AIPE4rVwkjPbtxNLMAbw6s9XalKXRgRXCIgvhndKRJPRjE+4
+ sdb0kLJzlEy88ar5nTaCahDQ5oC2uX8vqqB1fx7QzfrWCfhrt+UzBSWdp/qo+UNQNP
+ DYAbtrpnn2c4g==
+Date: Fri, 27 Feb 2026 13:54:50 -0800
 To: Christoph Hellwig <hch@lst.de>
-Message-ID: <20260227212247.GC2659@quark>
+Message-ID: <20260227215450.GA5357@quark>
 References: <20260226144954.142278-1-hch@lst.de>
- <20260226144954.142278-5-hch@lst.de>
+ <20260226144954.142278-6-hch@lst.de>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20260226144954.142278-5-hch@lst.de>
+In-Reply-To: <20260226144954.142278-6-hch@lst.de>
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Thu, Feb 26, 2026 at 06:49:24AM -0800, Christoph Hellwig
- wrote: > ext4 already has the inode and folio and can't have a NULL >
- folio->mapping
- in this path. Open code fscrypt_mergeable_bio_bh in > i [...] 
+ Content preview:  On Thu, Feb 26, 2026 at 06:49:25AM -0800, Christoph Hellwig
+ wrote: > Note that this does not add ifdefs for fscrypt as the compiler will
+ > optimize away the dead code if it is not built in. The call to
+ folio_mapping() isn't optimized out,
+ so it might still be worth adding an IS_ENABLED(CONFIG_FS_ENCRYPTION).
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 RCVD_IN_DNSWL_BLOCKED  RBL: ADMINISTRATOR NOTICE: The query to DNSWL
- was blocked.  See
- http://wiki.apache.org/spamassassin/DnsBlocklists#DnsBlocklists-dnsbl-block
- for more information. [172.105.4.254 listed in list.dnswl.org]
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ 0.0 RCVD_IN_DNSWL_BLOCKED  RBL: ADMINISTRATOR NOTICE: The query to DNSWL
+ was blocked.  See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#DnsBlocklists-dnsbl-block
+ for more information. [172.105.4.254 listed in list.dnswl.org]
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1vw5Id-0005yD-8L
-Subject: Re: [f2fs-dev] [PATCH 04/14] ext4,
- fscrypt: merge fscrypt_mergeable_bio_bh into io_submit_need_new_bio
+X-Headers-End: 1vw5nh-00082j-OU
+Subject: Re: [f2fs-dev] [PATCH 05/14] fscrypt: move
+ fscrypt_set_bio_crypt_ctx_bh to buffer.c
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -166,88 +167,16 @@ X-Spamd-Result: default: False [-8.11 / 15.00];
 	MISSING_XM_UA(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lst.de:email,lists.sourceforge.net:rdns,lists.sourceforge.net:helo,lists.sourceforge.net:dkim]
-X-Rspamd-Queue-Id: 334991BE275
+	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.sourceforge.net:rdns,lists.sourceforge.net:helo,lists.sourceforge.net:dkim]
+X-Rspamd-Queue-Id: 026FE1BE503
 X-Rspamd-Action: no action
 
-On Thu, Feb 26, 2026 at 06:49:24AM -0800, Christoph Hellwig wrote:
-> ext4 already has the inode and folio and can't have a NULL
-> folio->mapping in this path. Open code fscrypt_mergeable_bio_bh in
-> io_submit_need_new_bio based on these simplifying assumptions.
-> 
-> Signed-off-by: Christoph Hellwig <hch@lst.de>
-> ---
->  fs/crypto/inline_crypt.c | 23 -----------------------
->  fs/ext4/page-io.c        |  8 ++++++--
->  include/linux/fscrypt.h  |  9 ---------
->  3 files changed, 6 insertions(+), 34 deletions(-)
-> 
-> diff --git a/fs/crypto/inline_crypt.c b/fs/crypto/inline_crypt.c
-> index c0852b920dbc..0da53956a9b1 100644
-> --- a/fs/crypto/inline_crypt.c
-> +++ b/fs/crypto/inline_crypt.c
-> @@ -406,29 +406,6 @@ bool fscrypt_mergeable_bio(struct bio *bio, const struct inode *inode,
->  }
->  EXPORT_SYMBOL_GPL(fscrypt_mergeable_bio);
->  
-> -/**
-> - * fscrypt_mergeable_bio_bh() - test whether data can be added to a bio
-> - * @bio: the bio being built up
-> - * @next_bh: the next buffer_head for which I/O will be submitted
-> - *
-> - * Same as fscrypt_mergeable_bio(), except this takes a buffer_head instead of
-> - * an inode and block number directly.
-> - *
-> - * Return: true iff the I/O is mergeable
-> - */
-> -bool fscrypt_mergeable_bio_bh(struct bio *bio,
-> -			      const struct buffer_head *next_bh)
-> -{
-> -	const struct inode *inode;
-> -	u64 next_lblk;
-> -
-> -	if (!bh_get_inode_and_lblk_num(next_bh, &inode, &next_lblk))
-> -		return !bio->bi_crypt_context;
-> -
-> -	return fscrypt_mergeable_bio(bio, inode, next_lblk);
-> -}
-> -EXPORT_SYMBOL_GPL(fscrypt_mergeable_bio_bh);
-> -
->  /**
->   * fscrypt_dio_supported() - check whether DIO (direct I/O) is supported on an
->   *			     inode, as far as encryption is concerned
-> diff --git a/fs/ext4/page-io.c b/fs/ext4/page-io.c
-> index 88226979c503..3db3c19a29e5 100644
-> --- a/fs/ext4/page-io.c
-> +++ b/fs/ext4/page-io.c
-> @@ -441,11 +441,15 @@ static void io_submit_init_bio(struct ext4_io_submit *io,
->  }
->  
->  static bool io_submit_need_new_bio(struct ext4_io_submit *io,
-> +				   struct inode *inode,
-> +				   struct folio *io_folio,
->  				   struct buffer_head *bh)
->  {
->  	if (bh->b_blocknr != io->io_next_block)
->  		return true;
-> -	if (!fscrypt_mergeable_bio_bh(io->io_bio, bh))
-> +	if (!fscrypt_mergeable_bio(io->io_bio, inode,
-> +			(folio_pos(io_folio) + bh_offset(bh)) >>
-> +			 inode->i_blkbits))
->  		return true;
->  	return false;
->  }
-> @@ -456,7 +460,7 @@ static void io_submit_add_bh(struct ext4_io_submit *io,
->  			     struct folio *io_folio,
->  			     struct buffer_head *bh)
->  {
-> -	if (io->io_bio && io_submit_need_new_bio(io, bh)) {
-> +	if (io->io_bio && io_submit_need_new_bio(io, inode, io_folio, bh)) {
->  submit_and_retry:
->  		ext4_io_submit(io);
->  	}
+On Thu, Feb 26, 2026 at 06:49:25AM -0800, Christoph Hellwig wrote:
+> Note that this does not add ifdefs for fscrypt as the compiler will
+> optimize away the dead code if it is not built in.
 
-As in patch 2, this needs to use 'folio', not 'io_folio'.
+The call to folio_mapping() isn't optimized out, so it might still be
+worth adding an IS_ENABLED(CONFIG_FS_ENCRYPTION).
 
 - Eric
 
