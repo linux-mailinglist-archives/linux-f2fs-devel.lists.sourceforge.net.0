@@ -2,83 +2,83 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id qK9YBJydo2k3IQUAu9opvQ
+	id OPvwHNKdo2k3IQUAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 01 Mar 2026 02:59:56 +0100
+	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 01 Mar 2026 03:00:50 +0100
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5F28A1CC8AD
-	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 01 Mar 2026 02:59:55 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id CAF281CC982
+	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 01 Mar 2026 03:00:49 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
 	List-Unsubscribe:List-Id:Subject:MIME-Version:Message-ID:Date:To:Sender:
 	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
 	Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Owner;
-	bh=khgNT81Ioi869p6V1xWVwZgYWNlMARgKxz70hFKFBIc=; b=RHdtG63tQtcG2a1TskkEXZVBEV
-	g8nBG37dWPhHEpyffs9RUuyHd9vVFvGgY/FoE4Ik85U+xsMua40UhCNanL0nGtdmYuWK2kpVBqtjC
-	X5j65vXwTO1F3qIBrqm8PjeDhYfBHyrYzwhJ63i2jdE6nzZnOLeEQn9hYsEh00P4vahM=;
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=2gbnSQTpA4Dz86dSY3SG4N+uQkJfA0eE9uj8JVdjxUQ=; b=l07QJo31Hgjg0X8tvy0xHez57f
+	SFyQs0U+zw5hr3Duq1f0OyKyRzhmll3/0FRlNqbF35Wwv+YRoIllbDmjtY7JHied9PJ9yWeehR995
+	vi3kSf6OaMJR7oxtl4S4ByBRrvf+frZcAKLZlWzbOxL0VxNdrV5Y9tPR1BKRf2oTM1/s=;
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vwW5z-00010K-7f;
-	Sun, 01 Mar 2026 01:59:48 +0000
+	id 1vwW6u-0008BJ-7Y;
+	Sun, 01 Mar 2026 02:00:44 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <sashal@kernel.org>) id 1vwW5x-000108-Rk
+ (envelope-from <sashal@kernel.org>) id 1vwW6t-0008BB-9b
  for linux-f2fs-devel@lists.sourceforge.net;
- Sun, 01 Mar 2026 01:59:46 +0000
+ Sun, 01 Mar 2026 02:00:43 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
  Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=CtSY8ZVK/myGHf6qsl5Dc1SyB9hw2BldrG1BXtpdsWk=; b=QKJZrPJrSZTt3Dtb7rAvPKklRP
- lWvWscioF8DnYXtKJRvJacG4M15pTN1JRzAmB8q926MAh1YKngGm9OUF/8M9IDwAvEMP0V4YM502t
- o94yh+EroujlGWypDfmgQvKuEif3n8KthDYtRrHUzskzfbE8becp8jw1LVAPLQTkL6+Q=;
+ bh=p/WwukSj4EB54ZrpGaqpbwO9IFzbwgayb+LRq14yoi4=; b=KQn8tHDuS5HkdDL7POtL9chEFm
+ /zMMQIaqX/KoQxVerxdvCtC8/8hKzaxF7EhM1r8yjg4uPvcwDJQAGEr1BVEnlNZQdgyoTfTtlt+Y/
+ rp/g+iTAi5xo1qDRPn6E0kLVbY4RGrHLtBlhZybnlHIRc3fS3qzv8mrpvM+eQgY+KPDY=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
  :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
  Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=CtSY8ZVK/myGHf6qsl5Dc1SyB9hw2BldrG1BXtpdsWk=; b=a
- 1wXN4kT1aegzsdlVWgngHnFcQM3+aoQdGdNbPwgEfzBk1Xm4FiXPlPfJqg4V3syXFFXyEaCgEj1WA
- Jr8Q+0cm63U4uqc9XM0/OGqq+MKB+/zP5qZVHe/hr4W9qw57XmI6Bn1N+69aM3nylSQGL5WBce1M+
- YsFZgRhVhYt4ITf4=;
+ List-Owner:List-Archive; bh=p/WwukSj4EB54ZrpGaqpbwO9IFzbwgayb+LRq14yoi4=; b=E
+ fxxAuj8dHOeD1dJdna1P3+dagqbj5FYDaNLzk6pQSCqfNJi19lv2GIklDPyG7gklBq6vb4CWWmult
+ ijS7cBVfeFjkwolj4sk4m+G3Hl7wHMSIlz7iMuggre5z3Z07JBACfX1lobmOGVkN/TnfIT+rCPoYE
+ MQeFP+lOf488HgM4=;
 Received: from tor.source.kernel.org ([172.105.4.254])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vwW5y-0002i5-2C for linux-f2fs-devel@lists.sourceforge.net;
- Sun, 01 Mar 2026 01:59:46 +0000
+ id 1vwW6s-0002jo-GF for linux-f2fs-devel@lists.sourceforge.net;
+ Sun, 01 Mar 2026 02:00:43 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 718296014B;
- Sun,  1 Mar 2026 01:59:40 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4B638C19421;
- Sun,  1 Mar 2026 01:59:39 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id C8CE86014C;
+ Sun,  1 Mar 2026 02:00:31 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id D044CC19421;
+ Sun,  1 Mar 2026 02:00:30 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1772330380;
- bh=k8Us84mBo9Wmhf8NEndbI1nt4UatoJ3d/6lIwaZSC5k=;
+ s=k20201202; t=1772330431;
+ bh=XRVJZth6JtO3MLk1zu2ID3f7cI5sQ1jy2k7mX3MXpeA=;
  h=From:To:Cc:Subject:Date:From;
- b=ccs/m7qa01nYEGtnRme0RXk9SMKLUgBWMpIaJxFeFw7awdw2gxbsCywqeNcDezKha
- pDm6XFihHKKscztOoFFGAs2IfzdNqqAXdFAMO0QDAb5NTzdf4c4Jmjm4GOxRVC+aV3
- 4SVgdr/Z+i6bZF/DYCFpz7FX/aLcJ5NVEN0hKU5UBfK3eo/dXjchPxkdKnPlmRyqVf
- 2NjBtZNbrjj7QrSaDzvDrl6WmqfdAYer4yZEuTvA1RlZ7+kf1KEfajTRoOgIE8k2/r
- 80UQozl4ojsWerIoRJ+ET7dZIRq3kAXwwU74jh9jVJPei6mnVNRknTcojSwrU2jdHy
- aalAPL5MFPS6w==
+ b=RgY70FUCErKRRId6SpKKilr9Heh61KaSEIIZ50nEkj+IRTdiX2JLICOPIaITA7Qw2
+ vGMI4xVRri4mTdNnXCJHPxwYIkwgqd5SrOn9tMOvZnuU5vqk6V/DeDmXW4W/v9ux07
+ QJsxwk4bqRdEQAr+MIwEGrtpZN7CpWf8YaIa2Zl1939ZPDI+94aiM5pfgVQeX/fo+K
+ dc+ooV3WwKGJP3chVjeKxMrV113j6I7gb+zB6JUg9hVaD3FXuU5rJ5b0tfLe7l4RpR
+ 4viVAxjikJC9xnQHUbYOcLemzjfPGiAa5ExRnttpXtx4CLVAa4PPhph6rXMeul26FR
+ xUQeSbZuduLpg==
 To: stable@vger.kernel.org,
-	yangyongpeng@xiaomi.com
-Date: Sat, 28 Feb 2026 20:59:37 -0500
-Message-ID: <20260301015938.1725466-1-sashal@kernel.org>
+	chao@kernel.org
+Date: Sat, 28 Feb 2026 21:00:29 -0500
+Message-ID: <20260301020029.1726589-1-sashal@kernel.org>
 X-Mailer: git-send-email 2.51.0
 MIME-Version: 1.0
 X-Patchwork-Hint: ignore
 X-stable: review
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
@@ -89,18 +89,17 @@ X-Spam-Report: Spam detection software,
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1vwW5y-0002i5-2C
-Subject: [f2fs-dev] FAILED: Patch "f2fs: fix IS_CHECKPOINTED flag
- inconsistency issue caused by concurrent atomic commit and checkpoint
- writes" failed to apply to 5.10-stable tree
+X-Headers-End: 1vwW6s-0002jo-GF
+Subject: [f2fs-dev] FAILED: Patch "f2fs: fix to do sanity check on node
+ footer in {read, write}_end_io" failed to apply to 5.10-stable tree
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -114,50 +113,52 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>,
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
 From: Sasha Levin via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
 Reply-To: Sasha Levin <sashal@kernel.org>
-Cc: Jinbao Liu <liujinbao1@xiaomi.com>, Sheng Yong <shengyong1@xiaomi.com>,
- linux-f2fs-devel@lists.sourceforge.net, Jaegeuk Kim <jaegeuk@kernel.org>,
- stable@kernel.org
+Cc: Jaegeuk Kim <jaegeuk@kernel.org>,
+ syzbot+803dd716c4310d16ff3a@syzkaller.appspotmail.com, stable@kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-8.61 / 15.00];
+X-Spamd-Result: default: False [-7.11 / 15.00];
 	WHITELIST_DMARC(-7.00)[sourceforge.net:D:+];
+	SUSPICIOUS_RECIPS(1.50)[];
 	DMARC_POLICY_ALLOW_WITH_FAILURES(-0.50)[];
 	RWL_MAILSPIKE_EXCELLENT(-0.40)[216.105.38.7:from];
 	MAILLIST(-0.20)[mailman];
-	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7];
 	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
+	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7:c];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	DKIM_MIXED(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
-	DMARC_POLICY_ALLOW(0.00)[lists.sourceforge.net,none];
+	DKIM_MIXED(0.00)[];
 	RECEIVED_HELO_LOCALHOST(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:stable@vger.kernel.org,m:yangyongpeng@xiaomi.com,m:liujinbao1@xiaomi.com,m:shengyong1@xiaomi.com,m:linux-f2fs-devel@lists.sourceforge.net,m:jaegeuk@kernel.org,m:stable@kernel.org,s:lists@lfdr.de];
-	FORGED_SENDER(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
-	TO_DN_SOME(0.00)[];
-	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,kernel.org:s=k20201202];
-	MIME_TRACE(0.00)[0:+];
+	FORGED_RECIPIENTS(0.00)[m:stable@vger.kernel.org,m:chao@kernel.org,m:jaegeuk@kernel.org,m:syzbot+803dd716c4310d16ff3a@syzkaller.appspotmail.com,m:stable@kernel.org,m:linux-f2fs-devel@lists.sourceforge.net,m:syzbot@syzkaller.appspotmail.com,s:lists@lfdr.de];
 	ARC_NA(0.00)[];
+	TO_DN_SOME(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	DMARC_POLICY_ALLOW(0.00)[lists.sourceforge.net,none];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_SENDER(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
 	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
-	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,kernel.org:s=k20201202];
+	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
 	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,kernel.org:-];
 	RCVD_COUNT_FIVE(0.00)[5];
-	NEURAL_HAM(-0.00)[-1.000];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.sourceforge.net:rdns,lists.sourceforge.net:helo,lists.sourceforge.net:dkim];
 	FORGED_SENDER_FORWARDING(0.00)[];
 	FROM_HAS_DN(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
-	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
+	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
+	NEURAL_HAM(-0.00)[-1.000];
+	TAGGED_RCPT(0.00)[linux-f2fs-devel,803dd716c4310d16ff3a];
+	RCPT_COUNT_FIVE(0.00)[6];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	TAGGED_RCPT(0.00)[linux-f2fs-devel];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	RCPT_COUNT_SEVEN(0.00)[7];
-	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
+	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
 	HAS_REPLYTO(0.00)[sashal@kernel.org]
-X-Rspamd-Queue-Id: 5F28A1CC8AD
+X-Rspamd-Queue-Id: CAF281CC982
 X-Rspamd-Action: no action
 
 The patch below does not apply to the 5.10-stable tree.
@@ -170,102 +171,181 @@ Sasha
 
 ------------------ original commit in Linus's tree ------------------
 
-From 7633a7387eb4d0259d6bea945e1d3469cd135bbc Mon Sep 17 00:00:00 2001
-From: Yongpeng Yang <yangyongpeng@xiaomi.com>
-Date: Tue, 6 Jan 2026 20:12:11 +0800
-Subject: [PATCH] f2fs: fix IS_CHECKPOINTED flag inconsistency issue caused by
- concurrent atomic commit and checkpoint writes
+From 50ac3ecd8e05b6bcc350c71a4307d40c030ec7e4 Mon Sep 17 00:00:00 2001
+From: Chao Yu <chao@kernel.org>
+Date: Mon, 12 Jan 2026 15:49:16 +0800
+Subject: [PATCH] f2fs: fix to do sanity check on node footer in
+ {read,write}_end_io
 
-During SPO tests, when mounting F2FS, an -EINVAL error was returned from
-f2fs_recover_inode_page. The issue occurred under the following scenario
+-----------[ cut here ]------------
+kernel BUG at fs/f2fs/data.c:358!
+Call Trace:
+ <IRQ>
+ blk_update_request+0x5eb/0xe70 block/blk-mq.c:987
+ blk_mq_end_request+0x3e/0x70 block/blk-mq.c:1149
+ blk_complete_reqs block/blk-mq.c:1224 [inline]
+ blk_done_softirq+0x107/0x160 block/blk-mq.c:1229
+ handle_softirqs+0x283/0x870 kernel/softirq.c:579
+ __do_softirq kernel/softirq.c:613 [inline]
+ invoke_softirq kernel/softirq.c:453 [inline]
+ __irq_exit_rcu+0xca/0x1f0 kernel/softirq.c:680
+ irq_exit_rcu+0x9/0x30 kernel/softirq.c:696
+ instr_sysvec_apic_timer_interrupt arch/x86/kernel/apic/apic.c:1050 [inline]
+ sysvec_apic_timer_interrupt+0xa6/0xc0 arch/x86/kernel/apic/apic.c:1050
+ </IRQ>
 
-Thread A                                     Thread B
-f2fs_ioc_commit_atomic_write
- - f2fs_do_sync_file // atomic = true
-  - f2fs_fsync_node_pages
-    : last_folio = inode folio
-    : schedule before folio_lock(last_folio) f2fs_write_checkpoint
-                                              - block_operations// writeback last_folio
-                                              - schedule before f2fs_flush_nat_entries
-    : set_fsync_mark(last_folio, 1)
-    : set_dentry_mark(last_folio, 1)
-    : folio_mark_dirty(last_folio)
-    - __write_node_folio(last_folio)
-      : f2fs_down_read(&sbi->node_write)//block
-                                              - f2fs_flush_nat_entries
-                                                : {struct nat_entry}->flag |= BIT(IS_CHECKPOINTED)
-                                              - unblock_operations
-                                                : f2fs_up_write(&sbi->node_write)
-                                             f2fs_write_checkpoint//return
-      : f2fs_do_write_node_page()
-f2fs_ioc_commit_atomic_write//return
-                                             SPO
+In f2fs_write_end_io(), it detects there is inconsistency in between
+node page index (nid) and footer.nid of node page.
 
-Thread A calls f2fs_need_dentry_mark(sbi, ino), and the last_folio has
-already been written once. However, the {struct nat_entry}->flag did not
-have the IS_CHECKPOINTED set, causing set_dentry_mark(last_folio, 1) and
-write last_folio again after Thread B finishes f2fs_write_checkpoint.
+If footer of node page is corrupted in fuzzed image, then we load corrupted
+node page w/ async method, e.g. f2fs_ra_node_pages() or f2fs_ra_node_page(),
+in where we won't do sanity check on node footer, once node page becomes
+dirty, we will encounter this bug after node page writeback.
 
-After SPO and reboot, it was detected that {struct node_info}->blk_addr
-was not NULL_ADDR because Thread B successfully write the checkpoint.
-
-This issue only occurs in atomic write scenarios. For regular file
-fsync operations, the folio must be dirty. If
-block_operations->f2fs_sync_node_pages successfully submit the folio
-write, this path will not be executed. Otherwise, the
-f2fs_write_checkpoint will need to wait for the folio write submission
-to complete, as sbi->nr_pages[F2FS_DIRTY_NODES] > 0. Therefore, the
-situation where f2fs_need_dentry_mark checks that the {struct
-nat_entry}->flag /wo the IS_CHECKPOINTED flag, but the folio write has
-already been submitted, will not occur.
-
-Therefore, for atomic file fsync, sbi->node_write should be acquired
-through __write_node_folio to ensure that the IS_CHECKPOINTED flag
-correctly indicates that the checkpoint write has been completed.
-
-Fixes: 608514deba38 ("f2fs: set fsync mark only for the last dnode")
 Cc: stable@kernel.org
-Signed-off-by: Sheng Yong <shengyong1@xiaomi.com>
-Signed-off-by: Jinbao Liu <liujinbao1@xiaomi.com>
-Signed-off-by: Yongpeng Yang <yangyongpeng@xiaomi.com>
-Reviewed-by: Chao Yu <chao@kernel.org>
+Reported-by: syzbot+803dd716c4310d16ff3a@syzkaller.appspotmail.com
+Closes: https://syzkaller.appspot.com/bug?extid=803dd716c4310d16ff3a
+Signed-off-by: Chao Yu <chao@kernel.org>
 Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
 ---
- fs/f2fs/node.c | 14 ++++++++++----
- 1 file changed, 10 insertions(+), 4 deletions(-)
+ fs/f2fs/data.c | 12 ++++++++++--
+ fs/f2fs/f2fs.h | 11 +++++++++++
+ fs/f2fs/node.c | 20 +++++++++++---------
+ fs/f2fs/node.h |  8 --------
+ 4 files changed, 32 insertions(+), 19 deletions(-)
 
+diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
+index f461f1318b4cc..9b70b6d337031 100644
+--- a/fs/f2fs/data.c
++++ b/fs/f2fs/data.c
+@@ -172,6 +172,11 @@ static void f2fs_finish_read_bio(struct bio *bio, bool in_task)
+ 		while (nr_pages--)
+ 			dec_page_count(F2FS_F_SB(folio), __read_io_type(folio));
+ 
++		if (F2FS_F_SB(folio)->node_inode && is_node_folio(folio) &&
++			f2fs_sanity_check_node_footer(F2FS_F_SB(folio),
++				folio, folio->index, NODE_TYPE_REGULAR, true))
++			bio->bi_status = BLK_STS_IOERR;
++
+ 		if (finished)
+ 			folio_end_read(folio, bio->bi_status == BLK_STS_OK);
+ 	}
+@@ -374,8 +379,11 @@ static void f2fs_write_end_io(struct bio *bio)
+ 						STOP_CP_REASON_WRITE_FAIL);
+ 		}
+ 
+-		f2fs_bug_on(sbi, is_node_folio(folio) &&
+-				folio->index != nid_of_node(folio));
++		if (is_node_folio(folio)) {
++			f2fs_sanity_check_node_footer(sbi, folio,
++				folio->index, NODE_TYPE_REGULAR, true);
++			f2fs_bug_on(sbi, folio->index != nid_of_node(folio));
++		}
+ 
+ 		dec_page_count(sbi, type);
+ 
+diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+index ae78b8e1ca0ce..d41210a381cdb 100644
+--- a/fs/f2fs/f2fs.h
++++ b/fs/f2fs/f2fs.h
+@@ -1572,6 +1572,14 @@ enum f2fs_lookup_mode {
+ 	LOOKUP_AUTO,
+ };
+ 
++/* For node type in __get_node_folio() */
++enum node_type {
++	NODE_TYPE_REGULAR,
++	NODE_TYPE_INODE,
++	NODE_TYPE_XATTR,
++	NODE_TYPE_NON_INODE,
++};
++
+ /* a threshold of maximum elapsed time in critical region to print tracepoint */
+ #define MAX_LOCK_ELAPSED_TIME		500
+ 
+@@ -3915,6 +3923,9 @@ struct folio *f2fs_new_node_folio(struct dnode_of_data *dn, unsigned int ofs);
+ void f2fs_ra_node_page(struct f2fs_sb_info *sbi, nid_t nid);
+ struct folio *f2fs_get_node_folio(struct f2fs_sb_info *sbi, pgoff_t nid,
+ 						enum node_type node_type);
++int f2fs_sanity_check_node_footer(struct f2fs_sb_info *sbi,
++					struct folio *folio, pgoff_t nid,
++					enum node_type ntype, bool in_irq);
+ struct folio *f2fs_get_inode_folio(struct f2fs_sb_info *sbi, pgoff_t ino);
+ struct folio *f2fs_get_xnode_folio(struct f2fs_sb_info *sbi, pgoff_t xnid);
+ int f2fs_move_node_folio(struct folio *node_folio, int gc_type);
 diff --git a/fs/f2fs/node.c b/fs/f2fs/node.c
-index d378549010e67..99e425e8c00ac 100644
+index 30e26b878af0b..efd4f176a1f44 100644
 --- a/fs/f2fs/node.c
 +++ b/fs/f2fs/node.c
-@@ -1786,8 +1786,13 @@ static bool __write_node_folio(struct folio *folio, bool atomic, bool *submitted
+@@ -1511,9 +1511,9 @@ void f2fs_ra_node_page(struct f2fs_sb_info *sbi, nid_t nid)
+ 	f2fs_folio_put(afolio, err ? true : false);
+ }
+ 
+-static int sanity_check_node_footer(struct f2fs_sb_info *sbi,
++int f2fs_sanity_check_node_footer(struct f2fs_sb_info *sbi,
+ 					struct folio *folio, pgoff_t nid,
+-					enum node_type ntype)
++					enum node_type ntype, bool in_irq)
+ {
+ 	if (unlikely(nid != nid_of_node(folio)))
+ 		goto out_err;
+@@ -1538,12 +1538,13 @@ static int sanity_check_node_footer(struct f2fs_sb_info *sbi,
+ 		goto out_err;
+ 	return 0;
+ out_err:
+-	f2fs_warn(sbi, "inconsistent node block, node_type:%d, nid:%lu, "
+-		  "node_footer[nid:%u,ino:%u,ofs:%u,cpver:%llu,blkaddr:%u]",
+-		  ntype, nid, nid_of_node(folio), ino_of_node(folio),
+-		  ofs_of_node(folio), cpver_of_node(folio),
+-		  next_blkaddr_of_node(folio));
+ 	set_sbi_flag(sbi, SBI_NEED_FSCK);
++	f2fs_warn_ratelimited(sbi, "inconsistent node block, node_type:%d, nid:%lu, "
++		"node_footer[nid:%u,ino:%u,ofs:%u,cpver:%llu,blkaddr:%u]",
++		ntype, nid, nid_of_node(folio), ino_of_node(folio),
++		ofs_of_node(folio), cpver_of_node(folio),
++		next_blkaddr_of_node(folio));
++
+ 	f2fs_handle_error(sbi, ERROR_INCONSISTENT_FOOTER);
+ 	return -EFSCORRUPTED;
+ }
+@@ -1589,7 +1590,7 @@ static struct folio *__get_node_folio(struct f2fs_sb_info *sbi, pgoff_t nid,
+ 		goto out_err;
+ 	}
+ page_hit:
+-	err = sanity_check_node_footer(sbi, folio, nid, ntype);
++	err = f2fs_sanity_check_node_footer(sbi, folio, nid, ntype, false);
+ 	if (!err)
+ 		return folio;
+ out_err:
+@@ -1764,7 +1765,8 @@ static bool __write_node_folio(struct folio *folio, bool atomic, bool *submitted
+ 	/* get old block addr of this node page */
+ 	nid = nid_of_node(folio);
+ 
+-	if (sanity_check_node_footer(sbi, folio, nid, NODE_TYPE_REGULAR)) {
++	if (f2fs_sanity_check_node_footer(sbi, folio, nid,
++					NODE_TYPE_REGULAR, false)) {
+ 		f2fs_handle_critical_error(sbi, STOP_CP_REASON_CORRUPTED_NID);
  		goto redirty_out;
  	}
+diff --git a/fs/f2fs/node.h b/fs/f2fs/node.h
+index 9cb8dcf8d4176..824ac9f0e6e42 100644
+--- a/fs/f2fs/node.h
++++ b/fs/f2fs/node.h
+@@ -52,14 +52,6 @@ enum {
+ 	IS_PREALLOC,		/* nat entry is preallocated */
+ };
  
--	if (atomic && !test_opt(sbi, NOBARRIER))
--		fio.op_flags |= REQ_PREFLUSH | REQ_FUA;
-+	if (atomic) {
-+		if (!test_opt(sbi, NOBARRIER))
-+			fio.op_flags |= REQ_PREFLUSH | REQ_FUA;
-+		if (IS_INODE(folio))
-+			set_dentry_mark(folio,
-+				f2fs_need_dentry_mark(sbi, ino_of_node(folio)));
-+	}
- 
- 	/* should add to global list before clearing PAGECACHE status */
- 	if (f2fs_in_warm_node_list(sbi, folio)) {
-@@ -1928,8 +1933,9 @@ int f2fs_fsync_node_pages(struct f2fs_sb_info *sbi, struct inode *inode,
- 					if (is_inode_flag_set(inode,
- 								FI_DIRTY_INODE))
- 						f2fs_update_inode(inode, folio);
--					set_dentry_mark(folio,
--						f2fs_need_dentry_mark(sbi, ino));
-+					if (!atomic)
-+						set_dentry_mark(folio,
-+							f2fs_need_dentry_mark(sbi, ino));
- 				}
- 				/* may be written by other thread */
- 				if (!folio_test_dirty(folio))
+-/* For node type in __get_node_folio() */
+-enum node_type {
+-	NODE_TYPE_REGULAR,
+-	NODE_TYPE_INODE,
+-	NODE_TYPE_XATTR,
+-	NODE_TYPE_NON_INODE,
+-};
+-
+ /*
+  * For node information
+  */
 -- 
 2.51.0
 
