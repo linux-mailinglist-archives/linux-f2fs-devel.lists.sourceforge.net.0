@@ -2,42 +2,42 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id sNF3FYScpWlTFwYAu9opvQ
+	id YA3NH4WcpWk+FwYAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 02 Mar 2026 15:19:48 +0100
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 02 Mar 2026 15:19:49 +0100
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id AC7601DA985
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 02 Mar 2026 15:19:47 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1C5DF1DA98C
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 02 Mar 2026 15:19:49 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
 	Subject:MIME-Version:References:In-Reply-To:Message-ID:Date:To:From:Sender:
 	Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
 	:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=xXfalWg4Sx0fSnJ1c95D5O8XZoRI4LovmAY99rfW9cc=; b=A9M2DYLmwX4SfbhySmoB5DVfn1
-	FxRAqv8eNJDdpmZN7B3wfEUUn7DAiA0c3AFoXQFFzXoxdiV0plSXecV0lRHBKugE1dvrTPfj4NFx9
-	Y7nSwTA7miP4PVv130hpGirvShbvPj1+Y8+C1r5rJDIeZbMG7EApnbYfwpAGZNuhin0s=;
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=tETDONX1HIQ3vgQ4Wc1PqXjTWAOxkX7B4wZo35pJQRs=; b=nEjGqpAk1VA8DZ+QUUm36/Qgwx
+	CajIZYlUWv/6Afun2cfGk6Vu+wl5sewhx9+tF48Fz8numiQf1v2u8RwSmZD51Jig2abrh9NyZiYtB
+	yiC5TN+hBWzXttslMbsq8SXciqFaH7XCT1v6Fw0wWnHsoPpIzVGDL/Ct8ImTOYAXGOj0=;
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vx47e-0007pl-CN;
-	Mon, 02 Mar 2026 14:19:46 +0000
+	id 1vx47e-0005xD-W9;
+	Mon, 02 Mar 2026 14:19:47 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95) (envelope-from
  <BATV+ce5019daea4c3780914a+8226+infradead.org+hch@bombadil.srs.infradead.org>)
- id 1vx47d-0007pf-7G for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 02 Mar 2026 14:19:45 +0000
+ id 1vx47d-0005wc-Ek for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 02 Mar 2026 14:19:46 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=2MKwitb679q/7EFRawvNRTcIo328h9sEUi+N9CTrDp0=; b=jrzrjaJ9v0N5BUJH4Szl6413Go
- AFlnSZRWGt9PlJdcrnIG4MsXxk+HY96jNVTKMwiOCTB20S0S7sI+kGTRd5HFIJTXD4Ipg/QEdMJwJ
- RhMXdj61D5cGUDJL8yxla9yvrkQmuME+bJQhkO0HEAY6OZwjLJBPH3wuphj/2JD5E1/c=;
+ bh=iPTG6eQN9GD9Dw7MCvkn5JwwOi7YjGoLKJ1qkqW4aLQ=; b=BzuwvtgnqI+1kz+wPAgYL3t0Je
+ 2/69GFvjZZIwz/Q2YY4PmsT+OZJiojfP9D/41U2h0VSKip0iYX4r42zXMCOcH7/cDOCjdBsd1oX5R
+ AC1bwqydmsDZwqC3EiAm8FVDDT9kzZIP80q5fm0lDZzLSBy5BcOcA+8WKoGVoqxAbU3I=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:
@@ -45,31 +45,31 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=2MKwitb679q/7EFRawvNRTcIo328h9sEUi+N9CTrDp0=; b=HhnsMKGBeLnmWuoH59JrsGC8Jm
- y2B0EFZyb0DjquZXZdsq8NbReoprkZVhGKEC4gB1bL8ZNUR1qL0OXn2Xfq4mvWsvQ4sAAIFJdsxmO
- SCUy6rboXbHkhPAMpSVJl1zEc8Q6LotbguS4xCoIkwT7N8Ztm8l1ecCto9MC5PUk70AM=;
+ bh=iPTG6eQN9GD9Dw7MCvkn5JwwOi7YjGoLKJ1qkqW4aLQ=; b=CPj3eqBKkdFryLg7P8Gh01BwVQ
+ Hcxu9+uXbuEfsAK0OySz7QCGipg7WIlDEgL+exge+n81pp2aLOu+yitsyg5r/2gUQ+IsBxQcgno6L
+ kEfHs+obZK/y53TWUM3A8GK8+g56Rjhmcw1pPqdOjot2zGaiGSn6v0B9I6PvQ4tlUE/U=;
 Received: from bombadil.infradead.org ([198.137.202.133])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vx47c-0001UH-Qi for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 02 Mar 2026 14:19:45 +0000
+ id 1vx47d-0001UM-SJ for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 02 Mar 2026 14:19:46 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
  MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender
  :Reply-To:Content-Type:Content-ID:Content-Description;
- bh=2MKwitb679q/7EFRawvNRTcIo328h9sEUi+N9CTrDp0=; b=KlH8q9wjrnFAY6DKylX10U8ahL
- 4dm7vJPNndoAPXuPNAbCy8wEkewJ8m3Bqnw11DMcwm8Tf3oxM6Y/wtYy2gPd1ibjaaEGZyK72RxXO
- rg5PCwSwCZOzHGau2wJZWgpVLJ6DLv1FCejzB6b0cSbFCXqLDoJ28cevdBqBH4nq1EGo64yyxnash
- GFYjLwQa6DETQdUlXGdhG8qVef6rNQ3fTN/Rms7p7vjEOHVuzH/Ng47S8JdbMjlI2vmrWqMPXhvfV
- soqQUoiYgAiBEj6+9JFloeKBeZYZro3sj0VIF1c/pPNn7tcnvrx4bSdu1ZkzSK5prJWvYD8fH18uj
- o7XxGCfg==;
+ bh=iPTG6eQN9GD9Dw7MCvkn5JwwOi7YjGoLKJ1qkqW4aLQ=; b=SFS6t9d7RBVOwobiURK31Nszio
+ LqB7LOwvBTDV6mo9O9d2588F0g/Lcdt+a5Ltxva2yGLB4bfdDEYZlfumcqWk6IKaczjRPKjlixmih
+ hkwbWCsOfJLXPo7YOO2cnBgPjoG7pGorTdclD8TjW7J9qkiDhyvDznxfTtnaOqH9SR+XPPW/Q0aR8
+ EyXT6b6vAJHwebT5DVrrBYxk/vXsf5NkNhE/0Wv0AABORnzfBqb772YVw0JE/syyOkXf+h6JHKogj
+ Gqv3NC8RAjDCnp23dcSiWwGEY+AdHyLs5vAVDgy+GSBfIFHMo/znvPmN5cgcXYwg1SDGsTzquqJ6o
+ CvVr5aCw==;
 Received: from [2604:3d08:797f:2840::9d5f] (helo=localhost)
  by bombadil.infradead.org with esmtpsa (Exim 4.98.2 #2 (Red Hat Linux))
- id 1vx47R-0000000DDTC-3B0a; Mon, 02 Mar 2026 14:19:33 +0000
+ id 1vx47S-0000000DDTL-35tY; Mon, 02 Mar 2026 14:19:34 +0000
 From: Christoph Hellwig <hch@lst.de>
 To: Eric Biggers <ebiggers@kernel.org>
-Date: Mon,  2 Mar 2026 06:18:14 -0800
-Message-ID: <20260302141922.370070-10-hch@lst.de>
+Date: Mon,  2 Mar 2026 06:18:15 -0800
+Message-ID: <20260302141922.370070-11-hch@lst.de>
 X-Mailer: git-send-email 2.47.3
 In-Reply-To: <20260302141922.370070-1-hch@lst.de>
 References: <20260302141922.370070-1-hch@lst.de>
@@ -78,15 +78,17 @@ X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by
  bombadil.infradead.org. See http://www.infradead.org/rpr.html
 X-Spam-Score: 0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: Logical offsets into an inode are usually expressed as bytes
- in the VFS. Switch fscrypt_zeroout_range_inline_crypt to that convention.
- Signed-off-by: Christoph Hellwig <hch@lst.de> --- fs/crypto/bio.c | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-) 
+ Content preview:  Range lengths are usually expressed as bytes in the VFS,
+ switch
+ fscrypt_zeroout_range_inline_crypt to this convention. Signed-off-by:
+ Christoph
+ Hellwig <hch@lst.de> --- fs/crypto/bio.c | 12 ++++-------- 1 file changed,
+ 4 insertions(+), 8 deletions(-) 
  Content analysis details:   (0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -95,8 +97,8 @@ X-Spam-Report: Spam detection software,
  not necessarily valid
  0.2 HEADER_FROM_DIFFERENT_DOMAINS From and EnvelopeFrom 2nd level mail
  domains are different
-X-Headers-End: 1vx47c-0001UH-Qi
-Subject: [f2fs-dev] [PATCH 09/14] fscrypt: pass a byte offset to
+X-Headers-End: 1vx47d-0001UM-SJ
+Subject: [f2fs-dev] [PATCH 10/14] fscrypt: pass a byte length to
  fscrypt_zeroout_range_inline_crypt
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
@@ -151,52 +153,57 @@ X-Spamd-Result: default: False [-0.01 / 15.00];
 	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[lst.de:mid,lst.de:email]
-X-Rspamd-Queue-Id: AC7601DA985
+X-Rspamd-Queue-Id: 1C5DF1DA98C
 X-Rspamd-Action: no action
 
-Logical offsets into an inode are usually expressed as bytes in the VFS.
-Switch fscrypt_zeroout_range_inline_crypt to that convention.
+Range lengths are usually expressed as bytes in the VFS, switch
+fscrypt_zeroout_range_inline_crypt to this convention.
 
 Signed-off-by: Christoph Hellwig <hch@lst.de>
 ---
- fs/crypto/bio.c | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ fs/crypto/bio.c | 12 ++++--------
+ 1 file changed, 4 insertions(+), 8 deletions(-)
 
 diff --git a/fs/crypto/bio.c b/fs/crypto/bio.c
-index e7fb2fdd9728..7558b3e69701 100644
+index 7558b3e69701..303b5acc66a9 100644
 --- a/fs/crypto/bio.c
 +++ b/fs/crypto/bio.c
-@@ -70,12 +70,11 @@ static void fscrypt_zeroout_range_end_io(struct bio *bio)
- }
+@@ -71,10 +71,8 @@ static void fscrypt_zeroout_range_end_io(struct bio *bio)
  
  static int fscrypt_zeroout_range_inline_crypt(const struct inode *inode,
--					      pgoff_t lblk, sector_t sector,
-+					      loff_t pos, sector_t sector,
- 					      unsigned int len)
+ 					      loff_t pos, sector_t sector,
+-					      unsigned int len)
++					      u64 len)
  {
- 	const unsigned int blockbits = inode->i_blkbits;
- 	const unsigned int blocks_per_page = 1 << (PAGE_SHIFT - blockbits);
--	loff_t pos = (loff_t)lblk << blockbits;
+-	const unsigned int blockbits = inode->i_blkbits;
+-	const unsigned int blocks_per_page = 1 << (PAGE_SHIFT - blockbits);
  	struct fscrypt_zero_done done = {
  		.pending	= ATOMIC_INIT(1),
  		.done		= COMPLETION_INITIALIZER_ONSTACK(done.done),
-@@ -142,6 +141,7 @@ int fscrypt_zeroout_range(const struct inode *inode, pgoff_t lblk,
- 	const unsigned int du_per_page = 1U << du_per_page_bits;
- 	u64 du_index = (u64)lblk << (inode->i_blkbits - du_bits);
- 	u64 du_remaining = (u64)len << (inode->i_blkbits - du_bits);
-+	loff_t pos = (loff_t)lblk << inode->i_blkbits;
- 	sector_t sector = pblk << (inode->i_blkbits - SECTOR_SHIFT);
- 	struct page *pages[16]; /* write up to 16 pages at a time */
- 	unsigned int nr_pages;
-@@ -154,7 +154,7 @@ int fscrypt_zeroout_range(const struct inode *inode, pgoff_t lblk,
- 		return 0;
+@@ -92,12 +90,10 @@ static int fscrypt_zeroout_range_inline_crypt(const struct inode *inode,
+ 		fscrypt_set_bio_crypt_ctx(bio, inode, pos, GFP_NOFS);
+ 
+ 		for (n = 0; n < BIO_MAX_VECS; n++) {
+-			unsigned int blocks_this_page =
+-				min(len, blocks_per_page);
+-			unsigned int bytes_this_page = blocks_this_page << blockbits;
++			unsigned int bytes_this_page = min(len, PAGE_SIZE);
+ 
+ 			__bio_add_page(bio, ZERO_PAGE(0), bytes_this_page, 0);
+-			len -= blocks_this_page;
++			len -= bytes_this_page;
+ 			pos += bytes_this_page;
+ 			sector += (bytes_this_page >> SECTOR_SHIFT);
+ 			if (!len || !fscrypt_mergeable_bio(bio, inode, pos))
+@@ -155,7 +151,7 @@ int fscrypt_zeroout_range(const struct inode *inode, pgoff_t lblk,
  
  	if (fscrypt_inode_uses_inline_crypto(inode))
--		return fscrypt_zeroout_range_inline_crypt(inode, lblk, sector,
-+		return fscrypt_zeroout_range_inline_crypt(inode, pos, sector,
- 							  len);
+ 		return fscrypt_zeroout_range_inline_crypt(inode, pos, sector,
+-							  len);
++				(u64)len << inode->i_blkbits);
  
  	BUILD_BUG_ON(ARRAY_SIZE(pages) > BIO_MAX_VECS);
+ 	nr_pages = min_t(u64, ARRAY_SIZE(pages),
 -- 
 2.47.3
 
