@@ -2,41 +2,41 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id UNX1KmP3pWkEIgAAu9opvQ
+	id 4MftMnL3pWkEIgAAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 02 Mar 2026 21:47:31 +0100
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 02 Mar 2026 21:47:46 +0100
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0B4F51E0A33
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 02 Mar 2026 21:47:31 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 090751E0A97
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 02 Mar 2026 21:47:46 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
 	List-Unsubscribe:List-Id:Subject:To:In-Reply-To:References:Message-Id:
 	MIME-Version:Date:Sender:Content-ID:Content-Description:Resent-Date:
 	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=fpD2KTKl7he2YD/TQqmizoh6y6RJ2ZVQaL4WAOGHjVs=; b=AwPjpKcVsduV2lrIEcw8dAdmjM
-	qzlHIfIn7QxDscFNzulIxFgK6QnAiG4hHJZ9uzj2CMZ952h+cxXyYfFB1AtkRVPqRrwENraBtnqv/
-	lVY5+tGZA6lHGifcYdmLXJ4uRujtjCiLvCqyA2wFQ3I0bZd2s7sKLVpipaZsH9A6G/y8=;
+	bh=LAQm79Bmsp/1pDcItV+8x+tsYNumqmNjTbpODa/QnD0=; b=GxYF9t9bmEehZbBDgMgkG4yjwt
+	P7EUBQlHSAwc2HBd7KXvbYhn+V2qqtHiUJXf8J+qpzffyrdwoWHUzmkUoFazfTRI4LqKJtCrzpHLo
+	liVqydgnVVvIPDKOOMPF+663TyrQ/iQOzDqNFpfwRPbVIQZklzdmuRtz650s8xzlSkZA=;
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vxAAr-0003mV-Mv;
-	Mon, 02 Mar 2026 20:47:29 +0000
+	id 1vxAB6-0003p4-Mc;
+	Mon, 02 Mar 2026 20:47:44 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jlayton@kernel.org>) id 1vxAAq-0003m4-Lv;
- Mon, 02 Mar 2026 20:47:28 +0000
+ (envelope-from <jlayton@kernel.org>) id 1vxAB4-0003oc-G8;
+ Mon, 02 Mar 2026 20:47:42 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Cc:To:In-Reply-To:References:Message-Id:
  Content-Transfer-Encoding:Content-Type:MIME-Version:Subject:Date:From:Sender:
  Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
  :Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=B7AXbwPTgLHCGjtX1T8dYmVJK7C/TztnV7sCqTavkMM=; b=LSHlTXQw1WPSeJaoq1c7jAQ+WF
- oe9suv4OC6pflQgj1oo5QuDxQSKRrEYJwNasQf/HEi1nBqeLIFeUL22Q7nbFrnn8DLp9lESXT8T+A
- khwjuCujiCZM25p7VTKbgor0J3zJnxD4dA9NmYXQqk1l/E8p1V3kDlmpOSu9Yy03Cbd8=;
+ bh=IzVpjA5QHBmrEicfKcrCxgQ+qKrnQ4JXGLmoebkfl+w=; b=k3NmAen9zKbCOVLLhbQ/Me2l3l
+ 1HTYvYkJeZ/1iFJrJbFOmtlovN+bxgu73t6uIorRlAyPlAp+iFz+kxCHbFIlb0IEKae2S/sFwIOo6
+ 0sGL4GeXZFy13seDRg3nrRSqiIXc7CuBEs+kTbtSJj1IyfWOnc+859Gu6m3mFptwC8X4=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Cc:To:In-Reply-To:References:Message-Id:Content-Transfer-Encoding:
@@ -44,31 +44,31 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=B7AXbwPTgLHCGjtX1T8dYmVJK7C/TztnV7sCqTavkMM=; b=IaKMM8DQ1BP/0jZQ4mhblzKdXW
- ZDiaKLRgMIE1A4/u2eGcDr3v67WdzPHuapRnfP+4EdAff1GEgTBROrNDIn2U9RO6M9Mmyqk5C42mM
- HVOpTPD+o/ARLiopscHqu8EN6iEG46HqtozRWvboMRU1iBX8dbHUyXvcR5gYQJ+0sYV8=;
-Received: from sea.source.kernel.org ([172.234.252.31])
+ bh=IzVpjA5QHBmrEicfKcrCxgQ+qKrnQ4JXGLmoebkfl+w=; b=GOoqMxAGkDZA5gk8tY173qSYmo
+ vqpCCSio/km0L65Ejy/JMJhqG7AhmLaBQDkNc44Mv97pFTtll/PEW9CSzGQ2Y7YypoO6GQlsqfdm5
+ FnxZSr94JdAIgI8jOfwSxv6ARCyqvj2+jBT7i9EJY3LzRsdFLBy/GAHobGS6pluzfpKU=;
+Received: from tor.source.kernel.org ([172.105.4.254])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vxAAo-0006sn-VL; Mon, 02 Mar 2026 20:47:28 +0000
+ id 1vxAB3-0006vg-Uh; Mon, 02 Mar 2026 20:47:42 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 8788F412EC;
+ by tor.source.kernel.org (Postfix) with ESMTP id 13D046111B;
+ Mon,  2 Mar 2026 20:47:31 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id A13CAC2BCB3;
  Mon,  2 Mar 2026 20:47:16 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4F3B6C19423;
- Mon,  2 Mar 2026 20:47:02 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1772484436;
- bh=RBfm8moA3CkQn0FwfqqAPZHc84BX8JzG2ZwdR1qdFsA=;
+ s=k20201202; t=1772484450;
+ bh=0FUq3oBHlZbVkcm2IzUt/QSOlhrOWkdnXhWG19OJKNo=;
  h=From:Date:Subject:References:In-Reply-To:To:Cc:From;
- b=Ww8PRAHZGVoyc5aznf7Vmb1RlQqe2QC6RLPARRzy3XSFRmuvkPpi6VaUFGtphfeUO
- CKLP6ryS7WVtuXts1jsQt5qAAyd0skesKShwsOBGM0jHY+KL8lIWTJmoYyDyrMvw+C
- 5iB3CC11UMEau5Ed8pFgCyZlcjI3JcHnud4lSo8lKg54Ar1XxpTcvC/Sl5hBSVTzB/
- W0/WzDcsCp1qwYXAupIwTYrNRLvJw7s944jNfPYdiyGnzPMrKroNGqDglB7qBV4Ft9
- rKnFPbVUCzEayBJJ0DiSz348RXDYumtWXA8ukvnoLteTSCFuAqPfc7UpcP9jljdjut
- Nw6QoDA8lW5Fw==
-Date: Mon, 02 Mar 2026 15:25:17 -0500
+ b=l537t4QAmQuqxHKR5dYe85JUCbHQIh2XEpZ24tx5tQc7Z1RDfwhGxK4FMZXcbvQnq
+ aQ4HM6bLCa/Un9i6wnelpzLWo4dY9m9wOv+CcKQdftNx0/nHie8sNyjfkeMNDxiKEe
+ +a/+PNHGixc1Hi7FnmNMfbMhLA2uZ0Zv04KJE3LT7uivia9qGOIsQUMJEPLYJob5Zk
+ pp6q3elNvMPS9ffgrI8phMvsrlYR1hyXe248YcSkVzjPbGsmjWJ04UEAxhv+RXeQmt
+ rWaurG0VS/6V2pcG/kY8pyLSOgULGMj/BMa0aYE9sV6q8hKqVXU1KovTqqUPf/PYhu
+ iQU6/Gfpkj8vA==
+Date: Mon, 02 Mar 2026 15:25:18 -0500
 MIME-Version: 1.0
-Message-Id: <20260302-iino-u64-v2-93-e5388800dae0@kernel.org>
+Message-Id: <20260302-iino-u64-v2-94-e5388800dae0@kernel.org>
 References: <20260302-iino-u64-v2-0-e5388800dae0@kernel.org>
 In-Reply-To: <20260302-iino-u64-v2-0-e5388800dae0@kernel.org>
 To: Alexander Viro <viro@zeniv.linux.org.uk>, 
@@ -161,20 +161,20 @@ To: Alexander Viro <viro@zeniv.linux.org.uk>,
  Jesper Dangaard Brouer <hawk@kernel.org>, 
  John Fastabend <john.fastabend@gmail.com>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=818; i=jlayton@kernel.org;
- h=from:subject:message-id; bh=RBfm8moA3CkQn0FwfqqAPZHc84BX8JzG2ZwdR1qdFsA=;
- b=owEBbQKS/ZANAwAKAQAOaEEZVoIVAcsmYgBppfIICLS6xYO0GerXkvON8TeCQvci2rcZnQP3v
- d9lspoHnc6JAjMEAAEKAB0WIQRLwNeyRHGyoYTq9dMADmhBGVaCFQUCaaXyCAAKCRAADmhBGVaC
- FVulEACziSiBKlR+zOh4fLCSaUnlxhlP5Co/j48WwP2zAbzDX+V2ZSGOH2ZGleeh1FrxBnlij5N
- L+aKvR468U5ysEnS94v3NHoGtDMWWjRnzb+u9VK0mfd9JnNJR635yFFl7AcL7ONr6TpxJTgIN1F
- N+DXQ7Hx5aKkzhjsJRJYXF8KKsXlSZAcxeG4W7FnVWE/+Sy/SZYeJYsnVD3bK9OZhZ7QUJI8xqM
- psWuoaYpF0i8417ACwnxAky/dwvVL6gvk0SD6pBKor44I+adZLkih8t0vEA6R8r7pwZC0Kw3Dw1
- XLbkEdsoKLR68Hq+HjPmVXW9rGs9M3aC7mPREDnRFiBjHau8a1ffl48B/9FcxfqqgX63D/tFERD
- jtD0DhzI3m2HiIpSxE0b0qcMqCxBhDVaQaW0HJ4mhrs8N+GBpTTymIcebrjybuYBkHRFBha0yab
- 1VYEnIfcZdnBF9KeXFrMXK6JaiEUR/ssvzP2BOVscVVc5JSDfflE1Y7d84w5OlWFL9Je/Ftcdbj
- rYgLxRb84Hq5/Z/umLdbXXLYwuOV8Ty2GEA6rVamCTLqhaXCIyf+XGeZDOEzPflDG2mzI0myDKd
- TnKJJfVoM7pMhZ/qbe6WDJmtjZ3qI7PzepIIeCDtwiIiAOdPR/uoU/36BFHmyzRqClhgp1yFgGq
- 5JWMfLLYOHRNI4w==
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2628; i=jlayton@kernel.org;
+ h=from:subject:message-id; bh=0FUq3oBHlZbVkcm2IzUt/QSOlhrOWkdnXhWG19OJKNo=;
+ b=owEBbQKS/ZANAwAKAQAOaEEZVoIVAcsmYgBppfIJASn3pwzi/JkVT9cf7ITV/RmgrfApAFtpI
+ LpkxUcunG2JAjMEAAEKAB0WIQRLwNeyRHGyoYTq9dMADmhBGVaCFQUCaaXyCQAKCRAADmhBGVaC
+ FVQHEACatKPlTEQQlB+7HsoaPyVQKa2XKb+wwdq2O/9NWcgaSaCS9gV8r7nX+4Mny3M6JTWcL24
+ MPUocZoNadpP40XaT8KG/rh880/xyk3+lQT6GCIL6TL8x2is8hEMcgJB9HBpsmNLt0B4Fs9Pagx
+ tfqdViW5TXmnyKIGgmFGl7/4+6Imh+2U+B+wgmzG7qibX1oT4TwJlbu/DOTO7nqqAx3oVrT/iK7
+ BYKLIqYRY7OAlOOtwcf7lEtRzB9C76dJ3ZKmQIQ7TBo50rBHh5Tq6IUws7Ne3l32Id0PsycHhdo
+ qCfnIqq0ImzKIci2MTphv9mXJzoRjzP93IzaORtagDQ2JLxQrFQ+P33x6id8lDbW0eqnCefuhYs
+ PZ07FVi5+JlPYv/3XVl00hOOn90/1zy1dUo1cJi7fn6JU893QmR8YqN91J+GOd6jeTEZ8A8qeop
+ J9c5m5+g5mQuc9WstGLo6GeYk7lQJWgW3azzbIBl5ZAsNxjv+f219wJ7bTkGZtnZE7srR2wUpYn
+ boaXmlmryyuYUZyFfwkO/OsoO6NHb+tBQJde46hU0iPlWEysiUyCcBQe4qMUIXBiD9RbN+N1V3s
+ MdLbZGH1eC6ibbTDrr3FZIXKyyBM+ol7OtycvZ9OWGkq84QSWiki7fglVwFXD3XIv7iKnvACt3b
+ SsswaxS3dqCGQzw==
 X-Developer-Key: i=jlayton@kernel.org; a=openpgp;
  fpr=4BC0D7B24471B2A184EAF5D3000E684119568215
 X-Spam-Score: -0.2 (/)
@@ -185,10 +185,10 @@ X-Spam-Report: Spam detection software,
  similar future email.  If you have any questions, see
  the administrator of that system for details.
  Content preview:  Now that i_ino is u64 and the PRIino format macro has been
- removed,
- replace all uses in orangefs with the concrete format strings. Signed-off-by:
- Jeff Layton <jlayton@kernel.org> --- fs/orangefs/inode.c | 2 +- 1 file changed,
- 1 insertion(+), 1 deletion(-) 
+ removed, replace all uses in overlayfs with the concrete format strings.
+ Signed-off-by: Jeff Layton <jlayton@kernel.org> --- fs/overlayfs/export.c
+ | 2 +- fs/overlayfs/namei.c | 4 ++-- fs/overlayfs/util.c | 2 +- 3 files
+ changed, 4 insertions(+), 4 deletions(-) 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -200,8 +200,8 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1vxAAo-0006sn-VL
-Subject: [f2fs-dev] [PATCH v2 093/110] orangefs: replace PRIino with
+X-Headers-End: 1vxAB3-0006vg-Uh
+Subject: [f2fs-dev] [PATCH v2 094/110] overlayfs: replace PRIino with
  %llu/%llx format strings
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
@@ -239,7 +239,7 @@ Cc: nvdimm@lists.linux.dev, jfs-discussion@lists.sourceforge.net,
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
-X-Rspamd-Queue-Id: 0B4F51E0A33
+X-Rspamd-Queue-Id: 090751E0A97
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [-7.11 / 15.00];
 	WHITELIST_DMARC(-7.00)[sourceforge.net:D:+];
@@ -277,26 +277,63 @@ X-Spamd-Result: default: False [-7.11 / 15.00];
 X-Rspamd-Action: no action
 
 Now that i_ino is u64 and the PRIino format macro has been removed,
-replace all uses in orangefs with the concrete format strings.
+replace all uses in overlayfs with the concrete format strings.
 
 Signed-off-by: Jeff Layton <jlayton@kernel.org>
 ---
- fs/orangefs/inode.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ fs/overlayfs/export.c | 2 +-
+ fs/overlayfs/namei.c  | 4 ++--
+ fs/overlayfs/util.c   | 2 +-
+ 3 files changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/fs/orangefs/inode.c b/fs/orangefs/inode.c
-index fc0b20bd1d37043461bd2768e9155a763d3469fe..9e8a2a9e5229861a4976d67483a0f6452048f86b 100644
---- a/fs/orangefs/inode.c
-+++ b/fs/orangefs/inode.c
-@@ -1062,7 +1062,7 @@ struct inode *orangefs_iget(struct super_block *sb,
- 	unlock_new_inode(inode);
+diff --git a/fs/overlayfs/export.c b/fs/overlayfs/export.c
+index a17d55db8ebfab7e47f122eade22b96505392b05..0a35d1a20f13fbab5bbee5f271d41f52334a9a6a 100644
+--- a/fs/overlayfs/export.c
++++ b/fs/overlayfs/export.c
+@@ -262,7 +262,7 @@ static int ovl_dentry_to_fid(struct ovl_fs *ofs, struct inode *inode,
+ 	return err;
  
- 	gossip_debug(GOSSIP_INODE_DEBUG,
--		     "iget handle %pU, fsid %d hash %ld i_ino %" PRIino "u\n",
-+		     "iget handle %pU, fsid %d hash %ld i_ino %llu\n",
- 		     &ref->khandle,
- 		     ref->fs_id,
- 		     hash,
+ fail:
+-	pr_warn_ratelimited("failed to encode file handle (ino=%" PRIino "u, err=%i)\n",
++	pr_warn_ratelimited("failed to encode file handle (ino=%llu, err=%i)\n",
+ 			    inode->i_ino, err);
+ 	goto out;
+ }
+diff --git a/fs/overlayfs/namei.c b/fs/overlayfs/namei.c
+index 6cab72d7f70611a83bba433c769323a8954a61d4..ca899fdfaafd21f4bb31807e73883b4978116732 100644
+--- a/fs/overlayfs/namei.c
++++ b/fs/overlayfs/namei.c
+@@ -591,7 +591,7 @@ int ovl_verify_origin_xattr(struct ovl_fs *ofs, struct dentry *dentry,
+ 
+ fail:
+ 	inode = d_inode(real);
+-	pr_warn_ratelimited("failed to verify %s (%pd2, ino=%" PRIino "u, err=%i)\n",
++	pr_warn_ratelimited("failed to verify %s (%pd2, ino=%llu, err=%i)\n",
+ 			    is_upper ? "upper" : "origin", real,
+ 			    inode ? inode->i_ino : 0, err);
+ 	goto out;
+@@ -831,7 +831,7 @@ struct dentry *ovl_lookup_index(struct ovl_fs *ofs, struct dentry *upper,
+ 			index = NULL;
+ 			goto out;
+ 		}
+-		pr_warn_ratelimited("failed inode index lookup (ino=%" PRIino "u, key=%.*s, err=%i);\n"
++		pr_warn_ratelimited("failed inode index lookup (ino=%llu, key=%.*s, err=%i);\n"
+ 				    "overlayfs: mount with '-o index=off' to disable inodes index.\n",
+ 				    d_inode(origin)->i_ino, name.len, name.name,
+ 				    err);
+diff --git a/fs/overlayfs/util.c b/fs/overlayfs/util.c
+index 536504e9803e6457fb7d248036263da446569051..2edad9a146486bda5edf47dc60e1645d49af6539 100644
+--- a/fs/overlayfs/util.c
++++ b/fs/overlayfs/util.c
+@@ -1092,7 +1092,7 @@ static void ovl_cleanup_index(struct dentry *dentry)
+ 	got_write = true;
+ 	inode = d_inode(upperdentry);
+ 	if (!S_ISDIR(inode->i_mode) && inode->i_nlink != 1) {
+-		pr_warn_ratelimited("cleanup linked index (%pd2, ino=%" PRIino "u, nlink=%u)\n",
++		pr_warn_ratelimited("cleanup linked index (%pd2, ino=%llu, nlink=%u)\n",
+ 				    upperdentry, inode->i_ino, inode->i_nlink);
+ 		/*
+ 		 * We either have a bug with persistent union nlink or a lower
 
 -- 
 2.53.0
