@@ -2,41 +2,41 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id EPKeIk74pWkEIgAAu9opvQ
+	id GHz0NV/4pWkeIgAAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 02 Mar 2026 21:51:26 +0100
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 02 Mar 2026 21:51:43 +0100
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0325D1E0EA8
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 02 Mar 2026 21:51:25 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1E52B1E0EE6
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 02 Mar 2026 21:51:43 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
 	List-Unsubscribe:List-Id:Subject:To:In-Reply-To:References:Message-Id:
 	MIME-Version:Date:Sender:Content-ID:Content-Description:Resent-Date:
 	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=qLbm3yWQD9bRLxUCGI9RbZq/IfTf0jgTH0LCxbUQmfc=; b=GpyZtVFhhXZVsQCGE9Rc41a33V
-	I5BKiZstjKGihoi/bL85daxjwW/qiWTH13Mkl0pzklpGa5btxyDL1uzE6+KW3ExzAWz78EzflimaP
-	1DClojxkYqamlxVfhtnF0t2Xz2G/+Xc9Zsfx/HkVnGPGhzcaX/P3/ztiRJ3T386Gj/y0=;
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=EpkFAfco6BA59MZAeCTzgi2Knjf6eH0YK9vm6Hwl03M=; b=WPQ5TWuNHO62eIPn3UtFloF6Ht
+	J4XydOPn2Id0+6VbB6Q45GLKUyZJZhnbI3M6RAmzns4wDJKx10opuJXnHj/u/SkXJooWcnvgYfF1X
+	eognHNQ0byXopFylX6V/MDiygdACH87am0oHp6BFKKwSNNnsQi54wEyb0swsGNZi0Gb4=;
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vxAEb-0005W1-Ql;
-	Mon, 02 Mar 2026 20:51:22 +0000
+	id 1vxAEv-0004Gp-KD;
+	Mon, 02 Mar 2026 20:51:41 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jlayton@kernel.org>) id 1vxAEZ-0005VY-KH;
- Mon, 02 Mar 2026 20:51:20 +0000
+ (envelope-from <jlayton@kernel.org>) id 1vxAEt-0004GO-Ks;
+ Mon, 02 Mar 2026 20:51:39 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Cc:To:In-Reply-To:References:Message-Id:
  Content-Transfer-Encoding:Content-Type:MIME-Version:Subject:Date:From:Sender:
  Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
  :Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=FMnXjX09cpgAbbnvNzwPBaBnYdpvcuQuDwHRdLD5uSo=; b=DNsvH5beFaE3pubjzt4eG+D8SY
- juZdIhjJkQHDaDCacVzoLJKkg1yzpjzBlKAlWBBZKN+CrRcO4/YIlqJh8fwnr6u0aMLYh97Go2VqQ
- 3hK/TYb3mz3TgdmtKQZANw/mXmCDrYbyyXfPZQ3+PHCPWNGGwZqaRBgKrM3iWDYRZga4=;
+ bh=9JquwjMd7atCc+mVCKtunlkwPlGoSrLg7WB1xfco2yI=; b=PyRMf6hHssfUCdyGhZSpPibiSl
+ nX6QlV4nfm0T+J8iS0HrPdoa/zEneP0avkYdkjJ243gwxBlma3/CnF+edbCIxXCyn16WPp6MMdiU3
+ pPM8vFFB0k9RI+2ZlkiBwBX9bNIjTJSHv/5cKBEmY5F+5Kv0OIfxv5/+pGqeDmdp7MYs=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Cc:To:In-Reply-To:References:Message-Id:Content-Transfer-Encoding:
@@ -44,31 +44,31 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=FMnXjX09cpgAbbnvNzwPBaBnYdpvcuQuDwHRdLD5uSo=; b=jTDNm6GxLA3Y73X3M77Xa6LmZz
- aIAdO/J9w3sjKty+mQAVCmqZYV/wbiAKtgdLTTNaRNrS6wUr16ZZPA92I/8gaadsz2uNegy5GmQ/Q
- hFIjnXlmNkR9Pl6KInub8JfCJqDJcxlP0RNRoK3Elp6rGXu5gbvjIjcUk3HfGFouIaOs=;
+ bh=9JquwjMd7atCc+mVCKtunlkwPlGoSrLg7WB1xfco2yI=; b=F9FHoJYGBiuHJEJoOOR785/Uzy
+ Ss6nfoEgLdUHcMFsKxWdK+M8BWc7b+kYHz/cCNh82AdNvyJsroSAGdlrlOUmR33J3rCtJ1uPpNMZt
+ 0VsqaiXtIuTdSVKMbO4wuAARxPGsmQ4YtbchHnms3hrjm58ZWuL9cCXT9QsB2cBUQ87I=;
 Received: from tor.source.kernel.org ([172.105.4.254])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vxAEZ-0007LG-KT; Mon, 02 Mar 2026 20:51:20 +0000
+ id 1vxAEo-0007N6-1r; Mon, 02 Mar 2026 20:51:39 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id D546C6013C;
+ by tor.source.kernel.org (Postfix) with ESMTP id 2836160180;
+ Mon,  2 Mar 2026 20:51:23 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id BC98CC2BCAF;
  Mon,  2 Mar 2026 20:51:08 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 68E3CC19425;
- Mon,  2 Mar 2026 20:50:54 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1772484668;
- bh=bh/9FqQ+zYZ3KRPKzQcXTHwDk+54O75ySXqKcS7HYvs=;
+ s=k20201202; t=1772484682;
+ bh=/sz7TWb/8/hX0LciA1x/Z08Sx95qZ79eor/fKNv831c=;
  h=From:Date:Subject:References:In-Reply-To:To:Cc:From;
- b=ezajfXsx7jOzzXGyYD5JyoqhK8Em2M19Oms4vv5wm8s7gGd1RNIG17dLJ5uTr+5D6
- 13XlSDniCDt/7J/ablb2gb7iBuW/Oox6Ug/Wbln6TdU5pjRwg8QqUZyvUmWrrwzdzh
- TdPoePjqX1wISY5ACwM75XnPKfo63iKnsAlgsvSfbHZnf07XlHfFY43qEpxpxB/MWl
- zscDqCe1CnjGQpXdKoCAVl0e8woVX3ioo/6Qwmd9fITJqR2AokFIdtHXdns/BkdG0u
- 8tm3I731Q//Wx6DIYlJDNlt02wCFczoInqoYaDkiI/NtEl1kCXQ/RPXOqv4IcIOCPv
- 17eeYGfWCbmqw==
-Date: Mon, 02 Mar 2026 15:25:33 -0500
+ b=T7M2jA0E+nOiFu6g0V2eB4Fpg250FkkborXQ68QoO89fQRYaKtke1mCmqo5Vuf7+r
+ wiGdNgQVLprPk5IB7mkheRRMyC+FRKyQz6ka9nPwO+kJgHBHZ43Md2Dkd9VD0/Of83
+ ZUNAObaZI0EzCRK+rvOI+NopDu28S8zgq5QgcDyiMewHIqmRZf306wVK3dRX1tBBlm
+ VErLvddEWB8MSYgMw/Tz8REN4YQ1FxmYNeki4O77thoNIvmMcSZ/Thb9ssZkIaaIfz
+ KZV2FrOeEqwnH4Do1nBzSwg2vKuYdXhsUVCS3pZV7L6ke8IgQelYklF9NzLOeqoxtq
+ 8b/TRYKwQNuoQ==
+Date: Mon, 02 Mar 2026 15:25:34 -0500
 MIME-Version: 1.0
-Message-Id: <20260302-iino-u64-v2-109-e5388800dae0@kernel.org>
+Message-Id: <20260302-iino-u64-v2-110-e5388800dae0@kernel.org>
 References: <20260302-iino-u64-v2-0-e5388800dae0@kernel.org>
 In-Reply-To: <20260302-iino-u64-v2-0-e5388800dae0@kernel.org>
 To: Alexander Viro <viro@zeniv.linux.org.uk>, 
@@ -161,20 +161,20 @@ To: Alexander Viro <viro@zeniv.linux.org.uk>,
  Jesper Dangaard Brouer <hawk@kernel.org>, 
  John Fastabend <john.fastabend@gmail.com>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1475; i=jlayton@kernel.org;
- h=from:subject:message-id; bh=bh/9FqQ+zYZ3KRPKzQcXTHwDk+54O75ySXqKcS7HYvs=;
- b=owEBbQKS/ZANAwAKAQAOaEEZVoIVAcsmYgBppfINtFesBvHoVALkwuzaop+mrk5+hHLUhRkav
- SbiQ5q2EFuJAjMEAAEKAB0WIQRLwNeyRHGyoYTq9dMADmhBGVaCFQUCaaXyDQAKCRAADmhBGVaC
- FaifD/93wgaFohJzMv84cczGy5tqsiSQqVwg9N8IAOpIePJgt0kVY/+xJf0mgMpNCnwO6zNhsuS
- g1IOSlsrTR/MJcpKIRNRt/reW3SdqaEBr7CdUBnbzbCxAGIB+xu/HLgkHB7/xhXL78vuqw+zKnn
- JWZDTxZoLmgiBqPUS8UuOWTjTgkdOZ3zJMEnhCZsH/bvVaqe/Rx87GvqY9JB1vVpsjXluNfRHKK
- wnBcICij2U5zjwQL5pknxzyX+HmPY8260HO4DpxpwCbbXYKu4ZWIJ/0RD/8Rxnqi9RMgWONvuJK
- t+OWOpldFH4s+VBc2nkWs/1iRttLrxwAIoTe727yA+1RDN0kDcWgo5OKw7ETerM45p0uldTJJZz
- +b+0XOeGvsVl2qkZ4+XzpPZhUWp47tWlf1PFhlW8GonbWOTaJNdK8qvCFr3zuvsSmJOiG/+rg5Q
- B2j6heaXrv7KtI4KgpYSMyno9u5SyNZcSqBZspBnXgh2tJj5aQYIxuCDdbq0L4shZAGYBclkCXT
- A78go1uY2C0RpRjk/L8MeHCIPpy2rSoZDGJjUO/g5YlhVBfxrWaCv8yPvr9+APQpC0tLwYTEh7+
- RFM6hW4wUjX/5fMwwSL9Dp6TWTKIc6GW5tTG3pc5VAzwgmOaFPDsLKARdA8RqzISSskdsOHTFvR
- wQa3ZehRJTPIiiA==
+X-Developer-Signature: v=1; a=openpgp-sha256; l=7864; i=jlayton@kernel.org;
+ h=from:subject:message-id; bh=/sz7TWb/8/hX0LciA1x/Z08Sx95qZ79eor/fKNv831c=;
+ b=owEBbQKS/ZANAwAKAQAOaEEZVoIVAcsmYgBppfIOWw4VpZ1f0esD0l2eblcdOGEvFuzW5qecf
+ cTPMYYfwB+JAjMEAAEKAB0WIQRLwNeyRHGyoYTq9dMADmhBGVaCFQUCaaXyDgAKCRAADmhBGVaC
+ FSiGEADKoZsC6JwFSXz5Q8tPMZ6t8//Y5SGA/vaBUiD5D0C+kZUFc/J5USU5TJAKaXk0BTDmAT/
+ 2kbSCQNocpoPv3+wT1fnN67/FnoxtqnhKqtCXlvPPR9RqXVCoIxxjy81hmMGvj5OueJeojBhBrE
+ EPeNMIFty+gCEGi2dWknNkaFTtNxVknqICbKKlus5egvNmB/P/wcCwA75eyzT9Cqf8HgCQ2UWH6
+ E+1UZg/P3Utcs5RWUN4LdyqwfM+nEl51pMv3R4lNJeMv6VLFYo0VBxIBSMwMwLYGA8ONx6GabD8
+ h7hmuJLNcF4apD7rmibApIK+IR8kjVt7xg3Z1R/kF7WyEW+ipWCA+d5pPv4ATJrviTJ5swUDr+e
+ 0fR52ir06HftVbBViJXC+/+JeBB5ygEQwwixuJf+EHIPh8Nw+eAOeSMTJT6/5J9boBSM4t53R2U
+ 1uE4EroXow0SM75te/gScXwcjFowrQz/+gRU3pxfj31chpErmp6yk2ql36oF4XCRuFtyNVG3v2y
+ fwmpsbHx68WQUTJbKUJrw9HuC4vvVoFx2K26sNk8Mvnxfxb/Menyn7MMrfXHs4wZ/DdlCIHP9J6
+ K4FPkJfGrBW5QSCsdyluxgAY1+ed66E9Oz4M67wxOod8vTaTchUlxDXS5wJQNAd38COtoq/jHe9
+ EYgFPWN/4XZNcUQ==
 X-Developer-Key: i=jlayton@kernel.org; a=openpgp;
  fpr=4BC0D7B24471B2A184EAF5D3000E684119568215
 X-Spam-Score: -0.2 (/)
@@ -184,11 +184,11 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Now that i_ino is u64 and the PRIino format macro has been
- removed,
- replace all uses in uprobes with the concrete format strings. Signed-off-by:
- Jeff Layton <jlayton@kernel.org> --- kernel/events/uprobes.c | 4 ++-- 1 file
- changed, 2 insertions(+), 2 deletions(-) 
+ Content preview:  Now that i_ino has been widened to u64, replace the kino_t
+ typedef with u64 and the PRIino format macro with the concrete format strings.
+ Replace the remaining PRIino uses throughout the tree, and remove the typedef
+ and #define from include/linux/fs.h. Change the i_ino field in struct inode
+ from kino_t to u64. 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -200,9 +200,9 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1vxAEZ-0007LG-KT
-Subject: [f2fs-dev] [PATCH v2 109/110] uprobes: replace PRIino with
- %llu/%llx format strings
+X-Headers-End: 1vxAEo-0007N6-1r
+Subject: [f2fs-dev] [PATCH v2 110/110] vfs: remove kino_t typedef and PRIino
+ format macro
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -239,7 +239,7 @@ Cc: nvdimm@lists.linux.dev, jfs-discussion@lists.sourceforge.net,
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
-X-Rspamd-Queue-Id: 0325D1E0EA8
+X-Rspamd-Queue-Id: 1E52B1E0EE6
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [-7.11 / 15.00];
 	WHITELIST_DMARC(-7.00)[sourceforge.net:D:+];
@@ -276,36 +276,206 @@ X-Spamd-Result: default: False [-7.11 / 15.00];
 	HAS_REPLYTO(0.00)[jlayton@kernel.org]
 X-Rspamd-Action: no action
 
-Now that i_ino is u64 and the PRIino format macro has been removed,
-replace all uses in uprobes with the concrete format strings.
+Now that i_ino has been widened to u64, replace the kino_t typedef with
+u64 and the PRIino format macro with the concrete format strings.
+
+Replace the remaining PRIino uses throughout the tree, and remove the
+typedef and #define from include/linux/fs.h. Change the i_ino field in
+struct inode from kino_t to u64.
 
 Signed-off-by: Jeff Layton <jlayton@kernel.org>
 ---
- kernel/events/uprobes.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ fs/dcache.c        |  4 ++--
+ fs/eventpoll.c     |  2 +-
+ fs/fserror.c       |  2 +-
+ fs/inode.c         | 10 +++++-----
+ fs/locks.c         |  6 +++---
+ fs/nsfs.c          |  4 ++--
+ fs/pipe.c          |  2 +-
+ include/linux/fs.h |  5 +----
+ 8 files changed, 16 insertions(+), 19 deletions(-)
 
-diff --git a/kernel/events/uprobes.c b/kernel/events/uprobes.c
-index d5bf51565851223730c63b50436c493c0c05eafd..4084e926e284487ea7e28b63721797b20f0dfefd 100644
---- a/kernel/events/uprobes.c
-+++ b/kernel/events/uprobes.c
-@@ -344,7 +344,7 @@ __update_ref_ctr(struct mm_struct *mm, unsigned long vaddr, short d)
- static void update_ref_ctr_warn(struct uprobe *uprobe,
- 				struct mm_struct *mm, short d)
+diff --git a/fs/dcache.c b/fs/dcache.c
+index 13fb3e89cba7442c9bed74c41ca18be5e43e28c9..9ceab142896f6631017067890fd1079240448e13 100644
+--- a/fs/dcache.c
++++ b/fs/dcache.c
+@@ -1637,11 +1637,11 @@ static enum d_walk_ret umount_check(void *_data, struct dentry *dentry)
+ 	if (dentry == _data && dentry->d_lockref.count == 1)
+ 		return D_WALK_CONTINUE;
+ 
+-	WARN(1, "BUG: Dentry %p{i=%" PRIino "x,n=%pd} "
++	WARN(1, "BUG: Dentry %p{i=%llx,n=%pd} "
+ 			" still in use (%d) [unmount of %s %s]\n",
+ 		       dentry,
+ 		       dentry->d_inode ?
+-		       dentry->d_inode->i_ino : (kino_t)0,
++		       dentry->d_inode->i_ino : (u64)0,
+ 		       dentry,
+ 		       dentry->d_lockref.count,
+ 		       dentry->d_sb->s_type->name,
+diff --git a/fs/eventpoll.c b/fs/eventpoll.c
+index 90fd92425492221d13bd0cf067d47579bb407a01..4ccd4d2e31adf571f939d2e777123e40302e565f 100644
+--- a/fs/eventpoll.c
++++ b/fs/eventpoll.c
+@@ -1080,7 +1080,7 @@ static void ep_show_fdinfo(struct seq_file *m, struct file *f)
+ 		struct inode *inode = file_inode(epi->ffd.file);
+ 
+ 		seq_printf(m, "tfd: %8d events: %8x data: %16llx "
+-			   " pos:%lli ino:%" PRIino "x sdev:%x\n",
++			   " pos:%lli ino:%llx sdev:%x\n",
+ 			   epi->ffd.fd, epi->event.events,
+ 			   (long long)epi->event.data,
+ 			   (long long)epi->ffd.file->f_pos,
+diff --git a/fs/fserror.c b/fs/fserror.c
+index b685b329b5956a639c41b25c42cfff16e6e5ab6e..1e4d11fd9562fd158a23b64ca60e9b7e01719cb8 100644
+--- a/fs/fserror.c
++++ b/fs/fserror.c
+@@ -176,7 +176,7 @@ void fserror_report(struct super_block *sb, struct inode *inode,
+ lost:
+ 	if (inode)
+ 		pr_err_ratelimited(
+- "%s: lost file I/O error report for ino %" PRIino "u type %u pos 0x%llx len 0x%llx error %d",
++ "%s: lost file I/O error report for ino %llu type %u pos 0x%llx len 0x%llx error %d",
+ 		       sb->s_id, inode->i_ino, type, pos, len, error);
+ 	else
+ 		pr_err_ratelimited(
+diff --git a/fs/inode.c b/fs/inode.c
+index 24ab9fa10baf7c885244f23bfccd731efe4a14cc..5ad169d51728c260aeaabb810e59eb3ec1d1ce52 100644
+--- a/fs/inode.c
++++ b/fs/inode.c
+@@ -726,7 +726,7 @@ void dump_mapping(const struct address_space *mapping)
+ 	struct dentry *dentry_ptr;
+ 	struct dentry dentry;
+ 	char fname[64] = {};
+-	kino_t ino;
++	u64 ino;
+ 
+ 	/*
+ 	 * If mapping is an invalid pointer, we don't want to crash
+@@ -750,14 +750,14 @@ void dump_mapping(const struct address_space *mapping)
+ 	}
+ 
+ 	if (!dentry_first) {
+-		pr_warn("aops:%ps ino:%" PRIino "x\n", a_ops, ino);
++		pr_warn("aops:%ps ino:%llx\n", a_ops, ino);
+ 		return;
+ 	}
+ 
+ 	dentry_ptr = container_of(dentry_first, struct dentry, d_u.d_alias);
+ 	if (get_kernel_nofault(dentry, dentry_ptr) ||
+ 	    !dentry.d_parent || !dentry.d_name.name) {
+-		pr_warn("aops:%ps ino:%" PRIino "x invalid dentry:%px\n",
++		pr_warn("aops:%ps ino:%llx invalid dentry:%px\n",
+ 				a_ops, ino, dentry_ptr);
+ 		return;
+ 	}
+@@ -768,7 +768,7 @@ void dump_mapping(const struct address_space *mapping)
+ 	 * Even if strncpy_from_kernel_nofault() succeeded,
+ 	 * the fname could be unreliable
+ 	 */
+-	pr_warn("aops:%ps ino:%" PRIino "x dentry name(?):\"%s\"\n",
++	pr_warn("aops:%ps ino:%llx dentry name(?):\"%s\"\n",
+ 		a_ops, ino, fname);
+ }
+ 
+@@ -2641,7 +2641,7 @@ void init_special_inode(struct inode *inode, umode_t mode, dev_t rdev)
+ 		/* leave it no_open_fops */
+ 		break;
+ 	default:
+-		pr_debug("init_special_inode: bogus i_mode (%o) for inode %s:%" PRIino "u\n",
++		pr_debug("init_special_inode: bogus i_mode (%o) for inode %s:%llu\n",
+ 			 mode, inode->i_sb->s_id, inode->i_ino);
+ 		break;
+ 	}
+diff --git a/fs/locks.c b/fs/locks.c
+index 9c5aa23f09b6e061dc94c81cd802bb65dd0053c1..d8b066fb42108971f6b3c7449dbc9b5f8df16b13 100644
+--- a/fs/locks.c
++++ b/fs/locks.c
+@@ -234,7 +234,7 @@ locks_check_ctx_lists(struct inode *inode)
+ 	if (unlikely(!list_empty(&ctx->flc_flock) ||
+ 		     !list_empty(&ctx->flc_posix) ||
+ 		     !list_empty(&ctx->flc_lease))) {
+-		pr_warn("Leaked locks on dev=0x%x:0x%x ino=0x%" PRIino "x:\n",
++		pr_warn("Leaked locks on dev=0x%x:0x%x ino=0x%llx:\n",
+ 			MAJOR(inode->i_sb->s_dev), MINOR(inode->i_sb->s_dev),
+ 			inode->i_ino);
+ 		locks_dump_ctx_list(&ctx->flc_flock, "FLOCK");
+@@ -251,7 +251,7 @@ locks_check_ctx_file_list(struct file *filp, struct list_head *list, char *list_
+ 
+ 	list_for_each_entry(flc, list, flc_list)
+ 		if (flc->flc_file == filp)
+-			pr_warn("Leaked %s lock on dev=0x%x:0x%x ino=0x%" PRIino "x "
++			pr_warn("Leaked %s lock on dev=0x%x:0x%x ino=0x%llx "
+ 				" fl_owner=%p fl_flags=0x%x fl_type=0x%x fl_pid=%u\n",
+ 				list_type, MAJOR(inode->i_sb->s_dev),
+ 				MINOR(inode->i_sb->s_dev), inode->i_ino,
+@@ -2896,7 +2896,7 @@ static void lock_get_status(struct seq_file *f, struct file_lock_core *flc,
+ 			     (type == F_RDLCK) ? "READ" : "UNLCK");
+ 	if (inode) {
+ 		/* userspace relies on this representation of dev_t */
+-		seq_printf(f, "%d %02x:%02x:%" PRIino "u ", pid,
++		seq_printf(f, "%d %02x:%02x:%llu ", pid,
+ 				MAJOR(inode->i_sb->s_dev),
+ 				MINOR(inode->i_sb->s_dev), inode->i_ino);
+ 	} else {
+diff --git a/fs/nsfs.c b/fs/nsfs.c
+index 0e099ee2121f8831645c3a25d759793ef2ff9ce6..eac326b85314ac8080248347154d599c953969c7 100644
+--- a/fs/nsfs.c
++++ b/fs/nsfs.c
+@@ -46,7 +46,7 @@ static char *ns_dname(struct dentry *dentry, char *buffer, int buflen)
+ 	struct ns_common *ns = inode->i_private;
+ 	const struct proc_ns_operations *ns_ops = ns->ops;
+ 
+-	return dynamic_dname(buffer, buflen, "%s:[%" PRIino "u]",
++	return dynamic_dname(buffer, buflen, "%s:[%llu]",
+ 		ns_ops->name, inode->i_ino);
+ }
+ 
+@@ -394,7 +394,7 @@ static int nsfs_show_path(struct seq_file *seq, struct dentry *dentry)
+ 	const struct ns_common *ns = inode->i_private;
+ 	const struct proc_ns_operations *ns_ops = ns->ops;
+ 
+-	seq_printf(seq, "%s:[%" PRIino "u]", ns_ops->name, inode->i_ino);
++	seq_printf(seq, "%s:[%llu]", ns_ops->name, inode->i_ino);
+ 	return 0;
+ }
+ 
+diff --git a/fs/pipe.c b/fs/pipe.c
+index 311928e8713989747605fd79f653e36d27ce8c0e..9841648c9cf3e8e569cf6ba5c792624fe92396f5 100644
+--- a/fs/pipe.c
++++ b/fs/pipe.c
+@@ -873,7 +873,7 @@ static struct vfsmount *pipe_mnt __ro_after_init;
+  */
+ static char *pipefs_dname(struct dentry *dentry, char *buffer, int buflen)
  {
--	pr_warn("ref_ctr %s failed for inode: 0x%" PRIino "x offset: "
-+	pr_warn("ref_ctr %s failed for inode: 0x%llx offset: "
- 		"0x%llx ref_ctr_offset: 0x%llx of mm: 0x%p\n",
- 		d > 0 ? "increment" : "decrement", uprobe->inode->i_ino,
- 		(unsigned long long) uprobe->offset,
-@@ -982,7 +982,7 @@ static struct uprobe *insert_uprobe(struct uprobe *uprobe)
- static void
- ref_ctr_mismatch_warn(struct uprobe *cur_uprobe, struct uprobe *uprobe)
- {
--	pr_warn("ref_ctr_offset mismatch. inode: 0x%" PRIino "x offset: 0x%llx "
-+	pr_warn("ref_ctr_offset mismatch. inode: 0x%llx offset: 0x%llx "
- 		"ref_ctr_offset(old): 0x%llx ref_ctr_offset(new): 0x%llx\n",
- 		uprobe->inode->i_ino, (unsigned long long) uprobe->offset,
- 		(unsigned long long) cur_uprobe->ref_ctr_offset,
+-	return dynamic_dname(buffer, buflen, "pipe:[%" PRIino "u]",
++	return dynamic_dname(buffer, buflen, "pipe:[%llu]",
+ 				d_inode(dentry)->i_ino);
+ }
+ 
+diff --git a/include/linux/fs.h b/include/linux/fs.h
+index 4193817e02e8bf94f29514ca43379af21f37ac61..097443bf12e289c347651e5f3da5b67eb6b53121 100644
+--- a/include/linux/fs.h
++++ b/include/linux/fs.h
+@@ -758,9 +758,6 @@ struct inode_state_flags {
+ 	enum inode_state_flags_enum __state;
+ };
+ 
+-typedef u64		kino_t;
+-#define PRIino		"ll"
+-
+ /*
+  * Keep mostly read-only and often accessed (especially for
+  * the RCU path lookup and 'stat' data) fields at the beginning
+@@ -786,7 +783,7 @@ struct inode {
+ #endif
+ 
+ 	/* Stat data, not accessed from path walking */
+-	kino_t			i_ino;
++	u64			i_ino;
+ 	/*
+ 	 * Filesystems may only read i_nlink directly.  They shall use the
+ 	 * following functions for modification:
 
 -- 
 2.53.0
