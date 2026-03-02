@@ -2,41 +2,41 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id iFdxDgERpmnlJgAAu9opvQ
+	id WCq4FZsRpmnlJgAAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 02 Mar 2026 23:36:49 +0100
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 02 Mar 2026 23:39:23 +0100
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 307061E5B13
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 02 Mar 2026 23:36:48 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 55BCB1E5C26
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 02 Mar 2026 23:39:22 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
 	List-Unsubscribe:List-Id:Subject:MIME-Version:Content-ID:In-Reply-To:
 	References:Message-ID:Date:To:Sender:Content-Description:Resent-Date:
 	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=2py1oWs5u68QzyIKP32coxRmD896A/cFz5NLkglvVfU=; b=QkaCaN0eaDZEzLm9cKVICk2FAl
-	Zs4V8j0BxYc1zVWrt4oiIKn9cZSQWVVV5r7YEN/a/GoN1Zt5/3pqKQGqDCwbydVd/un7N2E8VOWLq
-	guXzR4IJUwHkuoD30G83iDYYk0wm6azA1OSdb1pZg4BygONKqmEkLGBrl9PNzDLIWffA=;
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=qDc2j669EJxB6y/WCzp8NFObxzWlaDFMt1wDH4FXwVQ=; b=ADkbimuzSiG+llJ0qvRsHMbGpm
+	acgKMzQKNBv5QbBLQvG4mBNFvEL+nCVvj9D0WvMWBtZeNWRiN2JLlbKnJY0gdaI8m4NfdkdsxJr93
+	A2KvHahq/dJ07+gpHujkpEUyf2o99Xvg/D3XLUstB20OJ8kqSOEeFUmJbZgsajYvAX0c=;
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vxBsa-0007wR-FD;
-	Mon, 02 Mar 2026 22:36:45 +0000
+	id 1vxBv5-0006es-Js;
+	Mon, 02 Mar 2026 22:39:19 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <Slava.Dubeyko@ibm.com>) id 1vxBsZ-0007w2-Dt;
- Mon, 02 Mar 2026 22:36:44 +0000
+ (envelope-from <Slava.Dubeyko@ibm.com>) id 1vxBv3-0006eM-Ci;
+ Mon, 02 Mar 2026 22:39:17 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Subject:MIME-Version:Content-Transfer-Encoding:
  Content-ID:Content-Type:In-Reply-To:References:Message-ID:Date:CC:To:From:
  Sender:Reply-To:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=0PKTLEeP4Tx9A96nY8i3BwXfQLUOJVGNDzDnFjj7ESs=; b=DeQEQoo/4IH0CW31uJYH9XCIVR
- MFIEDzZ40sJeLE5FAZjhhucR+m6U/zEwR94sFsdL5bQgQh89fA1YiQszxXdJ5wBGSH2pWUW/tZZqf
- MTeaHCHjYqMWzhijlx8dOEf+1+iyzBCLsIunhdnV5puygwF6f4aECGel+QO5AZ/KEbFk=;
+ bh=h7I7wjgcUqISfPVWpWjKqRnS9Lv/J3K4YnumqX9WKiA=; b=DSn3rJAUY2sazd7X8vRp9Dg2Ij
+ LLHh1kG2KFxQxUMstgXVcPk08x7V5LDwuPXhGOu8LUWR0nIQSMhwBbvXBEeG5OQ29RAjG8ggr6z64
+ Tq6lZPfkUH5NHYuZj+grKTK5mJTVxGHPoBJsxXySv4vwXmB7uURtf0MiTRccpQT8FS8U=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Subject:MIME-Version:Content-Transfer-Encoding:Content-ID:Content-Type:
@@ -44,50 +44,50 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=0PKTLEeP4Tx9A96nY8i3BwXfQLUOJVGNDzDnFjj7ESs=; b=C4b8hArAVqMVfrNTCTakF9CUE/
- M5OWpB8wHJS/QRPPCIa26msC+Mme2aynYaRiVAwstqGnAStzyJFuABy1MzryTVe+0Tum3hpBp2Xv8
- BWv49vR45g1kf70pzJjKDZPoK2GXiYV4ClDVZK6R4BDddedQEG1z4pKYJW6Lz9+b5Cc0=;
+ bh=h7I7wjgcUqISfPVWpWjKqRnS9Lv/J3K4YnumqX9WKiA=; b=MGcw2EP4ZOsiMPvRr88Bf/8SxV
+ OLbxC585ihARPsEoNrtSR50oIbXOmBNAE7oy7XepY4YhW2e/ylWrVeqsuOwAHAGhxplh8ZfPQGsFv
+ C7frgn5YiAacQkGUpMNIwnhiOvO4X8EUFvtTF+tbPUk05n2DVzdkXTY6q5jpnI5ppgwY=;
 Received: from mx0a-001b2d01.pphosted.com ([148.163.156.1])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vxBsZ-0004ef-C9; Mon, 02 Mar 2026 22:36:44 +0000
-Received: from pps.filterd (m0356517.ppops.net [127.0.0.1])
+ id 1vxBv2-0004mx-AC; Mon, 02 Mar 2026 22:39:17 +0000
+Received: from pps.filterd (m0360083.ppops.net [127.0.0.1])
  by mx0a-001b2d01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 622EYAtk2165137; Mon, 2 Mar 2026 22:36:14 GMT
+ 622EdxYQ2438123; Mon, 2 Mar 2026 22:38:48 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com; h=cc
  :content-id:content-transfer-encoding:content-type:date:from
  :in-reply-to:message-id:mime-version:references:subject:to; s=
- pp1; bh=0PKTLEeP4Tx9A96nY8i3BwXfQLUOJVGNDzDnFjj7ESs=; b=RRHykEpj
- 9MDPPjMZaP2txMNKCn4mj6Gqg7eRXRc++bC46+fXJW72IGBHqHlfi3q8+KNq3LgF
- Me9y9bvp2zH+nBoZIabmA6krVB4xZlA7mVVHbEbDORftrDJCaVlEAK5qqZWXfMTB
- eHHyjBQEUWxvP+2jFe3T4nGWtJsf+6QfI+AyS228DKjxN9bipQOOrTU2H4r49Qeb
- 5mmlxWQFUf+WjlOarorrR95iZFH41rN1uStfk8PSpV6DhcGbfiXxvbCAfypW5kMB
- lCTyB6tgswGZZwnox4tNcgV4jDiLkZA0GfYWVAvqItXRJZls+v2cptrkMu3Mjs0N
- SXUNJQY3nUo4OA==
-Received: from mw6pr02cu001.outbound.protection.outlook.com
- (mail-westus2azon11012026.outbound.protection.outlook.com [52.101.48.26])
- by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 4cksjd8qpj-1
+ pp1; bh=h7I7wjgcUqISfPVWpWjKqRnS9Lv/J3K4YnumqX9WKiA=; b=br1YtjuC
+ VnJYs5uIhqf26EBJXh9VRoa5dTvrLjySCROg3YdRoRRUn8BLFwnVe2KcwteHEML5
+ YkMLXDfkw1pi/qMQ94QqDBFeMWe0EZxLIEigCN6VGMXAzhm/NQTEtnQBPQQFfcGR
+ zoNeKuZdO2EYB9MKx4mqZKQsCOAYpMkU48YUiCIxo6m/tRd9aw38+Od2NqTMAZoU
+ StoY/ZHu6IPzDuwHm2C2Ur+HKg5DdV7dp9PogNcmlcEDp10stKD2m7yzrEj1CA1F
+ OMK2IMs/QLOrPZfYIYYnV//b+R12C1Cwo4GxUEfMN5nja+uGaUGFjgQfLyD1NWW1
+ oZV4+DCmb3c68g==
+Received: from dm1pr04cu001.outbound.protection.outlook.com
+ (mail-centralusazon11010042.outbound.protection.outlook.com [52.101.61.42])
+ by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 4cksrj0qcs-1
  (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
- Mon, 02 Mar 2026 22:36:13 +0000 (GMT)
+ Mon, 02 Mar 2026 22:38:46 +0000 (GMT)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=j+voMDjYmu62tnO+xyuks06DW624lpOzFVJ/dbG8A/4GQpWirojdVLOtoZcBdMjuIUkQV5E/YvpwUqoPLzXT6T4V4eilOpFtUQIduc2XxeR/2B+vWBqLLn8cQznV5opWKMVyTG6qmXY1NSYNbk6AqGV74DRNQep05C+V7Jw0wBZYcBRg2cY9KzcvTdTm+rncDcPTG5Mh1PN8p2eF3nMtVW4GuO6aOuMjKLcgNzh6knmEYCDf8xNZf5MQz3SvsofcabS/tN+21IRrfU1Scx9iU1dc1DgUE2icDSRJXNsSOOk4DvCU+AjQuugnxSlQukAQEYx0V2cIAVfhj7h/UtX70g==
+ b=W1KwGFCL1F3MU5b9FItWe50DI4Jc7GptoQNxAZOWjFOutW/Xbo+3X5xWb9LabXKi53WrBDteEXT952xe4rJ0is8Dhl5zNNW9Xm8qq6MK/pfX3wzi8ML3WgjGs7p4JbQcUP36oeyQcy4yRSDd6cSKpco7FNMONHbD3CzgocDqaIEekbk7EqoRKUYs40dpgc+y9W1cmdCoDlUDHI0fOmXRkWmMN++vl7Iy9SNlgT9aXgczTqCA7vft/jbc6AAtxRh4NRgAjwV6T9DuV/+4eXuMnekFKFM2il+Dt8gkRKYUhyT8rqOlK/bo4gcPgs0g8Lzj7CqQA0YLV8J1RLn2tscU7A==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=0PKTLEeP4Tx9A96nY8i3BwXfQLUOJVGNDzDnFjj7ESs=;
- b=Aw2FrhQuWONSXn4YTFjqAtjhjwDSQITQHpLSjCEgyqKY62fFQ9JtujxCOYAHwGOuHnFBJx8Wh5govNrtmNyAhidi9yqYb1GVy3k9WbCeIyr4QMdnz4eo2Y/+eDjVBpNFeHtcFn4L3DtbrCWLeZLlKy3s/u/aXPJPAG4tcYM9p3/7TZZW9eup1hDXxVYOqLvFP9J3GpWVxvAPgMB9sI/9WDGXoDlo2jRwfPYXAXMiseklfS676izdtSUYgj88o5Ky+JWodTuh4ut2dChVY4oMduuVjft2q+IucgeVM7ey8rSDMWMrqYpZDFeHiIA1r75nPC383Dzwedpzo/884hRrfQ==
+ bh=h7I7wjgcUqISfPVWpWjKqRnS9Lv/J3K4YnumqX9WKiA=;
+ b=xWsrgfiVK5vQGJJRyrqe9y9fU8ky2YGtAEXxnJ0nfMLa/0PYlU9VdNsziQ2NR+5f+GcgGOOabxk7ygIVaeeOHfhMUEh8/6MgCn/Y740Eqnc2KevczFxN0rFmx32KvVXJGDBiMCue3aDk0Q1KYqRng/zwSE4mf/hxhLC+z+B5qZJppw4Bb2Hpomj9g0Tlc4PE5kuD07p09izjnY6xKos2Ad3eQOm8SwfNMPgCsTc40T08PHBqKb0qbwtzhn/GGux9kZE+vSyH3iiUO4/6urI++Ps9uc2tUyN7fm0/bjHqZXKEuaCXm0IO5MvTYZjnJJbBP7Hz1S8y/3bT6stArwyIFg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=ibm.com; dmarc=pass action=none header.from=ibm.com; dkim=pass
  header.d=ibm.com; arc=none
 Received: from SA1PR15MB5819.namprd15.prod.outlook.com (2603:10b6:806:338::8)
- by SJ0PR15MB4155.namprd15.prod.outlook.com (2603:10b6:a03:2ee::20)
+ by PH3PPFE061D9768.namprd15.prod.outlook.com (2603:10b6:518:1::4cd)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9654.18; Mon, 2 Mar
- 2026 22:36:09 +0000
+ 2026 22:38:41 +0000
 Received: from SA1PR15MB5819.namprd15.prod.outlook.com
  ([fe80::920c:d2ba:5432:b539]) by SA1PR15MB5819.namprd15.prod.outlook.com
  ([fe80::920c:d2ba:5432:b539%7]) with mapi id 15.20.9632.017; Mon, 2 Mar 2026
- 22:36:09 +0000
+ 22:38:40 +0000
 To: "socketcan@hartkopp.net" <socketcan@hartkopp.net>,
  "herbert@gondor.apana.org.au" <herbert@gondor.apana.org.au>,
  "jolsa@kernel.org" <jolsa@kernel.org>,
@@ -184,109 +184,109 @@ To: "socketcan@hartkopp.net" <socketcan@hartkopp.net>,
  "naohiro.aota@wdc.com" <naohiro.aota@wdc.com>, "zohar@linux.ibm.com"
  <zohar@linux.ibm.com>, "chuck.lever@oracle.com" <chuck.lever@oracle.com>,
  "irogers@google.com" <irogers@google.com>
-Thread-Topic: [EXTERNAL] [PATCH v2 032/110] hfsplus: use PRIino format for
- i_ino
-Thread-Index: AQHcqobOGSQlvE2NLkaLDaZOgevjgLWb1N2A
-Date: Mon, 2 Mar 2026 22:36:08 +0000
-Message-ID: <25821493fe809c348a24231518c53d493c37674b.camel@ibm.com>
+Thread-Topic: [EXTERNAL] [PATCH v2 068/110] nilfs2: replace PRIino with
+ %llu/%llx format strings
+Thread-Index: AQHcqpH1veHvAidnr0qVoTrVuSHHfLWb1XsA
+Date: Mon, 2 Mar 2026 22:38:40 +0000
+Message-ID: <8800abc03ee286db813b902f1c32300962381dea.camel@ibm.com>
 References: <20260302-iino-u64-v2-0-e5388800dae0@kernel.org>
- <20260302-iino-u64-v2-32-e5388800dae0@kernel.org>
-In-Reply-To: <20260302-iino-u64-v2-32-e5388800dae0@kernel.org>
+ <20260302-iino-u64-v2-68-e5388800dae0@kernel.org>
+In-Reply-To: <20260302-iino-u64-v2-68-e5388800dae0@kernel.org>
 Accept-Language: en-US
 Content-Language: en-US
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
 x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: SA1PR15MB5819:EE_|SJ0PR15MB4155:EE_
-x-ms-office365-filtering-correlation-id: 8f8f1127-0bee-4b79-8224-08de78ac1967
+x-ms-traffictypediagnostic: SA1PR15MB5819:EE_|PH3PPFE061D9768:EE_
+x-ms-office365-filtering-correlation-id: 638af32c-265e-4f20-d04e-08de78ac73d5
 x-ld-processed: fcf67057-50c9-4ad4-98f3-ffca64add9e9,ExtAddr
 x-ms-exchange-senderadcheck: 1
 x-ms-exchange-antispam-relay: 0
 x-microsoft-antispam: BCL:0;
- ARA:13230040|7416014|376014|1800799024|10070799003|366016|921020|38070700021; 
-x-microsoft-antispam-message-info: liri0jEh5M5wGbC4pxkNU0y01oCzOU744CzLQ7rQbRTGMlcUVvz0gbe6DDbFEmvJSDKjkVuBYuavDjbNSFFAnrxKpX0C0Ywp9Lo9kRJwmppRfDSaMm52Q2SPMvu4Z10iuBcYIylR2WGo0J9mvQAVywFZQa3UGrrvmWxyGP3t1D17abZ1qBuIl3BnaePBIrd53jhaFeRxF3507uD0nT1a/xZQqq/U/1pj3kzd3lD3n6R+nSwKcRAWFd7rxQM0bu74DYK77kPimsl+lujD7VyQaaYjHRshpc6jQN9wYVS08AgyaC6hjlK5w+QeSEygM+FCGXHPKZLSe9wuY00WNxO4W9hK5ChMwFXQAntSmZZtwD/iA40CIg4oSUMrpFHAu+m/zrJ4mcuX8+2OIZhV4QnChtOubr7T0mUSEHpNLCWS0gRZzi3OzMJgi7Kbqo0qyqK5EIJqPyAHJzF0BydPAuYe58n+wTq6FJdaFoPCIZaDeYjoLSKVPKLCDUe/4z4paTV6sGHu/A3eWfceC0C/NH6Pwhd1ORKTclQKLVQlTCJrquzGjaqz6OWa6Yxg7SSadhU4GevDzHKJk8djN8GTbXiiyoxFccTDRM/g/830KCIkrl03kGvXGm5q8NZ6ZlQ6cdudkLyeUFEpPngcE+KElYuDWmlUMHIuVt8oEErjFoBH31YWsnwzNtxrQ7++CJTlPWIQcVf/DH+KCvEtHwa+4M45GXFQcE2RiebWHsoZkj+bdB1kbManXthWh5ruYWjKMNLFvtFGC7dW8as4R70A0CqjWJkgsRSCky/hVdVOXUPe8OZPKJ3GRSLyNjvgB1VmUWUD
+ ARA:13230040|376014|7416014|10070799003|366016|1800799024|38070700021|921020; 
+x-microsoft-antispam-message-info: qg5tOpyFMlWHx7QSsCOFGeOSusoHGwrW7/BifelEfBRbedjVwEJuWZvRs1J6sYngDRoCyO8NcyAYCqkz4nM1v0+lRdCYw2I5VASGl1SGsUAkrpmNNXakQtIkq3vPKvpvYnn7BTggjq/6T7WAYMNokh3Kp+noFTT1A5XJxjrUi6T4eiBGwVGo/gFdLiZmqBZ0iBU4I9zOhJ8uBzr6MXHmbU2GoZlyG+Xte7mv+HIjIDDUrNpq8j2avR3r+LSqLUlSwgz0K8pheviXnBkYeiC44HY3Fi6CX0LOnDPkBnADadJ38dvu9EPCnLxly43xV0v6G3PaSkgup49wZPKyMc7UVmQ8UDfC/88nEund6jINGTbaKCQbPCO4eeiad9YBedNERDid4VeNWjB2ZrW5Kc+NbChGQHMeIiVUfu7wiBuEZjkREUtJjx+Zs86atNC5qSCYCMLEx3Ann52dlRFBt91eL9pcDZD8bXs2o/0ymDa2MJ6llwlLfkMQJ3gbPpAhAWP8aLxv5FPoEBRteNZ9XKA7ifT5HH7JNTY2YagRT1krWP50X3z1Ale9qmJQkF0MktFNf1BNPRNISv6Yq/w7JsrewOnIsM1fb0gwTMiq+uD39cdcWSCWx/tIQBkV3GBASl9GDROFoww0h6JYX7izxQmCobgiQ1YjZ1usKBfoVA+Y8pFV6bGVp7arOEEiLAu5TxjFrZI6RWJ+BfejPgt2Nvt7MwuIxvn/w3KYoZR0phdiR9OUkh0+CKPKOUiLB4tUNx0f9mBivYHI4iaNNW9dfv/EJ9nG+hZZ8xgJfOVd/3SE1vg=
 x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:SA1PR15MB5819.namprd15.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(7416014)(376014)(1800799024)(10070799003)(366016)(921020)(38070700021);
+ SFS:(13230040)(376014)(7416014)(10070799003)(366016)(1800799024)(38070700021)(921020);
  DIR:OUT; SFP:1101; 
 x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?utf-8?B?Nm4wc0QvUThrV0wyZW13and5THBtWjdQTmozYnVYS0RpS3duL1pMSkUxTlVj?=
- =?utf-8?B?U2tLTWhKdnBNbmNFUm43cnBYVGNDV0IzSjVEMEhmeFFSSmFxekxWZElidG53?=
- =?utf-8?B?SzN0K1Z1QUprdVhlWjZUVm9qUVQxTHZNbFZKVCt6NGxlK015cGw2bGZZKzlW?=
- =?utf-8?B?aDhEQnVqK0JKNXlTRk54S0hxdnkrUU9abW1WKzdrRGJzZ01tMURwalg2QUFu?=
- =?utf-8?B?NFUxQnZiaHFzb3Z0bGJxb1ZuWWs0dFFTeEc4MWU3Y2U5UUllbmxWRlhzNW9r?=
- =?utf-8?B?V3p6V05udkQzdWNCdThvajdmNDZLTk9LMkl3bmNuN2NDdUd4ZmpyYWdpQ3Zk?=
- =?utf-8?B?N1FJdW9KVmFhYnhjOTl3bmY5OWpCY2wrbno3U3RSN1pnaWNrWDZhWmFTM0lm?=
- =?utf-8?B?L1pOV3hQY296TlJtRnAwdENzMlhXV2dnd0VpRFArR3JJVnNqY0UvejNsdjBS?=
- =?utf-8?B?UUdyRTlwdGc1bWRzVkcySGlHTmcwOXhocnp4QUhoa0MrNXhtbWVJb3AvQTNI?=
- =?utf-8?B?VW9rMmF6YmVHS0xiT1RJYkVwS3pSSHlwblhRQ25Ga2wyRDdBQVFGeWlVejlY?=
- =?utf-8?B?bXQra0tuR3JHRVVUSVlhaXBrY292dU1iOEtpWjFDc0FJWUpDWVFiMFJDWTNl?=
- =?utf-8?B?Z0tLdEtMdGpsUWlsVXVqcWdyV1FBbllFQnhacE5jcDMxQ21LZEJHT3BTY1R3?=
- =?utf-8?B?Q3hGclljOU1KR1VMSG55K2RuWWtTbVBvM3VFajc1MERsQSt1OS9Da05BTE84?=
- =?utf-8?B?QUtVZG1mazB0M3VtajNDLzBEaGg0eTdCNWxyWnFqUE5ab3V1ME4yOWhkaDUv?=
- =?utf-8?B?RHZhNGJvNnFKMFVPeEJyVXQzUWE1TEJKOTNPcGROSiszMzhrUkgrVHNMR2dJ?=
- =?utf-8?B?RlEvY0ZvNklwcXhIRU1KN2VERTNWR25TOWE0YnliWjJyZlpsdDVSWTQ1MDFP?=
- =?utf-8?B?NEhXS3RrUytTUFNnL2UrUk5GcW5XalhWK0k4R3VCVHB0VzQ3aWVCK3QwdEcz?=
- =?utf-8?B?Z21mOHlKOUVBNlphMWx6aDZVVTI2SjhNQ1p4YVd3TWlYSmtwSnhOVG82MWVh?=
- =?utf-8?B?dUN6M24vM3JYcXpHY211Z1JlZW1JbTVCdFVTS0UvUmd5azk1K3VpRDk5MDVO?=
- =?utf-8?B?aDFLeHpWOVVhbzhoTjhzMXJibjMvRE1SbFMyK3NRYi9aQlBBOVdxZktGcjNI?=
- =?utf-8?B?TFV3TFl2eFlCM0taeGkvY3ZpK2U1d0doNVRaQi9kc0JPb3VORnNCQTU5WjdX?=
- =?utf-8?B?d2IwdDcwVDBmMWtKZTFibDZqeHFZVlRJUFUzYjJCTEdNM3lHaENia1ViSVlD?=
- =?utf-8?B?bFpHcVR0N0RSbVF6VktFKzJmTVNodTc0dFZOWEZvOHU5aElCZTQweS9WaXIx?=
- =?utf-8?B?elczTnNoM0ErcGxoenlMNFJ4eDhwd1FHalNDVEhzaWFBWWdaNXBBckJ6Wm9Y?=
- =?utf-8?B?Q0NNMVZISWZMZEttMk9jcHZNTlFOM3pITlVwb3JyRkc2VFJBdlU1RHV1OHh4?=
- =?utf-8?B?by9CUlFyWnR6aXpkdjloaVBnZTJubnRTWm0xSkx3QWdxaENuaEJZV1ZXZ0x0?=
- =?utf-8?B?bFMzTGdENW5QalEvbjdpQzBCcUdtVXk2VXNOOUw2RkYvYnBoVkFsNzN2a2hJ?=
- =?utf-8?B?SGxzZnZvSVFqZEc3UEc1dHQwcURWTngzTXg2b2UwNC95dUlPOW8zQkVSUmNt?=
- =?utf-8?B?VTU0OVR0a1AzMFR4emxiQlIxYWhjYXBVVjJzcjdubVYycisyL3VUK0k5M1ZV?=
- =?utf-8?B?aWpLU3h0OTRGY2o1R2hTTm5nL1NWUXpPbW1CeDVadFl0SUxjOXlLdjA1MVFr?=
- =?utf-8?B?Q1puU2JPSWdTNmdKaVNJbVNkdHNLalNzOFl4UlpyV1ZlNVRrZnZaaHVQWno3?=
- =?utf-8?B?MGxoNEJwaE43Q25xUzBSbGt3UlJvblQ5QlYrTWh2eHI3b2Z2ZFNaUFlmY0Nr?=
- =?utf-8?B?VXlzOUJzQmZkVHdGSXhsR1paR3U3clF4R3JKZHNyTFJTZUlKdUdKWXFUTGFr?=
- =?utf-8?B?MmRhUU5CTDVIM3dXKytLdnAwcmdPanMxU0NqaTBxSlVpTXZzYzV5ZG53RDlC?=
- =?utf-8?B?Rk9pWjlxK01nYkNRL1VwbjhiemlTd1hBS1pxVjAyWUxYMG1UR0VNVnVLdGJj?=
- =?utf-8?B?NDFoMlg4VnRUVVBta1hyZTBuUlFuMmU5a1cxMW9LMHp0OHhJb0FLSmg0SDBF?=
- =?utf-8?B?R2s1Uk9hMitsNFBGd3NDa0RNSXJNVW9YK0VMQVVkZ2V0bnkwVTNCMzJ6clpT?=
- =?utf-8?B?ZWczK0Rjd3ZnNjNtZ01pWTZJT0puZXI5Tit1eHhBNTZxd0xuNDY4b1J3WDMw?=
- =?utf-8?B?aDNsSmx6dGsvSnhLcDRFYXBuc2ZCODYxTVhsbE5FQUI1VUF4MTBYZEdrZGRy?=
- =?utf-8?Q?FzhdrfgINKINxzCFRTeDluNJpjZ8xzKCNvsgm?=
-Content-ID: <DFDC9A9F2A3EC144BE37C0068935254C@namprd15.prod.outlook.com>
+x-ms-exchange-antispam-messagedata-0: =?utf-8?B?WlNPRUxsbnVsNGtnWTZUV3V2UE5vZVA0NGlFbk9DT2x3ai9oeUF1NXJuYTNF?=
+ =?utf-8?B?TVZRaUFTa3BQUmR6dllENVJmaE52cDJGdlZQRDlFM2oraUxVWmpNTWlPTXd1?=
+ =?utf-8?B?M3p6VnRUOWZuUm1tcHRlNUJDbjNoUmNFeWVCSVRkWUZTWVZYOUlsWEtBdXVJ?=
+ =?utf-8?B?Z1loSURvTitON2tCNUdSQzh0Y1k5SGJBNXVzb1FpOXJKYkVnR2dBSERaQkx3?=
+ =?utf-8?B?NHAzYmZoanNra3A2WE9JaUh4U0hpNDA3Z2hGbWZHb0NJeTM1NER6NWxLTW1p?=
+ =?utf-8?B?WnFkR1E3U0Z6M2xGTk1OeU5sSUJpbndYUGl2VUttODRDVUF2MXoyMnFlQStp?=
+ =?utf-8?B?NW9JZVpPWlc0S3ZBQ1JtMnJlUUxBVkc0OHV5NnNwSUxVMlFpQUI4ZUcvTXhz?=
+ =?utf-8?B?UVdseS9hZWFqSHNBWnhwcGd3T2U5OU5teEpTL0U3azlFL2RaNk9UcDVlZUdF?=
+ =?utf-8?B?bFdsRnRKbnBYZmFGL0NoeE44K0x2OXV6UUxONVlPK2k4dWVyaFpiMTNwSndS?=
+ =?utf-8?B?MnZRZzgwM2h0QjBwSHprUFNWV3JaQ0xCZDhEMjJSMnRwNGRTSDZNMG5teldp?=
+ =?utf-8?B?VytLNHRPeFBmdFFDU3FTNU9Gc0YxTmdkWUNObyszZXlxSDJUdzIwRjBCK01C?=
+ =?utf-8?B?QlNlMzZVRzlmaTVHTGxkcWFQYjZJSHhYMlNPMi9jSUtHNDM1K2NmTkl3S3NI?=
+ =?utf-8?B?UVNzYVlRZWxjZWcrb1dhMVdsR21IOHdrNmVIU0lEVEluNmZKdHpYZlNLU3JP?=
+ =?utf-8?B?MWkydHZBTEpGTVBteTZnR0dSSHFDdU1IMXVuUmpGcWg2UWg3T2ovSmVMR1Bk?=
+ =?utf-8?B?UTRxd2pHbldXcTlibUNra2pYWmxySXdnL3Y1enJUOCtySStJbTdFUzQwVTBR?=
+ =?utf-8?B?WTdMRTY1T1prVFBFZ0NhOElFdmdVRzRLeXRWN1psSk5tYkxrTUlZRUl3MGlT?=
+ =?utf-8?B?L2dyUzBWQ1F0ZEJqdW16STNFNDNCMnk5WmFJdEdtL1hrRy9MeGk4NGMrOURu?=
+ =?utf-8?B?bThFMU1saUF0U1NVRDVDWTc2WHJPOTg0M2Vycyt3cDBtb25aSTdCeE1VYzQr?=
+ =?utf-8?B?ZGVHRTg1ajJUV2xuL1RFeTJtaTZXeFNERkFjaHc0cTZKcXd0czJ5RVhMaGda?=
+ =?utf-8?B?bXVZRnFkWXdJZmltUXZoWW9YbEtrQkRiQytGQ3RjbFZsWENGWnIrQVptZ28v?=
+ =?utf-8?B?NXdxQ21yNWx5Snd4L1BiTEtsd0dYeDBQTm1mNXpEcHQwYVhmQjUzVE15aTJY?=
+ =?utf-8?B?U3pDc1d4eW1IK2wySWMrUEg3STl3WXlRRmFsakhEMHNjemt0ODh5ZHFLZjlC?=
+ =?utf-8?B?MDBGd3R5enA0STFkSWFkbzZKRHRQYTRUWXNMaDY5dUtHZkRkNkV3WkpGRThL?=
+ =?utf-8?B?OFhYRFBxSVhQd1UzN3B2Y2FlNmxIZmFuQ0hnRW50VW5tRmRXelhUTnA0Vjh0?=
+ =?utf-8?B?RitYbDRmOGd0ZkhGMUIvNFVMMm1XOFpSRzFGN2lXUjhBQVhEUnl2K2YrNS9Q?=
+ =?utf-8?B?OW9iU2xMSmpMTzdydTY0dGw5aU5kbE15N3g3TXFuVHR3N0l5Wm95U1Vmelln?=
+ =?utf-8?B?amN0MVhSWVNKeXRRT3BjWGFlbUNac0FDaTRMaEl0d25oQUpNVDVmMzF5b2lk?=
+ =?utf-8?B?dTFGVnM2eEFwaUFRWk5ua1VqN3V4WDBPcmZpWmNmTE9lVFVOSCtyNU5PMCt6?=
+ =?utf-8?B?Z3VlZ2V0ckU0eDB1dWVnZCtTV3FNcWRzRlc3VERnSy9UT1V3TkdrQnl4ZXRQ?=
+ =?utf-8?B?M3RwMFp0RXJpVXFIdzE5UFFxMExMcXloQVF3RXk5NHJYdzNtRFlhaHh1NUFX?=
+ =?utf-8?B?UUNNVkhRK3YwT2Z3Vjg4dmlqT2lyNytYRldXRFlxaW9LYkJzS0JCUlc5VW5B?=
+ =?utf-8?B?VDVTS3EvYWhCSUZpNjBud0o2Q3Y5ZkxBaHl6L2c2cVMzcm9uSG8xdElFVUdk?=
+ =?utf-8?B?TlVTZDg4REhhYm1QQWYwVHM4Y3RTZ21lanZUL2VRak9ERkJGRW1zWDNBUVdq?=
+ =?utf-8?B?bkJjZ2ZORDdmV2lsRjVLUWdVNzU5dlZGNzhxUTZFWmlvQnhEUUR5TkFjQlpK?=
+ =?utf-8?B?SS9BeUhrZHNRZjJhK1ZxUEZmckp0VXNqVW1IQXNMT3R2RmRtKytBM09jcm54?=
+ =?utf-8?B?YW1YZU10bHQ2Zk45VTBud0JGb2lWTE5RK0JZKy9IQW5abTRYUXlFNGF1Yng1?=
+ =?utf-8?B?Y2dydEN2MzRmc1VFSG8vaC81OVVZTWY3ckpkcWh3Ylkvc0VoZ3d5aDg0cHZW?=
+ =?utf-8?B?Q0ZESGdoTm83dyt1L1BtaWxoMGJ0amszWnljb3h6T00zR09UeWRSaStZVjRH?=
+ =?utf-8?B?a2N4NzJXYVhFeWF3OVZDYU4rQWFMSVlrbStpQ2QwdURxekhDVForcXJHckkx?=
+ =?utf-8?Q?8em0l4CGDzUplP9dVcDgv/bEk2D3za16kNnxh?=
+Content-ID: <664D2E1D3580A24698ABC711B55984CB@namprd15.prod.outlook.com>
 MIME-Version: 1.0
 X-OriginatorOrg: ibm.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
 X-MS-Exchange-CrossTenant-AuthSource: SA1PR15MB5819.namprd15.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 8f8f1127-0bee-4b79-8224-08de78ac1967
-X-MS-Exchange-CrossTenant-originalarrivaltime: 02 Mar 2026 22:36:08.8527 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 638af32c-265e-4f20-d04e-08de78ac73d5
+X-MS-Exchange-CrossTenant-originalarrivaltime: 02 Mar 2026 22:38:40.6239 (UTC)
 X-MS-Exchange-CrossTenant-fromentityheader: Hosted
 X-MS-Exchange-CrossTenant-id: fcf67057-50c9-4ad4-98f3-ffca64add9e9
 X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: ib+ltyxk4clMYYMsAZHWOx0KaEFvLfCaDk0uPr1zSgejRLoUx7ioeW+AKU5Zf0gZuOyp67VU7RcHPTmFFhe3HA==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR15MB4155
+X-MS-Exchange-CrossTenant-userprincipalname: Ujg2UeUfPihWwvhBUqhvDS8Kxh4MSayZL4EBwsygLQ03M4iOh8foehVIqV1rMjLEZLRDRsva+P5vLkxMMr2i/Q==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH3PPFE061D9768
 X-Proofpoint-Reinject: loops=2 maxloops=12
-X-Authority-Analysis: v=2.4 cv=M9BA6iws c=1 sm=1 tr=0 ts=69a610de cx=c_pps
- a=NPM8+NhlmoQiEOpqaaNCjw==:117 a=z/mQ4Ysz8XfWz/Q5cLBRGdckG28=:19
+X-Authority-Analysis: v=2.4 cv=Rp/I7SmK c=1 sm=1 tr=0 ts=69a61177 cx=c_pps
+ a=ggyiYYPOIDPuJa++h0h3+w==:117 a=z/mQ4Ysz8XfWz/Q5cLBRGdckG28=:19
  a=lCpzRmAYbLLaTzLvsPZ7Mbvzbb8=:19 a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10
  a=Yq5XynenixoA:10 a=VkNPw1HP01LnGYTKEx00:22 a=RnoormkPH1_aCDwRdu11:22
- a=U7nrCbtTmkRpXpFmAIza:22 a=VwQbUJbxAAAA:8 a=wCmvBT1CAAAA:8
- a=TooETclPppUkavAUpccA:9 a=QEXdDO2ut3YA:10 a=6z96SAwNL0f8klobD5od:22
-X-Proofpoint-ORIG-GUID: glA8nXs6PGjLL15TqRkEikFC0nNRiIpg
-X-Proofpoint-GUID: XJ3Ky6SEB_key2GF0K69GNh4ocy7hiOh
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMzAyMDE2NCBTYWx0ZWRfX2JFXAaLhC392
- Kwc1+dR93YB2BZCH0RVJ4TONXFzEuVGwGWpGV0K8zHu7+nx5TJp+pv6LxLrCWE4ltO7lresz0//
- EcsTRTs/qp5k5GJun/EHoGrVmvNIrlhrn5GjY0ueMYYtUXhywm3X1A+FGjSfDJKXieq7gwztYRs
- icOso7WrxXJjEgaLj2IFKI6V/MOG4Ce8770SrA0eDcEp+8xU2GJ9RNYACA0NUdhEON11tHNWbyL
- 8aKKwbiVW2oHjqlROYpmu63uwr4GrGRfeNo6AONDN7QUiCBKHOpMGgM/JbLgHn3Q8zziNbYk0Bc
- d6zMrBadzclxp2aQa4tx+dY+Uy90yb6nFjyauKl4VzsYrEP/iExjRhOPmxaydoWq3QkUoP6aL3P
- GGgVMeyT+/EaW3RoXNrwet+hsWwRrn6fe1EazPPwSGMLQ7954isKRxgyv2L8H1HAYXf7zErcktS
- sNSl6YpOOm7mFPktcDQ==
+ a=iQ6ETzBq9ecOQQE5vZCe:22 a=VwQbUJbxAAAA:8 a=wCmvBT1CAAAA:8
+ a=1Koa7OJEvVN96EddKCQA:9 a=QEXdDO2ut3YA:10 a=6z96SAwNL0f8klobD5od:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMzAyMDE2NyBTYWx0ZWRfX9OmTZ5v55DML
+ 38XrIclCEXvNUIHIDGCfy2FUVfrd+wxdG+kgNoNTTn6dhDzwYtN0XLenLycRfKVi7YPJNLrzAut
+ +slGlKUzanRn+svTZL4+ru8r3Do6Svomq7elur7qJxP7/Ab1cbqt8ggOJmYsf1pP3tMA5tHccPe
+ Y5LMi4nRN51pZFNJnnK0UmSaO2NtGWc2xoml02Glq+d8f84eZdHq5QGFlioeAuThmH7w3Y54FTK
+ nJ/DQxswgsdDgbMsJm1Q6vbh2qLOwj1IV5tUbRbchua3jAzIJ4jPGGA1dTKGWEnePR1Oy06uG8D
+ r7MnmCNRCB1Ety4seL2oDR6Ly8IXf2XWsvFHVBey+JcI5+zwRUaGP4LNFd+EzpQ26zMKwHtH/KE
+ FlTRW+TAA5MyvdiFTFzq+S6euSOmHslSmQjOhml3tGiEILRbPXKoqeR8pSfg9GkyMCV9OTiMt42
+ b8kjHBMoinVB9khDQAw==
+X-Proofpoint-GUID: SYkWJ6TCO5AIr3IVxWs2cRDM1HMq0pl9
+X-Proofpoint-ORIG-GUID: 3uG7sZ71mfYRremJjcb0bgEF-ZR1G-iW
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.51,FMLib:17.12.100.49
  definitions=2026-03-02_05,2026-03-02_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 priorityscore=1501 spamscore=0 adultscore=0 malwarescore=0
- bulkscore=0 lowpriorityscore=0 impostorscore=0 phishscore=0 suspectscore=0
+ suspectscore=0 priorityscore=1501 spamscore=0 phishscore=0 adultscore=0
+ bulkscore=0 clxscore=1015 impostorscore=0 malwarescore=0 lowpriorityscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2602130000 definitions=main-2603020164
+ reason=mlx scancount=1 engine=8.22.0-2602130000 definitions=main-2603020167
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
@@ -294,10 +294,9 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Mon, 2026-03-02 at 15:24 -0500,
- Jeff Layton wrote: > Convert
- hfsplus i_ino format strings to use the PRIino format > macro in preparation
- for the widening of i_ino via kino_t. > > Also correct sign [...] 
+ Content preview:  On Mon, 2026-03-02 at 15:24 -0500, Jeff Layton wrote: > Now
+ that i_ino is u64 and the PRIino format macro has been removed, > replace
+ all uses in nilfs2 with the concrete format strings. > > Signed-of [...] 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -312,9 +311,9 @@ X-Spam-Report: Spam detection software,
  domain 0.0 RCVD_IN_MSPIKE_H4      RBL: Very Good reputation (+4)
  [148.163.156.1 listed in wl.mailspike.net]
  0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1vxBsZ-0004ef-C9
-Subject: Re: [f2fs-dev] [PATCH v2 032/110] hfsplus: use PRIino format for
- i_ino
+X-Headers-End: 1vxBv2-0004mx-AC
+Subject: Re: [f2fs-dev] [PATCH v2 068/110] nilfs2: replace PRIino with
+ %llu/%llx format strings
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -379,7 +378,7 @@ Cc: "nvdimm@lists.linux.dev" <nvdimm@lists.linux.dev>,
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
-X-Rspamd-Queue-Id: 307061E5B13
+X-Rspamd-Queue-Id: 55BCB1E5C26
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [-6.11 / 15.00];
 	WHITELIST_DMARC(-7.00)[sourceforge.net:D:+];
@@ -404,7 +403,7 @@ X-Spamd-Result: default: False [-6.11 / 15.00];
 	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,ibm.com:s=pp1];
 	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
 	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,ibm.com:-];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[dubeyko.com:email,str.name:url,lists.sourceforge.net:dkim,lists.sourceforge.net:rdns,lists.sourceforge.net:helo];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[dubeyko.com:email,lists.sourceforge.net:dkim,lists.sourceforge.net:rdns,lists.sourceforge.net:helo];
 	RCPT_COUNT_GT_50(0.00)[172];
 	FROM_NEQ_ENVFROM(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
 	FROM_HAS_DN(0.00)[];
@@ -419,272 +418,335 @@ X-Spamd-Result: default: False [-6.11 / 15.00];
 X-Rspamd-Action: no action
 
 On Mon, 2026-03-02 at 15:24 -0500, Jeff Layton wrote:
-> Convert hfsplus i_ino format strings to use the PRIino format
-> macro in preparation for the widening of i_ino via kino_t.
-> 
-> Also correct signed format specifiers to unsigned, since inode
-> numbers are unsigned values.
+> Now that i_ino is u64 and the PRIino format macro has been removed,
+> replace all uses in nilfs2 with the concrete format strings.
 > 
 > Signed-off-by: Jeff Layton <jlayton@kernel.org>
 > ---
->  fs/hfsplus/attributes.c | 10 +++++-----
->  fs/hfsplus/catalog.c    |  2 +-
->  fs/hfsplus/dir.c        |  6 +++---
->  fs/hfsplus/extents.c    |  6 +++---
->  fs/hfsplus/inode.c      |  8 ++++----
->  fs/hfsplus/super.c      |  6 +++---
->  fs/hfsplus/xattr.c      | 10 +++++-----
->  7 files changed, 24 insertions(+), 24 deletions(-)
+>  fs/nilfs2/alloc.c   | 10 +++++-----
+>  fs/nilfs2/bmap.c    |  2 +-
+>  fs/nilfs2/btnode.c  |  2 +-
+>  fs/nilfs2/btree.c   | 12 ++++++------
+>  fs/nilfs2/dir.c     | 12 ++++++------
+>  fs/nilfs2/direct.c  |  4 ++--
+>  fs/nilfs2/gcinode.c |  2 +-
+>  fs/nilfs2/inode.c   |  8 ++++----
+>  fs/nilfs2/mdt.c     |  2 +-
+>  fs/nilfs2/namei.c   |  2 +-
+>  fs/nilfs2/segment.c |  2 +-
+>  11 files changed, 29 insertions(+), 29 deletions(-)
 > 
-> diff --git a/fs/hfsplus/attributes.c b/fs/hfsplus/attributes.c
-> index 4b79cd606276e31c20fa18ef3a099596f50e8a0f..d0b3f58166a057c0a5bf2e41cf6fc839798c0ded 100644
-> --- a/fs/hfsplus/attributes.c
-> +++ b/fs/hfsplus/attributes.c
-> @@ -203,7 +203,7 @@ int hfsplus_create_attr_nolock(struct inode *inode, const char *name,
->  	int entry_size;
->  	int err;
+> diff --git a/fs/nilfs2/alloc.c b/fs/nilfs2/alloc.c
+> index a3c559c86e5a4c63b1c9dd4ca137f24749c3ee87..7b1cd2baefcf21e54f9260845b02c7c95c148c64 100644
+> --- a/fs/nilfs2/alloc.c
+> +++ b/fs/nilfs2/alloc.c
+> @@ -707,7 +707,7 @@ void nilfs_palloc_commit_free_entry(struct inode *inode,
 >  
-> -	hfs_dbg("name %s, ino %ld\n",
-> +	hfs_dbg("name %s, ino %" PRIino "u\n",
->  		name ? name : NULL, inode->i_ino);
+>  	if (!nilfs_clear_bit_atomic(lock, group_offset, bitmap))
+>  		nilfs_warn(inode->i_sb,
+> -			   "%s (ino=%" PRIino "u): entry number %llu already freed",
+> +			   "%s (ino=%llu): entry number %llu already freed",
+>  			   __func__, inode->i_ino,
+>  			   (unsigned long long)req->pr_entry_nr);
+>  	else
+> @@ -748,7 +748,7 @@ void nilfs_palloc_abort_alloc_entry(struct inode *inode,
 >  
->  	if (name) {
-> @@ -255,7 +255,7 @@ int hfsplus_create_attr(struct inode *inode,
->  	hfsplus_attr_entry *entry_ptr;
->  	int err;
->  
-> -	hfs_dbg("name %s, ino %ld\n",
-> +	hfs_dbg("name %s, ino %" PRIino "u\n",
->  		name ? name : NULL, inode->i_ino);
->  
->  	if (!HFSPLUS_SB(sb)->attr_tree) {
-> @@ -337,7 +337,7 @@ int hfsplus_delete_attr_nolock(struct inode *inode, const char *name,
->  	struct super_block *sb = inode->i_sb;
->  	int err;
->  
-> -	hfs_dbg("name %s, ino %ld\n",
-> +	hfs_dbg("name %s, ino %" PRIino "u\n",
->  		name ? name : NULL, inode->i_ino);
->  
->  	if (name) {
-> @@ -367,7 +367,7 @@ int hfsplus_delete_attr(struct inode *inode, const char *name)
->  	struct super_block *sb = inode->i_sb;
->  	struct hfs_find_data fd;
->  
-> -	hfs_dbg("name %s, ino %ld\n",
-> +	hfs_dbg("name %s, ino %" PRIino "u\n",
->  		name ? name : NULL, inode->i_ino);
->  
->  	if (!HFSPLUS_SB(sb)->attr_tree) {
-> @@ -436,7 +436,7 @@ int hfsplus_replace_attr(struct inode *inode,
->  	hfsplus_attr_entry *entry_ptr;
->  	int err = 0;
->  
-> -	hfs_dbg("name %s, ino %ld\n",
-> +	hfs_dbg("name %s, ino %" PRIino "u\n",
->  		name ? name : NULL, inode->i_ino);
->  
->  	if (!HFSPLUS_SB(sb)->attr_tree) {
-> diff --git a/fs/hfsplus/catalog.c b/fs/hfsplus/catalog.c
-> index 02c1eee4a4b86059ceaab7a7c68ab65adba6fa26..d422f117c60dee6fd8ece0d01d4ce66e04421e4a 100644
-> --- a/fs/hfsplus/catalog.c
-> +++ b/fs/hfsplus/catalog.c
-> @@ -441,7 +441,7 @@ int hfsplus_rename_cat(u32 cnid,
->  	int entry_size, type;
->  	int err;
->  
-> -	hfs_dbg("cnid %u - ino %lu, name %s - ino %lu, name %s\n",
-> +	hfs_dbg("cnid %u - ino %" PRIino "u, name %s - ino %" PRIino "u, name %s\n",
->  		cnid, src_dir->i_ino, src_name->name,
->  		dst_dir->i_ino, dst_name->name);
->  	err = hfs_find_init(HFSPLUS_SB(sb)->cat_tree, &src_fd);
-> diff --git a/fs/hfsplus/dir.c b/fs/hfsplus/dir.c
-> index d559bf8625f853d50fd316d157cf8afe22069565..e701b11437f09172f88d68b4e4f5998591572b38 100644
-> --- a/fs/hfsplus/dir.c
-> +++ b/fs/hfsplus/dir.c
-> @@ -313,7 +313,7 @@ static int hfsplus_link(struct dentry *src_dentry, struct inode *dst_dir,
->  	if (!S_ISREG(inode->i_mode))
->  		return -EPERM;
->  
-> -	hfs_dbg("src_dir->i_ino %lu, dst_dir->i_ino %lu, inode->i_ino %lu\n",
-> +	hfs_dbg("src_dir->i_ino %" PRIino "u, dst_dir->i_ino %" PRIino "u, inode->i_ino %" PRIino "u\n",
->  		src_dir->i_ino, dst_dir->i_ino, inode->i_ino);
->  
->  	mutex_lock(&sbi->vh_mutex);
-> @@ -385,7 +385,7 @@ static int hfsplus_unlink(struct inode *dir, struct dentry *dentry)
->  	if (HFSPLUS_IS_RSRC(inode))
->  		return -EPERM;
->  
-> -	hfs_dbg("dir->i_ino %lu, inode->i_ino %lu\n",
-> +	hfs_dbg("dir->i_ino %" PRIino "u, inode->i_ino %" PRIino "u\n",
->  		dir->i_ino, inode->i_ino);
->  
->  	mutex_lock(&sbi->vh_mutex);
-> @@ -393,7 +393,7 @@ static int hfsplus_unlink(struct inode *dir, struct dentry *dentry)
->  	if (inode->i_ino == cnid &&
->  	    atomic_read(&HFSPLUS_I(inode)->opencnt)) {
->  		str.name = name;
-> -		str.len = sprintf(name, "temp%lu", inode->i_ino);
-> +		str.len = sprintf(name, "temp%" PRIino "u", inode->i_ino);
->  		res = hfsplus_rename_cat(inode->i_ino,
->  					 dir, &dentry->d_name,
->  					 sbi->hidden_dir, &str);
-> diff --git a/fs/hfsplus/extents.c b/fs/hfsplus/extents.c
-> index 8e886514d27f1e5d4d94be75142f197669e62234..1dbfdf44f954f2768852678d1e386a91758848f9 100644
-> --- a/fs/hfsplus/extents.c
-> +++ b/fs/hfsplus/extents.c
-> @@ -275,7 +275,7 @@ int hfsplus_get_block(struct inode *inode, sector_t iblock,
->  	mutex_unlock(&hip->extents_lock);
->  
->  done:
-> -	hfs_dbg("ino %lu, iblock %llu - dblock %u\n",
-> +	hfs_dbg("ino %" PRIino "u, iblock %llu - dblock %u\n",
->  		inode->i_ino, (long long)iblock, dblock);
->  
->  	mask = (1 << sbi->fs_shift) - 1;
-> @@ -476,7 +476,7 @@ int hfsplus_file_extend(struct inode *inode, bool zeroout)
->  			goto out;
+>  	if (!nilfs_clear_bit_atomic(lock, group_offset, bitmap))
+>  		nilfs_warn(inode->i_sb,
+> -			   "%s (ino=%" PRIino "u): entry number %llu already freed",
+> +			   "%s (ino=%llu): entry number %llu already freed",
+>  			   __func__, inode->i_ino,
+>  			   (unsigned long long)req->pr_entry_nr);
+>  	else
+> @@ -861,7 +861,7 @@ int nilfs_palloc_freev(struct inode *inode, __u64 *entry_nrs, size_t nitems)
+>  			if (!nilfs_clear_bit_atomic(lock, group_offset,
+>  						    bitmap)) {
+>  				nilfs_warn(inode->i_sb,
+> -					   "%s (ino=%" PRIino "u): entry number %llu already freed",
+> +					   "%s (ino=%llu): entry number %llu already freed",
+>  					   __func__, inode->i_ino,
+>  					   (unsigned long long)entry_nrs[j]);
+>  			} else {
+> @@ -906,7 +906,7 @@ int nilfs_palloc_freev(struct inode *inode, __u64 *entry_nrs, size_t nitems)
+>  							      last_nrs[k]);
+>  			if (ret && ret != -ENOENT)
+>  				nilfs_warn(inode->i_sb,
+> -					   "error %d deleting block that object (entry=%llu, ino=%" PRIino "u) belongs to",
+> +					   "error %d deleting block that object (entry=%llu, ino=%llu) belongs to",
+>  					   ret, (unsigned long long)last_nrs[k],
+>  					   inode->i_ino);
+>  		}
+> @@ -923,7 +923,7 @@ int nilfs_palloc_freev(struct inode *inode, __u64 *entry_nrs, size_t nitems)
+>  			ret = nilfs_palloc_delete_bitmap_block(inode, group);
+>  			if (ret && ret != -ENOENT)
+>  				nilfs_warn(inode->i_sb,
+> -					   "error %d deleting bitmap block of group=%lu, ino=%" PRIino "u",
+> +					   "error %d deleting bitmap block of group=%lu, ino=%llu",
+>  					   ret, group, inode->i_ino);
+>  		}
 >  	}
+> diff --git a/fs/nilfs2/bmap.c b/fs/nilfs2/bmap.c
+> index e12979bac3c3ee5eb7fcc2bf156fe6e48fc65a7d..824f2bd91c167965ec3a660202b6e6c5f1fe007e 100644
+> --- a/fs/nilfs2/bmap.c
+> +++ b/fs/nilfs2/bmap.c
+> @@ -33,7 +33,7 @@ static int nilfs_bmap_convert_error(struct nilfs_bmap *bmap,
 >  
-> -	hfs_dbg("ino %lu, start %u, len %u\n", inode->i_ino, start, len);
-> +	hfs_dbg("ino %" PRIino "u, start %u, len %u\n", inode->i_ino, start, len);
+>  	if (err == -EINVAL) {
+>  		__nilfs_error(inode->i_sb, fname,
+> -			      "broken bmap (inode number=%" PRIino "u)", inode->i_ino);
+> +			      "broken bmap (inode number=%llu)", inode->i_ino);
+>  		err = -EIO;
+>  	}
+>  	return err;
+> diff --git a/fs/nilfs2/btnode.c b/fs/nilfs2/btnode.c
+> index 3d64f3a9223e5601dc2332ae6e1007edd5b4827b..2e553d698d0f3980de98fced415dfd819ddbca0a 100644
+> --- a/fs/nilfs2/btnode.c
+> +++ b/fs/nilfs2/btnode.c
+> @@ -64,7 +64,7 @@ nilfs_btnode_create_block(struct address_space *btnc, __u64 blocknr)
+>  		 * clearing of an abandoned b-tree node is missing somewhere).
+>  		 */
+>  		nilfs_error(inode->i_sb,
+> -			    "state inconsistency probably due to duplicate use of b-tree node block address %llu (ino=%" PRIino "u)",
+> +			    "state inconsistency probably due to duplicate use of b-tree node block address %llu (ino=%llu)",
+>  			    (unsigned long long)blocknr, inode->i_ino);
+>  		goto failed;
+>  	}
+> diff --git a/fs/nilfs2/btree.c b/fs/nilfs2/btree.c
+> index 57163e991fbc49e2bfba2fa543f1b8dbd77718f4..3c03f5a741d144d22d1ffb5acf43a035e88c00dc 100644
+> --- a/fs/nilfs2/btree.c
+> +++ b/fs/nilfs2/btree.c
+> @@ -353,7 +353,7 @@ static int nilfs_btree_node_broken(const struct nilfs_btree_node *node,
+>  		     nchildren <= 0 ||
+>  		     nchildren > NILFS_BTREE_NODE_NCHILDREN_MAX(size))) {
+>  		nilfs_crit(inode->i_sb,
+> -			   "bad btree node (ino=%" PRIino "u, blocknr=%llu): level = %d, flags = 0x%x, nchildren = %d",
+> +			   "bad btree node (ino=%llu, blocknr=%llu): level = %d, flags = 0x%x, nchildren = %d",
+>  			   inode->i_ino, (unsigned long long)blocknr, level,
+>  			   flags, nchildren);
+>  		ret = 1;
+> @@ -384,7 +384,7 @@ static int nilfs_btree_root_broken(const struct nilfs_btree_node *node,
+>  		     nchildren > NILFS_BTREE_ROOT_NCHILDREN_MAX ||
+>  		     (nchildren == 0 && level > NILFS_BTREE_LEVEL_NODE_MIN))) {
+>  		nilfs_crit(inode->i_sb,
+> -			   "bad btree root (ino=%" PRIino "u): level = %d, flags = 0x%x, nchildren = %d",
+> +			   "bad btree root (ino=%llu): level = %d, flags = 0x%x, nchildren = %d",
+>  			   inode->i_ino, level, flags, nchildren);
+>  		ret = 1;
+>  	}
+> @@ -453,7 +453,7 @@ static int nilfs_btree_bad_node(const struct nilfs_bmap *btree,
+>  	if (unlikely(nilfs_btree_node_get_level(node) != level)) {
+>  		dump_stack();
+>  		nilfs_crit(btree->b_inode->i_sb,
+> -			   "btree level mismatch (ino=%" PRIino "u): %d != %d",
+> +			   "btree level mismatch (ino=%llu): %d != %d",
+>  			   btree->b_inode->i_ino,
+>  			   nilfs_btree_node_get_level(node), level);
+>  		return 1;
+> @@ -521,7 +521,7 @@ static int __nilfs_btree_get_block(const struct nilfs_bmap *btree, __u64 ptr,
+>   out_no_wait:
+>  	if (!buffer_uptodate(bh)) {
+>  		nilfs_err(btree->b_inode->i_sb,
+> -			  "I/O error reading b-tree node block (ino=%" PRIino "u, blocknr=%llu)",
+> +			  "I/O error reading b-tree node block (ino=%llu, blocknr=%llu)",
+>  			  btree->b_inode->i_ino, (unsigned long long)ptr);
+>  		brelse(bh);
+>  		return -EIO;
+> @@ -2104,7 +2104,7 @@ static int nilfs_btree_propagate(struct nilfs_bmap *btree,
+>  	if (ret < 0) {
+>  		if (unlikely(ret == -ENOENT)) {
+>  			nilfs_crit(btree->b_inode->i_sb,
+> -				   "writing node/leaf block does not appear in b-tree (ino=%" PRIino "u) at key=%llu, level=%d",
+> +				   "writing node/leaf block does not appear in b-tree (ino=%llu) at key=%llu, level=%d",
+>  				   btree->b_inode->i_ino,
+>  				   (unsigned long long)key, level);
+>  			ret = -EINVAL;
+> @@ -2146,7 +2146,7 @@ static void nilfs_btree_add_dirty_buffer(struct nilfs_bmap *btree,
+>  	    level >= NILFS_BTREE_LEVEL_MAX) {
+>  		dump_stack();
+>  		nilfs_warn(btree->b_inode->i_sb,
+> -			   "invalid btree level: %d (key=%llu, ino=%" PRIino "u, blocknr=%llu)",
+> +			   "invalid btree level: %d (key=%llu, ino=%llu, blocknr=%llu)",
+>  			   level, (unsigned long long)key,
+>  			   btree->b_inode->i_ino,
+>  			   (unsigned long long)bh->b_blocknr);
+> diff --git a/fs/nilfs2/dir.c b/fs/nilfs2/dir.c
+> index b182da076c58c4813145bc3e501a1e9a188bce85..3653db5cdb65137d1e660bb509c14ec4cbc8840b 100644
+> --- a/fs/nilfs2/dir.c
+> +++ b/fs/nilfs2/dir.c
+> @@ -150,7 +150,7 @@ static bool nilfs_check_folio(struct folio *folio, char *kaddr)
 >  
->  	if (hip->alloc_blocks <= hip->first_blocks) {
->  		if (!hip->first_blocks) {
-> @@ -545,7 +545,7 @@ void hfsplus_file_truncate(struct inode *inode)
->  	u32 alloc_cnt, blk_cnt, start;
->  	int res;
+>  Ebadsize:
+>  	nilfs_error(sb,
+> -		    "size of directory #%" PRIino "u is not a multiple of chunk size",
+> +		    "size of directory #%llu is not a multiple of chunk size",
+>  		    dir->i_ino);
+>  	goto fail;
+>  Eshort:
+> @@ -169,7 +169,7 @@ static bool nilfs_check_folio(struct folio *folio, char *kaddr)
+>  	error = "disallowed inode number";
+>  bad_entry:
+>  	nilfs_error(sb,
+> -		    "bad entry in directory #%" PRIino "u: %s - offset=%lu, inode=%lu, rec_len=%zd, name_len=%d",
+> +		    "bad entry in directory #%llu: %s - offset=%lu, inode=%lu, rec_len=%zd, name_len=%d",
+>  		    dir->i_ino, error, (folio->index << PAGE_SHIFT) + offs,
+>  		    (unsigned long)le64_to_cpu(p->inode),
+>  		    rec_len, p->name_len);
+> @@ -177,7 +177,7 @@ static bool nilfs_check_folio(struct folio *folio, char *kaddr)
+>  Eend:
+>  	p = (struct nilfs_dir_entry *)(kaddr + offs);
+>  	nilfs_error(sb,
+> -		    "entry in directory #%" PRIino "u spans the page boundary offset=%lu, inode=%lu",
+> +		    "entry in directory #%llu spans the page boundary offset=%lu, inode=%lu",
+>  		    dir->i_ino, (folio->index << PAGE_SHIFT) + offs,
+>  		    (unsigned long)le64_to_cpu(p->inode));
+>  fail:
+> @@ -251,7 +251,7 @@ static int nilfs_readdir(struct file *file, struct dir_context *ctx)
 >  
-> -	hfs_dbg("ino %lu, phys_size %llu -> i_size %llu\n",
-> +	hfs_dbg("ino %" PRIino "u, phys_size %llu -> i_size %llu\n",
->  		inode->i_ino, (long long)hip->phys_size, inode->i_size);
+>  		kaddr = nilfs_get_folio(inode, n, &folio);
+>  		if (IS_ERR(kaddr)) {
+> -			nilfs_error(sb, "bad page in #%" PRIino "u", inode->i_ino);
+> +			nilfs_error(sb, "bad page in #%llu", inode->i_ino);
+>  			ctx->pos += PAGE_SIZE - offset;
+>  			return -EIO;
+>  		}
+> @@ -336,7 +336,7 @@ struct nilfs_dir_entry *nilfs_find_entry(struct inode *dir,
+>  		/* next folio is past the blocks we've got */
+>  		if (unlikely(n > (dir->i_blocks >> (PAGE_SHIFT - 9)))) {
+>  			nilfs_error(dir->i_sb,
+> -			       "dir %" PRIino "u size %lld exceeds block count %llu",
+> +			       "dir %llu size %lld exceeds block count %llu",
+>  			       dir->i_ino, dir->i_size,
+>  			       (unsigned long long)dir->i_blocks);
+>  			goto out;
+> @@ -382,7 +382,7 @@ struct nilfs_dir_entry *nilfs_dotdot(struct inode *dir, struct folio **foliop)
+>  	return next_de;
 >  
->  	if (inode->i_size > hip->phys_size) {
-> diff --git a/fs/hfsplus/inode.c b/fs/hfsplus/inode.c
-> index 922ff41df042a83d47364f2d941c45dabda29afb..f61397db976e8b15fa186c3b31af71e55f9e26a6 100644
-> --- a/fs/hfsplus/inode.c
-> +++ b/fs/hfsplus/inode.c
-> @@ -230,7 +230,7 @@ static int hfsplus_get_perms(struct inode *inode,
->  		inode->i_flags &= ~S_APPEND;
->  	return 0;
->  bad_type:
-> -	pr_err("invalid file type 0%04o for inode %lu\n", mode, inode->i_ino);
-> +	pr_err("invalid file type 0%04o for inode %" PRIino "u\n", mode, inode->i_ino);
->  	return -EIO;
+>  fail:
+> -	nilfs_error(dir->i_sb, "directory #%" PRIino "u %s", dir->i_ino, msg);
+> +	nilfs_error(dir->i_sb, "directory #%llu %s", dir->i_ino, msg);
+>  	folio_release_kmap(folio, de);
+>  	return NULL;
+>  }
+> diff --git a/fs/nilfs2/direct.c b/fs/nilfs2/direct.c
+> index 1084d4d586e078ab6825167976dd2a71d52bc8aa..8bd0b1374e25f8ff510f3b36dbde2acc01aafc1e 100644
+> --- a/fs/nilfs2/direct.c
+> +++ b/fs/nilfs2/direct.c
+> @@ -338,7 +338,7 @@ static int nilfs_direct_assign(struct nilfs_bmap *bmap,
+>  	key = nilfs_bmap_data_get_key(bmap, *bh);
+>  	if (unlikely(key > NILFS_DIRECT_KEY_MAX)) {
+>  		nilfs_crit(bmap->b_inode->i_sb,
+> -			   "%s (ino=%" PRIino "u): invalid key: %llu",
+> +			   "%s (ino=%llu): invalid key: %llu",
+>  			   __func__,
+>  			   bmap->b_inode->i_ino, (unsigned long long)key);
+>  		return -EINVAL;
+> @@ -346,7 +346,7 @@ static int nilfs_direct_assign(struct nilfs_bmap *bmap,
+>  	ptr = nilfs_direct_get_ptr(bmap, key);
+>  	if (unlikely(ptr == NILFS_BMAP_INVALID_PTR)) {
+>  		nilfs_crit(bmap->b_inode->i_sb,
+> -			   "%s (ino=%" PRIino "u): invalid pointer: %llu",
+> +			   "%s (ino=%llu): invalid pointer: %llu",
+>  			   __func__,
+>  			   bmap->b_inode->i_ino, (unsigned long long)ptr);
+>  		return -EINVAL;
+> diff --git a/fs/nilfs2/gcinode.c b/fs/nilfs2/gcinode.c
+> index 714962d010da4a23e9b5f40de8aaaca8b95a74da..62d4c1b787e95c961a360a4214d621d564ad8b4c 100644
+> --- a/fs/nilfs2/gcinode.c
+> +++ b/fs/nilfs2/gcinode.c
+> @@ -137,7 +137,7 @@ int nilfs_gccache_wait_and_mark_dirty(struct buffer_head *bh)
+>  		struct inode *inode = bh->b_folio->mapping->host;
+>  
+>  		nilfs_err(inode->i_sb,
+> -			  "I/O error reading %s block for GC (ino=%" PRIino "u, vblocknr=%llu)",
+> +			  "I/O error reading %s block for GC (ino=%llu, vblocknr=%llu)",
+>  			  buffer_nilfs_node(bh) ? "node" : "data",
+>  			  inode->i_ino, (unsigned long long)bh->b_blocknr);
+>  		return -EIO;
+> diff --git a/fs/nilfs2/inode.c b/fs/nilfs2/inode.c
+> index 0bc1c5141ec596b3c31e7d18e4ba3541bf618406..51f7e125a311b868860e3e111700d49d4cb98fa6 100644
+> --- a/fs/nilfs2/inode.c
+> +++ b/fs/nilfs2/inode.c
+> @@ -108,7 +108,7 @@ int nilfs_get_block(struct inode *inode, sector_t blkoff,
+>  				 * be locked in this case.
+>  				 */
+>  				nilfs_warn(inode->i_sb,
+> -					   "%s (ino=%" PRIino "u): a race condition while inserting a data block at offset=%llu",
+> +					   "%s (ino=%llu): a race condition while inserting a data block at offset=%llu",
+>  					   __func__, inode->i_ino,
+>  					   (unsigned long long)blkoff);
+>  				err = -EAGAIN;
+> @@ -789,7 +789,7 @@ static void nilfs_truncate_bmap(struct nilfs_inode_info *ii,
+>  		goto repeat;
+>  
+>  failed:
+> -	nilfs_warn(ii->vfs_inode.i_sb, "error %d truncating bmap (ino=%" PRIino "u)",
+> +	nilfs_warn(ii->vfs_inode.i_sb, "error %d truncating bmap (ino=%llu)",
+>  		   ret, ii->vfs_inode.i_ino);
 >  }
 >  
-> @@ -328,7 +328,7 @@ int hfsplus_file_fsync(struct file *file, loff_t start, loff_t end,
->  	struct hfsplus_vh *vhdr = sbi->s_vhdr;
->  	int error = 0, error2;
->  
-> -	hfs_dbg("inode->i_ino %lu, start %llu, end %llu\n",
-> +	hfs_dbg("inode->i_ino %" PRIino "u, start %llu, end %llu\n",
->  		inode->i_ino, start, end);
->  
->  	error = file_write_and_wait_range(file, start, end);
-> @@ -639,7 +639,7 @@ int hfsplus_cat_write_inode(struct inode *inode)
->  	hfsplus_cat_entry entry;
->  	int res = 0;
->  
-> -	hfs_dbg("inode->i_ino %lu\n", inode->i_ino);
-> +	hfs_dbg("inode->i_ino %" PRIino "u\n", inode->i_ino);
->  
->  	if (HFSPLUS_IS_RSRC(inode))
->  		main_inode = HFSPLUS_I(inode)->rsrc_inode;
-> @@ -716,7 +716,7 @@ int hfsplus_cat_write_inode(struct inode *inode)
->  	if (!res) {
->  		res = hfs_btree_write(tree);
->  		if (res) {
-> -			pr_err("b-tree write err: %d, ino %lu\n",
-> +			pr_err("b-tree write err: %d, ino %" PRIino "u\n",
->  			       res, inode->i_ino);
->  		}
+> @@ -1026,7 +1026,7 @@ int nilfs_set_file_dirty(struct inode *inode, unsigned int nr_dirty)
+>  			 * this inode.
+>  			 */
+>  			nilfs_warn(inode->i_sb,
+> -				   "cannot set file dirty (ino=%" PRIino "u): the file is being freed",
+> +				   "cannot set file dirty (ino=%llu): the file is being freed",
+>  				   inode->i_ino);
+>  			spin_unlock(&nilfs->ns_inode_lock);
+>  			return -EINVAL; /*
+> @@ -1057,7 +1057,7 @@ int __nilfs_mark_inode_dirty(struct inode *inode, int flags)
+>  	err = nilfs_load_inode_block(inode, &ibh);
+>  	if (unlikely(err)) {
+>  		nilfs_warn(inode->i_sb,
+> -			   "cannot mark inode dirty (ino=%" PRIino "u): error %d loading inode block",
+> +			   "cannot mark inode dirty (ino=%llu): error %d loading inode block",
+>  			   inode->i_ino, err);
+>  		return err;
 >  	}
-> diff --git a/fs/hfsplus/super.c b/fs/hfsplus/super.c
-> index 7229a8ae89f9469109b1c3a317ee9b7705a83f8b..b76865e2eac5260b681fc46b297f1665f1bc10da 100644
-> --- a/fs/hfsplus/super.c
-> +++ b/fs/hfsplus/super.c
-> @@ -156,7 +156,7 @@ static int hfsplus_system_write_inode(struct inode *inode)
->  		int err = hfs_btree_write(tree);
+> diff --git a/fs/nilfs2/mdt.c b/fs/nilfs2/mdt.c
+> index 8629c72b62db33217d4747124885b6f727f182be..09adb40c65e505d92012a3d2f5fe8a5696e10056 100644
+> --- a/fs/nilfs2/mdt.c
+> +++ b/fs/nilfs2/mdt.c
+> @@ -203,7 +203,7 @@ static int nilfs_mdt_read_block(struct inode *inode, unsigned long block,
+>  	err = -EIO;
+>  	if (!buffer_uptodate(first_bh)) {
+>  		nilfs_err(inode->i_sb,
+> -			  "I/O error reading meta-data file (ino=%" PRIino "u, block-offset=%lu)",
+> +			  "I/O error reading meta-data file (ino=%llu, block-offset=%lu)",
+>  			  inode->i_ino, block);
+>  		goto failed_bh;
+>  	}
+> diff --git a/fs/nilfs2/namei.c b/fs/nilfs2/namei.c
+> index 29edb84a0663caa4b29fa488c0495fc53358ca00..40ac679ec56e400b1df98e9be6fe9ca338a9ba51 100644
+> --- a/fs/nilfs2/namei.c
+> +++ b/fs/nilfs2/namei.c
+> @@ -292,7 +292,7 @@ static int nilfs_do_unlink(struct inode *dir, struct dentry *dentry)
 >  
->  		if (err) {
-> -			pr_err("b-tree write err: %d, ino %lu\n",
-> +			pr_err("b-tree write err: %d, ino %" PRIino "u\n",
->  			       err, inode->i_ino);
->  			return err;
->  		}
-> @@ -169,7 +169,7 @@ static int hfsplus_write_inode(struct inode *inode,
->  {
->  	int err;
->  
-> -	hfs_dbg("ino %lu\n", inode->i_ino);
-> +	hfs_dbg("ino %" PRIino "u\n", inode->i_ino);
->  
->  	err = hfsplus_ext_write_extent(inode);
->  	if (err)
-> @@ -184,7 +184,7 @@ static int hfsplus_write_inode(struct inode *inode,
->  
->  static void hfsplus_evict_inode(struct inode *inode)
->  {
-> -	hfs_dbg("ino %lu\n", inode->i_ino);
-> +	hfs_dbg("ino %" PRIino "u\n", inode->i_ino);
->  	truncate_inode_pages_final(&inode->i_data);
->  	clear_inode(inode);
->  	if (HFSPLUS_IS_RSRC(inode)) {
-> diff --git a/fs/hfsplus/xattr.c b/fs/hfsplus/xattr.c
-> index 9904944cbd54e3d326591fa65a5ed678f38ca583..ef9121843482e81961fa541c53c906ab04d6fc33 100644
-> --- a/fs/hfsplus/xattr.c
-> +++ b/fs/hfsplus/xattr.c
-> @@ -277,7 +277,7 @@ int __hfsplus_setxattr(struct inode *inode, const char *name,
->  	u16 folder_finderinfo_len = sizeof(DInfo) + sizeof(DXInfo);
->  	u16 file_finderinfo_len = sizeof(FInfo) + sizeof(FXInfo);
->  
-> -	hfs_dbg("ino %lu, name %s, value %p, size %zu\n",
-> +	hfs_dbg("ino %" PRIino "u, name %s, value %p, size %zu\n",
->  		inode->i_ino, name ? name : NULL,
->  		value, size);
->  
-> @@ -447,7 +447,7 @@ int hfsplus_setxattr(struct inode *inode, const char *name,
->  		NLS_MAX_CHARSET_SIZE * HFSPLUS_ATTR_MAX_STRLEN + 1;
->  	int res;
->  
-> -	hfs_dbg("ino %lu, name %s, prefix %s, prefixlen %zu, "
-> +	hfs_dbg("ino %" PRIino "u, name %s, prefix %s, prefixlen %zu, "
->  		"value %p, size %zu\n",
->  		inode->i_ino, name ? name : NULL,
->  		prefix ? prefix : NULL, prefixlen,
-> @@ -607,7 +607,7 @@ ssize_t hfsplus_getxattr(struct inode *inode, const char *name,
->  	int res;
->  	char *xattr_name;
->  
-> -	hfs_dbg("ino %lu, name %s, prefix %s\n",
-> +	hfs_dbg("ino %" PRIino "u, name %s, prefix %s\n",
->  		inode->i_ino, name ? name : NULL,
->  		prefix ? prefix : NULL);
->  
-> @@ -717,7 +717,7 @@ ssize_t hfsplus_listxattr(struct dentry *dentry, char *buffer, size_t size)
->  	size_t strbuf_size;
->  	int xattr_name_len;
->  
-> -	hfs_dbg("ino %lu\n", inode->i_ino);
-> +	hfs_dbg("ino %" PRIino "u\n", inode->i_ino);
->  
->  	if (!is_xattr_operation_supported(inode))
->  		return -EOPNOTSUPP;
-> @@ -819,7 +819,7 @@ static int hfsplus_removexattr(struct inode *inode, const char *name)
->  	int is_xattr_acl_deleted;
->  	int is_all_xattrs_deleted;
->  
-> -	hfs_dbg("ino %lu, name %s\n",
-> +	hfs_dbg("ino %" PRIino "u, name %s\n",
->  		inode->i_ino, name ? name : NULL);
->  
->  	if (!HFSPLUS_SB(inode->i_sb)->attr_tree)
+>  	if (!inode->i_nlink) {
+>  		nilfs_warn(inode->i_sb,
+> -			   "deleting nonexistent file (ino=%" PRIino "u), %d",
+> +			   "deleting nonexistent file (ino=%llu), %d",
+>  			   inode->i_ino, inode->i_nlink);
+>  		set_nlink(inode, 1);
+>  	}
+> diff --git a/fs/nilfs2/segment.c b/fs/nilfs2/segment.c
+> index 9a8bc3fa35ce9b447abbc2fb56cbd2b0cc5f76de..4b1bf559f3524b1cc3965dae9fd3e5745718569d 100644
+> --- a/fs/nilfs2/segment.c
+> +++ b/fs/nilfs2/segment.c
+> @@ -2024,7 +2024,7 @@ static int nilfs_segctor_collect_dirty_files(struct nilfs_sc_info *sci,
+>  				ifile, ii->vfs_inode.i_ino, &ibh);
+>  			if (unlikely(err)) {
+>  				nilfs_warn(sci->sc_super,
+> -					   "log writer: error %d getting inode block (ino=%" PRIino "u)",
+> +					   "log writer: error %d getting inode block (ino=%llu)",
+>  					   err, ii->vfs_inode.i_ino);
+>  				return err;
+>  			}
 
 Reviewed-by: Viacheslav Dubeyko <slava@dubeyko.com>
 
 Thanks,
 Slava.
+
 
 _______________________________________________
 Linux-f2fs-devel mailing list
