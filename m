@@ -2,12 +2,12 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id zCYVI4CcpWlTFwYAu9opvQ
+	id GIyfIICcpWmfEwYAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
 	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 02 Mar 2026 15:19:44 +0100
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 161651DA950
+	by mail.lfdr.de (Postfix) with ESMTPS id 0DEE51DA94E
 	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 02 Mar 2026 15:19:43 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
@@ -15,19 +15,19 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	Subject:MIME-Version:References:In-Reply-To:Message-ID:Date:To:From:Sender:
 	Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
 	:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=48JvVwxSZEgEmi1YZ96Fk94nigqyAqK6h2IxllBigIc=; b=dFylA1lcOmLb0Hf/Nqhb0ry43r
-	sW6D9QJcTu9s4Dqlg12EtzTy9qG5sDhxlaRKbjoNx/sNzWdgTlsuFAdf9q09uW3WbKd9zNmQNDm6r
-	I5o26HJXRRY3M0jHVFyvOZfJQwG7nkLaWRF7zve+nSgAgzETmSUwC4PRkC0Hgs0hlClU=;
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=o4p/AXAmPUiCGRudJT8rXbBJxaAqgZH7DQA2rZK6/9g=; b=F4vwAGxkuf790fbkfIgK+a4xBX
+	g04C8gcmtUqm21VNzn0vvRnMlajRQ6DNoIgvGxKYRmhHeYlcierJHcJsBmk3zlovE9UxBVqxnUNih
+	xaL3PZfxnjpeDlBurm3xDe0jPP8T5gVt0E4kocl5hiSw51Hp3Mza1MnaNLtL0P6BeNv8=;
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vx47T-0002Ow-CD;
+	id 1vx47T-0002FG-DG;
 	Mon, 02 Mar 2026 14:19:35 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95) (envelope-from
  <BATV+ce5019daea4c3780914a+8226+infradead.org+hch@bombadil.srs.infradead.org>)
- id 1vx47R-0002Oo-0N for linux-f2fs-devel@lists.sourceforge.net;
+ id 1vx47R-0002F8-1p for linux-f2fs-devel@lists.sourceforge.net;
  Mon, 02 Mar 2026 14:19:33 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
@@ -35,9 +35,9 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=olHs/EBkSlbRjwcneX6lFlR0i6BJlKrjnJjRCQNIpEw=; b=kkwxs7tvUgaKEgezM+tOxkr6Zw
- OFwdKmRiLj28H99rPsoRjDirKFSCwR7beqOzFXN+C5vitPXq9Abl5ZqoZpcbk386vJZZLhbFQd+Pz
- JK6p3gsTu1plbl7dWTkY7hf9O6ypjIZRSQ06MzG6XmqCGOw2Ui8EL2pWXsvAhk2h/cAc=;
+ bh=vRH0VYuDnXIQ/WJ+FaJNrLKhHHLaKL0S+YY2G+IdqU8=; b=T41hLCVtwRRo905KdSLWDWzrLZ
+ cbsQMTS1yUbU3x3TQPkuKHHkQJ3tzD7Ncv7Brd7BTRSp8jWn5WsUG88t0DYJKVUHNcjenjvlllfzN
+ LhLYP9KxHfzoylsP4wAJ+oEYkYd9JPTIT2rtxEgbQALDd09Z/Lhs62pyZITHW/zuPSUA=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:
@@ -45,31 +45,31 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=olHs/EBkSlbRjwcneX6lFlR0i6BJlKrjnJjRCQNIpEw=; b=KtnIYB00BcjunR2wnjx9OX2PSD
- HhaCfVKqMYgNSbajj5yb4ghrSlWW8swtKKHtm5HOZ8/kYDsD3r9zEFXB515xecA08N+b0jb9o9zgz
- yJHih6THf+aQa4vrp27mvU9lycRq/8H2I3wIafDKiBl/EBg6x0ecOb8X61rCTliJ6CPw=;
+ bh=vRH0VYuDnXIQ/WJ+FaJNrLKhHHLaKL0S+YY2G+IdqU8=; b=YZLeW/BviNX4E42UABYCvzGUGr
+ J53tpc0yJ6TfZ5Bvg8ozqNYM8Rs1BHcTk4IYTppuudUTijQlfMOU6QKfo4DJ8x+NYV8bN6lAxhorb
+ 6j6fI9defwSgJA8ghXvZJb7sunj1tlQlpB3UJaFYgIBDRo5WJRVGTgw2WK0RrrJwtVas=;
 Received: from bombadil.infradead.org ([198.137.202.133])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vx47Q-0001TJ-Cw for linux-f2fs-devel@lists.sourceforge.net;
+ id 1vx47Q-0001TK-MW for linux-f2fs-devel@lists.sourceforge.net;
  Mon, 02 Mar 2026 14:19:32 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
  MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender
  :Reply-To:Content-Type:Content-ID:Content-Description;
- bh=olHs/EBkSlbRjwcneX6lFlR0i6BJlKrjnJjRCQNIpEw=; b=TApuq1k9pvOvmvL+kNfV9T5QgJ
- XYl/mRKaDOQ0/oBdffoZ4OpZIWuQ+nEvqlnRH4OU1DY6j74mQ3fOgRX3eQHSjgBulhh16geGrsUBR
- mS2ttvc3VCOIlAcuGddtd/G7E1t9UlUzzEuNyW3XZb26e8HxTZgU7F6O/A7uK4RtQU5GplPwQHcsa
- QMAcN7P2fPWVbacmYFcF8Vg4noi94rCBBCmtjZUhdRcZvgPtostYb8n8iDsCDOVEv3Rlo1VTM9enn
- CWp4kQBVZiazWIuRlqRut3PTyB0vPWrX+fyD2623ZKbtBC3YfmeAiFcsZ05Q37wQDwdF4W5DQZypk
- ly+tJ/qQ==;
+ bh=vRH0VYuDnXIQ/WJ+FaJNrLKhHHLaKL0S+YY2G+IdqU8=; b=KQQaQj/IT3chTySiJCVuiK1W5/
+ zI2yTx6tE92rx/uX9K/RuqfLRnZdOCaD8kTnQ5T71+A/VMlLqslcVRh5roKOC38nVydVHrpaVD2Y4
+ kpNgVlTC643UVxsfWuCpFgJDiY7JICZJgctDFOb6R59BNjkIDABBsKKIN6Wc9H8VlseHgxfHDZfjR
+ vF/wMmMbXXNElMfp04EwieRgIr3VFJ1YMRcxCjCw/EmbdfxivAJLOZkraAC5vsMaMZhNXp6EFavpN
+ pUI/D67nPtQZFo8vn0ZvjTvnQ9NmKFHqtbRbafy1iqpqNF+O8B7qIR8qKUMfxhZ38We3Qwd4dubuC
+ U6Xicxvw==;
 Received: from [2604:3d08:797f:2840::9d5f] (helo=localhost)
  by bombadil.infradead.org with esmtpsa (Exim 4.98.2 #2 (Red Hat Linux))
- id 1vx47J-0000000DDRg-2Ws4; Mon, 02 Mar 2026 14:19:25 +0000
+ id 1vx47K-0000000DDRk-2YZr; Mon, 02 Mar 2026 14:19:26 +0000
 From: Christoph Hellwig <hch@lst.de>
 To: Eric Biggers <ebiggers@kernel.org>
-Date: Mon,  2 Mar 2026 06:18:06 -0800
-Message-ID: <20260302141922.370070-2-hch@lst.de>
+Date: Mon,  2 Mar 2026 06:18:07 -0800
+Message-ID: <20260302141922.370070-3-hch@lst.de>
 X-Mailer: git-send-email 2.47.3
 In-Reply-To: <20260302141922.370070-1-hch@lst.de>
 References: <20260302141922.370070-1-hch@lst.de>
@@ -83,14 +83,12 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Make io_submit_init_bio complete by also initializing the
- write hint. Signed-off-by: Christoph Hellwig <hch@lst.de> ---
- fs/ext4/page-io.c | 8 ++++---- 1 file changed, 4 insertions(+),
- 4 deletions(-) diff --git a/fs/ext4/page-io.c
- b/fs/ext4/page-io.c index a8c95eee91b7..b8cf9f6f9e0b 100644 ---
- a/fs/ext4/page-io.c
- +++ b/fs/ext4/page-io.c @@ -416,6 +416,7 @@ void ext4_io_submit_init(struct
- ext4_io_s [...] 
+ Content preview: io_submit_init_bio already has or can easily get at most
+ information
+ needed to set the crypto context. Open code fscrypt_set_bio_crypt_ctx_bh
+ based on that. Signed-off-by: Christoph Hellwig <hch@lst.de> ---
+ fs/ext4/page-io.c
+ | 7 +++++-- 1 file changed, 5 insertions(+), 2 deletions(-) 
  Content analysis details:   (0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -99,9 +97,9 @@ X-Spam-Report: Spam detection software,
  not necessarily valid
  0.2 HEADER_FROM_DIFFERENT_DOMAINS From and EnvelopeFrom 2nd level mail
  domains are different
-X-Headers-End: 1vx47Q-0001TJ-Cw
-Subject: [f2fs-dev] [PATCH 01/14] ext4: initialize the write hint in
- io_submit_init_bio
+X-Headers-End: 1vx47Q-0001TK-MW
+Subject: [f2fs-dev] [PATCH 02/14] ext4: open code
+ fscrypt_set_bio_crypt_ctx_bh
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -155,46 +153,47 @@ X-Spamd-Result: default: False [-0.01 / 15.00];
 	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[lst.de:mid,lst.de:email]
-X-Rspamd-Queue-Id: 161651DA950
+X-Rspamd-Queue-Id: 0DEE51DA94E
 X-Rspamd-Action: no action
 
-Make io_submit_init_bio complete by also initializing the write hint.
+io_submit_init_bio already has or can easily get at most information
+needed to set the crypto context.  Open code fscrypt_set_bio_crypt_ctx_bh
+based on that.
 
 Signed-off-by: Christoph Hellwig <hch@lst.de>
 ---
- fs/ext4/page-io.c | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
+ fs/ext4/page-io.c | 7 +++++--
+ 1 file changed, 5 insertions(+), 2 deletions(-)
 
 diff --git a/fs/ext4/page-io.c b/fs/ext4/page-io.c
-index a8c95eee91b7..b8cf9f6f9e0b 100644
+index b8cf9f6f9e0b..c5ca99b33c26 100644
 --- a/fs/ext4/page-io.c
 +++ b/fs/ext4/page-io.c
-@@ -416,6 +416,7 @@ void ext4_io_submit_init(struct ext4_io_submit *io,
- }
+@@ -417,6 +417,7 @@ void ext4_io_submit_init(struct ext4_io_submit *io,
  
  static void io_submit_init_bio(struct ext4_io_submit *io,
-+			       struct inode *inode,
+ 			       struct inode *inode,
++			       struct folio *folio,
  			       struct buffer_head *bh)
  {
  	struct bio *bio;
-@@ -429,6 +430,7 @@ static void io_submit_init_bio(struct ext4_io_submit *io,
+@@ -426,7 +427,9 @@ static void io_submit_init_bio(struct ext4_io_submit *io,
+ 	 * __GFP_DIRECT_RECLAIM is set, see comments for bio_alloc_bioset().
+ 	 */
+ 	bio = bio_alloc(bh->b_bdev, BIO_MAX_VECS, REQ_OP_WRITE, GFP_NOIO);
+-	fscrypt_set_bio_crypt_ctx_bh(bio, bh, GFP_NOIO);
++	fscrypt_set_bio_crypt_ctx(bio, inode,
++			(folio_pos(folio) + bh_offset(bh)) >> inode->i_blkbits,
++			GFP_NOIO);
  	bio->bi_iter.bi_sector = bh->b_blocknr * (bh->b_size >> 9);
  	bio->bi_end_io = ext4_end_bio;
  	bio->bi_private = ext4_get_io_end(io->io_end);
-+	bio->bi_write_hint = inode->i_write_hint;
- 	io->io_bio = bio;
- 	io->io_next_block = bh->b_blocknr;
- 	wbc_init_bio(io->io_wbc, bio);
-@@ -445,10 +447,8 @@ static void io_submit_add_bh(struct ext4_io_submit *io,
- submit_and_retry:
+@@ -448,7 +451,7 @@ static void io_submit_add_bh(struct ext4_io_submit *io,
  		ext4_io_submit(io);
  	}
--	if (io->io_bio == NULL) {
--		io_submit_init_bio(io, bh);
--		io->io_bio->bi_write_hint = inode->i_write_hint;
--	}
-+	if (io->io_bio == NULL)
-+		io_submit_init_bio(io, inode, bh);
+ 	if (io->io_bio == NULL)
+-		io_submit_init_bio(io, inode, bh);
++		io_submit_init_bio(io, inode, folio, bh);
  	if (!bio_add_folio(io->io_bio, io_folio, bh->b_size, bh_offset(bh)))
  		goto submit_and_retry;
  	wbc_account_cgroup_owner(io->io_wbc, folio, bh->b_size);
