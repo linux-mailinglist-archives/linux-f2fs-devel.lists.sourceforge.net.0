@@ -2,41 +2,41 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id KJY2GtbzpWlMIQAAu9opvQ
+	id gF40LuXzpWkxIQAAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 02 Mar 2026 21:32:22 +0100
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 02 Mar 2026 21:32:37 +0100
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 042F61DF9FB
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 02 Mar 2026 21:32:21 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2D4931DFA29
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 02 Mar 2026 21:32:37 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
 	List-Unsubscribe:List-Id:Subject:To:In-Reply-To:References:Message-Id:
 	MIME-Version:Date:Sender:Content-ID:Content-Description:Resent-Date:
 	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=wTJFSulnrSiFyU4bqrwnvEnR65Yh10ZNz5IDpHkOz5M=; b=JbtvzyGqeR7b5Fs9zqVCK7WoF7
-	5LEscaxMYZ+BKA/1KPUkN54vY9Mhk/js8mLPdiYlY6kP9Ty9PScfjkvnnrG6Zbp5yhzhZhOOld/Tv
-	y9MGs3nD/i9iaUwPrHVorm1jC5fTTNIkTX2ZNi4drc2PkWNeraJV6q/ry2LmFuFIoJJQ=;
+	bh=7CtIDPJSKg73J0sulwVQWNIFbk745Z2BvpYk43EWeJM=; b=Xrt4j3j9L0rdkvDww1aPZf6phA
+	344S+Wd75qFLlXPBDfEQaRzi+x8/o6TPS3IXCBXyt2of9MPcRIOoXb20GhBLcnboDAinjESX35Uw7
+	OLUVu5hdCW3lXMOj46xsjvwSPHgQYvenWdpOH2lySTalcNPq6/wVjLsaNgWhShxnfcS0=;
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vx9wB-0002dr-NO;
-	Mon, 02 Mar 2026 20:32:20 +0000
+	id 1vx9wP-0002gm-CS;
+	Mon, 02 Mar 2026 20:32:34 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jlayton@kernel.org>) id 1vx9wA-0002dO-7B;
- Mon, 02 Mar 2026 20:32:19 +0000
+ (envelope-from <jlayton@kernel.org>) id 1vx9wO-0002gM-Fh;
+ Mon, 02 Mar 2026 20:32:33 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Cc:To:In-Reply-To:References:Message-Id:
  Content-Transfer-Encoding:Content-Type:MIME-Version:Subject:Date:From:Sender:
  Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
  :Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=gUhNxcPnK3c2jCrhaYvPQWAIRRqycFK/Jto/eJJJUQQ=; b=BFdxikhGj5WQEbBL58If2dn/2v
- 6PI253gRU0hVEpTzQSP6Hd/20KEFO6ytpzSD5yjzyCoBrBGHNV3bjNsm45L6KQTpBkOPzWNiID6nz
- /G8OD8ApGBMAvLDfFiCg1QCXUhOrgD1VYxtsRfU/y2gh9topB7GYDKD3ZZaxJWBTFsl4=;
+ bh=wepF4eEjwE2Uv4X5oy60a/bx+6Rq+2qdSDmK1U5QKc8=; b=Fv1foJjzzpWnq3Ao4ZWJA/qWdr
+ qdSlXLUwm4b6coihR2AhHMSWMN/FhPbqSOx0iFEPkHBcuIMaTsfKd9FNjvwZrPLaLrZl5haNR11LG
+ wrG9busCHSjogtJfrhFBFk6t18ydDCGp/Hbo3B26pHXzXOIHl06+dI97WP9EGDcHkHBw=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Cc:To:In-Reply-To:References:Message-Id:Content-Transfer-Encoding:
@@ -44,31 +44,31 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=gUhNxcPnK3c2jCrhaYvPQWAIRRqycFK/Jto/eJJJUQQ=; b=IfNwVuCt/lp2CQyhf/yNkHLw4Z
- KlU8VXmAEqM27wRwZ8OU3zQARCyoEv/QfTJ/LPt0OJxzw4U+ihg02QYMPO0Gz8mUVgb1DYzbMG2gX
- O8NseoT0eeA7ZZ3P5U5GXLQ3tISP2HlC9EuU4s0TS0Y1BiTrEzw2fs2/IQ+e9ck/dW+Q=;
+ bh=wepF4eEjwE2Uv4X5oy60a/bx+6Rq+2qdSDmK1U5QKc8=; b=Jf/++GYdcIMOqsFm/7rqSoE4ev
+ cO4ZjgUdXdiYSW5Zelg2cJ0Au0U5VcZGOZxxBRHxZsfZ04tXCki4h9N6kWzzIEXM4/ZcOYXvCL82f
+ dbzfw4hc3hc3NLNiX4DxSFo/8zct8NYt0PLsKyUlwQQAozxRdKnM7nWd9X54dwSzUp/I=;
 Received: from tor.source.kernel.org ([172.105.4.254])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vx9wA-0005Ca-FJ; Mon, 02 Mar 2026 20:32:18 +0000
+ id 1vx9wO-0005EK-N7; Mon, 02 Mar 2026 20:32:33 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 9981461336;
+ by tor.source.kernel.org (Postfix) with ESMTP id EDF646057A;
+ Mon,  2 Mar 2026 20:32:26 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 862C6C2BCAF;
  Mon,  2 Mar 2026 20:32:12 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 24D85C2BC87;
- Mon,  2 Mar 2026 20:31:58 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1772483532;
- bh=Yn2Qu7UMbJThtBrilI7pPp75jpWmCP33tSnnkZRaNHI=;
+ s=k20201202; t=1772483546;
+ bh=4zZLVZosTMapzlnQbViChZRIJwQ1YxnweV1e0IzMxKk=;
  h=From:Date:Subject:References:In-Reply-To:To:Cc:From;
- b=cvJD0maXNCq/O2xWYA+10/z/E8YRFJML0cT1B7vETcvH7heKfTKxs7p0sibB9di3C
- xmlXCoIm0SbP8G0jP6YbPVrS08BL1CKixwPXXAHSwrbjS/ap9RtAD2VbsMv+6DS1Z+
- bYFRaNFCNzJyKTwYvKvWvkDXLLlz6UDKUv4QdWjuBjWr2s8DeLpw4BzecJndVkUDTc
- JvNMHFwSqjHsLvb+zIYSgWv98lgKNu5JyaFPqeiyRcJSPD+6PeEPcA4HTxiN01b/WA
- uJsVT+8FSNriX6qmTtPlrORgIvHgNAff+hjUKshE6/oY62XlnyoDIEObjmzvFgOxFs
- 1KO0+PpVUVnaQ==
-Date: Mon, 02 Mar 2026 15:24:14 -0500
+ b=EeqjF7MoRlh/kOdenMQlIQE0g82iImB4Uqc17fvZNGHc9MCYhZRKQUrzHwrNeRq2p
+ BBd77tlP32HU+4aiXzIYfNufQXBt3X8waKSDljOzULdc2ZzPgaNbJuziGiAeIjrdwT
+ DwOQXm3XqIrKfCh6JfQAi71zjeYrPS7NwYlDS54RXNALxFlh84pcNKXllQMlS0+rWr
+ ObIc83qr4E1Ng8CJup4HLyksU6saNDa39jLQWyCxqJyFgFOMzbY9U3+kcB3HNXDaoI
+ S35PTiTtQsrGJUXNbJoGHIJr8oB2LXx/1BDWJzcsUHPVjDCcrGKCuxlFpzcMVIXDc0
+ 8djRYyhYmSagQ==
+Date: Mon, 02 Mar 2026 15:24:15 -0500
 MIME-Version: 1.0
-Message-Id: <20260302-iino-u64-v2-30-e5388800dae0@kernel.org>
+Message-Id: <20260302-iino-u64-v2-31-e5388800dae0@kernel.org>
 References: <20260302-iino-u64-v2-0-e5388800dae0@kernel.org>
 In-Reply-To: <20260302-iino-u64-v2-0-e5388800dae0@kernel.org>
 To: Alexander Viro <viro@zeniv.linux.org.uk>, 
@@ -161,33 +161,34 @@ To: Alexander Viro <viro@zeniv.linux.org.uk>,
  Jesper Dangaard Brouer <hawk@kernel.org>, 
  John Fastabend <john.fastabend@gmail.com>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1132; i=jlayton@kernel.org;
- h=from:subject:message-id; bh=Yn2Qu7UMbJThtBrilI7pPp75jpWmCP33tSnnkZRaNHI=;
- b=owEBbQKS/ZANAwAKAQAOaEEZVoIVAcsmYgBppfH2F6E1WlwdQlGn42tvtpN56rew8QauNYZQs
- uWunqtOWmiJAjMEAAEKAB0WIQRLwNeyRHGyoYTq9dMADmhBGVaCFQUCaaXx9gAKCRAADmhBGVaC
- FYwCD/9NZonA3wb3PFwtQxjXkl3/WD8EX6eYeInYrgJ+QQAL3s5tSoYqrHvvuIMkqJtY2WtxKqx
- CF8LInObvig0s/yGrrCPVa2VoLCG5Z0LvqvpOVu6C70X4D6PTl+bZk2/ntELohSSwHjidIKND9G
- O+oGpBZ8AiRa+lnT47HdvUbfICl/UEOL7sWQpgKMOJu20kdNSTp88wCNqlEudsDwgmkDnhGhVhz
- W7en3NFkygdhFH/wKB1zoCC8TjZysN4zbXYomqgVIYiXDwlzQbNo2jlNP1N940xUEv/3hFfG8qf
- Vw0dHduyiZTtOM5UffLrRmXGRc+1KOzZ/BvlTWZoRoVLTOYPUNVklRgufo+O+VlM4OwZ6LV92om
- yk4fZFCjGarfqb4xOPpE4ch44M7YSeH9r6R9R6rBQdDz47vVglWbtQQEZYACQXI/5rj+POP+fgA
- 27EgS+Iw1Jy7RaDluifkQV8PMrxIUlZP0tqbLdBeHv4QrY6gUv9TOHrmXIFGAnfGb7nvXYaLAIG
- I3eTOBuvNA4I61CPlwUonTwuAom5g/7CgzIAezX/YGgTjF/d/vxADqcCDboGMg9hX/ZLS7gcTmw
- pRMcZQMdu9Cjzbc7d/2GgYJhPsRGWSxkZ011EBbkX7wxbrRKf3i6YdwSF8cFWU5jNvT4fKKy32K
- y8aKLyjuQhVAEUQ==
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2637; i=jlayton@kernel.org;
+ h=from:subject:message-id; bh=4zZLVZosTMapzlnQbViChZRIJwQ1YxnweV1e0IzMxKk=;
+ b=owEBbQKS/ZANAwAKAQAOaEEZVoIVAcsmYgBppfH3/7MIAGsUTXCwQG56/sekwpotJydX2UJpS
+ A4cYEttsOSJAjMEAAEKAB0WIQRLwNeyRHGyoYTq9dMADmhBGVaCFQUCaaXx9wAKCRAADmhBGVaC
+ FQm3D/oD/nBEETcBUTWgdz+XCetI2Fr0jbRxFfuFvOIBZ6EGdtu5UWMBtyOxFVVjs3diIrb4PTx
+ /M8z8MRQrujiBZ4E1XZeTgynSueGxnTAZdQK3vCRI9BrRqRDs+Yqxyg5LgkCINzS2rmO70woRVw
+ OsAptb/wdU9AQLyMsGwgsTueVaN9omGgS/50G3uN/3cQm/WYKeCClkRPGzRRIEfIUKtmQnNRhfv
+ C1HTPxtq5w+ThSVEdCtjAG8OakcLP+cMFfDX4T6rBRIFEr/N95umFouZ0cHCjabDE9DaxWjhtm1
+ BrKedqbNpn5enrOcdwU866m2oqgdji5QoHO0aBgHdXGHjIKdjtC8+NxylR7FqU+p1hFOZQCzFQK
+ c7PLmGif/brK7rUao2mM438Zeh2abJAZXdMKrguZv1XVRWcO2XYGS4Viptsjzh0rzDfuTY6d78J
+ moge0sjDLD+JozJi7HqQNserJ5xdGDzrmj2Opw7TMXfGsZBX4gaZIyf5iCGi6BBn58ZI9fT4bFt
+ G8dW3lXq3s7O/GNGaf7/QQ35FnNZP86XcmMYGbHbET0dD8V/ps6xfb3Q8rWCfYxot7GEGOvelP5
+ m546feb2CKU8E0nSiVk3DL254B1ZNgEchgRGxtBtn2OzKVLBwwPIsy59/W+qr77Q/YZosjsT5qQ
+ YzATlmVEc4NMI+w==
 X-Developer-Key: i=jlayton@kernel.org; a=openpgp;
  fpr=4BC0D7B24471B2A184EAF5D3000E684119568215
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: Convert freevxfs i_ino format strings to use the PRIino
- format
- macro in preparation for the widening of i_ino via kino_t. Also correct signed
- format specifiers to unsigned, since inode numbers are unsigned values. 
+ Content preview:  Convert hfs i_ino format strings to use the PRIino format
+ macro in preparation for the widening of i_ino via kino_t. Signed-off-by:
+ Jeff Layton <jlayton@kernel.org> --- fs/hfs/catalog.c | 2 +- fs/hfs/extent.c
+ | 4 ++-- fs/hfs/inode.c | 4 ++-- 3 files changed, 5 insertions(+),
+ 5 deletions(-)
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -199,8 +200,8 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1vx9wA-0005Ca-FJ
-Subject: [f2fs-dev] [PATCH v2 030/110] freevxfs: use PRIino format for i_ino
+X-Headers-End: 1vx9wO-0005EK-N7
+Subject: [f2fs-dev] [PATCH v2 031/110] hfs: use PRIino format for i_ino
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -237,7 +238,7 @@ Cc: nvdimm@lists.linux.dev, jfs-discussion@lists.sourceforge.net,
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
-X-Rspamd-Queue-Id: 042F61DF9FB
+X-Rspamd-Queue-Id: 2D4931DFA29
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [-7.11 / 15.00];
 	WHITELIST_DMARC(-7.00)[sourceforge.net:D:+];
@@ -275,36 +276,73 @@ X-Spamd-Result: default: False [-7.11 / 15.00];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.sourceforge.net:dkim,lists.sourceforge.net:rdns,lists.sourceforge.net:helo]
 X-Rspamd-Action: no action
 
-Convert freevxfs i_ino format strings to use the PRIino format
+Convert hfs i_ino format strings to use the PRIino format
 macro in preparation for the widening of i_ino via kino_t.
-
-Also correct signed format specifiers to unsigned, since inode
-numbers are unsigned values.
 
 Signed-off-by: Jeff Layton <jlayton@kernel.org>
 ---
- fs/freevxfs/vxfs_bmap.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ fs/hfs/catalog.c | 2 +-
+ fs/hfs/extent.c  | 4 ++--
+ fs/hfs/inode.c   | 4 ++--
+ 3 files changed, 5 insertions(+), 5 deletions(-)
 
-diff --git a/fs/freevxfs/vxfs_bmap.c b/fs/freevxfs/vxfs_bmap.c
-index 26d367e3668da0cfd916881c7a07c047a7ef1bf5..93570fc8eee1e0889d13e3e6e351fdda91d9094a 100644
---- a/fs/freevxfs/vxfs_bmap.c
-+++ b/fs/freevxfs/vxfs_bmap.c
-@@ -260,12 +260,12 @@ vxfs_bmap1(struct inode *ip, long iblock)
- 	if (VXFS_ISIMMED(vip))
- 		goto unsupp;
+diff --git a/fs/hfs/catalog.c b/fs/hfs/catalog.c
+index b80ba40e38776123759df4b85c7f65daa19c6436..b07c0a3ffc61584165e8cc9f646de6066a6ad2c9 100644
+--- a/fs/hfs/catalog.c
++++ b/fs/hfs/catalog.c
+@@ -417,7 +417,7 @@ int hfs_cat_move(u32 cnid, struct inode *src_dir, const struct qstr *src_name,
+ 	int entry_size, type;
+ 	int err;
  
--	printk(KERN_WARNING "vxfs: inode %ld has no valid orgtype (%x)\n",
-+	printk(KERN_WARNING "vxfs: inode %" PRIino "u has no valid orgtype (%x)\n",
- 			ip->i_ino, vip->vii_orgtype);
- 	BUG();
+-	hfs_dbg("cnid %u - (ino %lu, name %s) - (ino %lu, name %s)\n",
++	hfs_dbg("cnid %u - (ino %" PRIino "u, name %s) - (ino %" PRIino "u, name %s)\n",
+ 		cnid, src_dir->i_ino, src_name->name,
+ 		dst_dir->i_ino, dst_name->name);
+ 	sb = src_dir->i_sb;
+diff --git a/fs/hfs/extent.c b/fs/hfs/extent.c
+index a097908b269d0ad1575847dd01d6d4a4538262bf..60875cc23880b758bbbb5e4b8281d9ee1f2dbcbb 100644
+--- a/fs/hfs/extent.c
++++ b/fs/hfs/extent.c
+@@ -411,7 +411,7 @@ int hfs_extend_file(struct inode *inode)
+ 		goto out;
+ 	}
  
- unsupp:
--	printk(KERN_WARNING "vxfs: inode %ld has an unsupported orgtype (%x)\n",
-+	printk(KERN_WARNING "vxfs: inode %" PRIino "u has an unsupported orgtype (%x)\n",
- 			ip->i_ino, vip->vii_orgtype);
- 	return 0;
- }
+-	hfs_dbg("ino %lu, start %u, len %u\n", inode->i_ino, start, len);
++	hfs_dbg("ino %" PRIino "u, start %u, len %u\n", inode->i_ino, start, len);
+ 	if (HFS_I(inode)->alloc_blocks == HFS_I(inode)->first_blocks) {
+ 		if (!HFS_I(inode)->first_blocks) {
+ 			hfs_dbg("first_extent: start %u, len %u\n",
+@@ -482,7 +482,7 @@ void hfs_file_truncate(struct inode *inode)
+ 	u32 size;
+ 	int res;
+ 
+-	hfs_dbg("ino %lu, phys_size %llu -> i_size %llu\n",
++	hfs_dbg("ino %" PRIino "u, phys_size %llu -> i_size %llu\n",
+ 		inode->i_ino, (long long)HFS_I(inode)->phys_size,
+ 		inode->i_size);
+ 	if (inode->i_size > HFS_I(inode)->phys_size) {
+diff --git a/fs/hfs/inode.c b/fs/hfs/inode.c
+index 878535db64d679995cd1f5c215f56c5258c3c720..b19866525c1e9c43decf3a943c709922ee8630f6 100644
+--- a/fs/hfs/inode.c
++++ b/fs/hfs/inode.c
+@@ -270,7 +270,7 @@ void hfs_delete_inode(struct inode *inode)
+ {
+ 	struct super_block *sb = inode->i_sb;
+ 
+-	hfs_dbg("ino %lu\n", inode->i_ino);
++	hfs_dbg("ino %" PRIino "u\n", inode->i_ino);
+ 	if (S_ISDIR(inode->i_mode)) {
+ 		atomic64_dec(&HFS_SB(sb)->folder_count);
+ 		if (HFS_I(inode)->cat_key.ParID == cpu_to_be32(HFS_ROOT_CNID))
+@@ -455,7 +455,7 @@ int hfs_write_inode(struct inode *inode, struct writeback_control *wbc)
+ 	hfs_cat_rec rec;
+ 	int res;
+ 
+-	hfs_dbg("ino %lu\n", inode->i_ino);
++	hfs_dbg("ino %" PRIino "u\n", inode->i_ino);
+ 	res = hfs_ext_write_extent(inode);
+ 	if (res)
+ 		return res;
 
 -- 
 2.53.0
