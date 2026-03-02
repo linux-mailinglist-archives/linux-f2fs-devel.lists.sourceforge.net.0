@@ -2,41 +2,41 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id cImkICn3pWl5IQAAu9opvQ
+	id KF03ESr3pWl5IQAAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 02 Mar 2026 21:46:33 +0100
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 02 Mar 2026 21:46:34 +0100
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id EA01A1E0930
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 02 Mar 2026 21:46:32 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id D2A2C1E0941
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 02 Mar 2026 21:46:33 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
 	List-Unsubscribe:List-Id:Subject:To:In-Reply-To:References:Message-Id:
 	MIME-Version:Date:Sender:Content-ID:Content-Description:Resent-Date:
 	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=O8soB65zlTu2v0BZMVJ1hST4YvEN8YOKN9odwXk+III=; b=DbKph6il3xaIbESAsJSMnA7/Wi
-	kHWwmoXbAgMPX6RC1qBqO2zGmlLriewD9UUxgRSK+kEKTUBaMdW02Ey0c2qyP/Br8sqVHASRcGe4m
-	wC0WrKf/YEQzpeZG/xACGIixmYsuG/A+Z6hIgFWKowQiUJQH5DAbI/DLbeX2oq7pb4WI=;
+	bh=wLmiPRaAmLb1gFjyzodO4d5Q0MH2em+sD3aev25Cd/s=; b=I4HOfbzVFa8ybNp1OZ/hC6G/rF
+	2XutfW2wDysagQOo0aEKTaM1m2iqo9wbzMGtPI02xAbHOYgXTkLgJkardexMaR2/jodaZTjbNI7Gm
+	qo8Hlbjh+GSv7GsT0LxJ5/uxrfcBnX+LSkqtke2hayCjHqpMDqriowGhYH7k2icTWgjo=;
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vxA9t-0007YF-R8;
-	Mon, 02 Mar 2026 20:46:29 +0000
+	id 1vxA9w-0007ZP-IS;
+	Mon, 02 Mar 2026 20:46:32 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jlayton@kernel.org>) id 1vxA9i-0007WD-9l;
- Mon, 02 Mar 2026 20:46:18 +0000
+ (envelope-from <jlayton@kernel.org>) id 1vxA9u-0007Yd-J6;
+ Mon, 02 Mar 2026 20:46:30 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Cc:To:In-Reply-To:References:Message-Id:
  Content-Transfer-Encoding:Content-Type:MIME-Version:Subject:Date:From:Sender:
  Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
  :Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=ukJlA5hNGeDu8wDq4qMPFOKZ33ejxXPqDyKKGt/DkT4=; b=GK7yyqzHnPaZomFnhL+bHS9Bfb
- yyZo5obrRu9skJ+6Fbqs2cNZLW0GWZXu5+qPX1Ze1Fs7E9xsyiCi4Ggu57LA/BddBPvCKwnFPKfFe
- Lekc7r2w4iAhjltgJ0CMWyU3Ym6ft4aDYbSo9MFepQzyLcETBLdVt6peyj9d6ZbU4fmg=;
+ bh=uTLDjRMYqIqXizkfTfBaXPlCkZuiyY7yVVz1X0+FiZg=; b=mOAz2GHjkYXmi0CRQXiaqSMddX
+ 1SMLO77+vg0MmHQ/10tjwlWAVP89d3QW8oeMuhbaLJIZfuMJE4CghWbxUqbUex0zWzZKM/M5TKltA
+ r/3qvPbfs3E5e2vDBkbwZqFjwik858zIeLGbnHjLhEpfQBZthJbjE+rf4i3ETYyBCbWQ=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Cc:To:In-Reply-To:References:Message-Id:Content-Transfer-Encoding:
@@ -44,31 +44,31 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=ukJlA5hNGeDu8wDq4qMPFOKZ33ejxXPqDyKKGt/DkT4=; b=O0fHhdO77VTVTmLmgTIu03tptu
- ov7MaF32PGCQGVtoeUHkeC+TXKtJMbCNQQgq+S7HxTb3xp1Yf3/JnMt4WtP0ynwxnTyATf0HuP4gt
- jQvSCe+KcQ8b8U5ys79K1ypljXmrpDNrRyxreD9MQ8q+Bcb9wAvvmBkaa1vkq9SziJsc=;
-Received: from sea.source.kernel.org ([172.234.252.31])
+ bh=uTLDjRMYqIqXizkfTfBaXPlCkZuiyY7yVVz1X0+FiZg=; b=hHjiRRsQAyRg0Z/61Vhh06+qmi
+ IannDnmD9hysbkpZ24P/+QN0lOOJS6iyFbsOI4dMbPiH07cy8t1b59CktrD8lF6LPBfhR6gH6iCgw
+ uOQjCiHwy37OSvlOBwFBAjL0u+YPmGTz47SeXxLEjTU19Ro+V/QxWt5GkPLC9hTrx2j4=;
+Received: from tor.source.kernel.org ([172.105.4.254])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vxA9a-0006k3-5G; Mon, 02 Mar 2026 20:46:11 +0000
+ id 1vxA9u-0006m6-1D; Mon, 02 Mar 2026 20:46:30 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id C279E43B9E;
+ by tor.source.kernel.org (Postfix) with ESMTP id 5321A60133;
+ Mon,  2 Mar 2026 20:46:19 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id DC442C19425;
  Mon,  2 Mar 2026 20:46:04 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8A47FC2BC9E;
- Mon,  2 Mar 2026 20:45:50 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1772484364;
- bh=qBOGZ+H4FCJyoScuTijEcAxm33DX4t54AKihmOD4lfc=;
+ s=k20201202; t=1772484379;
+ bh=oOhSUmlogX3hUkfVoKDF8y8a/pqC/DLSTod5Uj4+yCo=;
  h=From:Date:Subject:References:In-Reply-To:To:Cc:From;
- b=WD9QSZaB4Ynf3T2024pRykq9e0/jdmE8EG7gpxceQsWLs9ldUDrFlX4ArZiie0vbL
- 19LbIvHDGkRkdQlFvg2Y7NwamnoN3dr7aJrGPp3z71wIC5mJJ7qSa4bmsCB3TH/SeC
- hUi3DjOP9V4XSETuRPjeZTuWgMSi9immDKfUAEtwEpfS0taqUCB19NTdwT9PAl2Dr1
- X6n/FZutnR9+MwmmLPosjsknaR7URHBAA5CT4uRPA0WQdzY1319ktmFMHsHOHDXsX6
- uClORVRaA5wOmwgDDGWX9W7QBFGsaZ2Twg5ddM1UZAYTdINoixEOU0+4vzdq6qPVwW
- Ibfy5Y48Gl/bg==
-Date: Mon, 02 Mar 2026 15:25:12 -0500
+ b=QFK/l67WhGTxY3MNVSkTneymqOrQE5FKXZDHe6SB+nNMXtNeYjIew5DQgABkgt0Gn
+ lNM8YjJvoVkj+HtgUYYgAW9IQzpr0/cfOIHJ4dGkG9iAxa7WPVTRI7LfMjERvp1g20
+ NB2RNHKtU66gMxoH3/HZRV4R+2rfoO7mGxOFgvn81JNmQu79EVZeqb5N7sgERHMisD
+ XaWcM75KqkO3sODXZYDjBLbuOWxKgLDuUYiEf04D7AYj7x0tsxaMfo2IGzfcO0gSOD
+ YcWpwatBWQJMdZT69vmlZKdq2eHu04aKj7o7WnXXgMX3icvM9eeDG89T5QFXZHV9ki
+ qqt8UpZV8JT4Q==
+Date: Mon, 02 Mar 2026 15:25:13 -0500
 MIME-Version: 1.0
-Message-Id: <20260302-iino-u64-v2-88-e5388800dae0@kernel.org>
+Message-Id: <20260302-iino-u64-v2-89-e5388800dae0@kernel.org>
 References: <20260302-iino-u64-v2-0-e5388800dae0@kernel.org>
 In-Reply-To: <20260302-iino-u64-v2-0-e5388800dae0@kernel.org>
 To: Alexander Viro <viro@zeniv.linux.org.uk>, 
@@ -161,35 +161,35 @@ To: Alexander Viro <viro@zeniv.linux.org.uk>,
  Jesper Dangaard Brouer <hawk@kernel.org>, 
  John Fastabend <john.fastabend@gmail.com>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=4782; i=jlayton@kernel.org;
- h=from:subject:message-id; bh=qBOGZ+H4FCJyoScuTijEcAxm33DX4t54AKihmOD4lfc=;
- b=owEBbQKS/ZANAwAKAQAOaEEZVoIVAcsmYgBppfIHR7PXwpRijiaDSNoHBRx6sRq6q8UIIYKp7
- 0L0gu64QBiJAjMEAAEKAB0WIQRLwNeyRHGyoYTq9dMADmhBGVaCFQUCaaXyBwAKCRAADmhBGVaC
- FdutD/9ObZxe+nOy3nsTFaq7Ut8ArWcplsqSov2kMlKcZpVCHHzCKDenXVX9I9pFuqNSk3FCVmR
- ZtENkgoSqrEgrLbDJ9RYgQz5YLIkClSpE+d+3sRwa1vcidi9xUmF9r1539KnV74bVbjnUn7n39b
- 5Yz4oalHYtyM0RxZBk4NYEBKtBfrTqeXOydheHjmorfO4SLpKbS0DJSXG6yKJp+8cYAotA5dyLc
- 3wz9mx4uNNIi189tf6M4st3QnK1Rse02wHg82ld1a3TZwDRBfVMBrAtlw7DNUBGBc+nVPRYksak
- VxsyEvoslW6Mw05AybupfOtcxkiI7AacYGnromEJLcZ9ZlsBvV9WkRnM9x/QaFVylYPnp96tPfm
- vie5eyII+IYTlT43Ms7C5qU2fcqdKWkC6fZeKSw3Kh7u/pRdAWPgmiOQdnJIZMUoz4UB6CSQJK8
- a47IYq+UxK3Wc55K1/6Nr/HQ7be+ZGdPny2IRYMf644RLf9W0bUdW+9jBTSSRT7I/77bh4GypLj
- 13ZdGuuNKShNp8yE8pV0NP6WB8IbR3yr/yVN3F5UOGRYYRzT5c7/SWeas3JKNG3EhQqXtFQBTC8
- n8AEMtgsyD6/eAVFe8FdKpcragAugbl/JXE/AL/jlB+vFGxVdYQthx9JOUOfU1J2NFyfRZMlbfb
- M6QevW1Grdb83mA==
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2019; i=jlayton@kernel.org;
+ h=from:subject:message-id; bh=oOhSUmlogX3hUkfVoKDF8y8a/pqC/DLSTod5Uj4+yCo=;
+ b=owEBbQKS/ZANAwAKAQAOaEEZVoIVAcsmYgBppfIHVuyPWm6Ogyyr4Uaitgz5+Zy0QdOagQ0LM
+ rh3nzuPVViJAjMEAAEKAB0WIQRLwNeyRHGyoYTq9dMADmhBGVaCFQUCaaXyBwAKCRAADmhBGVaC
+ FUG8EAC6sR6nI8JObBOYvouIGChfBANCmxFZ2xYcY1j5s2hD9uFCg7fQJ0jAKZMouw/tMAZgjd/
+ m4N7AubbGIA/9/WBMScxAnpsIYHXZraFaWvOsndsTukur5JxALyIhPFz6+GpkFDN2s2OT66hKfh
+ C/RT3gGd4yxg98E2KnCo8aHKhr5lG/0fXpqgH+IOfdddVYehawAK6JakiIfhF2nyW8nDX8U0Eif
+ /6Wj4ib6XZsuiGvHt7SJ07d2Q8QTzUhgWiyNtu8KcSYMces0Gj6zeg+i/SvD0L0ALWJ56UUe659
+ pdyiLnatxvmsx1NdT/UKUKlFugXyUeJFD46H6wHulnrl6XCiWi8FzNwUrOe41pj5DwtyLLp2E9Y
+ sAA5HchXdhWof5rVVqElVkMrXdASYBe7HPu/dRMeWwAdQalBHWFivg2gKMIpej4I8Uhqffimo7K
+ Ax4qoBlNlESu4VpNIsliVjzhHvzh2cmxafpGTewoFYW4P5GIh1IZHN6nd73fG9NauLvMC/J3K+w
+ kqx0oRG4EpCQ1U/ntMliW508gwqp7fjR6/uekoTUSYH9eplK82F0BA7QAlBmiB1LBAj9pVj3DLn
+ jte/6qynA4B5h0jRQkSRTuvbLsRccq+akrBDBXmhP8CALxeqnjlFNMsC6dLgInpOlFCBea/12HK
+ JZIjXU3wI/gm1HQ==
 X-Developer-Key: i=jlayton@kernel.org; a=openpgp;
  fpr=4BC0D7B24471B2A184EAF5D3000E684119568215
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
  Content preview:  Now that i_ino is u64 and the PRIino format macro has been
  removed,
- replace all uses in jffs2 with the concrete format strings. Signed-off-by:
- Jeff Layton <jlayton@kernel.org> --- fs/jffs2/dir.c | 4 ++-- fs/jffs2/file.c
- | 4 ++-- fs/jffs2/fs.c | 14 +++++++------- 3 files changed, 11 insertions(+), 
- 11 deletions(-) 
+ replace all uses in jfs with the concrete format strings. Signed-off-by:
+ Jeff Layton <jlayton@kernel.org> --- fs/jfs/inode.c | 2 +- fs/jfs/jfs_imap.c
+ | 2 +- fs/jfs/jfs_metapage.c | 2 +- 3 files changed, 3 insertions(+),
+ 3 deletions(-)
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -201,8 +201,8 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1vxA9a-0006k3-5G
-Subject: [f2fs-dev] [PATCH v2 088/110] jffs2: replace PRIino with %llu/%llx
+X-Headers-End: 1vxA9u-0006m6-1D
+Subject: [f2fs-dev] [PATCH v2 089/110] jfs: replace PRIino with %llu/%llx
  format strings
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
@@ -240,7 +240,7 @@ Cc: nvdimm@lists.linux.dev, jfs-discussion@lists.sourceforge.net,
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
-X-Rspamd-Queue-Id: EA01A1E0930
+X-Rspamd-Queue-Id: D2A2C1E0941
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [-7.11 / 15.00];
 	WHITELIST_DMARC(-7.00)[sourceforge.net:D:+];
@@ -278,123 +278,54 @@ X-Spamd-Result: default: False [-7.11 / 15.00];
 X-Rspamd-Action: no action
 
 Now that i_ino is u64 and the PRIino format macro has been removed,
-replace all uses in jffs2 with the concrete format strings.
+replace all uses in jfs with the concrete format strings.
 
 Signed-off-by: Jeff Layton <jlayton@kernel.org>
 ---
- fs/jffs2/dir.c  |  4 ++--
- fs/jffs2/file.c |  4 ++--
- fs/jffs2/fs.c   | 14 +++++++-------
- 3 files changed, 11 insertions(+), 11 deletions(-)
+ fs/jfs/inode.c        | 2 +-
+ fs/jfs/jfs_imap.c     | 2 +-
+ fs/jfs/jfs_metapage.c | 2 +-
+ 3 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/fs/jffs2/dir.c b/fs/jffs2/dir.c
-index 6ef2641b39b3c66924eb4641f5c0024ae11ff255..c4088c3b4ac0362074cfa186c04f9c3afcccdff2 100644
---- a/fs/jffs2/dir.c
-+++ b/fs/jffs2/dir.c
-@@ -129,7 +129,7 @@ static int jffs2_readdir(struct file *file, struct dir_context *ctx)
- 	struct jffs2_full_dirent *fd;
- 	unsigned long curofs = 1;
+diff --git a/fs/jfs/inode.c b/fs/jfs/inode.c
+index 7529043baaf30a6227e5d8edbefd9e37a8105d43..c7914dbc91ed97e200edbd114e2d4c695b46fb7e 100644
+--- a/fs/jfs/inode.c
++++ b/fs/jfs/inode.c
+@@ -64,7 +64,7 @@ struct inode *jfs_iget(struct super_block *sb, unsigned long ino)
+ 		inode->i_op = &jfs_file_inode_operations;
+ 		init_special_inode(inode, inode->i_mode, inode->i_rdev);
+ 	} else {
+-		printk(KERN_DEBUG "JFS: Invalid file type 0%04o for inode %" PRIino "u.\n",
++		printk(KERN_DEBUG "JFS: Invalid file type 0%04o for inode %llu.\n",
+ 		       inode->i_mode, inode->i_ino);
+ 		iget_failed(inode);
+ 		return ERR_PTR(-EIO);
+diff --git a/fs/jfs/jfs_imap.c b/fs/jfs/jfs_imap.c
+index c9ea54f06114ce210ab2d80ad80d0dfa6c55b250..13ab21e66f510befc477bd15d40f69544cb7a386 100644
+--- a/fs/jfs/jfs_imap.c
++++ b/fs/jfs/jfs_imap.c
+@@ -302,7 +302,7 @@ int diRead(struct inode *ip)
+ 	unsigned long pageno;
+ 	int rel_inode;
  
--	jffs2_dbg(1, "jffs2_readdir() for dir_i #%" PRIino "u\n", inode->i_ino);
-+	jffs2_dbg(1, "jffs2_readdir() for dir_i #%llu\n", inode->i_ino);
+-	jfs_info("diRead: ino = %" PRIino "u", ip->i_ino);
++	jfs_info("diRead: ino = %llu", ip->i_ino);
  
- 	if (!dir_emit_dots(file, ctx))
- 		return 0;
-@@ -211,7 +211,7 @@ static int jffs2_create(struct mnt_idmap *idmap, struct inode *dir_i,
+ 	ipimap = sbi->ipimap;
+ 	JFS_IP(ip)->ipimap = ipimap;
+diff --git a/fs/jfs/jfs_metapage.c b/fs/jfs/jfs_metapage.c
+index 0a1efacaf4e2196197cfe44e5c51d89b15d39545..c95804f6dc1912510c51163cc120d536de652fd3 100644
+--- a/fs/jfs/jfs_metapage.c
++++ b/fs/jfs/jfs_metapage.c
+@@ -692,7 +692,7 @@ struct metapage *__get_metapage(struct inode *inode, unsigned long lblock,
+ 	unsigned long page_index;
+ 	unsigned long page_offset;
  
- 	jffs2_free_raw_inode(ri);
+-	jfs_info("__get_metapage: ino = %" PRIino "u, lblock = 0x%lx, abs=%d",
++	jfs_info("__get_metapage: ino = %llu, lblock = 0x%lx, abs=%d",
+ 		 inode->i_ino, lblock, absolute);
  
--	jffs2_dbg(1, "%s(): Created ino #%" PRIino "u with mode %o, nlink %d(%d). nrpages %ld\n",
-+	jffs2_dbg(1, "%s(): Created ino #%llu with mode %o, nlink %d(%d). nrpages %ld\n",
- 		  __func__, inode->i_ino, inode->i_mode, inode->i_nlink,
- 		  f->inocache->pino_nlink, inode->i_mapping->nrpages);
- 
-diff --git a/fs/jffs2/file.c b/fs/jffs2/file.c
-index f6b9d76d9dbc32f582069aeef0b73cf3c6ff842e..1e18d3a798409d23440a5890808bc25372549e93 100644
---- a/fs/jffs2/file.c
-+++ b/fs/jffs2/file.c
-@@ -88,7 +88,7 @@ static int jffs2_do_readpage_nolock(struct inode *inode, struct folio *folio)
- 	unsigned char *kaddr;
- 	int ret;
- 
--	jffs2_dbg(2, "%s(): ino #%" PRIino "u, page at offset 0x%lx\n",
-+	jffs2_dbg(2, "%s(): ino #%llu, page at offset 0x%lx\n",
- 		  __func__, inode->i_ino, folio->index << PAGE_SHIFT);
- 
- 	BUG_ON(!folio_test_locked(folio));
-@@ -259,7 +259,7 @@ static int jffs2_write_end(const struct kiocb *iocb,
- 	uint32_t writtenlen = 0;
- 	void *buf;
- 
--	jffs2_dbg(1, "%s(): ino #%" PRIino "u, page at 0x%llx, range %d-%d, flags %lx\n",
-+	jffs2_dbg(1, "%s(): ino #%llu, page at 0x%llx, range %d-%d, flags %lx\n",
- 		  __func__, inode->i_ino, folio_pos(folio),
- 		  start, end, folio->flags.f);
- 
-diff --git a/fs/jffs2/fs.c b/fs/jffs2/fs.c
-index 4ad37a42c03d8357f3ef99596b725bea3db1932b..6ada8369a76227c30ec27e8efebd93939376494e 100644
---- a/fs/jffs2/fs.c
-+++ b/fs/jffs2/fs.c
-@@ -43,7 +43,7 @@ int jffs2_do_setattr (struct inode *inode, struct iattr *iattr)
- 	int ret;
- 	int alloc_type = ALLOC_NORMAL;
- 
--	jffs2_dbg(1, "%s(): ino #%" PRIino "u\n", __func__, inode->i_ino);
-+	jffs2_dbg(1, "%s(): ino #%llu\n", __func__, inode->i_ino);
- 
- 	/* Special cases - we don't want more than one data node
- 	   for these types on the medium at any time. So setattr
-@@ -243,7 +243,7 @@ void jffs2_evict_inode (struct inode *inode)
- 	struct jffs2_sb_info *c = JFFS2_SB_INFO(inode->i_sb);
- 	struct jffs2_inode_info *f = JFFS2_INODE_INFO(inode);
- 
--	jffs2_dbg(1, "%s(): ino #%" PRIino "u mode %o\n",
-+	jffs2_dbg(1, "%s(): ino #%llu mode %o\n",
- 		  __func__, inode->i_ino, inode->i_mode);
- 	truncate_inode_pages_final(&inode->i_data);
- 	clear_inode(inode);
-@@ -334,7 +334,7 @@ struct inode *jffs2_iget(struct super_block *sb, unsigned long ino)
- 		ret = jffs2_read_dnode(c, f, f->metadata, (char *)&jdev, 0, f->metadata->size);
- 		if (ret < 0) {
- 			/* Eep */
--			pr_notice("Read device numbers for inode %" PRIino "u failed\n",
-+			pr_notice("Read device numbers for inode %llu failed\n",
- 				  inode->i_ino);
- 			goto error;
- 		}
-@@ -351,7 +351,7 @@ struct inode *jffs2_iget(struct super_block *sb, unsigned long ino)
- 		break;
- 
- 	default:
--		pr_warn("%s(): Bogus i_mode %o for ino %" PRIino "u\n",
-+		pr_warn("%s(): Bogus i_mode %o for ino %llu\n",
- 			__func__, inode->i_mode, inode->i_ino);
- 	}
- 
-@@ -374,12 +374,12 @@ void jffs2_dirty_inode(struct inode *inode, int flags)
- 	struct iattr iattr;
- 
- 	if (!(inode_state_read_once(inode) & I_DIRTY_DATASYNC)) {
--		jffs2_dbg(2, "%s(): not calling setattr() for ino #%" PRIino "u\n",
-+		jffs2_dbg(2, "%s(): not calling setattr() for ino #%llu\n",
- 			  __func__, inode->i_ino);
- 		return;
- 	}
- 
--	jffs2_dbg(1, "%s(): calling setattr() for ino #%" PRIino "u\n",
-+	jffs2_dbg(1, "%s(): calling setattr() for ino #%llu\n",
- 		  __func__, inode->i_ino);
- 
- 	iattr.ia_valid = ATTR_MODE|ATTR_UID|ATTR_GID|ATTR_ATIME|ATTR_MTIME|ATTR_CTIME;
-@@ -428,7 +428,7 @@ struct inode *jffs2_new_inode (struct inode *dir_i, umode_t mode, struct jffs2_r
- 	struct jffs2_inode_info *f;
- 	int ret;
- 
--	jffs2_dbg(1, "%s(): dir_i %" PRIino "u, mode 0x%x\n",
-+	jffs2_dbg(1, "%s(): dir_i %llu, mode 0x%x\n",
- 		  __func__, dir_i->i_ino, mode);
- 
- 	c = JFFS2_SB_INFO(sb);
+ 	l2bsize = inode->i_blkbits;
 
 -- 
 2.53.0
