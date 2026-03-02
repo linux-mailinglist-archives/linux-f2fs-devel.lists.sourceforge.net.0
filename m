@@ -2,41 +2,41 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id SJiEHV72pWmkIQAAu9opvQ
+	id WFoiA2v2pWmkIQAAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 02 Mar 2026 21:43:10 +0100
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 02 Mar 2026 21:43:23 +0100
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id C2CB81E056D
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 02 Mar 2026 21:43:09 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 629221E05BE
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 02 Mar 2026 21:43:22 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
 	List-Unsubscribe:List-Id:Subject:To:In-Reply-To:References:Message-Id:
 	MIME-Version:Date:Sender:Content-ID:Content-Description:Resent-Date:
 	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=GEfkYSSMgMpLKfMnNem0lmn0mvZcGrAAnOqmpgnhXzI=; b=OGnv6krrwlCygTm+jCFgWvAvxP
-	a0rb/ueqb8OG0n1nNd7/GrM64DKY1WfRucsqKPw093lnR4/ltN94BDXsPjTBnEFXfkX6+QKE89HfQ
-	q60hCm+aq0dHbUZZmnOXtNExRkjzzgGxeATtz1N9cleX3DxVEABvjIKNmsS/1vsR2m+w=;
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=WbbJ7WyuUuvFTSx7CUWpWNxkZo3EhWxkk2HFNmBDBGA=; b=IYF24F8KwkEun8n3NGsI10PvRk
+	/xuBdXpjs67jPftVf5cqmO9mWD87YJYZLkyfn0q8YOkOnxM52/NPMnZjFInwuRbWYXYGRIvZYdwvx
+	LzkJ76gPZhHhZbxxEajJzc6ZnGMozCXn9sM+gBz4T7onpjh9f47upNJzBLDk3wTSpkq4=;
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vxA6c-0006xb-Np;
-	Mon, 02 Mar 2026 20:43:06 +0000
+	id 1vxA6r-0003Qb-2v;
+	Mon, 02 Mar 2026 20:43:21 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jlayton@kernel.org>) id 1vxA6a-0006xA-Ek;
- Mon, 02 Mar 2026 20:43:04 +0000
+ (envelope-from <jlayton@kernel.org>) id 1vxA6o-0003QC-II;
+ Mon, 02 Mar 2026 20:43:18 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Cc:To:In-Reply-To:References:Message-Id:
  Content-Transfer-Encoding:Content-Type:MIME-Version:Subject:Date:From:Sender:
  Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
  :Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=WCFWiOhDsqsgnqiP9F2feA24eLVqMvK48TFLJm2h3iU=; b=abffF7Z5k20Wf6TRDdoZ9GrPpi
- h0C+mh16Wv6W34KPHdhRDmSpqimq25kOPSXSxFcnLBOe+nJbKdA5bLGEQVkl+rMgZgVZaa+3d7HNH
- ul1qGt0IEWsyMKXRREwLK1H+W4/eMRt4BcKN8fd/cnE70fUgsSur7SvRtu8L4ZFDEYRE=;
+ bh=b3CZJN/juuSpRXxjgwZVStDU5PIpM4J/lcUsjN8h26s=; b=bO1nHil/G0BjN5PWxV4pkeF1ET
+ mjqSCm6LsLKlwv5f8ELuJhNNd1nK+6PdiZoaBQY8gdtSQrYyd4/pLUAUIOuOL/5xPj6ViodlEiH68
+ epTLaVUyDa/kcCzzfBz3ekaWAlLbRMb66yJ4jSPLbj0boqXl8TZAL3PTR7J4n1OJ6wmo=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Cc:To:In-Reply-To:References:Message-Id:Content-Transfer-Encoding:
@@ -44,31 +44,31 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=WCFWiOhDsqsgnqiP9F2feA24eLVqMvK48TFLJm2h3iU=; b=kv8achNsNPXJ5BqYWcEDzSph16
- 65J8+hhEAnfGvEGA1yR2c5pXGvZYkW+ZQeCGpHGnuJy9qAYWlXzd+W4JGONfPwbaojHhRKAPj2U8B
- UaY7ksBjeOfackr4JgGhpP1zR4i0Q2FB4QPvnyOTfm25Nf+5dRlt2lGJ2O72Ktyh6rBM=;
+ bh=b3CZJN/juuSpRXxjgwZVStDU5PIpM4J/lcUsjN8h26s=; b=OLhu+gPYhrvkL9sjOd6oOEALsn
+ EhIlTcLUNs8RQdX3RRAkXOLBZWUx9c00oJpVbZZXa99tKU6g7/JABH/lQB1X+dq0ZWpPBHqFx5dDw
+ Nu7pyAqmKIFbASAjPFhR2MKJwcl0ckytgJq6q1FakoSfLXKzABgZWkSTS6BJGAZcOLzg=;
 Received: from sea.source.kernel.org ([172.234.252.31])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vxA6Z-0006Q2-Mo; Mon, 02 Mar 2026 20:43:04 +0000
+ id 1vxA6o-0006RP-0H; Mon, 02 Mar 2026 20:43:18 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 45670439F6;
+ by sea.source.kernel.org (Postfix) with ESMTP id A1D22441D1;
+ Mon,  2 Mar 2026 20:43:12 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5E43EC19425;
  Mon,  2 Mar 2026 20:42:58 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 14CA9C2BC87;
- Mon,  2 Mar 2026 20:42:44 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1772484178;
- bh=az5/UfgR48DhHcdtOz5xQudKTVsY7dUyG5/iejsoF3Q=;
+ s=k20201202; t=1772484192;
+ bh=FCaNd3pHlGf86M70GmPN/2h+0/BSndhawfzqYvem1rw=;
  h=From:Date:Subject:References:In-Reply-To:To:Cc:From;
- b=U64fZHuxQT3j2g9YM2j7e/vbcbDBvajdnUXKwQIjuM3WFcIX/1QkPqF5sUYX3qHHz
- Mb4JEexSPcZ+WRvsCPNifVFsOfIy/CB/Z/Glo/3zoEdMwflqDdpFDmrISqab44Dg0k
- xXkLYaFAC5AyCROU+yxO1j/kVfIKnLHxzCW/grvhs8R6WgbTQJYhsMfGiX511FLGj7
- G4AsHVkltVKQ3I9t+dgV/Uvo1wOyaHk3xXC3zcnK/CFBb4vsWNY+qK1nFlQBeXjm99
- 1DAM06ER88Zk2V8P4cduXVwHJgbcmFSUq0hqqz8MmZdSkmBf6enZg5hHpsT1vwSIXL
- Q8/gXJBezzM+Q==
-Date: Mon, 02 Mar 2026 15:24:59 -0500
+ b=a8erYOQoCeZ4W4SsKPy6/MjVlXR7g69i4wbgWBsm4HI5CR/90JTSi3KGCpH64F2cq
+ 5KYYQ8lChrVsy4lZ1JRloEwtGxpF43U70cVxjwumOtq+7DXaDBRvr4C1CxSbn4AX26
+ +gVeG0c3n3ZLtNb9i3VJiV8bBy1zKas6/u57Kcj+BjqfRnLLuxm/w0Ilats1EctoS5
+ mO5yXafS6AX2PWuTvlJBBQ9vVkekTrE6uxK5cqmpcEnqCkiuink+of/l0tqRdUZ75u
+ sne00ytw34bZb06iCSujnQvm2M6EHmxg3n+razSMYdNY5R3AMIN+RA3Teg2DEZPfE/
+ Ki0AiqBAN+RDQ==
+Date: Mon, 02 Mar 2026 15:25:00 -0500
 MIME-Version: 1.0
-Message-Id: <20260302-iino-u64-v2-75-e5388800dae0@kernel.org>
+Message-Id: <20260302-iino-u64-v2-76-e5388800dae0@kernel.org>
 References: <20260302-iino-u64-v2-0-e5388800dae0@kernel.org>
 In-Reply-To: <20260302-iino-u64-v2-0-e5388800dae0@kernel.org>
 To: Alexander Viro <viro@zeniv.linux.org.uk>, 
@@ -161,34 +161,34 @@ To: Alexander Viro <viro@zeniv.linux.org.uk>,
  Jesper Dangaard Brouer <hawk@kernel.org>, 
  John Fastabend <john.fastabend@gmail.com>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=3200; i=jlayton@kernel.org;
- h=from:subject:message-id; bh=az5/UfgR48DhHcdtOz5xQudKTVsY7dUyG5/iejsoF3Q=;
- b=owEBbQKS/ZANAwAKAQAOaEEZVoIVAcsmYgBppfIDvrM/TGfOFWGOUqzfIyuwAF6e1qhVhF+Yh
- Qv8S2GtC/mJAjMEAAEKAB0WIQRLwNeyRHGyoYTq9dMADmhBGVaCFQUCaaXyAwAKCRAADmhBGVaC
- FX1hEACqbYeHwrURpMMogt8p9UTcZ6PyKhws+kg8vAResb4l8L4XKPbalHZif6Y08h58t/KgmbN
- AkeZNtvuSQBICx9k2yue0Kg1DC5VB163feX+p8iHl4d9W61xhIx9hc9MIZSo48OyYobj5dZJmxd
- saqzyRL+cpFK11qSphNjtHv5QicR5807/BTwqicaoAcc+0wG6Wwww9xIM0EepTkrs/YczUYJthe
- CFXtU18q3Df2UomQg5hEepZS074QE5VH1iwVIbkLo8aGKHjwI9Qhyaoz0GVV6/T5Kzaj0l+B05c
- j17C+65SAsnLhabenAbtSuH2PiV/K+GgKI+EVd1UCeFO4Tndlo8CF2lkIbzEr+uccKkSpo83bdW
- 1IqkMQiNWhkDchA4mi2HgqQkwzX49TTnlMxF0uqpVnSgNpRHcBbuzBK1sMTrd8O3aeQdNTYDTQY
- 8vvN3iiFDN/D86PtCY1nYl3+mxGdVATt9O9oaUxAi/8s3QI8OK5uXim0mOLMv42sx06Ff63wTCZ
- Gmz7zDOigm9j99CSyK87xQ0wkrLHj1wnv59TUkj378+ps4zBidsrXd3JPdFWl9EVxhMq0P9irT8
- CmZSS5ry0AXxlvqeLQoCk7RzUsNUi9i7238avFyp3g91NNOpuEYTCknceTCWgjP5GtOz3vvQVY3
- JkCvUHLgEBDZ2+A==
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1325; i=jlayton@kernel.org;
+ h=from:subject:message-id; bh=FCaNd3pHlGf86M70GmPN/2h+0/BSndhawfzqYvem1rw=;
+ b=owEBbQKS/ZANAwAKAQAOaEEZVoIVAcsmYgBppfID+1/UHZA4NPHPLnw/+H+1taDd3t+Ga5qZd
+ qZRYbF9vRuJAjMEAAEKAB0WIQRLwNeyRHGyoYTq9dMADmhBGVaCFQUCaaXyAwAKCRAADmhBGVaC
+ FWh4D/wJ+yIb2cpCiPiJ8w1tdyHCbSXHupm6zq31jic18FwvKTcyujLdAcMJbbJiY3gw6BuOzw2
+ Cg8L9GAH2nYnXa2JqZ4OztG6Od2Udffiv0UHbZyU+xx6VyV1Upr0hQWKwCMchPy3vjczDBqaIII
+ C5vQc6cueJrt59r6TLCm2ehoYphk+juAj0U93SMafU4M4v08zpTagoXR5ybYfdGTV7c33q4U8GI
+ bMcSmZ7R13/DzvXCxjDko049T8rsEzgVNhwB0n9Ox73Ng+/rcHGMLRWiUR1nWhmIrlyBnxcdyhY
+ XKW8z6gW8zCLrKTSNrL+yRmVeCdpLjzZ/RMfTvmBJle5co30tXFChyLfNRBe7/Zw9S6sk4MIDe1
+ 5ISjP94k54Zh3/pC5eYsLzkivQb4t/ho3QTTP5L1lEsOXc4gDvAiHnF8S561Xz26NIRUoTUw56T
+ Rwnxti+HromqTX968WDtdOxhp/oqUL2zfij0+p04SwmQF85SHwrOTGAkZwqmtJ2eDYwqB+nvcJ/
+ ssLak2UCmta+IiPJr8fq8hAvaa7TtWXxQ4StKOBxj5wwQY9QVqvC3ldqD/zNHKC/bq4Q0zBB63G
+ AkkloOzcAGI1uwVBcnfQYsLv+yhDtfrnEV610eBHY8K0AQM4pP+3IX7g7piHYEb2VarMVnS16R8
+ jYHNDYgzKNO0NbQ==
 X-Developer-Key: i=jlayton@kernel.org; a=openpgp;
  fpr=4BC0D7B24471B2A184EAF5D3000E684119568215
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
  Content preview:  Now that i_ino is u64 and the PRIino format macro has been
- removed, replace all uses in cachefiles with the concrete format strings.
- Signed-off-by: Jeff Layton <jlayton@kernel.org> --- fs/cachefiles/namei.c
- | 12 ++++++------ fs/cachefiles/xattr.c | 2 +- 2 files changed, 7 insertions(+),
- 7 deletions(-) 
+ removed,
+ replace all uses in ceph with the concrete format strings. Signed-off-by:
+ Jeff Layton <jlayton@kernel.org> --- fs/ceph/crypto.c | 4 ++-- 1 file changed, 
+ 2 insertions(+), 2 deletions(-) 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -200,9 +200,9 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1vxA6Z-0006Q2-Mo
-Subject: [f2fs-dev] [PATCH v2 075/110] cachefiles: replace PRIino with
- %llu/%llx format strings
+X-Headers-End: 1vxA6o-0006RP-0H
+Subject: [f2fs-dev] [PATCH v2 076/110] ceph: replace PRIino with %llu/%llx
+ format strings
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -239,7 +239,7 @@ Cc: nvdimm@lists.linux.dev, jfs-discussion@lists.sourceforge.net,
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
-X-Rspamd-Queue-Id: C2CB81E056D
+X-Rspamd-Queue-Id: 629221E05BE
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [-7.11 / 15.00];
 	WHITELIST_DMARC(-7.00)[sourceforge.net:D:+];
@@ -277,85 +277,35 @@ X-Spamd-Result: default: False [-7.11 / 15.00];
 X-Rspamd-Action: no action
 
 Now that i_ino is u64 and the PRIino format macro has been removed,
-replace all uses in cachefiles with the concrete format strings.
+replace all uses in ceph with the concrete format strings.
 
 Signed-off-by: Jeff Layton <jlayton@kernel.org>
 ---
- fs/cachefiles/namei.c | 12 ++++++------
- fs/cachefiles/xattr.c |  2 +-
- 2 files changed, 7 insertions(+), 7 deletions(-)
+ fs/ceph/crypto.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/fs/cachefiles/namei.c b/fs/cachefiles/namei.c
-index ace111f29c6fa006b69a0808764b60a0074db229..4fdf7687aacb8285ae38d9b5d7e5129897b3ca03 100644
---- a/fs/cachefiles/namei.c
-+++ b/fs/cachefiles/namei.c
-@@ -147,7 +147,7 @@ struct dentry *cachefiles_get_directory(struct cachefiles_cache *cache,
- 		}
- 		ASSERT(d_backing_inode(subdir));
+diff --git a/fs/ceph/crypto.c b/fs/ceph/crypto.c
+index 718c194ba5d8ce22c6a5d1dd687ec3761263e7e1..64d2407592772ed61fb95b62401db194112f48a8 100644
+--- a/fs/ceph/crypto.c
++++ b/fs/ceph/crypto.c
+@@ -272,7 +272,7 @@ int ceph_encode_encrypted_dname(struct inode *parent, char *buf, int elen)
+ 	/* To understand the 240 limit, see CEPH_NOHASH_NAME_MAX comments */
+ 	WARN_ON(elen > 240);
+ 	if (dir != parent) // leading _ is already there; append _<inum>
+-		elen += 1 + sprintf(p + elen, "_%" PRIino "u", dir->i_ino);
++		elen += 1 + sprintf(p + elen, "_%llu", dir->i_ino);
  
--		_debug("mkdir -> %pd{ino=%" PRIino "u}",
-+		_debug("mkdir -> %pd{ino=%llu}",
- 		       subdir, d_backing_inode(subdir)->i_ino);
- 		if (_is_new)
- 			*_is_new = true;
-@@ -158,7 +158,7 @@ struct dentry *cachefiles_get_directory(struct cachefiles_cache *cache,
- 	end_creating_keep(subdir);
+ out:
+ 	kfree(cryptbuf);
+@@ -377,7 +377,7 @@ int ceph_fname_to_usr(const struct ceph_fname *fname, struct fscrypt_str *tname,
+ 	if (!ret && (dir != fname->dir)) {
+ 		char tmp_buf[BASE64_CHARS(NAME_MAX)];
  
- 	if (!__cachefiles_mark_inode_in_use(NULL, d_inode(subdir))) {
--		pr_notice("cachefiles: Inode already in use: %pd (B=%" PRIino "x)\n",
-+		pr_notice("cachefiles: Inode already in use: %pd (B=%llx)\n",
- 			  subdir, d_inode(subdir)->i_ino);
- 		goto mark_error;
- 	}
-@@ -183,7 +183,7 @@ struct dentry *cachefiles_get_directory(struct cachefiles_cache *cache,
- 	    !d_backing_inode(subdir)->i_op->unlink)
- 		goto check_error;
- 
--	_leave(" = [%" PRIino "u]", d_backing_inode(subdir)->i_ino);
-+	_leave(" = [%llu]", d_backing_inode(subdir)->i_ino);
- 	return subdir;
- 
- check_error:
-@@ -529,7 +529,7 @@ static bool cachefiles_create_file(struct cachefiles_object *object)
- 
- 	set_bit(FSCACHE_COOKIE_NEEDS_UPDATE, &object->cookie->flags);
- 	set_bit(CACHEFILES_OBJECT_USING_TMPFILE, &object->flags);
--	_debug("create -> %pD{ino=%" PRIino "u}", file, file_inode(file)->i_ino);
-+	_debug("create -> %pD{ino=%llu}", file, file_inode(file)->i_ino);
- 	object->file = file;
- 	return true;
- }
-@@ -549,7 +549,7 @@ static bool cachefiles_open_file(struct cachefiles_object *object,
- 	_enter("%pd", dentry);
- 
- 	if (!cachefiles_mark_inode_in_use(object, d_inode(dentry))) {
--		pr_notice("cachefiles: Inode already in use: %pd (B=%" PRIino "x)\n",
-+		pr_notice("cachefiles: Inode already in use: %pd (B=%llx)\n",
- 			  dentry, d_inode(dentry)->i_ino);
- 		return false;
- 	}
-@@ -657,7 +657,7 @@ bool cachefiles_look_up_object(struct cachefiles_object *object)
- 	if (!ret)
- 		return false;
- 
--	_leave(" = t [%" PRIino "u]", file_inode(object->file)->i_ino);
-+	_leave(" = t [%llu]", file_inode(object->file)->i_ino);
- 	return true;
- 
- new_file:
-diff --git a/fs/cachefiles/xattr.c b/fs/cachefiles/xattr.c
-index 1cfeadc4f8f0b95ce861a2faf5b7b41b8156cf47..f8ae78b3f7b6d368526a86b454bf0febd1ccc509 100644
---- a/fs/cachefiles/xattr.c
-+++ b/fs/cachefiles/xattr.c
-@@ -179,7 +179,7 @@ int cachefiles_remove_object_xattr(struct cachefiles_cache *cache,
- 			ret = 0;
- 		else if (ret != -ENOMEM)
- 			cachefiles_io_error(cache,
--					    "Can't remove xattr from %" PRIino "u"
-+					    "Can't remove xattr from %llu"
- 					    " (error %d)",
- 					    d_backing_inode(dentry)->i_ino, -ret);
- 	}
+-		name_len = snprintf(tmp_buf, sizeof(tmp_buf), "_%.*s_%" PRIino "u",
++		name_len = snprintf(tmp_buf, sizeof(tmp_buf), "_%.*s_%llu",
+ 				    oname->len, oname->name, dir->i_ino);
+ 		memcpy(oname->name, tmp_buf, name_len);
+ 		oname->len = name_len;
 
 -- 
 2.53.0
