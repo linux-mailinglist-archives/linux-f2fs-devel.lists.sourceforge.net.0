@@ -2,41 +2,41 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id mOirMqTzpWkeIQAAu9opvQ
+	id sIgQArPzpWkxIQAAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 02 Mar 2026 21:31:32 +0100
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 02 Mar 2026 21:31:47 +0100
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 65F8E1DF92D
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 02 Mar 2026 21:31:32 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4F4D61DF942
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 02 Mar 2026 21:31:46 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
 	List-Unsubscribe:List-Id:Subject:To:In-Reply-To:References:Message-Id:
 	MIME-Version:Date:Sender:Content-ID:Content-Description:Resent-Date:
 	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=x00Y0HE05yRb1BogipbSVrb5UE4cnIe1JYlOrMkRXco=; b=Aw9yfLJStRS7LnAeBfBYFEUdJu
-	6gvsP6Cf4TEQNVGmNdk2mbGTMZ1maG2Ku5UmA+uDQsy67Iuxb37GVClBLTDMTb6514fZaN7M+vr6X
-	Ts0cdUbFosDVy1EU22GZ/0J1gqqaRXySlJIQMwhS5D4zgP0WLWunpilSLmV9Ihye3HnA=;
+	bh=fR8J0Qj718KU5zKjQ8Ned1CuSxk+rGDHrTn+021zxIk=; b=guj7ZlXXarQqrNcU2CwGQVgk9H
+	h1lhwq4tiJjPakzBJhejFw4bMcPc9M0wlU/V4d/4ZrpAfyq7xsNcsgMPo09OwCONYFoOM8wok59pG
+	ZfmT4ACCrd9ZDnlnum3edRNRt/W3dnI3UcV/v/OK4FPdXaPxAmfJ+o9tB1GpelvLk9qk=;
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vx9vN-0002S3-VA;
-	Mon, 02 Mar 2026 20:31:29 +0000
+	id 1vx9vb-0002UD-7C;
+	Mon, 02 Mar 2026 20:31:43 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jlayton@kernel.org>) id 1vx9vL-0002Rb-Da;
- Mon, 02 Mar 2026 20:31:27 +0000
+ (envelope-from <jlayton@kernel.org>) id 1vx9vZ-0002Ti-6w;
+ Mon, 02 Mar 2026 20:31:41 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Cc:To:In-Reply-To:References:Message-Id:
  Content-Transfer-Encoding:Content-Type:MIME-Version:Subject:Date:From:Sender:
  Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
  :Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=qldfkeLrU7gnCZuk1mHmYsV+gtcZgaz7QUT1rOg0Lz0=; b=O99yftzziTMCwJcXHot2dFFtbI
- FyYo9gSP8g+vRPVpeigrNJlvLc625xvGszArtgJ0Y2GCFjBBydyfp92WHw1QAOx7JPseBDQMQsa7w
- l+Gp6dag6wkPNx75S2fjLcHpmjSfFcfyK3Hlq31bK64TfD3uzkMU3+DYgUfQLA1yrJ/s=;
+ bh=NW1F0zlk7ugJlQbWALTPX2PoRJ243c3oY77Ce5KOOzo=; b=EDAZNVpLKZqubeTWgzrfZQ8JqN
+ 9N7qcbcvaLMqhfTeHp45hxbMj9GBHXww/LlD//R5QhebBA/szR/uIx3Jar8RiCfujPnwtGf4bb99h
+ 3mwlqU2wfMXsHdPjHKrizYWlDSIGRBUOBZAcFLcNMbSuoTV37GKzGmaIBQuMQ087tNmQ=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Cc:To:In-Reply-To:References:Message-Id:Content-Transfer-Encoding:
@@ -44,31 +44,31 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=qldfkeLrU7gnCZuk1mHmYsV+gtcZgaz7QUT1rOg0Lz0=; b=kmZ0ga2OPMHhnOZa/yPgMgfBdG
- Ak3GKZQNefPGKZCnOH6Aglq9fBcySjxdTghPEHhVEYlnCFDIGt+iuQDcaupDB7YfyQmfvZ3uI1z0g
- /M6mkifmuoPyDZLabeUmcERj8Cqo/FnRRwp7vemHxzkxfIxEIVXZSVZ2e9RShuwbdOFk=;
-Received: from tor.source.kernel.org ([172.105.4.254])
+ bh=NW1F0zlk7ugJlQbWALTPX2PoRJ243c3oY77Ce5KOOzo=; b=aJwozoloQ3EAMoI892TkQu4Wac
+ GToOMe5xV7h+G3srGviG+6nsO7Uw3+zQekHnk8JQLsrUJb15BAwVSm3jNHYPPUbSqFB8s6AX24hAd
+ 05K01a2TfGTKljxUPXcPtrZOuczzZg0KjnL47p/PluyVqZ0e6yv1qu1iIaZGcrejO76s=;
+Received: from sea.source.kernel.org ([172.234.252.31])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vx9vJ-00056a-Ul; Mon, 02 Mar 2026 20:31:27 +0000
+ id 1vx9vX-00058C-MH; Mon, 02 Mar 2026 20:31:41 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 32B8260134;
+ by sea.source.kernel.org (Postfix) with ESMTP id 52D5E4165E;
+ Mon,  2 Mar 2026 20:31:29 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 20A54C2BCB3;
  Mon,  2 Mar 2026 20:31:15 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id C0E42C2BCB6;
- Mon,  2 Mar 2026 20:31:00 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1772483474;
- bh=PQs9e/NOjDYQIdekonxqO2Eg+K5kq8v2IBNAbt6jik8=;
+ s=k20201202; t=1772483489;
+ bh=EUtvhtP85AhwBvScrYqnCppGsNhvVgwIar2mU46rYXU=;
  h=From:Date:Subject:References:In-Reply-To:To:Cc:From;
- b=iLDEKABfnyEwokacyJc+5tE7MW1eGsXyn1cd8frfJYf03nto7ny+7UcEjBahu9oFR
- w8fNdbnsnvjW9ZKuZO0qPuh/mYfRHsFe6bbm8gndqSI+A2aXRJOnY2wmecb9CiMt/9
- tLwDroyIHJfyFvkxWEcQ9dvfXLeTqYgTEGWwzsS34H0ZAoK+36PRzQS719v2XPDByu
- H+zq6ZrpLXRWhv3VDpEqXHw9icIvmEg1krs90GIoMjV3wzrsnoIjNkL5Oa8qV/8WtZ
- egOWkMJ/rdh2HRuLEAAOqdi0o0N4h4aJAW4/V7v0glZ1E3E8ht1Zm7+2xyCczHE7ej
- FGow+Uq3khl1g==
-Date: Mon, 02 Mar 2026 15:24:10 -0500
+ b=Mn1jDEeIHTNuH8npwJ6PAZMEY5mnygPSTBG2na8sq7yRuo3NkZggb4wUeRpbvnRpB
+ OkZY4VEEf4TdERI2nnBdDbCfdyXMwGs2FomhvBC6xygk2qGLXjXjj5k4URDOEViHrJ
+ 5vWB73Clu4powjSrewHesTWAuzpk7k1tqRCTWZcTlwkfdHf6UffBReM2ugKG+iG1wc
+ 0AUvUfpKIzMO7jxzftrwjQzFtEdGc7hJLgflIbyg49ZpR47fcypQD8i0YatnVbnSkC
+ GzWghdAE0Cg65NiYq1VOtsK01J9C7d5sAnZkafhZS8K749Z/cW0PshXIffzCpc6Rz6
+ cUxop/qZ+TYwg==
+Date: Mon, 02 Mar 2026 15:24:11 -0500
 MIME-Version: 1.0
-Message-Id: <20260302-iino-u64-v2-26-e5388800dae0@kernel.org>
+Message-Id: <20260302-iino-u64-v2-27-e5388800dae0@kernel.org>
 References: <20260302-iino-u64-v2-0-e5388800dae0@kernel.org>
 In-Reply-To: <20260302-iino-u64-v2-0-e5388800dae0@kernel.org>
 To: Alexander Viro <viro@zeniv.linux.org.uk>, 
@@ -161,35 +161,33 @@ To: Alexander Viro <viro@zeniv.linux.org.uk>,
  Jesper Dangaard Brouer <hawk@kernel.org>, 
  John Fastabend <john.fastabend@gmail.com>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2338; i=jlayton@kernel.org;
- h=from:subject:message-id; bh=PQs9e/NOjDYQIdekonxqO2Eg+K5kq8v2IBNAbt6jik8=;
- b=owEBbQKS/ZANAwAKAQAOaEEZVoIVAcsmYgBppfH1FkE5dE7Y0NIe63WcPbRR9LyBnUB7GTTws
- DTP377b2LuJAjMEAAEKAB0WIQRLwNeyRHGyoYTq9dMADmhBGVaCFQUCaaXx9QAKCRAADmhBGVaC
- FXI6D/9Bg5yw6mYy/IgYsOpeDgG3m4q68wHA5zFH0nMd6cmp+0K1eZLmFTrlctr7OnYwEIwX6RL
- RBJ8cvCZu3r2LsUy5TqsFCNH4FLZ6DOWIYyC+39C4fAzrVNg8t3P/u9MoSoOMlDPSojaa5ETnXP
- mYaPta1+Bm45AZezRf9ZaNedU9dkRbzDCH9/e0bem+J38IleYk1dmJBbf38jkRt22nvPysOBkq4
- /oO7UaW0ln3aGb/OvFHTgcHv2Hd0P2irky9qeLUlr6IMATSCktEOHX0xWddZZo2Oya2effvUFyZ
- b66aM4WclxeSeJQAH03ZP1EcYs22K100luc830HOC87JarOUbsZyDCE9JhxB9hZnNDlPAkCv3QV
- GDVFO+/dBCoSCLW/X2OCPzTIWWn2nnjdg12SbOktg/zn/9xsrpHDlfNGGaQv8eDFBpBuWdsFTVD
- WRvmsQIgiEnJs0gWagNVcG+/qNGaeGVwNVRmz2bKd8UBXaKfK2MknHjGobTfygvHaivSzucjJvH
- LgRe65ISNG+uUDRHs4boc5s7UzorIfLLqdRc3/aTSfEbIBCEsbpsBwELPyO0TfqZR1bDxV73Ib+
- r33cFhr08IaoFvlx0/xR2I+U3kBsUz2zLZzv+p6/aCAuv3qL+ATLBSZ2LCStIkV69+YiY+fUbCG
- IJKDD7vRoDijdWQ==
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1592; i=jlayton@kernel.org;
+ h=from:subject:message-id; bh=EUtvhtP85AhwBvScrYqnCppGsNhvVgwIar2mU46rYXU=;
+ b=owEBbQKS/ZANAwAKAQAOaEEZVoIVAcsmYgBppfH2Wb+txQs3hUYjnTffsfzpJlLE1nFakCE6h
+ FGp+U/n2/uJAjMEAAEKAB0WIQRLwNeyRHGyoYTq9dMADmhBGVaCFQUCaaXx9gAKCRAADmhBGVaC
+ FRQvEADQeW8jCH/RGruXnEY9hdq+SS533KeGGxnNJUZbN/kso8RPKVZtPoOVxAHIgXdD2iOlpvP
+ gGyroUgmaHH/E+sI42ij0kNnaUn66OM1IViP6Qpl3Uw0Wjgx1VqiLu+OL6qXw4aKHREVYcNoGkg
+ P5DdBdkJhU1SmHATBT6CccY4S4kG8s/BVT9Wnzk6e75j9vIhlkuJxuJe+mzKSV4iGprhIgDhA0e
+ ZvVCc5wO5GN2EZKMqcwzhrcoOJiNqS/Nt7uz7/C6WREVEwuQjsjWsiCU+r7nLc57++5xAKCxBUL
+ nZSHQVFXIXNFbrU7Pk7kD62JOjj/CBU/q4JrFEr0hYP+vLHTSqNll0HC6AEQdp5lGrtMLUTSUZs
+ fyWsPziK0k/sb45uMjPIiG6RMzHEcuvgEnwNYpr9V+/AS0HXYaOUB1yMPZCqzrpzt625+1wH82m
+ XeGgtH/X/jtfbUUtJwO6AwvrEsv6mMq4XWJlNteJTQAWU+xXKdg03LAOhonGMbYmDnTjWQSbGFE
+ HMFiTkUY5wT7QqfZvbxO9nNKh+BF1X3rypPAN8CunLYNfW9CtO/fKzCbrLEPPh3+yXI0QMILGoY
+ 71lGdDmo/RqE9fZxU0hqghAJe2Um8QPCiu/jqbIXeZuAUIpyCl9hDpFREd9+3ljAYpqeTxU6jIP
+ 0qvVrWu34KEe/Ow==
 X-Developer-Key: i=jlayton@kernel.org; a=openpgp;
  fpr=4BC0D7B24471B2A184EAF5D3000E684119568215
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: Convert ecryptfs i_ino format strings to use the PRIino
- format
+ Content preview:  Convert efs i_ino format strings to use the PRIino format
  macro in preparation for the widening of i_ino via kino_t. Signed-off-by:
- Jeff Layton <jlayton@kernel.org> --- fs/ecryptfs/crypto.c | 6 +++---
- fs/ecryptfs/file.c
- | 2 +- 2 files changed, 4 insertions(+), 4 deletions(-) 
+ Jeff Layton <jlayton@kernel.org> --- fs/efs/inode.c | 6 +++--- 1 file changed, 
+ 3 insertions(+), 3 deletions(-) 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -201,8 +199,8 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1vx9vJ-00056a-Ul
-Subject: [f2fs-dev] [PATCH v2 026/110] ecryptfs: use PRIino format for i_ino
+X-Headers-End: 1vx9vX-00058C-MH
+Subject: [f2fs-dev] [PATCH v2 027/110] efs: use PRIino format for i_ino
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -239,7 +237,7 @@ Cc: nvdimm@lists.linux.dev, jfs-discussion@lists.sourceforge.net,
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
-X-Rspamd-Queue-Id: 65F8E1DF92D
+X-Rspamd-Queue-Id: 4F4D61DF942
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [-7.11 / 15.00];
 	WHITELIST_DMARC(-7.00)[sourceforge.net:D:+];
@@ -261,8 +259,8 @@ X-Spamd-Result: default: False [-7.11 / 15.00];
 	ARC_NA(0.00)[];
 	MIME_TRACE(0.00)[0:+];
 	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,kernel.org:s=k20201202];
-	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,kernel.org:-];
 	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
+	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,kernel.org:-];
 	RCVD_COUNT_FIVE(0.00)[5];
 	RCPT_COUNT_GT_50(0.00)[172];
 	FROM_NEQ_ENVFROM(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
@@ -277,59 +275,45 @@ X-Spamd-Result: default: False [-7.11 / 15.00];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.sourceforge.net:dkim,lists.sourceforge.net:rdns,lists.sourceforge.net:helo]
 X-Rspamd-Action: no action
 
-Convert ecryptfs i_ino format strings to use the PRIino format
+Convert efs i_ino format strings to use the PRIino format
 macro in preparation for the widening of i_ino via kino_t.
 
 Signed-off-by: Jeff Layton <jlayton@kernel.org>
 ---
- fs/ecryptfs/crypto.c | 6 +++---
- fs/ecryptfs/file.c   | 2 +-
- 2 files changed, 4 insertions(+), 4 deletions(-)
+ fs/efs/inode.c | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/fs/ecryptfs/crypto.c b/fs/ecryptfs/crypto.c
-index 3b59346d68c594fcd7e27bae87849d3e19eff56e..015b2e4ee11cba5b734d1f8fcd851accfa8f0481 100644
---- a/fs/ecryptfs/crypto.c
-+++ b/fs/ecryptfs/crypto.c
-@@ -1313,7 +1313,7 @@ int ecryptfs_read_metadata(struct dentry *ecryptfs_dentry)
- 		rc = ecryptfs_read_xattr_region(page_virt, ecryptfs_inode);
- 		if (rc) {
- 			printk(KERN_DEBUG "Valid eCryptfs headers not found in "
--			       "file header region or xattr region, inode %lu\n",
-+			       "file header region or xattr region, inode %" PRIino "u\n",
- 				ecryptfs_inode->i_ino);
- 			rc = -EINVAL;
- 			goto out;
-@@ -1323,7 +1323,7 @@ int ecryptfs_read_metadata(struct dentry *ecryptfs_dentry)
- 						ECRYPTFS_DONT_VALIDATE_HEADER_SIZE);
- 		if (rc) {
- 			printk(KERN_DEBUG "Valid eCryptfs headers not found in "
--			       "file xattr region either, inode %lu\n",
-+			       "file xattr region either, inode %" PRIino "u\n",
- 				ecryptfs_inode->i_ino);
- 			rc = -EINVAL;
- 		}
-@@ -1335,7 +1335,7 @@ int ecryptfs_read_metadata(struct dentry *ecryptfs_dentry)
- 			       "crypto metadata only in the extended attribute "
- 			       "region, but eCryptfs was mounted without "
- 			       "xattr support enabled. eCryptfs will not treat "
--			       "this like an encrypted file, inode %lu\n",
-+			       "this like an encrypted file, inode %" PRIino "u\n",
- 				ecryptfs_inode->i_ino);
- 			rc = -EINVAL;
- 		}
-diff --git a/fs/ecryptfs/file.c b/fs/ecryptfs/file.c
-index 7929411837cf5b2e98e1d4288791d2e07c44a4eb..9eff00cfbc46c5fbd599252dcc4434fceafb7223 100644
---- a/fs/ecryptfs/file.c
-+++ b/fs/ecryptfs/file.c
-@@ -253,7 +253,7 @@ static int ecryptfs_open(struct inode *inode, struct file *file)
- 	if (rc)
- 		goto out_put;
- 	ecryptfs_printk(KERN_DEBUG, "inode w/ addr = [0x%p], i_ino = "
--			"[0x%.16lx] size: [0x%.16llx]\n", inode, inode->i_ino,
-+			"[0x%.16" PRIino "x] size: [0x%.16llx]\n", inode, inode->i_ino,
- 			(unsigned long long)i_size_read(inode));
- 	goto out;
- out_put:
+diff --git a/fs/efs/inode.c b/fs/efs/inode.c
+index 28407578f83ad5db1b8a7b082fa3e990b6b442ec..a21a03f7e5790aed95738b1a0c0f1edcc84848e8 100644
+--- a/fs/efs/inode.c
++++ b/fs/efs/inode.c
+@@ -132,7 +132,7 @@ struct inode *efs_iget(struct super_block *super, unsigned long ino)
+ 	for(i = 0; i < EFS_DIRECTEXTENTS; i++) {
+ 		extent_copy(&(efs_inode->di_u.di_extents[i]), &(in->extents[i]));
+ 		if (i < in->numextents && in->extents[i].cooked.ex_magic != 0) {
+-			pr_warn("extent %d has bad magic number in inode %lu\n",
++			pr_warn("extent %d has bad magic number in inode %" PRIino "u\n",
+ 				i, inode->i_ino);
+ 			brelse(bh);
+ 			goto read_inode_error;
+@@ -140,7 +140,7 @@ struct inode *efs_iget(struct super_block *super, unsigned long ino)
+ 	}
+ 
+ 	brelse(bh);
+-	pr_debug("efs_iget(): inode %lu, extents %d, mode %o\n",
++	pr_debug("efs_iget(): inode %" PRIino "u, extents %d, mode %o\n",
+ 		 inode->i_ino, in->numextents, inode->i_mode);
+ 	switch (inode->i_mode & S_IFMT) {
+ 		case S_IFDIR: 
+@@ -171,7 +171,7 @@ struct inode *efs_iget(struct super_block *super, unsigned long ino)
+ 	return inode;
+         
+ read_inode_error:
+-	pr_warn("failed to read inode %lu\n", inode->i_ino);
++	pr_warn("failed to read inode %" PRIino "u\n", inode->i_ino);
+ 	iget_failed(inode);
+ 	return ERR_PTR(-EIO);
+ }
 
 -- 
 2.53.0
