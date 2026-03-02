@@ -2,41 +2,41 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id IJHCBOf3pWkEIgAAu9opvQ
+	id 6HDRKu73pWkEIgAAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 02 Mar 2026 21:49:43 +0100
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 02 Mar 2026 21:49:50 +0100
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 447B31E0C57
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 02 Mar 2026 21:49:42 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0CEF81E0C80
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 02 Mar 2026 21:49:50 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
 	List-Unsubscribe:List-Id:Subject:To:In-Reply-To:References:Message-Id:
 	MIME-Version:Date:Sender:Content-ID:Content-Description:Resent-Date:
 	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=OJXyxMVVbVI83ZGrVG+zhk5H/j5o9KG2W2bfrVnt1+k=; b=MDPPx30j1iXDKnS6vFne7H/2ZK
-	e3XZCRtqkycDeat8Aqacpfyb3ZQ6DmuGVo+vq5WSkaNKtiGOxwIdiBjEICnt+E5pSv+HMOFcK/E0j
-	KFB3xqwP85JGgfsc/O/KvXvBeMjb0EX2CC+YcVFgIspL7cssZjOeHIbL1mdfWP965S6U=;
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=yMdHmTdFdMS4EAndPkvL67m5gu/CMatF2n05Q4cIvfk=; b=M5xke+MzwfKtVGxZMOcUNbBxDH
+	ZqUXCmafxqvM36nIwu4MTTmnE2ez9rBEG6dc02y3n0PLdngebFA+5KGw3ZhyPK53tap7FYGB5yCEn
+	xWf4So3N1YjKtv0GYXRh868mmBGGLm3FioOKburW5r8KiTtAfSGdVlL0csSPZtqdnq6o=;
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vxACw-0003sI-6S;
-	Mon, 02 Mar 2026 20:49:38 +0000
+	id 1vxAD4-00042v-Qv;
+	Mon, 02 Mar 2026 20:49:46 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jlayton@kernel.org>) id 1vxACu-0003rb-SW;
- Mon, 02 Mar 2026 20:49:36 +0000
+ (envelope-from <jlayton@kernel.org>) id 1vxAD1-00042X-Sd;
+ Mon, 02 Mar 2026 20:49:43 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Cc:To:In-Reply-To:References:Message-Id:
  Content-Transfer-Encoding:Content-Type:MIME-Version:Subject:Date:From:Sender:
  Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
  :Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=DghIzVqbqugfjWxzK12XQfGtqk9IhJ8wjFTgevCYcHQ=; b=KsA03WTFqN7iffd2WLAtJTaiLW
- 7Gr4k0Z/1pZWs/5acCCgwtzTB4HYnegP269WgTAjEKfGcMGQUba4zGPFZYAgd2FR1XaZiCqKg3fee
- +nSl98V9s+j7KeUsR7ZeuK+l3OzJCvHbM+CjPnmIVlCIM5F3MJOOf1IhXZPIm4FUFwls=;
+ bh=h7qKht5TEG4XGxg/jBK9F/TEug/xp4e6yj4ovnk7QZQ=; b=H6yX0q3azqK8gfNs8LE3d2Z525
+ 0t4yimzEfBhB9AUT5fPy2caKvE5k9Q4KDImwp/DuPARUPXoi9YSnL0OULMmaSoyGIJ6cto0MtIDpv
+ SB36BBhhGecZfap+dtbAGnguU38EMRsR6MSwSLIUgxbR95SXQgOsYwaGt3QuF+E/Pji4=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Cc:To:In-Reply-To:References:Message-Id:Content-Transfer-Encoding:
@@ -44,31 +44,31 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=DghIzVqbqugfjWxzK12XQfGtqk9IhJ8wjFTgevCYcHQ=; b=fzn8dhf34SXE2864J6qexdE+Aj
- FTjCNzBLGQMGoB40EsqsQBAwudCmVpwlgWfveXpb+k+FWnbz3CJMZNXv97qnViVMzeqFql0FTsqpm
- dNJCuM6Wq6Rixwbc0H3/nlVmIJNGc0uBkO9Z8jkurax+cww5ZC5Y+zfue0WMUZqVlIMI=;
+ bh=h7qKht5TEG4XGxg/jBK9F/TEug/xp4e6yj4ovnk7QZQ=; b=DYANpYI1nx8zvHc81TzRpuGYxs
+ VF7y1ikGLEvgJj7c0zeFVnR92ggo/kwU6pjncdsjJxZ7o8z3LFwp/5j70RBBv72NudRFFGVJTJ3Hm
+ 0RZurr7XNWmjMqcwgASyUTC0/yuKaVlQXejdwl19kY+SJU/mFXFrOY8Y3h4tDAg09Es8=;
 Received: from tor.source.kernel.org ([172.105.4.254])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vxACj-00076p-0D; Mon, 02 Mar 2026 20:49:26 +0000
+ id 1vxACx-00078X-7m; Mon, 02 Mar 2026 20:49:43 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 28B1261338;
- Mon,  2 Mar 2026 20:49:14 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 76B31C2BC9E;
- Mon,  2 Mar 2026 20:48:58 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id 772CB6133C;
+ Mon,  2 Mar 2026 20:49:28 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 123B5C2BCB4;
+ Mon,  2 Mar 2026 20:49:13 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1772484553;
- bh=6cZwsfpbObzNeQK7uzLXLbgL+hWNwgK2OM7xy5ID8J4=;
+ s=k20201202; t=1772484568;
+ bh=vzIQRv67NMWSNgS1VbjzK8gHJGBIX5DecOuq4g2+t/Y=;
  h=From:Date:Subject:References:In-Reply-To:To:Cc:From;
- b=IorKuZlvL6dslhQZhuCOB77oSou3b9HVCdnk+hCgyzh8s5PaZDXHXQRR8e/ueaj3v
- Of2NatafLlcq93I3N3tj+b+ji3Cw90UnmElVxNb7flMZt0afB/JdPeJYxL+ZfTA5Ed
- r0Z9ma/eWygxi1n/JRHTwMwmayCZetTxj3iG3May/82azlyawA58n4CaW9UKfbezRV
- txPWvxHfqldCnxmeykB5RfT0sF6KyZj6k8QVjuAXYISpgl9wdenOoGH8O6mP0feaF3
- y7dED4qd+cENaLutYTklGDqxvIvPzTVhN8sNmXnBBosIiQA1FoeB9I757q97DjpyFL
- yYxh3gef8x7+Q==
-Date: Mon, 02 Mar 2026 15:25:25 -0500
+ b=GKA9YAdDB192UWw6Ik1+IjOsjLdN6nt+3OcqupadQsh6+xxwtrbePQBg8GZbEyoN3
+ vO6jFKIL4G9a8Vq7JIVMLKNMvWgl2e686DUqFpww9RsYvJusQXIjA5DRSVALHhV0XD
+ sKJpFOz+3Prz7Gf8D8l7la5HSWWMcRbxrapQ0hXgeKUu0KUU5FicrtQM/r9zUst/+8
+ xRFRfobXD7ZwAShbn85mB4uV3Xlw5Ci5j0P45dY87aI+Vx9PwEHfpIyh0HKhXsT7zB
+ rJcRDsj++olsdd4Zuo3XxNg4YQ0KM/bM0nmSS+BEd63yAXecSzTWyg9S77GEGM1hj8
+ X/xOzuffFg7Uw==
+Date: Mon, 02 Mar 2026 15:25:26 -0500
 MIME-Version: 1.0
-Message-Id: <20260302-iino-u64-v2-101-e5388800dae0@kernel.org>
+Message-Id: <20260302-iino-u64-v2-102-e5388800dae0@kernel.org>
 References: <20260302-iino-u64-v2-0-e5388800dae0@kernel.org>
 In-Reply-To: <20260302-iino-u64-v2-0-e5388800dae0@kernel.org>
 To: Alexander Viro <viro@zeniv.linux.org.uk>, 
@@ -161,36 +161,34 @@ To: Alexander Viro <viro@zeniv.linux.org.uk>,
  Jesper Dangaard Brouer <hawk@kernel.org>, 
  John Fastabend <john.fastabend@gmail.com>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=3214; i=jlayton@kernel.org;
- h=from:subject:message-id; bh=6cZwsfpbObzNeQK7uzLXLbgL+hWNwgK2OM7xy5ID8J4=;
- b=kA0DAAoBAA5oQRlWghUByyZiAGml8gujQ93Hzj5fXRpB1CYY3q3nHyAjWcLgnlNTz75TUF9PE
- YkCMwQAAQoAHRYhBEvA17JEcbKhhOr10wAOaEEZVoIVBQJppfILAAoJEAAOaEEZVoIVG/gP/1mz
- Z/aWsv6cLzW611kkwDhqAudZlM+C3BBx64Q0uc7G30XNc2yp0PWvuAMk61d9m6VCuoomh90jTr0
- NK6FFf3SL8jrC60bf3SoyBPUViDMMoKszBoRfVX2ASjXOLZJZzjeC5m0/glF5Wizs5+1UolOGYw
- wWYdsC+EeM6Qi6hHsqIONu2XYW2hepv6cwmVCFOPJAVcawQftNR+bvtC6wDTytEvgHKXjUTqhAS
- dpKjQ7vXFs+wZRVKSlavUg+b4iTYJhnZwifA44iJCd7edSq0hT6yK0/u91lhJaLGeadKtdIHHPj
- fHWpOhEWlg9lA4rhKrDRBHd1PZyjmhCxhcEfGIDdLnH7iesATUg9e2/6Eh9yJLEv1F8L+2RhdUQ
- ustpIjeJuUKJxHNOLj5kPcqOYapqJb+IsiP5qBGKMgNxAHDebqn357vmChru0JtK0EAe/xn0jai
- BCD5MX12d8DF4il2j5RTcpQX5sqs38yjrTATcTpDS98mNtHwOt9kMg0Whs5spp3DoqdpOb6kEqY
- Ee50OlpWXEY0cz+TyNIGDLRTvcizbTME7y0X9K9VolAB1L3Zttt8gL73zMs0WJi+TlQk35WSX8w
- 0g4Q7ostGDkCw5+XEqNWcIAanuZS6o5ssN4Bnpn/NIw6AWt87L3RuH4HvJoG7EDPCPQdKfUSflG
- 5+vLL
+X-Developer-Signature: v=1; a=openpgp-sha256; l=830; i=jlayton@kernel.org;
+ h=from:subject:message-id; bh=vzIQRv67NMWSNgS1VbjzK8gHJGBIX5DecOuq4g2+t/Y=;
+ b=owEBbQKS/ZANAwAKAQAOaEEZVoIVAcsmYgBppfILORiaxrEB5DiZmtKXsmsAIwV16e9x2gsA6
+ iuyH09ayOuJAjMEAAEKAB0WIQRLwNeyRHGyoYTq9dMADmhBGVaCFQUCaaXyCwAKCRAADmhBGVaC
+ FUGMEACyRmyxK+AXHZh2l9nhLoEUj6daFKPMxeFZc3xikQ9UYU4tO+iAd3XEUu/T6UesQVADyRu
+ Dg54ayCFZYhCuAN2ftoGf0q6tue0XDsH16Kbw16nWgFgwjG0SFCSasCSeNt9IdGGUT23uaoTC6g
+ PdPhKlrkgngnRtyeQhY2HaPR39lqLV/WpLREBVsi9tv7qBQT8uK4z+CehDgoVEJxpHQvgT6mHCM
+ XuSmjrkCS3sUkxZTZJV/p/a1Pjw7A34YzfqgkJK8Dx5YAyT+umwCkzRX5hXXd842n7WnLMk1n3s
+ 3SJkqTzDqh1w7wQo/pnUtztBXBRMosGGr64Kay2b1TeH9F2gw7jI1YNadmmFxjM5e9h469OzeBV
+ N+Ze5M5OEzZ8KvTFcWAUJRlcDKDuGdAz7NHN6h2LBr8mmak6XiAn7UK59M8+dW0uo6Y81iF6eMt
+ KFQQ12fURLzdqMx97SxsCE2UuejB4qBRta/1Xzf4cqPTb4/CRc20amRzBCmAuW5D5yvHvywKOvI
+ Jz/KhUqg35TzOUn+kqMbWzJdkMUxKLZFCGYJnrO4+cTBN7Pu9CzR+6Gy0foX6fPDA61RTIaOuVE
+ uUF+/mI1ADdERH8VPGKomlZtk0+OpgHhsLYUe5iC0cLB5yFrDLJFkkQ3TKCteBbnTzXXCmqZk59
+ qJ10YlxsTbU003w==
 X-Developer-Key: i=jlayton@kernel.org; a=openpgp;
  fpr=4BC0D7B24471B2A184EAF5D3000E684119568215
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
  Content preview:  Now that i_ino is u64 and the PRIino format macro has been
  removed,
- replace all uses in fscrypt with the concrete format strings. Signed-off-by:
- Jeff Layton <jlayton@kernel.org> --- fs/crypto/crypto.c | 2 +-
- fs/crypto/hooks.c
- | 2 +- fs/crypto/keyring.c | 4 ++-- fs/crypto/keysetup.c | 2 +- 4 files
- changed, 5 insertions(+), 5 dele [...] 
+ replace all uses in fsverity with the concrete format strings. Signed-off-by:
+ Jeff Layton <jlayton@kernel.org> --- fs/verity/init.c | 2 +- 1 file changed,
+ 1 insertion(+), 1 deletion(-) 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -202,8 +200,8 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1vxACj-00076p-0D
-Subject: [f2fs-dev] [PATCH v2 101/110] fscrypt: replace PRIino with
+X-Headers-End: 1vxACx-00078X-7m
+Subject: [f2fs-dev] [PATCH v2 102/110] fsverity: replace PRIino with
  %llu/%llx format strings
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
@@ -241,7 +239,7 @@ Cc: nvdimm@lists.linux.dev, jfs-discussion@lists.sourceforge.net,
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
-X-Rspamd-Queue-Id: 447B31E0C57
+X-Rspamd-Queue-Id: 0CEF81E0C80
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [-7.11 / 15.00];
 	WHITELIST_DMARC(-7.00)[sourceforge.net:D:+];
@@ -279,77 +277,26 @@ X-Spamd-Result: default: False [-7.11 / 15.00];
 X-Rspamd-Action: no action
 
 Now that i_ino is u64 and the PRIino format macro has been removed,
-replace all uses in fscrypt with the concrete format strings.
+replace all uses in fsverity with the concrete format strings.
 
 Signed-off-by: Jeff Layton <jlayton@kernel.org>
 ---
- fs/crypto/crypto.c   | 2 +-
- fs/crypto/hooks.c    | 2 +-
- fs/crypto/keyring.c  | 4 ++--
- fs/crypto/keysetup.c | 2 +-
- 4 files changed, 5 insertions(+), 5 deletions(-)
+ fs/verity/init.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/fs/crypto/crypto.c b/fs/crypto/crypto.c
-index 4fc2990642fd3ee385a9919183cbb0f1c5ba6a58..570a2231c945a6c649cf8dc3b457f0b55657e0c3 100644
---- a/fs/crypto/crypto.c
-+++ b/fs/crypto/crypto.c
-@@ -365,7 +365,7 @@ void fscrypt_msg(const struct inode *inode, const char *level,
+diff --git a/fs/verity/init.c b/fs/verity/init.c
+index 5f6a7b4f0a34aedebfcaffc2be53e00b23976217..3aa55dec88fc919792a2cb4be476f8481ef78a9e 100644
+--- a/fs/verity/init.c
++++ b/fs/verity/init.c
+@@ -50,7 +50,7 @@ void fsverity_msg(const struct inode *inode, const char *level,
  	vaf.fmt = fmt;
  	vaf.va = &args;
- 	if (inode && inode->i_ino)
--		printk("%sfscrypt (%s, inode %" PRIino "u): %pV\n",
-+		printk("%sfscrypt (%s, inode %llu): %pV\n",
+ 	if (inode)
+-		printk("%sfs-verity (%s, inode %" PRIino "u): %pV\n",
++		printk("%sfs-verity (%s, inode %llu): %pV\n",
  		       level, inode->i_sb->s_id, inode->i_ino, &vaf);
- 	else if (inode)
- 		printk("%sfscrypt (%s): %pV\n", level, inode->i_sb->s_id, &vaf);
-diff --git a/fs/crypto/hooks.c b/fs/crypto/hooks.c
-index f41809f1f1ed0b1ed78b85a4a987ec9e6cbcfa9d..a7a8a3f581a0460537f5ff955bc8b5d30573a033 100644
---- a/fs/crypto/hooks.c
-+++ b/fs/crypto/hooks.c
-@@ -62,7 +62,7 @@ int fscrypt_file_open(struct inode *inode, struct file *filp)
- 	dentry_parent = dget_parent(dentry);
- 	if (!fscrypt_has_permitted_context(d_inode(dentry_parent), inode)) {
- 		fscrypt_warn(inode,
--			     "Inconsistent encryption context (parent directory: %" PRIino "u)",
-+			     "Inconsistent encryption context (parent directory: %llu)",
- 			     d_inode(dentry_parent)->i_ino);
- 		err = -EPERM;
- 	}
-diff --git a/fs/crypto/keyring.c b/fs/crypto/keyring.c
-index c0a2568a88cf6318877dec0f5379c5c8511c00f8..be8e6e8011f2131f2908da746a37d33fd5295122 100644
---- a/fs/crypto/keyring.c
-+++ b/fs/crypto/keyring.c
-@@ -970,7 +970,7 @@ static int check_for_busy_inodes(struct super_block *sb,
- 	struct list_head *pos;
- 	size_t busy_count = 0;
- 	char ino_str[50] = "";
--	kino_t ino;
-+	u64 ino;
- 
- 	spin_lock(&mk->mk_decrypted_inodes_lock);
- 
-@@ -994,7 +994,7 @@ static int check_for_busy_inodes(struct super_block *sb,
- 
- 	/* If the inode is currently being created, ino may still be 0. */
- 	if (ino)
--		snprintf(ino_str, sizeof(ino_str), ", including ino %" PRIino "u", ino);
-+		snprintf(ino_str, sizeof(ino_str), ", including ino %llu", ino);
- 
- 	fscrypt_warn(NULL,
- 		     "%s: %zu inode(s) still busy after removing key with %s %*phN%s",
-diff --git a/fs/crypto/keysetup.c b/fs/crypto/keysetup.c
-index b30630f2c6a4e341c72af0db6aa173f59f742fa1..df58ca4a5e3cb1df94e2f08e3f3b093c33368993 100644
---- a/fs/crypto/keysetup.c
-+++ b/fs/crypto/keysetup.c
-@@ -91,7 +91,7 @@ select_encryption_mode(const union fscrypt_policy *policy,
- 	if (S_ISDIR(inode->i_mode) || S_ISLNK(inode->i_mode))
- 		return &fscrypt_modes[fscrypt_policy_fnames_mode(policy)];
- 
--	WARN_ONCE(1, "fscrypt: filesystem tried to load encryption info for inode %" PRIino "u, which is not encryptable (file type %d)\n",
-+	WARN_ONCE(1, "fscrypt: filesystem tried to load encryption info for inode %llu, which is not encryptable (file type %d)\n",
- 		  inode->i_ino, (inode->i_mode & S_IFMT));
- 	return ERR_PTR(-EINVAL);
- }
+ 	else
+ 		printk("%sfs-verity: %pV\n", level, &vaf);
 
 -- 
 2.53.0
