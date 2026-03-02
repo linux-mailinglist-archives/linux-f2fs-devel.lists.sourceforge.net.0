@@ -2,41 +2,41 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id aHWOG7v3pWkEIgAAu9opvQ
+	id YP7BAsr3pWkEIgAAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 02 Mar 2026 21:48:59 +0100
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 02 Mar 2026 21:49:14 +0100
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id D3E9D1E0B66
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 02 Mar 2026 21:48:58 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6B7671E0BC5
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 02 Mar 2026 21:49:13 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
 	List-Unsubscribe:List-Id:Subject:To:In-Reply-To:References:Message-Id:
 	MIME-Version:Date:Sender:Content-ID:Content-Description:Resent-Date:
 	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=nciWwjor2YyqD9lxARYQSwRgu00zmMlDWqHvc1CkX0A=; b=hJQwW/ALm08M/GuOZOBCYOW1Ky
-	a5ntfHa36Gw2MR3IzTSNdjCBv5BG78zWPqhDrA+rW7zDt2J+Srqjk8K2fx9Y5hi2w1VVWpoaP9OWJ
-	dqw6rhKt2nAAdd03AcFN5dH+wcVyAoVTS7A5WO/9GCtphdesivzVPz9PNpE5MJpOnHFc=;
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=xbaE8tZrp7ZVvTV/kfgyOcZdcBvuM922CiNruFeImds=; b=HQg4MmruU1upLbMiyd/tI8ovpe
+	D2M4/tnILVjxhYBA7WkqvD5H61ekCuUk7TEtd12Y+K7/AE566L6qbTe2SvT75C5CMtlfiW08J6aie
+	EX0PZsu2AGBjeFsDEAI/orzq7zApbsTHKmmQzVBuxvnzJ7J/GwmeeoSboWuTH1QMPcvY=;
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vxACH-0007ll-I7;
-	Mon, 02 Mar 2026 20:48:57 +0000
+	id 1vxACU-0003zo-Sw;
+	Mon, 02 Mar 2026 20:49:10 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jlayton@kernel.org>) id 1vxACF-0007lD-7B;
- Mon, 02 Mar 2026 20:48:55 +0000
+ (envelope-from <jlayton@kernel.org>) id 1vxACT-0003zR-Dp;
+ Mon, 02 Mar 2026 20:49:09 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Cc:To:In-Reply-To:References:Message-Id:
  Content-Transfer-Encoding:Content-Type:MIME-Version:Subject:Date:From:Sender:
  Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
  :Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=0ZqTrKdC/jsCoGS4oRviLLNxXywHaNjXZ+hkzY35ljI=; b=aUdsTBC5qI5Dyb9C7K5xLu+pOU
- mZIf40uITfgmbIqPseUXwfNgrckJySaQduH3VsHJK/vOiOza3cyg5D/ktEWU0UMgKdoGMYuLvhpwm
- Fze93xI4AVNxwN7MjuZGDqBYqox/h3A+sJMNNGnQAmLZXCmN/Hj1LFM1KWFboGiNIxF4=;
+ bh=k8ttBZrVSDPEgvD4uacmt5C4eEvNcZtRM6YJVKaZUlY=; b=Ipor3eaeIDYo7sgbLUSvgKDTyM
+ N+lPnkFGgF4eADbCMPGtecFaqouyq36vS7IZl8Dizgtw2j/gvNGjyqGzcx7ewWijd4n8rYv0B80Iq
+ f7nuxEeD2QbEJdvd2dDDIfCI3WmFThDnj3XrwZ0NGcJw1GQoANu2Jsnp+wd/QVFnr4w4=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Cc:To:In-Reply-To:References:Message-Id:Content-Transfer-Encoding:
@@ -44,31 +44,31 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=0ZqTrKdC/jsCoGS4oRviLLNxXywHaNjXZ+hkzY35ljI=; b=hRVYQmUCRqG5ER/HItu8Bf0pVT
- Z9CS+689MIYJMpCh92wRIE5oH8WKZmAMzIa2TdPiNqpr//SxYdZWh64Oa89BeKY4D07MKvaqoluQl
- F5muhe5IoJNMDDb95MeudgXaXTfLEqEYInOnAaRp6E884qEu/Q4Wf1ydMm45/z4x0IjU=;
+ bh=k8ttBZrVSDPEgvD4uacmt5C4eEvNcZtRM6YJVKaZUlY=; b=BM9dYAVOFGeNwzaldmWEq5PIhc
+ T0QcSDbzNFlRcm6oDx9VJNnj53Cy5FWsNGUxm++FoAjQt0rLEslxn/tZy+clKI56ehQ38ntSQlGf9
+ HgZAxaZ/1mUfyDsFCTs68TEhqghV6xqMli2GhDGM0HdF9tOXZu8CPuiz7VAWk3OQMH5w=;
 Received: from sea.source.kernel.org ([172.234.252.31])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vxACE-00073O-FQ; Mon, 02 Mar 2026 20:48:55 +0000
+ id 1vxACS-000758-N9; Mon, 02 Mar 2026 20:49:09 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 15E774049E;
+ by sea.source.kernel.org (Postfix) with ESMTP id 5D44542B6B;
+ Mon,  2 Mar 2026 20:48:58 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2DC80C2BC87;
  Mon,  2 Mar 2026 20:48:44 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 40790C19425;
- Mon,  2 Mar 2026 20:48:28 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1772484523;
- bh=XH+uFZSmNDN2ptX3RrQASaTIj90c+ocZQ3rxyA6ATLE=;
+ s=k20201202; t=1772484538;
+ bh=tg2GBJRcO6vMjzaMBfFcDIy8ZKyDb6aFMJ4tiWotI5c=;
  h=From:Date:Subject:References:In-Reply-To:To:Cc:From;
- b=iVXrDOh2Ncf5NrMJX3ihQ0yWYBb2qKpf1HDvUW8uaT1pQpdMsT5DTGR0WLz8/PKcW
- dE7bHgzpy10p5+ASLMDMPbJwJ+lyneDG1E/2GII25P4yGZW7tTPCBi2IwXsjtzXpza
- gQ/67PlXgGE4V3TZod6qgfREW74kicxEttREEGGDVmakwnnSBQl/9iH8qiQwX3UUUi
- qTYNw/V30fH3FRdzDydenPEg5d0ZpCBxvGPyfwxsCpYSFUuFo2vrKBZNb741AfLs45
- t3aKxo67Sv9a2MrfLiyxtNdMk0hwRyd82S9gMag4wOxhRH6k3m1e6uHk3O5iJTtC+l
- C7dNHXCjjF2Tw==
-Date: Mon, 02 Mar 2026 15:25:23 -0500
+ b=HAdByGNxmW08C5+Re1Gb5QIfJvh7W3RRSi/6F1cFsEwAggofFwWgUeimzkFbyPUOY
+ BpMrZkgal8HWLqJmZoa4CfJ7QVPUqq7RfD/5KjaGUc9b9JhvdHLpU9OhGpPUoUlJJd
+ SZjhUtdBdArACAUj0Ipa6ewEj9LZrDhEZ9jEQEdzYSV4nQHTDGCXynbDj1OiqZi2Lt
+ 4n4XPCp/sOUx4Rd8Ra6SNXwf1wjb9CfGYyrp4A1WIEmsdzPIq1g2oclhZMvtCjNsMw
+ Dg99kikAcdt1Fs2ylLBOi3qRicncT8lP5mr7FE2GkTwVzBq8TP0ONXslliEImrfNkp
+ SXdV/u4Pl4BCA==
+Date: Mon, 02 Mar 2026 15:25:24 -0500
 MIME-Version: 1.0
-Message-Id: <20260302-iino-u64-v2-99-e5388800dae0@kernel.org>
+Message-Id: <20260302-iino-u64-v2-100-e5388800dae0@kernel.org>
 References: <20260302-iino-u64-v2-0-e5388800dae0@kernel.org>
 In-Reply-To: <20260302-iino-u64-v2-0-e5388800dae0@kernel.org>
 To: Alexander Viro <viro@zeniv.linux.org.uk>, 
@@ -161,20 +161,20 @@ To: Alexander Viro <viro@zeniv.linux.org.uk>,
  Jesper Dangaard Brouer <hawk@kernel.org>, 
  John Fastabend <john.fastabend@gmail.com>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=8514; i=jlayton@kernel.org;
- h=from:subject:message-id; bh=XH+uFZSmNDN2ptX3RrQASaTIj90c+ocZQ3rxyA6ATLE=;
- b=owEBbQKS/ZANAwAKAQAOaEEZVoIVAcsmYgBppfIKMSoWP8hFQKjjQeno+hUGUuYd6GvJ4bDs5
- 7A3Boocpn2JAjMEAAEKAB0WIQRLwNeyRHGyoYTq9dMADmhBGVaCFQUCaaXyCgAKCRAADmhBGVaC
- FY3oEACyqIaJVAIso5s3j+X74J8R7OIZ/3TDCJ9XB5tC1cEx7enUCvtu37j0livMQYt+5/C2Rh9
- ru6qJKy8aZ21jQpbYqyiZHIg/0is1waiDOrKEtB7HyYm98IaEN0YFz5uzcfiGuGJSdzakmiFuu2
- nMfsAW/4aEtQE1ytbOR1ZWtykmsZMe0h91vvVWbHlZ3lNJWX+5ui2x51WoK4i056frqSjzIwyAM
- nV65BDJ1Y0tAUVBUznyrFbkHe4tOWe4RpA0g6E3+zlKE1johBi2QGhPhT0t1JpefRePwXzSMZ+d
- 5v5FTyhm28Gpj0m5gm5BkoO6DHT75enaedHOt/b6OhMPG+iKy1Q4BuDdnCpMgnB2piQQNiFJ6qS
- DwxuMt4AghbxBQWlmKoImjirtPYMvGQMpCVHCLm6cIhr8KQxHxVItTV0X1tRSVKorrPzeDlzTj7
- YxBIK6/M4zQHsnJXnXsVUi+fVQJA7206szogovn3GVf/tIiAmhkwVhsCjw25MppPIcsgmXBsvMs
- Iirc+TTCe6Q3FCBzUJX4x7/xhRAYOArxmoTLoon39IirCDJwAg8jI3hhd3fE992K99lw47W7Hxx
- J+el66KP4PdCBmx03OzxpYxhI2TyG4C5EZui0czqddpHczx8MN+mfe62gilR434DDf3aunJnsvv
- Z+h+VZ85i3fWN1A==
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2133; i=jlayton@kernel.org;
+ h=from:subject:message-id; bh=tg2GBJRcO6vMjzaMBfFcDIy8ZKyDb6aFMJ4tiWotI5c=;
+ b=owEBbQKS/ZANAwAKAQAOaEEZVoIVAcsmYgBppfILBKyvots3fqrnm3b3+1nlzkkUuZL/UNO2s
+ Y9u3WybBLWJAjMEAAEKAB0WIQRLwNeyRHGyoYTq9dMADmhBGVaCFQUCaaXyCwAKCRAADmhBGVaC
+ FaTTEACnI/vvfaLeyQUKf94n7FqC/B/DSywMOa0cw/ECthv67Dj41AVTZCneKCKSRZyANNa0WYm
+ l355RIIpHOTBxXnpFXD3lksIkUZGReQER+Kf7NQdgCd8qaVBWaTtN3cWUaCA2OqaFslA4cikPE9
+ PgHwcvjs1KYGo5O0LkZdoG30AKyzvktYdZWwJIJ5VkEoXNoG6YDhBMWa6SoJ3k0SAmFODLK9y/8
+ 85ngFaMnf3d/jFNL119T2Wz5/yPvuuSoxBRVTVL69qYwIvooH70O3tkujVGx30Y1MnoZW4twblY
+ QHSNk70vhVl1ErSJapAsovk0wHdpIG08OaSHpvu2Tpk0Zm1z+VdAP5Yv5rsbnZN16MeQ0PqnRNk
+ lXmao39Wa1d/LpsrU4m06JV0AwWp01RdNKTDFM+6EuXEjfyA5a+sT19+fZFgcc6mJr1XRaDsOm7
+ MuQAqsi5tBg8PRKxpaY0P50OUbiygtpEY6PgdMtoSBKYETXU2hcTGAMnDy8SUMe3x34cQYN7R/L
+ dpY7ZOfPKPpdV+otDv9XGmgf1URb1UsAddW1cfbJE1thukY6ybg+Tju8ryqT6GDUFjveLyMt2AC
+ YjvAmlVC0KZOohNIMf6SCTK+Xxt3XSL1YACXE2p7jDpiveCgGw3dzRLHVuB0b4Ap3nMAXHZOkfP
+ vtZAladjPrF/TCw==
 X-Developer-Key: i=jlayton@kernel.org; a=openpgp;
  fpr=4BC0D7B24471B2A184EAF5D3000E684119568215
 X-Spam-Score: -0.2 (/)
@@ -186,10 +186,9 @@ X-Spam-Report: Spam detection software,
  the administrator of that system for details.
  Content preview:  Now that i_ino is u64 and the PRIino format macro has been
  removed,
- replace all uses in ufs with the concrete format strings. Signed-off-by:
- Jeff Layton <jlayton@kernel.org> --- fs/ufs/balloc.c | 6 +++--- fs/ufs/dir.c
- | 10 +++++----- fs/ufs/ialloc.c | 6 +++--- fs/ufs/inode.c | 18
- +++++++++--------- fs/ufs/util.c | 2 +- 5 fil [...] 
+ replace all uses in zonefs with the concrete format strings. Signed-off-by:
+ Jeff Layton <jlayton@kernel.org> --- fs/zonefs/super.c | 8 ++++---- 1 file
+ changed, 4 insertions(+), 4 deletions(-) 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -201,8 +200,8 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1vxACE-00073O-FQ
-Subject: [f2fs-dev] [PATCH v2 099/110] ufs: replace PRIino with %llu/%llx
+X-Headers-End: 1vxACS-000758-N9
+Subject: [f2fs-dev] [PATCH v2 100/110] zonefs: replace PRIino with %llu/%llx
  format strings
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
@@ -240,7 +239,7 @@ Cc: nvdimm@lists.linux.dev, jfs-discussion@lists.sourceforge.net,
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
-X-Rspamd-Queue-Id: D3E9D1E0B66
+X-Rspamd-Queue-Id: 6B7671E0BC5
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [-7.11 / 15.00];
 	WHITELIST_DMARC(-7.00)[sourceforge.net:D:+];
@@ -278,220 +277,53 @@ X-Spamd-Result: default: False [-7.11 / 15.00];
 X-Rspamd-Action: no action
 
 Now that i_ino is u64 and the PRIino format macro has been removed,
-replace all uses in ufs with the concrete format strings.
+replace all uses in zonefs with the concrete format strings.
 
 Signed-off-by: Jeff Layton <jlayton@kernel.org>
 ---
- fs/ufs/balloc.c |  6 +++---
- fs/ufs/dir.c    | 10 +++++-----
- fs/ufs/ialloc.c |  6 +++---
- fs/ufs/inode.c  | 18 +++++++++---------
- fs/ufs/util.c   |  2 +-
- 5 files changed, 21 insertions(+), 21 deletions(-)
+ fs/zonefs/super.c | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/fs/ufs/balloc.c b/fs/ufs/balloc.c
-index b961daa05608fa52dcfc2702bb97c437ef27d9c2..628edfde3a9fd73852930094c19ae6944858f2c4 100644
---- a/fs/ufs/balloc.c
-+++ b/fs/ufs/balloc.c
-@@ -245,7 +245,7 @@ static void ufs_change_blocknr(struct inode *inode, sector_t beg,
- 	sector_t end, i;
- 	struct buffer_head *head, *bh;
- 
--	UFSD("ENTER, ino %" PRIino "u, count %u, oldb %llu, newb %llu\n",
-+	UFSD("ENTER, ino %llu, count %u, oldb %llu, newb %llu\n",
- 	      inode->i_ino, count,
- 	     (unsigned long long)oldb, (unsigned long long)newb);
- 
-@@ -340,7 +340,7 @@ u64 ufs_new_fragments(struct inode *inode, void *p, u64 fragment,
- 	unsigned cgno, oldcount, newcount;
- 	u64 tmp, request, result;
- 	
--	UFSD("ENTER, ino %" PRIino "u, fragment %llu, goal %llu, count %u\n",
-+	UFSD("ENTER, ino %llu, fragment %llu, goal %llu, count %u\n",
- 	     inode->i_ino, (unsigned long long)fragment,
- 	     (unsigned long long)goal, count);
- 	
-@@ -583,7 +583,7 @@ static u64 ufs_alloc_fragments(struct inode *inode, unsigned cgno,
- 	unsigned oldcg, i, j, k, allocsize;
- 	u64 result;
- 	
--	UFSD("ENTER, ino %" PRIino "u, cgno %u, goal %llu, count %u\n",
-+	UFSD("ENTER, ino %llu, cgno %u, goal %llu, count %u\n",
- 	     inode->i_ino, cgno, (unsigned long long)goal, count);
- 
- 	sb = inode->i_sb;
-diff --git a/fs/ufs/dir.c b/fs/ufs/dir.c
-index c7a13e01119f990b8f7139fdc3005e7b65afeb54..f10a50f7e78b8020fd216eff19c147b20bd332c1 100644
---- a/fs/ufs/dir.c
-+++ b/fs/ufs/dir.c
-@@ -150,7 +150,7 @@ static bool ufs_check_folio(struct folio *folio, char *kaddr)
- 
- Ebadsize:
- 	ufs_error(sb, __func__,
--		  "size of directory #%" PRIino "u is not a multiple of chunk size",
-+		  "size of directory #%llu is not a multiple of chunk size",
- 		  dir->i_ino
- 	);
- 	goto fail;
-@@ -169,7 +169,7 @@ static bool ufs_check_folio(struct folio *folio, char *kaddr)
- Einumber:
- 	error = "inode out of bounds";
- bad_entry:
--	ufs_error(sb, __func__, "bad entry in directory #%" PRIino "u: %s - "
-+	ufs_error(sb, __func__, "bad entry in directory #%llu: %s - "
- 		   "offset=%llu, rec_len=%d, name_len=%d",
- 		   dir->i_ino, error, folio_pos(folio) + offs,
- 		   rec_len, ufs_get_de_namlen(sb, p));
-@@ -177,7 +177,7 @@ static bool ufs_check_folio(struct folio *folio, char *kaddr)
- Eend:
- 	p = (struct ufs_dir_entry *)(kaddr + offs);
- 	ufs_error(sb, __func__,
--		   "entry in directory #%" PRIino "u spans the page boundary"
-+		   "entry in directory #%llu spans the page boundary"
- 		   "offset=%llu",
- 		   dir->i_ino, folio_pos(folio) + offs);
- fail:
-@@ -258,7 +258,7 @@ struct ufs_dir_entry *ufs_find_entry(struct inode *dir, const struct qstr *qstr,
- 	struct ufs_inode_info *ui = UFS_I(dir);
- 	struct ufs_dir_entry *de;
- 
--	UFSD("ENTER, dir_ino %" PRIino "u, name %s, namlen %u\n", dir->i_ino, name, namelen);
-+	UFSD("ENTER, dir_ino %llu, name %s, namlen %u\n", dir->i_ino, name, namelen);
- 
- 	if (npages == 0 || namelen > UFS_MAXNAMLEN)
- 		goto out;
-@@ -434,7 +434,7 @@ ufs_readdir(struct file *file, struct dir_context *ctx)
- 
- 		if (IS_ERR(kaddr)) {
- 			ufs_error(sb, __func__,
--				  "bad page in #%" PRIino "u",
-+				  "bad page in #%llu",
- 				  inode->i_ino);
- 			ctx->pos += PAGE_SIZE - offset;
- 			return PTR_ERR(kaddr);
-diff --git a/fs/ufs/ialloc.c b/fs/ufs/ialloc.c
-index f26fbe330a1d0e053ddf8dbe2a8ec5d41373c79f..8e51f4630d186ae49aa987ca46df20960f300614 100644
---- a/fs/ufs/ialloc.c
-+++ b/fs/ufs/ialloc.c
-@@ -63,7 +63,7 @@ void ufs_free_inode (struct inode * inode)
- 	int is_directory;
- 	unsigned ino, cg, bit;
- 	
--	UFSD("ENTER, ino %" PRIino "u\n", inode->i_ino);
-+	UFSD("ENTER, ino %llu\n", inode->i_ino);
- 
- 	sb = inode->i_sb;
- 	uspi = UFS_SB(sb)->s_uspi;
-@@ -317,7 +317,7 @@ struct inode *ufs_new_inode(struct inode *dir, umode_t mode)
- 		bh = sb_bread(sb, uspi->s_sbbase + ufs_inotofsba(inode->i_ino));
- 		if (!bh) {
- 			ufs_warning(sb, "ufs_read_inode",
--				    "unable to read inode %" PRIino "u\n",
-+				    "unable to read inode %llu\n",
- 				    inode->i_ino);
- 			err = -EIO;
- 			goto fail_remove_inode;
-@@ -336,7 +336,7 @@ struct inode *ufs_new_inode(struct inode *dir, umode_t mode)
- 	}
- 	mutex_unlock(&sbi->s_lock);
- 
--	UFSD("allocating inode %" PRIino "u\n", inode->i_ino);
-+	UFSD("allocating inode %llu\n", inode->i_ino);
- 	UFSD("EXIT\n");
- 	return inode;
- 
-diff --git a/fs/ufs/inode.c b/fs/ufs/inode.c
-index 199f5f71f77b20bfde408cb1ac7a8ea8c45cc465..2a8728c879796403166f713d1b4ee1b05fe1ffed 100644
---- a/fs/ufs/inode.c
-+++ b/fs/ufs/inode.c
-@@ -400,7 +400,7 @@ static int ufs_getfrag_block(struct inode *inode, sector_t fragment, struct buff
- 
- 	mutex_lock(&UFS_I(inode)->truncate_mutex);
- 
--	UFSD("ENTER, ino %" PRIino "u, fragment %llu\n", inode->i_ino, (unsigned long long)fragment);
-+	UFSD("ENTER, ino %llu, fragment %llu\n", inode->i_ino, (unsigned long long)fragment);
- 	if (unlikely(!depth)) {
- 		ufs_warning(sb, "ufs_get_block", "block > big");
- 		err = -EIO;
-@@ -595,7 +595,7 @@ static int ufs2_read_inode(struct inode *inode, struct ufs2_inode *ufs2_inode)
- 	struct super_block *sb = inode->i_sb;
- 	umode_t mode;
- 
--	UFSD("Reading ufs2 inode, ino %" PRIino "u\n", inode->i_ino);
-+	UFSD("Reading ufs2 inode, ino %llu\n", inode->i_ino);
- 	/*
- 	 * Copy data to the in-core inode.
+diff --git a/fs/zonefs/super.c b/fs/zonefs/super.c
+index cf084c7905d4d43c0638187a55f3c9af71364f3d..9b646cb5335d0643bc0431aa8efc35a90fbcdac5 100644
+--- a/fs/zonefs/super.c
++++ b/fs/zonefs/super.c
+@@ -297,7 +297,7 @@ static void zonefs_handle_io_error(struct inode *inode, struct blk_zone *zone,
  	 */
-@@ -662,7 +662,7 @@ struct inode *ufs_iget(struct super_block *sb, unsigned long ino)
+ 	if (isize != data_size)
+ 		zonefs_warn(sb,
+-			    "inode %" PRIino "u: invalid size %lld (should be %lld)\n",
++			    "inode %llu: invalid size %lld (should be %lld)\n",
+ 			    inode->i_ino, isize, data_size);
  
- 	bh = sb_bread(sb, uspi->s_sbbase + ufs_inotofsba(inode->i_ino));
- 	if (!bh) {
--		ufs_warning(sb, "ufs_read_inode", "unable to read inode %" PRIino "u\n",
-+		ufs_warning(sb, "ufs_read_inode", "unable to read inode %llu\n",
+ 	/*
+@@ -308,7 +308,7 @@ static void zonefs_handle_io_error(struct inode *inode, struct blk_zone *zone,
+ 	 */
+ 	if ((z->z_flags & ZONEFS_ZONE_OFFLINE) ||
+ 	    (sbi->s_mount_opts & ZONEFS_MNTOPT_ERRORS_ZOL)) {
+-		zonefs_warn(sb, "inode %" PRIino "u: read/write access disabled\n",
++		zonefs_warn(sb, "inode %llu: read/write access disabled\n",
  			    inode->i_ino);
- 		goto bad_inode;
- 	}
-@@ -793,17 +793,17 @@ static int ufs_update_inode(struct inode * inode, int do_sync)
- 	struct ufs_sb_private_info *uspi = UFS_SB(sb)->s_uspi;
- 	struct buffer_head * bh;
+ 		if (!(z->z_flags & ZONEFS_ZONE_OFFLINE))
+ 			z->z_flags |= ZONEFS_ZONE_OFFLINE;
+@@ -316,7 +316,7 @@ static void zonefs_handle_io_error(struct inode *inode, struct blk_zone *zone,
+ 		data_size = 0;
+ 	} else if ((z->z_flags & ZONEFS_ZONE_READONLY) ||
+ 		   (sbi->s_mount_opts & ZONEFS_MNTOPT_ERRORS_ZRO)) {
+-		zonefs_warn(sb, "inode %" PRIino "u: write access disabled\n",
++		zonefs_warn(sb, "inode %llu: write access disabled\n",
+ 			    inode->i_ino);
+ 		if (!(z->z_flags & ZONEFS_ZONE_READONLY))
+ 			z->z_flags |= ZONEFS_ZONE_READONLY;
+@@ -402,7 +402,7 @@ void __zonefs_io_error(struct inode *inode, bool write)
+ 	memalloc_noio_restore(noio_flag);
  
--	UFSD("ENTER, ino %" PRIino "u\n", inode->i_ino);
-+	UFSD("ENTER, ino %llu\n", inode->i_ino);
- 
- 	if (inode->i_ino < UFS_ROOTINO ||
- 	    inode->i_ino > (uspi->s_ncg * uspi->s_ipg)) {
--		ufs_warning (sb, "ufs_read_inode", "bad inode number (%" PRIino "u)\n", inode->i_ino);
-+		ufs_warning (sb, "ufs_read_inode", "bad inode number (%llu)\n", inode->i_ino);
- 		return -1;
- 	}
- 
- 	bh = sb_bread(sb, ufs_inotofsba(inode->i_ino));
- 	if (!bh) {
--		ufs_warning (sb, "ufs_read_inode", "unable to read inode %" PRIino "u\n", inode->i_ino);
-+		ufs_warning (sb, "ufs_read_inode", "unable to read inode %llu\n", inode->i_ino);
- 		return -1;
- 	}
- 	if (uspi->fs_magic == UFS2_MAGIC) {
-@@ -891,7 +891,7 @@ static void ufs_trunc_direct(struct inode *inode)
- 	unsigned int old_tail, new_tail;
- 	struct to_free ctx = {.inode = inode};
- 
--	UFSD("ENTER: ino %" PRIino "u\n", inode->i_ino);
-+	UFSD("ENTER: ino %llu\n", inode->i_ino);
- 
- 	new_frags = DIRECT_FRAGMENT;
- 	// new_frags = first fragment past the new EOF
-@@ -956,7 +956,7 @@ static void ufs_trunc_direct(struct inode *inode)
- 		}
- 	}
- done:
--	UFSD("EXIT: ino %" PRIino "u\n", inode->i_ino);
-+	UFSD("EXIT: ino %llu\n", inode->i_ino);
- }
- 
- static void free_full_branch(struct inode *inode, u64 ind_block, int depth)
-@@ -1169,7 +1169,7 @@ static int ufs_truncate(struct inode *inode, loff_t size)
- {
- 	int err = 0;
- 
--	UFSD("ENTER: ino %" PRIino "u, i_size: %llu, old_i_size: %llu\n",
-+	UFSD("ENTER: ino %llu, i_size: %llu, old_i_size: %llu\n",
- 	     inode->i_ino, (unsigned long long)size,
- 	     (unsigned long long)i_size_read(inode));
- 
-diff --git a/fs/ufs/util.c b/fs/ufs/util.c
-index 9acb59697d85015e83cd1e59ffbccb5452e6dd2d..dff6f74618def7bd5687bd7427f3001a78b708b8 100644
---- a/fs/ufs/util.c
-+++ b/fs/ufs/util.c
-@@ -203,7 +203,7 @@ struct folio *ufs_get_locked_folio(struct address_space *mapping,
- 		folio = read_mapping_folio(mapping, index, NULL);
- 
- 		if (IS_ERR(folio)) {
--			printk(KERN_ERR "ufs_change_blocknr: read_mapping_folio error: ino %" PRIino "u, index: %lu\n",
-+			printk(KERN_ERR "ufs_change_blocknr: read_mapping_folio error: ino %llu, index: %lu\n",
- 			       mapping->host->i_ino, index);
- 			return folio;
- 		}
+ 	if (ret != 1) {
+-		zonefs_err(sb, "Get inode %" PRIino "u zone information failed %d\n",
++		zonefs_err(sb, "Get inode %llu zone information failed %d\n",
+ 			   inode->i_ino, ret);
+ 		zonefs_warn(sb, "remounting filesystem read-only\n");
+ 		sb->s_flags |= SB_RDONLY;
 
 -- 
 2.53.0
