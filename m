@@ -2,41 +2,41 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id cG32IRT4pWkeIgAAu9opvQ
+	id UH11Jh74pWkEIgAAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 02 Mar 2026 21:50:28 +0100
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 02 Mar 2026 21:50:38 +0100
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id AF83C1E0D5F
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 02 Mar 2026 21:50:27 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 38DA21E0D97
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 02 Mar 2026 21:50:38 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
 	List-Unsubscribe:List-Id:Subject:To:In-Reply-To:References:Message-Id:
 	MIME-Version:Date:Sender:Content-ID:Content-Description:Resent-Date:
 	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=hdplULjerb/GUcew1GwSDxE51fS0VSi1K8rFqiuHLlY=; b=di/MNOvlax23XjUomfJkT/cT66
-	32+scm/+Nz3G6bZCmWCIrycQV+S17Zey3cNCEEhZ2wOTtSKCCdO0J/61hL4thJNwesdzhHGbJzk95
-	LpBmTkZ6pG1brCOjlCfHsNYyzlOS4tMNkDjyGtRVhGxeRdp4v+u1whasY8otMaqXmT+Q=;
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=aHaySxZM93efMv/Dntaqxx4zwvO6uYRk8wUAay1FlPA=; b=atLlzfRyDT8VdXb4HulsQHNlOE
+	yzGAH6yTi//WrOW7Ei2S23aI3YCNJdVUrmG5QQJBKWqAkTomiESUREb23CiE4FSF1S3qV4F7dSFQA
+	wfJ88p3EOSNObYNVYWi0BnVYYZlVwMf/gJCqb5cIwayPxcdH479j37nPsiNYzIZjb+hQ=;
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vxADi-00047K-DI;
-	Mon, 02 Mar 2026 20:50:26 +0000
+	id 1vxADs-0005OB-4I;
+	Mon, 02 Mar 2026 20:50:36 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jlayton@kernel.org>) id 1vxADf-00046x-Ow;
- Mon, 02 Mar 2026 20:50:23 +0000
+ (envelope-from <jlayton@kernel.org>) id 1vxADo-0005NH-N7;
+ Mon, 02 Mar 2026 20:50:33 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Cc:To:In-Reply-To:References:Message-Id:
  Content-Transfer-Encoding:Content-Type:MIME-Version:Subject:Date:From:Sender:
  Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
  :Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=khNugZudWESZiAwFc0P7ueANTJm9n8WmeKMlz46cHIg=; b=h35TzOGjiYnTzyNba0XOw6YIF3
- cn2xTgljYBai3O7QwceP5suE+az3zKsnFm2ioYDonzi702lAYZQCA0KuVYMSHSib0IpvKxCpNZe/w
- XOs/bZcFL13s0YNY1jz0Qld3xFFbNx3FnPsMaxmxOJ0ufUMfkCi3pLjXc/Bt5JZifYg4=;
+ bh=wMoSJdgdENlETIvEUtfq7nApMbU8o6sDMpY0Y0wWbn4=; b=CEmAq7q3ht/nQgiFvC9up70swq
+ rN/iv8QbykUFdrDmQYgvK0LJtEqM3hH7GXrtI21knkhOtmMCIGBwYocGNgiorY7vHcUXEyI4FbHtO
+ RfqT+h9LhdPzpfrP4a5kOg0XatxLL+x1fQA4+dUxn+N3brIf0HESaSmiPK78tj1zb9jk=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Cc:To:In-Reply-To:References:Message-Id:Content-Transfer-Encoding:
@@ -44,31 +44,31 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=khNugZudWESZiAwFc0P7ueANTJm9n8WmeKMlz46cHIg=; b=c6LICnVOtYXXqFUDjZ857Jq7Fe
- Xrmj24xCwphBxZXJUpegSyhnN79+lC0AksKvQERwxqMdAqDiKHIhHD0BzPDmG38EoK6FGMoUNMo9w
- J1AHRlG6wP82VWDdq4JzZo4jQX3nO0ha+pY8SoEHgmDO0jLWl5J1qiwcoR/M8tZhIl+0=;
+ bh=wMoSJdgdENlETIvEUtfq7nApMbU8o6sDMpY0Y0wWbn4=; b=LNiWNbtVPhzwyNDTGZCaUdRCa4
+ 16aB+7KuUdqoTOCU+DlyMT14SNOfvyEU1YwDUYHdlpXSsnCUYvjJdEjFIFwoedDhKe/GWeBMU7LPH
+ D81CmGUlmzVKLRzGYsd5GM4VoBpZ3hnVk7hVmgl8QxsQOPYi5UQKG/r37N80tBmggxmg=;
 Received: from tor.source.kernel.org ([172.105.4.254])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vxADe-0007E8-K2; Mon, 02 Mar 2026 20:50:23 +0000
+ id 1vxADn-0007F8-Ix; Mon, 02 Mar 2026 20:50:33 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 6816861850;
+ by tor.source.kernel.org (Postfix) with ESMTP id AE0A26183D;
+ Mon,  2 Mar 2026 20:50:25 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4CFC1C2BCAF;
  Mon,  2 Mar 2026 20:50:11 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 07F66C2BC9E;
- Mon,  2 Mar 2026 20:49:56 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1772484611;
- bh=JPKwVFtY7y15aQ0ACp/RNYZdvktcOhYNyEwOFBbpajk=;
+ s=k20201202; t=1772484625;
+ bh=uNYFxtg5Iv5MXUsRjSnqZGWzI+LksrISC7QvWEDcE88=;
  h=From:Date:Subject:References:In-Reply-To:To:Cc:From;
- b=mQXhr50rPhqiJaAE46QOiQaS1GigGjkyfHU3ea3xTGDwDSg8agj+bvmfu8MnTBaye
- uHx4YUJ72av/YaUG/IWhxpZdm8qR3c6BFTW9Ut82dfdCNhsx4BEExWOLvQxZq6Jw9G
- MD7rARU6qbSA+OdYE+b0EaHDtIRVRUa0wLLow63W+qb0UzN2PMcHRgq6qwdRB4MQMM
- GsVH7DA1fdahoGFwNQXviOC6OoZ4O1c5cjj/wfYPqtXBnAAYRaR3RlWIRPMWGxj0+Y
- Q91z5L3PWaadybVNCcLcB+3tZsv5jATjvMXnDqHhEIdHSBN5EN2s/XLlsUnaPRzW2n
- 7tBeLDlmeJY3A==
-Date: Mon, 02 Mar 2026 15:25:29 -0500
+ b=dUluxAGL9dbpHV0Un3l78iD2YJVbMrQu1Bd02WAf7Z4BPvMflxqtAVZpbEzaq6i1Y
+ WuUqDTCPchi4N+ooyqer66e4url/wraC+5KhJdG0UPsOr5PEn1NqTwnidWuSdRD/sT
+ Z6EtOJh6y5/KBCbHADqSwAP+FwBnT+EC+5niBxaZAZInGEGGUZpE3P7E0Dpo970iZI
+ cvNPiWtZ4VbDdM4Jwr+YTreyWRrF06Nw5T/nzxV9YtUj6jZP3b8YNwwRsJyB2ZfVwB
+ ISrbSIaAOOY5322QCpIywNnN/Q/FGKDqkJJf3EUTq/1XU9lYa75SMvlKMBB3wuYXZu
+ KF64/hQAst3LQ==
+Date: Mon, 02 Mar 2026 15:25:30 -0500
 MIME-Version: 1.0
-Message-Id: <20260302-iino-u64-v2-105-e5388800dae0@kernel.org>
+Message-Id: <20260302-iino-u64-v2-106-e5388800dae0@kernel.org>
 References: <20260302-iino-u64-v2-0-e5388800dae0@kernel.org>
 In-Reply-To: <20260302-iino-u64-v2-0-e5388800dae0@kernel.org>
 To: Alexander Viro <viro@zeniv.linux.org.uk>, 
@@ -161,35 +161,34 @@ To: Alexander Viro <viro@zeniv.linux.org.uk>,
  Jesper Dangaard Brouer <hawk@kernel.org>, 
  John Fastabend <john.fastabend@gmail.com>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=9058; i=jlayton@kernel.org;
- h=from:subject:message-id; bh=JPKwVFtY7y15aQ0ACp/RNYZdvktcOhYNyEwOFBbpajk=;
- b=owEBbQKS/ZANAwAKAQAOaEEZVoIVAcsmYgBppfIMT/IJ3kLMsyWUGkmj+RutCWvyg3pdXWUeJ
- H7H/xONu9SJAjMEAAEKAB0WIQRLwNeyRHGyoYTq9dMADmhBGVaCFQUCaaXyDAAKCRAADmhBGVaC
- FfBtD/9v/x6SpHlOSfRtgdtFXChydGJ/cGAt4/OmHih3k6NV/wtpjljKPdT7Zjdb4vM/BMdd/o4
- JAhmm5IpWH1G+jOCQsYjN3xwArrxf8ryZj5iRaiG4NyWar1Matm0j9mTAX/H/qNcbgdZZYzhHsp
- fLgKEcGnaDnMWCfmCgy2cuh+oTNm+58kA6W4PgVd/ki+3GnYCdcc0Tpj7tU5gON1PwXmCHpykcK
- OOffwvnN2dS4TQBEpVe/j5MQiXBob3RKe93n7sgkj1dq9TEtcnbgVF438aOP/1xU743aj6yGhQ4
- b55WP3ctl83nYaAZ95lSqwEhFEyW7VwXqHG1qa3qeixLYgH5v1yisAIdgnndT7cifui1Wsk2j5w
- c9e4VqpUO6hrueXltvFOSd7I8q5blS56BCPZEMwOgp0u43DapU9PubWIr/HkltUtQnmzNDaJjIs
- aW5op6certMTpHX9PrraMBr/YUFVColSfUR5u2Fc2HasmF46xOxxgrgoVZIFk+u5N9mBnQxJb5T
- N7gvIrulbELxl9kEyuPdwML1vSsKufgZ7J60DKuCHgZqckSpFR75PBjlwTKu+xCa6c1QN+qeA7P
- MHWFgYI6OwzU9ekLenKBJhWxqdJKbk44hkMyOercoxNUkM62lhqVgf5vgvSxytlqwD0SC7gaqaL
- 9qZuOp4OR7pRn7g==
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1242; i=jlayton@kernel.org;
+ h=from:subject:message-id; bh=uNYFxtg5Iv5MXUsRjSnqZGWzI+LksrISC7QvWEDcE88=;
+ b=owEBbQKS/ZANAwAKAQAOaEEZVoIVAcsmYgBppfIMt5x4iQABLZluIVrTQbU0nR9vsQFBc6H8e
+ MaC1UngLK6JAjMEAAEKAB0WIQRLwNeyRHGyoYTq9dMADmhBGVaCFQUCaaXyDAAKCRAADmhBGVaC
+ FRSWEADRmDAkhNpK6+h7nauxslYyedT5jkgsddgrricfItWlqYChN5XEbiXdUOC4dm00LJ3n7Nm
+ VsWfAVmXtEEMi1+OpAFZvptU/z1Uhp9fYwk0i0r4u9ryoW6/Hh2Q+i04MpCrkJsEBlVnFZEF1Ri
+ z2Yi6MhJXl8YpsG98d2VAXOVJ7cfOynOaqYULzaleFqzV/irdYjVAZ1bSb2hpsbDiJgwtxXnemR
+ 2vmYccDKKghYcmpjZHg9r2aADiTOyck38QbcEC2urm/h+1jvFG0W9jPua7cXa2x3Z/pJZiX+mlN
+ NC2f7hcaxhvWDuPOvxL5+/VdL7xIL8L3Px4gHh6Ffr1QWvth403RYl1iUY30L7AHGxs72TnqJN8
+ CLghrL0HEqob/Q2qg4+542aTMFH7sqfBoP8+vK2E7w+ZS5bm19LLfKuGuwhzUpCua5AS9L73+60
+ VCBvv8iCUYZfwgoQHkqxe7w3Qkz3Ictbi61tv0JW6jg0DvAiU1dNNFn67R1WJuLRFR65OSXw0g+
+ VpqQwvPKpMNahMcL7sma6piTYysuNd8Z5tbgGm0RMauZ/TdZMXfcn54KRTENJ2KU+CuzXuHHdH0
+ Pc1W3xausB9ERPDY1WKRZXPjZ1W4zh9wces/wn5ONEa8DBA7snqsUlleWjtkb0xDTICuyOdXk5R
+ KkYgGAqOFGM8+Qw==
 X-Developer-Key: i=jlayton@kernel.org; a=openpgp;
  fpr=4BC0D7B24471B2A184EAF5D3000E684119568215
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
  Content preview:  Now that i_ino is u64 and the PRIino format macro has been
- removed,
- replace all uses in security with the concrete format strings. Signed-off-by:
- Jeff Layton <jlayton@kernel.org> --- security/apparmor/apparmorfs.c | 4 ++--
- security/integrity/integrity_audit.c | 2 +- security/ipe/audit.c | 2 +-
- security/lsm_audit.c | 10 +++++----- [...] 
+ removed, replace all uses in drm/amdgpu with the concrete format strings.
+ Signed-off-by: Jeff Layton <jlayton@kernel.org> ---
+ drivers/gpu/drm/amd/amdgpu/amdgpu_object.c
+ | 4 ++-- 1 file changed, 2 insertions(+), 2 deletions(-) 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -201,8 +200,8 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1vxADe-0007E8-K2
-Subject: [f2fs-dev] [PATCH v2 105/110] security: replace PRIino with
+X-Headers-End: 1vxADn-0007F8-Ix
+Subject: [f2fs-dev] [PATCH v2 106/110] drm/amdgpu: replace PRIino with
  %llu/%llx format strings
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
@@ -240,7 +239,7 @@ Cc: nvdimm@lists.linux.dev, jfs-discussion@lists.sourceforge.net,
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
-X-Rspamd-Queue-Id: AF83C1E0D5F
+X-Rspamd-Queue-Id: 38DA21E0D97
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [-7.11 / 15.00];
 	WHITELIST_DMARC(-7.00)[sourceforge.net:D:+];
@@ -278,212 +277,29 @@ X-Spamd-Result: default: False [-7.11 / 15.00];
 X-Rspamd-Action: no action
 
 Now that i_ino is u64 and the PRIino format macro has been removed,
-replace all uses in security with the concrete format strings.
+replace all uses in drm/amdgpu with the concrete format strings.
 
 Signed-off-by: Jeff Layton <jlayton@kernel.org>
 ---
- security/apparmor/apparmorfs.c       |  4 ++--
- security/integrity/integrity_audit.c |  2 +-
- security/ipe/audit.c                 |  2 +-
- security/lsm_audit.c                 | 10 +++++-----
- security/selinux/hooks.c             | 10 +++++-----
- security/smack/smack_lsm.c           | 12 ++++++------
- 6 files changed, 20 insertions(+), 20 deletions(-)
+ drivers/gpu/drm/amd/amdgpu/amdgpu_object.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/security/apparmor/apparmorfs.c b/security/apparmor/apparmorfs.c
-index be343479f80b71566be6fda90fc4e00912faad63..7b645f40e71c956f216fa6a7d69c3ecd4e2a5ff4 100644
---- a/security/apparmor/apparmorfs.c
-+++ b/security/apparmor/apparmorfs.c
-@@ -149,7 +149,7 @@ static int aafs_count;
+diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_object.c b/drivers/gpu/drm/amd/amdgpu/amdgpu_object.c
+index d62f7cd1bdd3643803a99c3cbe35fa5b19217eeb..aaa8cdc122c49ebf0b5b6c55edb3a1db2a4fd710 100644
+--- a/drivers/gpu/drm/amd/amdgpu/amdgpu_object.c
++++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_object.c
+@@ -1676,9 +1676,9 @@ u64 amdgpu_bo_print_info(int id, struct amdgpu_bo *bo, struct seq_file *m)
+ 	attachment = READ_ONCE(bo->tbo.base.import_attach);
  
- static int aafs_show_path(struct seq_file *seq, struct dentry *dentry)
- {
--	seq_printf(seq, "%s:[%" PRIino "u]", AAFS_NAME, d_inode(dentry)->i_ino);
-+	seq_printf(seq, "%s:[%llu]", AAFS_NAME, d_inode(dentry)->i_ino);
- 	return 0;
- }
+ 	if (attachment)
+-		seq_printf(m, " imported from ino:%" PRIino "u", file_inode(dma_buf->file)->i_ino);
++		seq_printf(m, " imported from ino:%llu", file_inode(dma_buf->file)->i_ino);
+ 	else if (dma_buf)
+-		seq_printf(m, " exported as ino:%" PRIino "u", file_inode(dma_buf->file)->i_ino);
++		seq_printf(m, " exported as ino:%llu", file_inode(dma_buf->file)->i_ino);
  
-@@ -2644,7 +2644,7 @@ static int policy_readlink(struct dentry *dentry, char __user *buffer,
- 	char name[32];
- 	int res;
- 
--	res = snprintf(name, sizeof(name), "%s:[%" PRIino "u]", AAFS_NAME,
-+	res = snprintf(name, sizeof(name), "%s:[%llu]", AAFS_NAME,
- 		       d_inode(dentry)->i_ino);
- 	if (res > 0 && res < sizeof(name))
- 		res = readlink_copy(buffer, buflen, name, strlen(name));
-diff --git a/security/integrity/integrity_audit.c b/security/integrity/integrity_audit.c
-index d28dac23a4e7cf651856b80ab7756d250187ccde..d8d9e5ff1cd22b091f462d1e83d28d2d6bd983e9 100644
---- a/security/integrity/integrity_audit.c
-+++ b/security/integrity/integrity_audit.c
-@@ -62,7 +62,7 @@ void integrity_audit_message(int audit_msgno, struct inode *inode,
- 	if (inode) {
- 		audit_log_format(ab, " dev=");
- 		audit_log_untrustedstring(ab, inode->i_sb->s_id);
--		audit_log_format(ab, " ino=%" PRIino "u", inode->i_ino);
-+		audit_log_format(ab, " ino=%llu", inode->i_ino);
- 	}
- 	audit_log_format(ab, " res=%d errno=%d", !result, errno);
- 	audit_log_end(ab);
-diff --git a/security/ipe/audit.c b/security/ipe/audit.c
-index 0de95dd4fbea15d4d913fc42e197c3120a9d24a0..93fb59fbddd60b56c0b22be2a38b809ef9e18b76 100644
---- a/security/ipe/audit.c
-+++ b/security/ipe/audit.c
-@@ -153,7 +153,7 @@ void ipe_audit_match(const struct ipe_eval_ctx *const ctx,
- 		if (inode) {
- 			audit_log_format(ab, " dev=");
- 			audit_log_untrustedstring(ab, inode->i_sb->s_id);
--			audit_log_format(ab, " ino=%" PRIino "u", inode->i_ino);
-+			audit_log_format(ab, " ino=%llu", inode->i_ino);
- 		} else {
- 			audit_log_format(ab, " dev=? ino=?");
- 		}
-diff --git a/security/lsm_audit.c b/security/lsm_audit.c
-index 523f2ee116f0f928003aec30a105d6d4ecb49b0b..737f5a263a8f79416133315edf363ece3d79c722 100644
---- a/security/lsm_audit.c
-+++ b/security/lsm_audit.c
-@@ -202,7 +202,7 @@ void audit_log_lsm_data(struct audit_buffer *ab,
- 		if (inode) {
- 			audit_log_format(ab, " dev=");
- 			audit_log_untrustedstring(ab, inode->i_sb->s_id);
--			audit_log_format(ab, " ino=%" PRIino "u", inode->i_ino);
-+			audit_log_format(ab, " ino=%llu", inode->i_ino);
- 		}
- 		break;
- 	}
-@@ -215,7 +215,7 @@ void audit_log_lsm_data(struct audit_buffer *ab,
- 		if (inode) {
- 			audit_log_format(ab, " dev=");
- 			audit_log_untrustedstring(ab, inode->i_sb->s_id);
--			audit_log_format(ab, " ino=%" PRIino "u", inode->i_ino);
-+			audit_log_format(ab, " ino=%llu", inode->i_ino);
- 		}
- 		break;
- 	}
-@@ -228,7 +228,7 @@ void audit_log_lsm_data(struct audit_buffer *ab,
- 		if (inode) {
- 			audit_log_format(ab, " dev=");
- 			audit_log_untrustedstring(ab, inode->i_sb->s_id);
--			audit_log_format(ab, " ino=%" PRIino "u", inode->i_ino);
-+			audit_log_format(ab, " ino=%llu", inode->i_ino);
- 		}
- 
- 		audit_log_format(ab, " ioctlcmd=0x%hx", a->u.op->cmd);
-@@ -246,7 +246,7 @@ void audit_log_lsm_data(struct audit_buffer *ab,
- 		if (inode) {
- 			audit_log_format(ab, " dev=");
- 			audit_log_untrustedstring(ab, inode->i_sb->s_id);
--			audit_log_format(ab, " ino=%" PRIino "u", inode->i_ino);
-+			audit_log_format(ab, " ino=%llu", inode->i_ino);
- 		}
- 		break;
- 	}
-@@ -265,7 +265,7 @@ void audit_log_lsm_data(struct audit_buffer *ab,
- 		}
- 		audit_log_format(ab, " dev=");
- 		audit_log_untrustedstring(ab, inode->i_sb->s_id);
--		audit_log_format(ab, " ino=%" PRIino "u", inode->i_ino);
-+		audit_log_format(ab, " ino=%llu", inode->i_ino);
- 		rcu_read_unlock();
- 		break;
- 	}
-diff --git a/security/selinux/hooks.c b/security/selinux/hooks.c
-index 9430f44c81447708c67ddc35c5b4254f16731b8f..8f38de4d223ea59cfea6bbe73747d7b228e0c33f 100644
---- a/security/selinux/hooks.c
-+++ b/security/selinux/hooks.c
-@@ -1400,7 +1400,7 @@ static int inode_doinit_use_xattr(struct inode *inode, struct dentry *dentry,
- 	if (rc < 0) {
- 		kfree(context);
- 		if (rc != -ENODATA) {
--			pr_warn("SELinux: %s:  getxattr returned %d for dev=%s ino=%" PRIino "u\n",
-+			pr_warn("SELinux: %s:  getxattr returned %d for dev=%s ino=%llu\n",
- 				__func__, -rc, inode->i_sb->s_id, inode->i_ino);
- 			return rc;
- 		}
-@@ -1412,13 +1412,13 @@ static int inode_doinit_use_xattr(struct inode *inode, struct dentry *dentry,
- 					     def_sid, GFP_NOFS);
- 	if (rc) {
- 		char *dev = inode->i_sb->s_id;
--		kino_t ino = inode->i_ino;
-+		u64 ino = inode->i_ino;
- 
- 		if (rc == -EINVAL) {
--			pr_notice_ratelimited("SELinux: inode=%" PRIino "u on dev=%s was found to have an invalid context=%s.  This indicates you may need to relabel the inode or the filesystem in question.\n",
-+			pr_notice_ratelimited("SELinux: inode=%llu on dev=%s was found to have an invalid context=%s.  This indicates you may need to relabel the inode or the filesystem in question.\n",
- 					      ino, dev, context);
- 		} else {
--			pr_warn("SELinux: %s:  context_to_sid(%s) returned %d for dev=%s ino=%" PRIino "u\n",
-+			pr_warn("SELinux: %s:  context_to_sid(%s) returned %d for dev=%s ino=%llu\n",
- 				__func__, context, -rc, dev, ino);
- 		}
- 	}
-@@ -3477,7 +3477,7 @@ static void selinux_inode_post_setxattr(struct dentry *dentry, const char *name,
- 					   &newsid);
- 	if (rc) {
- 		pr_err("SELinux:  unable to map context to SID"
--		       "for (%s, %" PRIino "u), rc=%d\n",
-+		       "for (%s, %llu), rc=%d\n",
- 		       inode->i_sb->s_id, inode->i_ino, -rc);
- 		return;
- 	}
-diff --git a/security/smack/smack_lsm.c b/security/smack/smack_lsm.c
-index 22b6bd322840c82697c38c07b19a4677e7da2598..2eb3368a3632b836df54ba8628c16f7215ddf3ea 100644
---- a/security/smack/smack_lsm.c
-+++ b/security/smack/smack_lsm.c
-@@ -182,7 +182,7 @@ static int smk_bu_inode(struct inode *inode, int mode, int rc)
- 	char acc[SMK_NUM_ACCESS_TYPE + 1];
- 
- 	if (isp->smk_flags & SMK_INODE_IMPURE)
--		pr_info("Smack Unconfined Corruption: inode=(%s %" PRIino "u) %s\n",
-+		pr_info("Smack Unconfined Corruption: inode=(%s %llu) %s\n",
- 			inode->i_sb->s_id, inode->i_ino, current->comm);
- 
- 	if (rc <= 0)
-@@ -195,7 +195,7 @@ static int smk_bu_inode(struct inode *inode, int mode, int rc)
- 
- 	smk_bu_mode(mode, acc);
- 
--	pr_info("Smack %s: (%s %s %s) inode=(%s %" PRIino "u) %s\n", smk_bu_mess[rc],
-+	pr_info("Smack %s: (%s %s %s) inode=(%s %llu) %s\n", smk_bu_mess[rc],
- 		tsp->smk_task->smk_known, isp->smk_inode->smk_known, acc,
- 		inode->i_sb->s_id, inode->i_ino, current->comm);
- 	return 0;
-@@ -214,7 +214,7 @@ static int smk_bu_file(struct file *file, int mode, int rc)
- 	char acc[SMK_NUM_ACCESS_TYPE + 1];
- 
- 	if (isp->smk_flags & SMK_INODE_IMPURE)
--		pr_info("Smack Unconfined Corruption: inode=(%s %" PRIino "u) %s\n",
-+		pr_info("Smack Unconfined Corruption: inode=(%s %llu) %s\n",
- 			inode->i_sb->s_id, inode->i_ino, current->comm);
- 
- 	if (rc <= 0)
-@@ -223,7 +223,7 @@ static int smk_bu_file(struct file *file, int mode, int rc)
- 		rc = 0;
- 
- 	smk_bu_mode(mode, acc);
--	pr_info("Smack %s: (%s %s %s) file=(%s %" PRIino "u %pD) %s\n", smk_bu_mess[rc],
-+	pr_info("Smack %s: (%s %s %s) file=(%s %llu %pD) %s\n", smk_bu_mess[rc],
- 		sskp->smk_known, smk_of_inode(inode)->smk_known, acc,
- 		inode->i_sb->s_id, inode->i_ino, file,
- 		current->comm);
-@@ -244,7 +244,7 @@ static int smk_bu_credfile(const struct cred *cred, struct file *file,
- 	char acc[SMK_NUM_ACCESS_TYPE + 1];
- 
- 	if (isp->smk_flags & SMK_INODE_IMPURE)
--		pr_info("Smack Unconfined Corruption: inode=(%s %" PRIino "u) %s\n",
-+		pr_info("Smack Unconfined Corruption: inode=(%s %llu) %s\n",
- 			inode->i_sb->s_id, inode->i_ino, current->comm);
- 
- 	if (rc <= 0)
-@@ -253,7 +253,7 @@ static int smk_bu_credfile(const struct cred *cred, struct file *file,
- 		rc = 0;
- 
- 	smk_bu_mode(mode, acc);
--	pr_info("Smack %s: (%s %s %s) file=(%s %" PRIino "u %pD) %s\n", smk_bu_mess[rc],
-+	pr_info("Smack %s: (%s %s %s) file=(%s %llu %pD) %s\n", smk_bu_mess[rc],
- 		sskp->smk_known, smk_of_inode(inode)->smk_known, acc,
- 		inode->i_sb->s_id, inode->i_ino, file,
- 		current->comm);
+ 	amdgpu_bo_print_flag(m, bo, CPU_ACCESS_REQUIRED);
+ 	amdgpu_bo_print_flag(m, bo, NO_CPU_ACCESS);
 
 -- 
 2.53.0
