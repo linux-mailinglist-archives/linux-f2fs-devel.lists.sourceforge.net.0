@@ -2,41 +2,41 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id UH11Jh74pWkEIgAAu9opvQ
+	id KGdeJjD4pWkEIgAAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 02 Mar 2026 21:50:38 +0100
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 02 Mar 2026 21:50:56 +0100
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 38DA21E0D97
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 02 Mar 2026 21:50:38 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id F217F1E0DFD
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 02 Mar 2026 21:50:55 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
 	List-Unsubscribe:List-Id:Subject:To:In-Reply-To:References:Message-Id:
 	MIME-Version:Date:Sender:Content-ID:Content-Description:Resent-Date:
 	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=aHaySxZM93efMv/Dntaqxx4zwvO6uYRk8wUAay1FlPA=; b=atLlzfRyDT8VdXb4HulsQHNlOE
-	yzGAH6yTi//WrOW7Ei2S23aI3YCNJdVUrmG5QQJBKWqAkTomiESUREb23CiE4FSF1S3qV4F7dSFQA
-	wfJ88p3EOSNObYNVYWi0BnVYYZlVwMf/gJCqb5cIwayPxcdH479j37nPsiNYzIZjb+hQ=;
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=KYaMyqO4cd8bnnOAFiqDeb8kq6kkTm0xXXLngDJvxEU=; b=NIhzLKRSoLOtSdSom5lvYjDOSf
+	PRCoVedQEGUC6EL3Gx7L9v1BbiWdM8fyRC/UXuybv5q3H0jQoSW9A9sOVU1Ma6GyMV7mITYpRwmHD
+	L8rE2BLJskhpBTD5UZQiDrfEUIwKX48NwQqLUwgoOIhWDERWiRH759aNiNmHTrf5q8fY=;
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vxADs-0005OB-4I;
-	Mon, 02 Mar 2026 20:50:36 +0000
+	id 1vxAE8-0004AP-Jz;
+	Mon, 02 Mar 2026 20:50:52 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jlayton@kernel.org>) id 1vxADo-0005NH-N7;
- Mon, 02 Mar 2026 20:50:33 +0000
+ (envelope-from <jlayton@kernel.org>) id 1vxAE7-0004A4-ER;
+ Mon, 02 Mar 2026 20:50:51 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Cc:To:In-Reply-To:References:Message-Id:
  Content-Transfer-Encoding:Content-Type:MIME-Version:Subject:Date:From:Sender:
  Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
  :Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=wMoSJdgdENlETIvEUtfq7nApMbU8o6sDMpY0Y0wWbn4=; b=CEmAq7q3ht/nQgiFvC9up70swq
- rN/iv8QbykUFdrDmQYgvK0LJtEqM3hH7GXrtI21knkhOtmMCIGBwYocGNgiorY7vHcUXEyI4FbHtO
- RfqT+h9LhdPzpfrP4a5kOg0XatxLL+x1fQA4+dUxn+N3brIf0HESaSmiPK78tj1zb9jk=;
+ bh=gOogMmlqO5KnCMrnc7mgiYO0AiIEeBH0jPgNNxah9n0=; b=hFuMGGwL1yJSmWkWUbFSQyT4TS
+ grJOTpPiD+Ft/qvYytuPQz9R9s+5oj/CwW35KR01zjZYlAsvNUeEhyChgvzM5uWi5+69vhVkZvc9w
+ FWjc4wKUnj1ExDA8wB9b99SUgZ/O86DpL+9RYm8XBysb1cp6rbtnYqUaoqDyp0+edHp4=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Cc:To:In-Reply-To:References:Message-Id:Content-Transfer-Encoding:
@@ -44,31 +44,31 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=wMoSJdgdENlETIvEUtfq7nApMbU8o6sDMpY0Y0wWbn4=; b=LNiWNbtVPhzwyNDTGZCaUdRCa4
- 16aB+7KuUdqoTOCU+DlyMT14SNOfvyEU1YwDUYHdlpXSsnCUYvjJdEjFIFwoedDhKe/GWeBMU7LPH
- D81CmGUlmzVKLRzGYsd5GM4VoBpZ3hnVk7hVmgl8QxsQOPYi5UQKG/r37N80tBmggxmg=;
-Received: from tor.source.kernel.org ([172.105.4.254])
+ bh=gOogMmlqO5KnCMrnc7mgiYO0AiIEeBH0jPgNNxah9n0=; b=TXc32iexedHug+gVW8lMfJLNfP
+ doLukIH3qoNSAl0R/MwvFVMxQReg0hg+QjsOhGGGYPMgr8wsFtvBXfuZ0Fci5MkD3Ueo84GwK/Dzj
+ IHGhO6YAyOmDBda4MM+FzQqx9yJphBoJpdxLmRFhHqDJ9/FaHu+0+JonFJpmSvkJEDx0=;
+Received: from sea.source.kernel.org ([172.234.252.31])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vxADn-0007F8-Ix; Mon, 02 Mar 2026 20:50:33 +0000
+ id 1vxAE6-0007Hg-G7; Mon, 02 Mar 2026 20:50:51 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id AE0A26183D;
+ by sea.source.kernel.org (Postfix) with ESMTP id D1C0040634;
+ Mon,  2 Mar 2026 20:50:39 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 99D49C2BC87;
  Mon,  2 Mar 2026 20:50:25 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4CFC1C2BCAF;
- Mon,  2 Mar 2026 20:50:11 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1772484625;
- bh=uNYFxtg5Iv5MXUsRjSnqZGWzI+LksrISC7QvWEDcE88=;
+ s=k20201202; t=1772484639;
+ bh=cLgIu+r8isiqKa8h6mhOgoB9Fvp0x6cK/inF2LepjEg=;
  h=From:Date:Subject:References:In-Reply-To:To:Cc:From;
- b=dUluxAGL9dbpHV0Un3l78iD2YJVbMrQu1Bd02WAf7Z4BPvMflxqtAVZpbEzaq6i1Y
- WuUqDTCPchi4N+ooyqer66e4url/wraC+5KhJdG0UPsOr5PEn1NqTwnidWuSdRD/sT
- Z6EtOJh6y5/KBCbHADqSwAP+FwBnT+EC+5niBxaZAZInGEGGUZpE3P7E0Dpo970iZI
- cvNPiWtZ4VbDdM4Jwr+YTreyWRrF06Nw5T/nzxV9YtUj6jZP3b8YNwwRsJyB2ZfVwB
- ISrbSIaAOOY5322QCpIywNnN/Q/FGKDqkJJf3EUTq/1XU9lYa75SMvlKMBB3wuYXZu
- KF64/hQAst3LQ==
-Date: Mon, 02 Mar 2026 15:25:30 -0500
+ b=P1h1fEKemmxMNI5khnWmEMlcoMkgB+/ndcq26a36WpYNnj5HqMAU6dhjx53UqCAeA
+ lP9YqLzJ9qmLhhlG/FOnaB4UY0KoRnJNC5Vf5fXCQWMRyqSBn3UmmHNuj6dtwi8Ae5
+ u5+awrlVxw+WcDM8SGld99KFh9rdl4J9HmerK1eWhNrBYmVACE58jX3jIEQSectG4f
+ jIauczB9D5gEW5zzQDRaLDnkHcURB8shFhmSt86kCavUCnVKiyy9t75OhRCspCDTf4
+ dhI3sPDxX5ZI/v317crGVUmEkI7n6rxCPKqjLrkhDC5+WoRB9yK/u4f3E2o1CGG6PT
+ Fpr9AV83Kh5iA==
+Date: Mon, 02 Mar 2026 15:25:31 -0500
 MIME-Version: 1.0
-Message-Id: <20260302-iino-u64-v2-106-e5388800dae0@kernel.org>
+Message-Id: <20260302-iino-u64-v2-107-e5388800dae0@kernel.org>
 References: <20260302-iino-u64-v2-0-e5388800dae0@kernel.org>
 In-Reply-To: <20260302-iino-u64-v2-0-e5388800dae0@kernel.org>
 To: Alexander Viro <viro@zeniv.linux.org.uk>, 
@@ -161,34 +161,34 @@ To: Alexander Viro <viro@zeniv.linux.org.uk>,
  Jesper Dangaard Brouer <hawk@kernel.org>, 
  John Fastabend <john.fastabend@gmail.com>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1242; i=jlayton@kernel.org;
- h=from:subject:message-id; bh=uNYFxtg5Iv5MXUsRjSnqZGWzI+LksrISC7QvWEDcE88=;
- b=owEBbQKS/ZANAwAKAQAOaEEZVoIVAcsmYgBppfIMt5x4iQABLZluIVrTQbU0nR9vsQFBc6H8e
- MaC1UngLK6JAjMEAAEKAB0WIQRLwNeyRHGyoYTq9dMADmhBGVaCFQUCaaXyDAAKCRAADmhBGVaC
- FRSWEADRmDAkhNpK6+h7nauxslYyedT5jkgsddgrricfItWlqYChN5XEbiXdUOC4dm00LJ3n7Nm
- VsWfAVmXtEEMi1+OpAFZvptU/z1Uhp9fYwk0i0r4u9ryoW6/Hh2Q+i04MpCrkJsEBlVnFZEF1Ri
- z2Yi6MhJXl8YpsG98d2VAXOVJ7cfOynOaqYULzaleFqzV/irdYjVAZ1bSb2hpsbDiJgwtxXnemR
- 2vmYccDKKghYcmpjZHg9r2aADiTOyck38QbcEC2urm/h+1jvFG0W9jPua7cXa2x3Z/pJZiX+mlN
- NC2f7hcaxhvWDuPOvxL5+/VdL7xIL8L3Px4gHh6Ffr1QWvth403RYl1iUY30L7AHGxs72TnqJN8
- CLghrL0HEqob/Q2qg4+542aTMFH7sqfBoP8+vK2E7w+ZS5bm19LLfKuGuwhzUpCua5AS9L73+60
- VCBvv8iCUYZfwgoQHkqxe7w3Qkz3Ictbi61tv0JW6jg0DvAiU1dNNFn67R1WJuLRFR65OSXw0g+
- VpqQwvPKpMNahMcL7sma6piTYysuNd8Z5tbgGm0RMauZ/TdZMXfcn54KRTENJ2KU+CuzXuHHdH0
- Pc1W3xausB9ERPDY1WKRZXPjZ1W4zh9wces/wn5ONEa8DBA7snqsUlleWjtkb0xDTICuyOdXk5R
- KkYgGAqOFGM8+Qw==
+X-Developer-Signature: v=1; a=openpgp-sha256; l=891; i=jlayton@kernel.org;
+ h=from:subject:message-id; bh=cLgIu+r8isiqKa8h6mhOgoB9Fvp0x6cK/inF2LepjEg=;
+ b=owEBbQKS/ZANAwAKAQAOaEEZVoIVAcsmYgBppfINS7AXFLAAzgn9fyK/X1PwsN/DtHFgvy+zR
+ mmwTDJsS+2JAjMEAAEKAB0WIQRLwNeyRHGyoYTq9dMADmhBGVaCFQUCaaXyDQAKCRAADmhBGVaC
+ FY7lD/9TWal1LPrcFaJ43Jqomy251Mc9Q643LlnCCv5/Rc/KRGLbH5fSwQWu7UofnrUqnUaEsC4
+ hsXBL7UC5EOWJZOjMitjmjrtNm/jpQ845A3htLfW7scR+KxS3KMa/ArUc9eX+tIDXBjom9SMBLa
+ zUFz7APNciQuk0y10edidKTFAkD01P1CrWiuK3bw6giGwc6Y5MjQLEC7nV3YW9uP0qVRB0B+9TP
+ v0UY0BVa1jRp3IDbN4TlixCeYS3NFDPihTp6PbASMqTK4AWSSl0mFuI6o6plhWwg9zyMHhc2d3d
+ g/x4uYQfREiTtQ9DdfLEb6xy0KsNmvTvvjp7fsNJdH5qpSUQnvGAogY6LGqj3RKjFwVaqzurHIq
+ pXH8xZNrQGo7YGVIIbf6Xi0hsoAafjsCWVejiHi0Ge4qEU+9wZtwMFbscsLp61ltLLeKA4rUv8j
+ H6HpvtXsGRTh8KatLQS0tEw8mglMgS2gj7ISyCmRJN3j88kCNFDbSklxD9lXeJJV9tgA0sfqfVJ
+ P5sWGjParT12dxe1TCowgNPLFDIdhK9uKdQyNDqE0h6MdW2pB+t11ubrr52s4qmVUuV9KdT7UEz
+ wlleqG/f03XMhsTl5Q9D7R6wZnV7ejo/JiutdLn9N2XdPS6wVG25Fe1wlBjQ/MFeRWDmEm7QVPN
+ 83qraK44XF/1e0g==
 X-Developer-Key: i=jlayton@kernel.org; a=openpgp;
  fpr=4BC0D7B24471B2A184EAF5D3000E684119568215
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
  Content preview:  Now that i_ino is u64 and the PRIino format macro has been
- removed, replace all uses in drm/amdgpu with the concrete format strings.
- Signed-off-by: Jeff Layton <jlayton@kernel.org> ---
- drivers/gpu/drm/amd/amdgpu/amdgpu_object.c
- | 4 ++-- 1 file changed, 2 insertions(+), 2 deletions(-) 
+ removed,
+ replace all uses in dma-buf with the concrete format strings. Signed-off-by:
+ Jeff Layton <jlayton@kernel.org> --- drivers/dma-buf/dma-buf.c | 2 +- 1 file
+ changed, 1 insertion(+), 1 deletion(-) 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -200,8 +200,8 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1vxADn-0007F8-Ix
-Subject: [f2fs-dev] [PATCH v2 106/110] drm/amdgpu: replace PRIino with
+X-Headers-End: 1vxAE6-0007Hg-G7
+Subject: [f2fs-dev] [PATCH v2 107/110] dma-buf: replace PRIino with
  %llu/%llx format strings
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
@@ -239,7 +239,7 @@ Cc: nvdimm@lists.linux.dev, jfs-discussion@lists.sourceforge.net,
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
-X-Rspamd-Queue-Id: 38DA21E0D97
+X-Rspamd-Queue-Id: F217F1E0DFD
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [-7.11 / 15.00];
 	WHITELIST_DMARC(-7.00)[sourceforge.net:D:+];
@@ -277,29 +277,26 @@ X-Spamd-Result: default: False [-7.11 / 15.00];
 X-Rspamd-Action: no action
 
 Now that i_ino is u64 and the PRIino format macro has been removed,
-replace all uses in drm/amdgpu with the concrete format strings.
+replace all uses in dma-buf with the concrete format strings.
 
 Signed-off-by: Jeff Layton <jlayton@kernel.org>
 ---
- drivers/gpu/drm/amd/amdgpu/amdgpu_object.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ drivers/dma-buf/dma-buf.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_object.c b/drivers/gpu/drm/amd/amdgpu/amdgpu_object.c
-index d62f7cd1bdd3643803a99c3cbe35fa5b19217eeb..aaa8cdc122c49ebf0b5b6c55edb3a1db2a4fd710 100644
---- a/drivers/gpu/drm/amd/amdgpu/amdgpu_object.c
-+++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_object.c
-@@ -1676,9 +1676,9 @@ u64 amdgpu_bo_print_info(int id, struct amdgpu_bo *bo, struct seq_file *m)
- 	attachment = READ_ONCE(bo->tbo.base.import_attach);
+diff --git a/drivers/dma-buf/dma-buf.c b/drivers/dma-buf/dma-buf.c
+index 46ae9c77e6045a7cac7c318c3afe41daf88c8dee..8c16c8c425cc84cf379d7f790d054e140471c8ac 100644
+--- a/drivers/dma-buf/dma-buf.c
++++ b/drivers/dma-buf/dma-buf.c
+@@ -1708,7 +1708,7 @@ static int dma_buf_debug_show(struct seq_file *s, void *unused)
  
- 	if (attachment)
--		seq_printf(m, " imported from ino:%" PRIino "u", file_inode(dma_buf->file)->i_ino);
-+		seq_printf(m, " imported from ino:%llu", file_inode(dma_buf->file)->i_ino);
- 	else if (dma_buf)
--		seq_printf(m, " exported as ino:%" PRIino "u", file_inode(dma_buf->file)->i_ino);
-+		seq_printf(m, " exported as ino:%llu", file_inode(dma_buf->file)->i_ino);
  
- 	amdgpu_bo_print_flag(m, bo, CPU_ACCESS_REQUIRED);
- 	amdgpu_bo_print_flag(m, bo, NO_CPU_ACCESS);
+ 		spin_lock(&buf_obj->name_lock);
+-		seq_printf(s, "%08zu\t%08x\t%08x\t%08ld\t%s\t%08" PRIino "u\t%s\n",
++		seq_printf(s, "%08zu\t%08x\t%08x\t%08ld\t%s\t%08llu\t%s\n",
+ 				buf_obj->size,
+ 				buf_obj->file->f_flags, buf_obj->file->f_mode,
+ 				file_count(buf_obj->file),
 
 -- 
 2.53.0
