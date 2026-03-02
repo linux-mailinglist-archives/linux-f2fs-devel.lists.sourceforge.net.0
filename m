@@ -2,41 +2,41 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id +MMlAFf5pWljIgAAu9opvQ
+	id UE1mFUT3pWmkIQAAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 02 Mar 2026 21:55:51 +0100
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 02 Mar 2026 21:47:00 +0100
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 41D121E11CB
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 02 Mar 2026 21:55:50 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id AAD101E09A7
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 02 Mar 2026 21:46:59 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
 	List-Unsubscribe:List-Id:Subject:To:In-Reply-To:References:Message-Id:
 	MIME-Version:Date:Sender:Content-ID:Content-Description:Resent-Date:
 	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=K0GKPTfG7p69lgDX2f+z1jVLyCZV3rLA2M7sMOT8V8I=; b=XN2Y2tcHEeCp+EbcI2Kt4P2t3O
-	7hdd10EMiiZjkWVXHtJmbGEpjJSne+a1J97TSwKfrxcpyitB51f0JgU9Ki1pz7OsO+RWinqp3h/wq
-	dz5HuEYojWUWgahWiuZ2ZyFqJse1UIVq+S6rWiv4SMof4rTKSZYn03V3BNlXUmIFe0AA=;
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=kGt8EmhPCBKOxeVMwDMguAYGShqQakZcToaivSptcRo=; b=OoYpFUQEtSrBUJ36izYje2nXHl
+	aEILsUtHtqd/herikrjR+rL+Q3DYtrTvX2Kz+5+6cc+Bvrg5J4VAGmjsf3cvqS0wYBBG59seL2mg9
+	ZY/zItQtrMdlwprrDOdLigUs02xi0TRHcESQJPPr5/6jRFdoGiUJkzAdb29fz13OSwkE=;
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vxAIs-0004BD-Lf;
-	Mon, 02 Mar 2026 20:55:46 +0000
+	id 1vxAAL-0003gx-OW;
+	Mon, 02 Mar 2026 20:46:57 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jlayton@kernel.org>) id 1vxAIr-0004Au-2U;
- Mon, 02 Mar 2026 20:55:45 +0000
+ (envelope-from <jlayton@kernel.org>) id 1vxAAJ-0003gY-B5;
+ Mon, 02 Mar 2026 20:46:55 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Cc:To:In-Reply-To:References:Message-Id:
  Content-Transfer-Encoding:Content-Type:MIME-Version:Subject:Date:From:Sender:
  Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
  :Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=4x8Ajv+557L1GX0Efh1pGl/bCZw/7YI5SnocHg7l4MM=; b=atuPNf3GGbh4LizKlE6CD1F70Z
- MQuZJmsrd35Z9guN27azk2t895FfPXp9heD+Tbyabe2gLmx5Tu6SMhN+37cq4krf+kCPly83s2RyQ
- F08MNsbNW6iJSFl8iKl7ku22moo5M7DCMexWPfMK6sa5pASWDVZdOq4alS7F9G09zPRA=;
+ bh=224gAxWg0DZZ9RcdgtiPF5PSIYOmfXJn1BNm6BQm4iY=; b=gE+IPu9lPbIC2Pwp+pF4xmtfC4
+ mbyr+jM2viBtQduhB+1qQcyuVYr/tGhUDQr3DoW/VP/d6AEOwZIUyMpkpgVepuaA9OEoisesTd3sC
+ aimwcFtXv758Mf6ysX58ioVX5nNaVUdvewHcZQ7Uu+AnnnZdabaUMl9U63IMpqW5w6cg=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Cc:To:In-Reply-To:References:Message-Id:Content-Transfer-Encoding:
@@ -44,31 +44,31 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=4x8Ajv+557L1GX0Efh1pGl/bCZw/7YI5SnocHg7l4MM=; b=CYxYsmW4rWpus+4SywirjpYltD
- I1xfuaZKKdeZ3pjN/ycQ8anchu1xoZRt53xP6kWkQJM4tIfi42K7CtkoSGZc0QJCRbOp4DKIBxR5a
- Y5rC8Sy4HOnGaI3WLc98DgXH5gAaiMuqAslDfKuG2vvWyJT2rV8c1rm5f0zD8JIB9XxE=;
+ bh=224gAxWg0DZZ9RcdgtiPF5PSIYOmfXJn1BNm6BQm4iY=; b=Jb8cz59bdQmY4iPFw/nM0Ky5aX
+ 13qqzRN/dPQqRWnjwkYOQFr3sFs+ShEeNBkf59LFNsgbPu2/PmU7UOR2eUyIxi3DBQWYA0o4jBQGC
+ jKkemuy6mkR36rktTu+YF5ewdpcgjV0o9oIM1cN8hI2clJSgmk4qgpIHoW6feZhsXyKA=;
 Received: from tor.source.kernel.org ([172.105.4.254])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vxAIq-0007eW-HV; Mon, 02 Mar 2026 20:55:45 +0000
+ id 1vxAAH-0006om-Rd; Mon, 02 Mar 2026 20:46:55 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id A720F60127;
+ by tor.source.kernel.org (Postfix) with ESMTP id 0D0DD60141;
+ Mon,  2 Mar 2026 20:46:48 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 94E7EC19425;
  Mon,  2 Mar 2026 20:46:33 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3FB20C19423;
- Mon,  2 Mar 2026 20:46:19 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1772484393;
- bh=pNyc/GMO6ov372VncJrjkwuufp4u2AdNw50PlPHSxFI=;
+ s=k20201202; t=1772484407;
+ bh=vp0zPvf4xGJU8rljdJEp2XVsjnBl+O9vg1b2GqgCbLI=;
  h=From:Date:Subject:References:In-Reply-To:To:Cc:From;
- b=ClazEEobUze8svAWXQKJkjXIHd9psmPfuoY2+5Gdn2uCiW5u/+gqZI9cL6nR5Jaha
- xWkEp933aEve3u1I9tRXCBSCX7X6Rn1p+zjg7K9FcV6iZnpv3XaCGcL3MOiIUYHGcw
- lbJZcVau4YO7NXSfixiJrLiuyz5O3D/o6r9kfUsd/mvvfgo7OTJ9VTBzjzQdYNa8s2
- fxnINjMGit30HNhY7XrjNiTGRy5bC+ZOYJr2/wdOeFYu9bxPgvK7+aBvL/El48DzWL
- l7kV0dsx5qct2gflgUQ9N7+UHoUjSEsnQGU8KpcYOpocYclnt+4dpTuGDVvFotruK0
- LxVaO4ZP9T7dQ==
-Date: Mon, 02 Mar 2026 15:25:14 -0500
+ b=ao8cWXeU3C09G1xH+QkDsKkvNhRkpOLVBv2yk1GUM0JbIv9pTPlWFzDh7wDwobU1k
+ 03B6hNEGKWBIA9+zJxX9wJQaf+qJ502R//MztKoI+4NBvQSKR+/48T0vL/HEGlXC2y
+ Ek2YoHcq8/NY90GlJ540fUYxSaFiPukIOkbJViutTH2V03vTM2J9f+bh40+1O6T+fV
+ EkNeJIN1dsmt9P1whwPuNQNrlHNy4rYanqZ9NqkUJ1t8zA8Nj7Kp4eryWYAgk6sb2I
+ ubIqZzyyjnsCmuyFfWgQ+8dcJQenHyIJWSWa0vDgNqWVLmMs26mIxU1ixsvQMbAFaz
+ MmXG8DWwBeTLg==
+Date: Mon, 02 Mar 2026 15:25:15 -0500
 MIME-Version: 1.0
-Message-Id: <20260302-iino-u64-v2-90-e5388800dae0@kernel.org>
+Message-Id: <20260302-iino-u64-v2-91-e5388800dae0@kernel.org>
 References: <20260302-iino-u64-v2-0-e5388800dae0@kernel.org>
 In-Reply-To: <20260302-iino-u64-v2-0-e5388800dae0@kernel.org>
 To: Alexander Viro <viro@zeniv.linux.org.uk>, 
@@ -161,20 +161,20 @@ To: Alexander Viro <viro@zeniv.linux.org.uk>,
  Jesper Dangaard Brouer <hawk@kernel.org>, 
  John Fastabend <john.fastabend@gmail.com>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2386; i=jlayton@kernel.org;
- h=from:subject:message-id; bh=pNyc/GMO6ov372VncJrjkwuufp4u2AdNw50PlPHSxFI=;
- b=owEBbQKS/ZANAwAKAQAOaEEZVoIVAcsmYgBppfIIfaujhjMLqAn1ppJL9LQQ5PrWgczSPGGCx
- ALMZxMQc82JAjMEAAEKAB0WIQRLwNeyRHGyoYTq9dMADmhBGVaCFQUCaaXyCAAKCRAADmhBGVaC
- FbZTEACM3CL7hm+JRd+2fosamM2aW7VAlbzyjEFyJq6zk08OOdJkR2La4m7wUSfF0yX5t0HYnXl
- W+OtF5PPZmJVhsdgGX0YChExon1Jz4DcSRkVRlUvoENaed4tdKvD4fJvwN1JhjXkldlRKPxFVBV
- AFtTnPISVBNXhLkw541aR70iUfrLYjBeg+/Q9a1KyfpUcEt31WShsjE75aSweu7035wqdnhgOu2
- YY04gPPgRHLfDOORnG1Wq/S+y7HBNxB9CGYJADUlBvAH3JwnWLG6e/09L0LxzHwpCIwCM47B8a4
- mBvMs3FEgIljH80PN+IeKRAS3gqGN9WMzXI+NAgFV8BPUeXc4eOc+iq8pMx0gMgKjvSLW63PgmQ
- FeO/LW6LWldDcH9RsCOLnvcxEua4O4fOSd3sRq+5D0E1SMZQGEFi1BVtnyTnpnFDY/r0cBxaSlY
- j9NqyLwOo90mMdzog5q7s5Hf74PzjtJgQBvBd0MvpfPEBQQ0JSBEX6c2b9GQNtuLWXWNDJ36ign
- N8BefPDRqtqZDlgyVZQjFDS76p6laor3HeFzNS1MTt38TYDD7KRYxVPrHuxMVgQ6wG7lS8Smgi9
- sR+FMuF2Y6LZUvS2QzaADXdJ68Fkz1sSry904JnBW1rQ/W4dkYE7xV3OH+xqIWjALwQsFZyPz4h
- AV0xdrKEro9Ko9w==
+X-Developer-Signature: v=1; a=openpgp-sha256; l=843; i=jlayton@kernel.org;
+ h=from:subject:message-id; bh=vp0zPvf4xGJU8rljdJEp2XVsjnBl+O9vg1b2GqgCbLI=;
+ b=owEBbQKS/ZANAwAKAQAOaEEZVoIVAcsmYgBppfIIVMHHvceWBREHvqQurM0kfFdE+gebjZBd8
+ i3g3r8xANmJAjMEAAEKAB0WIQRLwNeyRHGyoYTq9dMADmhBGVaCFQUCaaXyCAAKCRAADmhBGVaC
+ FSwjD/9ZAfgzGHA/XuhcN3+Qn8iU6M8mbeFn9K8HG25WwxL8Ryj339D63XriZCJla5mdb3xriHO
+ Wa0WTzXWUDojsc9FLecu8CXqxsHFeXUQfoyb4WBlA2ldn+OJY04Zf/IRPUHFTLPOY+GiCSbwtn3
+ a1TRzXxhX1AVr2vMwg0YabnT20XQEB/otx84bAx8iYGahuGrFrY2g30Gmcy7fk3nIkrIMgy3AKR
+ hyc+lnGS8RZe4HEAk+ZQw9eN22V8zAKop8PreX7joAs+7cZU1DzXQ+qSzv6cGL0YZNDLjYp+jfS
+ cJeUWbBZWQyrpOC+DPTGLZrFtQR4Auf1UOHvwVHApkOR4Zmsl6Z3U+3n2cYxuJNpi98KyNh26lY
+ 9LklbWv4bGi1sfDkh8ldg/s/EZtokLrpkdBckpc6i8dlQsrtCJOCUX2Ym3CY2dEzplKb8Bu1kDB
+ F7BjebEKlchHqvOgrXZHpOI0BK5Y3fDdsN8oVzJ1+rf/XKwWVa+lk2Rf0wxK/CvfyvzcbmRT7h2
+ ZV1fliYg7z2IZuHQBjCivcz8DS+tb2zLzxVZdFWx/NpQS4o83zrHzBHvS8n2bcKg50j32dGeKPQ
+ mB71C2Rq4OjKabEB9z3Zqd2hYmJ6dzdSo5Ak52R0k32hWu1uFdZWFm8GxCab580XDPU7gaCsVPk
+ Dfu+nE8rkBBvgVQ==
 X-Developer-Key: i=jlayton@kernel.org; a=openpgp;
  fpr=4BC0D7B24471B2A184EAF5D3000E684119568215
 X-Spam-Score: -0.2 (/)
@@ -186,9 +186,9 @@ X-Spam-Report: Spam detection software,
  the administrator of that system for details.
  Content preview:  Now that i_ino is u64 and the PRIino format macro has been
  removed,
- replace all uses in minix with the concrete format strings. Signed-off-by:
- Jeff Layton <jlayton@kernel.org> --- fs/minix/inode.c | 10 +++++----- 1 file
- changed, 5 insertions(+), 5 deletions(-) 
+ replace all uses in ntfs3 with the concrete format strings. Signed-off-by:
+ Jeff Layton <jlayton@kernel.org> --- fs/ntfs3/super.c | 2 +- 1 file changed,
+ 1 insertion(+), 1 deletion(-) 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -200,8 +200,8 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1vxAIq-0007eW-HV
-Subject: [f2fs-dev] [PATCH v2 090/110] minix: replace PRIino with %llu/%llx
+X-Headers-End: 1vxAAH-0006om-Rd
+Subject: [f2fs-dev] [PATCH v2 091/110] ntfs3: replace PRIino with %llu/%llx
  format strings
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
@@ -239,35 +239,35 @@ Cc: nvdimm@lists.linux.dev, jfs-discussion@lists.sourceforge.net,
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
-X-Rspamd-Queue-Id: 41D121E11CB
+X-Rspamd-Queue-Id: AAD101E09A7
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [-7.11 / 15.00];
 	WHITELIST_DMARC(-7.00)[sourceforge.net:D:+];
 	SUSPICIOUS_RECIPS(1.50)[];
 	DMARC_POLICY_ALLOW_WITH_FAILURES(-0.50)[];
 	RWL_MAILSPIKE_EXCELLENT(-0.40)[216.105.38.7:from];
-	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
+	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7:c];
 	MAILLIST(-0.20)[mailman];
-	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7];
+	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	DKIM_MIXED(0.00)[];
-	DMARC_POLICY_ALLOW(0.00)[lists.sourceforge.net,none];
-	RCVD_TLS_LAST(0.00)[];
-	RECEIVED_HELO_LOCALHOST(0.00)[];
-	FREEMAIL_TO(0.00)[zeniv.linux.org.uk,kernel.org,suse.cz,goodmis.org,efficios.com,intel.com,infradead.org,mit.edu,linux.dev,suse.de,redhat.com,manguebit.org,dilger.ca,suse.com,oracle.com,brown.name,talpey.com,samba.org,gmail.com,microsoft.com,dubeyko.com,ionkov.net,codewreck.org,crudebyte.com,auristor.com,themaw.net,cs.cmu.edu,fluxnic.net,tyhicks.com,physik.fu-berlin.de,vivo.com,artax.karlin.mff.cuni.cz,nod.at,paragon-software.com,fasheh.com,evilplan.org,linux.alibaba.com,omnibond.com,szeredi.hu,alarsen.net,huawei.com,wdc.com,canonical.com,paul-moore.com,namei.org,hallyn.com,linux.ibm.com,schaufler-ca.com,amd.com,ffwll.ch,linaro.org,google.com,davemloft.net,arm.com,linux.intel.com,dev.tdt.de,yaina.de,holtmann.org,hartkopp.net,pengutronix.de,secunet.com,gondor.apana.org.au,fomichev.me,iogearbox.net];
-	TO_DN_SOME(0.00)[];
-	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,kernel.org:s=k20201202];
 	MIME_TRACE(0.00)[0:+];
+	FREEMAIL_TO(0.00)[zeniv.linux.org.uk,kernel.org,suse.cz,goodmis.org,efficios.com,intel.com,infradead.org,mit.edu,linux.dev,suse.de,redhat.com,manguebit.org,dilger.ca,suse.com,oracle.com,brown.name,talpey.com,samba.org,gmail.com,microsoft.com,dubeyko.com,ionkov.net,codewreck.org,crudebyte.com,auristor.com,themaw.net,cs.cmu.edu,fluxnic.net,tyhicks.com,physik.fu-berlin.de,vivo.com,artax.karlin.mff.cuni.cz,nod.at,paragon-software.com,fasheh.com,evilplan.org,linux.alibaba.com,omnibond.com,szeredi.hu,alarsen.net,huawei.com,wdc.com,canonical.com,paul-moore.com,namei.org,hallyn.com,linux.ibm.com,schaufler-ca.com,amd.com,ffwll.ch,linaro.org,google.com,davemloft.net,arm.com,linux.intel.com,dev.tdt.de,yaina.de,holtmann.org,hartkopp.net,pengutronix.de,secunet.com,gondor.apana.org.au,fomichev.me,iogearbox.net];
+	DMARC_POLICY_ALLOW(0.00)[lists.sourceforge.net,none];
+	TO_DN_SOME(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	DKIM_MIXED(0.00)[];
+	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,kernel.org:s=k20201202];
 	ARC_NA(0.00)[];
+	RECEIVED_HELO_LOCALHOST(0.00)[];
 	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,kernel.org:-];
+	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
 	RCVD_COUNT_FIVE(0.00)[5];
 	RCPT_COUNT_GT_50(0.00)[172];
 	FROM_NEQ_ENVFROM(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
 	FROM_HAS_DN(0.00)[];
-	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
+	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,kernel.org:-];
 	NEURAL_HAM(-0.00)[-1.000];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[linux-f2fs-devel];
@@ -277,62 +277,26 @@ X-Spamd-Result: default: False [-7.11 / 15.00];
 X-Rspamd-Action: no action
 
 Now that i_ino is u64 and the PRIino format macro has been removed,
-replace all uses in minix with the concrete format strings.
+replace all uses in ntfs3 with the concrete format strings.
 
 Signed-off-by: Jeff Layton <jlayton@kernel.org>
 ---
- fs/minix/inode.c | 10 +++++-----
- 1 file changed, 5 insertions(+), 5 deletions(-)
+ fs/ntfs3/super.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/fs/minix/inode.c b/fs/minix/inode.c
-index d92059227d273564c86f100dea3366be4509090b..838b072b6cf0b54c955320916ac996e72f994a14 100644
---- a/fs/minix/inode.c
-+++ b/fs/minix/inode.c
-@@ -36,7 +36,7 @@ void __minix_error_inode(struct inode *inode, const char *function,
- 	vaf.fmt = fmt;
+diff --git a/fs/ntfs3/super.c b/fs/ntfs3/super.c
+index f32227750d6f569286fd973a5ca745a655a470de..51aa008e126a8af18c39dd825a17c12df859329d 100644
+--- a/fs/ntfs3/super.c
++++ b/fs/ntfs3/super.c
+@@ -153,7 +153,7 @@ void ntfs_inode_printk(struct inode *inode, const char *fmt, ...)
+ 	vaf.fmt = printk_skip_level(fmt);
  	vaf.va = &args;
- 	printk(KERN_CRIT "minix-fs error (device %s): %s:%d: "
--	       "inode #%" PRIino "u: comm %s: %pV\n",
-+	       "inode #%llu: comm %s: %pV\n",
- 	       inode->i_sb->s_id, function, line, inode->i_ino,
- 	       current->comm, &vaf);
+ 
+-	printk("%c%cntfs3(%s): ino=%" PRIino "x,%s %pV\n", KERN_SOH_ASCII, level,
++	printk("%c%cntfs3(%s): ino=%llx,%s %pV\n", KERN_SOH_ASCII, level,
+ 	       sb->s_id, inode->i_ino, name ? name : "", &vaf);
+ 
  	va_end(args);
-@@ -520,7 +520,7 @@ void minix_set_inode(struct inode *inode, dev_t rdev)
- 		   S_ISFIFO(inode->i_mode) || S_ISSOCK(inode->i_mode)) {
- 		init_special_inode(inode, inode->i_mode, rdev);
- 	} else {
--		printk(KERN_DEBUG "MINIX-fs: Invalid file type 0%04o for inode %" PRIino "u.\n",
-+		printk(KERN_DEBUG "MINIX-fs: Invalid file type 0%04o for inode %llu.\n",
- 		       inode->i_mode, inode->i_ino);
- 		make_bad_inode(inode);
- 	}
-@@ -542,7 +542,7 @@ static struct inode *V1_minix_iget(struct inode *inode)
- 		return ERR_PTR(-EIO);
- 	}
- 	if (raw_inode->i_nlinks == 0) {
--		printk("MINIX-fs: deleted inode referenced: %" PRIino "u\n",
-+		printk("MINIX-fs: deleted inode referenced: %llu\n",
- 		       inode->i_ino);
- 		brelse(bh);
- 		iget_failed(inode);
-@@ -580,7 +580,7 @@ static struct inode *V2_minix_iget(struct inode *inode)
- 		return ERR_PTR(-EIO);
- 	}
- 	if (raw_inode->i_nlinks == 0) {
--		printk("MINIX-fs: deleted inode referenced: %" PRIino "u\n",
-+		printk("MINIX-fs: deleted inode referenced: %llu\n",
- 		       inode->i_ino);
- 		brelse(bh);
- 		iget_failed(inode);
-@@ -692,7 +692,7 @@ static int minix_write_inode(struct inode *inode, struct writeback_control *wbc)
- 	if (wbc->sync_mode == WB_SYNC_ALL && buffer_dirty(bh)) {
- 		sync_dirty_buffer(bh);
- 		if (buffer_req(bh) && !buffer_uptodate(bh)) {
--			printk("IO error syncing minix inode [%s:%08" PRIino "x]\n",
-+			printk("IO error syncing minix inode [%s:%08llx]\n",
- 				inode->i_sb->s_id, inode->i_ino);
- 			err = -EIO;
- 		}
 
 -- 
 2.53.0
