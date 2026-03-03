@@ -2,41 +2,41 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 6JznMwTUpmnHWgAAu9opvQ
+	id KF13MMfQpmnHWgAAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 03 Mar 2026 13:28:52 +0100
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 03 Mar 2026 13:15:03 +0100
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 13C8A1EF6C7
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 03 Mar 2026 13:28:52 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 19F291EF28F
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 03 Mar 2026 13:15:03 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
 	List-Unsubscribe:List-Id:Subject:MIME-Version:References:In-Reply-To:
 	Message-ID:Date:To:Sender:Content-ID:Content-Description:Resent-Date:
 	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=9oxiRs+XUHfp1sZaSWVS1RcyeMxzkQNzqfzcUWvzD/E=; b=U70SPTme2X+KbBynJal9rUcxJ5
-	A2BUGKiSV/VzA7+HpSPrtJOovcvaTn9OQNTEgsRe4XQX3cOPz1yhbw7SGKUpnJJj9xkxoEUqKfUqS
-	MGovgIUMh7Eh/stnGVqkGib7GVInrF9x7cHnevrPVIj2fonSnsVo6lNMWA/xYbB6K1M8=;
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=kzHtPSWrLDCuTj7/3+ZXpOdENkkK3K1nvSgtdFd5rAw=; b=JD6nGEDaThEA/QsuCIguy9cYs+
+	FZFaGhHavptyCvj8YidqHI54f5CSJ8LW5LXOX9cqd23zjlwxoGeuWYi9CqsK8CePny6cGIbrTYkFx
+	VFVK8QUEre7ZqVBqDDo3JEvelERsKQrHn4Kwno/XdNcvlPl7gCTbPxYCNNTD+YME/VSc=;
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vxOrf-0007wV-Ch;
-	Tue, 03 Mar 2026 12:28:39 +0000
+	id 1vxOeK-0006ox-NY;
+	Tue, 03 Mar 2026 12:14:52 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <linux_oss@crudebyte.com>) id 1vxOre-0007wK-CD;
- Tue, 03 Mar 2026 12:28:38 +0000
+ (envelope-from <linux_oss@crudebyte.com>) id 1vxOeI-0006om-I1;
+ Tue, 03 Mar 2026 12:14:50 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Type:Content-Transfer-Encoding:MIME-Version
  :References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=sEoIOy08sNDPM7R5rm77ylqbd67+xSmbEywB7fDE1l0=; b=JLinWtdGpcGGrPjx6Hki3pL6Jr
- 0JIC8xIKpzPTQhpEVfojA8399UUa0uSL1xDKa/4DDVrFtcCAbeU3Y10w7asdaG6HQnc+CN90w8MH8
- LON8gC3GDAwA9coWL5RWUPM9yQFZoHNMUvp7iaWwxDhX9Rmu9txPumOy0mixd12PYRT4=;
+ bh=6morsqL1rf2svzHpl7Mgcq7P7Za1rjxSr9X2GzDxJdQ=; b=BuK0bTo7KLnBBK985+w+kV1nVW
+ Y8ANp8nUyrgApoUFtKoY1DHNbByLgeO/UpxSxUMfMQ6Z5TuH2s7C9OPribYbkZfbtGlt0vrhbc6AY
+ R4t/zp2Yo69fwiO3B2aFvoxOdzhxZompNy/f8ywm4Vhh3nd6w3f8qoLvYSQHCiEuMkuA=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Type:Content-Transfer-Encoding:MIME-Version:References:
@@ -44,27 +44,27 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=sEoIOy08sNDPM7R5rm77ylqbd67+xSmbEywB7fDE1l0=; b=VPJC4ayjXg9h/Ha9nMpCeYcHOY
- SNm1ss2EAn9at5W9N5uIz0G7Qb+8s2D4Pr8Fh1RyoLieNbAzCIhznro+rms1dPneogFze8faHT3Mg
- NN2+uZlee90+D8PUphVYjWw+mlMfONxg8A7xvpKhGWZ9RVw6zKoW+0RUAFUvFgF9xbaM=;
+ bh=6morsqL1rf2svzHpl7Mgcq7P7Za1rjxSr9X2GzDxJdQ=; b=KTDW+3HmOPmI5FQtALKMxs51D7
+ HpQ3JOpqS94l1l1fxC8m+OmhrbP+DuyynbQy8+wV4uCuApTumzOr8b8WubOD1hSU4MPUMY+3e5q6T
+ oeLzHN27v+dX36DtmH0GytpFCFmYjRP55gkOIeBgDwlGcd1mN1E1v/MvHlqTQcoZeqag=;
 Received: from kylie.crudebyte.com ([5.189.157.229])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vxOrd-00083Z-HQ; Tue, 03 Mar 2026 12:28:38 +0000
+ id 1vxOeH-0007Tb-2t; Tue, 03 Mar 2026 12:14:50 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=crudebyte.com; s=kylie; h=Content-Type:Content-Transfer-Encoding:
  MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:
  Content-ID:Content-Description;
- bh=sEoIOy08sNDPM7R5rm77ylqbd67+xSmbEywB7fDE1l0=; b=b45/xuqsDe3UOPQGaSOC3QVfXK
- OUdoPRzyNDl+yB4fHKVaFWk8VF87HMtM4PYj4R2Fj4RpvcBDUY2ZRib9drn+oqZiRxQCtGar4RuAz
- RYpsEbooDPugVAlnLrqpLhL+RChtlDNEybUZnd2yTo6Y9uqRr+1WKo0xl+84dQj8eWwrm7umz7n0w
- S0EXkqOXa2C/JE8ObWOt92H0I3bqxVdgJ9TfYidSDZtw7bmGYFyYek8qwJZQAKn3MZmmf/FUVClZB
- QWCtVuugHhF8BNOyUJFLJSfWPIXAHjH3TLcWIb8OST54dg+7vIizA1SPKkby0pw/QTg0kPbnj4Wj9
- VeB+nqiUcTgosudQMsEBFy4QC+CVa0DVQMYM3UhAhXRVcGAw2OrwsIYL9SNJioU6URY8vyDA6TwfM
- CFYsOZ3h1lK3cnDA5o2cflFeZC32omihqCAVM51Ge0wTTskASCR9w0ENeA5eVA/akwkz+TZ5d3AsE
- 7f82uN5RuzZACblKcmQqEKYQjiNJSERv0YAwUBb/EiPVB4IwaXQdg3R2xm5FyvBpIz+8+5sqHHPrp
- 714s96tE/7YqJbu0kX52r+TMH8FczKREFdRsqPG+YK+I8GIlGaziiB8fLP6RTgOHSdf3lUuYeXzdb
- ttbE75RJ/SInwkaKpg3BOdQZ8WJQK3Z8q+sKFDgvs=;
+ bh=6morsqL1rf2svzHpl7Mgcq7P7Za1rjxSr9X2GzDxJdQ=; b=HqDnIkLb9g/Hsc8NjMh6Jj9WuM
+ MzJbEDxoSbJB6oNviZ4lhLElZSwdxUq+F82IhdhMr3/l3EIr7ekENzTfWw1alK0l7gFMBknTTbllK
+ rQiTpC5jrJRp5O9Y1BXau586rPz904ODCjVtDrL/S+fcUwcyE3KQHYPQE7yHCQgEDc8jdW2FFMvnt
+ 8BFo41dQEnn19Baat6muvD8WHIuTeXI5DV3hJWIvjJJnnIbJ9NBNkEHuffv8Z0iXv2/2WH2/hxxuH
+ bQk7qyA82VKBDS4IWm4WLmrZDk/8F2VTqK9lWDvGIID23xeCtmOUbbOU5nkyVR/RcS3L+8d3GznDt
+ Co3UvqraJhe1cjvRT3F0oMQn4owK/B7J/FhwdoT/TARifEt06mcA+ESiihNW/SIasrPSJHOjZxjau
+ 19CUACfNAgbx8938xysaW9hCoTK95R7R5EP2KKkB7w4xq+Xr5QZHTBanCME4DOR0egc7lmc8Iwow+
+ 6QdiLyA9W5tnh0qszmpT1je2sF3FDWXPdKIW8B5OWRyh6mmktdJOqx2KnWKFBZUmJIRSr0SYCgoEj
+ OXekGpcPmr2OGrtA46WUBXf4g/mM8I/cnPWeWBCwtWVWaywFhrbuiZs4N+cAgdTRI0a7P2lT1kapU
+ +AuwoWhfJXGO+AHTpCpSIxdbyzli+byB6v/wTaiSQ=;
 To: Alexander Viro <viro@zeniv.linux.org.uk>,
  Christian Brauner <brauner@kernel.org>, Jan Kara <jack@suse.cz>,
  Steven Rostedt <rostedt@goodmis.org>, Masami Hiramatsu <mhiramat@kernel.org>, 
@@ -147,35 +147,35 @@ To: Alexander Viro <viro@zeniv.linux.org.uk>,
  Daniel Borkmann <daniel@iogearbox.net>,
  Jesper Dangaard Brouer <hawk@kernel.org>,
  John Fastabend <john.fastabend@gmail.com>, Jeff Layton <jlayton@kernel.org>
-Date: Tue, 03 Mar 2026 12:52:39 +0100
-Message-ID: <12847641.O9o76ZdvQC@weasel>
-In-Reply-To: <20260302-iino-u64-v2-16-e5388800dae0@kernel.org>
+Date: Tue, 03 Mar 2026 13:12:51 +0100
+Message-ID: <13960165.uLZWGnKmhe@weasel>
+In-Reply-To: <20260302-iino-u64-v2-69-e5388800dae0@kernel.org>
 References: <20260302-iino-u64-v2-0-e5388800dae0@kernel.org>
- <20260302-iino-u64-v2-16-e5388800dae0@kernel.org>
+ <20260302-iino-u64-v2-69-e5388800dae0@kernel.org>
 MIME-Version: 1.0
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Monday, 2 March 2026 21:24:00 CET Jeff Layton wrote: >
- Convert 9p i_ino format strings to use the PRIino format > macro in
- preparation
- for the widening of i_ino via kino_t. > > Signed-off-by: Jeff [...] 
+ Content preview:  On Monday, 2 March 2026 21:24:53 CET Jeff Layton wrote: >
+ Now that i_ino is u64 and the PRIino format macro has been removed, > replace
+ all uses in 9p with the concrete format strings. > > Signed-off- [...] 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-X-Headers-End: 1vxOrd-00083Z-HQ
-Subject: Re: [f2fs-dev] [PATCH v2 016/110] 9p: use PRIino format for i_ino
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+X-Headers-End: 1vxOeH-0007Tb-2t
+Subject: Re: [f2fs-dev] [PATCH v2 069/110] 9p: replace PRIino with %llu/%llx
+ format strings
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -213,7 +213,7 @@ Cc: nvdimm@lists.linux.dev, jfs-discussion@lists.sourceforge.net,
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
-X-Rspamd-Queue-Id: 13C8A1EF6C7
+X-Rspamd-Queue-Id: 19F291EF28F
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [-6.61 / 15.00];
 	WHITELIST_DMARC(-7.00)[sourceforge.net:D:+];
@@ -249,12 +249,12 @@ X-Spamd-Result: default: False [-6.61 / 15.00];
 	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
 	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,crudebyte.com:-];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[crudebyte.com:replyto,crudebyte.com:email,lists.sourceforge.net:dkim,lists.sourceforge.net:rdns,lists.sourceforge.net:helo]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[crudebyte.com:replyto,crudebyte.com:email]
 X-Rspamd-Action: no action
 
-On Monday, 2 March 2026 21:24:00 CET Jeff Layton wrote:
-> Convert 9p i_ino format strings to use the PRIino format
-> macro in preparation for the widening of i_ino via kino_t.
+On Monday, 2 March 2026 21:24:53 CET Jeff Layton wrote:
+> Now that i_ino is u64 and the PRIino format macro has been removed,
+> replace all uses in 9p with the concrete format strings.
 > 
 > Signed-off-by: Jeff Layton <jlayton@kernel.org>
 > ---
@@ -263,8 +263,26 @@ On Monday, 2 March 2026 21:24:00 CET Jeff Layton wrote:
 >  fs/9p/vfs_inode_dotl.c | 6 +++---
 >  3 files changed, 8 insertions(+), 8 deletions(-)
 
+9p uses the following macro to convert the 9p network protocol's QID path from
+u64 (all platforms) to ino_t. The 32-bit path of this macro should be dropped
+after this change, as it would unnecessarily truncate the value to 32-bit now
+[fs/9p/v9fs_vfs.h]:
+
+#if (BITS_PER_LONG == 32)
+#define QID2INO(q) ((ino_t) (((q)->path+2) ^ (((q)->path) >> 32)))
+#else
+#define QID2INO(q) ((ino_t) ((q)->path+2))
+#endif
+
+You are not breaking anything, if you happen to send a v3, that would be nice
+to be dropped, otherwise we'll handle that on our end later on:
+
 Reviewed-by: Christian Schoenebeck <linux_oss@crudebyte.com>
 
+I wonder whether that exceeded Claude's context size, or if that's in line
+with the prompt specified by you.
+
+/Christian
 
 
 
