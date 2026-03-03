@@ -2,12 +2,12 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id H8vLN1vkpmlkZAAAu9opvQ
+	id GINbNlvkpmnGYwAAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
 	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 03 Mar 2026 14:38:35 +0100
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id B44D01F0665
+	by mail.lfdr.de (Postfix) with ESMTPS id B28A11F0664
 	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 03 Mar 2026 14:38:34 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
@@ -15,28 +15,28 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	Subject:In-Reply-To:MIME-Version:References:Message-ID:To:From:Date:Sender:
 	Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
 	:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=NEgdiAuPosbdzxx9kWXPNRv960HpV0o/zbU2SEb+L4U=; b=buWtH74g8/D2Lg+vhv9WUdAcFa
-	/lzZJq8Lh81FCwixRm3X+H9k9IgwMl0VOGNW1k9s+CL71A8OIREbQdMcIEuKPwx/FdhG4fc1R3Ivf
-	U6K86MD/97te9e7V6DPKW61o/zDXUTb/EJTjiCy92Pd7pB9xhm9ybbqh7lDVFO0q7/Ww=;
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=iUDQ8SQs8ghiLFZDm/ZVxT1p+Z9asQcKigf1UrUApd4=; b=SVlontbhCeLt2VVoWeUK8Yp32x
+	AR2kRM+hfUr3z8TgnliIbdv0MSg0bMmJ/vhylX1Ha/n87AtJ47lh3r/okx5ay88cdmOl9vJoYxbG/
+	R+bSvPWJmwJiPF4/nkJIV+O1wHFFwc5iDqY3ArujjIIwFO/PCDfSHkPDQmmcngyc3Wvk=;
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vxPx7-0002eL-I8;
-	Tue, 03 Mar 2026 13:38:22 +0000
+	id 1vxPx6-00009w-C7;
+	Tue, 03 Mar 2026 13:38:20 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95) (envelope-from
  <BATV+880759e8e7db559b7569+8227+infradead.org+hch@bombadil.srs.infradead.org>)
- id 1vxPx3-0002dt-Ub; Tue, 03 Mar 2026 13:38:18 +0000
+ id 1vxPx4-00009n-Ri; Tue, 03 Mar 2026 13:38:19 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Tk3uESbdvJBK0ZQDjaLs3gOQpD471/ds7fVyav3aEqM=; b=Rmb98xqASrWqOvauh9ogZ8siVF
- gdTzyeo7JCjtYv+r+KchlirZ5w6hKDnw2Ihur7JCA1iWMcOalyTAiKF6QC97IpRBQBaO03qKhEp6B
- 3J/3gMVN0Qf6qLBABr4MBfpCbc2C4YxJ855W/jdwcjnfXooQMUv39+i8SxPs1PISFr9I=;
+ bh=0i9fNykMCPIYLtg51f50XyVAFwwkJeuAbf20SWgL8IA=; b=T2LY1nXiC8S/91ABzqhDQs2DPF
+ 8VETktF2LYYcwLRSMj8s3f1UQxD1QBrXqLLdg6LSd5AoZX8Q+skpEgrXpP/B54ztB2DdoZQ4lbKwR
+ 60uNmALUyQx616+JZ+F92NgWohnA5X7wAutSTvXv3YSo+7GcPGCiR69+8HvMLYdIuM+s=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -44,58 +44,59 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=Tk3uESbdvJBK0ZQDjaLs3gOQpD471/ds7fVyav3aEqM=; b=OLUQEOG/AGEumyp0ws582sOhl7
- dgT+BA6hqkD+DEtfl+pzKu+shZgH/GkCJjlULc30domBpW3D0NyI0exVhwCnNdbJywhWLTLke4Myu
- 5FPPZo2hHb1NWrepZEmw8cRa9j1KIqf3qrNPkHbGik6nQvWYjKvx4gMYu+DOdA/hS5oo=;
+ bh=0i9fNykMCPIYLtg51f50XyVAFwwkJeuAbf20SWgL8IA=; b=Zv4XEWeasd9OIfjFuptzt2Xlib
+ 0ejqDD7YB05XksvgGeN6tRwElBAJwxEt6xUlKp++2jDQ/x/QUyGlxDJJWaLVPpCNx/87GMK/44vcJ
+ Z/WGaXGBIuwiT146YJzNeVD8ImWADy5VfUeUc9R+fOtGN8KII6uA3qIbXM6RPMVbsy1c=;
 Received: from bombadil.infradead.org ([198.137.202.133])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vxPx3-0001wc-Pe; Tue, 03 Mar 2026 13:38:18 +0000
+ id 1vxPx3-0001wp-Pv; Tue, 03 Mar 2026 13:38:18 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=bombadil.20210309; h=In-Reply-To:Content-Type:MIME-Version
  :References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
  Content-Transfer-Encoding:Content-ID:Content-Description;
- bh=Tk3uESbdvJBK0ZQDjaLs3gOQpD471/ds7fVyav3aEqM=; b=C+NAzkUgUxjxJBynLnQ11RqjfR
- zbYsG/zy2ofectzScTg6NHncmcu0JStQWd88qwniMwEHPUDMrzeu5AbPFjRTOGOusjBgApX2iupEQ
- 4TSFZW7l8R1upfRlXqKLi4RgyAdnukQQvbYPR1dAqrxxpUxnOkbsrwTNYlBbOrqkyVi4QvfAA8Hbw
- HJt/UXrH+SdGFi54kJW0+OTTU2dVCgOBYq2an1JkF/fBKXqVFdbNMcBaFcL7O/j1sFF7d0sWaEROA
- h3pRPEd5DrrHSXCFjh0Qfque8DSpJNMUn053UKYZ0bE9iWOzQNS+w/08ekbSH5pMrlzHr3N0R0CUZ
- 4DO7FRhQ==;
+ bh=0i9fNykMCPIYLtg51f50XyVAFwwkJeuAbf20SWgL8IA=; b=kr8/nkhxdG+BacNcKTfIO4XZUB
+ i7xk70hVnj0kN38gmr0dlJaLre+m1Y8Keo9ymYXIoBcHww1Y+hPC00/UHvb56kw8vUZqxa+/jNahq
+ lo1JvQxucy9KP5YYl3BJvCvBlMRiI1+7TOS9UDCexOCQT4oO0dZF73KEk82auTfbqI7G3klcW7KCl
+ 2+/df6PJTgQ4/8fk1VMkhG3bXi2ZmyKmmwEvzbL37VowoKQNKhueKgAd+dHU0zICZvWhtvA8HARA1
+ eICbHHpV2VmmTUNzGuvTIFriiMF2hmXCPYb4u7czBRvmuy0jRezd2uDvibuCdhD4GO+QcG9vVwW4n
+ DD/PLaWQ==;
 Received: from hch by bombadil.infradead.org with local (Exim 4.98.2 #2 (Red
- Hat Linux)) id 1vxPvS-0000000FEic-3CMP;
- Tue, 03 Mar 2026 13:36:38 +0000
-Date: Tue, 3 Mar 2026 05:36:38 -0800
+ Hat Linux)) id 1vxPvy-0000000FEmU-04pf;
+ Tue, 03 Mar 2026 13:37:10 +0000
+Date: Tue, 3 Mar 2026 05:37:09 -0800
 From: Christoph Hellwig <hch@infradead.org>
-To: "Darrick J. Wong" <djwong@kernel.org>
-Message-ID: <aabj5o1x4T-bRmro@infradead.org>
+To: Jeff Layton <jlayton@kernel.org>
+Message-ID: <aabkBadGzo7IZpSU@infradead.org>
 References: <20260302-iino-u64-v2-0-e5388800dae0@kernel.org>
  <20260302-iino-u64-v2-1-e5388800dae0@kernel.org>
  <20260303012556.GA6520@macsyma-wired.lan>
  <20260303042546.GF13868@frogsfrogsfrogs>
+ <33228005140684201de2ca0c157441d3b6a06413.camel@kernel.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20260303042546.GF13868@frogsfrogsfrogs>
+In-Reply-To: <33228005140684201de2ca0c157441d3b6a06413.camel@kernel.org>
 X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by
  bombadil.infradead.org. See http://www.infradead.org/rpr.html
 X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Mon, Mar 02, 2026 at 08:25:46PM -0800, Darrick J. Wong
- wrote: > > That being said, the userspace PRIu64, et. al macros are complete
- > > format specifiers, not just a length modifier. And I think th [...] 
+ Content preview:  On Tue, Mar 03, 2026 at 05:53:39AM -0500, Jeff Layton wrote:
+ > Like I said to Ted, this is just temporary scaffolding for the change.
+ > The PRIino macro is removed in the end. Given that, perhaps you [...] 
  Content analysis details:   (-0.1 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
-X-Headers-End: 1vxPx3-0001wc-Pe
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+X-Headers-End: 1vxPx3-0001wp-Pv
 Subject: Re: [f2fs-dev] [PATCH v2 001/110] vfs: introduce kino_t typedef and
  PRIino format macro
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
@@ -110,16 +111,17 @@ List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
 Cc: Latchesar Ionkov <lucho@ionkov.net>, nvdimm@lists.linux.dev,
- Paulo Alcantara <pc@manguebit.org>, Anders Larsen <al@alarsen.net>,
- dri-devel@lists.freedesktop.org, linux-sctp@vger.kernel.org,
- linux-hams@vger.kernel.org, Sumit Semwal <sumit.semwal@linaro.org>,
- Mike Marshall <hubcap@omnibond.com>, linux-xfs@vger.kernel.org,
- Fan Wu <wufan@kernel.org>, Xin Long <lucien.xin@gmail.com>,
- ceph-devel@vger.kernel.org, James Morris <jmorris@namei.org>,
- Tyler Hicks <code@tyhicks.com>, Christoph Hellwig <hch@infradead.org>,
- devel@lists.orangefs.org, Shyam Prasad N <sprasad@microsoft.com>,
- Martin Schiller <ms@dev.tdt.de>, Jesper Dangaard Brouer <hawk@kernel.org>,
- Jan Harkes <jaharkes@cs.cmu.edu>, Willem de Bruijn <willemb@google.com>,
+ Paulo Alcantara <pc@manguebit.org>, "Darrick J. Wong" <djwong@kernel.org>,
+ Anders Larsen <al@alarsen.net>, dri-devel@lists.freedesktop.org,
+ linux-sctp@vger.kernel.org, linux-hams@vger.kernel.org,
+ Sumit Semwal <sumit.semwal@linaro.org>, Mike Marshall <hubcap@omnibond.com>,
+ linux-xfs@vger.kernel.org, Fan Wu <wufan@kernel.org>,
+ Xin Long <lucien.xin@gmail.com>, ceph-devel@vger.kernel.org,
+ James Morris <jmorris@namei.org>, Tyler Hicks <code@tyhicks.com>,
+ Christoph Hellwig <hch@infradead.org>, devel@lists.orangefs.org,
+ Shyam Prasad N <sprasad@microsoft.com>, Martin Schiller <ms@dev.tdt.de>,
+ Jesper Dangaard Brouer <hawk@kernel.org>, Jan Harkes <jaharkes@cs.cmu.edu>,
+ Willem de Bruijn <willemb@google.com>,
  Arnaldo Carvalho de Melo <acme@kernel.org>, linux-fscrypt@vger.kernel.org,
  Alexander Viro <viro@zeniv.linux.org.uk>,
  Ronnie Sahlberg <ronniesahlberg@gmail.com>,
@@ -134,12 +136,12 @@ Cc: Latchesar Ionkov <lucho@ionkov.net>, nvdimm@lists.linux.dev,
  Jiri Olsa <jolsa@kernel.org>, Jan Kara <jack@suse.com>,
  Alex Deucher <alexander.deucher@amd.com>, linux-media@vger.kernel.org,
  Trond Myklebust <trondmy@kernel.org>, Mark Rutland <mark.rutland@arm.com>,
- Dave Kleikamp <shaggy@kernel.org>, samba-technical@lists.samba.org,
- Mimi Zohar <zohar@linux.ibm.com>, Oleg Nesterov <oleg@redhat.com>,
- Eric Dumazet <edumazet@google.com>, Johan Hedberg <johan.hedberg@gmail.com>,
- Simona Vetter <simona@ffwll.ch>, linux-cifs@vger.kernel.org,
- Kuniyuki Iwashima <kuniyu@google.com>, linux-nilfs@vger.kernel.org,
- Paul Moore <paul@paul-moore.com>, John Fastabend <john.fastabend@gmail.com>,
+ Dave Kleikamp <shaggy@kernel.org>, Mimi Zohar <zohar@linux.ibm.com>,
+ Oleg Nesterov <oleg@redhat.com>, Eric Dumazet <edumazet@google.com>,
+ Johan Hedberg <johan.hedberg@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+ linux-cifs@vger.kernel.org, Kuniyuki Iwashima <kuniyu@google.com>,
+ linux-nilfs@vger.kernel.org, Paul Moore <paul@paul-moore.com>,
+ John Fastabend <john.fastabend@gmail.com>,
  Remi Denis-Courmont <courmisch@gmail.com>, linux-trace-kernel@vger.kernel.org,
  Olga Kornievskaia <okorniev@redhat.com>,
  Maciej Fijalkowski <maciej.fijalkowski@intel.com>,
@@ -172,7 +174,7 @@ Cc: Latchesar Ionkov <lucho@ionkov.net>, nvdimm@lists.linux.dev,
  Dan Williams <dan.j.williams@intel.com>, Oscar Salvador <osalvador@suse.de>,
  Konstantin Komarov <almaz.alexandrovich@paragon-software.com>,
  linux-nfs@vger.kernel.org, linux-ext4@vger.kernel.org, linux-mm@kvack.org,
- Jeff Layton <jlayton@kernel.org>, Ondrej Mosnacek <omosnace@redhat.com>,
+ samba-technical@lists.samba.org, Ondrej Mosnacek <omosnace@redhat.com>,
  Steve French <sfrench@samba.org>, netdev@vger.kernel.org,
  linux-fsdevel@vger.kernel.org, bpf@vger.kernel.org, ntfs3@lists.linux.dev,
  Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
@@ -208,7 +210,7 @@ Cc: Latchesar Ionkov <lucho@ionkov.net>, nvdimm@lists.linux.dev,
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
-X-Rspamd-Queue-Id: B44D01F0665
+X-Rspamd-Queue-Id: B28A11F0664
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [0.49 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
@@ -233,7 +235,7 @@ X-Spamd-Result: default: False [0.49 / 15.00];
 	NEURAL_HAM(-0.00)[-1.000];
 	FROM_NEQ_ENVFROM(0.00)[hch@infradead.org,linux-f2fs-devel-bounces@lists.sourceforge.net];
 	FROM_HAS_DN(0.00)[];
-	FREEMAIL_CC(0.00)[ionkov.net,lists.linux.dev,manguebit.org,alarsen.net,lists.freedesktop.org,vger.kernel.org,linaro.org,omnibond.com,kernel.org,gmail.com,namei.org,tyhicks.com,infradead.org,lists.orangefs.org,microsoft.com,dev.tdt.de,cs.cmu.edu,google.com,zeniv.linux.org.uk,physik.fu-berlin.de,intel.com,redhat.com,oracle.com,suse.com,amd.com,arm.com,lists.samba.org,linux.ibm.com,ffwll.ch,paul-moore.com,vivo.com,lists.linaro.org,schaufler-ca.com,mit.edu,fluxnic.net,linux.dev,huawei.com,davemloft.net,linux.intel.com,lists.infradead.org,auristor.com,themaw.net,wdc.com,iogearbox.net,szeredi.hu,fomichev.me,dubeyko.com,brown.name,lists.sourceforge.net,hallyn.com,goodmis.org,efficios.com,suse.de,paragon-software.com,kvack.org,samba.org,suse.cz,codewreck.org,crudebyte.com,linux.alibaba.com,dilger.ca,artax.karlin.mff.cuni.cz,secunet.com,gondor.apana.org.au,nod.at,fasheh.com,holtmann.org,yaina.de,telemann.coda.cs.cmu.edu,lists.ubuntu.com,talpey.com,pengutronix.de,canonical.com,hartkopp.net,ev
+	FREEMAIL_CC(0.00)[ionkov.net,lists.linux.dev,manguebit.org,kernel.org,alarsen.net,lists.freedesktop.org,vger.kernel.org,linaro.org,omnibond.com,gmail.com,namei.org,tyhicks.com,infradead.org,lists.orangefs.org,microsoft.com,dev.tdt.de,cs.cmu.edu,google.com,zeniv.linux.org.uk,physik.fu-berlin.de,intel.com,redhat.com,oracle.com,suse.com,amd.com,arm.com,linux.ibm.com,ffwll.ch,paul-moore.com,vivo.com,lists.linaro.org,schaufler-ca.com,mit.edu,fluxnic.net,linux.dev,huawei.com,davemloft.net,linux.intel.com,lists.infradead.org,auristor.com,themaw.net,wdc.com,iogearbox.net,szeredi.hu,fomichev.me,dubeyko.com,brown.name,lists.sourceforge.net,hallyn.com,goodmis.org,efficios.com,suse.de,paragon-software.com,kvack.org,lists.samba.org,samba.org,suse.cz,codewreck.org,crudebyte.com,linux.alibaba.com,dilger.ca,artax.karlin.mff.cuni.cz,secunet.com,gondor.apana.org.au,nod.at,fasheh.com,holtmann.org,yaina.de,telemann.coda.cs.cmu.edu,lists.ubuntu.com,talpey.com,pengutronix.de,canonical.com,hartkopp.net,ev
  ilplan.org];
 	MID_RHS_MATCH_FROM(0.00)[];
 	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
@@ -243,18 +245,12 @@ X-Spamd-Result: default: False [0.49 / 15.00];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[infradead.org:mid,lists.sourceforge.net:dkim,lists.sourceforge.net:rdns,lists.sourceforge.net:helo]
 X-Rspamd-Action: no action
 
-On Mon, Mar 02, 2026 at 08:25:46PM -0800, Darrick J. Wong wrote:
-> > That being said, the userspace PRIu64, et. al macros are complete
-> > format specifiers, not just a length modifier.  And I think this
-> > results in less ugly format specifiers in our kernel code.
-> 
-> Yeah, I don't like "ino=%" PRIino "u, lolz\n" either.  I'd rather have
-> the whole format in the PRIino definition -- it /is/ unsigned long
-> after all.
+On Tue, Mar 03, 2026 at 05:53:39AM -0500, Jeff Layton wrote:
+> Like I said to Ted, this is just temporary scaffolding for the change.
+> The PRIino macro is removed in the end. Given that, perhaps you can
+> overlook the bikeshed's color in this instance?
 
-Just drop the bloody macro and the pointless micro-splitting of the
-change.  After this the inode is always 64-bit and we can just use
-normal ll specifiers without messing things up.
+So why add it in the first place?  
 
 
 
