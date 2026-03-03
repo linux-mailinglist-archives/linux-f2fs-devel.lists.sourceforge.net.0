@@ -2,42 +2,42 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id uL4ZJGTFpmn3TQAAu9opvQ
+	id CIv4Hp3Fpmn3TQAAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 03 Mar 2026 12:26:28 +0100
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 03 Mar 2026 12:27:25 +0100
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 955A51EDBF3
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 03 Mar 2026 12:26:27 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 75CD21EDC46
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 03 Mar 2026 12:27:24 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
 	Subject:In-Reply-To:MIME-Version:References:Message-ID:To:From:Date:Sender:
 	Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
 	:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=6qb6U5bTxzc+TwHXFXLNuyNfkvU7u6bKPeOgThWEFZE=; b=YhB/GUsoAcVtsEArjTYBQ4acp6
-	GNoxysgw/Mp0ahkN5+tzFcMfdfv1PWTdjI+bAOsCVC44I9ME72mgg4AW7HN0R4UHbupwZE8URiiq5
-	3YoHzJ5s9sm0HF3TInLYnUvwxzXIm2zvK/wDTBp/o8nf0j1oJG4HTAtHQypzLV+t5rz4=;
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=Ylat9kdXoNm1nXvjsRpE/kFinSIdmxfWU4AN3bbdLGE=; b=OZU8wQBRqShIIJeVF5b3bIvphE
+	MRX4kbFJ5wk3AzLKTf0YoQ4K1VQ7ZzXBe1UZkXZE5Swa8Jev/kSRgp3Sp7qnaLAXPBvObaEjYxkrB
+	peL1gc1xGsjbv1n0QhKLVBUX2Wt4vda/cmcLE2Wr07wUZnYDDKpierqL8LPyLY6akPMQ=;
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vxNtR-0005QV-2h;
-	Tue, 03 Mar 2026 11:26:25 +0000
+	id 1vxNuJ-0001bd-Uz;
+	Tue, 03 Mar 2026 11:27:20 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jack@suse.cz>) id 1vxNtP-0005QN-Ci
+ (envelope-from <jack@suse.cz>) id 1vxNuJ-0001bV-8k
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 03 Mar 2026 11:26:23 +0000
+ Tue, 03 Mar 2026 11:27:20 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=nPu8XPuDlU1g9pC+BD612SKMgab6QY4hhTylugDlyzw=; b=b3FD0fzi6PDXGIW9UIyGwAcvTr
- rCeLTYMcGFzBrghAXa0FLqUtlynaYc6QffhBpiqDi2/lyuwsDimaQ0EPdh1d2UlNO//6uS9Eu+lzD
- AQnj0cQL81jd/Dd37XkEZC/+KcxMD871LvvMTBMevTC/6fZzukDycU6ER3ROL0266UUk=;
+ bh=PJNIfED44CDmRM9QKnZe3vjqDvjr0r1+sKr6g16PVBU=; b=YKlmxpvt3j7F45z3oCB3iObvST
+ cyjkpkVZq4L8LjCfVvo/7wx/BI7K8kML1Z1D3srwN/aL9jFggeFuliVngVFws2cPMF3PZoTCbYW+y
+ y7NBjSvxvMl7vlXXEGNIL9tIJhWTVA5yUo2q1zj9uCXxTkszK/kGrT6y0Cih2WQ8/YCw=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -45,99 +45,99 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=nPu8XPuDlU1g9pC+BD612SKMgab6QY4hhTylugDlyzw=; b=eHcKOSHzKHQg/sJCYO51m+SNeU
- GZ+7FwkNZWri3Ax1hUf4k3XCerg09W3zVRdLMXzlZ3u7HiYYUalvPAkz8eZlrYX+1lvooAu8xT/jr
- qSUyTl0ImkNJy2lbhNm1DrugTPVqLq8KF0udp1ESbu6W/2+RU0sq7M2Sr2R1L+1eZ4FY=;
-Received: from smtp-out1.suse.de ([195.135.223.130])
+ bh=PJNIfED44CDmRM9QKnZe3vjqDvjr0r1+sKr6g16PVBU=; b=fkDZX6w0WYM69quIoFsI7OfCZv
+ Yo/W1KnsXv64+FssOQ7AUjrGSmkyuu72eKpEDToAg5GYiP1IM7yYz5oelAyzT1XufnAKyVpsqp1qK
+ DiToTPZkERXWqxZ9k+E/pv7rFckyNeLrZt1vZ0tA9ajPbhNLJGJVb4cKhig1uttFcJLE=;
+Received: from smtp-out2.suse.de ([195.135.223.131])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1vxNtO-0003sA-4J for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 03 Mar 2026 11:26:23 +0000
+ id 1vxNuI-0003yo-UW for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 03 Mar 2026 11:27:20 +0000
 Received: from imap1.dmz-prg2.suse.org (unknown [10.150.64.97])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id 480EA3F863;
- Tue,  3 Mar 2026 11:26:15 +0000 (UTC)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id 9178B5BDF1;
+ Tue,  3 Mar 2026 11:27:07 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.cz; s=susede2_rsa;
- t=1772537175; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ t=1772537227; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
  mime-version:mime-version:content-type:content-type:
  in-reply-to:in-reply-to:references:references;
- bh=nPu8XPuDlU1g9pC+BD612SKMgab6QY4hhTylugDlyzw=;
- b=nkwxPU6f/8r94zxGc4RXWbdDzA6AH42XX//Xsss6YCxStp0x2EcOr0GsBuSmRyKCliLMNC
- 33kSvTr/ut+H6ayhMqYeTdK3NFYWWb4fo7LpP8U5eO3+VvW3rrMLpyl6x9zanAM0NlTtEe
- 35vwx1OUEh1rL8GgkX/OzITY8DEMdwg=
+ bh=PJNIfED44CDmRM9QKnZe3vjqDvjr0r1+sKr6g16PVBU=;
+ b=TNLv15d/Q09vJ3yaa5rtyOZXJnqvcbR6rI/DEcqvgjcnvPlL2p7w7N/t4v6fp7iXBMckFn
+ KI8390yLukozk4ihYQJERYEt3MZ2Xa8hOf2lyCyXhQaoR/0lyLYN1gFf6ZLwspZgvcblJf
+ 8eN5vb5vdtk4do31HPWR1TQ0uj9qGIM=
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.cz;
- s=susede2_ed25519; t=1772537175;
+ s=susede2_ed25519; t=1772537227;
  h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
  mime-version:mime-version:content-type:content-type:
  in-reply-to:in-reply-to:references:references;
- bh=nPu8XPuDlU1g9pC+BD612SKMgab6QY4hhTylugDlyzw=;
- b=agjLNWMibMrxLGF3Fa07k6aUsfYIAWz4Au/CjhQcIFoZ6f1qcU8rerzkKEteqvTexnsZJk
- /gGscWX4ng0HaUBw==
-Authentication-Results: smtp-out1.suse.de;
+ bh=PJNIfED44CDmRM9QKnZe3vjqDvjr0r1+sKr6g16PVBU=;
+ b=eV9smZ4QhVNrlGzngsZi2/ze2KStbs+OocyLFDwfN7mxjM/fsVAwO/OP45s9rzwE/ZjD34
+ N/ABwqmXs1JJtYAw==
+Authentication-Results: smtp-out2.suse.de;
 	none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.cz; s=susede2_rsa;
- t=1772537175; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ t=1772537227; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
  mime-version:mime-version:content-type:content-type:
  in-reply-to:in-reply-to:references:references;
- bh=nPu8XPuDlU1g9pC+BD612SKMgab6QY4hhTylugDlyzw=;
- b=nkwxPU6f/8r94zxGc4RXWbdDzA6AH42XX//Xsss6YCxStp0x2EcOr0GsBuSmRyKCliLMNC
- 33kSvTr/ut+H6ayhMqYeTdK3NFYWWb4fo7LpP8U5eO3+VvW3rrMLpyl6x9zanAM0NlTtEe
- 35vwx1OUEh1rL8GgkX/OzITY8DEMdwg=
+ bh=PJNIfED44CDmRM9QKnZe3vjqDvjr0r1+sKr6g16PVBU=;
+ b=TNLv15d/Q09vJ3yaa5rtyOZXJnqvcbR6rI/DEcqvgjcnvPlL2p7w7N/t4v6fp7iXBMckFn
+ KI8390yLukozk4ihYQJERYEt3MZ2Xa8hOf2lyCyXhQaoR/0lyLYN1gFf6ZLwspZgvcblJf
+ 8eN5vb5vdtk4do31HPWR1TQ0uj9qGIM=
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.cz;
- s=susede2_ed25519; t=1772537175;
+ s=susede2_ed25519; t=1772537227;
  h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
  mime-version:mime-version:content-type:content-type:
  in-reply-to:in-reply-to:references:references;
- bh=nPu8XPuDlU1g9pC+BD612SKMgab6QY4hhTylugDlyzw=;
- b=agjLNWMibMrxLGF3Fa07k6aUsfYIAWz4Au/CjhQcIFoZ6f1qcU8rerzkKEteqvTexnsZJk
- /gGscWX4ng0HaUBw==
+ bh=PJNIfED44CDmRM9QKnZe3vjqDvjr0r1+sKr6g16PVBU=;
+ b=eV9smZ4QhVNrlGzngsZi2/ze2KStbs+OocyLFDwfN7mxjM/fsVAwO/OP45s9rzwE/ZjD34
+ N/ABwqmXs1JJtYAw==
 Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 2DFDF3EA6C;
- Tue,  3 Mar 2026 11:26:15 +0000 (UTC)
+ by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 767F43EA6C;
+ Tue,  3 Mar 2026 11:27:07 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
- by imap1.dmz-prg2.suse.org with ESMTPSA id CwcwC1fFpmkZTAAAD6G6ig
- (envelope-from <jack@suse.cz>); Tue, 03 Mar 2026 11:26:15 +0000
+ by imap1.dmz-prg2.suse.org with ESMTPSA id j1biHIvFpmkSTQAAD6G6ig
+ (envelope-from <jack@suse.cz>); Tue, 03 Mar 2026 11:27:07 +0000
 Received: by quack3.suse.cz (Postfix, from userid 1000)
- id E0715A0A1B; Tue,  3 Mar 2026 12:26:14 +0100 (CET)
-Date: Tue, 3 Mar 2026 12:26:14 +0100
+ id 349A8A0A1B; Tue,  3 Mar 2026 12:27:07 +0100 (CET)
+Date: Tue, 3 Mar 2026 12:27:07 +0100
 From: Jan Kara <jack@suse.cz>
 To: Jeff Layton <jlayton@kernel.org>
-Message-ID: <ssizzrk2zdfrfzppx75xewimgzg5rd3ofunrxa2vvrh5fmroul@rntxparm3irs>
+Message-ID: <m67mgdgcjw6hhbrluvsdipezmgzmdfewqw4dlkbmqlbxi6gv5x@bd3aqfjjcqsv>
 References: <20260302-iino-u64-v2-0-e5388800dae0@kernel.org>
- <20260302-iino-u64-v2-40-e5388800dae0@kernel.org>
+ <20260302-iino-u64-v2-46-e5388800dae0@kernel.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20260302-iino-u64-v2-40-e5388800dae0@kernel.org>
+In-Reply-To: <20260302-iino-u64-v2-46-e5388800dae0@kernel.org>
+X-Spam-Flag: NO
 X-Spam-Score: -0.30
 X-Spam-Level: 
-X-Spam-Flag: NO
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Mon 02-03-26 15:24:24, Jeff Layton wrote: > Convert ocfs2
+ Content preview:  On Mon 02-03-26 15:24:30, Jeff Layton wrote: > Convert udf
  i_ino format strings to use the PRIino format > macro in preparation for
- the widening of i_ino via kino_t. > > Remove now-unnecessary (unsi [...] 
+ the widening of i_ino via kino_t. > > Signed-off-by: Jeff Layton <jl [...]
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
-X-Headers-End: 1vxNtO-0003sA-4J
-Subject: Re: [f2fs-dev] [PATCH v2 040/110] ocfs2: use PRIino format for i_ino
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+X-Headers-End: 1vxNuI-0003yo-UW
+Subject: Re: [f2fs-dev] [PATCH v2 046/110] udf: use PRIino format for i_ino
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -248,14 +248,14 @@ Cc: Latchesar Ionkov <lucho@ionkov.net>, nvdimm@lists.linux.dev,
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
-X-Rspamd-Queue-Id: 955A51EDBF3
+X-Rspamd-Queue-Id: 75CD21EDC46
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [0.89 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	MID_RHS_NOT_FQDN(0.50)[];
 	RWL_MAILSPIKE_EXCELLENT(-0.40)[216.105.38.7:from];
 	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
-	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7];
+	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7:c];
 	MAILLIST(-0.20)[mailman];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
@@ -265,11 +265,11 @@ X-Spamd-Result: default: False [0.89 / 15.00];
  rnel.org,m:jack@suse.com,m:alexander.deucher@amd.com,m:linux-media@vger.kernel.org,m:trondmy@kernel.org,m:mark.rutland@arm.com,m:shaggy@kernel.org,m:zohar@linux.ibm.com,m:oleg@redhat.com,m:edumazet@google.com,m:johan.hedberg@gmail.com,m:simona@ffwll.ch,m:linux-cifs@vger.kernel.org,m:kuniyu@google.com,m:linux-nilfs@vger.kernel.org,m:paul@paul-moore.com,m:john.fastabend@gmail.com,m:codalist@coda.cs.cmu.edu,m:courmisch@gmail.com,m:linux-trace-kernel@vger.kernel.org,m:okorniev@redhat.com,m:maciej.fijalkowski@intel.com,m:frank.li@vivo.com,m:selinux@vger.kernel.org,m:v9fs@lists.linux.dev,m:linux-can@vger.kernel.org,m:linaro-mm-sig@lists.linaro.org,m:casey@schaufler-ca.com,m:netfs@lists.linux.dev,m:jaegeuk@kernel.org,m:fsverity@lists.linux.dev,m:tytso@mit.edu,m:nico@fluxnic.net,m:muchun.song@linux.dev,m:roberto.sassu@huawei.com,m:davem@davemloft.net,m:anna@kernel.org,m:linux-integrity@vger.kernel.org,m:marcelo.leitner@gmail.com,m:luiz.dentz@gmail.com,m:amarkuze@redhat.com,m:martin@omnibond
  .com,m:alexander.shishkin@linux.intel.com,m:ocfs2-devel@lists.linux.dev,m:ast@kernel.org,m:linux-mtd@lists.infradead.org,m:amd-gfx@lists.freedesktop.org,m:marc.dionne@auristor.com,m:ncardwell@google.com,m:linux-afs@lists.infradead.org,m:raven@themaw.net,m:naohiro.aota@wdc.com,m:ebiggers@kernel.org,m:daniel@iogearbox.net,m:miklos@szeredi.hu,m:willy@infradead.org,m:coda@cs.cmu.edu,m:sdf@fomichev.me,m:slava@dubeyko.com,s:lists@lfdr.de];
 	DKIM_MIXED(0.00)[];
-	FORGED_SENDER(0.00)[jack@suse.cz,linux-f2fs-devel-bounces@lists.sourceforge.net];
+	ARC_NA(0.00)[];
 	TO_DN_SOME(0.00)[];
 	DMARC_NA(0.00)[suse.cz];
 	MIME_TRACE(0.00)[0:+];
-	ARC_NA(0.00)[];
+	FORGED_SENDER(0.00)[jack@suse.cz,linux-f2fs-devel-bounces@lists.sourceforge.net];
 	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
 	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,suse.cz:s=susede2_rsa,suse.cz:s=susede2_ed25519];
 	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,suse.cz:-];
@@ -291,11 +291,9 @@ X-Spamd-Result: default: False [0.89 / 15.00];
 	RCVD_COUNT_SEVEN(0.00)[7]
 X-Rspamd-Action: no action
 
-On Mon 02-03-26 15:24:24, Jeff Layton wrote:
-> Convert ocfs2 i_ino format strings to use the PRIino format
+On Mon 02-03-26 15:24:30, Jeff Layton wrote:
+> Convert udf i_ino format strings to use the PRIino format
 > macro in preparation for the widening of i_ino via kino_t.
-> 
-> Remove now-unnecessary (unsigned long) casts on i_ino.
 > 
 > Signed-off-by: Jeff Layton <jlayton@kernel.org>
 
@@ -306,296 +304,217 @@ Reviewed-by: Jan Kara <jack@suse.cz>
 								Honza
 
 > ---
->  fs/ocfs2/alloc.c        |  2 +-
->  fs/ocfs2/aops.c         |  4 ++--
->  fs/ocfs2/dir.c          |  8 ++++----
->  fs/ocfs2/dlmfs/dlmfs.c  | 10 +++++-----
->  fs/ocfs2/extent_map.c   | 12 ++++++------
->  fs/ocfs2/inode.c        |  2 +-
->  fs/ocfs2/quota_local.c  |  2 +-
->  fs/ocfs2/refcounttree.c | 10 +++++-----
->  fs/ocfs2/xattr.c        |  4 ++--
->  9 files changed, 27 insertions(+), 27 deletions(-)
+>  fs/udf/directory.c | 18 +++++++++---------
+>  fs/udf/file.c      |  2 +-
+>  fs/udf/inode.c     | 12 ++++++------
+>  fs/udf/namei.c     |  8 ++++----
+>  fs/udf/super.c     |  2 +-
+>  5 files changed, 21 insertions(+), 21 deletions(-)
 > 
-> diff --git a/fs/ocfs2/alloc.c b/fs/ocfs2/alloc.c
-> index 344fd4d95fbc8bd7a749e9d51d31b5682ff030d0..d7703549645b548d9f5d77b2214a9a7c0af0ef6f 100644
-> --- a/fs/ocfs2/alloc.c
-> +++ b/fs/ocfs2/alloc.c
-> @@ -7318,7 +7318,7 @@ int ocfs2_commit_truncate(struct ocfs2_super *osb,
->  		 * to check it up here before changing the tree.
->  		*/
->  		if (root_el->l_tree_depth && rec->e_int_clusters == 0) {
-> -			mlog(ML_ERROR, "Inode %lu has an empty "
-> +			mlog(ML_ERROR, "Inode %" PRIino "u has an empty "
->  				    "extent record, depth %u\n", inode->i_ino,
->  				    le16_to_cpu(root_el->l_tree_depth));
->  			status = ocfs2_remove_rightmost_empty_extent(osb,
-> diff --git a/fs/ocfs2/aops.c b/fs/ocfs2/aops.c
-> index 17ba79f443ee736cb5225702c57d13f4019f3c52..aea35b1c9fa3ce7327672c1862d0d1201c895c40 100644
-> --- a/fs/ocfs2/aops.c
-> +++ b/fs/ocfs2/aops.c
-> @@ -137,7 +137,7 @@ int ocfs2_get_block(struct inode *inode, sector_t iblock,
->  			      (unsigned long long)iblock, bh_result, create);
+> diff --git a/fs/udf/directory.c b/fs/udf/directory.c
+> index 632453aa38934a0b58b420717ec0674c85627ce5..c825e11c017f652500a3dfc83905679ef86ec570 100644
+> --- a/fs/udf/directory.c
+> +++ b/fs/udf/directory.c
+> @@ -22,7 +22,7 @@ static int udf_verify_fi(struct udf_fileident_iter *iter)
 >  
->  	if (OCFS2_I(inode)->ip_flags & OCFS2_INODE_SYSTEM_FILE)
-> -		mlog(ML_NOTICE, "get_block on system inode 0x%p (%lu)\n",
-> +		mlog(ML_NOTICE, "get_block on system inode 0x%p (%" PRIino "u)\n",
->  		     inode, inode->i_ino);
->  
->  	if (S_ISLNK(inode->i_mode)) {
-> @@ -2146,7 +2146,7 @@ static int ocfs2_dio_wr_get_block(struct inode *inode, sector_t iblock,
->  	    ((iblock + ((len - 1) >> i_blkbits)) > endblk))
->  		len = (endblk - iblock + 1) << i_blkbits;
->  
-> -	mlog(0, "get block of %lu at %llu:%u req %u\n",
-> +	mlog(0, "get block of %" PRIino "u at %llu:%u req %u\n",
->  			inode->i_ino, pos, len, total_len);
->  
->  	/*
-> diff --git a/fs/ocfs2/dir.c b/fs/ocfs2/dir.c
-> index 1c8abf2c592caacbe734d49254b04d507925c9d1..eecb2b1d2ec17fb4b3f09abb9e168d2f28f9b420 100644
-> --- a/fs/ocfs2/dir.c
-> +++ b/fs/ocfs2/dir.c
-> @@ -794,7 +794,7 @@ static int ocfs2_dx_dir_lookup_rec(struct inode *inode,
->  	if (le16_to_cpu(el->l_count) !=
->  	    ocfs2_extent_recs_per_dx_root(inode->i_sb)) {
->  		ret = ocfs2_error(inode->i_sb,
-> -				  "Inode %lu has invalid extent list length %u\n",
-> +				  "Inode %" PRIino "u has invalid extent list length %u\n",
->  				  inode->i_ino, le16_to_cpu(el->l_count));
->  		goto out;
+>  	if (iter->fi.descTag.tagIdent != cpu_to_le16(TAG_IDENT_FID)) {
+>  		udf_err(iter->dir->i_sb,
+> -			"directory (ino %lu) has entry at pos %llu with incorrect tag %x\n",
+> +			"directory (ino %" PRIino "u) has entry at pos %llu with incorrect tag %x\n",
+>  			iter->dir->i_ino, (unsigned long long)iter->pos,
+>  			le16_to_cpu(iter->fi.descTag.tagIdent));
+>  		return -EFSCORRUPTED;
+> @@ -30,7 +30,7 @@ static int udf_verify_fi(struct udf_fileident_iter *iter)
+>  	len = udf_dir_entry_len(&iter->fi);
+>  	if (le16_to_cpu(iter->fi.lengthOfImpUse) & 3) {
+>  		udf_err(iter->dir->i_sb,
+> -			"directory (ino %lu) has entry at pos %llu with unaligned length of impUse field\n",
+> +			"directory (ino %" PRIino "u) has entry at pos %llu with unaligned length of impUse field\n",
+>  			iter->dir->i_ino, (unsigned long long)iter->pos);
+>  		return -EFSCORRUPTED;
 >  	}
-> @@ -812,7 +812,7 @@ static int ocfs2_dx_dir_lookup_rec(struct inode *inode,
->  
->  		if (el->l_tree_depth) {
->  			ret = ocfs2_error(inode->i_sb,
-> -					  "Inode %lu has non zero tree depth in btree tree block %llu\n",
-> +					  "Inode %" PRIino "u has non zero tree depth in btree tree block %llu\n",
->  					  inode->i_ino,
->  					  (unsigned long long)eb_bh->b_blocknr);
->  			goto out;
-> @@ -821,7 +821,7 @@ static int ocfs2_dx_dir_lookup_rec(struct inode *inode,
->  
->  	if (le16_to_cpu(el->l_next_free_rec) == 0) {
->  		ret = ocfs2_error(inode->i_sb,
-> -				  "Inode %lu has empty extent list at depth %u\n",
-> +				  "Inode %" PRIino "u has empty extent list at depth %u\n",
->  				  inode->i_ino,
->  				  le16_to_cpu(el->l_tree_depth));
->  		goto out;
-> @@ -839,7 +839,7 @@ static int ocfs2_dx_dir_lookup_rec(struct inode *inode,
->  
->  	if (!found) {
->  		ret = ocfs2_error(inode->i_sb,
-> -				  "Inode %lu has bad extent record (%u, %u, 0) in btree\n",
-> +				  "Inode %" PRIino "u has bad extent record (%u, %u, 0) in btree\n",
->  				  inode->i_ino,
->  				  le32_to_cpu(rec->e_cpos),
->  				  ocfs2_rec_clusters(el, rec));
-> diff --git a/fs/ocfs2/dlmfs/dlmfs.c b/fs/ocfs2/dlmfs/dlmfs.c
-> index 45cce261da65cab7ef48b5b88c0de5d41fa57615..e96c1c574ff7dc3dffad58ce8536b7e337d3f6fa 100644
-> --- a/fs/ocfs2/dlmfs/dlmfs.c
-> +++ b/fs/ocfs2/dlmfs/dlmfs.c
-> @@ -123,7 +123,7 @@ static int dlmfs_file_open(struct inode *inode,
->  	if (S_ISDIR(inode->i_mode))
->  		BUG();
->  
-> -	mlog(0, "open called on inode %lu, flags 0x%x\n", inode->i_ino,
-> +	mlog(0, "open called on inode %" PRIino "u, flags 0x%x\n", inode->i_ino,
->  		file->f_flags);
->  
->  	status = dlmfs_decode_open_flags(file->f_flags, &level, &flags);
-> @@ -170,7 +170,7 @@ static int dlmfs_file_release(struct inode *inode,
->  	if (S_ISDIR(inode->i_mode))
->  		BUG();
->  
-> -	mlog(0, "close called on inode %lu\n", inode->i_ino);
-> +	mlog(0, "close called on inode %" PRIino "u\n", inode->i_ino);
->  
->  	if (fp) {
->  		level = fp->fp_lock_level;
-> @@ -242,7 +242,7 @@ static ssize_t dlmfs_file_write(struct file *filp,
->  	int bytes_left;
->  	struct inode *inode = file_inode(filp);
->  
-> -	mlog(0, "inode %lu, count = %zu, *ppos = %llu\n",
-> +	mlog(0, "inode %" PRIino "u, count = %zu, *ppos = %llu\n",
->  		inode->i_ino, count, *ppos);
->  
->  	if (*ppos >= DLM_LVB_LEN)
-> @@ -301,7 +301,7 @@ static void dlmfs_evict_inode(struct inode *inode)
->  
->  	clear_inode(inode);
->  
-> -	mlog(0, "inode %lu\n", inode->i_ino);
-> +	mlog(0, "inode %" PRIino "u\n", inode->i_ino);
->  
->  	ip = DLMFS_I(inode);
->  	lockres = &ip->ip_lockres;
-> @@ -490,7 +490,7 @@ static int dlmfs_unlink(struct inode *dir,
->  	int status;
->  	struct inode *inode = d_inode(dentry);
->  
-> -	mlog(0, "unlink inode %lu\n", inode->i_ino);
-> +	mlog(0, "unlink inode %" PRIino "u\n", inode->i_ino);
->  
->  	/* if there are no current holders, or none that are waiting
->  	 * to acquire a lock, this basically destroys our lockres. */
-> diff --git a/fs/ocfs2/extent_map.c b/fs/ocfs2/extent_map.c
-> index d68229422dda3423971d7ab0e9a4335acab8b344..3cf93a08f7a8946810ccd2de246be4d07a23b53b 100644
-> --- a/fs/ocfs2/extent_map.c
-> +++ b/fs/ocfs2/extent_map.c
-> @@ -291,7 +291,7 @@ static int ocfs2_last_eb_is_empty(struct inode *inode,
->  
->  	if (el->l_tree_depth) {
->  		ocfs2_error(inode->i_sb,
-> -			    "Inode %lu has non zero tree depth in leaf block %llu\n",
-> +			    "Inode %" PRIino "u has non zero tree depth in leaf block %llu\n",
->  			    inode->i_ino,
->  			    (unsigned long long)eb_bh->b_blocknr);
->  		ret = -EROFS;
-> @@ -427,7 +427,7 @@ static int ocfs2_get_clusters_nocache(struct inode *inode,
->  
->  		if (el->l_tree_depth) {
->  			ocfs2_error(inode->i_sb,
-> -				    "Inode %lu has non zero tree depth in leaf block %llu\n",
-> +				    "Inode %" PRIino "u has non zero tree depth in leaf block %llu\n",
->  				    inode->i_ino,
->  				    (unsigned long long)eb_bh->b_blocknr);
->  			ret = -EROFS;
-> @@ -437,7 +437,7 @@ static int ocfs2_get_clusters_nocache(struct inode *inode,
->  
->  	if (le16_to_cpu(el->l_next_free_rec) > le16_to_cpu(el->l_count)) {
->  		ocfs2_error(inode->i_sb,
-> -			    "Inode %lu has an invalid extent (next_free_rec %u, count %u)\n",
-> +			    "Inode %" PRIino "u has an invalid extent (next_free_rec %u, count %u)\n",
->  			    inode->i_ino,
->  			    le16_to_cpu(el->l_next_free_rec),
->  			    le16_to_cpu(el->l_count));
-> @@ -472,7 +472,7 @@ static int ocfs2_get_clusters_nocache(struct inode *inode,
->  
->  	if (!rec->e_blkno) {
->  		ocfs2_error(inode->i_sb,
-> -			    "Inode %lu has bad extent record (%u, %u, 0)\n",
-> +			    "Inode %" PRIino "u has bad extent record (%u, %u, 0)\n",
->  			    inode->i_ino,
->  			    le32_to_cpu(rec->e_cpos),
->  			    ocfs2_rec_clusters(el, rec));
-> @@ -561,7 +561,7 @@ int ocfs2_xattr_get_clusters(struct inode *inode, u32 v_cluster,
->  
->  		if (el->l_tree_depth) {
->  			ocfs2_error(inode->i_sb,
-> -				    "Inode %lu has non zero tree depth in xattr leaf block %llu\n",
-> +				    "Inode %" PRIino "u has non zero tree depth in xattr leaf block %llu\n",
->  				    inode->i_ino,
->  				    (unsigned long long)eb_bh->b_blocknr);
->  			ret = -EROFS;
-> @@ -580,7 +580,7 @@ int ocfs2_xattr_get_clusters(struct inode *inode, u32 v_cluster,
->  
->  		if (!rec->e_blkno) {
->  			ocfs2_error(inode->i_sb,
-> -				    "Inode %lu has bad extent record (%u, %u, 0) in xattr\n",
-> +				    "Inode %" PRIino "u has bad extent record (%u, %u, 0) in xattr\n",
->  				    inode->i_ino,
->  				    le32_to_cpu(rec->e_cpos),
->  				    ocfs2_rec_clusters(el, rec));
-> diff --git a/fs/ocfs2/inode.c b/fs/ocfs2/inode.c
-> index 03a51662ea8e79f7a64fcd320b974f954b2ea8bf..c3076b450de3599291c386ceeb8b2d26e8680904 100644
-> --- a/fs/ocfs2/inode.c
-> +++ b/fs/ocfs2/inode.c
-> @@ -1196,7 +1196,7 @@ static void ocfs2_clear_inode(struct inode *inode)
->  				inode->i_nlink);
->  
->  	mlog_bug_on_msg(osb == NULL,
-> -			"Inode=%lu\n", inode->i_ino);
-> +			"Inode=%" PRIino "u\n", inode->i_ino);
->  
->  	dquot_drop(inode);
->  
-> diff --git a/fs/ocfs2/quota_local.c b/fs/ocfs2/quota_local.c
-> index c4e0117d8977807dd6f0f4df64e1ddf72a62ea09..269b0f27d5679aba317059b245ee4bf4f5580eca 100644
-> --- a/fs/ocfs2/quota_local.c
-> +++ b/fs/ocfs2/quota_local.c
-> @@ -471,7 +471,7 @@ static int ocfs2_recover_local_quota_file(struct inode *lqinode,
->  	qsize_t spacechange, inodechange;
->  	unsigned int memalloc;
->  
-> -	trace_ocfs2_recover_local_quota_file((unsigned long)lqinode->i_ino, type);
-> +	trace_ocfs2_recover_local_quota_file(lqinode->i_ino, type);
->  
->  	list_for_each_entry_safe(rchunk, next, &(rec->r_list[type]), rc_list) {
->  		chunk = rchunk->rc_chunk;
-> diff --git a/fs/ocfs2/refcounttree.c b/fs/ocfs2/refcounttree.c
-> index c1cdececdfa4ef51a1bd3a5addad734b324b92c0..1586c42fdabe70056bf7f103d583dd9000fe9510 100644
-> --- a/fs/ocfs2/refcounttree.c
-> +++ b/fs/ocfs2/refcounttree.c
-> @@ -2341,7 +2341,7 @@ static int ocfs2_mark_extent_refcounted(struct inode *inode,
->  					   cpos, len, phys);
->  
->  	if (!ocfs2_refcount_tree(OCFS2_SB(inode->i_sb))) {
-> -		ret = ocfs2_error(inode->i_sb, "Inode %lu want to use refcount tree, but the feature bit is not set in the super block\n",
-> +		ret = ocfs2_error(inode->i_sb, "Inode %" PRIino "u want to use refcount tree, but the feature bit is not set in the super block\n",
->  				  inode->i_ino);
->  		goto out;
+> @@ -41,20 +41,20 @@ static int udf_verify_fi(struct udf_fileident_iter *iter)
+>  	 */
+>  	if (len > 1 << iter->dir->i_blkbits) {
+>  		udf_err(iter->dir->i_sb,
+> -			"directory (ino %lu) has too big (%u) entry at pos %llu\n",
+> +			"directory (ino %" PRIino "u) has too big (%u) entry at pos %llu\n",
+>  			iter->dir->i_ino, len, (unsigned long long)iter->pos);
+>  		return -EFSCORRUPTED;
 >  	}
-> @@ -2524,7 +2524,7 @@ int ocfs2_prepare_refcount_change_for_del(struct inode *inode,
->  	u64 start_cpos = ocfs2_blocks_to_clusters(inode->i_sb, phys_blkno);
->  
->  	if (!ocfs2_refcount_tree(OCFS2_SB(inode->i_sb))) {
-> -		ret = ocfs2_error(inode->i_sb, "Inode %lu want to use refcount tree, but the feature bit is not set in the super block\n",
-> +		ret = ocfs2_error(inode->i_sb, "Inode %" PRIino "u want to use refcount tree, but the feature bit is not set in the super block\n",
->  				  inode->i_ino);
->  		goto out;
+>  	if (iter->pos + len > iter->dir->i_size) {
+>  		udf_err(iter->dir->i_sb,
+> -			"directory (ino %lu) has entry past directory size at pos %llu\n",
+> +			"directory (ino %" PRIino "u) has entry past directory size at pos %llu\n",
+>  			iter->dir->i_ino, (unsigned long long)iter->pos);
+>  		return -EFSCORRUPTED;
 >  	}
-> @@ -2650,7 +2650,7 @@ static int ocfs2_refcount_cal_cow_clusters(struct inode *inode,
->  
->  		if (el->l_tree_depth) {
->  			ret = ocfs2_error(inode->i_sb,
-> -					  "Inode %lu has non zero tree depth in leaf block %llu\n",
-> +					  "Inode %" PRIino "u has non zero tree depth in leaf block %llu\n",
->  					  inode->i_ino,
->  					  (unsigned long long)eb_bh->b_blocknr);
->  			goto out;
-> @@ -2662,7 +2662,7 @@ static int ocfs2_refcount_cal_cow_clusters(struct inode *inode,
->  		rec = &el->l_recs[i];
->  
->  		if (ocfs2_is_empty_extent(rec)) {
-> -			mlog_bug_on_msg(i != 0, "Inode %lu has empty record in "
-> +			mlog_bug_on_msg(i != 0, "Inode %" PRIino "u has empty record in "
->  					"index %d\n", inode->i_ino, i);
->  			continue;
+>  	if (udf_dir_entry_len(&iter->fi) !=
+>  	    sizeof(struct tag) + le16_to_cpu(iter->fi.descTag.descCRCLength)) {
+>  		udf_err(iter->dir->i_sb,
+> -			"directory (ino %lu) has entry where CRC length (%u) does not match entry length (%u)\n",
+> +			"directory (ino %" PRIino "u) has entry where CRC length (%u) does not match entry length (%u)\n",
+>  			iter->dir->i_ino,
+>  			(unsigned)le16_to_cpu(iter->fi.descTag.descCRCLength),
+>  			(unsigned)(udf_dir_entry_len(&iter->fi) -
+> @@ -78,7 +78,7 @@ static int udf_copy_fi(struct udf_fileident_iter *iter)
+>  	}
+>  	if (iter->dir->i_size < iter->pos + sizeof(struct fileIdentDesc)) {
+>  		udf_err(iter->dir->i_sb,
+> -			"directory (ino %lu) has entry straddling EOF\n",
+> +			"directory (ino %" PRIino "u) has entry straddling EOF\n",
+>  			iter->dir->i_ino);
+>  		return -EFSCORRUPTED;
+>  	}
+> @@ -184,7 +184,7 @@ static int udf_fiiter_advance_blk(struct udf_fileident_iter *iter)
+>  			return 0;
 >  		}
-> @@ -3325,7 +3325,7 @@ static int ocfs2_replace_cow(struct ocfs2_cow_context *context)
->  	struct ocfs2_super *osb = OCFS2_SB(inode->i_sb);
+>  		udf_err(iter->dir->i_sb,
+> -			"extent after position %llu not allocated in directory (ino %lu)\n",
+> +			"extent after position %llu not allocated in directory (ino %" PRIino "u)\n",
+>  			(unsigned long long)iter->pos, iter->dir->i_ino);
+>  		return -EFSCORRUPTED;
+>  	}
+> @@ -272,7 +272,7 @@ int udf_fiiter_init(struct udf_fileident_iter *iter, struct inode *dir,
+>  		if (pos == dir->i_size)
+>  			return 0;
+>  		udf_err(dir->i_sb,
+> -			"position %llu not allocated in directory (ino %lu)\n",
+> +			"position %llu not allocated in directory (ino %" PRIino "u)\n",
+>  			(unsigned long long)pos, dir->i_ino);
+>  		err = -EFSCORRUPTED;
+>  		goto out;
+> @@ -483,7 +483,7 @@ int udf_fiiter_append_blk(struct udf_fileident_iter *iter)
+>  		   &iter->loffset, &etype);
+>  	if (err <= 0 || etype != (EXT_RECORDED_ALLOCATED >> 30)) {
+>  		udf_err(iter->dir->i_sb,
+> -			"block %llu not allocated in directory (ino %lu)\n",
+> +			"block %llu not allocated in directory (ino %" PRIino "u)\n",
+>  			(unsigned long long)block, iter->dir->i_ino);
+>  		return -EFSCORRUPTED;
+>  	}
+> diff --git a/fs/udf/file.c b/fs/udf/file.c
+> index 32ae7cfd72c549958b70824b449cf146f6750f44..ab8093b87dc8f21ce8af6a72621e2868fb4b9a82 100644
+> --- a/fs/udf/file.c
+> +++ b/fs/udf/file.c
+> @@ -133,7 +133,7 @@ long udf_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
+>  	int result;
 >  
->  	if (!ocfs2_refcount_tree(osb)) {
-> -		return ocfs2_error(inode->i_sb, "Inode %lu want to use refcount tree, but the feature bit is not set in the super block\n",
-> +		return ocfs2_error(inode->i_sb, "Inode %" PRIino "u want to use refcount tree, but the feature bit is not set in the super block\n",
->  				   inode->i_ino);
+>  	if (file_permission(filp, MAY_READ) != 0) {
+> -		udf_debug("no permission to access inode %lu\n", inode->i_ino);
+> +		udf_debug("no permission to access inode %" PRIino "u\n", inode->i_ino);
+>  		return -EPERM;
 >  	}
 >  
-> diff --git a/fs/ocfs2/xattr.c b/fs/ocfs2/xattr.c
-> index 42ee5db362d3eb6df886d6721dd7398b8aca8cdb..74cd6dd57abf71a69adef18863d057e48496ccfe 100644
-> --- a/fs/ocfs2/xattr.c
-> +++ b/fs/ocfs2/xattr.c
-> @@ -3741,7 +3741,7 @@ static int ocfs2_xattr_get_rec(struct inode *inode,
->  
->  		if (el->l_tree_depth) {
->  			ret = ocfs2_error(inode->i_sb,
-> -					  "Inode %lu has non zero tree depth in xattr tree block %llu\n",
-> +					  "Inode %" PRIino "u has non zero tree depth in xattr tree block %llu\n",
->  					  inode->i_ino,
->  					  (unsigned long long)eb_bh->b_blocknr);
->  			goto out;
-> @@ -3758,7 +3758,7 @@ static int ocfs2_xattr_get_rec(struct inode *inode,
+> diff --git a/fs/udf/inode.c b/fs/udf/inode.c
+> index 7fae8002344a0e1e7e51022e97f1e0e2424185f9..ecc22aded0d287ccdfb34b42a0d82e392054f585 100644
+> --- a/fs/udf/inode.c
+> +++ b/fs/udf/inode.c
+> @@ -147,7 +147,7 @@ void udf_evict_inode(struct inode *inode)
+>  		if (iinfo->i_alloc_type != ICBTAG_FLAG_AD_IN_ICB &&
+>  		    inode->i_size != iinfo->i_lenExtents) {
+>  			udf_warn(inode->i_sb,
+> -				 "Inode %lu (mode %o) has inode size %llu different from extent length %llu. Filesystem need not be standards compliant.\n",
+> +				 "Inode %" PRIino "u (mode %o) has inode size %llu different from extent length %llu. Filesystem need not be standards compliant.\n",
+>  				 inode->i_ino, inode->i_mode,
+>  				 (unsigned long long)inode->i_size,
+>  				 (unsigned long long)iinfo->i_lenExtents);
+> @@ -1386,13 +1386,13 @@ static int udf_read_inode(struct inode *inode, bool hidden_inode)
+>  	 */
+>  	bh = udf_read_ptagged(inode->i_sb, iloc, 0, &ident);
+>  	if (!bh) {
+> -		udf_err(inode->i_sb, "(ino %lu) failed !bh\n", inode->i_ino);
+> +		udf_err(inode->i_sb, "(ino %" PRIino "u) failed !bh\n", inode->i_ino);
+>  		return -EIO;
 >  	}
 >  
->  	if (!e_blkno) {
-> -		ret = ocfs2_error(inode->i_sb, "Inode %lu has bad extent record (%u, %u, 0) in xattr\n",
-> +		ret = ocfs2_error(inode->i_sb, "Inode %" PRIino "u has bad extent record (%u, %u, 0) in xattr\n",
->  				  inode->i_ino,
->  				  le32_to_cpu(rec->e_cpos),
->  				  ocfs2_rec_clusters(el, rec));
+>  	if (ident != TAG_IDENT_FE && ident != TAG_IDENT_EFE &&
+>  	    ident != TAG_IDENT_USE) {
+> -		udf_err(inode->i_sb, "(ino %lu) failed ident=%u\n",
+> +		udf_err(inode->i_sb, "(ino %" PRIino "u) failed ident=%u\n",
+>  			inode->i_ino, ident);
+>  		goto out;
+>  	}
+> @@ -1641,7 +1641,7 @@ static int udf_read_inode(struct inode *inode, bool hidden_inode)
+>  		udf_debug("METADATA BITMAP FILE-----\n");
+>  		break;
+>  	default:
+> -		udf_err(inode->i_sb, "(ino %lu) failed unknown file type=%u\n",
+> +		udf_err(inode->i_sb, "(ino %" PRIino "u) failed unknown file type=%u\n",
+>  			inode->i_ino, fe->icbTag.fileType);
+>  		goto out;
+>  	}
+> @@ -1942,7 +1942,7 @@ static int udf_update_inode(struct inode *inode, int do_sync)
+>  	if (do_sync) {
+>  		sync_dirty_buffer(bh);
+>  		if (buffer_write_io_error(bh)) {
+> -			udf_warn(inode->i_sb, "IO error syncing udf inode [%08lx]\n",
+> +			udf_warn(inode->i_sb, "IO error syncing udf inode [%08" PRIino "x]\n",
+>  				 inode->i_ino);
+>  			err = -EIO;
+>  		}
+> @@ -2224,7 +2224,7 @@ int udf_next_aext(struct inode *inode, struct extent_position *epos,
+>  
+>  		if (++indirections > UDF_MAX_INDIR_EXTS) {
+>  			udf_err(inode->i_sb,
+> -				"too many indirect extents in inode %lu\n",
+> +				"too many indirect extents in inode %" PRIino "u\n",
+>  				inode->i_ino);
+>  			return -EFSCORRUPTED;
+>  		}
+> diff --git a/fs/udf/namei.c b/fs/udf/namei.c
+> index 5f2e9a892bffa9579143cedf71d80efa7ad6e9fb..32209549a31f451a486918e673a41497bef42e89 100644
+> --- a/fs/udf/namei.c
+> +++ b/fs/udf/namei.c
+> @@ -550,7 +550,7 @@ static int udf_unlink(struct inode *dir, struct dentry *dentry)
+>  		goto end_unlink;
+>  
+>  	if (!inode->i_nlink) {
+> -		udf_debug("Deleting nonexistent file (%lu), %u\n",
+> +		udf_debug("Deleting nonexistent file (%" PRIino "u), %u\n",
+>  			  inode->i_ino, inode->i_nlink);
+>  		set_nlink(inode, 1);
+>  	}
+> @@ -809,7 +809,7 @@ static int udf_rename(struct mnt_idmap *idmap, struct inode *old_dir,
+>  					       &diriter);
+>  		if (retval == -ENOENT) {
+>  			udf_err(old_inode->i_sb,
+> -				"directory (ino %lu) has no '..' entry\n",
+> +				"directory (ino %" PRIino "u) has no '..' entry\n",
+>  				old_inode->i_ino);
+>  			retval = -EFSCORRUPTED;
+>  		}
+> @@ -821,7 +821,7 @@ static int udf_rename(struct mnt_idmap *idmap, struct inode *old_dir,
+>  				old_dir->i_ino) {
+>  			retval = -EFSCORRUPTED;
+>  			udf_err(old_inode->i_sb,
+> -				"directory (ino %lu) has parent entry pointing to another inode (%lu != %u)\n",
+> +				"directory (ino %" PRIino "u) has parent entry pointing to another inode (%" PRIino "u != %u)\n",
+>  				old_inode->i_ino, old_dir->i_ino,
+>  				udf_get_lb_pblock(old_inode->i_sb, &tloc, 0));
+>  			goto out_oiter;
+> @@ -869,7 +869,7 @@ static int udf_rename(struct mnt_idmap *idmap, struct inode *old_dir,
+>  	retval = udf_fiiter_find_entry(old_dir, &old_dentry->d_name, &oiter);
+>  	if (retval) {
+>  		udf_err(old_dir->i_sb,
+> -			"failed to find renamed entry again in directory (ino %lu)\n",
+> +			"failed to find renamed entry again in directory (ino %" PRIino "u)\n",
+>  			old_dir->i_ino);
+>  	} else {
+>  		udf_fiiter_delete_entry(&oiter);
+> diff --git a/fs/udf/super.c b/fs/udf/super.c
+> index 27f463fd1d89e8ae4844cd70c291d737aee1589e..c6e372d573885742745d3ff4b3b017facf228a32 100644
+> --- a/fs/udf/super.c
+> +++ b/fs/udf/super.c
+> @@ -1166,7 +1166,7 @@ static int udf_fill_partdesc_info(struct super_block *sb,
+>  		}
+>  		map->s_uspace.s_table = inode;
+>  		map->s_partition_flags |= UDF_PART_FLAG_UNALLOC_TABLE;
+> -		udf_debug("unallocSpaceTable (part %d) @ %lu\n",
+> +		udf_debug("unallocSpaceTable (part %d) @ %" PRIino "u\n",
+>  			  p_index, map->s_uspace.s_table->i_ino);
+>  	}
+>  
 > 
 > -- 
 > 2.53.0
