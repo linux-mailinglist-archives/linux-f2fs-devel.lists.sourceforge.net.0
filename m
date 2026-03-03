@@ -2,42 +2,42 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id AGUCKt7Epmn3TQAAu9opvQ
+	id SHdMCAXFpmn3TQAAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 03 Mar 2026 12:24:14 +0100
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 03 Mar 2026 12:24:53 +0100
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id C8B651EDB12
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 03 Mar 2026 12:24:13 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3F2A41EDB48
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 03 Mar 2026 12:24:52 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
 	Subject:In-Reply-To:MIME-Version:References:Message-ID:To:From:Date:Sender:
 	Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
 	:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=ctYGx4pibLrFB06cWGNUu8U/3Q4PwFF0IkpUV8cC5fg=; b=AYYLdqKMIsFS3mE9E3HTw2+6Wv
-	LXjMBPVQ8f6nuFqqebKUFK+b0ZHsnBwL9kd08T9WXkvI5kbI9RpkJz34zZuYkBB0i0+bLu9dj470C
-	x6Bkc20L4cfD4bwl2NzDJ4xylL1X8uAxV0DaCO8Fko4HjaodNyOWNRzVd1gYJf4m90Qc=;
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=DzJJkoJFnqNV4hipZE3MNkYOwUXwYpRQ93AAgxFPuRU=; b=QDCm8zjqK5jSOLCI+gGRTnrSY4
+	l4m0TrMUKrvfxfieMo4y/TVCEgbBaLv7oP9VMKxB21fdH0FjDNvqqbPSWYKL5bAZKaMLYr4v53oLs
+	HF+JVGDi2Qopvo7hKklT/hiNmjtf9cBZWh2Y+X4YRtgWIRAspPFFC6LYXmuHPr/5erFQ=;
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vxNrG-0005Ll-9J;
-	Tue, 03 Mar 2026 11:24:10 +0000
+	id 1vxNru-0001ku-O1;
+	Tue, 03 Mar 2026 11:24:50 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jack@suse.cz>) id 1vxNrF-0005Lc-DI
+ (envelope-from <jack@suse.cz>) id 1vxNrt-0001ko-D6
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 03 Mar 2026 11:24:09 +0000
+ Tue, 03 Mar 2026 11:24:49 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=K7Yl9Dt7jVlcVQjEf63B1tQYNVt8eYC4EdfdZsuIVJM=; b=UFLcMfr6S8jGPJdptWLioIV9KK
- KKkPzgiSaOO42rURiwDo3zEbJ7ZotbWuz2nV34PjBbwC0oKD/dFTZ+jBPC+pf+i8Dp6u33ZkF2Onq
- g4Uxr571N3m31YJDvh3vCbE2zjRSljQMksF8L4HCc8a84yxCYA2j2mCKBnFSeUCS7irI=;
+ bh=vDQHJTybbwme79tj0LaoGJ3bxXhb6k+U6EpthuA22eM=; b=EgXKN9sXtgtDNIfTdpdRuCB5wX
+ Z4W8Y+FJaaMCD+rFjV5EEI1cc3ui25uGApdF5rF14mIVfmpf3G7XdYf0ovVjARFsMDEHrxcflNmiF
+ TEGFQwy/NlG3EVDwrM42aW0QbByV9K/Sd27tP6PyoBps+j6xqBQKeg5RsPSjRLCUy6qo=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -45,79 +45,76 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=K7Yl9Dt7jVlcVQjEf63B1tQYNVt8eYC4EdfdZsuIVJM=; b=d3aljvOm6YZiV7Aqj8Nva74pYS
- xvScvpQmMXOhO1ryj2BJc4eXJb9v9S8udnaTqzGMikI/wSESBD5FYseUKx/3QUsCj1kUQU37Uv0Hn
- x7zKaLc3Lpt+SxOiBNhnbxDEz+UqEYobyphUwMCCb93Z9goi6NEiXV2/dby3wAT6vyCQ=;
+ bh=vDQHJTybbwme79tj0LaoGJ3bxXhb6k+U6EpthuA22eM=; b=AFWKQ6b52kTWlGA0TI7w6OBMes
+ 57HSvfpLv+iZTMqUAi14W3LUMqXdFxSCHMcKzJ2Re2TxAJUdszc3G50Gxa525yzdsmn8HauyRYgnC
+ XlBXSBVZ/Ah5mrLmU6xWfrk3xv3aFkmbzgwNVEFIIaaqoXLkh6TO4xdnCaswpURD4YDo=;
 Received: from smtp-out2.suse.de ([195.135.223.131])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1vxNrE-0003iD-N7 for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 03 Mar 2026 11:24:09 +0000
-Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org
- [IPv6:2a07:de40:b281:104:10:150:64:97])
+ id 1vxNrs-0003kI-IN for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 03 Mar 2026 11:24:49 +0000
+Received: from imap1.dmz-prg2.suse.org (unknown [10.150.64.97])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id 4EC1A5BDF3;
- Tue,  3 Mar 2026 11:24:02 +0000 (UTC)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id 18CC35BD1C;
+ Tue,  3 Mar 2026 11:24:37 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.cz; s=susede2_rsa;
- t=1772537042; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ t=1772537077; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
  mime-version:mime-version:content-type:content-type:
  in-reply-to:in-reply-to:references:references;
- bh=K7Yl9Dt7jVlcVQjEf63B1tQYNVt8eYC4EdfdZsuIVJM=;
- b=oy8pWoHqrMEHlN4brCXg2tPFAhfnj7hNnLiWr7QZqvLnhUUVRLml6dG2v7DgEPSLDnZovj
- KAXy3PwMSytjm6CRgomx/IgEopJ3owCZp+3PaBD8ZCWWFIlSZ6TreqR/OCjywszkRFPjhM
- RZ129a6nRDsR1gOHwRCIua5AvBIGjGg=
+ bh=vDQHJTybbwme79tj0LaoGJ3bxXhb6k+U6EpthuA22eM=;
+ b=UoWJ+20FudPqog6nxHkr+fdHi2sJkTvwHuu+U6kuvo8gTTWmh/AlFpBu94vJwGOq83XWlO
+ SWRBZty/CKQ0hlfQ+lZ8gNI3kKqwwsJ/Lu5UnE5LBFMyAaA3/uvcm0WcVYOvdRBJtXQ4CA
+ ohEwDdk4ePzsFvbqpNx8CmCIILQIl8w=
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.cz;
- s=susede2_ed25519; t=1772537042;
+ s=susede2_ed25519; t=1772537077;
  h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
  mime-version:mime-version:content-type:content-type:
  in-reply-to:in-reply-to:references:references;
- bh=K7Yl9Dt7jVlcVQjEf63B1tQYNVt8eYC4EdfdZsuIVJM=;
- b=jJuhp4wn8vYJLdotyAquo63x/02x111qPRtzSjYNdGjAowRt5gzgynAxTUYw+Ln14/yoSt
- LKDZZhnGQ3WO8cCw==
+ bh=vDQHJTybbwme79tj0LaoGJ3bxXhb6k+U6EpthuA22eM=;
+ b=Q6oUQTudfBrS7v+5ldwHSD1RVeupUKkxjY+tqUelutQ+f0ackTTzkSKTR5cBNAJo7Ebnpa
+ K1UfuCNCKIm02nCA==
 Authentication-Results: smtp-out2.suse.de;
- dkim=pass header.d=suse.cz header.s=susede2_rsa header.b=oy8pWoHq;
- dkim=pass header.d=suse.cz header.s=susede2_ed25519 header.b=jJuhp4wn
+	none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.cz; s=susede2_rsa;
- t=1772537042; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ t=1772537077; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
  mime-version:mime-version:content-type:content-type:
  in-reply-to:in-reply-to:references:references;
- bh=K7Yl9Dt7jVlcVQjEf63B1tQYNVt8eYC4EdfdZsuIVJM=;
- b=oy8pWoHqrMEHlN4brCXg2tPFAhfnj7hNnLiWr7QZqvLnhUUVRLml6dG2v7DgEPSLDnZovj
- KAXy3PwMSytjm6CRgomx/IgEopJ3owCZp+3PaBD8ZCWWFIlSZ6TreqR/OCjywszkRFPjhM
- RZ129a6nRDsR1gOHwRCIua5AvBIGjGg=
+ bh=vDQHJTybbwme79tj0LaoGJ3bxXhb6k+U6EpthuA22eM=;
+ b=UoWJ+20FudPqog6nxHkr+fdHi2sJkTvwHuu+U6kuvo8gTTWmh/AlFpBu94vJwGOq83XWlO
+ SWRBZty/CKQ0hlfQ+lZ8gNI3kKqwwsJ/Lu5UnE5LBFMyAaA3/uvcm0WcVYOvdRBJtXQ4CA
+ ohEwDdk4ePzsFvbqpNx8CmCIILQIl8w=
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.cz;
- s=susede2_ed25519; t=1772537042;
+ s=susede2_ed25519; t=1772537077;
  h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
  mime-version:mime-version:content-type:content-type:
  in-reply-to:in-reply-to:references:references;
- bh=K7Yl9Dt7jVlcVQjEf63B1tQYNVt8eYC4EdfdZsuIVJM=;
- b=jJuhp4wn8vYJLdotyAquo63x/02x111qPRtzSjYNdGjAowRt5gzgynAxTUYw+Ln14/yoSt
- LKDZZhnGQ3WO8cCw==
+ bh=vDQHJTybbwme79tj0LaoGJ3bxXhb6k+U6EpthuA22eM=;
+ b=Q6oUQTudfBrS7v+5ldwHSD1RVeupUKkxjY+tqUelutQ+f0ackTTzkSKTR5cBNAJo7Ebnpa
+ K1UfuCNCKIm02nCA==
 Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 3A1123EA6E;
- Tue,  3 Mar 2026 11:24:02 +0000 (UTC)
+ by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 0470A3EA69;
+ Tue,  3 Mar 2026 11:24:37 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
- by imap1.dmz-prg2.suse.org with ESMTPSA id S/8nDtLEpmm3SQAAD6G6ig
- (envelope-from <jack@suse.cz>); Tue, 03 Mar 2026 11:24:02 +0000
+ by imap1.dmz-prg2.suse.org with ESMTPSA id WHkSAfXEpmlOSgAAD6G6ig
+ (envelope-from <jack@suse.cz>); Tue, 03 Mar 2026 11:24:37 +0000
 Received: by quack3.suse.cz (Postfix, from userid 1000)
- id D1FB8A0A1B; Tue,  3 Mar 2026 12:24:01 +0100 (CET)
-Date: Tue, 3 Mar 2026 12:24:01 +0100
+ id BC159A0A1B; Tue,  3 Mar 2026 12:24:36 +0100 (CET)
+Date: Tue, 3 Mar 2026 12:24:36 +0100
 From: Jan Kara <jack@suse.cz>
 To: Jeff Layton <jlayton@kernel.org>
-Message-ID: <ru6heof6ndlg2doksb3mhaz2gnfdt32pqkiwv3trx6ppbmtu3l@466clvjonlps>
+Message-ID: <4sefbdgtlxnclmqd5drtyk7k7iixheqrkxambzoazpc5wjbaad@z4djfmeum5ks>
 References: <20260302-iino-u64-v2-0-e5388800dae0@kernel.org>
- <20260302-iino-u64-v2-29-e5388800dae0@kernel.org>
+ <20260302-iino-u64-v2-34-e5388800dae0@kernel.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20260302-iino-u64-v2-29-e5388800dae0@kernel.org>
-X-Spamd-Bar: /
+In-Reply-To: <20260302-iino-u64-v2-34-e5388800dae0@kernel.org>
 X-Spam-Flag: NO
-X-Spam-Score: -0.51
+X-Spam-Score: -0.30
 X-Spam-Level: 
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
@@ -126,9 +123,9 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Mon 02-03-26 15:24:13, Jeff Layton wrote: > Convert ext2
+ Content preview:  On Mon 02-03-26 15:24:18, Jeff Layton wrote: > Convert isofs
  i_ino format strings to use the PRIino format > macro in preparation for
- the widening of i_ino via kino_t. > > Also correct signed format sp [...] 
+ the widening of i_ino via kino_t. > > Also correct signed format s [...] 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -139,8 +136,8 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-X-Headers-End: 1vxNrE-0003iD-N7
-Subject: Re: [f2fs-dev] [PATCH v2 029/110] ext2: use PRIino format for i_ino
+X-Headers-End: 1vxNrs-0003kI-IN
+Subject: Re: [f2fs-dev] [PATCH v2 034/110] isofs: use PRIino format for i_ino
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -251,7 +248,7 @@ Cc: Latchesar Ionkov <lucho@ionkov.net>, nvdimm@lists.linux.dev,
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
-X-Rspamd-Queue-Id: C8B651EDB12
+X-Rspamd-Queue-Id: 3F2A41EDB48
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [0.89 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
@@ -277,7 +274,7 @@ X-Spamd-Result: default: False [0.89 / 15.00];
 	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,suse.cz:s=susede2_rsa,suse.cz:s=susede2_ed25519];
 	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,suse.cz:-];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.sourceforge.net:dkim,lists.sourceforge.net:rdns,lists.sourceforge.net:helo,suse.cz:email,suse.com:email];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[suse.com:email,suse.cz:email,lists.sourceforge.net:dkim,lists.sourceforge.net:rdns,lists.sourceforge.net:helo];
 	RCPT_COUNT_GT_50(0.00)[170];
 	FORGED_SENDER_FORWARDING(0.00)[];
 	FROM_HAS_DN(0.00)[];
@@ -294,8 +291,8 @@ X-Spamd-Result: default: False [0.89 / 15.00];
 	RCVD_COUNT_SEVEN(0.00)[7]
 X-Rspamd-Action: no action
 
-On Mon 02-03-26 15:24:13, Jeff Layton wrote:
-> Convert ext2 i_ino format strings to use the PRIino format
+On Mon 02-03-26 15:24:18, Jeff Layton wrote:
+> Convert isofs i_ino format strings to use the PRIino format
 > macro in preparation for the widening of i_ino via kino_t.
 > 
 > Also correct signed format specifiers to unsigned, since inode
@@ -308,6 +305,88 @@ Looks good. Feel free to add:
 Reviewed-by: Jan Kara <jack@suse.cz>
 
 								Honza
+
+> ---
+>  fs/isofs/compress.c | 2 +-
+>  fs/isofs/dir.c      | 2 +-
+>  fs/isofs/inode.c    | 6 +++---
+>  fs/isofs/namei.c    | 2 +-
+>  4 files changed, 6 insertions(+), 6 deletions(-)
+> 
+> diff --git a/fs/isofs/compress.c b/fs/isofs/compress.c
+> index 50b4cb3aea87c7fc46b8b5483162bce84573b483..dc6c7d247cf880720be47cd26d23206d25a4e453 100644
+> --- a/fs/isofs/compress.c
+> +++ b/fs/isofs/compress.c
+> @@ -156,7 +156,7 @@ static loff_t zisofs_uncompress_block(struct inode *inode, loff_t block_start,
+>  				else {
+>  					printk(KERN_DEBUG
+>  					       "zisofs: zisofs_inflate returned"
+> -					       " %d, inode = %lu,"
+> +					       " %d, inode = %" PRIino "u,"
+>  					       " page idx = %d, bh idx = %d,"
+>  					       " avail_in = %ld,"
+>  					       " avail_out = %ld\n",
+> diff --git a/fs/isofs/dir.c b/fs/isofs/dir.c
+> index 2ca16c3fe5ef3427e5bbd0631eb8323ef3c58bf1..0a8f9e411c23425a6919b7a4fa3fb387eb2c3209 100644
+> --- a/fs/isofs/dir.c
+> +++ b/fs/isofs/dir.c
+> @@ -152,7 +152,7 @@ static int do_isofs_readdir(struct inode *inode, struct file *file,
+>  		    de_len < de->name_len[0] +
+>  					sizeof(struct iso_directory_record)) {
+>  			printk(KERN_NOTICE "iso9660: Corrupted directory entry"
+> -			       " in block %lu of inode %lu\n", block,
+> +			       " in block %lu of inode %" PRIino "u\n", block,
+>  			       inode->i_ino);
+>  			brelse(bh);
+>  			return -EIO;
+> diff --git a/fs/isofs/inode.c b/fs/isofs/inode.c
+> index 5c01536c5e8fecb73a95d801cdd3b8ee22011a3c..678d7363e157d893e005152e64e922d9170468d0 100644
+> --- a/fs/isofs/inode.c
+> +++ b/fs/isofs/inode.c
+> @@ -1261,7 +1261,7 @@ static int isofs_read_level3_size(struct inode *inode)
+>  
+>  out_toomany:
+>  	printk(KERN_INFO "%s: More than 100 file sections ?!?, aborting...\n"
+> -		"isofs_read_level3_size: inode=%lu\n",
+> +		"isofs_read_level3_size: inode=%" PRIino "u\n",
+>  		__func__, inode->i_ino);
+>  	goto out;
+>  }
+> @@ -1380,7 +1380,7 @@ static int isofs_read_inode(struct inode *inode, int relocated)
+>  	/* I have no idea what file_unit_size is used for, so
+>  	   we will flag it for now */
+>  	if (de->file_unit_size[0] != 0) {
+> -		printk(KERN_DEBUG "ISOFS: File unit size != 0 for ISO file (%ld).\n",
+> +		printk(KERN_DEBUG "ISOFS: File unit size != 0 for ISO file (%" PRIino "u).\n",
+>  			inode->i_ino);
+>  	}
+>  
+> @@ -1450,7 +1450,7 @@ static int isofs_read_inode(struct inode *inode, int relocated)
+>  		/* XXX - parse_rock_ridge_inode() had already set i_rdev. */
+>  		init_special_inode(inode, inode->i_mode, inode->i_rdev);
+>  	} else {
+> -		printk(KERN_DEBUG "ISOFS: Invalid file type 0%04o for inode %lu.\n",
+> +		printk(KERN_DEBUG "ISOFS: Invalid file type 0%04o for inode %" PRIino "u.\n",
+>  			inode->i_mode, inode->i_ino);
+>  		ret = -EIO;
+>  		goto fail;
+> diff --git a/fs/isofs/namei.c b/fs/isofs/namei.c
+> index 58f80e1b3ac0d5082c24b5dbfd064cf5bff7d5a5..494d2ae4c0955123335a97f23672b959dcc9e0bd 100644
+> --- a/fs/isofs/namei.c
+> +++ b/fs/isofs/namei.c
+> @@ -100,7 +100,7 @@ isofs_find_entry(struct inode *dir, struct dentry *dentry,
+>  		/* Basic sanity check, whether name doesn't exceed dir entry */
+>  		if (de_len < dlen + sizeof(struct iso_directory_record)) {
+>  			printk(KERN_NOTICE "iso9660: Corrupted directory entry"
+> -			       " in block %lu of inode %lu\n", block,
+> +			       " in block %lu of inode %" PRIino "u\n", block,
+>  			       dir->i_ino);
+>  			brelse(bh);
+>  			return 0;
+> 
+> -- 
+> 2.53.0
+> 
 -- 
 Jan Kara <jack@suse.com>
 SUSE Labs, CR
