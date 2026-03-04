@@ -2,228 +2,101 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id GKUcCHyLp2nliAAAu9opvQ
+	id 4AD5OQOZp2kCigAAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 04 Mar 2026 02:31:40 +0100
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 04 Mar 2026 03:29:23 +0100
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 432E41F96D1
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 04 Mar 2026 02:31:39 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0E8141F9E07
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 04 Mar 2026 03:29:22 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:MIME-Version:In-Reply-To:References:
+	List-Unsubscribe:List-Id:Subject:MIME-Version:References:In-Reply-To:
 	Message-ID:To:Date:Sender:Content-ID:Content-Description:Resent-Date:
 	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=xBSJqKSKblc2Cjx5fVxbsJ6bluTIfxZhg8aTvYduNPQ=; b=Mae75FTwywIJaQ6fml1rzw0q8m
-	b5fef2YZaEkairXcICov7oYWBNc7RU4aNScq1qeblDaquCb5bqcyeFPd/olxDJIXqiB4QO+bsUkE5
-	f55kYSKm1nkxuIckYEC2OGPEJZlIkgfO3ZgOrEjXNtuzMAd5QAyS7x2ssSdO4spkp1Co=;
+	bh=8Lck9VxvV9OWDnjQyvtoY9A79dDVvAuhfXuS3wTCu20=; b=DtkZn/mS4m6xc36N+ckllzNred
+	BXyIS5Ed6oWDd10V0Pd7pvCFBw6ukuj5YojP8moIMjeU3ccsEeJUck1uI508G5mepvu0mzUw5nNp3
+	9G41e7zZaBOXDQ5DhtBmWkztk/57K2lPOey92a2A0mXyp66QChFN33FYr4AETJngvUHo=;
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vxb5L-0002ZF-Gv;
-	Wed, 04 Mar 2026 01:31:35 +0000
+	id 1vxbz5-0005lu-UP;
+	Wed, 04 Mar 2026 02:29:11 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <harry.yoo@oracle.com>) id 1vxb5J-0002Z7-G9
+ (envelope-from <kuba@kernel.org>) id 1vxbyu-0005lO-Q2
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 04 Mar 2026 01:31:33 +0000
+ Wed, 04 Mar 2026 02:29:00 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=MIME-Version:In-Reply-To:Content-Type:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:MIME-Version
+ :References:In-Reply-To:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=p1pfgV1drFZ5J1vieB4uSVPLuWjx9UoNU8kMUtv5iFA=; b=YswYrV3hPY5cTdUGNpfjgPSrjf
- n5RB+mWoNm3Ba7k69l/oN12IdnAUH7bc6/rCYtpbzu/+ph4TybLGUlHJxB9Q3RrUduPtEEvGxy7YV
- 2UrAM+zZkUUaI8laOqnl9dLAeftnOQ7zKLmcLBQiZJpwNbbvt61obz9seFohe1o7yEss=;
+ bh=wKj0ybLQ7OTEX7VYO4UYrqVGHCViOoCZ3KGzAf4cs5s=; b=Yx4ZXY8Qj3cDsh7WowvONIDcSp
+ WVrOUqCUXuCKyLmVwhUXeXCrA4xSn5aYa9ZRhAWVb+0DdiV8Ly7aNu1ubD8qV7CO7TxyfrG4Hcz0Q
+ PEYr9rHsqpvnyWSgTzit6QEScct10lGkDD7mDlnUkdCYclRbXGQ9prJI1Z7nHAbCg6ao=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=MIME-Version:In-Reply-To:Content-Type:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:MIME-Version:References:
+ In-Reply-To:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=p1pfgV1drFZ5J1vieB4uSVPLuWjx9UoNU8kMUtv5iFA=; b=EI5xmu8eOOxPejNNm1C7RuX1lL
- jOx3NAHtGRg5AK7YDESMP6kbACRFnX6tlyBERp7FJLsdijOHwS9+nMZbZoM7EjLUcWUXBgN6C/4Zy
- zunbbIecWsjPKJp38S24XyQev+0ov+kXou0ZHV8LyR2G5PL6K96xIuXKBF3BJd31i15c=;
-Received: from mx0a-00069f02.pphosted.com ([205.220.165.32])
+ bh=wKj0ybLQ7OTEX7VYO4UYrqVGHCViOoCZ3KGzAf4cs5s=; b=ZMgd013XqNAsYThrosgAMqoVj4
+ dhhb6bNG+MGbZ27J5WjDRV7nY8DTHmqR1OkuPPuz4LRLpc6bBzNz/MqWPCNvrJGjstS1oIf+1ZroH
+ 6IqCqwGlsKN6ig1ylxyWsVHB3m8lZPKc3v3Cd2E5Hgk8DMDles6a+r4o4CO0tZV1+FAA=;
+Received: from sea.source.kernel.org ([172.234.252.31])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vxb5I-0007lP-W3 for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 04 Mar 2026 01:31:33 +0000
-Received: from pps.filterd (m0246627.ppops.net [127.0.0.1])
- by mx0b-00069f02.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 6241CDCK610470; Wed, 4 Mar 2026 01:31:11 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com; h=cc
- :content-type:date:from:in-reply-to:message-id:mime-version
- :references:subject:to; s=corp-2025-04-25; bh=p1pfgV1drFZ5J1vieB
- 4uSVPLuWjx9UoNU8kMUtv5iFA=; b=IS5lyUBpGnoj0glDmLzA4T7XAuxmnVuJR7
- o4uo3pmTvGLY6m2Kzyim3h0ke6Ifcw86zEijJlITraMl0SDIJxhC5Y0jdaIbCZsE
- qYYqP6Lnx1O46tw/I6MI/PD/Lk1hb3Eu0JBXP3Kd8f78pKWtHVAypR3aHWwZOHRa
- /DTJFKCz50cgXAAFdepvo7A6RZnT7Ke05464tFIpw71gPSZHhHMEiKzKxvc3Pj3R
- o/iDQvMZsQwqcW0ueADKIRvfcVjB8zheRmHwcE18hoNFUS8nw2gBjXxYXBDhUQlT
- rHcbss7OYtyVuY8IoUkoJB1rM53DB9evH4ZxkmJI/sVEoPWsD0TQ==
-Received: from iadpaimrmta03.imrmtpd1.prodappiadaev1.oraclevcn.com
- (iadpaimrmta03.appoci.oracle.com [130.35.103.27])
- by mx0b-00069f02.pphosted.com (PPS) with ESMTPS id 4cpahhg0va-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Wed, 04 Mar 2026 01:31:10 +0000 (GMT)
-Received: from pps.filterd
- (iadpaimrmta03.imrmtpd1.prodappiadaev1.oraclevcn.com [127.0.0.1])
- by iadpaimrmta03.imrmtpd1.prodappiadaev1.oraclevcn.com (8.18.1.2/8.18.1.2)
- with ESMTP id 623NdZSH023114; Wed, 4 Mar 2026 01:31:09 GMT
-Received: from ph8pr06cu001.outbound.protection.outlook.com
- (mail-westus3azon11012041.outbound.protection.outlook.com [40.107.209.41])
- by iadpaimrmta03.imrmtpd1.prodappiadaev1.oraclevcn.com (PPS) with ESMTPS id
- 4ckptfd84c-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Wed, 04 Mar 2026 01:31:09 +0000
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=MYzn1SpQpZcd954L0GCtvycmGeYFG/EMYyiS0VsB0LsWiBHoIO7TaF0AyvrixE/pR6BN+MmIjakc5S3tVGdkGo/8b7z42MpbgTU5TsRFnnsJht/dkNNfYlUHnkv9cQDNRmTJRe44axoXXnjdGpeER0Y2PtMSZpHS/uwrWZkvMDDKmsfOjruDtDaElBEkmv1COjDVpXOQubeNuw97lB+DyleN0Hk8QYBwBfi9+yQ3Gr8sELTjicDJ/p/veAADgIHVmfpYQaKs6Sgf9K2N1R3NFVEZGAX3QDa0cFjcjhMqybkQA/4PYDyKVKRyYz04mswOjik1NyPtbVC7KZJJWS4dfA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=p1pfgV1drFZ5J1vieB4uSVPLuWjx9UoNU8kMUtv5iFA=;
- b=mrU1Wt63DyfbsHDh8q16jQlgCDm93ClE5/cOasToINI6aN0dmpRl38CcFrQZJJtnSmMaJXWpxFn9UGZVFpUHJB59DuFux7avAsN1Zltm8nZycLghEOaEvdifrHsN69fH+CddXbjejzblnruzvRFd5G80FbFDFg02e8GYM74BacL6Lcpy40toWy5a8IPb/2EUOs37Zt4+ePhbnrDxeSpyTpU5QZc9aRCW+9v9+wDx+wmUKONb9649BNY7V/DavmJkR0aFR7hfzoNeDdo0eXKb4DjtjWNAmswmywUP2lA4e3H9URG6qjLllGyHcAaQkcLQVc7XiBmjnUL0VB2XO1oJrg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=oracle.com; dmarc=pass action=none header.from=oracle.com;
- dkim=pass header.d=oracle.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oracle.onmicrosoft.com; s=selector2-oracle-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=p1pfgV1drFZ5J1vieB4uSVPLuWjx9UoNU8kMUtv5iFA=;
- b=gJcstTNbeKvveo7Nw+cA+ZAIWs/C6Cjb4bDPLUvq/GrZK+LAbRIC8kDlrSnHOjAkgUvD/CfsW/dxJOX+n/BDj+REVixXiuwKZApvSaiI+rteoJX2g9MwY5+EWIK4sdZIxMtGzbFeDsOrTGIjDhvW/ogQLoDEVX39+4LN6EDIBXY=
-Received: from CH3PR10MB7329.namprd10.prod.outlook.com (2603:10b6:610:12c::16)
- by SJ2PR10MB6989.namprd10.prod.outlook.com (2603:10b6:a03:4cf::5)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9654.14; Wed, 4 Mar
- 2026 01:31:05 +0000
-Received: from CH3PR10MB7329.namprd10.prod.outlook.com
- ([fe80::c2a4:fdda:f0c2:6f71]) by CH3PR10MB7329.namprd10.prod.outlook.com
- ([fe80::c2a4:fdda:f0c2:6f71%7]) with mapi id 15.20.9678.016; Wed, 4 Mar 2026
- 01:31:05 +0000
-Date: Wed, 4 Mar 2026 10:30:55 +0900
-To: "Vlastimil Babka (SUSE)" <vbabka@kernel.org>
-Message-ID: <aaeLT8mnMMj_kPJc@hyeyoo>
-References: <698a26d3.050a0220.3b3015.007e.GAE@google.com>
- <20260302034102.3145719-1-wangqing7171@gmail.com>
- <20df8dd1-a32c-489d-8345-085d424a2f12@kernel.org>
-Content-Disposition: inline
-In-Reply-To: <20df8dd1-a32c-489d-8345-085d424a2f12@kernel.org>
-X-ClientProxiedBy: SL2P216CA0224.KORP216.PROD.OUTLOOK.COM
- (2603:1096:101:18::12) To CH3PR10MB7329.namprd10.prod.outlook.com
- (2603:10b6:610:12c::16)
+ id 1vxbyu-0002Je-7u for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 04 Mar 2026 02:29:00 +0000
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sea.source.kernel.org (Postfix) with ESMTP id 41CFF43A1B;
+ Wed,  4 Mar 2026 02:28:49 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id DB983C116C6;
+ Wed,  4 Mar 2026 02:28:45 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1772591329;
+ bh=w0enNDJ6vj/GjKs1g6Qapybf69Y+ysKOpkctiG5RrpQ=;
+ h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+ b=spjB+qe83UoElqhhSNfGwtYNBZK6rgflA8nN48IzNFPIWPeUr3QRcXVdCtF1NJKnf
+ z5EksqVKhftC9MLC9j/7nGeIaaTR87yGm5Rwd8MxIRtsUMKdsilMMJ3Cd9iakxj8Bd
+ EH9ATACpJVqsf4PLZG7kLZaviIgPJnXRNiYRro7z9N/ZFYixQx9IlT7mTSxw717b7C
+ FtZrlDgcd81FIPR+0JhvBn0boDgv6oQAtRyqPocimgjFVPbqTR/7W2RrWO0jyc8Sw9
+ QZEusDhvc5/gFZA6KC6+NigNLVm6yl1rbhBl2iBivGRlsjsn6q5oZHNnRRI6Qq4pAT
+ NJF9zxNmgNh2w==
+Date: Tue, 3 Mar 2026 18:28:45 -0800
+To: Yury Norov <ynorov@nvidia.com>
+Message-ID: <20260303182845.250bb2de@kernel.org>
+In-Reply-To: <20260304012717.201797-1-ynorov@nvidia.com>
+References: <20260304012717.201797-1-ynorov@nvidia.com>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH3PR10MB7329:EE_|SJ2PR10MB6989:EE_
-X-MS-Office365-Filtering-Correlation-Id: 31a646dc-a7e2-470e-8774-08de798db406
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|7416014|376014|1800799024;
-X-Microsoft-Antispam-Message-Info: FC/DzIcEISn/3fp68f9o6BlK+K2ha8Teuybdjh7ENMUs3HbAtMW6TwxqXlEHSCR0cHrOh/AaMRBTHPVgzbx5Zk32GdA32M0YdBfR3c74YpMKLJlLFTBEMSHXOSOYN0WxFe+11VGClAnMfOmlf9zzIVH8KLPK3pyvJ/Gl5QiyZU4CfbvC/4bXF0IeZT1dS03EhbCnQcPL+xOyUYqfnpyw8PGkMj54GOX8nFbhIT2VGXrwWlRtPpTxS7CdguIxexPEIGM3hRt8U4FmzBiRfo6s+p8T5XHkjzp7MhVpoc6wODZw3aZuaCm1mgsJMytPYcecvpVqx91YNAGiVyp7FL5ciHw75RMcZBq4Jm75FXiBxGA7/ZjEGLZeCgG5SY3jJQUF9QxoHzhoEqfBHSKctluvm3TdDKh9PIuC7m10EEGYaje6qUq9gpDzCTmbbMBPSFBRkDVMMftzSFmEZInazfzU5ytS0y/x/78LO6yxUKOL0JAMu8RUq+NEWA0IjnAm0H89ThEclJoUArpiRUUK0j0KASXhiE8trcRDk13Uth9KJP+mRueqEXA8Z4B1MjZNyYmUEJWYA15pcUugki1m5vu8RlML749hye7Aa5ojIM8RVhUZqgk6MOhtZalO7U4nCQpmucDr+1tdCvtgfPsl+aQsdsEJclbv8t9gU39kJzgisuu0Tn/2JpfZmclZjZdT2oT48J06pdipzsm/Q/4n4uvwn5Kiyshv+rzHvD7ggROMVW8=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:CH3PR10MB7329.namprd10.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(7416014)(376014)(1800799024); DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?2LEH143N2qcyZbRPO8cl+3HhXfztwPR8jbxvExfW5GlXKf1/FCLLGK32837i?=
- =?us-ascii?Q?CDnv1xJp1FDlIXJUbTsH0XL2i85jKIGch89+MQjSOSAkCdU40J3l+LEEIdu0?=
- =?us-ascii?Q?/YWnnu2e9GPD3uDMj6jxWg7A9c5f77iNgbVG72bABh7TnPKJlO+SHuysslpk?=
- =?us-ascii?Q?vUbcP5NlZu+SnLRVTS4Vflj7MwH//yVkm0aHrVfC8xRA68OFkobHKdwskr32?=
- =?us-ascii?Q?YctHEXZMIXKm/WkI67qgkIJmFw3S78XWJ4kJQLBPbV/xjz++5csEtBh6iU+M?=
- =?us-ascii?Q?8Sz/1VcXqdRw0sN9TNypbtfoJcsy7tlvChARdxgw8BGSvX+/89ffJXWvJV08?=
- =?us-ascii?Q?8W2V6FX7gKavdE0S3W1iXtjPuT0L1MbGRzXsX/hapFT5u9dMtrsPq/dPbtu7?=
- =?us-ascii?Q?ntz81QUvnZvvgfnk+p2labXmkcc2T3zQTVW22NAXAYGpPHpNqhfmLWIs84IE?=
- =?us-ascii?Q?2Y2YGJArLbXRW+koxTZ2fHVcP4A3wzsa5Dkkff6UG3tlIQh3Dn9/22ieLHrA?=
- =?us-ascii?Q?iZ9RQ+88488kOcUljyyvSfwkpueI71j6gKL8VHIE7MMGw6uWaKK2SOG087G9?=
- =?us-ascii?Q?6C+qkhfNDHsO9svj+02rO6CKNjRx6ivZoB7Ut2MHUQK0y9g7dD1dsfEZQZkj?=
- =?us-ascii?Q?Zt563HaK/m+OZlMSn8suQUpL308UFDRxk6Psg4ZVuAxjyfToy6PkcS+oYr8G?=
- =?us-ascii?Q?dRcY8SLLeATs3KcBftisbhahLYwV/d4jOSd8XVxVDaQogZbwi4+xTTomzSWh?=
- =?us-ascii?Q?eqUgLzM4KyzQ46XoPsJOZRzxayHrCtc8wnYqjvIcDvr2BSIlpN4Vqw6gmOzk?=
- =?us-ascii?Q?Wx9KnAYszoc7R+ljEYYf+HdgO6kXXTWD0pDnXmHzIOGcQPuj73ugm+ZYmcdj?=
- =?us-ascii?Q?URKdr8kLn/QIOENTvLD1YRHH/WroJIicqaddt7eOytasG7+wMJNK6j+evkLK?=
- =?us-ascii?Q?PUu04H0bnmX676/Lh5Tl+OL+9ZUhZb/0MancK8/fn9burrUXnF97Kli9wjsb?=
- =?us-ascii?Q?PmPrei3JlK4o+3GAXk7HSTjVeXRAA+0ozg26eNYZVn8Uxqb1ytipAJ1ICp0F?=
- =?us-ascii?Q?SRgvT7CZmz9EL2qBRszRgzp/BSA4M5fo/uPOkz0Huj/mt3SSSeHq3qsPmSt3?=
- =?us-ascii?Q?E6S4n8eM+tPohEiABFx4i0+vORxvQw8mFkPRdFPr/orlK9oZlLg+TS8HSdDP?=
- =?us-ascii?Q?gccXmaw39GXfhtpkd0XK3et4+NL5HmwMwJB03NkpbQFV9l/ki03Z2P3j7sXX?=
- =?us-ascii?Q?aW3/FQWH9CjRLzzZ3ANJY+Wo9ueHKpMnUaRECfClDU+NlgEJHFkP7ew2CSbM?=
- =?us-ascii?Q?gFHWbrTdaGp/JsbRDCWLq5ZigLWfH/ga7IpECxi03mbK95AUkern9kuMeLln?=
- =?us-ascii?Q?GYKtpN6M5BhyCOUe4cF/stekzTiXGNhzmy6n1jZ1NPwWArsAi3Jzkf9m779o?=
- =?us-ascii?Q?kH+E4NfwGLCYpirh+zVnU7J706ECtJmBPxcTb0RQ91GLmRD7oPPzPRsl6YWm?=
- =?us-ascii?Q?acc/bNW3x6RjgCdyxLqLNpt3Xm68JvI4jMJvnFzrTwXl0CuROv6kRYpNoXSo?=
- =?us-ascii?Q?0NebEbVAmtO1eIwEeM8smWr3ztMOi+L8p1+6mCVTJqE2jNPBmTREzxHtlkKz?=
- =?us-ascii?Q?a3YS5AGpKjeNh4pJOvhUf3UK6Jd/yG+v2gWJO0ipAdkL52HIjt8tvXKT1RFG?=
- =?us-ascii?Q?cD4ccnH9E4ECKY+eQX64ad9EpAagcKfC+aO/E0t1PgeUgyJEmV2NkeoYamE3?=
- =?us-ascii?Q?KmqDo2oK3g=3D=3D?=
-X-MS-Exchange-AntiSpam-ExternalHop-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-ExternalHop-MessageData-0: RfbxEcB3YwGjBKcU1nwAryzK+KmQazUmxAvGWsMH1iSst4Qpuc1q2NfU+NPZlhkI6KIMAmKtLM2D8D6q0hONLPCd6bCcJ2YZsw5IpCElATO8Rj+DRPSrSHaT+5p8bZwv+4r4TIDaRpD1jOdQjzlTyxy0ofUYhDnpGAjcvnOOaVyborZGER/rcVCQkt6QCwmQn93V7W70CFkoJ/PooCZExvnAEw8tzbtHTSBKtTZkoUFsAoyMorzjLWSVAmpeTm3iIJN5qqMSNNOszrUiXt6XDaOkEEPY7sSGtUtK6FmV2Ot6IAPNJgp7iJ/+OKbH34DtKWSAV81TyhoqRJqBLJJsZDV/rXVYkkQTyivsO6S9YD7ru5AgREdsJW8FP8peJCuHA1ocydICPQLxr/B/YoM/XGPqecqOD4KcaItScv2hQTUAzMX2QcABIf+R/dOHXkHSFBZFiAMR6bwxAqHJbaVmG41eEq36bDt1sCmviUJnlqtdeEdww4uSCt7ukYy5XQhIKjjn6J/zQYpmauVZguh4TPYUvjV199Xc0VePmvnMIaazL9srTELYIjxep6kdlDwF+kLK3Pgc61vwpMdmKs2fmtQ6azLuc6KmKa0kX8psK5M=
-X-OriginatorOrg: oracle.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 31a646dc-a7e2-470e-8774-08de798db406
-X-MS-Exchange-CrossTenant-AuthSource: CH3PR10MB7329.namprd10.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Mar 2026 01:31:05.2209 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 4e2c6054-71cb-48f1-bd6c-3a9705aca71b
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: cguBaW3nUtkQ8Xh1+gVoUBs5C8feU6elSDyhjJNMsQTprAW6nKDo4t/mTtskTncY9A7VKiM7+21UAwaAl24xPg==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ2PR10MB6989
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.51,FMLib:17.12.100.49
- definitions=2026-03-04_01,2026-03-03_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 mlxscore=0
- phishscore=0 malwarescore=0
- bulkscore=0 adultscore=0 spamscore=0 mlxlogscore=999 suspectscore=0
- classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2602130000
- definitions=main-2603040011
-X-Proofpoint-GUID: 7FofmWgRyxEE4PoNe7KQkaNl6Ha-kU-m
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMzA0MDAxMSBTYWx0ZWRfX7tJQ2e6Kgy5c
- yqftRaWJV3XSxVU0zgq9PCAObFWlWmWZSAGfRFJySoNWwTSfuy7fSLDeBT0MUGK6NdCjlhanHl8
- AFtWYc4ui2ZePA1djGpcxdjJpeQ5XIhyYmv62jo9kq9T3B+WErUVbhSfzrmRzy35ON3HLfYwPBS
- uF6AHC+Us/A5otlTlfD4sxQCqtG+m+CMV+ubyI8j6jc4ezXxLlNZqeZiZ7qhtJ3MW32huOv8Lfo
- cMf+9nnjkpHHrnCzazrIwsgh7BVP7FLlMW74cN4twiJin4urw6wae6jMD4mDx9PwIlhOF0j4U9P
- ImYH4uRNhlS7bmpqlEFO2YzFb5IzFYpgdgLHf9E5Lt7y6BK0WTKYgYm1oRfGw6ktOT3azrgcMOm
- E+uruwHZsWjj9L8+6X7XGEjxXktC1n/zpATsYmcj4mmNbMgpeinHlWiHhagx7Waz9wB+xcEESKq
- Yg9fATjK4IBbTP7aHnyNnhuU72jDksqZ1T0F1fqI=
-X-Proofpoint-ORIG-GUID: 7FofmWgRyxEE4PoNe7KQkaNl6Ha-kU-m
-X-Authority-Analysis: v=2.4 cv=CKEnnBrD c=1 sm=1 tr=0 ts=69a78b5e b=1 cx=c_pps
- a=qoll8+KPOyaMroiJ2sR5sw==:117
- a=qoll8+KPOyaMroiJ2sR5sw==:17
- a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=z/mQ4Ysz8XfWz/Q5cLBRGdckG28=:19
- a=lCpzRmAYbLLaTzLvsPZ7Mbvzbb8=:19 a=xqWC_Br6kY4A:10 a=kj9zAlcOel0A:10
- a=Yq5XynenixoA:10 a=GoEa3M9JfhUA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=jiCTI4zE5U7BLdzWsZGv:22 a=RD47p0oAkeU5bO7t-o6f:22 a=rJA0KjVYEokx5ObBIS8A:9
- a=CjuIK1q_8ugA:10 cc=ntf awl=host:12267
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  [+Cc adding Catalin for kmemleak bits] On Mon, Mar 02, 2026
- at 09:39:48AM +0100, Vlastimil Babka (SUSE) wrote: > On 3/2/26 04:41, Qing
- Wang wrote: > > #syz test > > > > diff --git a/mm/slub.c b/mm/slub.c > >
- index cdc1e652ec52..387979b8912 [...] 
+ Content preview:  On Tue, 3 Mar 2026 20:27:08 -0500 Yury Norov wrote: > The
+ net/9p networking driver has a handy macro to calculate the > amount of bytes
+ from a given pointer to the end of page. Move it > to core/mm, a [...] 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.0 ARC_VALID              Message has a valid ARC signature
- 0.0 ARC_SIGNED             Message has a ARC signature
- 0.0 RCVD_IN_MSPIKE_H4      RBL: Very Good reputation (+4)
- [205.220.165.32 listed in wl.mailspike.net]
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1vxb5I-0007lP-W3
-Subject: Re: [f2fs-dev] [syzbot] [mm?] [f2fs?] [exfat?] memory leak in
- __kfree_rcu_sheaf
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1vxbyu-0002Je-7u
+Subject: Re: [f2fs-dev] [PATCH 0/8] mm: globalize rest_of_page() macro
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -235,121 +108,119 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Harry Yoo via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Harry Yoo <harry.yoo@oracle.com>
-Cc: Qing Wang <wangqing7171@gmail.com>, Hao Li <hao.li@linux.dev>,
- lorenzo.stoakes@oracle.com, jannh@google.com,
- Catalin Marinas <catalin.marinas@arm.com>, syzkaller-bugs@googlegroups.com,
- linux-kernel@vger.kernel.org, Liam.Howlett@oracle.com,
- syzbot+cae7809e9dc1459e4e63@syzkaller.appspotmail.com, linux-mm@kvack.org,
- sj1557.seo@samsung.com, pfalcato@suse.de, linux-fsdevel@vger.kernel.org,
- jaegeuk@kernel.org, akpm@linux-foundation.org,
- linux-f2fs-devel@lists.sourceforge.net, linkinjeon@kernel.org, vbabka@suse.cz
+From: Jakub Kicinski via Linux-f2fs-devel
+ <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Jakub Kicinski <kuba@kernel.org>
+Cc: Latchesar Ionkov <lucho@ionkov.net>, Zheng Gu <cengku@gmail.com>,
+ kvm@vger.kernel.org, "Michael S. Tsirkin" <mst@redhat.com>,
+ Peter Zijlstra <peterz@infradead.org>,
+ Catalin Marinas <catalin.marinas@arm.com>,
+ Alexander Duyck <alexanderduyck@fb.com>,
+ Dave Hansen <dave.hansen@linux.intel.com>, dri-devel@lists.freedesktop.org,
+ Jaroslav Kysela <perex@perex.cz>, linux-perf-users@vger.kernel.org,
+ linux-mm@kvack.org, Eric Dumazet <edumazet@google.com>,
+ Andreas Dilger <adilger.kernel@dilger.ca>, linux-nfs@vger.kernel.org,
+ Dongsheng Yang <dongsheng.yang@linux.dev>,
+ Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+ Alexander Gordeev <agordeev@linux.ibm.com>,
+ Claudio Imbrenda <imbrenda@linux.ibm.com>, David Airlie <airlied@gmail.com>,
+ linux-riscv@lists.infradead.org, Simona Vetter <simona@ffwll.ch>,
+ linux-s390@vger.kernel.org, Madhavan Srinivasan <maddy@linux.ibm.com>,
+ Yury Norov <yury.norov@gmail.com>, Herbert Xu <herbert@gondor.apana.org.au>,
+ Alexandra Winter <wintera@linux.ibm.com>, Miklos Szeredi <miklos@szeredi.hu>,
+ Michael Ellerman <mpe@ellerman.id.au>, linux-ext4@vger.kernel.org,
+ x86@kernel.org, Tvrtko Ursulin <tursulin@ursulin.net>,
+ linux-spi@vger.kernel.org, Ingo Molnar <mingo@redhat.com>,
+ Aswin Karuvally <aswin@linux.ibm.com>, intel-gfx@lists.freedesktop.org,
+ Christian Borntraeger <borntraeger@linux.ibm.com>,
+ Carlos Maiolino <cem@kernel.org>, Dominique Martinet <asmadeus@codewreck.org>,
+ Thomas Gleixner <tglx@kernel.org>, dm-devel@lists.linux.dev,
+ Jens Axboe <axboe@kernel.dk>, Albert Ou <aou@eecs.berkeley.edu>,
+ Vasily Gorbik <gor@linux.ibm.com>, Heiko Carstens <hca@linux.ibm.com>,
+ Will Deacon <will@kernel.org>, linux-f2fs-devel@lists.sourceforge.net,
+ Arnaldo Carvalho de Melo <acme@kernel.org>, linux-crypto@vger.kernel.org,
+ linux-block@vger.kernel.org, Mark Brown <broonie@kernel.org>,
+ Borislav Petkov <bp@alien8.de>, Alexander Viro <viro@zeniv.linux.org.uk>,
+ Rodrigo Vivi <rodrigo.vivi@intel.com>, Jaegeuk Kim <jaegeuk@kernel.org>,
+ virtualization@lists.linux.dev, Eric Van Hensbergen <ericvh@kernel.org>,
+ Paul Walmsley <pjw@kernel.org>, linux-arm-kernel@lists.infradead.org,
+ Janosch Frank <frankja@linux.ibm.com>,
+ Jani Nikula <jani.nikula@linux.intel.com>,
+ Christian Brauner <brauner@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
+ Theodore Ts'o <tytso@mit.edu>, v9fs@lists.linux.dev,
+ Sean Christopherson <seanjc@google.com>, Linus Walleij <linusw@kernel.org>,
+ linux-sound@vger.kernel.org, Takashi Iwai <tiwai@suse.com>,
+ linux-kernel@vger.kernel.org, linux-xfs@vger.kernel.org,
+ Andrew Lunn <andrew+netdev@lunn.ch>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Anton Yakovlev <anton.yakovlev@opensynergy.com>,
+ Anna Schumaker <anna@kernel.org>, netdev@vger.kernel.org,
+ linux-fsdevel@vger.kernel.org, Paolo Bonzini <pbonzini@redhat.com>,
+ Andrew Morton <akpm@linux-foundation.org>, Namhyung Kim <namhyung@kernel.org>,
+ linuxppc-dev@lists.ozlabs.org, "David S. Miller" <davem@davemloft.net>,
+ Trond Myklebust <trondmy@kernel.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
-X-Rspamd-Queue-Id: 432E41F96D1
+X-Rspamd-Queue-Id: 0E8141F9E07
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-5.61 / 15.00];
+X-Spamd-Result: default: False [-7.11 / 15.00];
 	WHITELIST_DMARC(-7.00)[sourceforge.net:D:+];
 	SUSPICIOUS_RECIPS(1.50)[];
-	ARC_REJECT(1.00)[signature check failed: fail, {[1] = sig:microsoft.com:reject}];
 	DMARC_POLICY_ALLOW_WITH_FAILURES(-0.50)[];
-	MID_RHS_NOT_FQDN(0.50)[];
 	RWL_MAILSPIKE_EXCELLENT(-0.40)[216.105.38.7:from];
-	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
+	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7];
 	MAILLIST(-0.20)[mailman];
-	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7:c];
+	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORGED_RECIPIENTS(0.00)[m:vbabka@kernel.org,m:wangqing7171@gmail.com,m:hao.li@linux.dev,m:lorenzo.stoakes@oracle.com,m:jannh@google.com,m:catalin.marinas@arm.com,m:syzkaller-bugs@googlegroups.com,m:linux-kernel@vger.kernel.org,m:Liam.Howlett@oracle.com,m:syzbot+cae7809e9dc1459e4e63@syzkaller.appspotmail.com,m:linux-mm@kvack.org,m:sj1557.seo@samsung.com,m:pfalcato@suse.de,m:linux-fsdevel@vger.kernel.org,m:jaegeuk@kernel.org,m:akpm@linux-foundation.org,m:linux-f2fs-devel@lists.sourceforge.net,m:linkinjeon@kernel.org,m:vbabka@suse.cz,m:syzbot@syzkaller.appspotmail.com,s:lists@lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
-	RECEIVED_HELO_LOCALHOST(0.00)[];
-	DKIM_MIXED(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[19];
 	TO_DN_SOME(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	FREEMAIL_CC(0.00)[gmail.com,linux.dev,oracle.com,google.com,arm.com,googlegroups.com,vger.kernel.org,syzkaller.appspotmail.com,kvack.org,samsung.com,suse.de,kernel.org,linux-foundation.org,lists.sourceforge.net,suse.cz];
+	DMARC_POLICY_ALLOW(0.00)[lists.sourceforge.net,none];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	DKIM_MIXED(0.00)[];
+	ARC_NA(0.00)[];
+	RECEIVED_HELO_LOCALHOST(0.00)[];
 	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
 	FORGED_SENDER(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	SUBJECT_HAS_QUESTION(0.00)[];
-	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
-	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,oracle.com:s=corp-2025-04-25,oracle.onmicrosoft.com:s=selector2-oracle-onmicrosoft-com];
+	MIME_TRACE(0.00)[0:+];
+	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,kernel.org:s=k20201202];
+	FORGED_RECIPIENTS(0.00)[m:ynorov@nvidia.com,m:lucho@ionkov.net,m:cengku@gmail.com,m:kvm@vger.kernel.org,m:mst@redhat.com,m:peterz@infradead.org,m:catalin.marinas@arm.com,m:alexanderduyck@fb.com,m:dave.hansen@linux.intel.com,m:dri-devel@lists.freedesktop.org,m:perex@perex.cz,m:linux-perf-users@vger.kernel.org,m:linux-mm@kvack.org,m:edumazet@google.com,m:adilger.kernel@dilger.ca,m:linux-nfs@vger.kernel.org,m:dongsheng.yang@linux.dev,m:joonas.lahtinen@linux.intel.com,m:agordeev@linux.ibm.com,m:imbrenda@linux.ibm.com,m:airlied@gmail.com,m:linux-riscv@lists.infradead.org,m:simona@ffwll.ch,m:linux-s390@vger.kernel.org,m:maddy@linux.ibm.com,m:yury.norov@gmail.com,m:herbert@gondor.apana.org.au,m:wintera@linux.ibm.com,m:miklos@szeredi.hu,m:mpe@ellerman.id.au,m:linux-ext4@vger.kernel.org,m:x86@kernel.org,m:tursulin@ursulin.net,m:linux-spi@vger.kernel.org,m:mingo@redhat.com,m:aswin@linux.ibm.com,m:intel-gfx@lists.freedesktop.org,m:borntraeger@linux.ibm.com,m:cem@kernel.org,m:asmadeus@codewreck
+ .org,m:tglx@kernel.org,m:dm-devel@lists.linux.dev,m:axboe@kernel.dk,m:aou@eecs.berkeley.edu,m:gor@linux.ibm.com,m:hca@linux.ibm.com,m:will@kernel.org,m:linux-f2fs-devel@lists.sourceforge.net,m:acme@kernel.org,m:linux-crypto@vger.kernel.org,m:linux-block@vger.kernel.org,m:broonie@kernel.org,m:bp@alien8.de,m:viro@zeniv.linux.org.uk,m:rodrigo.vivi@intel.com,m:jaegeuk@kernel.org,m:virtualization@lists.linux.dev,m:ericvh@kernel.org,m:pjw@kernel.org,m:linux-arm-kernel@lists.infradead.org,m:frankja@linux.ibm.com,m:jani.nikula@linux.intel.com,m:brauner@kernel.org,m:pabeni@redhat.com,m:tytso@mit.edu,m:v9fs@lists.linux.dev,m:seanjc@google.com,m:linusw@kernel.org,m:linux-sound@vger.kernel.org,m:tiwai@suse.com,m:linux-kernel@vger.kernel.org,m:linux-xfs@vger.kernel.org,m:andrew+netdev@lunn.ch,m:palmer@dabbelt.com,m:anton.yakovlev@opensynergy.com,m:anna@kernel.org,m:netdev@vger.kernel.org,m:linux-fsdevel@vger.kernel.org,m:pbonzini@redhat.com,m:akpm@linux-foundation.org,m:namhyung@kernel.org,m:lin
+ uxppc-dev@lists.ozlabs.org,m:davem@davemloft.net,m:trondmy@kernel.org,s:lists@lfdr.de];
+	FREEMAIL_CC(0.00)[ionkov.net,gmail.com,vger.kernel.org,redhat.com,infradead.org,arm.com,fb.com,linux.intel.com,lists.freedesktop.org,perex.cz,kvack.org,google.com,dilger.ca,linux.dev,linux.ibm.com,lists.infradead.org,ffwll.ch,gondor.apana.org.au,szeredi.hu,ellerman.id.au,kernel.org,ursulin.net,codewreck.org,lists.linux.dev,kernel.dk,eecs.berkeley.edu,lists.sourceforge.net,alien8.de,zeniv.linux.org.uk,intel.com,mit.edu,suse.com,lunn.ch,dabbelt.com,opensynergy.com,linux-foundation.org,lists.ozlabs.org,davemloft.net];
+	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
+	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,kernel.org:-];
+	RCVD_COUNT_FIVE(0.00)[5];
+	RCPT_COUNT_GT_50(0.00)[84];
 	NEURAL_HAM(-0.00)[-1.000];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
 	FROM_HAS_DN(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
-	DMARC_POLICY_ALLOW(0.00)[lists.sourceforge.net,none];
-	TAGGED_RCPT(0.00)[linux-f2fs-devel,cae7809e9dc1459e4e63];
-	MISSING_XM_UA(0.00)[];
-	HAS_REPLYTO(0.00)[harry.yoo@oracle.com];
-	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
-	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,oracle.com:-,oracle.onmicrosoft.com:-];
+	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	HAS_REPLYTO(0.00)[kuba@kernel.org];
+	TAGGED_RCPT(0.00)[linux-f2fs-devel,netdev];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
-	RCVD_COUNT_SEVEN(0.00)[9]
+	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
+	MISSING_XM_UA(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.sourceforge.net:dkim,lists.sourceforge.net:rdns,lists.sourceforge.net:helo]
 X-Rspamd-Action: no action
 
-[+Cc adding Catalin for kmemleak bits]
-
-On Mon, Mar 02, 2026 at 09:39:48AM +0100, Vlastimil Babka (SUSE) wrote:
-> On 3/2/26 04:41, Qing Wang wrote:
-> > #syz test
-> > 
-> > diff --git a/mm/slub.c b/mm/slub.c
-> > index cdc1e652ec52..387979b89120 100644
-> > --- a/mm/slub.c
-> > +++ b/mm/slub.c
-> > @@ -6307,15 +6307,21 @@ bool __kfree_rcu_sheaf(struct kmem_cache *s, void *obj)
-> >  			goto fail;
-> >  
-> >  		if (!local_trylock(&s->cpu_sheaves->lock)) {
-> > -			barn_put_empty_sheaf(barn, empty);
-> > +			if (barn && data_race(barn->nr_empty) < MAX_EMPTY_SHEAVES)
-> > +				barn_put_empty_sheaf(barn, empty);
-> > +			else
-> > +				free_empty_sheaf(s, empty);
-> >  			goto fail;
-> >  		}
-> >  
-> >  		pcs = this_cpu_ptr(s->cpu_sheaves);
-> >  
-> > -		if (unlikely(pcs->rcu_free))
-> > -			barn_put_empty_sheaf(barn, empty);
-> > -		else
-> > +		if (unlikely(pcs->rcu_free)) {
-> > +			if (barn && data_race(barn->nr_empty) < MAX_EMPTY_SHEAVES)
-> > +				barn_put_empty_sheaf(barn, empty);
-> > +			else
-> > +				free_empty_sheaf(s, empty);
-> > +		} else
-> >  			pcs->rcu_free = empty;
-> >  	}
+On Tue,  3 Mar 2026 20:27:08 -0500 Yury Norov wrote:
+> The net/9p networking driver has a handy macro to calculate the
+> amount of bytes from a given pointer to the end of page. Move it
+> to core/mm, and apply tree-wide. No functional changes intended.
 > 
-> I don't think this would fix any leak, and syzbot agrees. It would limit the
-> empty sheaves in barn more strictly, but they are not leaked.
-> Hm I don't see any leak in __kfree_rcu_sheaf() or rcu_free_sheaf(). Wonder
-> if kmemleak lacks visibility into barns or pcs's as roots for searching what
-> objects are considered referenced, or something?
+> This series was originally introduced as a single patch #07/12 in:
+> 
+> https://lore.kernel.org/all/20260219181407.290201-1-ynorov@nvidia.com/
+> 
+> Split it for better granularity and submit separately.
 
-Objects that are allocated from slab and percpu allocator should be
-properly tracked by kmemleak. But those allocated with
-gfpflags_allow_spinning() == false are not tracked by kmemleak.
-
-When barns and sheaves are allocated early (!gfpflags_allow_spinning()
-due to gfp_allowed_mask) and it skips kmemleak_alloc_recursive(), 
-it could produce false positives because from kmemleak's point of view,
-the objects are not reachable from the root set (data section, stack,
-etc.).
-
-To me it seems kmemleak should gain allow_spin == false support
-sooner or later.
-
--- 
-Cheers,
-Harry / Hyeonggon
+I don't get what the motivation is here. Another helper developers
+and readers of the code will need to know about just to replace 
+obvious and easy to comprehend math.
 
 
 _______________________________________________
