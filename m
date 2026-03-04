@@ -2,106 +2,94 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id gJHhLxTyp2lmmwAAu9opvQ
+	id eNgZGI/zp2nImwAAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 04 Mar 2026 09:49:24 +0100
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 04 Mar 2026 09:55:43 +0100
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id A51CB1FCE33
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 04 Mar 2026 09:49:23 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7C0411FD004
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 04 Mar 2026 09:55:42 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
+	d=lists.sourceforge.net; s=beta; h=Content-Type:Content-Transfer-Encoding:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:MIME-Version:Message-ID:Date:To:Sender:
-	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
-	Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Owner;
-	bh=vOfW1z/41c5u3+7G8irEJqFxlsDQ2wdjEu836DRVJCw=; b=KnJgSbWZvlpQSBZJp4j6lmciJ2
-	gKrHZrSS73mShrhtZZo/aLAj3pjJLrrTzD8CEC6x/3YstnxDajfU3Qp3t/M6lEXrdOuluMyVmv4l5
-	QPfKm/xD1VKLeYwfqLUowv4EvffOjYHNo2k13Yw/Priu4rQm2zjn5b3U2kQ0+SzB6l4k=;
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	List-Unsubscribe:List-Id:Subject:In-Reply-To:References:To:MIME-Version:Date:
+	Message-ID:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
+	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
+	bh=oefsJmWzun5AHNzGrI4P2I6W2yc4x5Unmx2EzbHwB/s=; b=cR3abF/4JL2Jv+l8o3sXZ8sLcg
+	iyoOawlQ6/eYQU+nGm5Bzri+JQh/Tqpf0j4a4wcxB5NN01JN0LQ+4LXgj/XQw5C0Gr3lOWd4dJMGM
+	uIb2tiRTaTZic2/+ujOv6dJJygFPRcDEwqa7AT+GvTMODDMIpLYJ3jdMWwOb2F2ShxDM=;
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vxhuu-0004Nm-5i;
-	Wed, 04 Mar 2026 08:49:16 +0000
+	id 1vxi11-0003sy-9Y;
+	Wed, 04 Mar 2026 08:55:36 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <Zhiguo.Niu@unisoc.com>) id 1vxhuZ-0004Jw-03
+ (envelope-from <chao@kernel.org>) id 1vxi0u-0003sG-13
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 04 Mar 2026 08:48:55 +0000
+ Wed, 04 Mar 2026 08:55:28 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:MIME-Version
- :Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ From:References:To:Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=ZxDgthgxvlq2ZmYfjZyPAasjrLlFLNSwjnA9lVCz0Tw=; b=Mx7l4pLBIGK+ehFpqAcjc0Wkrm
- M5x2ipFiGZcZ9wHBQ5gEnNqezpk3pF7GEURvtY5mWAeL9wGsQwP+GEUCPHbV7cNt6nSzZnNZgfZGe
- l8NlqdzRdHQ+f2bCzr/iVzLy4Uax1D8Iu+w3ggS4lhcMCnJW7qgnqmYS0DojIV0GULSk=;
+ bh=ZgvOQp9V11OLUC4jjXQF4tPyLSwFsBmTaSyFXOrMM68=; b=hWoJWIIrj2U1uqzY5Y0ZIeVmIv
+ ajfmOkgms1w5D1V9o5ImcpYb/BsRw3MA8lwZC2tUvwgl7IYj2+AYpH3tlgoKSDA7Cr782+G2XL05s
+ EBmCJwEg0iz1IfCN7jQI2UdLxRhIeccHaWcX1KdJbSLdb6gVVRyC1OHyPm0GR0RS6t0g=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:MIME-Version:Message-ID:Date:
- Subject:CC:To:From:Sender:Reply-To:Content-ID:Content-Description:Resent-Date
- :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=ZxDgthgxvlq2ZmYfjZyPAasjrLlFLNSwjnA9lVCz0Tw=; b=n
- G7Lq2ariO68l6d/ujZfm9R9r4pdu4t8iJTQ3Y2xDrUXOqBZc/NTlqMJu/ZGRGB2bltco4LCv1U4DK
- sJ+TN55Km5uSPQsTRsOqtSZud+k+LG6UzzbX3H1s16JEsjEJnL6xIWrvDYqBG0uav0Z0mBhjYnORS
- zd5LRfis0KXfeUHE=;
-Received: from mx1.unisoc.com ([222.66.158.135] helo=SHSQR01.spreadtrum.com)
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
+ Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=ZgvOQp9V11OLUC4jjXQF4tPyLSwFsBmTaSyFXOrMM68=; b=Cko1ILAUt9Aehy7Vl0tQ2/zUXd
+ onGUT+5DAoFn0r5uqKUrO+exihB8CiakGNDSxdNSEuXFSlfv92zpjy4IUn1ww7tjq47zhcB+Dr/1r
+ GMf7oID1o3UVKm8P5p4DzAr5IUvnwiSmj61KhmvnkorbUwu5N8f8SLGyqNNqbPP2Ool4=;
+Received: from tor.source.kernel.org ([172.105.4.254])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vxhuW-0004j1-Is for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 04 Mar 2026 08:48:54 +0000
-Received: from SHSQR01.spreadtrum.com (localhost [127.0.0.2] (may be forged))
- by SHSQR01.spreadtrum.com with ESMTP id 6248Zj3Z027161
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Wed, 4 Mar 2026 16:35:45 +0800 (+08)
- (envelope-from Zhiguo.Niu@unisoc.com)
-Received: from dlp.unisoc.com ([10.29.3.86])
- by SHSQR01.spreadtrum.com with ESMTP id 6248XpS8013299;
- Wed, 4 Mar 2026 16:33:51 +0800 (+08)
- (envelope-from Zhiguo.Niu@unisoc.com)
-Received: from SHDLP.spreadtrum.com (BJMBX02.spreadtrum.com [10.0.64.8])
- by dlp.unisoc.com (SkyGuard) with ESMTPS id 4fQmBp1JLpz2K5B73;
- Wed,  4 Mar 2026 16:32:50 +0800 (CST)
-Received: from bj08434pcu.spreadtrum.com (10.0.73.87) by
- BJMBX02.spreadtrum.com (10.0.64.8) with Microsoft SMTP Server (TLS) id
- 15.0.1497.48; Wed, 4 Mar 2026 16:33:48 +0800
-To: <jaegeuk@kernel.org>, <chao@kernel.org>
-Date: Wed, 4 Mar 2026 16:35:16 +0800
-Message-ID: <1772613316-19952-1-git-send-email-zhiguo.niu@unisoc.com>
-X-Mailer: git-send-email 1.9.1
+ id 1vxi0u-0005Xd-3I for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 04 Mar 2026 08:55:28 +0000
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by tor.source.kernel.org (Postfix) with ESMTP id 5A9EF600AD;
+ Wed,  4 Mar 2026 08:55:22 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 31508C19423;
+ Wed,  4 Mar 2026 08:55:19 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1772614522;
+ bh=HqKZV8r+WbZc2mVhdkJQIs86V27AYaKGayXetUA8yL4=;
+ h=Date:Cc:Subject:To:References:From:In-Reply-To:From;
+ b=nZBNM9Nt+oC3jjp/vR8l9A8hVY5UA6qfK8CfjmlXdYZbC+sfmWRPmb2dj6SXEg/pF
+ iWb+so9z1IE6eRGE2yUNTTw0lK/hAHIlGLL1rjpcka3MxLtstppJ7uvxslbFOPnLSw
+ Rli7Dub17IhuwoIJ3nf4+KBi5l1F9fu/gQ61WBL4ZeoeF1zEtRP+EGo8QVSdfLPOs+
+ /HgsccAQ034eyN9lUPFItJ+yNhEg/71+x3x0wv68x2m9fQOE5dZRAALLThoJHPe1ua
+ RydTX1lxLw+tksihYdFaJBP8U9MM5u8CISCi7ZtuTBjdQuhHgyL4lfOdBWLnGsH/C8
+ YZu+z4BUFK8jw==
+Message-ID: <da969409-ce10-46fe-8620-b0dfb0cea201@kernel.org>
+Date: Wed, 4 Mar 2026 16:55:13 +0800
 MIME-Version: 1.0
-X-Originating-IP: [10.0.73.87]
-X-ClientProxiedBy: SHCAS03.spreadtrum.com (10.0.1.207) To
- BJMBX02.spreadtrum.com (10.0.64.8)
-X-MAIL: SHSQR01.spreadtrum.com 6248XpS8013299
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=unisoc.com;
- s=default; t=1772613242;
- bh=ZxDgthgxvlq2ZmYfjZyPAasjrLlFLNSwjnA9lVCz0Tw=;
- h=From:To:CC:Subject:Date;
- b=LffOeWpq1kDiL+d1oQCz2TDZklniRgqXU+czgnz0rjjeWzpTcF1uZ8LUOSyd0WbqY
- OIYb8V54NZ8iZYz/W1kwNynpxpC0G/z9fxHV14dgNcKUB4iftfM333nMGPYMa+3qsC
- PxYsbGR4iN0uJn8SKFT+w2YFyx2e5mHfCZDvnvfyVpzyWYp9Dif0fHuZNkSssD7w0l
- vcjkC8jYTaMG623hdMAmXkDggE2D227d6ZuEVKwkLlgv8WPJKU+hGtdmeHccUPlkDK
- qsZPZjn4CgD6CWrKb09SVmDUg2gr93b1ayDdXNeSpMTZwcB/YEInABht3/uRtnMClR
- VwTyjOtzZrMrQ==
+User-Agent: Mozilla Thunderbird
+To: Shinichiro Kawasaki <shinichiro.kawasaki@wdc.com>,
+ Jaegeuk Kim <jaegeuk@kernel.org>
+References: <20260218125237.3340441-1-shinichiro.kawasaki@wdc.com>
+ <20260218125237.3340441-2-shinichiro.kawasaki@wdc.com>
+ <aZ0aVDSWpRRqFwl9@google.com> <aZ1C-Cdrwoxp0VCJ@shinmob>
+ <aaH_XCGbYOt6dpba@google.com> <aae5x_9gpi7utuf0@shinmob>
+Content-Language: en-US
+In-Reply-To: <aae5x_9gpi7utuf0@shinmob>
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: The following steps will change previous value of
- reserve_{blocks, node}, 
- this dones not match the original intention. 1.mount -t f2fs -o
- reserve_root=8192
- imgfile test_mount/ F2FS-fs (loop56): Mounted with checkpoint version =
- 1b69f8c7
- mount info: /dev/block/loop56 on /data/test_mount type f2fs (xxx,
- reserve_root=8192 [...] 
+ Content preview:  On 2026/3/4 12:57, Shinichiro Kawasaki wrote: > On Feb 27,
+ 2026 / 20:32, Jaegeuk Kim wrote: >> On 02/24, Shinichiro Kawasaki wrote:
+ >>> On Feb 24, 2026 / 03:26, Jaegeuk Kim wrote: >>>> On 02/18, Shin' [...]
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -112,9 +100,10 @@ X-Spam-Report: Spam detection software,
  not necessarily valid
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
-X-Headers-End: 1vxhuW-0004j1-Is
-Subject: [f2fs-dev] [PATCH] f2fs: fix to preserve previous reserve_{blocks,
- node} value when remount
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1vxi0u-0005Xd-3I
+Subject: Re: [f2fs-dev] [PATCH v2 1/1] f2fs: fix lockdep WARN of
+ sbi->cp_global_sem and q->q_usage_counter
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -126,17 +115,17 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Zhiguo Niu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Zhiguo Niu <zhiguo.niu@unisoc.com>
-Cc: ke.wang@unisoc.com, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net, zhiguo.niu@unisoc.com,
- Hao_hao.Wang@unisoc.com
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Chao Yu <chao@kernel.org>
+Cc: Damien Le Moal <dlemoal@kernel.org>,
+ "linux-f2fs-devel@lists.sourceforge.net"
+ <linux-f2fs-devel@lists.sourceforge.net>
+Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
-X-Rspamd-Queue-Id: A51CB1FCE33
+X-Rspamd-Queue-Id: 7C0411FD004
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-8.51 / 15.00];
+X-Spamd-Result: default: False [-8.61 / 15.00];
 	WHITELIST_DMARC(-7.00)[sourceforge.net:D:+];
 	DMARC_POLICY_ALLOW_WITH_FAILURES(-0.50)[];
 	RWL_MAILSPIKE_EXCELLENT(-0.40)[216.105.38.7:from];
@@ -144,99 +133,179 @@ X-Spamd-Result: default: False [-8.51 / 15.00];
 	MAILLIST(-0.20)[mailman];
 	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
 	MIME_GOOD(-0.10)[text/plain];
-	MIME_BASE64_TEXT(0.10)[];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_TLS_LAST(0.00)[];
-	FORGED_SENDER(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
-	DKIM_MIXED(0.00)[];
-	DMARC_POLICY_ALLOW(0.00)[lists.sourceforge.net,none];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	RECEIVED_HELO_LOCALHOST(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:jaegeuk@kernel.org,m:chao@kernel.org,m:ke.wang@unisoc.com,m:linux-kernel@vger.kernel.org,m:linux-f2fs-devel@lists.sourceforge.net,m:zhiguo.niu@unisoc.com,m:Hao_hao.Wang@unisoc.com,s:lists@lfdr.de];
-	SUSPICIOUS_AUTH_ORIGIN(0.00)[];
-	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
-	ARC_NA(0.00)[];
-	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,unisoc.com:s=default];
-	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,unisoc.com:-];
-	TO_DN_NONE(0.00)[];
-	PREVIOUSLY_DELIVERED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
-	HAS_XOIP(0.00)[];
+	DMARC_POLICY_ALLOW(0.00)[lists.sourceforge.net,none];
+	RCVD_TLS_LAST(0.00)[];
+	DKIM_MIXED(0.00)[];
+	TO_DN_SOME(0.00)[];
+	RECEIVED_HELO_LOCALHOST(0.00)[];
+	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
+	FORGED_SENDER(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
+	MIME_TRACE(0.00)[0:+];
+	TO_DN_EQ_ADDR_SOME(0.00)[];
+	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,kernel.org:s=k20201202];
+	FORGED_RECIPIENTS(0.00)[m:shinichiro.kawasaki@wdc.com,m:jaegeuk@kernel.org,m:dlemoal@kernel.org,m:linux-f2fs-devel@lists.sourceforge.net,s:lists@lfdr.de];
+	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
+	RCPT_COUNT_THREE(0.00)[4];
+	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,kernel.org:-];
+	RCVD_COUNT_FIVE(0.00)[5];
+	NEURAL_HAM(-0.00)[-1.000];
 	FORGED_SENDER_FORWARDING(0.00)[];
 	FROM_HAS_DN(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
 	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
-	RCPT_COUNT_SEVEN(0.00)[7];
-	HAS_REPLYTO(0.00)[zhiguo.niu@unisoc.com];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[unisoc.com:replyto,unisoc.com:email,unisoc.com:mid];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	ARC_NA(0.00)[];
 	TAGGED_RCPT(0.00)[linux-f2fs-devel];
+	FORGED_SENDER_MAILLIST(0.00)[];
 	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
-	RCVD_COUNT_SEVEN(0.00)[7]
+	HAS_REPLYTO(0.00)[chao@kernel.org]
 X-Rspamd-Action: no action
 
-VGhlIGZvbGxvd2luZyBzdGVwcyB3aWxsIGNoYW5nZSBwcmV2aW91cyB2YWx1ZSBvZiByZXNlcnZl
-X3tibG9ja3Msbm9kZX0sCnRoaXMgZG9uZXMgbm90IG1hdGNoIHRoZSBvcmlnaW5hbCBpbnRlbnRp
-b24uCgoxLm1vdW50IC10IGYyZnMgLW8gcmVzZXJ2ZV9yb290PTgxOTIgaW1nZmlsZSB0ZXN0X21v
-dW50LwpGMkZTLWZzIChsb29wNTYpOiBNb3VudGVkIHdpdGggY2hlY2twb2ludCB2ZXJzaW9uID0g
-MWI2OWY4YzcKbW91bnQgaW5mbzoKL2Rldi9ibG9jay9sb29wNTYgb24gL2RhdGEvdGVzdF9tb3Vu
-dCB0eXBlIGYyZnMgKHh4eCxyZXNlcnZlX3Jvb3Q9ODE5MixyZXNlcnZlX25vZGU9MCxyZXN1aWQ9
-MCxyZXNnaWQ9MCx4eHgpCgoyLm1vdW50IC10IGYyZnMgLW8gcmVtb3VudCxyZXNlcnZlX3Jvb3Q9
-NDA5NiAvZGF0YS90ZXN0X21vdW50CkYyRlMtZnMgKGxvb3A1Nik6IFByZXNlcnZlIHByZXZpb3Vz
-IHJlc2VydmVfcm9vdD04MTkyCmNoZWNrIG1vdW50IGluZm86IHJlc2VydmVfcm9vdCBjaGFuZ2Ug
-dG8gNDA5NgovZGV2L2Jsb2NrL2xvb3A1NiBvbiAvZGF0YS90ZXN0X21vdW50IHR5cGUgZjJmcyAo
-eHh4LHJlc2VydmVfcm9vdD00MDk2LHJlc2VydmVfbm9kZT0wLHJlc3VpZD0wLHJlc2dpZD0wLHh4
-eCkKCkZpeGVzOiBkMTg1MzUxMzI1MjMgKCJmMmZzOiBzZXBhcmF0ZSB0aGUgb3B0aW9ucyBwYXJz
-aW5nIGFuZCBvcHRpb25zIGNoZWNraW5nIikKU2lnbmVkLW9mZi1ieTogWmhpZ3VvIE5pdSA8emhp
-Z3VvLm5pdUB1bmlzb2MuY29tPgotLS0KIGZzL2YyZnMvc3VwZXIuYyB8IDIgKysKIDEgZmlsZSBj
-aGFuZ2VkLCAyIGluc2VydGlvbnMoKykKCmRpZmYgLS1naXQgYS9mcy9mMmZzL3N1cGVyLmMgYi9m
-cy9mMmZzL3N1cGVyLmMKaW5kZXggODc3NGM2MC4uMzlmOGU4OCAxMDA2NDQKLS0tIGEvZnMvZjJm
-cy9zdXBlci5jCisrKyBiL2ZzL2YyZnMvc3VwZXIuYwpAQCAtMTUxNSw2ICsxNTE1LDcgQEAgc3Rh
-dGljIGludCBmMmZzX2NoZWNrX29wdF9jb25zaXN0ZW5jeShzdHJ1Y3QgZnNfY29udGV4dCAqZmMs
-CiAgICAgICAgICAgICAgICAgICAgICAgIEYyRlNfT1BUSU9OKHNiaSkucm9vdF9yZXNlcnZlZF9i
-bG9ja3MpOwogICAgICAgICAgICAgICAgY3R4X2NsZWFyX29wdChjdHgsIEYyRlNfTU9VTlRfUkVT
-RVJWRV9ST09UKTsKICAgICAgICAgICAgICAgIGN0eC0+b3B0X21hc2sgJj0gfkJJVChGMkZTX01P
-VU5UX1JFU0VSVkVfUk9PVCk7CisgICAgICAgICAgICAgICBjdHgtPnNwZWNfbWFzayAmPSB+RjJG
-U19TUEVDX3Jlc2VydmVfcm9vdDsKICAgICAgICB9CiAgICAgICAgaWYgKHRlc3Rfb3B0KHNiaSwg
-UkVTRVJWRV9OT0RFKSAmJgogICAgICAgICAgICAgICAgICAgICAgICAoY3R4LT5vcHRfbWFzayAm
-IEJJVChGMkZTX01PVU5UX1JFU0VSVkVfTk9ERSkpICYmCkBAIC0xNTIzLDYgKzE1MjQsNyBAQCBz
-dGF0aWMgaW50IGYyZnNfY2hlY2tfb3B0X2NvbnNpc3RlbmN5KHN0cnVjdCBmc19jb250ZXh0ICpm
-YywKICAgICAgICAgICAgICAgICAgICAgICAgRjJGU19PUFRJT04oc2JpKS5yb290X3Jlc2VydmVk
-X25vZGVzKTsKICAgICAgICAgICAgICAgIGN0eF9jbGVhcl9vcHQoY3R4LCBGMkZTX01PVU5UX1JF
-U0VSVkVfTk9ERSk7CiAgICAgICAgICAgICAgICBjdHgtPm9wdF9tYXNrICY9IH5CSVQoRjJGU19N
-T1VOVF9SRVNFUlZFX05PREUpOworICAgICAgICAgICAgICAgY3R4LT5zcGVjX21hc2sgJj0gfkYy
-RlNfU1BFQ19yZXNlcnZlX25vZGU7CiAgICAgICAgfQoKICAgICAgICBlcnIgPSBmMmZzX2NoZWNr
-X3Rlc3RfZHVtbXlfZW5jcnlwdGlvbihmYywgc2IpOwotLQoxLjkuMQoKX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX18KIFRoaXMgZW1haWwgKGluY2x1ZGluZyBpdHMgYXR0YWNobWVudHMp
-IGlzIGludGVuZGVkIG9ubHkgZm9yIHRoZSBwZXJzb24gb3IgZW50aXR5IHRvIHdoaWNoIGl0IGlz
-IGFkZHJlc3NlZCBhbmQgbWF5IGNvbnRhaW4gaW5mb3JtYXRpb24gdGhhdCBpcyBwcml2aWxlZ2Vk
-LCBjb25maWRlbnRpYWwgb3Igb3RoZXJ3aXNlIHByb3RlY3RlZCBmcm9tIGRpc2Nsb3N1cmUuIFVu
-YXV0aG9yaXplZCB1c2UsIGRpc3NlbWluYXRpb24sIGRpc3RyaWJ1dGlvbiBvciBjb3B5aW5nIG9m
-IHRoaXMgZW1haWwgb3IgdGhlIGluZm9ybWF0aW9uIGhlcmVpbiBvciB0YWtpbmcgYW55IGFjdGlv
-biBpbiByZWxpYW5jZSBvbiB0aGUgY29udGVudHMgb2YgdGhpcyBlbWFpbCBvciB0aGUgaW5mb3Jt
-YXRpb24gaGVyZWluLCBieSBhbnlvbmUgb3RoZXIgdGhhbiB0aGUgaW50ZW5kZWQgcmVjaXBpZW50
-LCBvciBhbiBlbXBsb3llZSBvciBhZ2VudCByZXNwb25zaWJsZSBmb3IgZGVsaXZlcmluZyB0aGUg
-bWVzc2FnZSB0byB0aGUgaW50ZW5kZWQgcmVjaXBpZW50LCBpcyBzdHJpY3RseSBwcm9oaWJpdGVk
-LiBJZiB5b3UgYXJlIG5vdCB0aGUgaW50ZW5kZWQgcmVjaXBpZW50LCBwbGVhc2UgZG8gbm90IHJl
-YWQsIGNvcHksIHVzZSBvciBkaXNjbG9zZSBhbnkgcGFydCBvZiB0aGlzIGUtbWFpbCB0byBvdGhl
-cnMuIFBsZWFzZSBub3RpZnkgdGhlIHNlbmRlciBpbW1lZGlhdGVseSBhbmQgcGVybWFuZW50bHkg
-ZGVsZXRlIHRoaXMgZS1tYWlsIGFuZCBhbnkgYXR0YWNobWVudHMgaWYgeW91IHJlY2VpdmVkIGl0
-IGluIGVycm9yLiBJbnRlcm5ldCBjb21tdW5pY2F0aW9ucyBjYW5ub3QgYmUgZ3VhcmFudGVlZCB0
-byBiZSB0aW1lbHksIHNlY3VyZSwgZXJyb3ItZnJlZSBvciB2aXJ1cy1mcmVlLiBUaGUgc2VuZGVy
-IGRvZXMgbm90IGFjY2VwdCBsaWFiaWxpdHkgZm9yIGFueSBlcnJvcnMgb3Igb21pc3Npb25zLgrm
-nKzpgq7ku7blj4rlhbbpmYTku7blhbfmnInkv53lr4bmgKfotKjvvIzlj5fms5Xlvovkv53miqTk
-uI3lvpfms4TpnLLvvIzku4Xlj5HpgIHnu5nmnKzpgq7ku7bmiYDmjIfnibnlrprmlLbku7bkurrj
-gILkuKXnpoHpnZ7nu4/mjojmnYPkvb/nlKjjgIHlrqPkvKDjgIHlj5HluIPmiJblpI3liLbmnKzp
-gq7ku7bmiJblhbblhoXlrrnjgILoi6XpnZ7or6XnibnlrprmlLbku7bkurrvvIzor7fli7/pmIXo
-r7vjgIHlpI3liLbjgIEg5L2/55So5oiW5oqr6Zyy5pys6YKu5Lu255qE5Lu75L2V5YaF5a6544CC
-6Iul6K+v5pS25pys6YKu5Lu277yM6K+35LuO57O757uf5Lit5rC45LmF5oCn5Yig6Zmk5pys6YKu
-5Lu25Y+K5omA5pyJ6ZmE5Lu277yM5bm25Lul5Zue5aSN6YKu5Lu255qE5pa55byP5Y2z5Yi75ZGK
-55+l5Y+R5Lu25Lq644CC5peg5rOV5L+d6K+B5LqS6IGU572R6YCa5L+h5Y+K5pe244CB5a6J5YWo
-44CB5peg6K+v5oiW6Ziy5q+S44CC5Y+R5Lu25Lq65a+55Lu75L2V6ZSZ5ryP5Z2H5LiN5om/5ouF
-6LSj5Lu744CCCgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X18KTGludXgtZjJmcy1kZXZlbCBtYWlsaW5nIGxpc3QKTGludXgtZjJmcy1kZXZlbEBsaXN0cy5z
-b3VyY2Vmb3JnZS5uZXQKaHR0cHM6Ly9saXN0cy5zb3VyY2Vmb3JnZS5uZXQvbGlzdHMvbGlzdGlu
-Zm8vbGludXgtZjJmcy1kZXZlbAo=
+On 2026/3/4 12:57, Shinichiro Kawasaki wrote:
+> On Feb 27, 2026 / 20:32, Jaegeuk Kim wrote:
+>> On 02/24, Shinichiro Kawasaki wrote:
+>>> On Feb 24, 2026 / 03:26, Jaegeuk Kim wrote:
+>>>> On 02/18, Shin'ichiro Kawasaki wrote:
+>>>>> From: Shin'ichiro Kawasaki via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
+>>>>>
+>>>>> A lockdep WARN is observed recently under the following steps:
+>>>>>
+>>>>> 1) Create a zoned TCMU device
+>>>>> 2) Create a f2fs filesystem on the zoned TCMU device and mount it
+>>>>> 3) Fill the filesystem with files and trigger GC
+>>>>> 4) Unmout the filesystem
+>>>>> 5) Remove the zoned TCMU device
+>>>>>
+>>>>> The lockdep WARN indicates that a circular lock depedency formed by four
+>>>>> contexts, as described below.
+>>>>>
+>>>>> a) TCMU device removal context:
+>>>>>   - call del_gendisk() to get q->q_usage_counter
+>>>>>   - call start_flush_work() to get work_completion of wb->dwork
+>>>>> b) f2fs writeback context:
+>>>>>   - in wb_workfn(), which holds work_completion of wb->dwork
+>>>>>   - call f2fs_balance_fs() to get sbi->gc_lock
+>>>>> c) f2fs vfs_write context:
+>>>>>   - call f2fs_gc() to get sbi->gc_lock
+>>>>>   - call f2fs_write_checkpoint() to get sbi->cp_global_sem
+>>>>> d) f2fs mount context:
+>>>>>   - call recover_fsync_data() to get sbi->cp_global_sem
+>>>>>   - call f2fs_check_and_fix_write_pointer() to call blkdev_report_zones()
+>>>>>     that goes down to blk_mq_alloc_request and get q->q_usage_counter
+>>>>>
+>>>>> To suppress the WARN, cut the dependency d) between sbi->cp_global_sem
+>>>>> and q->q_usage_counter. For that purpose, move the
+>>>>> f2fs_check_and_fix_write_pointer() call outside of the critical section
+>>>>> of sbi->cp_global_sem in f2fs_recovery_fsync_data(). This change is fine
+>>>>> because the write pointer fix operation only affects the main segments
+>>>>> and does not interact with the check point metadata. Furthermore,
+>>>>> conflicts between the write pointer fix operation and data/node flush
+>>>>> operations remain protected by SBI_POR_DOING.
+>>>>>
+>>>>> Fixes: c426d99127b1 ("f2fs: Check write pointer consistency of open zones")
+>>>>> Reviewed-by: Damien Le Moal <dlemoal@kernel.org>
+>>>>> Signed-off-by: Shin'ichiro Kawasaki <shinichiro.kawasaki@wdc.com>
+>>>>> ---
+>>>>>   fs/f2fs/recovery.c | 4 ++--
+>>>>>   1 file changed, 2 insertions(+), 2 deletions(-)
+>>>>>
+>>>>> diff --git a/fs/f2fs/recovery.c b/fs/f2fs/recovery.c
+>>>>> index a26071f2b0bc..87fd6cd436fe 100644
+>>>>> --- a/fs/f2fs/recovery.c
+>>>>> +++ b/fs/f2fs/recovery.c
+>>>>> @@ -922,6 +922,8 @@ int f2fs_recover_fsync_data(struct f2fs_sb_info *sbi, bool check_only)
+>>>>>   		truncate_inode_pages_final(META_MAPPING(sbi));
+>>>>>   	}
+>>>>>   
+>>>>> +	f2fs_up_write_trace(&sbi->cp_global_sem, &lc);
+>>>>> +
+>>>>>   	/*
+>>>>>   	 * If fsync data succeeds or there is no fsync data to recover,
+>>>>>   	 * and the f2fs is not read only, check and fix zoned block devices'
+>>>>> @@ -933,8 +935,6 @@ int f2fs_recover_fsync_data(struct f2fs_sb_info *sbi, bool check_only)
+>>>>>   	if (!err)
+>>>>>   		clear_sbi_flag(sbi, SBI_POR_DOING);
+>>>>>   
+>>>>> -	f2fs_up_write_trace(&sbi->cp_global_sem, &lc);
+>>>>> -
+>>>>
+>>>> This was a guard to prevent checkpoint during f2fs_check_and_fix_write_pointer()
+>>>> where it changes the checkpoint as well?
+>>>
+>>> I checked f2fs_check_and_fix_write_pointer() again, and it does not look
+>>> changing the checkpoint to me. FYI, here I show the rough function call chain
+>>> from f2fs_check_and_fix_write_pointer() as below. I guess this call chain does
+>>> not change the checkpoint, but if I misunderstand anything, please let me know.
+>>>
+>>>   f2fs_check_and_fix_write_pointer()
+>>>    fix_curseg_write_pointer()
+>>>     do_fix_curseg_write_pointer()
+>>>      blkdev_report_zones()
+>>>       report_one_zone_cb()
+>>>      f2fs_allocate_new_section()
+>>>       __allocate_new_segment()
+>>>        new_curseg()
+>>
+>> E.g., curseg.
+>>
+> 
+> Thanks, I looked in do_checkpoint() in fs/f2fs/checkpoing.c, and found it refers
+> to cursegs. Then, this patch will allow recording the cursegs in parallel of
+> f2fs_check_and_fix_write_pointer(), and it will results in inconsistent curseg
+> values in checkpoints. Not good. Let me drop this patch.
+> 
+> I will seek out other ways to avoid the lockdep. I have no idea how to do that
+> at this moment, though.
+
+Shinichiro,
+
+IMO, this looks like a false alarm of lockdep, what do you think of this fix?
+
+https://git.kernel.org/pub/scm/linux/kernel/git/chao/linux.git/commit/?h=bugfix/syzbot&id=3b19564b95e9ba9803ef30e90eace0977b9d140d
+
+---
+  fs/f2fs/f2fs.h  | 3 +++
+  fs/f2fs/super.c | 3 +++
+  2 files changed, 6 insertions(+)
+
+diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+index bb34e864d0ef..5b400e99f332 100644
+--- a/fs/f2fs/f2fs.h
++++ b/fs/f2fs/f2fs.h
+@@ -2042,6 +2042,9 @@ struct f2fs_sb_info {
+         spinlock_t iostat_lat_lock;
+         struct iostat_lat_info *iostat_io_lat;
+  #endif
++#ifdef CONFIG_DEBUG_LOCK_ALLOC
++       struct lock_class_key cp_global_sem_key;
++#endif
+  };
+
+  /* Definitions to access f2fs_sb_info */
+diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
+index 8774c60b4be4..9e85f31fa828 100644
+--- a/fs/f2fs/super.c
++++ b/fs/f2fs/super.c
+@@ -4948,6 +4948,9 @@ static int f2fs_fill_super(struct super_block *sb, struct fs_context *fc)
+         init_f2fs_rwsem_trace(&sbi->gc_lock, sbi, LOCK_NAME_GC_LOCK);
+         mutex_init(&sbi->writepages);
+         init_f2fs_rwsem_trace(&sbi->cp_global_sem, sbi, LOCK_NAME_CP_GLOBAL);
++#ifdef CONFIG_DEBUG_LOCK_ALLOC
++       lockdep_set_class(&sbi->cp_global_sem, &sbi->cp_global_sem_key);
++#endif
+         init_f2fs_rwsem_trace(&sbi->node_write, sbi, LOCK_NAME_NODE_WRITE);
+         init_f2fs_rwsem_trace(&sbi->node_change, sbi, LOCK_NAME_NODE_CHANGE);
+         spin_lock_init(&sbi->stat_lock);
+-- 
+2.49.0
+
+
+
+
+_______________________________________________
+Linux-f2fs-devel mailing list
+Linux-f2fs-devel@lists.sourceforge.net
+https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
