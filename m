@@ -2,91 +2,94 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id gBSJFLEkqGl3ogAAu9opvQ
+	id gAz6MrE5qGkTqgAAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 04 Mar 2026 13:25:21 +0100
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 04 Mar 2026 14:54:57 +0100
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 031641FFA9F
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 04 Mar 2026 13:25:20 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1065B200C84
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 04 Mar 2026 14:54:56 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.sourceforge.net; s=beta; h=Content-Type:Content-Transfer-Encoding:Cc:
-	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:In-Reply-To:References:To:MIME-Version:Date:
-	Message-ID:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
-	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=7lZCD7fIlOiNREeMmt6xeq2uMjQX5utjGVPhXTLcCvA=; b=LtxdL0pg05aAHBNEjXPuVxPwGL
-	L/xUL68tzsqDNh+nwDyiNou4lL4+KtKV22q6uWUKiuo9q2iIihj1eUmiZqXuvl5T9UFR1fMesVYRh
-	JXcAOZes/9oCXF21ofTu0vFQ5j+g4UW6UJ3mR3xW5xlqQ6Rdg6PQc68JQIW61XCykdrc=;
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
+	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
+	Subject:In-Reply-To:MIME-Version:References:Message-ID:To:From:Date:Sender:
+	Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
+	:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
+	bh=iqERoYo+osHscluuOXGf4wLNYrXH2uPGjfwR60IwDxY=; b=kPEeQf90BC7mWiZrZMx8O84Xwb
+	Fz7TyRKKYIbAAKSRbZmD5pabY36zW3QAngUwpH62/Kflo1mVHffK9AUke6vjDOvn9F6hljNhpV3K7
+	C9+s7m4ARhwAgKKW9JtKdGHGW3eb1S6slaHcmJ7QhfpmMTz80z+0lDPp0ayx6Vp5EkjI=;
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vxlHt-0004ch-9c;
-	Wed, 04 Mar 2026 12:25:13 +0000
+	id 1vxmgY-0006Fc-Jb;
+	Wed, 04 Mar 2026 13:54:46 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1vxlHs-0004cb-2s
+ (envelope-from <peterz@infradead.org>) id 1vxmgV-0006FT-OF
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 04 Mar 2026 12:25:12 +0000
+ Wed, 04 Mar 2026 13:54:43 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- From:References:To:Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=hW4T+CmT7JhxAVA+q/eaPiDwKNcxmMe5tHf0KMBwqvo=; b=AfsErcjjsIZjR74VEvSOc2gn5i
- XH6IhRy7anDt2Q1KKZ54ayLEVRwQsw78ZzSEQCZDK+/3y5ObiU8YN33JWqvBx+iYgpi7gnSnsdeGv
- Vels5eCDRRbG7fgzSb+8lreIR16nVUOw+80lBuhePxsJJgHllUkP6OTVFhykOpxVM3AE=;
+ bh=YsXg2qDZ+ZjnQnj/eNfiIgU3SLUyimkRR7bx5y5oB4w=; b=UcTByFDmKH7nyH3nhg6FSmVJBq
+ XNseHOSH/p+lplma01S2GHczPp6AEq+8403/Sh95aHwcsxqEB1umkcp+OloohoD27uhclAQlIMSL6
+ wQA1WhZxZfdRZmoyXMFdlfd1CK2ibpQLZBh5Rc32j8ekp6XVBtDpIU09EKMQw8oQgYqU=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
- Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=hW4T+CmT7JhxAVA+q/eaPiDwKNcxmMe5tHf0KMBwqvo=; b=J5FyVLFtTx/1vXtaSQX+OVRvld
- D7ad6I0ducAQqBU594h4s3pW5quc3B/F3WteZnjtjd9eFtGKuu/ppQtveEvMvqvAkxrK6nOrGkeFp
- FP7K4plk3yizQ35HSHSfrDA4IwSy3OcRQFX3piIejMpZZFyoIZQ1LcmzfGOxA3ZOXCM4=;
-Received: from tor.source.kernel.org ([172.105.4.254])
+ bh=YsXg2qDZ+ZjnQnj/eNfiIgU3SLUyimkRR7bx5y5oB4w=; b=D8LqtcJAI433iHgml4ODErPYyI
+ qTQLxhtFhrZdbIAuNC8bYx+9Uw+41ys3zsZFmEYjt4PEmMX92Ksxu9vdigApzhzPxZWFZW/Yk3zhT
+ RoahSfx9XtyPg7bQle4GbU0ikhVQ9PXdkLVK0u4kQI2wEJ5/4L2puRFC6XS/6bxejHPw=;
+Received: from desiato.infradead.org ([90.155.92.199])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vxlHr-0008OH-MZ for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 04 Mar 2026 12:25:12 +0000
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 12D1560097;
- Wed,  4 Mar 2026 12:25:01 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id F0720C19423;
- Wed,  4 Mar 2026 12:24:57 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1772627100;
- bh=xY8w/SLBNyQ0i8Q5a3+WjokCNIdJBW4jppsDD/caqoA=;
- h=Date:Cc:Subject:To:References:From:In-Reply-To:From;
- b=BQAjgt6bglXbxe3YQfrnj/4MpMnyfGx0N7Ig4ujPmb1xLx+AtwDrF+T8tqOafsSqX
- 3DNjvxuaCJ0L3lN8sTyKnphQUt4xlxdEUJBH5NGzRvBAz7vgwFZMNz/G0Df1/8H0Xj
- KWXlKbgmNjsKpRjqR3qkLj824c8j1Qk2INgrCZKZc4RjveFd82C3GF06yZ93gbHKQo
- dJ8HUbOkYf0FzY6/XpImz+UgNijtt1OS3p5iZHp0XyF3cgKYzzXZin2ChzUcD3MNEa
- M6ZZU7HMO9WlxIWJLyjAHU9Fe/WDZm+t2pU66AvEddoKYTuuIFUhq2RYTm2D5Kmh9v
- byNhs/pldiZqw==
-Message-ID: <46c69e75-f797-4121-b740-afa1096132cd@kernel.org>
-Date: Wed, 4 Mar 2026 20:24:55 +0800
+ id 1vxmgU-0003Na-TA for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 04 Mar 2026 13:54:43 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=infradead.org; s=desiato.20200630; h=In-Reply-To:Content-Type:MIME-Version:
+ References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+ Content-Transfer-Encoding:Content-ID:Content-Description;
+ bh=YsXg2qDZ+ZjnQnj/eNfiIgU3SLUyimkRR7bx5y5oB4w=; b=U5NhpZCn934XojSyVFL1nj1S/W
+ 2SwNvFKnKgDXQSzq6m51IMvSlZX+ne4bEh4E01vZtYgpLee5ixUDi8qEHb4R97fy2f4d2ReNAtXFl
+ 2Myy/FM9yjpIi4F5MCjGcXNEoyN2WDgyc7039UPkredIXwYhk1etVNasHnwai+IB6c4ro8VQTd24m
+ dlAjACdWYLWNFfSy+VdBxKivYhNczBRSHxMPHao0CvqQusPNjCznq/i4rksmb+FqExqEhxu3s5ruZ
+ HIicL8wW2i2h8YBWX0vQS1a34HK9wPAQFs79TabY9VaeD6tSKbvzAdMAvOXPYXBWy7iVhi1jbb7PJ
+ KVa5pNSQ==;
+Received: from 77-249-17-252.cable.dynamic.v4.ziggo.nl ([77.249.17.252]
+ helo=noisy.programming.kicks-ass.net)
+ by desiato.infradead.org with esmtpsa (Exim 4.98.2 #2 (Red Hat Linux))
+ id 1vxle2-00000004Z41-2FWR; Wed, 04 Mar 2026 12:48:06 +0000
+Received: by noisy.programming.kicks-ass.net (Postfix, from userid 1000)
+ id 07040300666; Wed, 04 Mar 2026 13:48:06 +0100 (CET)
+Date: Wed, 4 Mar 2026 13:48:05 +0100
+From: Peter Zijlstra <peterz@infradead.org>
+To: Sean Christopherson <seanjc@google.com>
+Message-ID: <20260304124805.GB2277644@noisy.programming.kicks-ass.net>
+References: <20260304012717.201797-1-ynorov@nvidia.com>
+ <20260303182845.250bb2de@kernel.org>
+ <f8d86743-6231-414d-a5e8-65e867123fea@kernel.dk>
+ <aaedwFwXh9QXS3Ju@google.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-To: Daeho Jeong <daeho43@gmail.com>, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net, kernel-team@android.com
-References: <20260303170036.2242819-1-daeho43@gmail.com>
-Content-Language: en-US
-In-Reply-To: <20260303170036.2242819-1-daeho43@gmail.com>
+Content-Disposition: inline
+In-Reply-To: <aaedwFwXh9QXS3Ju@google.com>
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2026/3/4 01:00, Daeho Jeong wrote: > From: Daeho Jeong
- <daehojeong@google.com> > > Reproduction: > truncate -s 512M overflow.img
- > ./out/host/linux-x86/bin/make_f2fs -g android -b 16384 -w 16384 -O [...]
+ Content preview:  On Tue, Mar 03, 2026 at 06:49:36PM -0800, Sean Christopherson
+ wrote: > On Tue, Mar 03, 2026, Jens Axboe wrote: > > On 3/3/26 7:28 PM, Jakub
+ Kicinski wrote: > > > On Tue, 3 Mar 2026 20:27:08 -0500 Yury [...] 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -97,10 +100,8 @@ X-Spam-Report: Spam detection software,
  not necessarily valid
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1vxlHr-0008OH-MZ
-Subject: Re: [f2fs-dev] [PATCH] f2fs-tools: fix heap-buffer-overflow of
- reading SSA from checkpoint area
+X-Headers-End: 1vxmgU-0003Na-TA
+Subject: Re: [f2fs-dev] [PATCH 0/8] mm: globalize rest_of_page() macro
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -112,80 +113,123 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Chao Yu <chao@kernel.org>
-Cc: Daeho Jeong <daehojeong@google.com>,
- Maxim Pleshivenkov <mpleshivenkov@google.com>
+Cc: Latchesar Ionkov <lucho@ionkov.net>, Zheng Gu <cengku@gmail.com>,
+ kvm@vger.kernel.org, "Michael S. Tsirkin" <mst@redhat.com>,
+ Catalin Marinas <catalin.marinas@arm.com>,
+ Alexander Duyck <alexanderduyck@fb.com>,
+ Dave Hansen <dave.hansen@linux.intel.com>, dri-devel@lists.freedesktop.org,
+ Jaroslav Kysela <perex@perex.cz>, linux-perf-users@vger.kernel.org,
+ linux-mm@kvack.org, Eric Dumazet <edumazet@google.com>,
+ Andreas Dilger <adilger.kernel@dilger.ca>, linux-nfs@vger.kernel.org,
+ Dongsheng Yang <dongsheng.yang@linux.dev>,
+ Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+ Alexander Gordeev <agordeev@linux.ibm.com>,
+ Claudio Imbrenda <imbrenda@linux.ibm.com>, David Airlie <airlied@gmail.com>,
+ linux-riscv@lists.infradead.org, Simona Vetter <simona@ffwll.ch>,
+ linux-s390@vger.kernel.org, Madhavan Srinivasan <maddy@linux.ibm.com>,
+ Yury Norov <yury.norov@gmail.com>, Herbert Xu <herbert@gondor.apana.org.au>,
+ Alexandra Winter <wintera@linux.ibm.com>, Miklos Szeredi <miklos@szeredi.hu>,
+ Michael Ellerman <mpe@ellerman.id.au>, linux-ext4@vger.kernel.org,
+ x86@kernel.org, Yury Norov <ynorov@nvidia.com>,
+ Tvrtko Ursulin <tursulin@ursulin.net>, linux-spi@vger.kernel.org,
+ Jani Nikula <jani.nikula@linux.intel.com>, Ingo Molnar <mingo@redhat.com>,
+ Aswin Karuvally <aswin@linux.ibm.com>, intel-gfx@lists.freedesktop.org,
+ Jakub Kicinski <kuba@kernel.org>,
+ Christian Borntraeger <borntraeger@linux.ibm.com>,
+ Carlos Maiolino <cem@kernel.org>, Dominique Martinet <asmadeus@codewreck.org>,
+ Thomas Gleixner <tglx@kernel.org>, dm-devel@lists.linux.dev,
+ Albert Ou <aou@eecs.berkeley.edu>, Vasily Gorbik <gor@linux.ibm.com>,
+ Heiko Carstens <hca@linux.ibm.com>, Will Deacon <will@kernel.org>,
+ linux-f2fs-devel@lists.sourceforge.net,
+ Arnaldo Carvalho de Melo <acme@kernel.org>, linux-crypto@vger.kernel.org,
+ linux-block@vger.kernel.org, Mark Brown <broonie@kernel.org>,
+ Borislav Petkov <bp@alien8.de>, Alexander Viro <viro@zeniv.linux.org.uk>,
+ Rodrigo Vivi <rodrigo.vivi@intel.com>, Jaegeuk Kim <jaegeuk@kernel.org>,
+ virtualization@lists.linux.dev, Eric Van Hensbergen <ericvh@kernel.org>,
+ Paul Walmsley <pjw@kernel.org>, linux-arm-kernel@lists.infradead.org,
+ Janosch Frank <frankja@linux.ibm.com>, Jens Axboe <axboe@kernel.dk>,
+ Christian Brauner <brauner@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
+ Theodore Ts'o <tytso@mit.edu>, v9fs@lists.linux.dev, netdev@vger.kernel.org,
+ Linus Walleij <linusw@kernel.org>, linux-sound@vger.kernel.org,
+ Takashi Iwai <tiwai@suse.com>, linux-kernel@vger.kernel.org,
+ linux-xfs@vger.kernel.org, Andrew Lunn <andrew+netdev@lunn.ch>,
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Anton Yakovlev <anton.yakovlev@opensynergy.com>,
+ Anna Schumaker <anna@kernel.org>, linux-fsdevel@vger.kernel.org,
+ Paolo Bonzini <pbonzini@redhat.com>, Andrew Morton <akpm@linux-foundation.org>,
+ Namhyung Kim <namhyung@kernel.org>, linuxppc-dev@lists.ozlabs.org,
+ "David S. Miller" <davem@davemloft.net>, Trond Myklebust <trondmy@kernel.org>
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
-X-Rspamd-Queue-Id: 031641FFA9F
+X-Rspamd-Queue-Id: 1065B200C84
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-8.61 / 15.00];
-	WHITELIST_DMARC(-7.00)[sourceforge.net:D:+];
-	DMARC_POLICY_ALLOW_WITH_FAILURES(-0.50)[];
+X-Spamd-Result: default: False [0.49 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
 	RWL_MAILSPIKE_EXCELLENT(-0.40)[216.105.38.7:from];
+	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
 	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7];
 	MAILLIST(-0.20)[mailman];
-	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
 	MIME_GOOD(-0.10)[text/plain];
+	DMARC_POLICY_SOFTFAIL(0.10)[infradead.org : SPF not aligned (relaxed), DKIM not aligned (relaxed),none];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_TLS_LAST(0.00)[];
-	RECEIVED_HELO_LOCALHOST(0.00)[];
 	DKIM_MIXED(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:daeho43@gmail.com,m:linux-kernel@vger.kernel.org,m:linux-f2fs-devel@lists.sourceforge.net,m:kernel-team@android.com,m:daehojeong@google.com,m:mpleshivenkov@google.com,s:lists@lfdr.de];
-	FREEMAIL_TO(0.00)[gmail.com,vger.kernel.org,lists.sourceforge.net,android.com];
-	FORGED_SENDER(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
+	RECEIVED_HELO_LOCALHOST(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
 	TO_DN_SOME(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	DMARC_POLICY_ALLOW(0.00)[lists.sourceforge.net,none];
+	FORGED_SENDER(0.00)[peterz@infradead.org,linux-f2fs-devel-bounces@lists.sourceforge.net];
 	MIME_TRACE(0.00)[0:+];
-	ARC_NA(0.00)[];
+	FORGED_RECIPIENTS(0.00)[m:seanjc@google.com,m:lucho@ionkov.net,m:cengku@gmail.com,m:kvm@vger.kernel.org,m:mst@redhat.com,m:catalin.marinas@arm.com,m:alexanderduyck@fb.com,m:dave.hansen@linux.intel.com,m:dri-devel@lists.freedesktop.org,m:perex@perex.cz,m:linux-perf-users@vger.kernel.org,m:linux-mm@kvack.org,m:edumazet@google.com,m:adilger.kernel@dilger.ca,m:linux-nfs@vger.kernel.org,m:dongsheng.yang@linux.dev,m:joonas.lahtinen@linux.intel.com,m:agordeev@linux.ibm.com,m:imbrenda@linux.ibm.com,m:airlied@gmail.com,m:linux-riscv@lists.infradead.org,m:simona@ffwll.ch,m:linux-s390@vger.kernel.org,m:maddy@linux.ibm.com,m:yury.norov@gmail.com,m:herbert@gondor.apana.org.au,m:wintera@linux.ibm.com,m:miklos@szeredi.hu,m:mpe@ellerman.id.au,m:linux-ext4@vger.kernel.org,m:x86@kernel.org,m:ynorov@nvidia.com,m:tursulin@ursulin.net,m:linux-spi@vger.kernel.org,m:jani.nikula@linux.intel.com,m:mingo@redhat.com,m:aswin@linux.ibm.com,m:intel-gfx@lists.freedesktop.org,m:kuba@kernel.org,m:borntraeger@linux.
+ ibm.com,m:cem@kernel.org,m:asmadeus@codewreck.org,m:tglx@kernel.org,m:dm-devel@lists.linux.dev,m:aou@eecs.berkeley.edu,m:gor@linux.ibm.com,m:hca@linux.ibm.com,m:will@kernel.org,m:linux-f2fs-devel@lists.sourceforge.net,m:acme@kernel.org,m:linux-crypto@vger.kernel.org,m:linux-block@vger.kernel.org,m:broonie@kernel.org,m:bp@alien8.de,m:viro@zeniv.linux.org.uk,m:rodrigo.vivi@intel.com,m:jaegeuk@kernel.org,m:virtualization@lists.linux.dev,m:ericvh@kernel.org,m:pjw@kernel.org,m:linux-arm-kernel@lists.infradead.org,m:frankja@linux.ibm.com,m:axboe@kernel.dk,m:brauner@kernel.org,m:pabeni@redhat.com,m:tytso@mit.edu,m:v9fs@lists.linux.dev,m:netdev@vger.kernel.org,m:linusw@kernel.org,m:linux-sound@vger.kernel.org,m:tiwai@suse.com,m:linux-kernel@vger.kernel.org,m:linux-xfs@vger.kernel.org,m:andrew+netdev@lunn.ch,m:palmer@dabbelt.com,m:anton.yakovlev@opensynergy.com,m:anna@kernel.org,m:linux-fsdevel@vger.kernel.org,m:pbonzini@redhat.com,m:akpm@linux-foundation.org,m:namhyung@kernel.org,m:linuxppc
+ -dev@lists.ozlabs.org,m:davem@davemloft.net,m:trondmy@kernel.org,s:lists@lfdr.de];
 	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
-	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,kernel.org:s=k20201202];
-	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,kernel.org:-];
-	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
+	ARC_NA(0.00)[];
+	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,infradead.org:s=desiato.20200630];
+	FREEMAIL_CC(0.00)[ionkov.net,gmail.com,vger.kernel.org,redhat.com,arm.com,fb.com,linux.intel.com,lists.freedesktop.org,perex.cz,kvack.org,google.com,dilger.ca,linux.dev,linux.ibm.com,lists.infradead.org,ffwll.ch,gondor.apana.org.au,szeredi.hu,ellerman.id.au,kernel.org,nvidia.com,ursulin.net,codewreck.org,lists.linux.dev,eecs.berkeley.edu,lists.sourceforge.net,alien8.de,zeniv.linux.org.uk,intel.com,kernel.dk,mit.edu,suse.com,lunn.ch,dabbelt.com,opensynergy.com,linux-foundation.org,lists.ozlabs.org,davemloft.net];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
 	RCVD_COUNT_FIVE(0.00)[5];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.sourceforge.net:dkim,lists.sourceforge.net:rdns,lists.sourceforge.net:helo];
+	RCPT_COUNT_GT_50(0.00)[84];
 	FORGED_SENDER_FORWARDING(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
-	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[peterz@infradead.org,linux-f2fs-devel-bounces@lists.sourceforge.net];
+	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,infradead.org:-];
 	NEURAL_HAM(-0.00)[-1.000];
-	TAGGED_RCPT(0.00)[linux-f2fs-devel];
-	RCPT_COUNT_FIVE(0.00)[6];
+	TAGGED_RCPT(0.00)[linux-f2fs-devel,netdev];
+	MISSING_XM_UA(0.00)[];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
 	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
-	HAS_REPLYTO(0.00)[chao@kernel.org]
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.sourceforge.net:dkim,lists.sourceforge.net:rdns,lists.sourceforge.net:helo,noisy.programming.kicks-ass.net:mid]
 X-Rspamd-Action: no action
 
-On 2026/3/4 01:00, Daeho Jeong wrote:
-> From: Daeho Jeong <daehojeong@google.com>
+On Tue, Mar 03, 2026 at 06:49:36PM -0800, Sean Christopherson wrote:
+> On Tue, Mar 03, 2026, Jens Axboe wrote:
+> > On 3/3/26 7:28 PM, Jakub Kicinski wrote:
+> > > On Tue,  3 Mar 2026 20:27:08 -0500 Yury Norov wrote:
+> > >> The net/9p networking driver has a handy macro to calculate the
+> > >> amount of bytes from a given pointer to the end of page. Move it
+> > >> to core/mm, and apply tree-wide. No functional changes intended.
+> > >>
+> > >> This series was originally introduced as a single patch #07/12 in:
+> > >>
+> > >> https://lore.kernel.org/all/20260219181407.290201-1-ynorov@nvidia.com/
+> > >>
+> > >> Split it for better granularity and submit separately.
+> > > 
+> > > I don't get what the motivation is here. Another helper developers
+> > > and readers of the code will need to know about just to replace 
+> > > obvious and easy to comprehend math.
+> > 
+> > I fully agree, I had the same thought reading this.
 > 
-> Reproduction:
-> truncate -s 512M overflow.img
-> ./out/host/linux-x86/bin/make_f2fs -g android -b 16384 -w 16384 -O packed_ssa overflow.img
-> mkdir -p empty_dir
-> export ASAN_OPTIONS=detect_leaks=0:abort_on_error=1
-> ./out/host/linux-x86/bin/sload_f2fs -f empty_dir -t /data overflow.img
-> 
-> Result:
-> ==306082==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x7df5201e2500 at pc 0x5567ea010583 bp 0x7ffc3386c210 sp 0x7ffc3386b9d8
-> READ of size 16384 at 0x7df5201e2500 thread T0
-> 
-> Even though we can reduce the summary block to 4KB, we need to maintain
-> backward compatibility for the checkpoint area. Therefore, the summary
-> block there must match the block size, so it is correct to use F2FS_BLKSIZE.
-> 
-> Fixes: ad1357c34023 ("f2fs-tools: revert summary entry count from 2048 to 512 in 16kb block support")
-> Reported-by: Maxim Pleshivenkov <mpleshivenkov@google.com>
-> Signed-off-by: Daeho Jeong <daehojeong@google.com>
+> +1 from KVM-land.
 
-Reviewed-by: Chao Yu <chao@kernel.org>
+Right, this. I hate these pointless helpers that obscure perfectly
+sensible and obvious code -- and for me that includes things like
+rounddown() and DIV_ROUND_UP().
 
-Thanks,
+It just makes the code harder to read.
 
 
 _______________________________________________
