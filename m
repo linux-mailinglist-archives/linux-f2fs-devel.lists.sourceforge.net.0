@@ -2,42 +2,42 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id eN0zF2gdqGnyoAAAu9opvQ
+	id uEumKDAhqGlQoQAAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 04 Mar 2026 12:54:16 +0100
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 04 Mar 2026 13:10:24 +0100
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1D95E1FF5B4
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 04 Mar 2026 12:54:16 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id F3A2F1FF829
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 04 Mar 2026 13:10:23 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Type:Content-Transfer-Encoding:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
 	List-Unsubscribe:List-Id:Subject:In-Reply-To:References:To:MIME-Version:Date:
 	Message-ID:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
 	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=j1Vso1v3OchI71hKq7et6pAdp0EgFg/UX+wMsJ7+K8I=; b=T0DDS0CpPvPfjjTjXl0epuciaU
-	qr/iljoXDLL0m3jTTJHDGY/Q8x+q1F0pr5yZHO/7QjJsUNI0FZUZviRZ0j8zZBqc+02QD0IFJebTH
-	e2akT8o/bI9Sp/iMj8gVSzMEStV7L/+52FsxDJG8C+9FG8jEkUIg7hPAN2gZzrr21Y0E=;
+	bh=i1TvxiCgC8UjQJB8s+0AaM2cZh9wZ/d15EFzOqpFDMU=; b=ee023M5NiAO3R9G+D6NMV/NaPL
+	pmzHnuQwKUASg/dSXBQMsmucBQBnu8IKPTBepznCDOIlr7ceuB9Dpv1czlnIl4Tm3nPkmADg+I7Gc
+	oOjO0jF8ERGhF2rLd8zw7rIFQXr8PZgXyTP5BpdWOqQqWYXJ0d+BTE0lVC9nG6npSig0=;
 Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
 	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vxknu-0003WN-Gy;
-	Wed, 04 Mar 2026 11:54:14 +0000
+	id 1vxl3L-0003ur-Dx;
+	Wed, 04 Mar 2026 12:10:11 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
  by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1vxknt-0003WF-8c
+ (envelope-from <chao@kernel.org>) id 1vxl3J-0003uj-Ts
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 04 Mar 2026 11:54:13 +0000
+ Wed, 04 Mar 2026 12:10:10 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  From:References:To:Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=yzRu4aOT2Cffprveb0NB+VWYA3QsuJt5HZLSm5ZogSA=; b=WxkCM1GVVTz9wKs0IW+H2ggfPR
- e2QhwGNT1I5gbm3WNTjSgyul8ICOpPz6Cu1K9fCZH6sWwpxY/HIaig48aeNzObBjQkwBqifFkyjGz
- N9jpU9hRGwyAngHhb0jjsTEoDjnf6f4QOFKuuZMVHDcxW9+Lr8ECcr0Yax0biQc62BF8=;
+ bh=VhWANrC3JMCCNzRs5ZYbqYTMhJ4vWUo0Bouo6HZYfic=; b=HTU5arlvk1u3GKQ8+wkLHidvSI
+ umCaVcXobbvsDWAmUg6lpN+4mj7f2j9EYXFiGWtiT47RaCzuZ/okvdaUQhqb87reJKpuYg8JGQQOX
+ TdjfIWC5YWMF30iCaBhUKx0czbbsM/6vr8EtO5O13o02dQ2yKRFF2bQ1RGSfc2BrUvlA=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
@@ -45,49 +45,50 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=yzRu4aOT2Cffprveb0NB+VWYA3QsuJt5HZLSm5ZogSA=; b=O5FmZ5YgWqefNsV7kKqaoBNbCP
- 5gsyjHGZZJHYRE09Y5tVaZtl64/6p3fIwr8NS9T9Q4LrwnvNYg0k9LUMMP/RWNqKFRgmmFrzp9Fie
- im5pNHjoXW1nviRzPVFpjJnmc86yXP25jeOHuqYKHrje/QzDRq2gezW6+rT8A0B/uk1w=;
+ bh=VhWANrC3JMCCNzRs5ZYbqYTMhJ4vWUo0Bouo6HZYfic=; b=YCmY6SQme8CNVj+3NpjSvu2wpl
+ Bgz5ih4YzdqvvTXrh1BsU+/n0i189uOHgzaVfnyDOwqG+YVDQpe8MmJeVwRckx8/JmksdgdRy6he1
+ D0Z5Q50H2nUXJ+HlT8QPHoTuZVVGnoveNodVFfQ/A0XssKYbXSfELRCUw8LionfDTLn8=;
 Received: from tor.source.kernel.org ([172.105.4.254])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vxkns-0006hF-RQ for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 04 Mar 2026 11:54:13 +0000
+ id 1vxl3H-0007ii-Cs for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 04 Mar 2026 12:10:08 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 49550600AD;
- Wed,  4 Mar 2026 11:54:00 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id EBEB7C19423;
- Wed,  4 Mar 2026 11:53:57 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id AF9AA600AD;
+ Wed,  4 Mar 2026 12:09:56 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id BB46BC2BCAF;
+ Wed,  4 Mar 2026 12:09:51 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1772625240;
- bh=/01nl1T28FC/kCDbWHYz3Qa1fj+hPe3nbFwKD+bTfns=;
+ s=k20201202; t=1772626196;
+ bh=EQ35PvaRx03UzYS9X1Bzs1qb1ocHzp0vdwuVUpuNBfE=;
  h=Date:Cc:Subject:To:References:From:In-Reply-To:From;
- b=fXOnDo1mqpKIm3N722BKaAp+smAfhv1c3VON7iSlRkoGc6Lge+uHwHzxb8uGg6vMY
- B2AIqyCIpUMOMZxMLvOABzUJlE1LQlK+X0WWwm+wp4uwmg94Y6qcuZGbBX3Lvr84Ll
- kMgwksWspYKXtinJ/D5AQ+QHUlUbPc+UOZCBobYHdhH04PoBW5cIojE8buT235O07P
- yXQc8pg0YL0LXVau2VcMXhUtDHnKsYIdBZEIgFWwmYirtn7tw8mBl6xOuvY1ctf2v5
- gGbitvIOjYYQRYn7evT5QQK9IO3QUHXJLEmm4eOqNSIjOGc3jQh67fd+mTdgPPate8
- UkvXzsMfin2xg==
-Message-ID: <e43923c5-27f6-44c1-bb82-328fbe357283@kernel.org>
-Date: Wed, 4 Mar 2026 19:53:55 +0800
+ b=uLl+8+NtnsbWfboyTgH5efkt923GNSSCiAmj6EQWIT4ufjbVw7kmqGX2xJC4l1RoM
+ yy0WRk0tboWeu4yOx+ltbfmfldUAh7GZ21zHlnXPQEuuSkVkc/f2gsGpN8Nlt/4kEx
+ jaBUSIqnhITM0Ux5TjFAVbZiwVo06TIDLbuSI9gsiyWb/PbxjQhRDlDS+M9vEJhuUt
+ LVy4Z7AyA56rrURbc7leoNe0pSL03NL2xYtuxFz3szTRTYltocBaPtmDTmPO52iNwr
+ GxcC0oXCscQ4iEWXETlA39MdG6qW+SOw35h41+j4kemqHQJczLHMxXgW1KJj61QURM
+ JNjhY+j7Iyw4g==
+Message-ID: <36d15a4f-d2ca-4294-aa87-4f52dbf84574@kernel.org>
+Date: Wed, 4 Mar 2026 20:09:43 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-To: Yongpeng Yang <monty_pavel@sina.com>, Jaegeuk Kim <jaegeuk@kernel.org>
-References: <20260227073052.3940958-2-monty_pavel@sina.com>
- <20260227073052.3940958-4-monty_pavel@sina.com>
+To: Jianan Huang <huangjianan@xiaomi.com>,
+ linux-f2fs-devel@lists.sourceforge.net, jaegeuk@kernel.org
+References: <20260209063121.117451-1-huangjianan@xiaomi.com>
 Content-Language: en-US
-In-Reply-To: <20260227073052.3940958-4-monty_pavel@sina.com>
+In-Reply-To: <20260209063121.117451-1-huangjianan@xiaomi.com>
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2026/2/27 15:30, Yongpeng Yang wrote: > From: Yongpeng
- Yang <yangyongpeng@xiaomi.com> > > The sbi parameter in
- f2fs_in_warm_node_list()
- is not used. Remove it to > simplify the function. > > Signed [...] 
+ Content preview:  On 2026/2/9 14:31,
+ Jianan Huang wrote: > We found the following
+ issue during fuzz testing: > > page: refcount:3 mapcount:0
+ mapping:00000000b6e89c65
+ index:0x18b2dc pfn:0x161ba9 > memcg:f8ffff800e269c00 [...] 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -99,9 +100,9 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1vxkns-0006hF-RQ
-Subject: Re: [f2fs-dev] [PATCH 2/2] f2fs: drop unused sbi parameter from
- f2fs_in_warm_node_list()
+X-Headers-End: 1vxl3H-0007ii-Cs
+Subject: Re: [f2fs-dev] [PATCH] f2fs: avoid reading already updated pages
+ during GC
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -115,65 +116,146 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>,
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
 From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
 Reply-To: Chao Yu <chao@kernel.org>
-Cc: Yongpeng Yang <yangyongpeng@xiaomi.com>,
- linux-f2fs-devel@lists.sourceforge.net
+Cc: Sheng Yong <shengyong1@xiaomi.com>, wanghui33@xiaomi.com
 Content-Transfer-Encoding: 7bit
 Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
-X-Rspamd-Queue-Id: 1D95E1FF5B4
+X-Rspamd-Queue-Id: F3A2F1FF829
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [-8.61 / 15.00];
 	WHITELIST_DMARC(-7.00)[sourceforge.net:D:+];
 	DMARC_POLICY_ALLOW_WITH_FAILURES(-0.50)[];
 	RWL_MAILSPIKE_EXCELLENT(-0.40)[216.105.38.7:from];
+	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7];
 	MAILLIST(-0.20)[mailman];
-	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7:c];
 	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	DMARC_POLICY_ALLOW(0.00)[lists.sourceforge.net,none];
+	DKIM_MIXED(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
 	RECEIVED_HELO_LOCALHOST(0.00)[];
-	DKIM_MIXED(0.00)[];
-	FREEMAIL_TO(0.00)[sina.com,kernel.org];
-	DMARC_POLICY_ALLOW(0.00)[lists.sourceforge.net,none];
+	FORGED_RECIPIENTS(0.00)[m:huangjianan@xiaomi.com,m:linux-f2fs-devel@lists.sourceforge.net,m:jaegeuk@kernel.org,m:shengyong1@xiaomi.com,m:wanghui33@xiaomi.com,s:lists@lfdr.de];
+	FORGED_SENDER(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
 	TO_DN_SOME(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:monty_pavel@sina.com,m:jaegeuk@kernel.org,m:yangyongpeng@xiaomi.com,m:linux-f2fs-devel@lists.sourceforge.net,s:lists@lfdr.de];
-	MIME_TRACE(0.00)[0:+];
-	FORGED_SENDER(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
-	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
-	ARC_NA(0.00)[];
 	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,kernel.org:s=k20201202];
+	MIME_TRACE(0.00)[0:+];
+	ARC_NA(0.00)[];
+	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
+	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,kernel.org:-];
-	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
 	RCVD_COUNT_FIVE(0.00)[5];
-	NEURAL_HAM(-0.00)[-1.000];
 	FORGED_SENDER_FORWARDING(0.00)[];
+	HAS_REPLYTO(0.00)[chao@kernel.org];
 	FROM_HAS_DN(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
-	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
+	NEURAL_HAM(-0.00)[-1.000];
 	TAGGED_RCPT(0.00)[linux-f2fs-devel];
-	HAS_REPLYTO(0.00)[chao@kernel.org];
-	RECEIVED_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[172.30.29.66:received,172.105.4.254:received];
-	RCPT_COUNT_THREE(0.00)[4];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
+	RCPT_COUNT_FIVE(0.00)[5];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[xiaomi.com:email,lists.sourceforge.net:dkim,lists.sourceforge.net:rdns,lists.sourceforge.net:helo]
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[syzkaller.appspot.com:url]
 X-Rspamd-Action: no action
 
-On 2026/2/27 15:30, Yongpeng Yang wrote:
-> From: Yongpeng Yang <yangyongpeng@xiaomi.com>
+On 2026/2/9 14:31, Jianan Huang wrote:
+> We found the following issue during fuzz testing:
 > 
-> The sbi parameter in f2fs_in_warm_node_list() is not used. Remove it to
-> simplify the function.
+> page: refcount:3 mapcount:0 mapping:00000000b6e89c65 index:0x18b2dc pfn:0x161ba9
+> memcg:f8ffff800e269c00
+> aops:f2fs_meta_aops ino:2
+> flags: 0x52880000000080a9(locked|waiters|uptodate|lru|private|zone=1|kasantag=0x4a)
+> raw: 52880000000080a9 fffffffec6e17588 fffffffec0ccc088 a7ffff8067063618
+> raw: 000000000018b2dc 0000000000000009 00000003ffffffff f8ffff800e269c00
+> page dumped because: VM_BUG_ON_FOLIO(folio_test_uptodate(folio))
+> page_owner tracks the page as allocated
+>   post_alloc_hook+0x58c/0x5ec
+>   prep_new_page+0x34/0x284
+>   get_page_from_freelist+0x2dcc/0x2e8c
+>   __alloc_pages_noprof+0x280/0x76c
+>   __folio_alloc_noprof+0x18/0xac
+>   __filemap_get_folio+0x6bc/0xdc4
+>   pagecache_get_page+0x3c/0x104
+>   do_garbage_collect+0x5c78/0x77a4
+>   f2fs_gc+0xd74/0x25f0
+>   gc_thread_func+0xb28/0x2930
+>   kthread+0x464/0x5d8
+>   ret_from_fork+0x10/0x20
+> ------------[ cut here ]------------
+> kernel BUG at mm/filemap.c:1563!
+>   folio_end_read+0x140/0x168
+>   f2fs_finish_read_bio+0x5c4/0xb80
+>   f2fs_read_end_io+0x64c/0x708
+>   bio_endio+0x85c/0x8c0
+>   blk_update_request+0x690/0x127c
+>   scsi_end_request+0x9c/0xb8c
+>   scsi_io_completion+0xf0/0x250
+>   scsi_finish_command+0x430/0x45c
+>   scsi_complete+0x178/0x6d4
+>   blk_mq_complete_request+0xcc/0x104
+>   scsi_done_internal+0x214/0x454
+>   scsi_done+0x24/0x34
 > 
-> Signed-off-by: Yongpeng Yang <yangyongpeng@xiaomi.com>
+> which is similar to the problem reported by syzbot:
+> https://syzkaller.appspot.com/bug?extid=3686758660f980b402dc
+> 
+> This case is consistent with the description in commit 9bf1a3f
+> ("f2fs: avoid GC causing encrypted file corrupted"):
+> Page 1 is moved from blkaddr A to blkaddr B by move_data_block, and after
+> being written it is marked as uptodate. Then, Page 1 is moved from blkaddr
+> B to blkaddr C, VM_BUG_ON_FOLIO was triggered in the endio initiated by
+> ra_data_block.
+> 
+> There is no need to read Page 1 again from blkaddr B, since it has already
+> been updated. Therefore, avoid initiating I/O in this case.
+> 
+> Fixes: 6aa58d8ad20a ("f2fs: readahead encrypted block during GC")
+> Signed-off-by: Jianan Huang <huangjianan@xiaomi.com>
+> Signed-off-by: Sheng Yong <shengyong1@xiaomi.com>
+> ---
+>   fs/f2fs/gc.c | 5 ++++-
+>   1 file changed, 4 insertions(+), 1 deletion(-)
+> 
+> diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
+> index 60378614bc54..c184ae6a616e 100644
+> --- a/fs/f2fs/gc.c
+> +++ b/fs/f2fs/gc.c
+> @@ -1228,7 +1228,7 @@ static int ra_data_block(struct inode *inode, pgoff_t index)
+>   		.encrypted_page = NULL,
+>   		.in_list = 0,
+>   	};
+> -	int err;
+> +	int err = 0;
+>   
+>   	folio = f2fs_grab_cache_folio(mapping, index, true);
+>   	if (IS_ERR(folio))
+> @@ -1279,6 +1279,9 @@ static int ra_data_block(struct inode *inode, pgoff_t index)
+>   		goto put_folio;
+>   	}
+>   
+> +	if (folio_test_uptodate(efolio))
+> +		goto put_encrypted_page;
+> +
+>   	fio.encrypted_page = &efolio->page;
 
-Reviewed-by: Chao Yu <chao@kernel.org>
+Should relocate changes here, otherwise, fio.encrypted_page will be used before
+initialization.
+
+1299         return 0;
+1300 put_encrypted_page:
+1301         f2fs_put_page(fio.encrypted_page, true);
+1302 put_folio:
+1303         f2fs_folio_put(folio, true);
+1304         return err;
 
 Thanks,
+
+>   
+>   	err = f2fs_submit_page_bio(&fio);
+
 
 
 _______________________________________________
