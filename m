@@ -2,42 +2,42 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id qP39EKCKp2nliAAAu9opvQ
+	id gLMjK5+Kp2nliAAAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 04 Mar 2026 02:28:00 +0100
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 04 Mar 2026 02:27:59 +0100
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id A4D401F9460
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 04 Mar 2026 02:27:59 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id B74B41F9456
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 04 Mar 2026 02:27:58 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
 	List-Unsubscribe:List-Id:Subject:MIME-Version:References:In-Reply-To:
 	Message-ID:Date:To:Sender:Content-ID:Content-Description:Resent-Date:
 	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=NcepAbwEc977vcGVmBvX1PBu0rl+gkjpNyHA8frMHIo=; b=G50mTmp84mbaoDVEL5n+1QJKpy
-	wAvjUOnwuFaiQo6YkIGQgHVvXhWjqR+ODizQheHuWdh70Au2hatgSamzLlkoNMycDB7S/mQ2ZDARy
-	xIICJCLxmIywmslCh1kuaWYaduC34cmwdoZlBr0aewz1qkOt6kCANULWyqky0zThfX2Y=;
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=AmPX6zeXc3RccMhmRLwiMkw9CJLIaQTns5hlf+3eywc=; b=mopMZwpPY/O8uPlJhil3g52QNe
+	Ql/s6ycgcjzZjiVtaH9A2OE9eDChgW87mTU5eiIARHjh92nDpp6TgTd865YX2Vmqkjk027+p2+Dxc
+	5EioJBqxH+zAhXDKb0b2yfjmHrzvXkxLua6S+zBJRlDxB9OSX0UX4rGlgVFgrvFImz/Y=;
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vxb1o-0007jj-8H;
-	Wed, 04 Mar 2026 01:27:56 +0000
+	id 1vxb1m-0002RY-Q9;
+	Wed, 04 Mar 2026 01:27:54 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <ynorov@nvidia.com>) id 1vxb1k-0007jY-UC
+ (envelope-from <ynorov@nvidia.com>) id 1vxb1l-0002RP-IS
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 04 Mar 2026 01:27:52 +0000
+ Wed, 04 Mar 2026 01:27:53 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=MIME-Version:Content-Type:Content-Transfer-Encoding
  :References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=8gSCHE8kjPSLoULSKkpRxPQqFKwhZBXzpx81D8lSNwo=; b=fKRlNfR8pDU94FqGSQUYHGZcuY
- 9DZ0J1Q+MxKy7Gv9TXjVYV3WJXSondD57jIazfXXXQC1O0Sfjx6qemBszt1/ncYhxFJzjDOy0YTJk
- G+kkgOe8wdZC9/dTWgeyqrjVuPGGtmtpMd3hhnTr8jCT3TP1Ru7kYRfDX+RLJAMTfi84=;
+ bh=gWX3eT6p4fXBUeVs633dJyml1vlPH261gl8a3ZsnfQE=; b=HXTS5/4TtVlVJ0wn1uMknqiOOp
+ ZR1/3vNixKw+bvPXzfI9saf7r8AN57tVMC+joKAlGA6EJgOwMrcu2JNGycwZJ3zkh61O6ZzkNPHKp
+ lhy87DxMCJo4ftq1+DOn5j2f+75IxdmyKMVfMrImMoC7xKeQcL/426E6yl7c1obgbiiI=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=MIME-Version:Content-Type:Content-Transfer-Encoding:References:
@@ -45,41 +45,41 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=8gSCHE8kjPSLoULSKkpRxPQqFKwhZBXzpx81D8lSNwo=; b=AifAKNtB8+M7vhu/kRmc7Eu26V
- EMva68GKDaVuJ1Chp6fGXCs9UcvYbWV3VVYACETZnO9WzHH+yhfHzKzc792nhoFzpEkT5CUuQMJbQ
- nx/OUm5rY+yoSADIfJkhmfw86SiY4iiY29JsE0l4RBJDrPjRhgsIcs7amf/8pz38Ir5g=;
+ bh=gWX3eT6p4fXBUeVs633dJyml1vlPH261gl8a3ZsnfQE=; b=JOF9UJ8dBvf17ogPgAboJFmYnz
+ dsn3cM9lQEb0n7eHHDiv5TiB8dAcI6BtO1QldZyD+ShJuxaNtYFf1wWPPppZUy3Jb6RCfzx7qXShU
+ 9rg5fcIjOT9G/vD/ayU3yeftEF1PT1esD4cP93S1U3CvDa+svLMrIjZakEvnumoccVk4=;
 Received: from mail-northcentralusazon11013028.outbound.protection.outlook.com
  ([40.107.201.28] helo=CH4PR04CU002.outbound.protection.outlook.com)
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vxb1k-0007YB-Fq for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 04 Mar 2026 01:27:52 +0000
+ id 1vxb1l-0007YB-1q for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 04 Mar 2026 01:27:53 +0000
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=a5afcP+xPp53aYkHswiWzdI4Msozqr5V4tHhEVXe9ZVjtcmRiy3VX11EkPHjazOLYMHmGxtIZ1Y0lGPnHStG+/C0bRfTo7MUqs/Mt8xjsP3P7e45Tsjhnuput9GwSWyBLlsoZq2QWZSKI21cj3tsvENx9xrZ9jKDxVS7Ir+xVogQ8dPScgJpIFGkkHmjRcuTtxYiJUwfWpSGShQNjiEwGmIFTPWDeJpwX+mSIb0dtqB29KsgifvWU6U63Ztsb8TPcihy32Q/yp19plQumzA04MwzycDnQcvnjZljjC1W1nyboRNthKtcyp9pXv4mMkgoyqWpLchikAR6nskSg4ChpQ==
+ b=N0iVu0oRaYnBStX5V8zWh+or4vWzHPgcub3oSl70gVTAku0eXa+wS7ZaokJV0JOpd3b6vVz0dN2qddQSukYjzihAj7ddsBCPuQ3m+nVA3zAqSFqPy2ODUTRALkPhmo5h9yqj/mUOYJgBUMDN0q2Rkk8cU6CfF3ESsQ6KEq4DhGrlgwDb8W7kPPtRd3nldKuqgofcw9tsrZ/wFOY9Xm9fHf9sRmXc6DlA3y4/twcROxQHZ5pWD4QG6IErGfN9YRqDHTZoqS1azy2ZEr6cgRm2n5riH4hwGF0LpNKHMHTtRPD4ZfIxl2sLtNQgHLVu8B4Ud5h0W1zgR4kwkMQ1GSgkrg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=8gSCHE8kjPSLoULSKkpRxPQqFKwhZBXzpx81D8lSNwo=;
- b=wbJElpWqD6bg0np/jNgUS09/M6WzYi4dXudK8aKDX0VYiPs8VBeR5wWPPryGowCpTuB5H/ScREOXYsnBTRWUJtKCVh48VEvGMNSPA0FvjxenfxRYSiJv/3SsO1k4oIt9v0SSFvyG1Lev7GmYbW+CKWEmESsBklwuQfB/0v1pL4jgZ5k/XAhZKV0v8JCDOuUNm7RaR7Y9jbSdPvfj3NCPnohu+8z7NGRmq8hlm2RUA4hoz5u1Ay04m7rI3HziSV8vTp15QzorFOH2zQnTBkrfh8Bv20q+PV9C2YUE1fsyPndY0a/vtMAZdZOB6Zh9Szx+m/r3yjdbYR/4pz6V7wmw7A==
+ bh=gWX3eT6p4fXBUeVs633dJyml1vlPH261gl8a3ZsnfQE=;
+ b=Iq0i1J7WAdCIRWFUWB/18M1c9IdovuuO8vG2ZPlYNN+gbxRF+8lgDeZieQP1SUQfAq5ntar37mIwgfn5Oz3BbbLcjtFIl21Dosv+zqrk0EWcXDVCTvBc/IqdtxbHIsNXGKUxlc+S2r9WHvVYyCptLPICYZfIhz4aR9gE0zEpKwGDUo0rBKDdRu52mnsyyGzwh/MhO9A3FMw1V8ILClnhl0TtdRrRoyAhgr5ajA72BYWTg3oKLOium7FuSxKh/nw0cyBKtzQ2SDfVyd5ttpFYPOVIik6TMJOChPJTp3qF3yeDF6uI8TXWUm8boIyA9uygiGHY/oif6cD8ohjD6LY6Ng==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
  dkim=pass header.d=nvidia.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=8gSCHE8kjPSLoULSKkpRxPQqFKwhZBXzpx81D8lSNwo=;
- b=f5sF/09Q480wY19v1DY3Wt+SNUs6vVXNnfB4WTZLCiAUZdUuHcjnQZtwIPxSD5MC3m8FjWqDcVHdmYoyy3a3YR8YTJZoqiCMCvFvSlpv2IWlfLYXxnB27ls2FDf17x0IGjUDteajVACehCgQlH9MkjMfmgtNfDoUNo1niDZAL0eZigyTFSeuWyGGkSbRqKBVaxptIbqnrR9aBmVRDapK/pME3lM6UW7pm2Xj5/EtV/1OYYM5kg3kg10EopJujBHC/ujXluuVSmDflkCC6+qiRR/UlVgMH018CmS8f49SnBIU8dYa1kciQOVP4rRF/2Zu1WHrSt9VUT4gsIEkfXRHFw==
+ bh=gWX3eT6p4fXBUeVs633dJyml1vlPH261gl8a3ZsnfQE=;
+ b=BcLaauwkyLA4YizK5LZX6K5uYlMqOdSo/X1bo/atutQ/ejAjm06+LnIEG3WjB6/SIwAoUs7UXj89LYzVct1TDD5CdvI9VX87crwkk9xwoXGqmMoKIctGoIYhbP4qAvux2O8BH3ZC5qxZ18mutsyM9uN29N5bTj3NNW3NPmCmKk5joDXpRmFlIOB7tCPWk1aOuWoe3wRsAbNhWiiA/AvqzkS72+DhvV60Wx7KBGzrXNI1oIYd49N8ScgyaWPzSOUDn/dsEYmPZe9uvs9Z4takJtSXXGwil0U2ScZczN1r1zN9/Q8I6rEOKXGq6plfJp+nXxB6wJGF6uWXY6plp2BpdA==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=nvidia.com;
 Received: from PH0PR12MB8800.namprd12.prod.outlook.com (2603:10b6:510:26f::12)
  by IA1PR12MB6651.namprd12.prod.outlook.com (2603:10b6:208:3a0::22)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9654.22; Wed, 4 Mar
- 2026 01:27:33 +0000
+ 2026 01:27:37 +0000
 Received: from PH0PR12MB8800.namprd12.prod.outlook.com
  ([fe80::f79d:ddc5:2ad7:762d]) by PH0PR12MB8800.namprd12.prod.outlook.com
  ([fe80::f79d:ddc5:2ad7:762d%4]) with mapi id 15.20.9654.022; Wed, 4 Mar 2026
- 01:27:33 +0000
+ 01:27:37 +0000
 To: Andrew Morton <akpm@linux-foundation.org>,
  "David S. Miller" <davem@davemloft.net>,
  "Michael S. Tsirkin" <mst@redhat.com>, "Theodore Ts'o" <tytso@mit.edu>,
@@ -123,98 +123,99 @@ To: Andrew Morton <akpm@linux-foundation.org>,
  Tvrtko Ursulin <tursulin@ursulin.net>, Vasily Gorbik <gor@linux.ibm.com>,
  Will Deacon <will@kernel.org>, Yury Norov <yury.norov@gmail.com>,
  Zheng Gu <cengku@gmail.com>
-Date: Tue,  3 Mar 2026 20:27:14 -0500
-Message-ID: <20260304012717.201797-7-ynorov@nvidia.com>
+Date: Tue,  3 Mar 2026 20:27:15 -0500
+Message-ID: <20260304012717.201797-8-ynorov@nvidia.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260304012717.201797-1-ynorov@nvidia.com>
 References: <20260304012717.201797-1-ynorov@nvidia.com>
-X-ClientProxiedBy: BN9PR03CA0939.namprd03.prod.outlook.com
- (2603:10b6:408:108::14) To PH0PR12MB8800.namprd12.prod.outlook.com
+X-ClientProxiedBy: BN0PR04CA0093.namprd04.prod.outlook.com
+ (2603:10b6:408:ec::8) To PH0PR12MB8800.namprd12.prod.outlook.com
  (2603:10b6:510:26f::12)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: PH0PR12MB8800:EE_|IA1PR12MB6651:EE_
-X-MS-Office365-Filtering-Correlation-Id: a668991d-ff9b-4dbb-7daa-08de798d35a8
+X-MS-Office365-Filtering-Correlation-Id: 5e9eaa48-d77e-4968-6465-08de798d3708
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
  ARA:13230040|366016|1800799024|10070799003|376014|7416014|921020; 
-X-Microsoft-Antispam-Message-Info: Z/6V97ZgGWZnJizosWGs3D3JmsBEU37quAoqwhEy56JDe8uN9V3H6D0yuBL506dxvp7oKI9HDcWQuTOlKn0o1JpfUQnxPPVHmG8fJW0OJ2nIPNi/BZ5LpoMR8z8W9ya02KrLD+7+pOg61gi6s0I3tkmeKrg5DEriLsalAWRhpbRdciQcUJ98RKyfMVAO/XnUqVRVy+mCCctZ5T0BPaspgBUdQCU+vpwLVMWgLWg4xwX5QaiOhiL5bYu3LJxw5MD3r3OTLNsbkDoQ0oUDuJh091ka7SnC0vuHZ3ptqQ3ghskwHcPQKSMbxV+7P8btNCQviv75jQU9o/qFRbhF2XUTNS+Qc4BtwtnE/Lvguo1ceZnaIQpK8RgQOlgihnvThAsXus7SPKfcgffX5kkYyiGOXXbx2QJxfndKopRgwym112xa8FNEwzOrYtKVSvsBMdlVPdMU8DUD5IC71mZYK1dAiaf36QUz9dW9Ibj8wULgR/OF2sGOXtJep8iC0/Ojd/ofmjfcQ6auj/jtREgrlK4jtSKwjsePgcVhq0mct+jNAElovWmy7MJ56cWAm7WgJ4SB1cTtaNxVMRhkgBJ56PKWV0JQu0xlZJ3NKA+xU4uPGfsFxXuV7VktmRigNpPV6h9vd5f9Pnphg3l+tgavj+Od6om9EpHzRTvSpjYzzG5471C9FMY+oSzEOq9q8Xn4COFLTJb1VuaMekZAgG+uBTdDVleFXWQy0PRNyCjZ1KPO4+wlaQ8xlZQ30GD3yei8xfzDp6Etd01YNcd7ZPo5U2jfWg==
+X-Microsoft-Antispam-Message-Info: DVvXGtpxfjOKO3JcfP/1ZiRzhs9ZKXlzfZMNW1FYLjT6r9fA83fociKxHtkhHPPXH1Laowy6Er5gdxeImIg/VU1+8k/e9vZp+y8pxUrybsO/KhnSq9ppK9VtQenR6kteXnB2+9tPq4ETxUqGumgdQ3o+WzTDj9B9YiV7ID4PtuUfzYdXriE4h/nvEUFzEdAVe4oDv/fJXOJ0r+KlDUFRvvOtwvZjDAVb9NEkWfpdREqLD1ChwA3XChMPDazqlLDI8l5AfExkCwVw8LHHAVxdPhF4vytGe6yzh0HJkLW3SjhT98h8S2wEBdUhOwASPxYJiTFAvkoxNnO/eXvRiwmMvYjrWJKnN4d0ROUmrWLBSKfwrmDWrgD0mIDjVyC2NnwzN5ciKvdC9OVnHbHE9UGxRxALxlI16U8aN6aRHWnUBVKtjRLWxWzQpEqj/KyIz58lrP+ME9oXzSHSlmxJfMJVYNJ/iXZB2Id/2RTx3E0yOdagTGmOpndWEar9vVOjThDYQBIVWf4LlKiH+ntnxUrqIHivoQbusk2832vEtwUfnb216T3w5Rad2DBkXcIIZiRqLpC7UAXr+sgKdJWD/JKnvsZ58m4zTqMNLR/7vpfUE22gLni8cCQpTGMbNshIDpwyMdgRb0wHfTn+ujt/pHYNkb5ynHReoHEIVBd7Pqau9KTiZuUoEVCJJRViRUxKR2BSG2FcdNIwAFTMRC4E7NQbXrWV4K/bm07CECCQj9tZbwVDAckHkv3+KpD3re+YhN2RSxqztfvvHcGlPDbixNe3vA==
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:PH0PR12MB8800.namprd12.prod.outlook.com; PTR:; CAT:NONE;
  SFS:(13230040)(366016)(1800799024)(10070799003)(376014)(7416014)(921020);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?laYgr3IxhCpx4j5kAcCot2E/Vds0o6kWWRSkjhyWLUWD7KnDgH7Y1ZuPn3NN?=
- =?us-ascii?Q?T7vC5+3ZaVnxRrdvyxx4Pk32wCA36ghzy+a7JPqKAgl/W6+ER1Gweb37TUlG?=
- =?us-ascii?Q?jbKLI3PtNYWB3vftGBA2zzxthZoh8cTCK1+iib+/D5uiOGZl3t/iu3gn52gG?=
- =?us-ascii?Q?6vdHH07a8CbBy8eX4hheIn+vKX3n8lCq+lScXOLywYvX5liTqyIobDDoHMxg?=
- =?us-ascii?Q?6/gdi8l94txKeW83Mpcn0rlrO2NZH2Wp+Xk9wwgBXl5m/yt5kpglcTqtX2uZ?=
- =?us-ascii?Q?bT2KRNx2B70ebitdNXc7JT83lyPk2H0/NEEZnmgauUaSD5EanlTM3rK3UMqf?=
- =?us-ascii?Q?VkZigj7W40REEgNAR+EZ2HoJEo2CCUHGldupvDrYdF/LeoC4GxS0mCufNpqi?=
- =?us-ascii?Q?+aroeTwNAV6oVuTfxshUYht6iSJAbIqVmtGmA+r9FfQ3NuOLqp7ehdd2OlFn?=
- =?us-ascii?Q?A+QTYT5DPXpU3Hjo6xbFRIeE8AzUnMeKNBdZVPJkA6MWofZ9AYvgvUfZzPSz?=
- =?us-ascii?Q?sMymeQ7yWdKdLd6lGxVL85nafColRy16aCzvBn5TqjIZwNlidpdNvFGY/RkH?=
- =?us-ascii?Q?ByLtJLcNNzgSr6mzWuPV3pm8Tq78hEGf2c2zMcdBlgH3dQwYa4JELCG+U0QR?=
- =?us-ascii?Q?KNTPwFJsRLv79MiuTHxxERMUXifaB9lRVVu9UeDeNnJnEf/oxfze9tHsxHHX?=
- =?us-ascii?Q?b64wyrpfq/5VWiLD0J5dKLbXcc6EB4OGeOWjKLxWdgTDWeyTMOTeNZtY4ltN?=
- =?us-ascii?Q?ilPrVnS9iVOlvhXSPF7inNdbpo3Qm9NdCiOftJtFr2pPTkkAUpJA1ddJsXHW?=
- =?us-ascii?Q?JV6H/5RL11cKVVtX91ibKZW07gLklZ5KG4OyZVmXf4qe+mwinGs5hhPDkCse?=
- =?us-ascii?Q?jwWtnKoExLGVTa9af5q3IRkESQZPeqRo3zvPV+tSSCrkkxO2DndjGFfQ3JSg?=
- =?us-ascii?Q?Tr+X9j8APyhcmfV+sT35H623x8I+h2YG1YdyewmmAkOxFzlp4e6RbzSSc5Ob?=
- =?us-ascii?Q?OhRz9+x2brAanr8h6fQ6kt1vX142wIyXIgoc4QBML58szqTKyEb1PjZS5QBc?=
- =?us-ascii?Q?IGl72nmkGzGrla/30UhPk/Uk33V77V/BS1KRwEOX+CNDXPxYD66C7bkUy265?=
- =?us-ascii?Q?2NWweaA/3yE0QY6orrpYKP4HQkb7VMgIOSBcOrDDk3lWK3TFyZ+sDvzNjYxL?=
- =?us-ascii?Q?nm6bQz7vMBlpbXKeCxouxHVtOmcvE2fEMdscirYsTU6RAkz6L5C0/LUezw+z?=
- =?us-ascii?Q?nQp3DS4x2tyD8sxYQyP2uTg3WJ+YIZS6GxlSQnNW3Bn+uBTZIt1EQYfSGZP7?=
- =?us-ascii?Q?ZIKGDgE2LTKC9RAcM9vVm3ZrvQDc7QoTNzUX41ttr3w+0g5s2Ji/gr/FyIbu?=
- =?us-ascii?Q?P7dG/cNYnnHQWq1o/DNFXBkEgSuY0o+vqJAZ8Jf0lzEsVlk345/poEQdlA+o?=
- =?us-ascii?Q?hf7PiKHDScKqE5Jh60nN78knkAj/oylR+TlFMCg5/D4EEUPCefP7ZnEcun2z?=
- =?us-ascii?Q?MYVGRd3uvVYU0vGTjb2jG3qb1vNYn+t1o7HdK9vymM2TtVhUxW/WJCirhuSf?=
- =?us-ascii?Q?pBmPscEsjuKH6aBdjXXDMv3/Yppc3XNC//+ObZWvq+DMuyIJ1uW3TvNFNzqO?=
- =?us-ascii?Q?fqHS0tbuUjJTX3ZASi+GQksg6JnUmNeG20CRLeFgzok2+suplVFdaKt7My4q?=
- =?us-ascii?Q?M5LyApib5nySpUtA+JaA2HSpBZrb14KDYPS6cyXnhX6yIyZ950FBjV7x172A?=
- =?us-ascii?Q?dVBrYx1dTkPYSm7toKzWE1J8W0h+zMjBquMe0kBK99qsGkl+aDlG?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?CuB//gjPgcLROadOGKRtUXfVSHyEdOq3e93TKy5P7oo+d/6f3bYBrO1hJjbd?=
+ =?us-ascii?Q?54AlyTbtDnwuXkoqw36xJUmBCQ09uz1nN589lRtiiy/PlvqEP485wGwWFbyH?=
+ =?us-ascii?Q?yGVa9JToxHfpdyC3ugD+uXBbA/TQc/4a/MzMMm6uw+oJd4tnVhOWBOmNOOEy?=
+ =?us-ascii?Q?Vk9GMZJfwFCyykQxAipF8O81Wu4ra5FiLijq69qf1Kxs70v89rzKfLtP6tVB?=
+ =?us-ascii?Q?Pe1e0Rg9N5aH6A2/Sm6bZdb5G3XYXa6Y4LAKyLJBG3ZlddeCPBlq/NPOGzuV?=
+ =?us-ascii?Q?5qdTgFwMICAs+JsJbm1uJaCQA2RVTEhqNsFX54xWMM1ljH/CPN2trFPF1ef5?=
+ =?us-ascii?Q?tquk7oG1NEpazaMAgPzpnHJ7kZpfpo+iDP0J+2Ux98laovbRNqfSXUKl+bgN?=
+ =?us-ascii?Q?NXrQgAqSpwTfW7OMeZqnFWDFz5XkaoCw7yuI/VKrBXoZNPa/NTB0cfhY11Hw?=
+ =?us-ascii?Q?WUXi3Yg+dZvJ0qc/4hsYbX/RmRRT+OBMvLNlR9xk54MqTLREuDtasryeMafP?=
+ =?us-ascii?Q?TStpUn2Vd0DeG6oVjdWH5PXUVpd9cusIPdK/UN0UhmCtIlLYF/wnTSvtfdyG?=
+ =?us-ascii?Q?2BC5ct7sn8jwVt1imnmKJJ9Bq5cbtL3ahaybm63z+gUD4Gr6RzSUXgJWneg4?=
+ =?us-ascii?Q?kNhe7/SlNbsefYQ5R9GfmYZ8QzOG3MVw4FapejeFtzm6pMUoqKMNlpcL8GBH?=
+ =?us-ascii?Q?FLcyvI+9NP07888LOyEmouSV/a9I3BzE+YvU+9FMX1yY7nRveGNuHHSX07DQ?=
+ =?us-ascii?Q?HrMJBq9URvjN+BhVZj7diiBuo5NPZEcAQXqlzqBcVWjT/B6l6h538sqlmIqf?=
+ =?us-ascii?Q?5UJL7jEBGp04qNUOOoFQV9c1iBFGeJpJWnmVp2Y02eijs6wn/I5jJOo6/YTz?=
+ =?us-ascii?Q?6wA9uzJ/b+uROHELdgveEM7Hs0u+Jl6YQSEbRWoyUmS3GmBNQtBxnOa1TVuH?=
+ =?us-ascii?Q?nP6uJbhYo1aztNCT9N1xDhd9OdLmUD3a117YZVrq2mB2prNYKpoFcu+I1dN1?=
+ =?us-ascii?Q?2mPMthvMjTrFLq9Ql/vi+o+uLRStForK1tQBDWwodzU7ALv1PlEqfrTKuNe9?=
+ =?us-ascii?Q?1Y4widhDe2Z4eH/U/qwuzFF8/AfGB6gv8copnksFADEDbpYEBEuh5iHcrefH?=
+ =?us-ascii?Q?CY0K+K2BkowA9e3Y1AEW57jS4yUUuFGj47n+vwCZa0AoofK9nt07Ii8A6xOW?=
+ =?us-ascii?Q?3esRVmKgpE+CTX0ZDxgBiy2LhTRP8X3S0DoCB9aatK+eCriX71wWxFb8TN0Z?=
+ =?us-ascii?Q?eh4Av017KJHX6+M0JF0mG9pqsYay3cQNDs8KvtqHprMx/H+6p44UiE8Uqxkk?=
+ =?us-ascii?Q?U3MXMId8cDQ35XWh4sjsNzOO0UfcHHcMR41/M5O8X3YOFL3LhQDQYTzg1e6O?=
+ =?us-ascii?Q?vWJIm/q+j0oOwE0vtAzaNe/YcgHZQeNpdJIh9m7cix8ScH2XsgMwY95UvviV?=
+ =?us-ascii?Q?BrDsqdYQXAB7WzNC9GG7irTJGj7OLmK/rj8efEB65JVQvZRNkQxoTTat/B2i?=
+ =?us-ascii?Q?EQaAMeaaBcjW6sx/BvsI9mYv5zDqKawWHlyYul+JllfHECrqUEWPRaYPHh8h?=
+ =?us-ascii?Q?g1ZABhiHDDmuzHSQo9AkFtg2iV17xtm1IOCHhmc19qWSzBINaZJbnwwTuEqz?=
+ =?us-ascii?Q?CYY0NU676LNxu5RHwcZOguS54jscNsBWVSVlZ6K4JNFlTZAcq8Nod1tgoZgJ?=
+ =?us-ascii?Q?pvS0QTW6aACzFprvsawc6QzKixCpaxA4XVVF4rpQkmo4IhxKuQZzcU3L64vZ?=
+ =?us-ascii?Q?Ml/LLzxHIB2aS2hJDL5CE0lLtrTQGapFMTQViuXPiEODk2SSYHSb?=
 X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: a668991d-ff9b-4dbb-7daa-08de798d35a8
+X-MS-Exchange-CrossTenant-Network-Message-Id: 5e9eaa48-d77e-4968-6465-08de798d3708
 X-MS-Exchange-CrossTenant-AuthSource: PH0PR12MB8800.namprd12.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Mar 2026 01:27:33.1912 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Mar 2026 01:27:35.5482 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: NuFdHRQ+7R7JZVi6h8G6FO97rJSCcjNiBcJaG0+UNpDidCcb/D65BlFnnGxlBYVv7Gy4M0KiWg0X+ktiM9h16w==
+X-MS-Exchange-CrossTenant-UserPrincipalName: 68bWaQ0b1wdGjpLS7Z+T5PtKeLUxcw+8APaV+plAbdN09V3AhKcwleD8x1xus9zTUd9zSYRS6/cp9gGSTmrIPg==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA1PR12MB6651
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Switch KVM code to using the macro. No functional changes
+ Content preview: Switch drivers to using the macro. No functional changes
  intended. Signed-off-by: Yury Norov <ynorov@nvidia.com> ---
- arch/s390/kvm/gaccess.c
- | 6 +++--- arch/x86/kvm/emulate.c | 4 ++-- 2 files changed, 5 insertions(+),
- 5 deletions(-) 
+ drivers/block/null_blk/main.c
+ | 6 ++---- drivers/gpu/drm/i915/gt/shmem_utils.c | 5 ++---
+ drivers/md/dm-pcache/backing_dev.h
+ | 2 +- sound/virtio/virtio [...] 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
  [40.107.201.28 listed in wl.mailspike.net]
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.0 ARC_VALID              Message has a valid ARC signature
  0.0 ARC_SIGNED             Message has a ARC signature
+ 0.0 ARC_VALID              Message has a valid ARC signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1vxb1k-0007YB-Fq
-Subject: [f2fs-dev] [PATCH 6/8] KVM: use rest_of_page() macro where
- appropriate
+X-Headers-End: 1vxb1l-0007YB-1q
+Subject: [f2fs-dev] [PATCH 7/8] drivers: ALSA: use rest_of_page() macro
+ where appropriate
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -242,7 +243,7 @@ Cc: kvm@vger.kernel.org, dri-devel@lists.freedesktop.org, linux-mm@kvack.org,
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
-X-Rspamd-Queue-Id: A4D401F9460
+X-Rspamd-Queue-Id: B74B41F9456
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [-6.11 / 15.00];
 	WHITELIST_DMARC(-7.00)[sourceforge.net:D:+];
@@ -250,23 +251,23 @@ X-Spamd-Result: default: False [-6.11 / 15.00];
 	ARC_REJECT(1.00)[signature check failed: fail, {[1] = sig:microsoft.com:reject}];
 	DMARC_POLICY_ALLOW_WITH_FAILURES(-0.50)[];
 	RWL_MAILSPIKE_EXCELLENT(-0.40)[216.105.38.7:from];
-	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7:c];
+	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7];
 	MAILLIST(-0.20)[mailman];
 	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
+	FREEMAIL_TO(0.00)[linux-foundation.org,davemloft.net,redhat.com,mit.edu,eecs.berkeley.edu,fb.com,linux.ibm.com,zeniv.linux.org.uk,dilger.ca,lunn.ch,kernel.org,opensynergy.com,alien8.de,arm.com,linux.intel.com,gmail.com,codewreck.org,linux.dev,google.com,gondor.apana.org.au,perex.cz,kernel.dk,ionkov.net,ellerman.id.au,szeredi.hu,dabbelt.com,infradead.org,intel.com,ffwll.ch,suse.com,ursulin.net];
 	DKIM_MIXED(0.00)[];
 	RECEIVED_HELO_LOCALHOST(0.00)[];
+	FORGED_SENDER(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
 	FORGED_RECIPIENTS(0.00)[m:akpm@linux-foundation.org,m:davem@davemloft.net,m:mst@redhat.com,m:tytso@mit.edu,m:aou@eecs.berkeley.edu,m:alexanderduyck@fb.com,m:agordeev@linux.ibm.com,m:viro@zeniv.linux.org.uk,m:wintera@linux.ibm.com,m:adilger.kernel@dilger.ca,m:andrew+netdev@lunn.ch,m:anna@kernel.org,m:anton.yakovlev@opensynergy.com,m:acme@kernel.org,m:aswin@linux.ibm.com,m:bp@alien8.de,m:cem@kernel.org,m:catalin.marinas@arm.com,m:chao@kernel.org,m:borntraeger@linux.ibm.com,m:brauner@kernel.org,m:imbrenda@linux.ibm.com,m:dave.hansen@linux.intel.com,m:airlied@gmail.com,m:asmadeus@codewreck.org,m:dongsheng.yang@linux.dev,m:edumazet@google.com,m:ericvh@kernel.org,m:hca@linux.ibm.com,m:herbert@gondor.apana.org.au,m:mingo@redhat.com,m:jaegeuk@kernel.org,m:kuba@kernel.org,m:jani.nikula@linux.intel.com,m:frankja@linux.ibm.com,m:perex@perex.cz,m:axboe@kernel.dk,m:joonas.lahtinen@linux.intel.com,m:lucho@ionkov.net,m:linusw@kernel.org,m:maddy@linux.ibm.com,m:broonie@kernel.org,m:mpe@ellerman.id.
  au,m:miklos@szeredi.hu,m:namhyung@kernel.org,m:palmer@dabbelt.com,m:pabeni@redhat.com,m:pbonzini@redhat.com,m:pjw@kernel.org,m:peterz@infradead.org,m:rodrigo.vivi@intel.com,m:seanjc@google.com,m:simona@ffwll.ch,m:tiwai@suse.com,m:tglx@kernel.org,m:trondmy@kernel.org,m:tursulin@ursulin.net,m:gor@linux.ibm.com,m:will@kernel.org,m:yury.norov@gmail.com,m:cengku@gmail.com,m:kvm@vger.kernel.org,m:dri-devel@lists.freedesktop.org,m:linux-mm@kvack.org,m:linux-riscv@lists.infradead.org,m:linux-spi@vger.kernel.org,m:linux-s390@vger.kernel.org,m:x86@kernel.org,m:ynorov@nvidia.com,m:linux-ext4@vger.kernel.org,m:dm-devel@lists.linux.dev,m:intel-gfx@lists.freedesktop.org,m:virtualization@lists.linux.dev,m:linux-sound@vger.kernel.org,m:linux-block@vger.kernel.org,m:linux-xfs@vger.kernel.org,m:linux-arm-kernel@lists.infradead.org,m:linux-nfs@vger.kernel.org,m:netdev@vger.kernel.org,m:v9fs@lists.linux.dev,m:linux-kernel@vger.kernel.org,m:linux-f2fs-devel@lists.sourceforge.net,m:linux-perf-users@vger.
  kernel.org,m:linux-crypto@vger.kernel.org,m:linux-fsdevel@vger.kernel.org,m:linuxppc-dev@lists.ozlabs.org,m:andrew@lunn.ch,s:lists@lfdr.de];
-	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
-	MIME_TRACE(0.00)[0:+];
 	DMARC_POLICY_ALLOW(0.00)[lists.sourceforge.net,none];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	FREEMAIL_TO(0.00)[linux-foundation.org,davemloft.net,redhat.com,mit.edu,eecs.berkeley.edu,fb.com,linux.ibm.com,zeniv.linux.org.uk,dilger.ca,lunn.ch,kernel.org,opensynergy.com,alien8.de,arm.com,linux.intel.com,gmail.com,codewreck.org,linux.dev,google.com,gondor.apana.org.au,perex.cz,kernel.dk,ionkov.net,ellerman.id.au,szeredi.hu,dabbelt.com,infradead.org,intel.com,ffwll.ch,suse.com,ursulin.net];
-	FORGED_SENDER(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
 	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,Nvidia.com:s=selector2];
 	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,Nvidia.com:-];
 	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
@@ -285,67 +286,98 @@ X-Spamd-Result: default: False [-6.11 / 15.00];
 	HAS_REPLYTO(0.00)[ynorov@nvidia.com]
 X-Rspamd-Action: no action
 
-Switch KVM code to using the macro. No functional changes intended.
+Switch drivers to using the macro. No functional changes intended.
 
 Signed-off-by: Yury Norov <ynorov@nvidia.com>
 ---
- arch/s390/kvm/gaccess.c | 6 +++---
- arch/x86/kvm/emulate.c  | 4 ++--
- 2 files changed, 5 insertions(+), 5 deletions(-)
+ drivers/block/null_blk/main.c         | 6 ++----
+ drivers/gpu/drm/i915/gt/shmem_utils.c | 5 ++---
+ drivers/md/dm-pcache/backing_dev.h    | 2 +-
+ sound/virtio/virtio_pcm_msg.c         | 4 ++--
+ 4 files changed, 7 insertions(+), 10 deletions(-)
 
-diff --git a/arch/s390/kvm/gaccess.c b/arch/s390/kvm/gaccess.c
-index 4630b2a067ea..40f85b7eca63 100644
---- a/arch/s390/kvm/gaccess.c
-+++ b/arch/s390/kvm/gaccess.c
-@@ -973,7 +973,7 @@ int access_guest_with_key(struct kvm_vcpu *vcpu, unsigned long ga, u8 ar,
- 	if (rc)
- 		goto out_unlock;
- 	for (idx = 0; idx < nr_pages; idx++) {
--		fragment_len = min(PAGE_SIZE - offset_in_page(gpas[idx]), len);
-+		fragment_len = min(rest_of_page(gpas[idx]), len);
- 		if (try_fetch_prot_override && fetch_prot_override_applies(ga, fragment_len)) {
- 			rc = access_guest_page_gpa(vcpu->kvm, mode, gpas[idx], data, fragment_len);
- 		} else {
-@@ -1015,7 +1015,7 @@ int access_guest_real(struct kvm_vcpu *vcpu, unsigned long gra,
+diff --git a/drivers/block/null_blk/main.c b/drivers/block/null_blk/main.c
+index f8c0fd57e041..89e9651b09a9 100644
+--- a/drivers/block/null_blk/main.c
++++ b/drivers/block/null_blk/main.c
+@@ -1147,8 +1147,7 @@ static blk_status_t copy_to_nullb(struct nullb *nullb, void *source,
+ 	sector_t sector;
  
- 	while (len && !rc) {
- 		gpa = kvm_s390_real_to_abs(vcpu, gra);
--		fragment_len = min(PAGE_SIZE - offset_in_page(gpa), len);
-+		fragment_len = min(rest_of_page(gpa), len);
- 		rc = access_guest_page_gpa(vcpu->kvm, mode, gpa, data, fragment_len);
- 		len -= fragment_len;
- 		gra += fragment_len;
-@@ -1237,7 +1237,7 @@ int check_gpa_range(struct kvm *kvm, unsigned long gpa, unsigned long length,
- 	int rc = 0;
+ 	while (count < n) {
+-		temp = min3(nullb->dev->blocksize, n - count,
+-			    PAGE_SIZE - offset_in_page(pos));
++		temp = min3(nullb->dev->blocksize, n - count, rest_of_page(pos));
+ 		sector = pos >> SECTOR_SHIFT;
  
- 	while (length && !rc) {
--		fragment_len = min(PAGE_SIZE - offset_in_page(gpa), length);
-+		fragment_len = min(rest_of_page(gpa), length);
- 		rc = vm_check_access_key_gpa(kvm, access_key, mode, gpa);
- 		length -= fragment_len;
- 		gpa += fragment_len;
-diff --git a/arch/x86/kvm/emulate.c b/arch/x86/kvm/emulate.c
-index c8e292e9a24d..c060d1e2bb94 100644
---- a/arch/x86/kvm/emulate.c
-+++ b/arch/x86/kvm/emulate.c
-@@ -864,7 +864,7 @@ static int __do_insn_fetch_bytes(struct x86_emulate_ctxt *ctxt, int op_size)
- 		return rc;
+ 		if (null_cache_active(nullb) && !is_fua)
+@@ -1181,8 +1180,7 @@ static void copy_from_nullb(struct nullb *nullb, void *dest, loff_t pos,
+ 	sector_t sector;
  
- 	size = min_t(unsigned, 15UL ^ cur_size, max_size);
--	size = min_t(unsigned, size, PAGE_SIZE - offset_in_page(linear));
-+	size = min_t(unsigned int, size, rest_of_page(linear));
+ 	while (count < n) {
+-		temp = min3(nullb->dev->blocksize, n - count,
+-			    PAGE_SIZE - offset_in_page(pos));
++		temp = min3(nullb->dev->blocksize, n - count, rest_of_page(pos));
+ 		sector = pos >> SECTOR_SHIFT;
  
- 	/*
- 	 * One instruction can only straddle two pages,
-@@ -1372,7 +1372,7 @@ static int pio_in_emulated(struct x86_emulate_ctxt *ctxt,
- 			address_mask(ctxt, reg_read(ctxt, VCPU_REGS_RCX)) : 1;
- 		in_page = (ctxt->eflags & X86_EFLAGS_DF) ?
- 			offset_in_page(reg_read(ctxt, VCPU_REGS_RDI)) :
--			PAGE_SIZE - offset_in_page(reg_read(ctxt, VCPU_REGS_RDI));
-+			rest_of_page(reg_read(ctxt, VCPU_REGS_RDI));
- 		n = min3(in_page, (unsigned int)sizeof(rc->data) / size, count);
- 		if (n == 0)
- 			n = 1;
+ 		t_page = null_lookup_page(nullb, sector, false,
+diff --git a/drivers/gpu/drm/i915/gt/shmem_utils.c b/drivers/gpu/drm/i915/gt/shmem_utils.c
+index 5850adaebf82..9a0a6f67fef0 100644
+--- a/drivers/gpu/drm/i915/gt/shmem_utils.c
++++ b/drivers/gpu/drm/i915/gt/shmem_utils.c
+@@ -99,8 +99,7 @@ static int __shmem_rw(struct file *file, loff_t off,
+ 	unsigned long pfn;
+ 
+ 	for (pfn = off >> PAGE_SHIFT; len; pfn++) {
+-		unsigned int this =
+-			min_t(size_t, PAGE_SIZE - offset_in_page(off), len);
++		unsigned int this = min_t(size_t, rest_of_page(off), len);
+ 		struct page *page;
+ 		void *vaddr;
+ 
+@@ -135,7 +134,7 @@ int shmem_read_to_iosys_map(struct file *file, loff_t off,
+ 
+ 	for (pfn = off >> PAGE_SHIFT; len; pfn++) {
+ 		unsigned int this =
+-			min_t(size_t, PAGE_SIZE - offset_in_page(off), len);
++			min_t(size_t, rest_of_page(off), len);
+ 		struct page *page;
+ 		void *vaddr;
+ 
+diff --git a/drivers/md/dm-pcache/backing_dev.h b/drivers/md/dm-pcache/backing_dev.h
+index b371cba483b9..17e83b38b845 100644
+--- a/drivers/md/dm-pcache/backing_dev.h
++++ b/drivers/md/dm-pcache/backing_dev.h
+@@ -96,7 +96,7 @@ static inline u32 backing_dev_req_coalesced_max_len(const void *data, u32 len)
+ 
+ 	first_page = vmalloc_to_page(p);
+ advance:
+-	in_page = PAGE_SIZE - offset_in_page(p);
++	in_page = rest_of_page(p);
+ 	to_advance = min_t(u32, in_page, len - done);
+ 
+ 	done += to_advance;
+diff --git a/sound/virtio/virtio_pcm_msg.c b/sound/virtio/virtio_pcm_msg.c
+index a5c4e7027717..5d1b0dc08234 100644
+--- a/sound/virtio/virtio_pcm_msg.c
++++ b/sound/virtio/virtio_pcm_msg.c
+@@ -56,7 +56,7 @@ static int virtsnd_pcm_sg_num(u8 *data, unsigned int length)
+ 		phys_addr_t pg_address = page_to_phys(pg);
+ 		size_t pg_length;
+ 
+-		pg_length = PAGE_SIZE - offset_in_page(data);
++		pg_length = rest_of_page(data);
+ 		if (pg_length > length)
+ 			pg_length = length;
+ 
+@@ -96,7 +96,7 @@ static void virtsnd_pcm_sg_from(struct scatterlist *sgs, int nsgs, u8 *data,
+ 		struct page *pg = vmalloc_to_page(data);
+ 		size_t pg_length;
+ 
+-		pg_length = PAGE_SIZE - offset_in_page(data);
++		pg_length = rest_of_page(data);
+ 		if (pg_length > length)
+ 			pg_length = length;
+ 
 -- 
 2.43.0
 
