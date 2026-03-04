@@ -2,41 +2,41 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id GNCxKTKnqGlMwQAAu9opvQ
+	id oN0TBUenqGlOwQAAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 04 Mar 2026 22:42:10 +0100
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 04 Mar 2026 22:42:31 +0100
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id DC835208114
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 04 Mar 2026 22:42:09 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 68427208170
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 04 Mar 2026 22:42:30 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
 	List-Unsubscribe:List-Id:Subject:In-Reply-To:References:To:MIME-Version:Date:
 	Message-ID:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
 	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=Cx5MAh1e88HM4CkoAcFdkxH/T2oDWb4iO1PGHAri8Lw=; b=bAwWtBeQiQMMhejDSWnvuc4mLT
-	WPdIsN9pg5BT59DvKyUZBNKqvUM9r95RuA9Ty9R9ysaW+w/r6DIJK/Au39oonFo1O7Hqs4JkGlMdu
-	mqE7SgAq3Z6MXX4kjc4q+St/Ut20srfYiZl5wJCiCYdN9TIV4DRSByBLKSbd1g+J8JKw=;
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=8wphQA0FQ2xPo+lv2DbaxqSDJK8W9sVh5yoKm9ybUK0=; b=EHVooHSZDJz2kQGkbpoBRHYgKO
+	avh3mPpYgajTxByqK5iPXduXcDt0TqWni3znE3qeTk0deNaGtEjtofXXgfttpfClVH3BLZwKh7gBa
+	i2PNsX3jPSIWezjQ1crUcVHtgLh6eVUQkaBORGCt3d5wxcgvfZ+cqLvKUToFyZ6kEO90=;
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vxtyk-00084s-04;
-	Wed, 04 Mar 2026 21:42:02 +0000
+	id 1vxtz2-0000eP-Bz;
+	Wed, 04 Mar 2026 21:42:21 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <dlemoal@kernel.org>) id 1vxtyh-00084T-SC;
- Wed, 04 Mar 2026 21:41:59 +0000
+ (envelope-from <dlemoal@kernel.org>) id 1vxtz0-0000e0-RV;
+ Wed, 04 Mar 2026 21:42:19 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=TLTH+Ki/JacgTwtIUmmUFQbLVRipNqt8GAWnhOqX5uU=; b=ExOAdXFnX/L6H0RR+AOxeQ3l4g
- T9wlGc4XoEDn5TLIHniZWd0iWBkce4s6wfKztng6AeoqxU4VmtSk5ifCSxYuHYN4Vi6/DORsxsH3N
- NouocBprT0aMHQvIP+w3qJnIDoqrchZbRI+2+Tz2mH8PP3U7cmv82kW1HLyY9W08MVs0=;
+ bh=TWMxDkBFlm3DbrXTIPwCf3ralkmwZ1WN6EDnLJ/iSzA=; b=VFC9XlYkEFUnZz7xgBloSERSPg
+ k5Tf+HWJziy9VUgr94wncY6eq7mBll/SPJEy/XbmyEU4QYTXmm6JGE7oO+QZUJ7I7MVb9F5QB6/PP
+ JL/ksKeo5qjAIZXgfkjSFBSSBn1I5v0s0BXO3qztdUlWAttrA5KNinI3e+KWoM43NQdk=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
@@ -44,30 +44,30 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=TLTH+Ki/JacgTwtIUmmUFQbLVRipNqt8GAWnhOqX5uU=; b=jj/x1/6NvuLvnk03hTRM16z8IL
- AODquXGZIufwzVhhfS6TGSJxykklEG36ucMj8pxeRspZ1l88FtXnGf4B5dhbwY9QdYrb9Fjggb8s+
- /WFprxXpMawJ+izvzb1p81OiiyQAqNIvyPyU98fu+1GI2nuyPKFcCwmZfHMiRw1gfMNw=;
+ bh=TWMxDkBFlm3DbrXTIPwCf3ralkmwZ1WN6EDnLJ/iSzA=; b=VvNA4QT3ZLpRHV9jBNj1LudZ1a
+ D7WoxiXn9YrSj3vQtCmw4hGSoonlU3WPIc7ch2DBN4gNb2kdWQYcn3NiPS1rRJFSoj1nprbSScJTN
+ WU1fix04s66Dna0KsE+kmJWjo6yJlvdIGFAXgGQ51eVZXQz6PxWkCBQwVn6GGNSxCpA4=;
 Received: from sea.source.kernel.org ([172.234.252.31])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vxtyh-0008PT-Ap; Wed, 04 Mar 2026 21:41:59 +0000
+ id 1vxtz1-0008QF-5G; Wed, 04 Mar 2026 21:42:19 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id D16CC432D4;
- Wed,  4 Mar 2026 21:41:47 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id BFDDDC4CEF7;
- Wed,  4 Mar 2026 21:41:22 +0000 (UTC)
+ by sea.source.kernel.org (Postfix) with ESMTP id A3CB743232;
+ Wed,  4 Mar 2026 21:42:13 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 07326C2BCB4;
+ Wed,  4 Mar 2026 21:41:48 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1772660507;
- bh=PV67OS/91fsa6EbIf+u5pJQmbMnqcMaw7mOqQaMZtc4=;
+ s=k20201202; t=1772660533;
+ bh=xiOhB9YembJ+CStGf833o6vXChZ9R9iPIsGRMRIY668=;
  h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=WOy+ahU5UARQ0yTbDyVVAn1fSlv8RpYZwjPT+Gigf4F6vtlQM47BUEAaHpPl28jTi
- zijTiFmnsokrQhTEwusFFZyPjXjLpzptmexKVrqiO7zalnrs6jCk/4Dtvo7p2Wi1b1
- deFntjfjHaMPD1GtY9aIYLocTQHgNd9upu9na/Ju2G9Ir6nNYqwGJRWtco86cB0/5r
- uO2UQtHfq4CG7HDfigIocItuDJOTEaZae9H5bHTqKAx9IDkUJuakGJN2s0X8q9pydZ
- YUjxavtU51Dm29ViV1Ch1zVWrQIQ2z11hjkuPtHX/LzHUzaMqMA8RcsW3Ko5J8lxOB
- JCi7YwgNkSxnQ==
-Message-ID: <d5ef252a-02db-42d1-8ffa-1769189ae60a@kernel.org>
-Date: Thu, 5 Mar 2026 06:41:21 +0900
+ b=MTiNOmzumY+Ccr9Y25oeq5uYZKghdKy9YuMJBVJenlXMeDIlM5fFuFFctJXPSrlj1
+ KOikET8YCvcGy9yWYQw1bgH6uo7qLLK1Yimq397PsLMKP+QRrCFPLt2x5Iauoplbvb
+ eVdpKah8RLNh0zfOSHOOrQ3xqtsNbQi1nkFz6EB4vJXFLpSPJMg52b3nqo2mplKkNj
+ xJmYwih0yzyZ+saefyHXLopmh2Uw8y8KnyiNiI3ZzGwKqQQ7Bt9hEM//Ab6R2kTuX0
+ dvCJZkANj5UO/wUvSeTKYiDWcUSEi2O8IiF1HH0MkcYb0vMhcqKbNtD1e26QLX94o6
+ x5Esh08bkPubQ==
+Message-ID: <000dfca2-3101-45dd-8fdd-987ca885124a@kernel.org>
+Date: Thu, 5 Mar 2026 06:41:41 +0900
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 To: Jeff Layton <jlayton@kernel.org>, Alexander Viro
@@ -156,10 +156,10 @@ To: Jeff Layton <jlayton@kernel.org>, Alexander Viro
  Jesper Dangaard Brouer <hawk@kernel.org>,
  John Fastabend <john.fastabend@gmail.com>
 References: <20260304-iino-u64-v3-0-2257ad83d372@kernel.org>
- <20260304-iino-u64-v3-12-2257ad83d372@kernel.org>
+ <20260304-iino-u64-v3-8-2257ad83d372@kernel.org>
 Content-Language: en-US
 Organization: Western Digital Research
-In-Reply-To: <20260304-iino-u64-v3-12-2257ad83d372@kernel.org>
+In-Reply-To: <20260304-iino-u64-v3-8-2257ad83d372@kernel.org>
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
@@ -167,9 +167,10 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 3/5/26 00:32, Jeff Layton wrote: > On 32-bit architectures,
- unsigned long is only 32 bits wide, which > causes 64-bit inode numbers to
- be silently truncated. Several > filesystems (NFS, XFS, BTRFS, [...] 
+ Content preview:  On 3/5/26 00:32, Jeff Layton wrote: > Update zonefs trace
+ event definitions to use u64 instead of > ino_t/unsigned long for inode number
+ fields. > > Signed-off-by: Jeff Layton <jlayton@kernel.org> Acked-by: Damien
+ Le Moal <dlemoal@kernel.org> 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -181,9 +182,9 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1vxtyh-0008PT-Ap
-Subject: Re: [f2fs-dev] [PATCH v3 12/12] treewide: change inode->i_ino from
- unsigned long to u64
+X-Headers-End: 1vxtz1-0008QF-5G
+Subject: Re: [f2fs-dev] [PATCH v3 08/12] zonefs: widen trace event i_ino
+ fields to u64
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -220,7 +221,7 @@ Cc: nvdimm@lists.linux.dev, jfs-discussion@lists.sourceforge.net,
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
-X-Rspamd-Queue-Id: DC835208114
+X-Rspamd-Queue-Id: 68427208170
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [-6.11 / 15.00];
 	WHITELIST_DMARC(-7.00)[sourceforge.net:D:+];
@@ -228,57 +229,43 @@ X-Spamd-Result: default: False [-6.11 / 15.00];
 	MID_RHS_MATCH_TO(1.00)[];
 	DMARC_POLICY_ALLOW_WITH_FAILURES(-0.50)[];
 	RWL_MAILSPIKE_EXCELLENT(-0.40)[216.105.38.7:from];
-	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7];
+	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7:c];
 	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
 	MAILLIST(-0.20)[mailman];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCPT_COUNT_GT_50(0.00)[170];
+	ARC_NA(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	DKIM_MIXED(0.00)[];
-	RECEIVED_HELO_LOCALHOST(0.00)[];
-	FREEMAIL_TO(0.00)[kernel.org,zeniv.linux.org.uk,suse.cz,goodmis.org,efficios.com,intel.com,mit.edu,linux.dev,suse.de,redhat.com,manguebit.org,dilger.ca,suse.com,oracle.com,brown.name,talpey.com,samba.org,gmail.com,microsoft.com,dubeyko.com,ionkov.net,codewreck.org,crudebyte.com,auristor.com,themaw.net,cs.cmu.edu,fluxnic.net,tyhicks.com,infradead.org,physik.fu-berlin.de,vivo.com,artax.karlin.mff.cuni.cz,nod.at,paragon-software.com,fasheh.com,evilplan.org,linux.alibaba.com,omnibond.com,szeredi.hu,alarsen.net,huawei.com,wdc.com,canonical.com,paul-moore.com,namei.org,hallyn.com,linux.ibm.com,schaufler-ca.com,amd.com,ffwll.ch,linaro.org,google.com,davemloft.net,arm.com,linux.intel.com,dev.tdt.de,yaina.de,holtmann.org,hartkopp.net,pengutronix.de,secunet.com,gondor.apana.org.au,fomichev.me,iogearbox.net];
-	HAS_ORG_HEADER(0.00)[];
-	REPLYTO_DOM_EQ_TO_DOM(0.00)[];
 	TO_DN_SOME(0.00)[];
 	MIME_TRACE(0.00)[0:+];
+	DKIM_MIXED(0.00)[];
+	REPLYTO_DOM_EQ_TO_DOM(0.00)[];
 	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,kernel.org:s=k20201202];
-	DMARC_POLICY_ALLOW(0.00)[lists.sourceforge.net,none];
+	HAS_ORG_HEADER(0.00)[];
+	FREEMAIL_TO(0.00)[kernel.org,zeniv.linux.org.uk,suse.cz,goodmis.org,efficios.com,intel.com,mit.edu,linux.dev,suse.de,redhat.com,manguebit.org,dilger.ca,suse.com,oracle.com,brown.name,talpey.com,samba.org,gmail.com,microsoft.com,dubeyko.com,ionkov.net,codewreck.org,crudebyte.com,auristor.com,themaw.net,cs.cmu.edu,fluxnic.net,tyhicks.com,infradead.org,physik.fu-berlin.de,vivo.com,artax.karlin.mff.cuni.cz,nod.at,paragon-software.com,fasheh.com,evilplan.org,linux.alibaba.com,omnibond.com,szeredi.hu,alarsen.net,huawei.com,wdc.com,canonical.com,paul-moore.com,namei.org,hallyn.com,linux.ibm.com,schaufler-ca.com,amd.com,ffwll.ch,linaro.org,google.com,davemloft.net,arm.com,linux.intel.com,dev.tdt.de,yaina.de,holtmann.org,hartkopp.net,pengutronix.de,secunet.com,gondor.apana.org.au,fomichev.me,iogearbox.net];
+	RECEIVED_HELO_LOCALHOST(0.00)[];
+	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,kernel.org:-];
 	RCVD_COUNT_FIVE(0.00)[5];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TAGGED_RCPT(0.00)[linux-f2fs-devel];
-	NEURAL_HAM(-0.00)[-1.000];
-	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
-	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
-	FORGED_SENDER_MAILLIST(0.00)[];
+	RCPT_COUNT_GT_50(0.00)[170];
 	FROM_NEQ_ENVFROM(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	ARC_NA(0.00)[];
-	HAS_REPLYTO(0.00)[dlemoal@kernel.org]
+	FROM_HAS_DN(0.00)[];
+	DMARC_POLICY_ALLOW(0.00)[lists.sourceforge.net,none];
+	NEURAL_HAM(-0.00)[-1.000];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	HAS_REPLYTO(0.00)[dlemoal@kernel.org];
+	TAGGED_RCPT(0.00)[linux-f2fs-devel];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.sourceforge.net:dkim,lists.sourceforge.net:rdns,lists.sourceforge.net:helo]
 X-Rspamd-Action: no action
 
 On 3/5/26 00:32, Jeff Layton wrote:
-> On 32-bit architectures, unsigned long is only 32 bits wide, which
-> causes 64-bit inode numbers to be silently truncated. Several
-> filesystems (NFS, XFS, BTRFS, etc.) can generate inode numbers that
-> exceed 32 bits, and this truncation can lead to inode number collisions
-> and other subtle bugs on 32-bit systems.
-> 
-> Change the type of inode->i_ino from unsigned long to u64 to ensure that
-> inode numbers are always represented as 64-bit values regardless of
-> architecture. Update all format specifiers treewide from %lu/%lx to
-> %llu/%llx to match the new type, along with corresponding local variable
-> types.
-> 
-> This is the bulk treewide conversion. Earlier patches in this series
-> handled trace events separately to allow trace field reordering for
-> better struct packing on 32-bit.
+> Update zonefs trace event definitions to use u64 instead of
+> ino_t/unsigned long for inode number fields.
 > 
 > Signed-off-by: Jeff Layton <jlayton@kernel.org>
-
-For the zonefs bits:
 
 Acked-by: Damien Le Moal <dlemoal@kernel.org>
 
