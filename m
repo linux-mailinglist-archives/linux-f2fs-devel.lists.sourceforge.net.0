@@ -2,89 +2,97 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 6O64AZ3dqGlmyAAAu9opvQ
+	id gLQ3OefdqGmVyAAAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 05 Mar 2026 02:34:21 +0100
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 05 Mar 2026 02:35:35 +0100
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 35007209DFB
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 05 Mar 2026 02:34:20 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3C276209E40
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 05 Mar 2026 02:35:34 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:MIME-Version:Message-ID:Date:To:Sender:
-	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
-	Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Owner;
-	bh=C0uKdzo2A9aken1kebJXAJeUqD10ySF/rvM7hxALI90=; b=GnMk+Ta/R3AilAL40gM63oAq3j
-	oBWGm0bAyXhbDEWsifM6FVBlg8nVAgdRnw/kl6pH7HLSrUZBA5e7DpEK6vBDpgl4l3iFhawtewKPJ
-	nPn64tnLAOKPDvK0w0IGq9dY/48tzmFUv14j9mnBy344K86vYSIdOpzNTr92BDZsWi5g=;
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	List-Unsubscribe:List-Id:Subject:MIME-Version:Content-ID:In-Reply-To:
+	References:Message-ID:Date:To:Sender:Content-Description:Resent-Date:
+	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
+	bh=13BVhuiFI4lXCSIs+VHpJFUw4A0l73bKBASb3yR8FhM=; b=ADQ3YV1NngLxdojW3+CamPNBI/
+	/0RhSjOFSm6VsOMdohmBe6UP7YAYyz1adF31OcwHCZ2HSFlkXPA9TLLNn4vqpsac28PrjPVYFOabF
+	pwtsMPl1JsofRrALxzghmKK6dd6N4hBGqBgWUdUMyZCtiaoXS2BYtx0eAi3j4hQSrSWc=;
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vxxbO-0003IY-EE;
-	Thu, 05 Mar 2026 01:34:10 +0000
+	id 1vxxcW-0004Bz-61;
+	Thu, 05 Mar 2026 01:35:20 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <huangjianan@xiaomi.com>) id 1vxxbM-0003IP-Rd
+ (envelope-from <huangjianan@xiaomi.com>) id 1vxxcL-0004Bh-5y
  for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 05 Mar 2026 01:34:08 +0000
+ Thu, 05 Mar 2026 01:35:09 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:Content-Transfer-Encoding:MIME-Version
- :Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-ID:
+ Content-Type:In-Reply-To:References:Message-ID:Date:Subject:CC:To:From:Sender
+ :Reply-To:Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To
+ :Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Yx3t+MNPRIvkvv26bpZwDbvx/t65hHMOrOYf94vqZzU=; b=e0aTxifrHJWiKUVP4M2inTllMg
- WQGHNIAi9mKzbsizyknsR0y4ULct3NWRXEffuFeGV3+CO5Kfb0KV1EBJgeu/xoL0Bj/5BHD+niP5n
- VbpATtbFvipnpn9a2dJyJHiVDcsI/LMFxtWTJXnMEyb15/x4tcoWbphI1x+eQH1ZkMzU=;
+ bh=EXWwKJSlvAuJjmKo2KqZ1sVw9tjIqLWlHE5ul2PZ78A=; b=mZFlzKhdIUjcnx718lVQDno1oB
+ 89oA5Yn6Dc87xjkLXf9Z8iRDH8qdRxS11U25vePZGLbnWf896Mj7pXsUgSk/ZnHJPGLs3bLSDIsST
+ givQwZXbkZVQkXjZKsnXqwTxqHCSC+CQJdBfr12Lc9kL32Ueho3y7P3gOUuR52iqlV+Y=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:Content-Transfer-Encoding:MIME-Version:Message-ID:Date:
- Subject:CC:To:From:Sender:Reply-To:Content-ID:Content-Description:Resent-Date
- :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=Yx3t+MNPRIvkvv26bpZwDbvx/t65hHMOrOYf94vqZzU=; b=a
- cBoVsrpWqzhG7ePiVutxW/P6AfY5yrDKTpGHXKQJPr1It48NPKTamVUMP/Wvjg63igk4HQuD1YNNn
- tUiBEansITQMjfEhAF8h0+c2Ox3+f+r3Q4VN9ydb3SuKpiiwjOcLSbwGexSDuZrLNuCx1KldZcXqu
- ZgmnS81JbZya6/Io=;
+ h=MIME-Version:Content-Transfer-Encoding:Content-ID:Content-Type:
+ In-Reply-To:References:Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=EXWwKJSlvAuJjmKo2KqZ1sVw9tjIqLWlHE5ul2PZ78A=; b=Z5EUI19Ga+wqZlKUA9P6ynjlOL
+ PuibDFPKMVKvTlHYXji1ihGLfnxbuTjjPzJVDjN3Y9nV/KNN/cz0CIIurQN+6KrdsTteM7n1KfxkA
+ 4jjySQTHaYlGZWp9GQcAACxKsfvqo0V31Jd7bijHLclUEK8bhkcCKOtqRXXiCtktuAlI=;
 Received: from outboundhk.mxmail.xiaomi.com ([207.226.244.123])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtp (Exim 4.95)
- id 1vxxbM-0002Aw-73 for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 05 Mar 2026 01:34:08 +0000
-X-CSE-ConnectionGUID: rbaoq5vCTxW5KqH8vHqZAw==
-X-CSE-MsgGUID: 0W0iOdknS1ukYq2izvlGPA==
-X-IronPort-AV: E=Sophos;i="6.21,325,1763395200"; d="scan'208";a="168647734"
-To: <linux-f2fs-devel@lists.sourceforge.net>, <chao@kernel.org>,
+ id 1vxxcF-0002F4-4y for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 05 Mar 2026 01:35:04 +0000
+X-CSE-ConnectionGUID: sQ4cxOcXT1aukHkLkizIAw==
+X-CSE-MsgGUID: C0SOwWu1Q7W2rCGTQWSigw==
+X-IronPort-AV: E=Sophos;i="6.21,325,1763395200"; d="scan'208";a="168647797"
+To: Chao Yu <chao@kernel.org>, "linux-f2fs-devel@lists.sourceforge.net"
+ <linux-f2fs-devel@lists.sourceforge.net>, "jaegeuk@kernel.org"
  <jaegeuk@kernel.org>
-Date: Thu, 5 Mar 2026 09:18:10 +0800
-Message-ID: <20260305011810.4189655-1-huangjianan@xiaomi.com>
-X-Mailer: git-send-email 2.43.0
+Thread-Topic: [External Mail]Re: [PATCH] f2fs: avoid reading already updated
+ pages during GC
+Thread-Index: AQHcmY23caLNamfKiEKqYJHeIVOJHbWd5lmAgADcmIA=
+Date: Thu, 5 Mar 2026 01:19:16 +0000
+Message-ID: <d0ea280a-184f-4e0c-a5a8-37b4f54304b0@xiaomi.com>
+References: <20260209063121.117451-1-huangjianan@xiaomi.com>
+ <36d15a4f-d2ca-4294-aa87-4f52dbf84574@kernel.org>
+In-Reply-To: <36d15a4f-d2ca-4294-aa87-4f52dbf84574@kernel.org>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.237.8.163]
+Content-ID: <4F99CC4667D7B74388C4B2DEF1E0AB77@xiaomi.com>
 MIME-Version: 1.0
-X-Originating-IP: [10.237.8.165]
-X-ClientProxiedBy: BJ-MBX01.mioffice.cn (10.237.8.121) To YZ-MBX05.mioffice.cn
- (10.237.88.125)
 X-Spam-Score: 0.0 (/)
-X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
+X-Spam-Report: Spam detection software, running on the system "sfi-spamd-1.hosts.colo.sdot.me",
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: We found the following issue during fuzz testing: page:
- refcount:3
- mapcount:0 mapping:00000000b6e89c65 index:0x18b2dc pfn:0x161ba9
- memcg:f8ffff800e269c00 aops:f2fs_meta_aops ino:2 flags:
- 0x52880000000080a9(locked|waiters|uptodate|lru|private|zone=1|k
- [...] Content analysis details:   (0.0 points, 5.0 required)
- pts rule name              description
+ 
+ Content preview:  On 3/4/2026 8:09 PM, Chao Yu wrote: > [外部邮件] 此邮件来源于小米公司外部，请谨慎处理。若对邮件安全性存疑，请
+    > 将邮件转发给misec@xiaomi.com进行反馈 > > On [...] 
+ 
+ Content analysis details:   (0.0 points, 5.0 required)
+ 
+  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 RCVD_IN_MSPIKE_H5      RBL: Excellent reputation (+5)
- [207.226.244.123 listed in wl.mailspike.net]
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1vxxbM-0002Aw-73
-Subject: [f2fs-dev] [PATCH v2] f2fs: avoid reading already updated pages
- during GC
+  0.0 RCVD_IN_MSPIKE_H5      RBL: Excellent reputation (+5)
+                             [207.226.244.123 listed in wl.mailspike.net]
+  0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+X-Headers-End: 1vxxcF-0002F4-4y
+Subject: Re: [f2fs-dev] [External Mail]Re: [PATCH] f2fs: avoid reading
+ already updated pages during GC
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -96,140 +104,129 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Jianan Huang via Linux-f2fs-devel
+From: =?utf-8?B?6buE5L2z55S3?= via Linux-f2fs-devel
  <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Jianan Huang <huangjianan@xiaomi.com>
-Cc: Sheng Yong <shengyong1@xiaomi.com>, linux-kernel@vger.kernel.org,
- wanghui33@xiaomi.com
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Reply-To: =?utf-8?B?6buE5L2z55S3?= <huangjianan@xiaomi.com>
+Cc: =?utf-8?B?55ub5YuH?= <shengyong1@xiaomi.com>,
+ =?utf-8?B?546L6L6J?= <wanghui33@xiaomi.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
-X-Rspamd-Queue-Id: 35007209DFB
+X-Rspamd-Queue-Id: 3C276209E40
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-8.61 / 15.00];
+X-Spamd-Result: default: False [-8.51 / 15.00];
 	WHITELIST_DMARC(-7.00)[sourceforge.net:D:+];
 	DMARC_POLICY_ALLOW_WITH_FAILURES(-0.50)[];
 	RWL_MAILSPIKE_EXCELLENT(-0.40)[216.105.38.7:from];
-	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7];
-	MAILLIST(-0.20)[mailman];
 	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
+	MAILLIST(-0.20)[mailman];
+	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7:c];
+	MIME_BASE64_TEXT(0.10)[];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RECEIVED_HELO_LOCALHOST(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
+	RECEIVED_HELO_LOCALHOST(0.00)[];
 	DKIM_MIXED(0.00)[];
-	ARC_NA(0.00)[];
 	RCVD_COUNT_THREE(0.00)[3];
-	MIME_TRACE(0.00)[0:+];
-	TO_DN_SOME(0.00)[];
+	FORGED_RECIPIENTS(0.00)[m:chao@kernel.org,m:linux-f2fs-devel@lists.sourceforge.net,m:jaegeuk@kernel.org,m:shengyong1@xiaomi.com,m:wanghui33@xiaomi.com,s:lists@lfdr.de];
 	SUSPICIOUS_AUTH_ORIGIN(0.00)[];
+	TO_DN_SOME(0.00)[];
+	FORGED_SENDER(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
 	DMARC_POLICY_ALLOW(0.00)[lists.sourceforge.net,none];
+	MIME_TRACE(0.00)[0:+];
+	TO_DN_EQ_ADDR_SOME(0.00)[];
+	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
+	ARC_NA(0.00)[];
 	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x];
-	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-];
 	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[syzkaller.appspot.com:url,xiaomi.com:replyto,xiaomi.com:email,xiaomi.com:mid,lists.sourceforge.net:dkim,lists.sourceforge.net:rdns,lists.sourceforge.net:helo];
+	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.sourceforge.net:dkim,lists.sourceforge.net:rdns,lists.sourceforge.net:helo,xiaomi.com:replyto,xiaomi.com:email,xiaomi.com:mid,syzkaller.appspot.com:url];
 	HAS_XOIP(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
-	FROM_HAS_DN(0.00)[];
-	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
+	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
+	RCPT_COUNT_FIVE(0.00)[5];
 	TAGGED_RCPT(0.00)[linux-f2fs-devel];
-	RCPT_COUNT_FIVE(0.00)[6];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	MISSING_XM_UA(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
 	HAS_REPLYTO(0.00)[huangjianan@xiaomi.com]
 X-Rspamd-Action: no action
 
-We found the following issue during fuzz testing:
-
-page: refcount:3 mapcount:0 mapping:00000000b6e89c65 index:0x18b2dc pfn:0x161ba9
-memcg:f8ffff800e269c00
-aops:f2fs_meta_aops ino:2
-flags: 0x52880000000080a9(locked|waiters|uptodate|lru|private|zone=1|kasantag=0x4a)
-raw: 52880000000080a9 fffffffec6e17588 fffffffec0ccc088 a7ffff8067063618
-raw: 000000000018b2dc 0000000000000009 00000003ffffffff f8ffff800e269c00
-page dumped because: VM_BUG_ON_FOLIO(folio_test_uptodate(folio))
-page_owner tracks the page as allocated
- post_alloc_hook+0x58c/0x5ec
- prep_new_page+0x34/0x284
- get_page_from_freelist+0x2dcc/0x2e8c
- __alloc_pages_noprof+0x280/0x76c
- __folio_alloc_noprof+0x18/0xac
- __filemap_get_folio+0x6bc/0xdc4
- pagecache_get_page+0x3c/0x104
- do_garbage_collect+0x5c78/0x77a4
- f2fs_gc+0xd74/0x25f0
- gc_thread_func+0xb28/0x2930
- kthread+0x464/0x5d8
- ret_from_fork+0x10/0x20
-------------[ cut here ]------------
-kernel BUG at mm/filemap.c:1563!
- folio_end_read+0x140/0x168
- f2fs_finish_read_bio+0x5c4/0xb80
- f2fs_read_end_io+0x64c/0x708
- bio_endio+0x85c/0x8c0
- blk_update_request+0x690/0x127c
- scsi_end_request+0x9c/0xb8c
- scsi_io_completion+0xf0/0x250
- scsi_finish_command+0x430/0x45c
- scsi_complete+0x178/0x6d4
- blk_mq_complete_request+0xcc/0x104
- scsi_done_internal+0x214/0x454
- scsi_done+0x24/0x34
-
-which is similar to the problem reported by syzbot:
-https://syzkaller.appspot.com/bug?extid=3686758660f980b402dc
-
-This case is consistent with the description in commit 9bf1a3f
-("f2fs: avoid GC causing encrypted file corrupted"):
-Page 1 is moved from blkaddr A to blkaddr B by move_data_block, and after
-being written it is marked as uptodate. Then, Page 1 is moved from blkaddr
-B to blkaddr C, VM_BUG_ON_FOLIO was triggered in the endio initiated by
-ra_data_block.
-
-There is no need to read Page 1 again from blkaddr B, since it has already
-been updated. Therefore, avoid initiating I/O in this case.
-
-Fixes: 6aa58d8ad20a ("f2fs: readahead encrypted block during GC")
-Signed-off-by: Jianan Huang <huangjianan@xiaomi.com>
-Signed-off-by: Sheng Yong <shengyong1@xiaomi.com>
----
-Changes since v1:
-- Place the uptodate check after the initialization of fio.encrypted_page.
-
- fs/f2fs/gc.c | 5 ++++-
- 1 file changed, 4 insertions(+), 1 deletion(-)
-
-diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
-index f46b2673d31f..ec0680187c0d 100644
---- a/fs/f2fs/gc.c
-+++ b/fs/f2fs/gc.c
-@@ -1230,7 +1230,7 @@ static int ra_data_block(struct inode *inode, pgoff_t index)
- 		.encrypted_page = NULL,
- 		.in_list = 0,
- 	};
--	int err;
-+	int err = 0;
- 
- 	folio = f2fs_grab_cache_folio(mapping, index, true);
- 	if (IS_ERR(folio))
-@@ -1283,6 +1283,9 @@ static int ra_data_block(struct inode *inode, pgoff_t index)
- 
- 	fio.encrypted_page = &efolio->page;
- 
-+	if (folio_test_uptodate(efolio))
-+		goto put_encrypted_page;
-+
- 	err = f2fs_submit_page_bio(&fio);
- 	if (err)
- 		goto put_encrypted_page;
--- 
-2.43.0
-
-
-
-_______________________________________________
-Linux-f2fs-devel mailing list
-Linux-f2fs-devel@lists.sourceforge.net
-https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
+T24gMy80LzIwMjYgODowOSBQTSwgQ2hhbyBZdSB3cm90ZToNCj4gW+WklumDqOmCruS7tl0g5q2k
+6YKu5Lu25p2l5rqQ5LqO5bCP57Gz5YWs5Y+45aSW6YOo77yM6K+36LCo5oWO5aSE55CG44CC6Iul
+5a+56YKu5Lu25a6J5YWo5oCn5a2Y55aR77yM6K+3IA0KPiDlsIbpgq7ku7bovazlj5Hnu5ltaXNl
+Y0B4aWFvbWkuY29t6L+b6KGM5Y+N6aaIDQo+IA0KPiBPbiAyMDI2LzIvOSAxNDozMSwgSmlhbmFu
+IEh1YW5nIHdyb3RlOg0KPj4gV2UgZm91bmQgdGhlIGZvbGxvd2luZyBpc3N1ZSBkdXJpbmcgZnV6
+eiB0ZXN0aW5nOg0KPj4NCj4+IHBhZ2U6IHJlZmNvdW50OjMgbWFwY291bnQ6MCBtYXBwaW5nOjAw
+MDAwMDAwYjZlODljNjUgaW5kZXg6MHgxOGIyZGMgDQo+PiBwZm46MHgxNjFiYTkNCj4+IG1lbWNn
+OmY4ZmZmZjgwMGUyNjljMDANCj4+IGFvcHM6ZjJmc19tZXRhX2FvcHMgaW5vOjINCj4+IGZsYWdz
+OiAweDUyODgwMDAwMDAwMDgwYTkobG9ja2VkfHdhaXRlcnN8dXB0b2RhdGV8bHJ1fHByaXZhdGV8
+em9uZT0xfCANCj4+IGthc2FudGFnPTB4NGEpDQo+PiByYXc6IDUyODgwMDAwMDAwMDgwYTkgZmZm
+ZmZmZmVjNmUxNzU4OCBmZmZmZmZmZWMwY2NjMDg4IGE3ZmZmZjgwNjcwNjM2MTgNCj4+IHJhdzog
+MDAwMDAwMDAwMDE4YjJkYyAwMDAwMDAwMDAwMDAwMDA5IDAwMDAwMDAzZmZmZmZmZmYgZjhmZmZm
+ODAwZTI2OWMwMA0KPj4gcGFnZSBkdW1wZWQgYmVjYXVzZTogVk1fQlVHX09OX0ZPTElPKGZvbGlv
+X3Rlc3RfdXB0b2RhdGUoZm9saW8pKQ0KPj4gcGFnZV9vd25lciB0cmFja3MgdGhlIHBhZ2UgYXMg
+YWxsb2NhdGVkDQo+PiDCoCBwb3N0X2FsbG9jX2hvb2srMHg1OGMvMHg1ZWMNCj4+IMKgIHByZXBf
+bmV3X3BhZ2UrMHgzNC8weDI4NA0KPj4gwqAgZ2V0X3BhZ2VfZnJvbV9mcmVlbGlzdCsweDJkY2Mv
+MHgyZThjDQo+PiDCoCBfX2FsbG9jX3BhZ2VzX25vcHJvZisweDI4MC8weDc2Yw0KPj4gwqAgX19m
+b2xpb19hbGxvY19ub3Byb2YrMHgxOC8weGFjDQo+PiDCoCBfX2ZpbGVtYXBfZ2V0X2ZvbGlvKzB4
+NmJjLzB4ZGM0DQo+PiDCoCBwYWdlY2FjaGVfZ2V0X3BhZ2UrMHgzYy8weDEwNA0KPj4gwqAgZG9f
+Z2FyYmFnZV9jb2xsZWN0KzB4NWM3OC8weDc3YTQNCj4+IMKgIGYyZnNfZ2MrMHhkNzQvMHgyNWYw
+DQo+PiDCoCBnY190aHJlYWRfZnVuYysweGIyOC8weDI5MzANCj4+IMKgIGt0aHJlYWQrMHg0NjQv
+MHg1ZDgNCj4+IMKgIHJldF9mcm9tX2ZvcmsrMHgxMC8weDIwDQo+PiAtLS0tLS0tLS0tLS1bIGN1
+dCBoZXJlIF0tLS0tLS0tLS0tLS0NCj4+IGtlcm5lbCBCVUcgYXQgbW0vZmlsZW1hcC5jOjE1NjMh
+DQo+PiDCoCBmb2xpb19lbmRfcmVhZCsweDE0MC8weDE2OA0KPj4gwqAgZjJmc19maW5pc2hfcmVh
+ZF9iaW8rMHg1YzQvMHhiODANCj4+IMKgIGYyZnNfcmVhZF9lbmRfaW8rMHg2NGMvMHg3MDgNCj4+
+IMKgIGJpb19lbmRpbysweDg1Yy8weDhjMA0KPj4gwqAgYmxrX3VwZGF0ZV9yZXF1ZXN0KzB4Njkw
+LzB4MTI3Yw0KPj4gwqAgc2NzaV9lbmRfcmVxdWVzdCsweDljLzB4YjhjDQo+PiDCoCBzY3NpX2lv
+X2NvbXBsZXRpb24rMHhmMC8weDI1MA0KPj4gwqAgc2NzaV9maW5pc2hfY29tbWFuZCsweDQzMC8w
+eDQ1Yw0KPj4gwqAgc2NzaV9jb21wbGV0ZSsweDE3OC8weDZkNA0KPj4gwqAgYmxrX21xX2NvbXBs
+ZXRlX3JlcXVlc3QrMHhjYy8weDEwNA0KPj4gwqAgc2NzaV9kb25lX2ludGVybmFsKzB4MjE0LzB4
+NDU0DQo+PiDCoCBzY3NpX2RvbmUrMHgyNC8weDM0DQo+Pg0KPj4gd2hpY2ggaXMgc2ltaWxhciB0
+byB0aGUgcHJvYmxlbSByZXBvcnRlZCBieSBzeXpib3Q6DQo+PiBodHRwczovL3N5emthbGxlci5h
+cHBzcG90LmNvbS9idWc/ZXh0aWQ9MzY4Njc1ODY2MGY5ODBiNDAyZGMNCj4+DQo+PiBUaGlzIGNh
+c2UgaXMgY29uc2lzdGVudCB3aXRoIHRoZSBkZXNjcmlwdGlvbiBpbiBjb21taXQgOWJmMWEzZg0K
+Pj4gKCJmMmZzOiBhdm9pZCBHQyBjYXVzaW5nIGVuY3J5cHRlZCBmaWxlIGNvcnJ1cHRlZCIpOg0K
+Pj4gUGFnZSAxIGlzIG1vdmVkIGZyb20gYmxrYWRkciBBIHRvIGJsa2FkZHIgQiBieSBtb3ZlX2Rh
+dGFfYmxvY2ssIGFuZCBhZnRlcg0KPj4gYmVpbmcgd3JpdHRlbiBpdCBpcyBtYXJrZWQgYXMgdXB0
+b2RhdGUuIFRoZW4sIFBhZ2UgMSBpcyBtb3ZlZCBmcm9tIA0KPj4gYmxrYWRkcg0KPj4gQiB0byBi
+bGthZGRyIEMsIFZNX0JVR19PTl9GT0xJTyB3YXMgdHJpZ2dlcmVkIGluIHRoZSBlbmRpbyBpbml0
+aWF0ZWQgYnkNCj4+IHJhX2RhdGFfYmxvY2suDQo+Pg0KPj4gVGhlcmUgaXMgbm8gbmVlZCB0byBy
+ZWFkIFBhZ2UgMSBhZ2FpbiBmcm9tIGJsa2FkZHIgQiwgc2luY2UgaXQgaGFzIA0KPj4gYWxyZWFk
+eQ0KPj4gYmVlbiB1cGRhdGVkLiBUaGVyZWZvcmUsIGF2b2lkIGluaXRpYXRpbmcgSS9PIGluIHRo
+aXMgY2FzZS4NCj4+DQo+PiBGaXhlczogNmFhNThkOGFkMjBhICgiZjJmczogcmVhZGFoZWFkIGVu
+Y3J5cHRlZCBibG9jayBkdXJpbmcgR0MiKQ0KPj4gU2lnbmVkLW9mZi1ieTogSmlhbmFuIEh1YW5n
+IDxodWFuZ2ppYW5hbkB4aWFvbWkuY29tPg0KPj4gU2lnbmVkLW9mZi1ieTogU2hlbmcgWW9uZyA8
+c2hlbmd5b25nMUB4aWFvbWkuY29tPg0KPj4gLS0tDQo+PiDCoCBmcy9mMmZzL2djLmMgfCA1ICsr
+KystDQo+PiDCoCAxIGZpbGUgY2hhbmdlZCwgNCBpbnNlcnRpb25zKCspLCAxIGRlbGV0aW9uKC0p
+DQo+Pg0KPj4gZGlmZiAtLWdpdCBhL2ZzL2YyZnMvZ2MuYyBiL2ZzL2YyZnMvZ2MuYw0KPj4gaW5k
+ZXggNjAzNzg2MTRiYzU0Li5jMTg0YWU2YTYxNmUgMTAwNjQ0DQo+PiAtLS0gYS9mcy9mMmZzL2dj
+LmMNCj4+ICsrKyBiL2ZzL2YyZnMvZ2MuYw0KPj4gQEAgLTEyMjgsNyArMTIyOCw3IEBAIHN0YXRp
+YyBpbnQgcmFfZGF0YV9ibG9jayhzdHJ1Y3QgaW5vZGUgKmlub2RlLCANCj4+IHBnb2ZmX3QgaW5k
+ZXgpDQo+PiDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCAuZW5jcnlwdGVkX3BhZ2UgPSBOVUxM
+LA0KPj4gwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgLmluX2xpc3QgPSAwLA0KPj4gwqDCoMKg
+wqDCoCB9Ow0KPj4gLcKgwqDCoMKgIGludCBlcnI7DQo+PiArwqDCoMKgwqAgaW50IGVyciA9IDA7
+DQo+Pg0KPj4gwqDCoMKgwqDCoCBmb2xpbyA9IGYyZnNfZ3JhYl9jYWNoZV9mb2xpbyhtYXBwaW5n
+LCBpbmRleCwgdHJ1ZSk7DQo+PiDCoMKgwqDCoMKgIGlmIChJU19FUlIoZm9saW8pKQ0KPj4gQEAg
+LTEyNzksNiArMTI3OSw5IEBAIHN0YXRpYyBpbnQgcmFfZGF0YV9ibG9jayhzdHJ1Y3QgaW5vZGUg
+Kmlub2RlLCANCj4+IHBnb2ZmX3QgaW5kZXgpDQo+PiDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oCBnb3RvIHB1dF9mb2xpbzsNCj4+IMKgwqDCoMKgwqAgfQ0KPj4NCj4+ICvCoMKgwqDCoCBpZiAo
+Zm9saW9fdGVzdF91cHRvZGF0ZShlZm9saW8pKQ0KPj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oCBnb3RvIHB1dF9lbmNyeXB0ZWRfcGFnZTsNCj4+ICsNCj4+IMKgwqDCoMKgwqAgZmlvLmVuY3J5
+cHRlZF9wYWdlID0gJmVmb2xpby0+cGFnZTsNCj4gDQo+IFNob3VsZCByZWxvY2F0ZSBjaGFuZ2Vz
+IGhlcmUsIG90aGVyd2lzZSwgZmlvLmVuY3J5cHRlZF9wYWdlIHdpbGwgYmUgdXNlZCANCj4gYmVm
+b3JlDQo+IGluaXRpYWxpemF0aW9uLg0KDQpVcGRhdGVkIGluIHYyLg0KDQpUaGFua3MsDQoNCj4g
+DQo+IDEyOTnCoMKgwqDCoMKgwqDCoMKgIHJldHVybiAwOw0KPiAxMzAwIHB1dF9lbmNyeXB0ZWRf
+cGFnZToNCj4gMTMwMcKgwqDCoMKgwqDCoMKgwqAgZjJmc19wdXRfcGFnZShmaW8uZW5jcnlwdGVk
+X3BhZ2UsIHRydWUpOw0KPiAxMzAyIHB1dF9mb2xpbzoNCj4gMTMwM8KgwqDCoMKgwqDCoMKgwqAg
+ZjJmc19mb2xpb19wdXQoZm9saW8sIHRydWUpOw0KPiAxMzA0wqDCoMKgwqDCoMKgwqDCoCByZXR1
+cm4gZXJyOw0KPiANCj4gVGhhbmtzLA0KPiANCj4+DQo+PiDCoMKgwqDCoMKgIGVyciA9IGYyZnNf
+c3VibWl0X3BhZ2VfYmlvKCZmaW8pOw0KPiANCg0KCl9fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fCkxpbnV4LWYyZnMtZGV2ZWwgbWFpbGluZyBsaXN0CkxpbnV4
+LWYyZnMtZGV2ZWxAbGlzdHMuc291cmNlZm9yZ2UubmV0Cmh0dHBzOi8vbGlzdHMuc291cmNlZm9y
+Z2UubmV0L2xpc3RzL2xpc3RpbmZvL2xpbnV4LWYyZnMtZGV2ZWwK
