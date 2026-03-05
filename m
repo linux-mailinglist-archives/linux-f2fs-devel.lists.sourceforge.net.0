@@ -2,41 +2,41 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id QGTLOnWSqWmoAAEAu9opvQ
+	id wIJgKniSqWmoAAEAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 05 Mar 2026 15:25:57 +0100
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 05 Mar 2026 15:26:00 +0100
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2D5A72134F2
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 05 Mar 2026 15:25:57 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 45D092134FA
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 05 Mar 2026 15:26:00 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
 	Subject:In-Reply-To:MIME-Version:References:Message-ID:To:From:Date:Sender:
 	Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
 	:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=zS/XIBq/1CXDFuiVuFsx+qvPzaiECo6lrY9laXtvlAs=; b=TxBt/qTeJHeONxJv3Z2g+yVe/j
-	J8Frs3fKttaUF4488ZrHXE4qp36lvXT7en/fve6BJGtA2GCV3PB21Z/tT4bCgp/2D1flEhuCnpFEi
-	j4z1sn4H2iyIVkqwG5VZ6aSysjUXwTiMvWz44BNAiPulnwd1H7owUnEsaoOOjusKYsbo=;
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=e8qfyoSPyPfjE0jCCqLhRQvm/sqiAGHIjfAWqfboNlU=; b=JzTgLLHIxF78Lre8PyRJuAkwFJ
+	0HstUGxNRtiHFkm1Qdy7PZ6vNSPQ4B234oiP7u9yQZq50/1/x6NGGJ1Z9DhqEi7f/o7d1t0Ug6bDq
+	YBGHYY+Tzi9STKSCsCLfn73NC1mQgxSUrvr5N8rl1AITNtDvSZQa6U9KfuQbs5s07L4s=;
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vy9e8-0002U1-J7;
-	Thu, 05 Mar 2026 14:25:48 +0000
+	id 1vy9eI-0000go-6I;
+	Thu, 05 Mar 2026 14:25:58 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95) (envelope-from
  <BATV+2e11e6930e970eb8572e+8229+infradead.org+hch@bombadil.srs.infradead.org>)
- id 1vy9e7-0002Ts-U8; Thu, 05 Mar 2026 14:25:47 +0000
+ id 1vy9eG-0000gX-KG; Thu, 05 Mar 2026 14:25:57 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Q7WgSM2wxChLNQuC1Kvn6fELh/kLhkbo4HJpx2Cfu6A=; b=K9FUcR9z2/NPHbxDIHrq9tcdYm
- vlweEfXpdpDMWXF8UoheYG+8L6xhKqaGrTpRRYpvRryXswZMPnTbzHzgCd/DERh8aX0/UBotMReLD
- An9IMeyHe3kwhsuOWZelA8g1z4DbH6p9EZdis3wDicBYv8XMmFQGWqfjP/I5tJiML0a8=;
+ bh=M7NmYC/Iylm9myghHwqILim55SAUt9QrM+UZYk0eJlw=; b=j5esBE4hjpQc2wWrju+Iw8L8OV
+ 9kS8HhejUN8GDHi7XnYGtNWqNrw/gQrudTZrL33AgG9W74fyccWkuVb9/pKTJXyRXGnVUFWNU4GPk
+ uKdYwtjlq1ksEd02Wiz7aabGAHfSIh7poA9wjx3Wp3HW+irtZCrJpkYU5s82S2c5OKOY=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -44,35 +44,35 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=Q7WgSM2wxChLNQuC1Kvn6fELh/kLhkbo4HJpx2Cfu6A=; b=mQIYGv4O1x1+TSGBK/15ON0BOV
- kjqlXPLKT9tDrg8cLuFzNt1WPoQYnL07Ir31V921eAFgtWFIRjcpCmTE+rzhC3JnttwCFYuWoDmON
- xExUBipLrAjGtiOdwMsmpVq0ADyWXlJY7tOohjVGhONUPTMaJPFDnl5zFW2LuXY58E/0=;
+ bh=M7NmYC/Iylm9myghHwqILim55SAUt9QrM+UZYk0eJlw=; b=LiISFaIysWTwyLDC+4AwQ7ohEf
+ gyLMSrey2NXJXlpnb4lccYrBFDDGoDKr/6ULMjzAPSO0N44QrB0S/LTAOkzppFn649/U3p5pLXvYh
+ Bl8NCi24WnWZAvsvlJjjnMsVpCyHcHlf5Uxfi5IRhkyZpdboujQoumVM94MbeoGibCBE=;
 Received: from bombadil.infradead.org ([198.137.202.133])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vy9e7-000476-HV; Thu, 05 Mar 2026 14:25:47 +0000
+ id 1vy9eH-00047O-2S; Thu, 05 Mar 2026 14:25:57 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=bombadil.20210309; h=In-Reply-To:Content-Type:MIME-Version
  :References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
  Content-Transfer-Encoding:Content-ID:Content-Description;
- bh=Q7WgSM2wxChLNQuC1Kvn6fELh/kLhkbo4HJpx2Cfu6A=; b=lH0MXtHysHRHd3GA37b3KZTjyP
- uu4y4Wtum5SU6K6sPfQMgC1wjjkW4oCqsV4k/47t6pQLQeF8ZoEj/MCqcOOGspH7qzymaVtmQP+Xz
- McOy8ppewKfneb0WSeWQnqvtEDYc/dlx8W/zl9H7IajaOG+qhDprLRbWd56Gq6X58gqQbt72A/1Fu
- 57Ga2O0/96vpcbtKCzVO+AvNbbfp5XHKwrSU0HjpCts8yao8Gtx0uNB3CTwnNFoO22s1yTa6uj5cz
- t5l/w2CXYVAlbsn9+teUymKx7c1e2jxul2t/6h7WcREQXT8EksTsachxtLADsrQgvaMckHOQQ2x5B
- kI8111qA==;
+ bh=M7NmYC/Iylm9myghHwqILim55SAUt9QrM+UZYk0eJlw=; b=N/OnFzWa9k33Gb8WoaORaZf8/1
+ omQzMxzv7AKB0iGBOiFBTlfDd8cv/SFY2cN/xlhCF9LD4axDr458b3KkJDHIqY9jaYSeX0Iuke/ea
+ ruLhr6C+ymLhOMKavxBklyL56gQe5kOFHaR9GqikFPQ4+YspElC14XRfWh6kM52omEOHgMpsSREro
+ y5uto1k++Slfwuo7nq2YzlvQFOIu0vNsS5w8AUmDYAa3V8L257/vRobIemRsPwt43jEH4dMBKvjE9
+ qvJU8j7WutreciL7iwRXCEmJf59WsaeHF8hGB2PcyqrdNOf6OBCyjpqgu7qzQ+34Omj2U+HU1z4kP
+ lBT6VZKQ==;
 Received: from hch by bombadil.infradead.org with local (Exim 4.98.2 #2 (Red
- Hat Linux)) id 1vy9ck-00000001ywt-2yR7;
- Thu, 05 Mar 2026 14:24:22 +0000
-Date: Thu, 5 Mar 2026 06:24:22 -0800
+ Hat Linux)) id 1vy9dP-00000001z65-3qix;
+ Thu, 05 Mar 2026 14:25:03 +0000
+Date: Thu, 5 Mar 2026 06:25:03 -0800
 From: Christoph Hellwig <hch@infradead.org>
 To: Jeff Layton <jlayton@kernel.org>
-Message-ID: <aamSFgXhrORAJLBC@infradead.org>
+Message-ID: <aamSP0KKicK3dvIf@infradead.org>
 References: <20260304-iino-u64-v3-0-2257ad83d372@kernel.org>
- <20260304-iino-u64-v3-1-2257ad83d372@kernel.org>
+ <20260304-iino-u64-v3-12-2257ad83d372@kernel.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20260304-iino-u64-v3-1-2257ad83d372@kernel.org>
+In-Reply-To: <20260304-iino-u64-v3-12-2257ad83d372@kernel.org>
 X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by
  bombadil.infradead.org. See http://www.infradead.org/rpr.html
 X-Spam-Score: -0.1 (/)
@@ -82,9 +82,7 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  > extern struct inode *ilookup5_nowait(struct super_block
- *sb, > - unsigned long hashval, int (*test)(struct inode *, void *), > + u64
- hashval, int (*test)(struct inode *, void *), > void *data, bool [...] 
+ Content preview:  Looks good: Reviewed-by: Christoph Hellwig <hch@lst.de> 
  Content analysis details:   (-0.1 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -93,9 +91,9 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
-X-Headers-End: 1vy9e7-000476-HV
-Subject: Re: [f2fs-dev] [PATCH v3 01/12] vfs: widen inode hash/lookup
- functions to u64
+X-Headers-End: 1vy9eH-00047O-2S
+Subject: Re: [f2fs-dev] [PATCH v3 12/12] treewide: change inode->i_ino from
+ unsigned long to u64
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -206,14 +204,14 @@ Cc: Latchesar Ionkov <lucho@ionkov.net>, nvdimm@lists.linux.dev,
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
-X-Rspamd-Queue-Id: 2D5A72134F2
+X-Rspamd-Queue-Id: 45D092134FA
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [0.49 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	RWL_MAILSPIKE_EXCELLENT(-0.40)[216.105.38.7:from];
 	MAILLIST(-0.20)[mailman];
+	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7:c];
 	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
-	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7];
 	MIME_GOOD(-0.10)[text/plain];
 	DMARC_POLICY_SOFTFAIL(0.10)[infradead.org : SPF not aligned (relaxed), DKIM not aligned (relaxed),none];
 	HAS_LIST_UNSUB(-0.01)[];
@@ -240,19 +238,7 @@ X-Spamd-Result: default: False [0.49 / 15.00];
 	FORGED_SENDER_MAILLIST(0.00)[]
 X-Rspamd-Action: no action
 
->  extern struct inode *ilookup5_nowait(struct super_block *sb,
-> -		unsigned long hashval, int (*test)(struct inode *, void *),
-> +		u64 hashval, int (*test)(struct inode *, void *),
->  		void *data, bool *isnew);
-> -extern struct inode *ilookup5(struct super_block *sb, unsigned long hashval,
-> +extern struct inode *ilookup5(struct super_block *sb, u64 hashval,
->  		int (*test)(struct inode *, void *), void *data);
-
-...
-
-Can you please drop all these pointless externs while you're at it?
-
-Otherwise looks good:
+Looks good:
 
 Reviewed-by: Christoph Hellwig <hch@lst.de>
 
