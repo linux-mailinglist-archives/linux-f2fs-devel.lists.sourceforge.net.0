@@ -2,108 +2,105 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id sIYsLhC+qmlXWQEAu9opvQ
+	id sJDGG2W+qmlXWQEAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 06 Mar 2026 12:44:16 +0100
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 06 Mar 2026 12:45:41 +0100
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id BA7A121FD07
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 06 Mar 2026 12:44:15 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id B770D21FD66
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 06 Mar 2026 12:45:40 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
 	List-Unsubscribe:List-Id:Subject:In-Reply-To:MIME-Version:References:
 	Message-ID:To:Date:Sender:Content-ID:Content-Description:Resent-Date:
 	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=1k1YOQ9xWkFqk29tITlJxci8icKgKuCdli9m2zf8nEE=; b=ixUD+jv/idBnVhlbAnqxm5xMCx
-	NYsMFLkmGOo4J6ajUOYq26U54NS+WVCaaY7chEPhUmZge2vjgtrEVie2sKOeiLwj59vXFja59Qguk
-	ajDRXN1u3f88bX6ENikWBucl7XL5BvIaVfJgZfmU91F3ATMrScweACg80cBStiUjDgRY=;
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=7jzeOt6YJwBF/eFOEgbaBX9lDb5y7tUP8lgBEyBJzhU=; b=VCVztkaQs5mLw3E3d6b/5DO4RU
+	m8cs55sNJTLSkaZeEZJ0bDPj1wysstAMNT8TuVKlu/6db0v988oXn4wvpyrEwjsJQJViO4C+NGQJp
+	jtDo5TjbLPgIyWSe2Um/Q6yvllE/jM8OB2yB10GVuyNeM5kcJkR8uYpU0WEG6A68oF6U=;
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vyTbI-0000oU-Kk;
-	Fri, 06 Mar 2026 11:44:12 +0000
+	id 1vyTce-0005TP-JC;
+	Fri, 06 Mar 2026 11:45:37 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <ljs@kernel.org>) id 1vyTbG-0000oB-95
+ (envelope-from <ljs@kernel.org>) id 1vyTcc-0005TH-S9
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 06 Mar 2026 11:44:10 +0000
+ Fri, 06 Mar 2026 11:45:35 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Transfer-Encoding:Content-Type:
- MIME-Version:References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=sRz34eImcHxKTmTajF2SNiroZjup4ZwAoVZb1kBuQeM=; b=ZLTwVYOC4znfh+YYR50TWIsq39
- ORLYbKRXWnzwjdegvIXUrzCpLHJb+kqOl1E1zVapL8Nf4kTVSuC9WGpL+Mb4zJ5J3o37tA0PWQ2W0
- XHmxhjVHilkidyA/8BIguF8Zlfrp8AkoTqIp9txY4uBFXTTRf8D5wWwpi4WDFPR0zJ8o=;
+ bh=XKGG0630aPxK92Bt5eiVwX3VxA8FpDHPW+jFpl95B+k=; b=E1WQr5HPBy9ifzPZTVYcS7OAGz
+ O6/d0xQmnKLyij+8umg57s9B3giKw+fDF6E6WQuXUHJWAr5/uq7R8zgi7Myh++AfN3OdnIP/PI+Ln
+ OEk9pEOZ8m56f1kaUz/I43EyMueHnYKJpZGTsbzKGAg1RxagMLdEVyssLENBV/3dyZLo=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Transfer-Encoding:Content-Type:MIME-Version:
- References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=sRz34eImcHxKTmTajF2SNiroZjup4ZwAoVZb1kBuQeM=; b=MGUY49WpPOriIkLteEQOXlZeo5
- aRyMLM+CrDHqhe4qPq3FgdS5IzhXqLG2Q+jJylJrRCfdZYc+sOvOhZw71b/i6vlFyFgl78HdyZ75i
- lO7khtvLdlWN/LzMcV2v3POfASKgbLnjDLia6n4GlxvO5ZZrLzEvGQ7BNvrqb37Neggw=;
+ bh=XKGG0630aPxK92Bt5eiVwX3VxA8FpDHPW+jFpl95B+k=; b=c6KvYNztOWbFvs84UnniDW1mv1
+ YyWE3k4zz9oklFLZHb9rq53FNKuEOaGuTfZBIae7rr4yWFbUUk6w6F+akJGYy6mSVWCCzSxPvWYeX
+ uZvBgGIKAcY34sJgT7pyKzYLtuWk1zrV28XJi4ohGQXj+Jrap0duTM/6m1l9XLApJ8yU=;
 Received: from tor.source.kernel.org ([172.105.4.254])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vyTbE-0004Zv-MX for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 06 Mar 2026 11:44:10 +0000
+ id 1vyTcc-0004jg-H8 for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 06 Mar 2026 11:45:35 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id F3F0C6012A;
- Fri,  6 Mar 2026 11:44:02 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 108AAC4CEF7;
- Fri,  6 Mar 2026 11:44:02 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id BCBCD60131;
+ Fri,  6 Mar 2026 11:45:28 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id D9A66C4CEF7;
+ Fri,  6 Mar 2026 11:45:26 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1772797442;
- bh=UFLs+/Qh5B2lTG5nwZRUtZBh7NyF4LyaDtaPQPhqU4U=;
+ s=k20201202; t=1772797528;
+ bh=R0Pw6Rvi1Mhd+owNp6fekaCHGfNY8HGW5Ezw3BximRg=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=kzv4kDn96sFE5pUZm0OV/+klHhlYaq8zv1qUjwhr7B2Luj85FRSNNC06RexgRAv/h
- auzHR1WHrHelcxk34dLr7L5HAVRB7PpQylFi9a3IRZ5WfWmH+UIrZQSa5p2TISvcyA
- vH3lMHcEfKK2sk5Ek3p0lBWrveEiz2VB6RGNe6Oki58t/J79jgbolhU8ufG+wysAs9
- Rk0sFZ+5qoJ1RYUmVIoOeYozjlcjOHw4UmpKcmyBToP8QjHH6OYa0rV1Jbtv0JngFP
- HCYWKG1ojXfBGM2OLs6Xy7ZyW41psNotDrjf9qMqyP7/LZldTtaWB+Wtr8QN5RJ3iM
- 0PNDWlV6idOfw==
-Date: Fri, 6 Mar 2026 11:43:59 +0000
+ b=fSK/XAQLAWrXgjeiTk3XlTolP/BrZo51IJvpeJZGw2osWtvnYdKil+TQMDx8gWiRi
+ WjuQV6ZeyS/m6ni5W9gNsA2w9RKNJwzanT8/GnfMrboUr9Gbo4aVh2Mn/o2+vlLsjv
+ 4PWo7PC7OublPZdNgrtwgO4Z2w9v6j7fcHKxDxv09GvTy61OlC8iHrQfKGPJGqGONd
+ M0ALOZf6QGWhuKnQcihp+k2WJXsFw4+ryjYEvUIiElVerrlDn/O4aKeIuaVu+rMseL
+ zWWevBBNjgHPZpEgylrlPgorL36cHHh2UT5GUH7Mk8QSGuUi3c21N1pC1/msfyBSRQ
+ 8CjN9YQXQSKGA==
+Date: Fri, 6 Mar 2026 11:45:24 +0000
 To: Tal Zussman <tz2294@columbia.edu>
-Message-ID: <0ff6ba9e-f5d8-43a9-bb79-4a87dc6274d9@lucifer.local>
+Message-ID: <56265c07-962d-4bfc-b332-17f04c97429e@lucifer.local>
 References: <20260225-pagevec_cleanup-v2-0-716868cc2d11@columbia.edu>
- <20260225-pagevec_cleanup-v2-3-716868cc2d11@columbia.edu>
+ <20260225-pagevec_cleanup-v2-4-716868cc2d11@columbia.edu>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20260225-pagevec_cleanup-v2-3-716868cc2d11@columbia.edu>
+In-Reply-To: <20260225-pagevec_cleanup-v2-4-716868cc2d11@columbia.edu>
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Wed, Feb 25, 2026 at 06:44:27PM -0500, Tal Zussman wrote:
- > struct pagevec was removed in commit 1e0877d58b1e ("mm: remove struct >
- pagevec"). Rename include/linux/pagevec.h to reflect reality and [...] 
+ Content preview:  On Wed, Feb 25, 2026 at 06:44:28PM -0500, Tal Zussman wrote:
+ > struct pagevec no longer exists. Rename the macro appropriately. > >
+ Signed-off-by:
+ Tal Zussman <tz2294@columbia.edu> Nice thanks for this! LGTM, so: 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.0 URIBL_BLOCKED ADMINISTRATOR NOTICE: The query to URIBL was blocked.
- See
- http://wiki.apache.org/spamassassin/DnsBlocklists#dnsbl-block
- for more information. [URI: linux-mm.org]
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1vyTbE-0004Zv-MX
-Subject: Re: [f2fs-dev] [PATCH v2 3/4] folio_batch: Rename pagevec.h to
- folio_batch.h
+X-Headers-End: 1vyTcc-0004jg-H8
+Subject: Re: [f2fs-dev] [PATCH v2 4/4] folio_batch: Rename PAGEVEC_SIZE to
+ FOLIO_BATCH_SIZE
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -169,10 +166,10 @@ Cc: nvdimm@lists.linux.dev, Paulo Alcantara <pc@manguebit.org>,
  Ryusuke Konishi <konishi.ryusuke@gmail.com>, Wei Xu <weixugc@google.com>,
  Thomas Zimmermann <tzimmermann@suse.de>, Johannes Weiner <hannes@cmpxchg.org>,
  linux-btrfs@vger.kernel.org, Joel Becker <jlbec@evilplan.org>
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
-X-Rspamd-Queue-Id: BA7A121FD07
+X-Rspamd-Queue-Id: B770D21FD66
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [-7.11 / 15.00];
 	WHITELIST_DMARC(-7.00)[sourceforge.net:D:+];
@@ -215,565 +212,186 @@ X-Spamd-Result: default: False [-7.11 / 15.00];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
 	MISSING_XM_UA(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[kvack.org:email,lucifer.local:mid,lists.sourceforge.net:dkim,lists.sourceforge.net:rdns,lists.sourceforge.net:helo,columbia.edu:email]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[columbia.edu:email,lists.sourceforge.net:dkim,lists.sourceforge.net:rdns,lists.sourceforge.net:helo,lucifer.local:mid]
 X-Rspamd-Action: no action
 
-On Wed, Feb 25, 2026 at 06:44:27PM -0500, Tal Zussman wrote:
-> struct pagevec was removed in commit 1e0877d58b1e ("mm: remove struct
-> pagevec"). Rename include/linux/pagevec.h to reflect reality and update
-> includes tree-wide. Add the new filename to MAINTAINERS explicitly, as
-> it no longer matches the "include/linux/page[-_]*" pattern in MEMORY
-> MANAGEMENT - CORE.
+On Wed, Feb 25, 2026 at 06:44:28PM -0500, Tal Zussman wrote:
+> struct pagevec no longer exists. Rename the macro appropriately.
 >
 > Signed-off-by: Tal Zussman <tz2294@columbia.edu>
 
-Nice, thanks for this! LGTM, so:
+Nice thanks for this! LGTM, so:
 
 Reviewed-by: Lorenzo Stoakes (Oracle) <ljs@kernel.org>
 
 > ---
->  MAINTAINERS                                | 1 +
->  drivers/gpu/drm/drm_gem.c                  | 2 +-
->  drivers/gpu/drm/i915/gem/i915_gem_shmem.c  | 2 +-
->  drivers/gpu/drm/i915/gt/intel_gtt.h        | 2 +-
->  drivers/gpu/drm/i915/i915_gpu_error.c      | 2 +-
->  fs/btrfs/compression.c                     | 2 +-
->  fs/btrfs/extent_io.c                       | 2 +-
->  fs/btrfs/tests/extent-io-tests.c           | 2 +-
->  fs/buffer.c                                | 2 +-
->  fs/ceph/addr.c                             | 2 +-
->  fs/ext4/inode.c                            | 2 +-
->  fs/f2fs/checkpoint.c                       | 2 +-
->  fs/f2fs/compress.c                         | 2 +-
->  fs/f2fs/data.c                             | 2 +-
->  fs/f2fs/node.c                             | 2 +-
->  fs/gfs2/aops.c                             | 2 +-
->  fs/hugetlbfs/inode.c                       | 2 +-
->  fs/nilfs2/btree.c                          | 2 +-
->  fs/nilfs2/page.c                           | 2 +-
->  fs/nilfs2/segment.c                        | 2 +-
->  fs/ramfs/file-nommu.c                      | 2 +-
->  include/linux/{pagevec.h =3D> folio_batch.h} | 8 ++++----
->  include/linux/folio_queue.h                | 2 +-
->  include/linux/iomap.h                      | 2 +-
->  include/linux/sunrpc/svc.h                 | 2 +-
->  include/linux/writeback.h                  | 2 +-
->  mm/filemap.c                               | 2 +-
->  mm/gup.c                                   | 2 +-
->  mm/memcontrol.c                            | 2 +-
->  mm/mlock.c                                 | 2 +-
->  mm/page-writeback.c                        | 2 +-
->  mm/page_alloc.c                            | 2 +-
->  mm/shmem.c                                 | 2 +-
->  mm/swap.c                                  | 2 +-
->  mm/swap_state.c                            | 2 +-
->  mm/truncate.c                              | 2 +-
->  mm/vmscan.c                                | 2 +-
->  37 files changed, 40 insertions(+), 39 deletions(-)
+>  fs/btrfs/extent_io.c        | 4 ++--
+>  include/linux/folio_batch.h | 6 +++---
+>  include/linux/folio_queue.h | 6 +++---
+>  mm/shmem.c                  | 4 ++--
+>  mm/swap.c                   | 2 +-
+>  mm/swap_state.c             | 2 +-
+>  mm/truncate.c               | 6 +++---
+>  7 files changed, 15 insertions(+), 15 deletions(-)
 >
-> diff --git a/MAINTAINERS b/MAINTAINERS
-> index e4572a36afd2..f50421e65cb1 100644
-> --- a/MAINTAINERS
-> +++ b/MAINTAINERS
-> @@ -16664,6 +16664,7 @@ L:	linux-mm@kvack.org
->  S:	Maintained
->  W:	http://www.linux-mm.org
->  T:	git git://git.kernel.org/pub/scm/linux/kernel/git/akpm/mm
-> +F:	include/linux/folio_batch.h
->  F:	include/linux/gfp.h
->  F:	include/linux/gfp_types.h
->  F:	include/linux/highmem.h
-> diff --git a/drivers/gpu/drm/drm_gem.c b/drivers/gpu/drm/drm_gem.c
-> index 891c3bff5ae0..dc4534fb175c 100644
-> --- a/drivers/gpu/drm/drm_gem.c
-> +++ b/drivers/gpu/drm/drm_gem.c
-> @@ -38,7 +38,7 @@
->  #include <linux/mman.h>
->  #include <linux/module.h>
->  #include <linux/pagemap.h>
-> -#include <linux/pagevec.h>
-> +#include <linux/folio_batch.h>
->  #include <linux/sched/mm.h>
->  #include <linux/shmem_fs.h>
->  #include <linux/slab.h>
-> diff --git a/drivers/gpu/drm/i915/gem/i915_gem_shmem.c b/drivers/gpu/drm/=
-i915/gem/i915_gem_shmem.c
-> index c6c64ba29bc4..07025b547c94 100644
-> --- a/drivers/gpu/drm/i915/gem/i915_gem_shmem.c
-> +++ b/drivers/gpu/drm/i915/gem/i915_gem_shmem.c
-> @@ -3,7 +3,7 @@
->   * Copyright =A9 2014-2016 Intel Corporation
->   */
->
-> -#include <linux/pagevec.h>
-> +#include <linux/folio_batch.h>
->  #include <linux/shmem_fs.h>
->  #include <linux/swap.h>
->  #include <linux/uio.h>
-> diff --git a/drivers/gpu/drm/i915/gt/intel_gtt.h b/drivers/gpu/drm/i915/g=
-t/intel_gtt.h
-> index 9d3a3ad567a0..b54ee4f25af1 100644
-> --- a/drivers/gpu/drm/i915/gt/intel_gtt.h
-> +++ b/drivers/gpu/drm/i915/gt/intel_gtt.h
-> @@ -19,7 +19,7 @@
->  #include <linux/io-mapping.h>
->  #include <linux/kref.h>
->  #include <linux/mm.h>
-> -#include <linux/pagevec.h>
-> +#include <linux/folio_batch.h>
->  #include <linux/scatterlist.h>
->  #include <linux/workqueue.h>
->
-> diff --git a/drivers/gpu/drm/i915/i915_gpu_error.c b/drivers/gpu/drm/i915=
-/i915_gpu_error.c
-> index a99b4e45d26c..ffe5f24594c9 100644
-> --- a/drivers/gpu/drm/i915/i915_gpu_error.c
-> +++ b/drivers/gpu/drm/i915/i915_gpu_error.c
-> @@ -31,7 +31,7 @@
->  #include <linux/debugfs.h>
->  #include <linux/highmem.h>
->  #include <linux/nmi.h>
-> -#include <linux/pagevec.h>
-> +#include <linux/folio_batch.h>
->  #include <linux/scatterlist.h>
->  #include <linux/string_helpers.h>
->  #include <linux/utsname.h>
-> diff --git a/fs/btrfs/compression.c b/fs/btrfs/compression.c
-> index 790518a8c803..dbc634d10ad3 100644
-> --- a/fs/btrfs/compression.c
-> +++ b/fs/btrfs/compression.c
-> @@ -8,7 +8,7 @@
->  #include <linux/file.h>
->  #include <linux/fs.h>
->  #include <linux/pagemap.h>
-> -#include <linux/pagevec.h>
-> +#include <linux/folio_batch.h>
->  #include <linux/highmem.h>
->  #include <linux/kthread.h>
->  #include <linux/time.h>
 > diff --git a/fs/btrfs/extent_io.c b/fs/btrfs/extent_io.c
-> index 744a1fff6eef..c373d113f1e7 100644
+> index c373d113f1e7..d82ca509503f 100644
 > --- a/fs/btrfs/extent_io.c
 > +++ b/fs/btrfs/extent_io.c
-> @@ -11,7 +11,7 @@
->  #include <linux/blkdev.h>
->  #include <linux/swap.h>
->  #include <linux/writeback.h>
-> -#include <linux/pagevec.h>
-> +#include <linux/folio_batch.h>
->  #include <linux/prefetch.h>
->  #include <linux/fsverity.h>
->  #include "extent_io.h"
-> diff --git a/fs/btrfs/tests/extent-io-tests.c b/fs/btrfs/tests/extent-io-=
-tests.c
-> index a0187d6163df..b2aacf846c8b 100644
-> --- a/fs/btrfs/tests/extent-io-tests.c
-> +++ b/fs/btrfs/tests/extent-io-tests.c
-> @@ -4,7 +4,7 @@
->   */
+> @@ -2095,13 +2095,13 @@ static void buffer_tree_tag_for_writeback(struct btrfs_fs_info *fs_info,
+>  struct eb_batch {
+>  	unsigned int nr;
+>  	unsigned int cur;
+> -	struct extent_buffer *ebs[PAGEVEC_SIZE];
+> +	struct extent_buffer *ebs[FOLIO_BATCH_SIZE];
+>  };
 >
->  #include <linux/pagemap.h>
-> -#include <linux/pagevec.h>
-> +#include <linux/folio_batch.h>
->  #include <linux/sched.h>
->  #include <linux/slab.h>
->  #include <linux/sizes.h>
-> diff --git a/fs/buffer.c b/fs/buffer.c
-> index 22b43642ba57..f3122160ee2d 100644
-> --- a/fs/buffer.c
-> +++ b/fs/buffer.c
-> @@ -45,7 +45,7 @@
->  #include <linux/bitops.h>
->  #include <linux/mpage.h>
->  #include <linux/bit_spinlock.h>
-> -#include <linux/pagevec.h>
-> +#include <linux/folio_batch.h>
->  #include <linux/sched/mm.h>
->  #include <trace/events/block.h>
->  #include <linux/fscrypt.h>
-> diff --git a/fs/ceph/addr.c b/fs/ceph/addr.c
-> index e87b3bb94ee8..2803511d86ef 100644
-> --- a/fs/ceph/addr.c
-> +++ b/fs/ceph/addr.c
-> @@ -7,7 +7,7 @@
->  #include <linux/swap.h>
->  #include <linux/pagemap.h>
->  #include <linux/slab.h>
-> -#include <linux/pagevec.h>
-> +#include <linux/folio_batch.h>
->  #include <linux/task_io_accounting_ops.h>
->  #include <linux/signal.h>
->  #include <linux/iversion.h>
-> diff --git a/fs/ext4/inode.c b/fs/ext4/inode.c
-> index 396dc3a5d16b..58f982885187 100644
-> --- a/fs/ext4/inode.c
-> +++ b/fs/ext4/inode.c
-> @@ -29,7 +29,7 @@
->  #include <linux/string.h>
->  #include <linux/buffer_head.h>
->  #include <linux/writeback.h>
-> -#include <linux/pagevec.h>
-> +#include <linux/folio_batch.h>
->  #include <linux/mpage.h>
->  #include <linux/rmap.h>
->  #include <linux/namei.h>
-> diff --git a/fs/f2fs/checkpoint.c b/fs/f2fs/checkpoint.c
-> index 6dd39b7de11a..0143365c07dc 100644
-> --- a/fs/f2fs/checkpoint.c
-> +++ b/fs/f2fs/checkpoint.c
-> @@ -11,7 +11,7 @@
->  #include <linux/writeback.h>
->  #include <linux/blkdev.h>
->  #include <linux/f2fs_fs.h>
-> -#include <linux/pagevec.h>
-> +#include <linux/folio_batch.h>
->  #include <linux/swap.h>
->  #include <linux/kthread.h>
->  #include <linux/delayacct.h>
-> diff --git a/fs/f2fs/compress.c b/fs/f2fs/compress.c
-> index 8c76400ba631..614e00b8ffdc 100644
-> --- a/fs/f2fs/compress.c
-> +++ b/fs/f2fs/compress.c
-> @@ -13,7 +13,7 @@
->  #include <linux/lzo.h>
->  #include <linux/lz4.h>
->  #include <linux/zstd.h>
-> -#include <linux/pagevec.h>
-> +#include <linux/folio_batch.h>
->
->  #include "f2fs.h"
->  #include "node.h"
-> diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
-> index 338df7a2aea6..90e8ef625d82 100644
-> --- a/fs/f2fs/data.c
-> +++ b/fs/f2fs/data.c
-> @@ -10,7 +10,7 @@
->  #include <linux/sched/mm.h>
->  #include <linux/mpage.h>
->  #include <linux/writeback.h>
-> -#include <linux/pagevec.h>
-> +#include <linux/folio_batch.h>
->  #include <linux/blkdev.h>
->  #include <linux/bio.h>
->  #include <linux/blk-crypto.h>
-> diff --git a/fs/f2fs/node.c b/fs/f2fs/node.c
-> index 74992fd9c9b6..ba0272314528 100644
-> --- a/fs/f2fs/node.c
-> +++ b/fs/f2fs/node.c
-> @@ -10,7 +10,7 @@
->  #include <linux/mpage.h>
->  #include <linux/sched/mm.h>
->  #include <linux/blkdev.h>
-> -#include <linux/pagevec.h>
-> +#include <linux/folio_batch.h>
->  #include <linux/swap.h>
->
->  #include "f2fs.h"
-> diff --git a/fs/gfs2/aops.c b/fs/gfs2/aops.c
-> index e79ad087512a..dae3dc4ee6f7 100644
-> --- a/fs/gfs2/aops.c
-> +++ b/fs/gfs2/aops.c
-> @@ -10,7 +10,7 @@
->  #include <linux/completion.h>
->  #include <linux/buffer_head.h>
->  #include <linux/pagemap.h>
-> -#include <linux/pagevec.h>
-> +#include <linux/folio_batch.h>
->  #include <linux/mpage.h>
->  #include <linux/fs.h>
->  #include <linux/writeback.h>
-> diff --git a/fs/hugetlbfs/inode.c b/fs/hugetlbfs/inode.c
-> index 22c799000edb..2ec3e4231252 100644
-> --- a/fs/hugetlbfs/inode.c
-> +++ b/fs/hugetlbfs/inode.c
-> @@ -25,7 +25,7 @@
->  #include <linux/ctype.h>
->  #include <linux/backing-dev.h>
->  #include <linux/hugetlb.h>
-> -#include <linux/pagevec.h>
-> +#include <linux/folio_batch.h>
->  #include <linux/fs_parser.h>
->  #include <linux/mman.h>
->  #include <linux/slab.h>
-> diff --git a/fs/nilfs2/btree.c b/fs/nilfs2/btree.c
-> index dd0c8e560ef6..b400cfcdc803 100644
-> --- a/fs/nilfs2/btree.c
-> +++ b/fs/nilfs2/btree.c
-> @@ -10,7 +10,7 @@
->  #include <linux/slab.h>
->  #include <linux/string.h>
->  #include <linux/errno.h>
-> -#include <linux/pagevec.h>
-> +#include <linux/folio_batch.h>
->  #include "nilfs.h"
->  #include "page.h"
->  #include "btnode.h"
-> diff --git a/fs/nilfs2/page.c b/fs/nilfs2/page.c
-> index 56c4da417b6a..a9d8aa65416f 100644
-> --- a/fs/nilfs2/page.c
-> +++ b/fs/nilfs2/page.c
-> @@ -14,7 +14,7 @@
->  #include <linux/page-flags.h>
->  #include <linux/list.h>
->  #include <linux/highmem.h>
-> -#include <linux/pagevec.h>
-> +#include <linux/folio_batch.h>
->  #include <linux/gfp.h>
->  #include "nilfs.h"
->  #include "page.h"
-> diff --git a/fs/nilfs2/segment.c b/fs/nilfs2/segment.c
-> index 098a3bd103e0..6d62de64a309 100644
-> --- a/fs/nilfs2/segment.c
-> +++ b/fs/nilfs2/segment.c
-> @@ -19,7 +19,7 @@
->  #include <linux/freezer.h>
->  #include <linux/kthread.h>
->  #include <linux/crc32.h>
-> -#include <linux/pagevec.h>
-> +#include <linux/folio_batch.h>
->  #include <linux/slab.h>
->  #include <linux/sched/signal.h>
->
-> diff --git a/fs/ramfs/file-nommu.c b/fs/ramfs/file-nommu.c
-> index 0f8e838ece07..2f79bcb89d2e 100644
-> --- a/fs/ramfs/file-nommu.c
-> +++ b/fs/ramfs/file-nommu.c
-> @@ -14,7 +14,7 @@
->  #include <linux/string.h>
->  #include <linux/backing-dev.h>
->  #include <linux/ramfs.h>
-> -#include <linux/pagevec.h>
-> +#include <linux/folio_batch.h>
->  #include <linux/mman.h>
->  #include <linux/sched.h>
->  #include <linux/slab.h>
-> diff --git a/include/linux/pagevec.h b/include/linux/folio_batch.h
-> similarity index 95%
-> rename from include/linux/pagevec.h
-> rename to include/linux/folio_batch.h
-> index 007affabf335..a2f3d3043f7e 100644
-> --- a/include/linux/pagevec.h
-> +++ b/include/linux/folio_batch.h
-> @@ -1,13 +1,13 @@
->  /* SPDX-License-Identifier: GPL-2.0 */
->  /*
-> - * include/linux/pagevec.h
-> + * include/linux/folio_batch.h
->   *
->   * In many places it is efficient to batch an operation up against multi=
-ple
->   * folios.  A folio_batch is a container which is used for that.
->   */
->
-> -#ifndef _LINUX_PAGEVEC_H
-> -#define _LINUX_PAGEVEC_H
-> +#ifndef _LINUX_FOLIO_BATCH_H
-> +#define _LINUX_FOLIO_BATCH_H
->
->  #include <linux/types.h>
->
-> @@ -102,4 +102,4 @@ static inline void folio_batch_release(struct folio_b=
-atch *fbatch)
+>  static inline bool eb_batch_add(struct eb_batch *batch, struct extent_buffer *eb)
+>  {
+>  	batch->ebs[batch->nr++] = eb;
+> -	return (batch->nr < PAGEVEC_SIZE);
+> +	return (batch->nr < FOLIO_BATCH_SIZE);
 >  }
 >
->  void folio_batch_remove_exceptionals(struct folio_batch *fbatch);
-> -#endif /* _LINUX_PAGEVEC_H */
-> +#endif /* _LINUX_FOLIO_BATCH_H */
+>  static inline void eb_batch_init(struct eb_batch *batch)
+> diff --git a/include/linux/folio_batch.h b/include/linux/folio_batch.h
+> index a2f3d3043f7e..b45946adc50b 100644
+> --- a/include/linux/folio_batch.h
+> +++ b/include/linux/folio_batch.h
+> @@ -12,7 +12,7 @@
+>  #include <linux/types.h>
+>
+>  /* 31 pointers + header align the folio_batch structure to a power of two */
+> -#define PAGEVEC_SIZE	31
+> +#define FOLIO_BATCH_SIZE	31
+>
+>  struct folio;
+>
+> @@ -29,7 +29,7 @@ struct folio_batch {
+>  	unsigned char nr;
+>  	unsigned char i;
+>  	bool percpu_pvec_drained;
+> -	struct folio *folios[PAGEVEC_SIZE];
+> +	struct folio *folios[FOLIO_BATCH_SIZE];
+>  };
+>
+>  /**
+> @@ -58,7 +58,7 @@ static inline unsigned int folio_batch_count(const struct folio_batch *fbatch)
+>
+>  static inline unsigned int folio_batch_space(const struct folio_batch *fbatch)
+>  {
+> -	return PAGEVEC_SIZE - fbatch->nr;
+> +	return FOLIO_BATCH_SIZE - fbatch->nr;
+>  }
+>
+>  /**
 > diff --git a/include/linux/folio_queue.h b/include/linux/folio_queue.h
-> index adab609c972e..0d3765fa9d1d 100644
+> index 0d3765fa9d1d..f6d5f1f127c9 100644
 > --- a/include/linux/folio_queue.h
 > +++ b/include/linux/folio_queue.h
-> @@ -14,7 +14,7 @@
->  #ifndef _LINUX_FOLIO_QUEUE_H
->  #define _LINUX_FOLIO_QUEUE_H
+> @@ -29,12 +29,12 @@
+>   */
+>  struct folio_queue {
+>  	struct folio_batch	vec;		/* Folios in the queue segment */
+> -	u8			orders[PAGEVEC_SIZE]; /* Order of each folio */
+> +	u8			orders[FOLIO_BATCH_SIZE]; /* Order of each folio */
+>  	struct folio_queue	*next;		/* Next queue segment or NULL */
+>  	struct folio_queue	*prev;		/* Previous queue segment of NULL */
+>  	unsigned long		marks;		/* 1-bit mark per folio */
+>  	unsigned long		marks2;		/* Second 1-bit mark per folio */
+> -#if PAGEVEC_SIZE > BITS_PER_LONG
+> +#if FOLIO_BATCH_SIZE > BITS_PER_LONG
+>  #error marks is not big enough
+>  #endif
+>  	unsigned int		rreq_id;
+> @@ -70,7 +70,7 @@ static inline void folioq_init(struct folio_queue *folioq, unsigned int rreq_id)
+>   */
+>  static inline unsigned int folioq_nr_slots(const struct folio_queue *folioq)
+>  {
+> -	return PAGEVEC_SIZE;
+> +	return FOLIO_BATCH_SIZE;
+>  }
 >
-> -#include <linux/pagevec.h>
-> +#include <linux/folio_batch.h>
->  #include <linux/mm.h>
->
->  /*
-> diff --git a/include/linux/iomap.h b/include/linux/iomap.h
-> index 99b7209dabd7..4551613cea2f 100644
-> --- a/include/linux/iomap.h
-> +++ b/include/linux/iomap.h
-> @@ -9,7 +9,7 @@
->  #include <linux/types.h>
->  #include <linux/mm_types.h>
->  #include <linux/blkdev.h>
-> -#include <linux/pagevec.h>
-> +#include <linux/folio_batch.h>
->
->  struct address_space;
->  struct fiemap_extent_info;
-> diff --git a/include/linux/sunrpc/svc.h b/include/linux/sunrpc/svc.h
-> index 4dc14c7a711b..a11acf5cd63b 100644
-> --- a/include/linux/sunrpc/svc.h
-> +++ b/include/linux/sunrpc/svc.h
-> @@ -20,7 +20,7 @@
->  #include <linux/lwq.h>
->  #include <linux/wait.h>
->  #include <linux/mm.h>
-> -#include <linux/pagevec.h>
-> +#include <linux/folio_batch.h>
->  #include <linux/kthread.h>
->
->  /*
-> diff --git a/include/linux/writeback.h b/include/linux/writeback.h
-> index e530112c4b3a..62552a2ce5b9 100644
-> --- a/include/linux/writeback.h
-> +++ b/include/linux/writeback.h
-> @@ -11,7 +11,7 @@
->  #include <linux/flex_proportions.h>
->  #include <linux/backing-dev-defs.h>
->  #include <linux/blk_types.h>
-> -#include <linux/pagevec.h>
-> +#include <linux/folio_batch.h>
->
->  struct bio;
->
-> diff --git a/mm/filemap.c b/mm/filemap.c
-> index 6cd7974d4ada..63f256307fdd 100644
-> --- a/mm/filemap.c
-> +++ b/mm/filemap.c
-> @@ -31,7 +31,7 @@
->  #include <linux/hash.h>
->  #include <linux/writeback.h>
->  #include <linux/backing-dev.h>
-> -#include <linux/pagevec.h>
-> +#include <linux/folio_batch.h>
->  #include <linux/security.h>
->  #include <linux/cpuset.h>
->  #include <linux/hugetlb.h>
-> diff --git a/mm/gup.c b/mm/gup.c
-> index 8e7dc2c6ee73..ad9ded39609c 100644
-> --- a/mm/gup.c
-> +++ b/mm/gup.c
-> @@ -18,7 +18,7 @@
->  #include <linux/hugetlb.h>
->  #include <linux/migrate.h>
->  #include <linux/mm_inline.h>
-> -#include <linux/pagevec.h>
-> +#include <linux/folio_batch.h>
->  #include <linux/sched/mm.h>
->  #include <linux/shmem_fs.h>
->
-> diff --git a/mm/memcontrol.c b/mm/memcontrol.c
-> index db59fad3503f..51508573963d 100644
-> --- a/mm/memcontrol.c
-> +++ b/mm/memcontrol.c
-> @@ -34,7 +34,7 @@
->  #include <linux/shmem_fs.h>
->  #include <linux/hugetlb.h>
->  #include <linux/pagemap.h>
-> -#include <linux/pagevec.h>
-> +#include <linux/folio_batch.h>
->  #include <linux/vm_event_item.h>
->  #include <linux/smp.h>
->  #include <linux/page-flags.h>
-> diff --git a/mm/mlock.c b/mm/mlock.c
-> index 2f699c3497a5..1a92d16f3684 100644
-> --- a/mm/mlock.c
-> +++ b/mm/mlock.c
-> @@ -13,7 +13,7 @@
->  #include <linux/swap.h>
->  #include <linux/swapops.h>
->  #include <linux/pagemap.h>
-> -#include <linux/pagevec.h>
-> +#include <linux/folio_batch.h>
->  #include <linux/pagewalk.h>
->  #include <linux/mempolicy.h>
->  #include <linux/syscalls.h>
-> diff --git a/mm/page-writeback.c b/mm/page-writeback.c
-> index 601a5e048d12..1009bb042ba4 100644
-> --- a/mm/page-writeback.c
-> +++ b/mm/page-writeback.c
-> @@ -33,7 +33,7 @@
->  #include <linux/sysctl.h>
->  #include <linux/cpu.h>
->  #include <linux/syscalls.h>
-> -#include <linux/pagevec.h>
-> +#include <linux/folio_batch.h>
->  #include <linux/timer.h>
->  #include <linux/sched/rt.h>
->  #include <linux/sched/signal.h>
-> diff --git a/mm/page_alloc.c b/mm/page_alloc.c
-> index d88c8c67ac0b..74b603872f34 100644
-> --- a/mm/page_alloc.c
-> +++ b/mm/page_alloc.c
-> @@ -31,7 +31,7 @@
->  #include <linux/sysctl.h>
->  #include <linux/cpu.h>
->  #include <linux/cpuset.h>
-> -#include <linux/pagevec.h>
-> +#include <linux/folio_batch.h>
->  #include <linux/memory_hotplug.h>
->  #include <linux/nodemask.h>
->  #include <linux/vmstat.h>
+>  /**
 > diff --git a/mm/shmem.c b/mm/shmem.c
-> index cfed6c3ff853..149fdb051170 100644
+> index 149fdb051170..5e7dcf5bc5d3 100644
 > --- a/mm/shmem.c
 > +++ b/mm/shmem.c
-> @@ -61,7 +61,7 @@ static struct vfsmount *shm_mnt __ro_after_init;
->  #include <linux/slab.h>
->  #include <linux/backing-dev.h>
->  #include <linux/writeback.h>
-> -#include <linux/pagevec.h>
-> +#include <linux/folio_batch.h>
->  #include <linux/percpu_counter.h>
->  #include <linux/falloc.h>
->  #include <linux/splice.h>
+> @@ -1113,7 +1113,7 @@ static void shmem_undo_range(struct inode *inode, loff_t lstart, uoff_t lend,
+>  	pgoff_t start = (lstart + PAGE_SIZE - 1) >> PAGE_SHIFT;
+>  	pgoff_t end = (lend + 1) >> PAGE_SHIFT;
+>  	struct folio_batch fbatch;
+> -	pgoff_t indices[PAGEVEC_SIZE];
+> +	pgoff_t indices[FOLIO_BATCH_SIZE];
+>  	struct folio *folio;
+>  	bool same_folio;
+>  	long nr_swaps_freed = 0;
+> @@ -1510,7 +1510,7 @@ static int shmem_unuse_inode(struct inode *inode, unsigned int type)
+>  	struct address_space *mapping = inode->i_mapping;
+>  	pgoff_t start = 0;
+>  	struct folio_batch fbatch;
+> -	pgoff_t indices[PAGEVEC_SIZE];
+> +	pgoff_t indices[FOLIO_BATCH_SIZE];
+>  	int ret = 0;
+>
+>  	do {
 > diff --git a/mm/swap.c b/mm/swap.c
-> index bb19ccbece46..2e517ede6561 100644
+> index 2e517ede6561..78b4aa811fc6 100644
 > --- a/mm/swap.c
 > +++ b/mm/swap.c
-> @@ -20,7 +20,7 @@
->  #include <linux/swap.h>
->  #include <linux/mman.h>
->  #include <linux/pagemap.h>
-> -#include <linux/pagevec.h>
-> +#include <linux/folio_batch.h>
->  #include <linux/init.h>
->  #include <linux/export.h>
->  #include <linux/mm_inline.h>
+> @@ -1018,7 +1018,7 @@ EXPORT_SYMBOL(folios_put_refs);
+>  void release_pages(release_pages_arg arg, int nr)
+>  {
+>  	struct folio_batch fbatch;
+> -	int refs[PAGEVEC_SIZE];
+> +	int refs[FOLIO_BATCH_SIZE];
+>  	struct encoded_page **encoded = arg.encoded_pages;
+>  	int i;
+>
 > diff --git a/mm/swap_state.c b/mm/swap_state.c
-> index 32d9d877bda8..a0c64db2b275 100644
+> index a0c64db2b275..6313b59d7eab 100644
 > --- a/mm/swap_state.c
 > +++ b/mm/swap_state.c
-> @@ -15,7 +15,7 @@
->  #include <linux/leafops.h>
->  #include <linux/init.h>
->  #include <linux/pagemap.h>
-> -#include <linux/pagevec.h>
-> +#include <linux/folio_batch.h>
->  #include <linux/backing-dev.h>
->  #include <linux/blkdev.h>
->  #include <linux/migrate.h>
+> @@ -385,7 +385,7 @@ void free_folio_and_swap_cache(struct folio *folio)
+>  void free_pages_and_swap_cache(struct encoded_page **pages, int nr)
+>  {
+>  	struct folio_batch folios;
+> -	unsigned int refs[PAGEVEC_SIZE];
+> +	unsigned int refs[FOLIO_BATCH_SIZE];
+>
+>  	folio_batch_init(&folios);
+>  	for (int i = 0; i < nr; i++) {
 > diff --git a/mm/truncate.c b/mm/truncate.c
-> index 12467c1bd711..df0b7a7e6aff 100644
+> index df0b7a7e6aff..2931d66c16d0 100644
 > --- a/mm/truncate.c
 > +++ b/mm/truncate.c
-> @@ -17,7 +17,7 @@
->  #include <linux/export.h>
->  #include <linux/pagemap.h>
->  #include <linux/highmem.h>
-> -#include <linux/pagevec.h>
-> +#include <linux/folio_batch.h>
->  #include <linux/task_io_accounting_ops.h>
->  #include <linux/shmem_fs.h>
->  #include <linux/rmap.h>
-> diff --git a/mm/vmscan.c b/mm/vmscan.c
-> index 7effd01a7828..7e921dbe2373 100644
-> --- a/mm/vmscan.c
-> +++ b/mm/vmscan.c
-> @@ -44,7 +44,7 @@
->  #include <linux/sysctl.h>
->  #include <linux/memory-tiers.h>
->  #include <linux/oom.h>
-> -#include <linux/pagevec.h>
-> +#include <linux/folio_batch.h>
->  #include <linux/prefetch.h>
->  #include <linux/printk.h>
->  #include <linux/dax.h>
+> @@ -369,7 +369,7 @@ void truncate_inode_pages_range(struct address_space *mapping,
+>  	pgoff_t		start;		/* inclusive */
+>  	pgoff_t		end;		/* exclusive */
+>  	struct folio_batch fbatch;
+> -	pgoff_t		indices[PAGEVEC_SIZE];
+> +	pgoff_t		indices[FOLIO_BATCH_SIZE];
+>  	pgoff_t		index;
+>  	int		i;
+>  	struct folio	*folio;
+> @@ -534,7 +534,7 @@ EXPORT_SYMBOL(truncate_inode_pages_final);
+>  unsigned long mapping_try_invalidate(struct address_space *mapping,
+>  		pgoff_t start, pgoff_t end, unsigned long *nr_failed)
+>  {
+> -	pgoff_t indices[PAGEVEC_SIZE];
+> +	pgoff_t indices[FOLIO_BATCH_SIZE];
+>  	struct folio_batch fbatch;
+>  	pgoff_t index = start;
+>  	unsigned long ret;
+> @@ -672,7 +672,7 @@ int folio_unmap_invalidate(struct address_space *mapping, struct folio *folio,
+>  int invalidate_inode_pages2_range(struct address_space *mapping,
+>  				  pgoff_t start, pgoff_t end)
+>  {
+> -	pgoff_t indices[PAGEVEC_SIZE];
+> +	pgoff_t indices[FOLIO_BATCH_SIZE];
+>  	struct folio_batch fbatch;
+>  	pgoff_t index;
+>  	int i;
 >
 > --
 > 2.39.5
