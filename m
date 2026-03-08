@@ -2,121 +2,111 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id YI6cLq9urWnN2wEAu9opvQ
+	id iL8qEAmLrWkA4QEAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 08 Mar 2026 13:42:23 +0100
+	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 08 Mar 2026 15:43:21 +0100
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 149F2230414
-	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 08 Mar 2026 13:42:22 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0C4A2230BBE
+	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 08 Mar 2026 15:43:19 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:
+	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
-	Subject:To:From:Message-ID:In-Reply-To:Date:MIME-Version:Sender:Reply-To:Cc:
-	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
-	Resent-To:Resent-Cc:Resent-Message-ID:References:List-Owner;
-	bh=OGV+m3c7UaqixVB72kuOB++9hho7PUU9KEFgxR+m3y4=; b=G4Ff6Vax5QaNuPGo/8uiXs5nXU
-	SqVCv0JLG9d6bSJprRqFNbZ5kE+Kcu54oyFwxdVNwNtcLoh59Lf+Hv0bP4u5np2kaCn37GyaldidR
-	MPks7q7pfDTC6oizack7Gv5ZGQK92nAAUIT8eFbc7RbhQX32lIfCS1BwrjYirJXympRY=;
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	Subject:MIME-Version:Message-ID:Date:To:From:Sender:Reply-To:Content-ID:
+	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+	:Resent-Message-ID:In-Reply-To:References:List-Owner;
+	bh=du7wnqcwuBe2H7DP+kPryfQISd2za3krBpc47vlGe30=; b=Iz9WHhhLcRSdNZ7OB53ZLX8eM5
+	3jvvZ71s3MbrIsFUScYRHAnKfbFT5R7GYWIWifiUsVYIzASv3USAwNDFzbh+XogXeaMAzqOur1+Uz
+	wcJLzZiYBaN0ubzieEK8VP/Q7IZpeoXbHh7GCiTDk8B/GccrpKtCPXvamlcVyxpCEr6U=;
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vzDSY-0006uH-Ac;
-	Sun, 08 Mar 2026 12:42:15 +0000
+	id 1vzFLW-0007pv-Q1;
+	Sun, 08 Mar 2026 14:43:06 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
- TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95) (envelope-from
- <3mm6taQkbAIEx34pfqqjwfuuni.lttlqjzxjwhtsyjsy.htr@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com>)
- id 1vzDSW-0006u3-VQ for linux-f2fs-devel@lists.sourceforge.net;
- Sun, 08 Mar 2026 12:42:13 +0000
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
+ (envelope-from <monty_pavel@sina.com>) id 1vzFLU-0007pm-2M
+ for linux-f2fs-devel@lists.sourceforge.net;
+ Sun, 08 Mar 2026 14:43:05 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:To:From:Subject:Message-ID:In-Reply-To
- :Date:MIME-Version:Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:References:List-Id:List-Help:List-Unsubscribe:
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=wXpCrHnBOzbrjuCa4snuHa6G2PuKQUzS5Cx3HuD89MU=; b=HMZ1GuSgREIpyqC9hi9KOSKE4c
- 7c5I94NsgsvjeWrKeSO6XN0MNX73JqznCZ/d5ndrMok78F2NEBktdWOHz3iCOwy1PLHT41PkooWiF
- MrF38ex9pUwXLrq1zZinPvvqLI+CgXJzUW0wKjo2Zw84dD+BscJJRZnK1Q3gy/W/NKpM=;
+ bh=/Yix+63PKa96i9/rcne8IF2DCXr88Xd00UcU9oo7CqU=; b=Y4lelqccvfNBeM69Kyg1JCLHYR
+ eDva1dRlg+wnEhpa6gY+1oMSXAiPszEdzcgOGU5Qt086fZOO71kDOVFkQ5syRU755rWGy6ZRWHfGU
+ TaoYQOKGBr9KqsFSNvivj3DzmIKgIbhLmt47l5kchXIYwwOOAhM4dWC3eMj4dBbvQk7o=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:To:From:Subject:Message-ID:In-Reply-To:Date:MIME-Version:
- Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:Content-Description:
- Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
+ h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=wXpCrHnBOzbrjuCa4snuHa6G2PuKQUzS5Cx3HuD89MU=; b=m
- Q1+ZPbch4O0M/lGKz/5eME9iz7jEWdhqj5VnKR86vBSdJegZ8C2SPLCR749A/NXt7IK1lkc36WbnN
- NRdCmtpusXB5x9O/tx7Lwd0q3rmluuBBZStM4ok7xT8Y2/DQCJJVQAAY1FGXSmgoqob7fR7xb5BzH
- Iyezlsz2BLcIyn/U=;
-Received: from mail-oa1-f71.google.com ([209.85.160.71])
+ List-Owner:List-Archive; bh=/Yix+63PKa96i9/rcne8IF2DCXr88Xd00UcU9oo7CqU=; b=M
+ YWWBEQ5UatFulC5EF11j4dVdYu/+uVqQNPqY3yiTxcULgb1/tNcvFrLykRpFa2Mr40ojE70wTqy7a
+ UX6ymLMhQvkI5on1zAgejLEGWqlXu5Lg3ocbewX3cnjc3KZosFlYAwqo6ai2TGjsQssnMUC6E6sNP
+ 6PcmXgWyhAu3e+o8=;
+Received: from r3-19.sinamail.sina.com.cn ([202.108.3.19])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1vzDSX-0007RA-2j for linux-f2fs-devel@lists.sourceforge.net;
- Sun, 08 Mar 2026 12:42:13 +0000
-Received: by mail-oa1-f71.google.com with SMTP id
- 586e51a60fabf-41701418411so10402856fac.1
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Sun, 08 Mar 2026 05:42:13 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1772973722; x=1773578522;
- h=to:from:subject:message-id:in-reply-to:date:mime-version
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=wXpCrHnBOzbrjuCa4snuHa6G2PuKQUzS5Cx3HuD89MU=;
- b=GZy08LiKesuiFFLTQpL6i32LM/lRDMebZuZ5jkKOy+EwHy8qO9u63wmKxIK9mHtxdV
- sSJE8TSSsaJOibxft4CF9t6GLF43SEO55Lt6auXzdO+xMU04cVisHV3hWdvNoA3NcTPT
- tvcSLIv5G3m7btc1erkbVGRer/PIDcNNeS51Qrhpv36+fVCnmrJZZJLRxaR3g5ZovpP6
- +/toW/rSxox7y9L313Fza3uCzAO6XGNztPnv0Agy/an9uttNugNgtlHvGwgDKLBZapOg
- LyXk02lVnRKuLp3PkFKAxmfiiaCWRSwmiuwoAX9dyf9xbGEyUbTDBr5sGlKP126jd5Hd
- Lm8g==
-X-Forwarded-Encrypted: i=1;
- AJvYcCU/24ffotfl2BCAQHMNWOnw+IGvTKVSymcvJ8YP1b4Jy/Lyau36K318Xr6WlIET0W4Jnep9OWNwMELgf07qXPqC@lists.sourceforge.net
-X-Gm-Message-State: AOJu0Yy2L0YeNNwlHRluS9HvnS0A8HY9s758i2MToZEGOJBMSC+zhlLM
- kbvNtaq2vRSC3Niy/AoZoP1hU/RpgOo7cqhEzVHdVcHwbYuEKq3XmFGgCnNOgBMC4XmVby9vyIV
- CL2h2Lh0wQpUhfMRTvCxjUq0XM+fDk+mPMVFa179u+zvNb1evsR7qKBPrLlk=
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
+ id 1vzFLS-0003hL-HI for linux-f2fs-devel@lists.sourceforge.net;
+ Sun, 08 Mar 2026 14:43:04 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sina.com; s=201208;
+ t=1772980982; bh=/Yix+63PKa96i9/rcne8IF2DCXr88Xd00UcU9oo7CqU=;
+ h=From:Subject:Date:Message-ID;
+ b=ZXSZ9s5JNQ8QoNGRkrP4s/4FbOOzXFtBlqImGLibuvYz97uE998Opmw8c1u6LJQzW
+ rBnQjV8mdJp95cYbHNBjguXuoEQys8WaGHu4d22jYZ8cKT4qMBOvV91RUUQWIVwHwo
+ VFRgxHswXiuY7HyZSZQQBIMgo+ywG+qDDLzYBPPQ=
+X-SMAIL-HELO: xiaomi-ThinkCentre-M760t.mioffice.cn
+Received: from unknown (HELO
+ xiaomi-ThinkCentre-M760t.mioffice.cn)([114.247.175.249])
+ by sina.com (10.54.253.32) with ESMTP
+ id 69AD8AE800002FA4; Sun, 8 Mar 2026 22:42:51 +0800 (CST)
+X-Sender: monty_pavel@sina.com
+X-Auth-ID: monty_pavel@sina.com
+Authentication-Results: sina.com; spf=none smtp.mailfrom=monty_pavel@sina.com;
+ dkim=none header.i=none;
+ dmarc=none action=none header.from=monty_pavel@sina.com
+X-SMAIL-MID: 2643754456620
+X-SMAIL-UIID: 85C23F4A466D43988CE769B341BA10E9-20260308-224251-1
+From: Yongpeng Yang <monty_pavel@sina.com>
+To: Chao Yu <chao@kernel.org>,
+	Jaegeuk Kim <jaegeuk@kernel.org>
+Date: Sun,  8 Mar 2026 22:40:15 +0800
+Message-ID: <20260308144013.2340225-3-monty_pavel@sina.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-X-Received: by 2002:a05:6820:2188:b0:679:ea08:8fd6 with SMTP id
- 006d021491bc7-67b9bd22c94mr5375108eaf.46.1772973722411; Sun, 08 Mar 2026
- 05:42:02 -0700 (PDT)
-Date: Sun, 08 Mar 2026 05:42:02 -0700
-In-Reply-To: <aa1XpnY0TRvDGf4i@arm.com>
-X-Google-Appengine-App-Id: s~syzkaller
-X-Google-Appengine-App-Id-Alias: syzkaller
-Message-ID: <69ad6e9a.050a0220.310d8.000b.GAE@google.com>
-From: syzbot <syzbot+cae7809e9dc1459e4e63@syzkaller.appspotmail.com>
-To: akpm@linux-foundation.org, catalin.marinas@arm.com, chao@kernel.org, 
- hao.li@linux.dev, harry.yoo@oracle.com, jaegeuk@kernel.org, jannh@google.com, 
- liam.howlett@oracle.com, linkinjeon@kernel.org, 
- linux-f2fs-devel@lists.sourceforge.net, linux-fsdevel@vger.kernel.org, 
- linux-kernel@vger.kernel.org, linux-mm@kvack.org, lorenzo.stoakes@oracle.com, 
- pfalcato@suse.de, sj1557.seo@samsung.com, syzkaller-bugs@googlegroups.com, 
- vbabka@kernel.org, vbabka@suse.cz, wangqing7171@gmail.com
-X-Spam-Score: 3.1 (+++)
+X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Hello,
- syzbot has tested the proposed patch but the reproducer
- is still triggering an issue: memory leak in __pcs_replace_empty_main BUG:
- memory leak unreferenced object 0xffff88810005f800 (size 512): comm
- "swapper/0", 
- pid 0, jiffies 4294937296 hex dump (first 32 bytes): 00 2a 90 00 81 88 ff
- ff 00 94 30 29 81 88 ff ff 0). [...] 
- Content analysis details:   (3.1 points, 5.0 required)
+ Content preview: From: Yongpeng Yang When f2fs_fiemap() is called with
+ `fileinfo->fi_flags`
+ containing the FIEMAP_FLAG_SYNC flag, it attempts to write data to disk before
+ retrieving file mappings via filemap_write_and_wait(). However, th [...] 
+ Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.3 FROM_LOCAL_HEX         From: localpart has long hexadecimal sequence
- 0.2 HEADER_FROM_DIFFERENT_DOMAINS From and EnvelopeFrom 2nd level mail
- domains are different
- 2.5 SORTED_RECIPS          Recipient list is sorted by address
  0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.160.71 listed in wl.mailspike.net]
+ [202.108.3.19 listed in wl.mailspike.net]
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
  0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1vzDSX-0007RA-2j
-Subject: Re: [f2fs-dev] [syzbot] [mm?] [f2fs?] [exfat?] memory leak in
- __kfree_rcu_sheaf
+ 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
+ [monty_pavel(at)sina.com]
+X-Headers-End: 1vzFLS-0003hL-HI
+Subject: [f2fs-dev] [PATCH v2] f2fs: fix inline data not being written to
+ disk in writeback path
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -128,245 +118,187 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
+Cc: Yongpeng Yang <yangyongpeng@xiaomi.com>,
+ Yongpeng Yang <monty_pavel@sina.com>, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
-X-Rspamd-Queue-Id: 149F2230414
+X-Rspamd-Queue-Id: 0C4A2230BBE
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [-0.01 / 15.00];
-	URI_HIDDEN_PATH(1.00)[https://syzkaller.appspot.com/x/.config?x=2c6ad6fefffa76b1];
+	MID_CONTAINS_FROM(1.00)[];
 	RWL_MAILSPIKE_EXCELLENT(-0.40)[216.105.38.7:from];
-	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
-	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7];
 	MAILLIST(-0.20)[mailman];
+	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7];
+	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
 	MIME_GOOD(-0.10)[text/plain];
-	DMARC_POLICY_SOFTFAIL(0.10)[appspotmail.com : SPF not aligned (relaxed), DKIM not aligned (relaxed),none];
+	DMARC_POLICY_SOFTFAIL(0.10)[sina.com : SPF not aligned (relaxed), DKIM not aligned (relaxed),none];
 	HAS_LIST_UNSUB(-0.01)[];
+	FORGED_SENDER(0.00)[monty_pavel@sina.com,linux-f2fs-devel-bounces@lists.sourceforge.net];
+	FORGED_RECIPIENTS(0.00)[m:chao@kernel.org,m:jaegeuk@kernel.org,m:yangyongpeng@xiaomi.com,m:monty_pavel@sina.com,m:linux-f2fs-devel@lists.sourceforge.net,s:lists@lfdr.de];
 	RCVD_COUNT_THREE(0.00)[4];
-	TAGGED_FROM(0.00)[cae7809e9dc1459e4e63];
-	RECEIVED_HELO_LOCALHOST(0.00)[];
-	RCVD_TLS_LAST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[20];
-	FORGED_RECIPIENTS(0.00)[m:akpm@linux-foundation.org,m:catalin.marinas@arm.com,m:chao@kernel.org,m:hao.li@linux.dev,m:harry.yoo@oracle.com,m:jaegeuk@kernel.org,m:jannh@google.com,m:liam.howlett@oracle.com,m:linkinjeon@kernel.org,m:linux-f2fs-devel@lists.sourceforge.net,m:linux-fsdevel@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-mm@kvack.org,m:lorenzo.stoakes@oracle.com,m:pfalcato@suse.de,m:sj1557.seo@samsung.com,m:syzkaller-bugs@googlegroups.com,m:vbabka@kernel.org,m:vbabka@suse.cz,m:wangqing7171@gmail.com,s:lists@lfdr.de];
-	MIME_TRACE(0.00)[0:+];
-	FORGED_SENDER(0.00)[syzbot@syzkaller.appspotmail.com,linux-f2fs-devel-bounces@lists.sourceforge.net];
 	ARC_NA(0.00)[];
 	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
-	FREEMAIL_TO(0.00)[linux-foundation.org,arm.com,kernel.org,linux.dev,oracle.com,google.com,lists.sourceforge.net,vger.kernel.org,kvack.org,suse.de,samsung.com,googlegroups.com,suse.cz,gmail.com];
-	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x];
-	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	TO_DN_NONE(0.00)[];
-	PREVIOUSLY_DELIVERED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[syzbot@syzkaller.appspotmail.com,linux-f2fs-devel-bounces@lists.sourceforge.net];
+	RECEIVED_HELO_LOCALHOST(0.00)[];
+	FREEMAIL_FROM(0.00)[sina.com];
+	MIME_TRACE(0.00)[0:+];
+	TO_DN_SOME(0.00)[];
 	DKIM_MIXED(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.sourceforge.net:dkim,lists.sourceforge.net:rdns,lists.sourceforge.net:helo,syzkaller.appspot.com:url];
+	FREEMAIL_CC(0.00)[xiaomi.com,sina.com,lists.sourceforge.net];
+	RCPT_COUNT_FIVE(0.00)[5];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	NEURAL_HAM(-0.00)[-0.962];
+	FROM_NEQ_ENVFROM(0.00)[monty_pavel@sina.com,linux-f2fs-devel-bounces@lists.sourceforge.net];
+	FROM_HAS_DN(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
-	MISSING_XM_UA(0.00)[];
-	TAGGED_RCPT(0.00)[linux-f2fs-devel];
 	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
-	SUBJECT_HAS_QUESTION(0.00)[]
+	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,sina.com:s=201208];
+	TAGGED_RCPT(0.00)[linux-f2fs-devel];
+	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,sina.com:-];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[vm:email,lists.sourceforge.net:dkim,lists.sourceforge.net:rdns,lists.sourceforge.net:helo,sina.com:mid]
 X-Rspamd-Action: no action
 
-Hello,
+From: Yongpeng Yang <yangyongpeng@xiaomi.com>
 
-syzbot has tested the proposed patch but the reproducer is still triggering an issue:
-memory leak in __pcs_replace_empty_main
+When f2fs_fiemap() is called with `fileinfo->fi_flags` containing the
+FIEMAP_FLAG_SYNC flag, it attempts to write data to disk before
+retrieving file mappings via filemap_write_and_wait(). However, there is
+an issue where the file does not get mapped as expected. The following
+scenario can occur:
 
-BUG: memory leak
-unreferenced object 0xffff88810005f800 (size 512):
-  comm "swapper/0", pid 0, jiffies 4294937296
-  hex dump (first 32 bytes):
-    00 2a 90 00 81 88 ff ff 00 94 30 29 81 88 ff ff  .*........0)....
-    00 12 04 00 81 88 ff ff 00 00 00 00 00 00 00 00  ................
-  backtrace (crc a3e5799):
-    kmemleak_alloc_recursive include/linux/kmemleak.h:44 [inline]
-    slab_post_alloc_hook mm/slub.c:4547 [inline]
-    slab_alloc_node mm/slub.c:4869 [inline]
-    __do_kmalloc_node mm/slub.c:5262 [inline]
-    __kmalloc_noprof+0x3bd/0x560 mm/slub.c:5275
-    kmalloc_noprof include/linux/slab.h:954 [inline]
-    kzalloc_noprof include/linux/slab.h:1188 [inline]
-    __alloc_empty_sheaf+0x35/0x50 mm/slub.c:2771
-    alloc_empty_sheaf mm/slub.c:2786 [inline]
-    alloc_full_sheaf mm/slub.c:2834 [inline]
-    __pcs_replace_empty_main+0x1d2/0x260 mm/slub.c:4629
-    alloc_from_pcs mm/slub.c:4720 [inline]
-    slab_alloc_node mm/slub.c:4854 [inline]
-    __kmalloc_cache_noprof+0x3ac/0x480 mm/slub.c:5378
-    kmalloc_noprof include/linux/slab.h:950 [inline]
-    kzalloc_noprof include/linux/slab.h:1188 [inline]
-    __irq_domain_alloc_fwnode+0x37/0x140 kernel/irq/irqdomain.c:95
-    irq_domain_alloc_named_fwnode include/linux/irqdomain.h:271 [inline]
-    arch_early_irq_init+0x1c/0x70 arch/x86/kernel/apic/vector.c:803
-    start_kernel+0x931/0xb80 init/main.c:1114
-    x86_64_start_reservations+0x24/0x30 arch/x86/kernel/head64.c:310
-    x86_64_start_kernel+0xce/0xd0 arch/x86/kernel/head64.c:291
-    common_startup_64+0x13e/0x148
+root@vm:/mnt/f2fs# dd if=/dev/zero of=data.3k bs=3k count=1
+root@vm:/mnt/f2fs# xfs_io data.3k -c "fiemap -v 0 4096"
+data.3k:
+ EXT: FILE-OFFSET      BLOCK-RANGE      TOTAL FLAGS
+   0: [0..5]:          0..5                 6 0x307
 
-BUG: memory leak
-unreferenced object 0xffff8881008f6c00 (size 512):
-  comm "kthreadd", pid 2, jiffies 4294937344
-  hex dump (first 32 bytes):
-    00 94 30 29 81 88 ff ff 00 d6 de 0b 81 88 ff ff  ..0)............
-    00 12 04 00 81 88 ff ff 00 00 00 00 00 00 00 00  ................
-  backtrace (crc 9181eca5):
-    kmemleak_alloc_recursive include/linux/kmemleak.h:44 [inline]
-    slab_post_alloc_hook mm/slub.c:4547 [inline]
-    slab_alloc_node mm/slub.c:4869 [inline]
-    __do_kmalloc_node mm/slub.c:5262 [inline]
-    __kmalloc_noprof+0x3bd/0x560 mm/slub.c:5275
-    kmalloc_noprof include/linux/slab.h:954 [inline]
-    kzalloc_noprof include/linux/slab.h:1188 [inline]
-    __alloc_empty_sheaf+0x35/0x50 mm/slub.c:2771
-    alloc_empty_sheaf mm/slub.c:2786 [inline]
-    alloc_full_sheaf mm/slub.c:2834 [inline]
-    __pcs_replace_empty_main+0x1d2/0x260 mm/slub.c:4629
-    alloc_from_pcs mm/slub.c:4720 [inline]
-    slab_alloc_node mm/slub.c:4854 [inline]
-    __kmalloc_cache_node_noprof+0x3ef/0x4e0 mm/slub.c:5391
-    kmalloc_node_noprof include/linux/slab.h:1077 [inline]
-    __get_vm_area_node+0xc6/0x1d0 mm/vmalloc.c:3221
-    __vmalloc_node_range_noprof+0x1d3/0xe50 mm/vmalloc.c:4024
-    __vmalloc_node_noprof+0x71/0x90 mm/vmalloc.c:4124
-    alloc_thread_stack_node kernel/fork.c:355 [inline]
-    dup_task_struct kernel/fork.c:924 [inline]
-    copy_process+0x3e5/0x28c0 kernel/fork.c:2050
-    kernel_clone+0xac/0x6e0 kernel/fork.c:2654
-    kernel_thread+0x80/0xb0 kernel/fork.c:2715
-    create_kthread kernel/kthread.c:459 [inline]
-    kthreadd+0x186/0x250 kernel/kthread.c:817
-    ret_from_fork+0x23c/0x4b0 arch/x86/kernel/process.c:158
-    ret_from_fork_asm+0x1a/0x30 arch/x86/entry/entry_64.S:245
+The root cause of this issue is that f2fs_write_single_data_page() only
+calls f2fs_write_inline_data() to copy data from the data folio to the
+inode folio, and it clears the dirty flag on the data folio. However, it
+does not mark the data folio as writeback. When
+__filemap_fdatawait_range() checks for folios with the writeback flag,
+it returns early, causing f2fs_fiemap() to report that the file has no
+mapping.
 
-BUG: memory leak
-unreferenced object 0xffff8881008fd600 (size 512):
-  comm "kworker/u8:6", pid 223, jiffies 4294937434
-  hex dump (first 32 bytes):
-    00 c6 8f 00 81 88 ff ff d8 2c 04 00 81 88 ff ff  .........,......
-    00 12 04 00 81 88 ff ff 00 00 00 00 00 00 00 00  ................
-  backtrace (crc 33698a2f):
-    kmemleak_alloc_recursive include/linux/kmemleak.h:44 [inline]
-    slab_post_alloc_hook mm/slub.c:4547 [inline]
-    slab_alloc_node mm/slub.c:4869 [inline]
-    __do_kmalloc_node mm/slub.c:5262 [inline]
-    __kmalloc_noprof+0x3bd/0x560 mm/slub.c:5275
-    kmalloc_noprof include/linux/slab.h:954 [inline]
-    kzalloc_noprof include/linux/slab.h:1188 [inline]
-    __alloc_empty_sheaf+0x35/0x50 mm/slub.c:2771
-    alloc_empty_sheaf mm/slub.c:2786 [inline]
-    __pcs_replace_full_main+0xe8/0x300 mm/slub.c:5725
-    free_to_pcs mm/slub.c:5778 [inline]
-    slab_free mm/slub.c:6173 [inline]
-    kfree+0x352/0x390 mm/slub.c:6486
-    call_usermodehelper_freeinfo kernel/umh.c:43 [inline]
-    umh_complete kernel/umh.c:57 [inline]
-    call_usermodehelper_exec_async+0x1c7/0x1f0 kernel/umh.c:119
-    ret_from_fork+0x23c/0x4b0 arch/x86/kernel/process.c:158
-    ret_from_fork_asm+0x1a/0x30 arch/x86/entry/entry_64.S:245
+To fix this issue, the solution is to call f2fs_sync_node_pages() in
+f2fs_inline_data_fiemap() when getting fiemap with FIEMAP_FLAG_SYNC
+flags. This patch ensures that the inode folio is written back and the
+writeback process completes before proceeding.
 
-BUG: memory leak
-unreferenced object 0xffff8881008fc600 (size 512):
-  comm "kworker/0:1", pid 10, jiffies 4294937441
-  hex dump (first 32 bytes):
-    00 1a 39 10 81 88 ff ff 00 d6 8f 00 81 88 ff ff  ..9.............
-    00 12 04 00 81 88 ff ff 00 00 00 00 00 00 00 00  ................
-  backtrace (crc fca1c70a):
-    kmemleak_alloc_recursive include/linux/kmemleak.h:44 [inline]
-    slab_post_alloc_hook mm/slub.c:4547 [inline]
-    slab_alloc_node mm/slub.c:4869 [inline]
-    __do_kmalloc_node mm/slub.c:5262 [inline]
-    __kmalloc_noprof+0x3bd/0x560 mm/slub.c:5275
-    kmalloc_noprof include/linux/slab.h:954 [inline]
-    kzalloc_noprof include/linux/slab.h:1188 [inline]
-    __alloc_empty_sheaf+0x35/0x50 mm/slub.c:2771
-    alloc_empty_sheaf mm/slub.c:2786 [inline]
-    __pcs_replace_full_main+0xe8/0x300 mm/slub.c:5725
-    free_to_pcs mm/slub.c:5778 [inline]
-    slab_free mm/slub.c:6173 [inline]
-    kfree+0x352/0x390 mm/slub.c:6486
-    vfree.part.0+0x1d5/0x4d0 mm/vmalloc.c:3485
-    vfree mm/vmalloc.c:3456 [inline]
-    delayed_vfree_work+0x5b/0x90 mm/vmalloc.c:3398
-    process_one_work+0x26c/0x5d0 kernel/workqueue.c:3275
-    process_scheduled_works kernel/workqueue.c:3358 [inline]
-    worker_thread+0x243/0x490 kernel/workqueue.c:3439
-    kthread+0x14e/0x1a0 kernel/kthread.c:436
-    ret_from_fork+0x23c/0x4b0 arch/x86/kernel/process.c:158
-    ret_from_fork_asm+0x1a/0x30 arch/x86/entry/entry_64.S:245
+Fixes: 9ffe0fb5f3bb ("f2fs: handle inline data operations")
+Signed-off-by: Yongpeng Yang <yangyongpeng@xiaomi.com>
+---
+- Call f2fs_sync_node_pages() in getting fiemap path rather than
+writeback path.
+---
+ fs/f2fs/checkpoint.c |  1 +
+ fs/f2fs/inline.c     | 25 +++++++++++++++++++++++++
+ fs/f2fs/node.c       | 21 ++++++++++++++++-----
+ 3 files changed, 42 insertions(+), 5 deletions(-)
 
-BUG: memory leak
-unreferenced object 0xffff888100902a00 (size 512):
-  comm "kworker/0:1", pid 10, jiffies 4294937448
-  hex dump (first 32 bytes):
-    00 c4 58 09 81 88 ff ff 00 f8 05 00 81 88 ff ff  ..X.............
-    00 12 04 00 81 88 ff ff 00 00 00 00 00 00 00 00  ................
-  backtrace (crc 8a5f0c0d):
-    kmemleak_alloc_recursive include/linux/kmemleak.h:44 [inline]
-    slab_post_alloc_hook mm/slub.c:4547 [inline]
-    slab_alloc_node mm/slub.c:4869 [inline]
-    __do_kmalloc_node mm/slub.c:5262 [inline]
-    __kmalloc_noprof+0x3bd/0x560 mm/slub.c:5275
-    kmalloc_noprof include/linux/slab.h:954 [inline]
-    kzalloc_noprof include/linux/slab.h:1188 [inline]
-    __alloc_empty_sheaf+0x35/0x50 mm/slub.c:2771
-    alloc_empty_sheaf mm/slub.c:2786 [inline]
-    __pcs_replace_full_main+0xe8/0x300 mm/slub.c:5725
-    free_to_pcs mm/slub.c:5778 [inline]
-    slab_free mm/slub.c:6173 [inline]
-    kfree+0x352/0x390 mm/slub.c:6486
-    vfree.part.0+0x1d5/0x4d0 mm/vmalloc.c:3485
-    vfree mm/vmalloc.c:3456 [inline]
-    delayed_vfree_work+0x5b/0x90 mm/vmalloc.c:3398
-    process_one_work+0x26c/0x5d0 kernel/workqueue.c:3275
-    process_scheduled_works kernel/workqueue.c:3358 [inline]
-    worker_thread+0x243/0x490 kernel/workqueue.c:3439
-    kthread+0x14e/0x1a0 kernel/kthread.c:436
-    ret_from_fork+0x23c/0x4b0 arch/x86/kernel/process.c:158
-    ret_from_fork_asm+0x1a/0x30 arch/x86/entry/entry_64.S:245
-
-BUG: memory leak
-unreferenced object 0xffff88810958c400 (size 512):
-  comm "kworker/u8:5", pid 4599, jiffies 4294937964
-  hex dump (first 32 bytes):
-    00 4c 6a 12 81 88 ff ff 00 2a 90 00 81 88 ff ff  .Lj......*......
-    00 12 04 00 81 88 ff ff 00 00 00 00 00 00 00 00  ................
-  backtrace (crc 45e572cd):
-    kmemleak_alloc_recursive include/linux/kmemleak.h:44 [inline]
-    slab_post_alloc_hook mm/slub.c:4547 [inline]
-    slab_alloc_node mm/slub.c:4869 [inline]
-    __do_kmalloc_node mm/slub.c:5262 [inline]
-    __kmalloc_noprof+0x3bd/0x560 mm/slub.c:5275
-    kmalloc_noprof include/linux/slab.h:954 [inline]
-    kzalloc_noprof include/linux/slab.h:1188 [inline]
-    __alloc_empty_sheaf+0x35/0x50 mm/slub.c:2771
-    alloc_empty_sheaf mm/slub.c:2786 [inline]
-    __pcs_replace_full_main+0xe8/0x300 mm/slub.c:5725
-    free_to_pcs mm/slub.c:5778 [inline]
-    slab_free mm/slub.c:6173 [inline]
-    kfree+0x352/0x390 mm/slub.c:6486
-    call_usermodehelper_freeinfo kernel/umh.c:43 [inline]
-    umh_complete kernel/umh.c:57 [inline]
-    call_usermodehelper_exec_async+0x1c7/0x1f0 kernel/umh.c:119
-    ret_from_fork+0x23c/0x4b0 arch/x86/kernel/process.c:158
-    ret_from_fork_asm+0x1a/0x30 arch/x86/entry/entry_64.S:245
-
-connection error: failed to recv *flatrpc.ExecutorMessageRawT: EOF
-
-
-Tested on:
-
-commit:         c23719ab Merge tag 'x86-urgent-2026-03-08' of git://gi..
-git tree:       upstream
-console output: https://syzkaller.appspot.com/x/log.txt?x=10027054580000
-kernel config:  https://syzkaller.appspot.com/x/.config?x=2c6ad6fefffa76b1
-dashboard link: https://syzkaller.appspot.com/bug?extid=cae7809e9dc1459e4e63
-compiler:       gcc (Debian 14.2.0-19) 14.2.0, GNU ld (GNU Binutils for Debian) 2.44
-patch:          https://syzkaller.appspot.com/x/patch.diff?x=17682a02580000
+diff --git a/fs/f2fs/checkpoint.c b/fs/f2fs/checkpoint.c
+index 6dd39b7de11a..c85276931c45 100644
+--- a/fs/f2fs/checkpoint.c
++++ b/fs/f2fs/checkpoint.c
+@@ -1416,6 +1416,7 @@ static int block_operations(struct f2fs_sb_info *sbi)
+ 	struct writeback_control wbc = {
+ 		.sync_mode = WB_SYNC_ALL,
+ 		.nr_to_write = LONG_MAX,
++		.range_cyclic = 1,
+ 	};
+ 	int err = 0, cnt = 0;
+ 
+diff --git a/fs/f2fs/inline.c b/fs/f2fs/inline.c
+index 86d2abbb40ff..ab1e10b0f6a6 100644
+--- a/fs/f2fs/inline.c
++++ b/fs/f2fs/inline.c
+@@ -9,6 +9,7 @@
+ #include <linux/fs.h>
+ #include <linux/f2fs_fs.h>
+ #include <linux/fiemap.h>
++#include <linux/writeback.h>
+ 
+ #include "f2fs.h"
+ #include "node.h"
+@@ -814,6 +815,30 @@ int f2fs_inline_data_fiemap(struct inode *inode,
+ 		goto out;
+ 	}
+ 
++	if (fieinfo->fi_flags & FIEMAP_FLAG_SYNC) {
++		struct writeback_control iwbc = {
++			.sync_mode = WB_SYNC_ALL,
++			.range_start = inode->i_ino << PAGE_SHIFT,
++			.range_end = inode->i_ino << PAGE_SHIFT,
++			.nr_to_write = 1,
++			.range_cyclic = 0,
++		};
++
++retry:
++		f2fs_folio_wait_writeback(ifolio, NODE, true, true);
++		if (folio_test_dirty(ifolio)) {
++			f2fs_folio_put(ifolio, true);
++			err = f2fs_sync_node_pages(F2FS_I_SB(inode), &iwbc, true, FS_NODE_IO);
++			if (!err) {
++				ifolio = f2fs_get_inode_folio(F2FS_I_SB(inode), inode->i_ino);
++				if (IS_ERR(ifolio))
++					return PTR_ERR(ifolio);
++				goto retry;
++			}
++			return err;
++		}
++	}
++
+ 	ilen = min_t(size_t, MAX_INLINE_DATA(inode), i_size_read(inode));
+ 	if (start >= ilen)
+ 		goto out;
+diff --git a/fs/f2fs/node.c b/fs/f2fs/node.c
+index bbfa677ef46f..2fbfecaf3f7b 100644
+--- a/fs/f2fs/node.c
++++ b/fs/f2fs/node.c
+@@ -2083,7 +2083,8 @@ int f2fs_sync_node_pages(struct f2fs_sb_info *sbi,
+ 				struct writeback_control *wbc,
+ 				bool do_balance, enum iostat_type io_type)
+ {
+-	pgoff_t index;
++	pgoff_t index, wbc_index;
++	pgoff_t end, wbc_end;
+ 	struct folio_batch fbatch;
+ 	int step = 0;
+ 	int nwritten = 0;
+@@ -2092,14 +2093,24 @@ int f2fs_sync_node_pages(struct f2fs_sb_info *sbi,
+ 
+ 	folio_batch_init(&fbatch);
+ 
++	wbc_index = 0;
++	wbc_end = LONG_MAX;
++	if (!wbc->range_cyclic) {
++		wbc_index = wbc->range_start >> PAGE_SHIFT;
++		wbc_end = wbc->range_end >> PAGE_SHIFT;
++	}
+ next_step:
+-	index = 0;
++	index = wbc_index;
++	end = wbc_end;
+ 
+-	while (!done && (nr_folios = filemap_get_folios_tag(NODE_MAPPING(sbi),
+-				&index, (pgoff_t)-1, PAGECACHE_TAG_DIRTY,
+-				&fbatch))) {
++	while (!done && (index <= end)) {
+ 		int i;
+ 
++		nr_folios = filemap_get_folios_tag(NODE_MAPPING(sbi),
++				&index, end, PAGECACHE_TAG_DIRTY,
++				&fbatch);
++		if (nr_folios == 0)
++			break;
+ 		for (i = 0; i < nr_folios; i++) {
+ 			struct folio *folio = fbatch.folios[i];
+ 			bool submitted = false;
+-- 
+2.43.0
 
 
 
