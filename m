@@ -2,42 +2,42 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 4K0nMX5XrWmd1gEAu9opvQ
+	id EFz4LLtXrWmd1gEAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 08 Mar 2026 12:03:26 +0100
+	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 08 Mar 2026 12:04:27 +0100
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5BC8D22F610
-	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 08 Mar 2026 12:03:25 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6524922F62D
+	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 08 Mar 2026 12:04:27 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
 	Subject:In-Reply-To:MIME-Version:References:Message-ID:To:From:Date:Sender:
 	Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
 	:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=vzlcEjn9kNUIjQw6OUxRNNfd2U9wV/urrQElqqykbao=; b=QeSMwkUAUfIo+3U4UpdKruC4U2
-	GQI56Upmm6qlRoFa/oBmEjGbAzCsLa0BsJtXkGu6J921FZn8TbQbLXfXoxs+Si1m2p/jDDmJH5D6A
-	uitiIdSV3L8aqlwqonaTY5wvyia3jbMsp4yzLeOpcziuxGG980E4IdxPtJfPwwDjNWhQ=;
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=Lw1nFt6gb25/WE8IAz60QM268yCUiFSLBwp1IyPsTj8=; b=T3SHJvGAamGUFo9/lY6PnqYP/O
+	oDVDkRq8S5SGoS/lyu4+UvwmORtcET/W9qXSAuBnVS6cGTcveZtENIdIyDlQkxAA4wFH9Z3ENhhOz
+	Q7YokMUtgv/ofOvJuLV5yfB83sZfUnS8flV4zWd1VPNKXjjMTrBlLsQV+jJHMAx8IVm4=;
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vzBuj-00059J-RW;
-	Sun, 08 Mar 2026 11:03:13 +0000
+	id 1vzBvr-000569-7K;
+	Sun, 08 Mar 2026 11:04:23 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <catalin.marinas@arm.com>) id 1vzBui-00059C-Qc
+ (envelope-from <catalin.marinas@arm.com>) id 1vzBvp-000561-S6
  for linux-f2fs-devel@lists.sourceforge.net;
- Sun, 08 Mar 2026 11:03:12 +0000
+ Sun, 08 Mar 2026 11:04:21 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=dItoOuvfLDGqHyqGTKLW6q+r2btk7jU8ImqoQ9EzJK4=; b=E0q1BcEvfQsduYETvKPqLGwidh
- UxMBjb/4X4YLscxmy4IkBamtRbRcvEN1+UpHMeX0PEAOaT/EBSAAJ4VLGtwiHzunvrWVzPbSzY0VG
- j//cYN2OroDYHePtOJcbIzgan4kjIfQjIoV/w85S8nzMfsvrdczAGB4YTXF1sGQ4N9U0=;
+ bh=Er5cat7IeSsScdTn0K/gJbSyeUdZl6C/O0hkcgq7XkI=; b=OugIkJcH5+RyCZu36eKED+Oe95
+ hUvgt8p+RwkylsXnZ6HpfBGgs1S5Id6s9yLUUuXXO20Vxki8BsswoSHQqMt9C157bg8+WLM9IQdop
+ yjT5ylr7FqCA/gYWCgjLwew83CCg/8z0zuvxmwX1T1IpzVfpBBvLRhH4X7p8UaXRHgeU=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -45,23 +45,23 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=dItoOuvfLDGqHyqGTKLW6q+r2btk7jU8ImqoQ9EzJK4=; b=DAwHAVPDyK9kAv4018nDnYWkmH
- faGXftPwnK2grftzLglmGFLy+stpsKNymI97NKa7MnT70qaDmR2D9qBT9lR2+0MKWUcIKba5AEU+/
- j3JitptVgJhrP+z9ih5p5UHOQE7MHLk2pzLOnHrqkBIM2YMPI6fJpCzsXwV13xbtvr9U=;
+ bh=Er5cat7IeSsScdTn0K/gJbSyeUdZl6C/O0hkcgq7XkI=; b=ckRcF8DVmJ1L8mDj1QAXlHtorQ
+ mdg40FeUbrX+6Y7a2nc4Eo7La52Zf7qPrN/KfxMkMBinOguQ6NdH5E2UetI+Sg75BJ83nFoNFPChP
+ XBNq60yJyfCS2flc4VuWFFNEBqvcCo+ui5cUjOAsDmM6trJkNaVCwsu2h40r+5ouxyCs=;
 Received: from foss.arm.com ([217.140.110.172])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtp (Exim 4.95)
- id 1vzBui-0003Mc-6o for linux-f2fs-devel@lists.sourceforge.net;
- Sun, 08 Mar 2026 11:03:12 +0000
+ id 1vzBvp-0003QA-Gl for linux-f2fs-devel@lists.sourceforge.net;
+ Sun, 08 Mar 2026 11:04:21 +0000
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 71CE61570;
- Sun,  8 Mar 2026 04:02:55 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id EFA891570;
+ Sun,  8 Mar 2026 04:04:04 -0700 (PDT)
 Received: from arm.com (usa-sjc-mx-foss1.foss.arm.com [172.31.20.19])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 0FE963F836;
- Sun,  8 Mar 2026 04:02:57 -0700 (PDT)
-Date: Sun, 8 Mar 2026 11:02:55 +0000
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id A63E23F836;
+ Sun,  8 Mar 2026 04:04:08 -0700 (PDT)
+Date: Sun, 8 Mar 2026 11:04:06 +0000
 From: Catalin Marinas <catalin.marinas@arm.com>
 To: syzbot+cae7809e9dc1459e4e63@syzkaller.appspotmail.com
-Message-ID: <aa1XX2ZXo-hc6LHG@arm.com>
+Message-ID: <aa1XpnY0TRvDGf4i@arm.com>
 References: <698a26d3.050a0220.3b3015.007e.GAE@google.com>
  <20260302034102.3145719-1-wangqing7171@gmail.com>
  <20df8dd1-a32c-489d-8345-085d424a2f12@kernel.org>
@@ -78,14 +78,14 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: #syz test diff --git a/mm/slub.c b/mm/slub.c index
- 0c906fefc31b..401557ff5487
- 100644 --- a/mm/slub.c +++ b/mm/slub.c @@ -7513,6 +7513,7 @@ static void
- early_kmem_cache_node_alloc(int node) slab->freelist = get_ [...] 
+ Content preview:  #syz test diff --git a/mm/slab_common.c b/mm/slab_common.c
+ index d5a70a831a2a..73f4668d870d 100644 --- a/mm/slab_common.c +++
+ b/mm/slab_common.c
+ @@ -1954,8 +1954,14 @@ void kvfree_call_rcu(struct rcu_head *head [...] 
  Content analysis details:   (0.0 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
-X-Headers-End: 1vzBui-0003Mc-6o
+X-Headers-End: 1vzBvp-0003QA-Gl
 Subject: Re: [f2fs-dev] [syzbot] [mm?] [f2fs?] [exfat?] memory leak in
  __kfree_rcu_sheaf
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
@@ -110,13 +110,13 @@ Cc: Qing Wang <wangqing7171@gmail.com>,
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
-X-Rspamd-Queue-Id: 5BC8D22F610
+X-Rspamd-Queue-Id: 6524922F62D
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [0.49 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	RWL_MAILSPIKE_EXCELLENT(-0.40)[216.105.38.7:from];
 	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
-	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7];
+	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7:c];
 	MAILLIST(-0.20)[mailman];
 	MIME_GOOD(-0.10)[text/plain];
 	DMARC_POLICY_SOFTFAIL(0.10)[arm.com : SPF not aligned (relaxed), DKIM not aligned (relaxed),none];
@@ -125,18 +125,18 @@ X-Spamd-Result: default: False [0.49 / 15.00];
 	MIME_TRACE(0.00)[0:+];
 	RCPT_COUNT_TWELVE(0.00)[19];
 	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x];
-	FORGED_SENDER(0.00)[catalin.marinas@arm.com,linux-f2fs-devel-bounces@lists.sourceforge.net];
-	DKIM_MIXED(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:syzbot+cae7809e9dc1459e4e63@syzkaller.appspotmail.com,m:wangqing7171@gmail.com,m:vbabka@kernel.org,m:lorenzo.stoakes@oracle.com,m:jannh@google.com,m:syzkaller-bugs@googlegroups.com,m:linux-kernel@vger.kernel.org,m:Liam.Howlett@oracle.com,m:linux-f2fs-devel@lists.sourceforge.net,m:linux-mm@kvack.org,m:vbabka@suse.cz,m:hao.li@linux.dev,m:pfalcato@suse.de,m:linux-fsdevel@vger.kernel.org,m:jaegeuk@kernel.org,m:akpm@linux-foundation.org,m:sj1557.seo@samsung.com,m:linkinjeon@kernel.org,m:harry.yoo@oracle.com,m:syzbot@syzkaller.appspotmail.com,s:lists@lfdr.de];
 	ARC_NA(0.00)[];
+	DKIM_MIXED(0.00)[];
 	RECEIVED_HELO_LOCALHOST(0.00)[];
-	FREEMAIL_CC(0.00)[gmail.com,kernel.org,oracle.com,google.com,googlegroups.com,vger.kernel.org,lists.sourceforge.net,kvack.org,suse.cz,linux.dev,suse.de,linux-foundation.org,samsung.com];
+	FORGED_SENDER(0.00)[catalin.marinas@arm.com,linux-f2fs-devel-bounces@lists.sourceforge.net];
 	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
+	FREEMAIL_CC(0.00)[gmail.com,kernel.org,oracle.com,google.com,googlegroups.com,vger.kernel.org,lists.sourceforge.net,kvack.org,suse.cz,linux.dev,suse.de,linux-foundation.org,samsung.com];
+	FORGED_RECIPIENTS(0.00)[m:syzbot+cae7809e9dc1459e4e63@syzkaller.appspotmail.com,m:wangqing7171@gmail.com,m:vbabka@kernel.org,m:lorenzo.stoakes@oracle.com,m:jannh@google.com,m:syzkaller-bugs@googlegroups.com,m:linux-kernel@vger.kernel.org,m:Liam.Howlett@oracle.com,m:linux-f2fs-devel@lists.sourceforge.net,m:linux-mm@kvack.org,m:vbabka@suse.cz,m:hao.li@linux.dev,m:pfalcato@suse.de,m:linux-fsdevel@vger.kernel.org,m:jaegeuk@kernel.org,m:akpm@linux-foundation.org,m:sj1557.seo@samsung.com,m:linkinjeon@kernel.org,m:harry.yoo@oracle.com,m:syzbot@syzkaller.appspotmail.com,s:lists@lfdr.de];
 	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-];
 	MISSING_XM_UA(0.00)[];
 	TO_DN_SOME(0.00)[];
 	RCVD_COUNT_FIVE(0.00)[5];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[arm.com:mid];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[arm.com:mid,lists.sourceforge.net:dkim,lists.sourceforge.net:rdns,lists.sourceforge.net:helo];
 	FORGED_SENDER_FORWARDING(0.00)[];
 	FROM_HAS_DN(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[catalin.marinas@arm.com,linux-f2fs-devel-bounces@lists.sourceforge.net];
@@ -153,18 +153,26 @@ X-Rspamd-Action: no action
 
 #syz test
 
-diff --git a/mm/slub.c b/mm/slub.c
-index 0c906fefc31b..401557ff5487 100644
---- a/mm/slub.c
-+++ b/mm/slub.c
-@@ -7513,6 +7513,7 @@ static void early_kmem_cache_node_alloc(int node)
- 	slab->freelist = get_freepointer(kmem_cache_node, n);
- 	slab->inuse = 1;
- 	kmem_cache_node->node[node] = n;
-+	kmemleak_alloc(n, sizeof(*n), 1, GFP_NOWAIT);
- 	init_kmem_cache_node(n, NULL);
- 	inc_slabs_node(kmem_cache_node, node, slab->objects);
+diff --git a/mm/slab_common.c b/mm/slab_common.c
+index d5a70a831a2a..73f4668d870d 100644
+--- a/mm/slab_common.c
++++ b/mm/slab_common.c
+@@ -1954,8 +1954,14 @@ void kvfree_call_rcu(struct rcu_head *head, void *ptr)
+ 	if (!head)
+ 		might_sleep();
  
+-	if (!IS_ENABLED(CONFIG_PREEMPT_RT) && kfree_rcu_sheaf(ptr))
++	if (!IS_ENABLED(CONFIG_PREEMPT_RT) && kfree_rcu_sheaf(ptr)) {
++		/*
++		 * The object is now queued for deferred freeing via an RCU
++		 * sheaf. Tell kmemleak to ignore it.
++		 */
++		kmemleak_ignore(ptr);
+ 		return;
++	}
+ 
+ 	// Queue the object but don't yet schedule the batch.
+ 	if (debug_rcu_head_queue(ptr)) {
 
 
 _______________________________________________
