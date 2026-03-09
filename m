@@ -2,81 +2,76 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id iL8qEAmLrWkA4QEAu9opvQ
+	id kOyjKhQvrmlrAQIAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 08 Mar 2026 15:43:21 +0100
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 09 Mar 2026 03:23:16 +0100
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0C4A2230BBE
-	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 08 Mar 2026 15:43:19 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id C9ACB23334A
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 09 Mar 2026 03:23:15 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
-	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
-	Subject:MIME-Version:Message-ID:Date:To:From:Sender:Reply-To:Content-ID:
-	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
-	:Resent-Message-ID:In-Reply-To:References:List-Owner;
-	bh=du7wnqcwuBe2H7DP+kPryfQISd2za3krBpc47vlGe30=; b=Iz9WHhhLcRSdNZ7OB53ZLX8eM5
-	3jvvZ71s3MbrIsFUScYRHAnKfbFT5R7GYWIWifiUsVYIzASv3USAwNDFzbh+XogXeaMAzqOur1+Uz
-	wcJLzZiYBaN0ubzieEK8VP/Q7IZpeoXbHh7GCiTDk8B/GccrpKtCPXvamlcVyxpCEr6U=;
+	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
+	List-Unsubscribe:List-Id:Subject:MIME-Version:Message-ID:Date:To:Sender:
+	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+	Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Owner;
+	bh=SyUJ33eVXysjuC+1ikc1WIvCB/1LnQJ08O1IAdVVaJ8=; b=A2jHhkUgk51bSYyHkCsE13rJ7T
+	+oK/VP6WoNL3s+JCYBPA69iWH2QH14l5+RJgHMaFOV7sa+UZunkQzt2UGV/fEMGIQWhREomS1qzGO
+	JjpgKk4Ji85C0BuuGegLF8R8v9QrZCjNrJ5GLppfs+3lgHcFJlozV/vtmCJjdo+gUxSs=;
 Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
 	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vzFLW-0007pv-Q1;
-	Sun, 08 Mar 2026 14:43:06 +0000
+	id 1vzQGu-0004Z8-Po;
+	Mon, 09 Mar 2026 02:23:04 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
  by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <monty_pavel@sina.com>) id 1vzFLU-0007pm-2M
+ (envelope-from <chao@kernel.org>) id 1vzQGt-0004Z1-5p
  for linux-f2fs-devel@lists.sourceforge.net;
- Sun, 08 Mar 2026 14:43:05 +0000
+ Mon, 09 Mar 2026 02:23:03 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
  Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=/Yix+63PKa96i9/rcne8IF2DCXr88Xd00UcU9oo7CqU=; b=Y4lelqccvfNBeM69Kyg1JCLHYR
- eDva1dRlg+wnEhpa6gY+1oMSXAiPszEdzcgOGU5Qt086fZOO71kDOVFkQ5syRU755rWGy6ZRWHfGU
- TaoYQOKGBr9KqsFSNvivj3DzmIKgIbhLmt47l5kchXIYwwOOAhM4dWC3eMj4dBbvQk7o=;
+ bh=xzyR8yDuHu67N5F2w848Db+XnTgjwugHo2X69ztJ9L4=; b=Bs6HQOb3XGoq7sK1y7GoHQP13r
+ PfVz2bxDP+frBvZ0Sh5tdwNjhr9J9aG5WbTxqQXFOGqTTMCtCe4XmiIzOtqVkRaeXbkbT+C3dtZTT
+ 4US21oW0I42xbk427TwsoUdCpmpQwgIEZez7o2aOu7OoiPJfAGXANh0aJmCc6d4iGlNw=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
  :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
  Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=/Yix+63PKa96i9/rcne8IF2DCXr88Xd00UcU9oo7CqU=; b=M
- YWWBEQ5UatFulC5EF11j4dVdYu/+uVqQNPqY3yiTxcULgb1/tNcvFrLykRpFa2Mr40ojE70wTqy7a
- UX6ymLMhQvkI5on1zAgejLEGWqlXu5Lg3ocbewX3cnjc3KZosFlYAwqo6ai2TGjsQssnMUC6E6sNP
- 6PcmXgWyhAu3e+o8=;
-Received: from r3-19.sinamail.sina.com.cn ([202.108.3.19])
+ List-Owner:List-Archive; bh=xzyR8yDuHu67N5F2w848Db+XnTgjwugHo2X69ztJ9L4=; b=O
+ 1jVXsSZ6xddAdR2jRTu4jWLx5XG+xJkav3Ozt30O6J+jrKYzwnnnZFP6yb5y5DbIh+Z7t4i+kT9mz
+ up1cXwfXtSRMhPeaHcSfYGlnYpve3IiCJISYTGhGXJIV9BTgXpiL3kn7Rt13ooq6uUDsm/pJiz7Al
+ UjMMZ5QcUFxYskxA=;
+Received: from sea.source.kernel.org ([172.234.252.31])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vzFLS-0003hL-HI for linux-f2fs-devel@lists.sourceforge.net;
- Sun, 08 Mar 2026 14:43:04 +0000
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sina.com; s=201208;
- t=1772980982; bh=/Yix+63PKa96i9/rcne8IF2DCXr88Xd00UcU9oo7CqU=;
- h=From:Subject:Date:Message-ID;
- b=ZXSZ9s5JNQ8QoNGRkrP4s/4FbOOzXFtBlqImGLibuvYz97uE998Opmw8c1u6LJQzW
- rBnQjV8mdJp95cYbHNBjguXuoEQys8WaGHu4d22jYZ8cKT4qMBOvV91RUUQWIVwHwo
- VFRgxHswXiuY7HyZSZQQBIMgo+ywG+qDDLzYBPPQ=
-X-SMAIL-HELO: xiaomi-ThinkCentre-M760t.mioffice.cn
-Received: from unknown (HELO
- xiaomi-ThinkCentre-M760t.mioffice.cn)([114.247.175.249])
- by sina.com (10.54.253.32) with ESMTP
- id 69AD8AE800002FA4; Sun, 8 Mar 2026 22:42:51 +0800 (CST)
-X-Sender: monty_pavel@sina.com
-X-Auth-ID: monty_pavel@sina.com
-Authentication-Results: sina.com; spf=none smtp.mailfrom=monty_pavel@sina.com;
- dkim=none header.i=none;
- dmarc=none action=none header.from=monty_pavel@sina.com
-X-SMAIL-MID: 2643754456620
-X-SMAIL-UIID: 85C23F4A466D43988CE769B341BA10E9-20260308-224251-1
-From: Yongpeng Yang <monty_pavel@sina.com>
-To: Chao Yu <chao@kernel.org>,
-	Jaegeuk Kim <jaegeuk@kernel.org>
-Date: Sun,  8 Mar 2026 22:40:15 +0800
-Message-ID: <20260308144013.2340225-3-monty_pavel@sina.com>
-X-Mailer: git-send-email 2.43.0
+ id 1vzQGs-0003OH-Kq for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 09 Mar 2026 02:23:03 +0000
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sea.source.kernel.org (Postfix) with ESMTP id 0F39F43796;
+ Mon,  9 Mar 2026 02:22:52 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id DB713C116C6;
+ Mon,  9 Mar 2026 02:22:50 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1773022971;
+ bh=QY92ZT8kIt/iEYqDgvcfPZiPKBlUZ1FPa2zb9N0hQSw=;
+ h=From:To:Cc:Subject:Date:From;
+ b=tW49woeW8nglY7P/8TI6dK5ezHZ82ObEzAZqI72ovrNDowRgNo3VnLkwaPr/Y7jwU
+ 7wIxCydJBblYRk+RDLTkYnjRFh21ci9XdE+dtu/p9O3daeYZT6WBzImRLuDZd14XtO
+ ZJ1TcqobiQmRA26ieK4/ushIe56pJUXFNxMGgEz0vooY4L29b8D9f1XXbCDPZ2FiqT
+ maGM9ufCEimZdoURCIfgfjvE2pfw/UzLIDWl/HNeVM7uVE4KYcv39ER9iAwfRb/Oei
+ VQWzjMMjzf2DF/IaTTxEpPArj7HJXH05IB+jZ3dB1TYR5hBZb3EFvSazjq2EiIlYoW
+ BFremlRuVzcLA==
+To: jaegeuk@kernel.org
+Date: Mon,  9 Mar 2026 02:22:37 +0000
+Message-ID: <20260309022237.1680736-1-chao@kernel.org>
+X-Mailer: git-send-email 2.53.0.473.g4a7958ca14-goog
 MIME-Version: 1.0
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
@@ -85,15 +80,13 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: From: Yongpeng Yang When f2fs_fiemap() is called with
- `fileinfo->fi_flags`
- containing the FIEMAP_FLAG_SYNC flag, it attempts to write data to disk before
- retrieving file mappings via filemap_write_and_wait(). However, th [...] 
+ Content preview: syzbot reported a f2fs bug as below: BUG: KMSAN: uninit-value
+ in f2fs_sanity_check_node_footer+0x374/0xa20 fs/f2fs/node.c:1520
+ f2fs_sanity_check_node_footer+0x374/0xa20
+ fs/f2fs/node.c:1520 f2fs_finish_read_bio+0xe1e/0x1d60 fs/f2fs/data.c [...]
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [202.108.3.19 listed in wl.mailspike.net]
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
@@ -101,12 +94,10 @@ X-Spam-Report: Spam detection software,
  envelope-from domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
- 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
- [monty_pavel(at)sina.com]
-X-Headers-End: 1vzFLS-0003hL-HI
-Subject: [f2fs-dev] [PATCH v2] f2fs: fix inline data not being written to
- disk in writeback path
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1vzQGs-0003OH-Kq
+Subject: [f2fs-dev] [PATCH] f2fs: fix to avoid uninit-value access in
+ f2fs_sanity_check_node_footer
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -118,187 +109,119 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Yongpeng Yang <yangyongpeng@xiaomi.com>,
- Yongpeng Yang <monty_pavel@sina.com>, linux-f2fs-devel@lists.sourceforge.net
+From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Chao Yu <chao@kernel.org>
+Cc: syzbot+9aac813cdc456cdd49f8@syzkaller.appspotmail.com, stable@kernel.org,
+ linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
-X-Rspamd-Queue-Id: 0C4A2230BBE
+X-Rspamd-Queue-Id: C9ACB23334A
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-0.01 / 15.00];
-	MID_CONTAINS_FROM(1.00)[];
+X-Spamd-Result: default: False [-6.11 / 15.00];
+	WHITELIST_DMARC(-7.00)[sourceforge.net:D:+];
+	SUSPICIOUS_RECIPS(1.50)[];
+	MID_RHS_MATCH_TO(1.00)[];
+	DMARC_POLICY_ALLOW_WITH_FAILURES(-0.50)[];
 	RWL_MAILSPIKE_EXCELLENT(-0.40)[216.105.38.7:from];
 	MAILLIST(-0.20)[mailman];
 	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7];
 	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
 	MIME_GOOD(-0.10)[text/plain];
-	DMARC_POLICY_SOFTFAIL(0.10)[sina.com : SPF not aligned (relaxed), DKIM not aligned (relaxed),none];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORGED_SENDER(0.00)[monty_pavel@sina.com,linux-f2fs-devel-bounces@lists.sourceforge.net];
-	FORGED_RECIPIENTS(0.00)[m:chao@kernel.org,m:jaegeuk@kernel.org,m:yangyongpeng@xiaomi.com,m:monty_pavel@sina.com,m:linux-f2fs-devel@lists.sourceforge.net,s:lists@lfdr.de];
-	RCVD_COUNT_THREE(0.00)[4];
-	ARC_NA(0.00)[];
-	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
-	FORGED_SENDER_MAILLIST(0.00)[];
 	RECEIVED_HELO_LOCALHOST(0.00)[];
-	FREEMAIL_FROM(0.00)[sina.com];
-	MIME_TRACE(0.00)[0:+];
-	TO_DN_SOME(0.00)[];
-	DKIM_MIXED(0.00)[];
-	FREEMAIL_CC(0.00)[xiaomi.com,sina.com,lists.sourceforge.net];
-	RCPT_COUNT_FIVE(0.00)[5];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	NEURAL_HAM(-0.00)[-0.962];
-	FROM_NEQ_ENVFROM(0.00)[monty_pavel@sina.com,linux-f2fs-devel-bounces@lists.sourceforge.net];
-	FROM_HAS_DN(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
+	DKIM_MIXED(0.00)[];
+	FORGED_RECIPIENTS(0.00)[m:jaegeuk@kernel.org,m:syzbot+9aac813cdc456cdd49f8@syzkaller.appspotmail.com,m:stable@kernel.org,m:linux-kernel@vger.kernel.org,m:linux-f2fs-devel@lists.sourceforge.net,m:syzbot@syzkaller.appspotmail.com,s:lists@lfdr.de];
+	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,kernel.org:s=k20201202];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	REPLYTO_DOM_EQ_TO_DOM(0.00)[];
+	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
+	FORGED_SENDER(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
+	ARC_NA(0.00)[];
+	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,kernel.org:-];
+	RCVD_COUNT_FIVE(0.00)[5];
+	TO_DN_NONE(0.00)[];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
+	DMARC_POLICY_ALLOW(0.00)[lists.sourceforge.net,none];
+	NEURAL_HAM(-0.00)[-0.991];
+	TAGGED_RCPT(0.00)[linux-f2fs-devel,9aac813cdc456cdd49f8];
+	RCPT_COUNT_FIVE(0.00)[5];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
-	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,sina.com:s=201208];
-	TAGGED_RCPT(0.00)[linux-f2fs-devel];
-	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,sina.com:-];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vm:email,lists.sourceforge.net:dkim,lists.sourceforge.net:rdns,lists.sourceforge.net:helo,sina.com:mid]
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	HAS_REPLYTO(0.00)[chao@kernel.org]
 X-Rspamd-Action: no action
 
-From: Yongpeng Yang <yangyongpeng@xiaomi.com>
+syzbot reported a f2fs bug as below:
 
-When f2fs_fiemap() is called with `fileinfo->fi_flags` containing the
-FIEMAP_FLAG_SYNC flag, it attempts to write data to disk before
-retrieving file mappings via filemap_write_and_wait(). However, there is
-an issue where the file does not get mapped as expected. The following
-scenario can occur:
+BUG: KMSAN: uninit-value in f2fs_sanity_check_node_footer+0x374/0xa20 fs/f2fs/node.c:1520
+ f2fs_sanity_check_node_footer+0x374/0xa20 fs/f2fs/node.c:1520
+ f2fs_finish_read_bio+0xe1e/0x1d60 fs/f2fs/data.c:177
+ f2fs_read_end_io+0x6ab/0x2220 fs/f2fs/data.c:-1
+ bio_endio+0x1006/0x1160 block/bio.c:1792
+ submit_bio_noacct+0x533/0x2960 block/blk-core.c:891
+ submit_bio+0x57a/0x620 block/blk-core.c:926
+ blk_crypto_submit_bio include/linux/blk-crypto.h:203 [inline]
+ f2fs_submit_read_bio+0x12c/0x360 fs/f2fs/data.c:557
+ f2fs_submit_page_bio+0xee2/0x1450 fs/f2fs/data.c:775
+ read_node_folio+0x384/0x4b0 fs/f2fs/node.c:1481
+ __get_node_folio+0x5db/0x15d0 fs/f2fs/node.c:1576
+ f2fs_get_inode_folio+0x40/0x50 fs/f2fs/node.c:1623
+ do_read_inode fs/f2fs/inode.c:425 [inline]
+ f2fs_iget+0x1209/0x9380 fs/f2fs/inode.c:596
+ f2fs_fill_super+0x8f5a/0xb2e0 fs/f2fs/super.c:5184
+ get_tree_bdev_flags+0x6e6/0x920 fs/super.c:1694
+ get_tree_bdev+0x38/0x50 fs/super.c:1717
+ f2fs_get_tree+0x35/0x40 fs/f2fs/super.c:5436
+ vfs_get_tree+0xb3/0x5d0 fs/super.c:1754
+ fc_mount fs/namespace.c:1193 [inline]
+ do_new_mount_fc fs/namespace.c:3763 [inline]
+ do_new_mount+0x885/0x1dd0 fs/namespace.c:3839
+ path_mount+0x7a2/0x20b0 fs/namespace.c:4159
+ do_mount fs/namespace.c:4172 [inline]
+ __do_sys_mount fs/namespace.c:4361 [inline]
+ __se_sys_mount+0x704/0x7f0 fs/namespace.c:4338
+ __x64_sys_mount+0xe4/0x150 fs/namespace.c:4338
+ x64_sys_call+0x39f0/0x3ea0 arch/x86/include/generated/asm/syscalls_64.h:166
+ do_syscall_x64 arch/x86/entry/syscall_64.c:63 [inline]
+ do_syscall_64+0x134/0xf80 arch/x86/entry/syscall_64.c:94
+ entry_SYSCALL_64_after_hwframe+0x77/0x7f
 
-root@vm:/mnt/f2fs# dd if=/dev/zero of=data.3k bs=3k count=1
-root@vm:/mnt/f2fs# xfs_io data.3k -c "fiemap -v 0 4096"
-data.3k:
- EXT: FILE-OFFSET      BLOCK-RANGE      TOTAL FLAGS
-   0: [0..5]:          0..5                 6 0x307
+The root cause is: in f2fs_finish_read_bio(), we may access uninit data
+in folio if we failed to read the data from device into folio, let's add
+a check condition to avoid such issue.
 
-The root cause of this issue is that f2fs_write_single_data_page() only
-calls f2fs_write_inline_data() to copy data from the data folio to the
-inode folio, and it clears the dirty flag on the data folio. However, it
-does not mark the data folio as writeback. When
-__filemap_fdatawait_range() checks for folios with the writeback flag,
-it returns early, causing f2fs_fiemap() to report that the file has no
-mapping.
-
-To fix this issue, the solution is to call f2fs_sync_node_pages() in
-f2fs_inline_data_fiemap() when getting fiemap with FIEMAP_FLAG_SYNC
-flags. This patch ensures that the inode folio is written back and the
-writeback process completes before proceeding.
-
-Fixes: 9ffe0fb5f3bb ("f2fs: handle inline data operations")
-Signed-off-by: Yongpeng Yang <yangyongpeng@xiaomi.com>
+Cc: stable@kernel.org
+Fixes: 50ac3ecd8e05 ("f2fs: fix to do sanity check on node footer in {read,write}_end_io")
+Reported-by: syzbot+9aac813cdc456cdd49f8@syzkaller.appspotmail.com
+Closes: https://lore.kernel.org/linux-f2fs-devel/69a9ca26.a70a0220.305d9a.0000.GAE@google.com
+Signed-off-by: Chao Yu <chao@kernel.org>
 ---
-- Call f2fs_sync_node_pages() in getting fiemap path rather than
-writeback path.
----
- fs/f2fs/checkpoint.c |  1 +
- fs/f2fs/inline.c     | 25 +++++++++++++++++++++++++
- fs/f2fs/node.c       | 21 ++++++++++++++++-----
- 3 files changed, 42 insertions(+), 5 deletions(-)
+ fs/f2fs/data.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/fs/f2fs/checkpoint.c b/fs/f2fs/checkpoint.c
-index 6dd39b7de11a..c85276931c45 100644
---- a/fs/f2fs/checkpoint.c
-+++ b/fs/f2fs/checkpoint.c
-@@ -1416,6 +1416,7 @@ static int block_operations(struct f2fs_sb_info *sbi)
- 	struct writeback_control wbc = {
- 		.sync_mode = WB_SYNC_ALL,
- 		.nr_to_write = LONG_MAX,
-+		.range_cyclic = 1,
- 	};
- 	int err = 0, cnt = 0;
+diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
+index 400f0400e13d..cb2332faf5f0 100644
+--- a/fs/f2fs/data.c
++++ b/fs/f2fs/data.c
+@@ -173,7 +173,8 @@ static void f2fs_finish_read_bio(struct bio *bio, bool in_task)
+ 		while (nr_pages--)
+ 			dec_page_count(F2FS_F_SB(folio), __read_io_type(folio));
  
-diff --git a/fs/f2fs/inline.c b/fs/f2fs/inline.c
-index 86d2abbb40ff..ab1e10b0f6a6 100644
---- a/fs/f2fs/inline.c
-+++ b/fs/f2fs/inline.c
-@@ -9,6 +9,7 @@
- #include <linux/fs.h>
- #include <linux/f2fs_fs.h>
- #include <linux/fiemap.h>
-+#include <linux/writeback.h>
- 
- #include "f2fs.h"
- #include "node.h"
-@@ -814,6 +815,30 @@ int f2fs_inline_data_fiemap(struct inode *inode,
- 		goto out;
- 	}
- 
-+	if (fieinfo->fi_flags & FIEMAP_FLAG_SYNC) {
-+		struct writeback_control iwbc = {
-+			.sync_mode = WB_SYNC_ALL,
-+			.range_start = inode->i_ino << PAGE_SHIFT,
-+			.range_end = inode->i_ino << PAGE_SHIFT,
-+			.nr_to_write = 1,
-+			.range_cyclic = 0,
-+		};
-+
-+retry:
-+		f2fs_folio_wait_writeback(ifolio, NODE, true, true);
-+		if (folio_test_dirty(ifolio)) {
-+			f2fs_folio_put(ifolio, true);
-+			err = f2fs_sync_node_pages(F2FS_I_SB(inode), &iwbc, true, FS_NODE_IO);
-+			if (!err) {
-+				ifolio = f2fs_get_inode_folio(F2FS_I_SB(inode), inode->i_ino);
-+				if (IS_ERR(ifolio))
-+					return PTR_ERR(ifolio);
-+				goto retry;
-+			}
-+			return err;
-+		}
-+	}
-+
- 	ilen = min_t(size_t, MAX_INLINE_DATA(inode), i_size_read(inode));
- 	if (start >= ilen)
- 		goto out;
-diff --git a/fs/f2fs/node.c b/fs/f2fs/node.c
-index bbfa677ef46f..2fbfecaf3f7b 100644
---- a/fs/f2fs/node.c
-+++ b/fs/f2fs/node.c
-@@ -2083,7 +2083,8 @@ int f2fs_sync_node_pages(struct f2fs_sb_info *sbi,
- 				struct writeback_control *wbc,
- 				bool do_balance, enum iostat_type io_type)
- {
--	pgoff_t index;
-+	pgoff_t index, wbc_index;
-+	pgoff_t end, wbc_end;
- 	struct folio_batch fbatch;
- 	int step = 0;
- 	int nwritten = 0;
-@@ -2092,14 +2093,24 @@ int f2fs_sync_node_pages(struct f2fs_sb_info *sbi,
- 
- 	folio_batch_init(&fbatch);
- 
-+	wbc_index = 0;
-+	wbc_end = LONG_MAX;
-+	if (!wbc->range_cyclic) {
-+		wbc_index = wbc->range_start >> PAGE_SHIFT;
-+		wbc_end = wbc->range_end >> PAGE_SHIFT;
-+	}
- next_step:
--	index = 0;
-+	index = wbc_index;
-+	end = wbc_end;
- 
--	while (!done && (nr_folios = filemap_get_folios_tag(NODE_MAPPING(sbi),
--				&index, (pgoff_t)-1, PAGECACHE_TAG_DIRTY,
--				&fbatch))) {
-+	while (!done && (index <= end)) {
- 		int i;
- 
-+		nr_folios = filemap_get_folios_tag(NODE_MAPPING(sbi),
-+				&index, end, PAGECACHE_TAG_DIRTY,
-+				&fbatch);
-+		if (nr_folios == 0)
-+			break;
- 		for (i = 0; i < nr_folios; i++) {
- 			struct folio *folio = fbatch.folios[i];
- 			bool submitted = false;
+-		if (F2FS_F_SB(folio)->node_inode && is_node_folio(folio) &&
++		if (bio->bi_status == BLK_STS_OK &&
++			F2FS_F_SB(folio)->node_inode && is_node_folio(folio) &&
+ 			f2fs_sanity_check_node_footer(F2FS_F_SB(folio),
+ 				folio, folio->index, NODE_TYPE_REGULAR, true))
+ 			bio->bi_status = BLK_STS_IOERR;
 -- 
-2.43.0
+2.49.0
 
 
 
