@@ -2,42 +2,42 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 0NvbIhOjrmk9HAIAu9opvQ
+	id uHP0DBOjrmk9HAIAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
 	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 09 Mar 2026 11:38:11 +0100
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 28EC323739F
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 09 Mar 2026 11:38:11 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5D04523739D
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 09 Mar 2026 11:38:10 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
 	Subject:MIME-Version:References:In-Reply-To:Message-ID:Date:To:From:Sender:
 	Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
 	:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=OYcu2slVcOEkxl+dc01RLnHtBG/9oCyaHOfWRHo+mdg=; b=JShivCqxeDAqFOToAzQORqbtIX
-	NAGyNrTeo+om+/vI6AtojCaEI7Lq6Wf4WIrHo3bJU57Q7+VtEleA4xp3C5WzknxpfYvQtFoLlsmKR
-	DI8BxrOFBJx07h4W4nziJHcmkP/2R5W/Lofc1beNkfNSHIsHU8eyhIt3kBu/xDozf1cg=;
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=8FkFV+BWV6jTJcqPswRVUA42bgfZuL6oeKZnmSfKxV4=; b=XDZqALagMdDCZL2/j0v2Q41MPL
+	Ie+RtmhpwKkKo7zXjVkP7uZMncbQjxXuqKQD3ytn7uHajyX1J2nSpX+xk/FgwPAEWqYJwhU3iSeZQ
+	XtL9BUcSS9fi1YIX/c4bk6Ry6P+cLngrBdANLVHIKoEFDvLW9Zm85nCVIkmcswA9fQ8g=;
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vzXzy-0005z2-8u;
-	Mon, 09 Mar 2026 10:38:06 +0000
+	id 1vzXzw-0006hz-Uc;
+	Mon, 09 Mar 2026 10:38:04 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <william.allentx@gmail.com>) id 1vzXzm-0005ye-L0
+ (envelope-from <william.allentx@gmail.com>) id 1vzXzr-0006hR-CZ
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 09 Mar 2026 10:37:54 +0000
+ Mon, 09 Mar 2026 10:37:59 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=dBuOUGVLEw4nznHpBENauX1eomvy7I2QzIe17Bzs21Q=; b=Q2PCBhpfH22IaEFt7lglLAZDvr
- u1Cfb3TgQz07bbPa/+RmHGTLmLRjGD7U6coE9QsNerVdVdI79rIF7LnR7iGQVcCuOCjCZIZjQ6ZnN
- U3UKGV+0BaGjj3TzSSzHWHJFpyvG1niLbY/GykUc8sja3EwA8gvdB9yj95B2/cwMg0Io=;
+ bh=ocFSNy72gpBYTyqbLTn5+BD/eUt6UO2paTu1vwXpU5E=; b=X6zpDsg0HlGgbsoDitdeXgUct9
+ v7nAAAQ4sk/l1jM9tlxo7N9xBYq+UNQvMzQN+oMu65khv7c7XDnFfJBTKBqxuMYshG3GqFe1VIuHi
+ O/dOdbyVcu0EaARSaPRiJEHExQi2aGOcG+rAMZWVLIbwLDmIizmixjczmK9JyGxIXR9A=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:
@@ -45,63 +45,63 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=dBuOUGVLEw4nznHpBENauX1eomvy7I2QzIe17Bzs21Q=; b=PABUhMn3XdUmkBYjTlrcNWnj78
- R92kj1jFhClO3V18VlL/eooxaBI5satbUc6CktZr1M7bV8d7Y9Vw1E+2Rxm5MX8uEn4T5l/xdfgdL
- gWE8vrUfFL70b05fFvZZyYuoe091zSNppsITgGTw9lUONMb1jbXndZMwSCYqegf8l5ao=;
-Received: from mail-ot1-f42.google.com ([209.85.210.42])
+ bh=ocFSNy72gpBYTyqbLTn5+BD/eUt6UO2paTu1vwXpU5E=; b=JGMFkEfrKODQL8qWVeIW3/Bggp
+ YoZrC/5a3IgAj9VTTwC3OH6yshPYuHK05OmsxRaAuVFVjXXvjdPnzXDEMs30/UtGjljmwa/1GXkU5
+ YK8v7ANJX+9CoiaoJQ6SbCuyBJAWw9qQnOZxezUg0+l2aNVvS8Pqv+B65t5/KdtA1wZ8=;
+Received: from mail-ot1-f48.google.com ([209.85.210.48])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1vzXzm-0008Fj-8I for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 09 Mar 2026 10:37:54 +0000
-Received: by mail-ot1-f42.google.com with SMTP id
- 46e09a7af769-7d74a59262fso868220a34.0
+ id 1vzXzq-0008Fs-A7 for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 09 Mar 2026 10:37:59 +0000
+Received: by mail-ot1-f48.google.com with SMTP id
+ 46e09a7af769-7d7422b4ff1so455149a34.3
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Mon, 09 Mar 2026 03:37:54 -0700 (PDT)
+ Mon, 09 Mar 2026 03:37:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1773052663; x=1773657463; darn=lists.sourceforge.net;
+ d=gmail.com; s=20230601; t=1773052667; x=1773657467; darn=lists.sourceforge.net;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=dBuOUGVLEw4nznHpBENauX1eomvy7I2QzIe17Bzs21Q=;
- b=cfy7gyxgOjfdI0MZTHgEOtyQoPCGKZbJ1qsqwZLFu+7ihy8fUA5GK90OkupAobzE/J
- uDXDdNT/zofQ7QarXKKu1d1Br+hrhUECADoxYZSpsqwec43tYKnS+EthCz+0LVVHU600
- 2Rf1fhOmcqjdXmJ7BYjGdTFa7n8cT8dIlvX0xBKJJp/Jf7Iqdrec/3SAXnh0T5umTZQY
- FDtnvtbb8iliDXuYQ/A6OduIt9KldjXkNJ1eWZyTYSFrP3NlstsVXAxuebBDB1pyCcgO
- /0oQQHsjOKdRwFxoLAeAoALhOGHgegDJiJ+LGCC4Rwo7yer8XwJnO1cT/dexwkVf0fBB
- KK3g==
+ bh=ocFSNy72gpBYTyqbLTn5+BD/eUt6UO2paTu1vwXpU5E=;
+ b=cZNL3s3qXkHyZA5f+VA0UcaCOvNGF2KYVqFpF055NQnscrmCpSy6PW6sXAFeD9wqx7
+ X2yYOw6dNzj7GtMQ9lOcNfhziVwI1QkavHvRjvWUHG5WUcZpA/NJqisnB7YTrDSe/39d
+ t9Z6nNWsmk58IJuN4ikxoZx1ufOxqBjlgEdSEkL9847+Rlvpxi70KAif1t79BF4x6MPv
+ VbVDjjdC0srlfMVOCva5bDj8pt/+FsoooE3tts+jMaoe+UcF0/v4ERamZrn0QyOw73yB
+ YVZ3R9LQas590NJ0uNtXx8jrCPFoeXbVLNt3cdAYcew1qgaeVbc23UZTXajilVVVHcEL
+ vrAA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1773052663; x=1773657463;
+ d=1e100.net; s=20230601; t=1773052667; x=1773657467;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
  :to:cc:subject:date:message-id:reply-to;
- bh=dBuOUGVLEw4nznHpBENauX1eomvy7I2QzIe17Bzs21Q=;
- b=GAopkasHGsYzXI47/lBdSTPPX4/iZJhzKTahoqxdFLhpjO8S4Pm/p4vrqYIimI7hkU
- 4PHRbuIT5oq3gb3sP1wyE/pjex929fi7tGFHe2pgBcujPrAOdde0fqI6gdQCnnATzs0v
- 5o5qg0mbut6fHHlDOquO3Mee6jh/mGXVqOEsQy6GEbgYjnj4ZlFZotnJwisRB1yvFlxj
- 25VbHTq9U2WsTHyenKa4UyflGQRfBDDwaSr52uxIH3gauzyokUDx4uKERWK1O+f+3PfV
- PWvqXwlgJdRTLbnWKe9hzUbXnvbUuXfSY8ua1PUCQnjabUqeoNsfgaKFBOe9Zx4oI3J0
- bPfQ==
-X-Gm-Message-State: AOJu0YwcU3rkyvhXLYyo/l+E3pLhcTueoagK69P0Mxscb7ANDtgfk64H
- oX0IMnQN9zsperSYcfRLMcHcGsmqsCZza3FdtjF8iUW1pOUPKN8e4189uxXUiqyW
-X-Gm-Gg: ATEYQzxyEeCJQT+805YT10sUCRoruCPFyd30zIjRhmc38IBzp09lkfBh4+VUe3zSCsW
- DaUW+tasJ6OS2+akGH4832e6wUPsS31A6QM4qPIHznMEmPqPmdBC7Qnuh+rNge827F5UkHol7ep
- pXGt1TOUN96fTJh5886Omssgp7FOERjf7SXdyjDkeCojA2lGibKNaL1cbd93/iHx7IpQ79CXHLg
- Vq+SZd++eNQNKTFY0Bb38zlQaE7ptRVqu0Cnr6eW10+L2Rhsc2rS+DKewa+fXOMg80TluPARjFD
- nKIhSTvnioLRlsh12RMiglJMoNSDonLObAfVPrl1glzwKlaVZQmq7oTz02htYnTnLI0taKn+zxv
- SaTLaZYw55flqhfutSQz9RQnT1Rd9cozbHxV8uCIm1ZdX7GkyMUnUzOdgC422P0eCp3LIyyrEfD
- K5BlVx2mpxXnPSzWnZzyjktsVzPOG9bJzI7rmVgun566wG/mVSl5Q=
-X-Received: by 2002:a05:6830:828e:b0:7d7:45ff:dcfd with SMTP id
- 46e09a7af769-7d745ffe497mr2836864a34.12.1773052663327; 
- Mon, 09 Mar 2026 03:37:43 -0700 (PDT)
+ bh=ocFSNy72gpBYTyqbLTn5+BD/eUt6UO2paTu1vwXpU5E=;
+ b=IgM7kghnEgtWdsuEJR1dWV18bk7eXTi2VLIJGOZo2cb6O+uq5m9PCwZGhsTfu0MWag
+ fRtFJ16IOAm6MaD06aRV95miXettkYoX/2LFU/Z0o8lurtx4cDGXZln9cX/F3y0jM6pw
+ cx5ANMEPPpXymXG6THEJWp9Q9a4ureN4CK4m/LeUhvEb8k5772tbWvVaIp1zv5wCfXST
+ bdta2kF9J+3MWZ5yHLdRHp9sF2uXElsmB/ESubO+5L15CbhOxNTLfos2k2Vi9ueP4jIt
+ 9iz1DtRnG4MzbcbRxgB4gbePN3mOuM2gwnjOi7AmPTItoU2AsfPFNi0oh0HZCmeNTOOC
+ UUHQ==
+X-Gm-Message-State: AOJu0YyCCrQXjRYkNiaHJDKEtTuR5CvAjl8g2ye3dHzJf+FI2KExqC2v
+ anr6VSiU6Y+wV6HariM2tlwTeJZzJK53lo3winlsbKRNFD/iKQnpH69e/EshL9b0
+X-Gm-Gg: ATEYQzyVZHjtjc1o2p0CTvp8fnmM70D83bhk2ZrlIRTwbWOGuKfA+ZUnq+l6VIPLJdU
+ OeTTNDUpouFx6EaDy4v/rhMUmK41NNZ+hky4MGlLppz8DrNFnQFfSKZAO9LqEcmR41RGcZRDRtt
+ EaDRBjvrI5b/EIe2nH2tYeLVDQEE4xCz3GlmoNxYQ22NKCfudSXEiIBsPfXvGsao7IP34Sx69hY
+ WXV4jQbRfsyP5fx/W0K+7Q/u9KTqugbGkGZACVdslIt8XBKthBRasInUuQ0jPIfIsD548wGKZY0
+ qph9FhUsla06+FPlGhMdhNiE5926zivF9Dx3RRyY0MpASml6cGoM3GNo93X2imF+x1xdRiNA0/K
+ OL6VgHe2wShGpiTNXwJDqJiJWh0nJM9XJI+aQfNbi3Oj3EQs8X01p/V5KgfkqsdT4NImkvpKH9r
+ t8TMncznl6VhMBoZTwvz6r2hd2U7JIf8Mlk2qDQbTxsn+IYO/7iCM=
+X-Received: by 2002:a05:6830:d18:b0:7ab:e111:1a57 with SMTP id
+ 46e09a7af769-7d72705c2fcmr6133858a34.31.1773052667312; 
+ Mon, 09 Mar 2026 03:37:47 -0700 (PDT)
 Received: from starman.tricat-industries.com ([136.49.86.72])
  by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7d755603798sm231247a34.29.2026.03.09.03.37.42
+ 46e09a7af769-7d755603798sm231247a34.29.2026.03.09.03.37.46
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 09 Mar 2026 03:37:42 -0700 (PDT)
+ Mon, 09 Mar 2026 03:37:46 -0700 (PDT)
 From: 'wallentx <william.allentx@gmail.com>
 To: linux-f2fs-devel@lists.sourceforge.net
-Date: Mon,  9 Mar 2026 05:36:58 -0500
-Message-ID: <20260309103700.489932-2-william.allentx@gmail.com>
+Date: Mon,  9 Mar 2026 05:36:59 -0500
+Message-ID: <20260309103700.489932-3-william.allentx@gmail.com>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20260309103700.489932-1-william.allentx@gmail.com>
 References: <20260309103700.489932-1-william.allentx@gmail.com>
@@ -113,12 +113,10 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: From: wallentx checkpoint validation and
- segment_bits_seq_show()
- can read cur_valid_map without taking the segment lock. A following patch
- will allow zoned LFS segments to switch between shared and private SIT valid
- maps, so those readers need to tolerate pointer publication safely. 
- Content analysis details:   (-0.2 points, 5.0 required)
+ Content preview:  From: wallentx For zoned devices, F2FS only allows LFS mode.
+ In that configuration SSR is not used, IPU is not allowed, and discard defaults
+ to section granularity. Even so, F2FS still allocates per-segment cur/ckpt
+ [...] Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
@@ -131,11 +129,11 @@ X-Spam-Report: Spam detection software,
  0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
  [william.allentx(at)gmail.com]
  0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.210.42 listed in wl.mailspike.net]
+ [209.85.210.48 listed in wl.mailspike.net]
  0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1vzXzm-0008Fj-8I
-Subject: [f2fs-dev] [RFC PATCH 1/3] f2fs: prepare cur_valid_map for safe
- lockless access
+X-Headers-End: 1vzXzq-0008Fs-A7
+Subject: [f2fs-dev] [RFC PATCH 2/3] f2fs: reduce zoned LFS memory by sharing
+ SIT valid maps
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -152,7 +150,7 @@ Cc: jaegeuk@kernel.org, linux-kernel@vger.kernel.org,
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
-X-Rspamd-Queue-Id: 28EC323739F
+X-Rspamd-Queue-Id: 5D04523739D
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [0.49 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
@@ -191,78 +189,581 @@ X-Rspamd-Action: no action
 
 From: wallentx <william.allentx@gmail.com>
 
-checkpoint validation and segment_bits_seq_show() can read
-cur_valid_map without taking the segment lock.
+For zoned devices, F2FS only allows LFS mode. In that configuration SSR
+is not used, IPU is not allowed, and discard defaults to section
+granularity. Even so, F2FS still allocates per-segment cur/ckpt valid
+maps for every segment, including the common cases where a segment is
+trivially empty or trivially full.
 
-A following patch will allow zoned LFS segments to switch between
-shared and private SIT valid maps, so those readers need to tolerate
-pointer publication safely.
+Reduce that overhead by introducing shared zero/full SIT valid maps for
+zoned LFS. Empty inactive segments point at the shared zero map, full
+inactive segments point at the shared full map, and only active or
+partially valid segments keep private maps. Update SIT rebuild and
+runtime updates to move segments between shared and private maps safely,
+and retire replaced private maps with RCU.
 
-Prepare for that by reading cur_valid_map under RCU in the lockless
-paths and by publishing the initial map pointer with RCU semantics.
-This is preparatory and does not change the SIT layout or allocation
-policy yet.
+Also invalidate scanned SIT metadata pages after mount-time rebuild so
+META_MAPPING does not retain the full SIT scan, update memory reporting
+to reflect the new layout, and reject checkpoint=disable because its
+checkpoint-era validity accounting does not fit the collapsed shared-SIT
+representation.
+
+On a test system with 43 HM-SMR zoned volumes (~550 TB total),
+CONFIG_F2FS_CHECK_FS=y, and this patch applied on top of jaegeuk/f2fs
+dev at 5f04e90eedd0, static F2FS memory dropped from 58.91 GiB to
+27.70 GiB.
 
 Signed-off-by: wallentx <william.allentx@gmail.com>
 ---
- fs/f2fs/checkpoint.c | 4 +++-
- fs/f2fs/segment.c    | 3 ++-
- fs/f2fs/sysfs.c      | 9 ++++++++-
- 3 files changed, 13 insertions(+), 3 deletions(-)
+ fs/f2fs/debug.c   |  20 ++-
+ fs/f2fs/f2fs.h    |   6 +
+ fs/f2fs/segment.c | 338 ++++++++++++++++++++++++++++++++++++++++++----
+ fs/f2fs/segment.h |   3 +
+ fs/f2fs/super.c   |   4 +
+ fs/f2fs/sysfs.c   |   3 +-
+ 6 files changed, 341 insertions(+), 33 deletions(-)
 
-diff --git a/fs/f2fs/checkpoint.c b/fs/f2fs/checkpoint.c
-index 6dd39b7de11a..7b196d9df0f7 100644
---- a/fs/f2fs/checkpoint.c
-+++ b/fs/f2fs/checkpoint.c
-@@ -354,7 +354,9 @@ static bool __is_bitmap_valid(struct f2fs_sb_info *sbi, block_t blkaddr,
- 	offset = GET_BLKOFF_FROM_SEG0(sbi, blkaddr);
- 	se = get_seg_entry(sbi, segno);
+diff --git a/fs/f2fs/debug.c b/fs/f2fs/debug.c
+index af88db8fdb71..d8bfdac5c1e4 100644
+--- a/fs/f2fs/debug.c
++++ b/fs/f2fs/debug.c
+@@ -319,9 +319,23 @@ static void update_mem_info(struct f2fs_sb_info *sbi)
+ 	si->base_mem += sizeof(struct sit_info);
+ 	si->base_mem += MAIN_SEGS(sbi) * sizeof(struct seg_entry);
+ 	si->base_mem += f2fs_bitmap_size(MAIN_SEGS(sbi));
+-	si->base_mem += 2 * SIT_VBLOCK_MAP_SIZE * MAIN_SEGS(sbi);
+-	si->base_mem += SIT_VBLOCK_MAP_SIZE * MAIN_SEGS(sbi);
+-	si->base_mem += SIT_VBLOCK_MAP_SIZE;
++
++	if (f2fs_use_shared_sit_map(sbi)) {
++		/* shared cur/ckpt maps (zero + full bitmaps) */
++		si->base_mem += SIT_VBLOCK_MAP_SIZE * 2;
++		/* Approximate private bitmaps for active logs */
++		si->base_mem += SIT_VBLOCK_MAP_SIZE * NR_CURSEG_TYPE;
++#ifdef CONFIG_F2FS_CHECK_FS
++		si->base_mem += SIT_VBLOCK_MAP_SIZE * MAIN_SEGS(sbi);
++#endif
++		if (f2fs_block_unit_discard(sbi))
++			si->base_mem += SIT_VBLOCK_MAP_SIZE * MAIN_SEGS(sbi);
++	} else {
++		si->base_mem += 2 * SIT_VBLOCK_MAP_SIZE * MAIN_SEGS(sbi);
++		si->base_mem += SIT_VBLOCK_MAP_SIZE * MAIN_SEGS(sbi);
++		si->base_mem += SIT_VBLOCK_MAP_SIZE;
++	}
++
+ 	if (__is_large_section(sbi))
+ 		si->base_mem += MAIN_SECS(sbi) * sizeof(struct sec_entry);
+ 	si->base_mem += __bitmap_size(sbi, SIT_BITMAP);
+diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+index 8942b2a63cfd..11f3601ffd34 100644
+--- a/fs/f2fs/f2fs.h
++++ b/fs/f2fs/f2fs.h
+@@ -4914,6 +4914,12 @@ static inline bool f2fs_lfs_mode(struct f2fs_sb_info *sbi)
+ 	return F2FS_OPTION(sbi).fs_mode == FS_MODE_LFS;
+ }
  
--	exist = f2fs_test_bit(offset, se->cur_valid_map);
-+	rcu_read_lock();
-+	exist = f2fs_test_bit(offset, rcu_dereference(se->cur_valid_map));
-+	rcu_read_unlock();
- 
- 	/* skip data, if we already have an error in checkpoint. */
- 	if (unlikely(f2fs_cp_error(sbi)))
++/* Share SIT valid maps only for zoned LFS. */
++static inline bool f2fs_use_shared_sit_map(struct f2fs_sb_info *sbi)
++{
++	return f2fs_sb_has_blkzoned(sbi) && f2fs_lfs_mode(sbi);
++}
++
+ static inline bool f2fs_is_sequential_zone_area(struct f2fs_sb_info *sbi,
+ 					  block_t blkaddr)
+ {
 diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
-index 23faf6725632..c9cfc8f17698 100644
+index c9cfc8f17698..0dab6b16ba56 100644
 --- a/fs/f2fs/segment.c
 +++ b/fs/f2fs/segment.c
-@@ -4845,7 +4845,8 @@ static int build_sit_info(struct f2fs_sb_info *sbi)
- 	bitmap = sit_i->bitmap;
+@@ -31,6 +31,24 @@ static struct kmem_cache *discard_entry_slab;
+ static struct kmem_cache *discard_cmd_slab;
+ static struct kmem_cache *sit_entry_set_slab;
+ static struct kmem_cache *revoke_entry_slab;
++static struct kmem_cache *sit_bitmap_slab;
++
++struct f2fs_sit_bitmap {
++	struct rcu_head rcu;
++	unsigned char map[SIT_VBLOCK_MAP_SIZE];
++};
++
++static void f2fs_free_sit_bitmap_rcu(struct rcu_head *rcu)
++{
++	struct f2fs_sit_bitmap *b = container_of(rcu, struct f2fs_sit_bitmap, rcu);
++
++	kmem_cache_free(sit_bitmap_slab, b);
++}
++
++static struct f2fs_sit_bitmap *f2fs_sit_bitmap_from_map(void *map)
++{
++	return container_of(map, struct f2fs_sit_bitmap, map);
++}
  
- 	for (start = 0; start < MAIN_SEGS(sbi); start++) {
--		sit_i->sentries[start].cur_valid_map = bitmap;
-+		rcu_assign_pointer(sit_i->sentries[start].cur_valid_map,
-+				   bitmap);
- 		bitmap += SIT_VBLOCK_MAP_SIZE;
+ static unsigned long __reverse_ulong(unsigned char *str)
+ {
+@@ -2444,6 +2462,31 @@ static int update_sit_entry_for_release(struct f2fs_sb_info *sbi, struct seg_ent
  
- 		sit_i->sentries[start].ckpt_valid_map = bitmap;
+ 	f2fs_bug_on(sbi, GET_SEGNO(sbi, blkaddr) != GET_SEGNO(sbi, blkaddr + del_count - 1));
+ 
++	if (f2fs_use_shared_sit_map(sbi)) {
++		struct sit_info *sit_i = SIT_I(sbi);
++
++		if (se->cur_valid_map == sit_i->bitmap_full) {
++			struct f2fs_sit_bitmap *b = f2fs_kmem_cache_alloc(sit_bitmap_slab,
++						GFP_NOFS, true, sbi);
++			memset(b->map, 0xff, SIT_VBLOCK_MAP_SIZE);
++			rcu_assign_pointer(se->cur_valid_map, b->map);
++			se->ckpt_valid_map = b->map;
++#ifdef CONFIG_F2FS_CHECK_FS
++			memcpy(se->cur_valid_map_mir, b->map, SIT_VBLOCK_MAP_SIZE);
++#endif
++		} else if (se->cur_valid_map == sit_i->bitmap_zero) {
++			/* Should not happen, freeing empty segment */
++			struct f2fs_sit_bitmap *b = f2fs_kmem_cache_alloc(sit_bitmap_slab,
++						GFP_NOFS, true, sbi);
++			memset(b->map, 0, SIT_VBLOCK_MAP_SIZE);
++			rcu_assign_pointer(se->cur_valid_map, b->map);
++			se->ckpt_valid_map = b->map;
++#ifdef CONFIG_F2FS_CHECK_FS
++			memcpy(se->cur_valid_map_mir, b->map, SIT_VBLOCK_MAP_SIZE);
++#endif
++		}
++	}
++
+ 	for (i = 0; i < del_count; i++) {
+ 		exist = f2fs_test_and_clear_bit(offset + i, se->cur_valid_map);
+ #ifdef CONFIG_F2FS_CHECK_FS
+@@ -2478,10 +2521,18 @@ static int update_sit_entry_for_release(struct f2fs_sb_info *sbi, struct seg_ent
+ 				f2fs_test_and_clear_bit(offset + i, se->discard_map))
+ 			sbi->discard_blks++;
+ 
+-		if (!f2fs_test_bit(offset + i, se->ckpt_valid_map)) {
+-			se->ckpt_valid_blocks -= 1;
+-			if (__is_large_section(sbi))
+-				get_sec_entry(sbi, segno)->ckpt_valid_blocks -= 1;
++		if (se->cur_valid_map != se->ckpt_valid_map) {
++			if (!f2fs_test_bit(offset + i, se->ckpt_valid_map)) {
++				se->ckpt_valid_blocks -= 1;
++				if (__is_large_section(sbi))
++					get_sec_entry(sbi, segno)->ckpt_valid_blocks -= 1;
++			}
++		} else {
++			if (exist) {
++				se->ckpt_valid_blocks -= 1;
++				if (__is_large_section(sbi))
++					get_sec_entry(sbi, segno)->ckpt_valid_blocks -= 1;
++			}
+ 		}
+ 	}
+ 
+@@ -2499,6 +2550,31 @@ static int update_sit_entry_for_alloc(struct f2fs_sb_info *sbi, struct seg_entry
+ 	bool mir_exist;
+ #endif
+ 
++	if (f2fs_use_shared_sit_map(sbi)) {
++		struct sit_info *sit_i = SIT_I(sbi);
++
++		if (se->cur_valid_map == sit_i->bitmap_zero) {
++			struct f2fs_sit_bitmap *b = f2fs_kmem_cache_alloc(sit_bitmap_slab,
++						GFP_NOFS, true, sbi);
++			memset(b->map, 0, SIT_VBLOCK_MAP_SIZE);
++			rcu_assign_pointer(se->cur_valid_map, b->map);
++			se->ckpt_valid_map = b->map;
++#ifdef CONFIG_F2FS_CHECK_FS
++			memcpy(se->cur_valid_map_mir, b->map, SIT_VBLOCK_MAP_SIZE);
++#endif
++		} else if (se->cur_valid_map == sit_i->bitmap_full) {
++			/* Should not happen in LFS alloc, but for safety */
++			struct f2fs_sit_bitmap *b = f2fs_kmem_cache_alloc(sit_bitmap_slab,
++						GFP_NOFS, true, sbi);
++			memset(b->map, 0xff, SIT_VBLOCK_MAP_SIZE);
++			rcu_assign_pointer(se->cur_valid_map, b->map);
++			se->ckpt_valid_map = b->map;
++#ifdef CONFIG_F2FS_CHECK_FS
++			memcpy(se->cur_valid_map_mir, b->map, SIT_VBLOCK_MAP_SIZE);
++#endif
++		}
++	}
++
+ 	exist = f2fs_test_and_set_bit(offset, se->cur_valid_map);
+ #ifdef CONFIG_F2FS_CHECK_FS
+ 	mir_exist = f2fs_test_and_set_bit(offset,
+@@ -2525,14 +2601,23 @@ static int update_sit_entry_for_alloc(struct f2fs_sb_info *sbi, struct seg_entry
+ 	 * or newly invalidated.
+ 	 */
+ 	if (!is_sbi_flag_set(sbi, SBI_CP_DISABLED)) {
+-		if (!f2fs_test_and_set_bit(offset, se->ckpt_valid_map)) {
+-			se->ckpt_valid_blocks++;
+-			if (__is_large_section(sbi))
+-				get_sec_entry(sbi, segno)->ckpt_valid_blocks++;
++		if (se->cur_valid_map != se->ckpt_valid_map) {
++			if (!f2fs_test_and_set_bit(offset, se->ckpt_valid_map)) {
++				se->ckpt_valid_blocks++;
++				if (__is_large_section(sbi))
++					get_sec_entry(sbi, segno)->ckpt_valid_blocks++;
++			}
++		} else {
++			if (!exist) {
++				se->ckpt_valid_blocks++;
++				if (__is_large_section(sbi))
++					get_sec_entry(sbi, segno)->ckpt_valid_blocks++;
++			}
+ 		}
+ 	}
+ 
+-	if (!f2fs_test_bit(offset, se->ckpt_valid_map)) {
++	if (se->cur_valid_map != se->ckpt_valid_map &&
++	    !f2fs_test_bit(offset, se->ckpt_valid_map)) {
+ 		se->ckpt_valid_blocks += del;
+ 		if (__is_large_section(sbi))
+ 			get_sec_entry(sbi, segno)->ckpt_valid_blocks += del;
+@@ -2582,6 +2667,40 @@ static void update_sit_entry(struct f2fs_sb_info *sbi, block_t blkaddr, int del)
+ 
+ 	if (__is_large_section(sbi))
+ 		get_sec_entry(sbi, segno)->valid_blocks += del;
++
++	if (f2fs_use_shared_sit_map(sbi)) {
++		struct sit_info *sit_i = SIT_I(sbi);
++
++		if (new_vblocks == 0 &&
++		    se->cur_valid_map != sit_i->bitmap_zero) {
++			void *old_map = se->cur_valid_map;
++
++			rcu_assign_pointer(se->cur_valid_map, sit_i->bitmap_zero);
++			se->ckpt_valid_map = sit_i->bitmap_zero;
++#ifdef CONFIG_F2FS_CHECK_FS
++			memset(se->cur_valid_map_mir, 0, SIT_VBLOCK_MAP_SIZE);
++#endif
++			if (old_map != sit_i->bitmap_zero &&
++			    old_map != sit_i->bitmap_full) {
++				call_rcu(&f2fs_sit_bitmap_from_map(old_map)->rcu,
++					 f2fs_free_sit_bitmap_rcu);
++			}
++		} else if (new_vblocks == BLKS_PER_SEG(sbi) &&
++				se->cur_valid_map != sit_i->bitmap_full) {
++			void *old_map = se->cur_valid_map;
++
++			rcu_assign_pointer(se->cur_valid_map, sit_i->bitmap_full);
++			se->ckpt_valid_map = sit_i->bitmap_full;
++#ifdef CONFIG_F2FS_CHECK_FS
++			memset(se->cur_valid_map_mir, 0xff, SIT_VBLOCK_MAP_SIZE);
++#endif
++			if (old_map != sit_i->bitmap_zero &&
++			    old_map != sit_i->bitmap_full) {
++				call_rcu(&f2fs_sit_bitmap_from_map(old_map)->rcu,
++					 f2fs_free_sit_bitmap_rcu);
++			}
++		}
++	}
+ }
+ 
+ void f2fs_invalidate_blocks(struct f2fs_sb_info *sbi, block_t addr,
+@@ -4812,6 +4931,7 @@ static int build_sit_info(struct f2fs_sb_info *sbi)
+ 	char *src_bitmap, *bitmap;
+ 	unsigned int bitmap_size, main_bitmap_size, sit_bitmap_size;
+ 	unsigned int discard_map = f2fs_block_unit_discard(sbi) ? 1 : 0;
++	bool share_map = f2fs_use_shared_sit_map(sbi);
+ 
+ 	/* allocate memory for SIT information */
+ 	sit_i = f2fs_kzalloc(sbi, sizeof(struct sit_info), GFP_KERNEL);
+@@ -4838,28 +4958,73 @@ static int build_sit_info(struct f2fs_sb_info *sbi)
+ #else
+ 	bitmap_size = MAIN_SEGS(sbi) * SIT_VBLOCK_MAP_SIZE * (2 + discard_map);
+ #endif
+-	sit_i->bitmap = f2fs_kvzalloc(sbi, bitmap_size, GFP_KERNEL);
+-	if (!sit_i->bitmap)
+-		return -ENOMEM;
+-
+-	bitmap = sit_i->bitmap;
+ 
+-	for (start = 0; start < MAIN_SEGS(sbi); start++) {
+-		rcu_assign_pointer(sit_i->sentries[start].cur_valid_map,
+-				   bitmap);
+-		bitmap += SIT_VBLOCK_MAP_SIZE;
++	if (share_map) {
++		sit_i->bitmap_zero = f2fs_kzalloc(sbi, SIT_VBLOCK_MAP_SIZE, GFP_KERNEL);
++		if (!sit_i->bitmap_zero)
++			return -ENOMEM;
++		sit_i->bitmap_full = f2fs_kzalloc(sbi, SIT_VBLOCK_MAP_SIZE, GFP_KERNEL);
++		if (!sit_i->bitmap_full) {
++			kfree(sit_i->bitmap_zero);
++			sit_i->bitmap_zero = NULL;
++			return -ENOMEM;
++		}
++		memset(sit_i->bitmap_full, 0xff, SIT_VBLOCK_MAP_SIZE);
+ 
+-		sit_i->sentries[start].ckpt_valid_map = bitmap;
+-		bitmap += SIT_VBLOCK_MAP_SIZE;
++		bitmap_size = MAIN_SEGS(sbi) * SIT_VBLOCK_MAP_SIZE * discard_map;
++#ifdef CONFIG_F2FS_CHECK_FS
++		bitmap_size += MAIN_SEGS(sbi) * SIT_VBLOCK_MAP_SIZE;
++#endif
++		if (bitmap_size) {
++			sit_i->bitmap = f2fs_kvzalloc(sbi, bitmap_size, GFP_KERNEL);
++			if (!sit_i->bitmap) {
++				kfree(sit_i->bitmap_full);
++				kfree(sit_i->bitmap_zero);
++				sit_i->bitmap_full = NULL;
++				sit_i->bitmap_zero = NULL;
++				return -ENOMEM;
++			}
++			bitmap = sit_i->bitmap;
++		}
+ 
++		for (start = 0; start < MAIN_SEGS(sbi); start++) {
++			rcu_assign_pointer(sit_i->sentries[start].cur_valid_map,
++					   sit_i->bitmap_zero);
++			sit_i->sentries[start].ckpt_valid_map =
++						sit_i->bitmap_zero;
+ #ifdef CONFIG_F2FS_CHECK_FS
+-		sit_i->sentries[start].cur_valid_map_mir = bitmap;
+-		bitmap += SIT_VBLOCK_MAP_SIZE;
++			sit_i->sentries[start].cur_valid_map_mir =
++						bitmap;
++			bitmap += SIT_VBLOCK_MAP_SIZE;
+ #endif
++			if (discard_map) {
++				sit_i->sentries[start].discard_map = bitmap;
++				bitmap += SIT_VBLOCK_MAP_SIZE;
++			}
++		}
++	} else {
++		sit_i->bitmap = f2fs_kvzalloc(sbi, bitmap_size, GFP_KERNEL);
++		if (!sit_i->bitmap)
++			return -ENOMEM;
++
++		bitmap = sit_i->bitmap;
++
++		for (start = 0; start < MAIN_SEGS(sbi); start++) {
++			rcu_assign_pointer(sit_i->sentries[start].cur_valid_map, bitmap);
++			bitmap += SIT_VBLOCK_MAP_SIZE;
+ 
+-		if (discard_map) {
+-			sit_i->sentries[start].discard_map = bitmap;
++			sit_i->sentries[start].ckpt_valid_map = bitmap;
+ 			bitmap += SIT_VBLOCK_MAP_SIZE;
++
++#ifdef CONFIG_F2FS_CHECK_FS
++			sit_i->sentries[start].cur_valid_map_mir = bitmap;
++			bitmap += SIT_VBLOCK_MAP_SIZE;
++#endif
++
++			if (discard_map) {
++				sit_i->sentries[start].discard_map = bitmap;
++				bitmap += SIT_VBLOCK_MAP_SIZE;
++			}
+ 		}
+ 	}
+ 
+@@ -5009,7 +5174,39 @@ static int build_sit_entries(struct f2fs_sb_info *sbi)
+ 			err = check_block_count(sbi, start, &sit);
+ 			if (err)
+ 				return err;
+-			seg_info_from_raw_sit(se, &sit);
++
++			if (f2fs_use_shared_sit_map(sbi)) {
++				unsigned int vblocks = GET_SIT_VBLOCKS(&sit);
++				unsigned char *map = NULL;
++				bool is_active = is_curseg(sbi, start);
++
++				if (vblocks == 0 && !is_active) {
++					map = sit_i->bitmap_zero;
++				} else if (vblocks == BLKS_PER_SEG(sbi) && !is_active) {
++					map = sit_i->bitmap_full;
++				} else {
++					struct f2fs_sit_bitmap *b =
++						f2fs_kmem_cache_alloc(sit_bitmap_slab,
++								      GFP_KERNEL,
++								      false, sbi);
++					if (!b)
++						return -ENOMEM;
++					map = b->map;
++					memcpy(map, sit.valid_map, SIT_VBLOCK_MAP_SIZE);
++				}
++
++				se->valid_blocks = vblocks;
++				se->ckpt_valid_blocks = vblocks;
++				rcu_assign_pointer(se->cur_valid_map, map);
++				se->ckpt_valid_map = map;
++#ifdef CONFIG_F2FS_CHECK_FS
++				memcpy(se->cur_valid_map_mir, map, SIT_VBLOCK_MAP_SIZE);
++#endif
++				se->type = GET_SIT_TYPE(&sit);
++				se->mtime = le64_to_cpu(sit.mtime);
++			} else {
++				seg_info_from_raw_sit(se, &sit);
++			}
+ 
+ 			if (se->type >= NR_PERSISTENT_LOG) {
+ 				f2fs_err(sbi, "Invalid segment type: %u, segno: %u",
+@@ -5039,6 +5236,15 @@ static int build_sit_entries(struct f2fs_sb_info *sbi)
+ 				get_sec_entry(sbi, start)->valid_blocks +=
+ 							se->valid_blocks;
+ 		}
++		if (f2fs_use_shared_sit_map(sbi)) {
++			pgoff_t start_addr = sit_i->sit_base_addr + start_blk;
++			pgoff_t end_addr = start_addr + readed - 1;
++			pgoff_t alt_start_addr = start_addr + sit_i->sit_blocks;
++			pgoff_t alt_end_addr = alt_start_addr + readed - 1;
++
++			invalidate_mapping_pages(META_MAPPING(sbi), start_addr, end_addr);
++			invalidate_mapping_pages(META_MAPPING(sbi), alt_start_addr, alt_end_addr);
++		}
+ 		start_blk += readed;
+ 	} while (start_blk < sit_blk_cnt);
+ 
+@@ -5065,7 +5271,52 @@ static int build_sit_entries(struct f2fs_sb_info *sbi)
+ 		err = check_block_count(sbi, start, &sit);
+ 		if (err)
+ 			break;
+-		seg_info_from_raw_sit(se, &sit);
++
++		if (f2fs_use_shared_sit_map(sbi)) {
++			unsigned int vblocks = GET_SIT_VBLOCKS(&sit);
++			unsigned char *map = se->cur_valid_map;
++			bool is_active = is_curseg(sbi, start);
++
++			if (vblocks == 0 && !is_active) {
++				if (map != sit_i->bitmap_zero &&
++				    map != sit_i->bitmap_full)
++					kmem_cache_free(sit_bitmap_slab,
++							f2fs_sit_bitmap_from_map(map));
++				map = sit_i->bitmap_zero;
++			} else if (vblocks == BLKS_PER_SEG(sbi) && !is_active) {
++				if (map != sit_i->bitmap_zero &&
++				    map != sit_i->bitmap_full)
++					kmem_cache_free(sit_bitmap_slab,
++							f2fs_sit_bitmap_from_map(map));
++				map = sit_i->bitmap_full;
++			} else {
++				if (map == sit_i->bitmap_zero ||
++				    map == sit_i->bitmap_full) {
++					struct f2fs_sit_bitmap *b =
++						f2fs_kmem_cache_alloc(sit_bitmap_slab,
++								      GFP_KERNEL,
++								      false, sbi);
++					if (!b) {
++						up_read(&curseg->journal_rwsem);
++						return -ENOMEM;
++					}
++					map = b->map;
++				}
++				memcpy(map, sit.valid_map, SIT_VBLOCK_MAP_SIZE);
++			}
++
++			se->valid_blocks = vblocks;
++			se->ckpt_valid_blocks = vblocks;
++			rcu_assign_pointer(se->cur_valid_map, map);
++			se->ckpt_valid_map = map;
++#ifdef CONFIG_F2FS_CHECK_FS
++			memcpy(se->cur_valid_map_mir, map, SIT_VBLOCK_MAP_SIZE);
++#endif
++			se->type = GET_SIT_TYPE(&sit);
++			se->mtime = le64_to_cpu(sit.mtime);
++		} else {
++			seg_info_from_raw_sit(se, &sit);
++		}
+ 
+ 		if (se->type >= NR_PERSISTENT_LOG) {
+ 			f2fs_err(sbi, "Invalid segment type: %u, segno: %u",
+@@ -5844,8 +6095,30 @@ static void destroy_sit_info(struct f2fs_sb_info *sbi)
+ 	if (!sit_i)
+ 		return;
+ 
+-	if (sit_i->sentries)
+-		kvfree(sit_i->bitmap);
++	if (sit_i->sentries) {
++		if (f2fs_use_shared_sit_map(sbi)) {
++			unsigned int start;
++
++			for (start = 0; start < MAIN_SEGS(sbi); start++) {
++				struct seg_entry *se = &sit_i->sentries[start];
++
++				if (se->cur_valid_map &&
++				    se->cur_valid_map != sit_i->bitmap_zero &&
++				    se->cur_valid_map != sit_i->bitmap_full) {
++					struct f2fs_sit_bitmap *b;
++
++					b = f2fs_sit_bitmap_from_map(se->cur_valid_map);
++					kmem_cache_free(sit_bitmap_slab, b);
++				}
++			}
++			kfree(sit_i->bitmap_zero);
++			kfree(sit_i->bitmap_full);
++			if (sit_i->bitmap)
++				kvfree(sit_i->bitmap);
++		} else {
++			kvfree(sit_i->bitmap);
++		}
++	}
+ 	kfree(sit_i->tmp_map);
+ 
+ 	kvfree(sit_i->sentries);
+@@ -5898,8 +6171,16 @@ int __init f2fs_create_segment_manager_caches(void)
+ 			sizeof(struct revoke_entry));
+ 	if (!revoke_entry_slab)
+ 		goto destroy_sit_entry_set;
++
++	sit_bitmap_slab = f2fs_kmem_cache_create("f2fs_sit_bitmap",
++						 sizeof(struct f2fs_sit_bitmap));
++	if (!sit_bitmap_slab)
++		goto destroy_revoke_entry;
++
+ 	return 0;
+ 
++destroy_revoke_entry:
++	kmem_cache_destroy(revoke_entry_slab);
+ destroy_sit_entry_set:
+ 	kmem_cache_destroy(sit_entry_set_slab);
+ destroy_discard_cmd:
+@@ -5916,4 +6197,5 @@ void f2fs_destroy_segment_manager_caches(void)
+ 	kmem_cache_destroy(discard_cmd_slab);
+ 	kmem_cache_destroy(discard_entry_slab);
+ 	kmem_cache_destroy(revoke_entry_slab);
++	kmem_cache_destroy(sit_bitmap_slab);
+ }
+diff --git a/fs/f2fs/segment.h b/fs/f2fs/segment.h
+index 068845660b0f..cb45cfa7a658 100644
+--- a/fs/f2fs/segment.h
++++ b/fs/f2fs/segment.h
+@@ -233,6 +233,9 @@ struct sit_info {
+ 	unsigned long long dirty_max_mtime;	/* rerange candidates in GC_AT */
+ 
+ 	unsigned int last_victim[MAX_GC_POLICY]; /* last victim segment # */
++
++	unsigned char *bitmap_zero;		/* shared zero bitmap */
++	unsigned char *bitmap_full;		/* shared full bitmap */
+ };
+ 
+ struct free_segmap_info {
+diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
+index 8774c60b4be4..83ce88ce12cb 100644
+--- a/fs/f2fs/super.c
++++ b/fs/f2fs/super.c
+@@ -2617,6 +2617,10 @@ static int f2fs_disable_checkpoint(struct f2fs_sb_info *sbi)
+ 		f2fs_err(sbi, "checkpoint=disable on readonly fs");
+ 		return -EINVAL;
+ 	}
++	if (f2fs_use_shared_sit_map(sbi)) {
++		f2fs_err(sbi, "checkpoint=disable is not supported in zoned shared SIT mode");
++		return -EOPNOTSUPP;
++	}
+ 	sbi->sb->s_flags |= SB_ACTIVE;
+ 
+ 	/* check if we need more GC first */
 diff --git a/fs/f2fs/sysfs.c b/fs/f2fs/sysfs.c
-index 969e06b65b04..9c79f7b63583 100644
+index 9c79f7b63583..2baf349721c9 100644
 --- a/fs/f2fs/sysfs.c
 +++ b/fs/f2fs/sysfs.c
-@@ -1782,11 +1782,18 @@ static int __maybe_unused segment_bits_seq_show(struct seq_file *seq,
- 
- 	for (i = 0; i < total_segs; i++) {
- 		struct seg_entry *se = get_seg_entry(sbi, i);
-+		unsigned char map[SIT_VBLOCK_MAP_SIZE];
- 
- 		seq_printf(seq, "%-10d", i);
+@@ -1788,8 +1788,7 @@ static int __maybe_unused segment_bits_seq_show(struct seq_file *seq,
  		seq_printf(seq, "%d|%-3u|", se->type, se->valid_blocks);
-+
-+		rcu_read_lock();
-+		memcpy(map, rcu_dereference(se->cur_valid_map),
-+		       SIT_VBLOCK_MAP_SIZE);
-+		rcu_read_unlock();
-+
+ 
+ 		rcu_read_lock();
+-		memcpy(map, rcu_dereference(se->cur_valid_map),
+-		       SIT_VBLOCK_MAP_SIZE);
++		memcpy(map, rcu_dereference(se->cur_valid_map), SIT_VBLOCK_MAP_SIZE);
+ 		rcu_read_unlock();
+ 
  		for (j = 0; j < SIT_VBLOCK_MAP_SIZE; j++)
--			seq_printf(seq, " %.2x", se->cur_valid_map[j]);
-+			seq_printf(seq, " %.2x", map[j]);
- 		seq_printf(seq, "| %llx", se->mtime);
- 		seq_putc(seq, '\n');
- 	}
 -- 
 2.53.0
 
