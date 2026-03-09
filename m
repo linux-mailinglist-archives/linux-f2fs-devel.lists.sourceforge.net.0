@@ -2,31 +2,31 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id UOWmFLEer2neOAIAu9opvQ
+	id qMlSJ7Aer2khOQIAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 09 Mar 2026 20:25:37 +0100
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 09 Mar 2026 20:25:36 +0100
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4859F23FD01
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 09 Mar 2026 20:25:37 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 95A4323FCEE
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 09 Mar 2026 20:25:36 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
 	List-Unsubscribe:List-Id:Subject:MIME-Version:References:In-Reply-To:
 	Message-ID:Date:To:Sender:Content-ID:Content-Description:Resent-Date:
 	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=ixLuoDCFjxW+cw3KSqL4HRr+iF5qK80FSDhEATyE8RQ=; b=N/BTSrpxxQ7QYLczezFTr8ZILl
-	wy/bL9245x+ah+5AA3joNNjOfTZs6r0n9DXT0DAZY9T5WbNy2vpQc6if/oXpaoUhuNO/TuCouU2wW
-	wStGkZ8infeW2ftUmKC6KlhZUSZR/xLNXngD/Wf458jT74SnwLBen20B9K/rpa2jffOc=;
+	bh=9kL0wruM888qh2i5djX6jzjHMa2DM6OMPVYfu2EaRAM=; b=PwjjbMVGo9aVMScU9Qdp0ZCOTH
+	nknzQsGBt+kFmsE/m380jZQSwegKImJ/Brf5jDmy2vWCdBK1eTzO9pLg54v2T3gE6oqfxwUh2/Btu
+	FDNmDNjLcNHvzo/4s0m/ePTVb1v3Va2zfKimnz+VqHM/IDZgYC30DQHQ3JG0nLUiEQL8=;
 Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
 	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vzgER-0008D1-Um;
+	id 1vzgER-0008Cm-8d;
 	Mon, 09 Mar 2026 19:25:35 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
  by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <aalbersh@kernel.org>) id 1vzgE6-0008AL-IN
+ (envelope-from <aalbersh@kernel.org>) id 1vzgE6-0008AW-I1
  for linux-f2fs-devel@lists.sourceforge.net;
  Mon, 09 Mar 2026 19:25:14 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
@@ -35,9 +35,9 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=ExMhA3H6ziSNMhG1qoslhWKRPShq1nQ3bDI4MmsgHok=; b=Q7Sv4rniSaoifPwO8MNIeLbJYb
- +UHD7xK9eNSgSvLsOHYoTWQNG5jQjQnOESdj1YejdTRAfHvqzzaJgInUdAlUChFxj2pDCImyjcebX
- hjWgduhWjbrm6krD2WKCd1QeNX0O9lOP6ZSdqTRzPPja9O5wDbKldA2m5Ml8HcPr8tiU=;
+ bh=Vcu2AzQTKndDC2bAFOdAxckJXYcW2q01smKg/x+AtMY=; b=Dl5nM7RDWoW8lG0/qELIBaSeI5
+ I7Qo+2viqtEsj3KQqTMl3ECwi0yFGpz7y/aKueFWK3tNmsHvw2byjekmIPK/HHLXuhOlxhOCtLb+d
+ p1toBAHcxtGH58MqqN3Innc48z953uiaGzAR2tuAstUiRG0x7WwyrAqhbKHFgKont1OU=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:
@@ -45,33 +45,33 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=ExMhA3H6ziSNMhG1qoslhWKRPShq1nQ3bDI4MmsgHok=; b=VGlml50+DAhzdbqY9ZVzW7YB42
- ZnuRBLfga4s7XWWJXwYBhhgIG31ZbEFSNWm1+O2WsMsamo+1NyLmRDSDbVOiNpicB/VVOqxHTFjXr
- fKj0aBFQXsGwMSDyQF0JALAUJzS1uW8gSWQN4ZGPp1zGvCVlSy1eSLa1VeO0xzHJG06A=;
+ bh=Vcu2AzQTKndDC2bAFOdAxckJXYcW2q01smKg/x+AtMY=; b=M5bE3TGzTlVq/BzPb45tI5DqiZ
+ PiY7UQvgkjt8nCb5TsG0k1+oiLcTGHApYHNzT65pKGCuwy3W8W+Xa7StQ33/WSLgJt7YOGuxw8Gdm
+ pGadav38DbwGteKcbbI5AUIl8uAASIhkhICGF3mOn+qWwlhOcDrp1eUj2BbohHSHkqxE=;
 Received: from sea.source.kernel.org ([172.234.252.31])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vzgDx-0001Gf-2i for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 09 Mar 2026 19:25:05 +0000
+ id 1vzgDz-0001Gy-Or for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 09 Mar 2026 19:25:08 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id A3CE743329;
+ by sea.source.kernel.org (Postfix) with ESMTP id 588A140A1F;
+ Mon,  9 Mar 2026 19:24:57 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0188CC4CEF7;
  Mon,  9 Mar 2026 19:24:54 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4AC78C4CEF7;
- Mon,  9 Mar 2026 19:24:52 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1773084294;
- bh=mPVHTe9Ab/5USFw8EX0zjFajZsuuSbaTg0zG8xac2aQ=;
+ s=k20201202; t=1773084297;
+ bh=s36P9QLO9GzyT4MQJjm1imoOYbBZv4qo+rih8qa1TLU=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=pqMQpCfNaVdvzzzpIP2DjrTS/ZYgyv17WBIAofC2mluK9x7PojwIAkcwUCDorbStG
- cKDa4XcHWWlLpAppZsausDrJ7XzMgqvPwaUuIjM79XYywjNK32FAifnr0vp8nk4+2F
- Nc63s20tWE1ALdyokpYpgrlR/VrWbPdFC3nChVeTttukJHoTeyp0gN6JpBrjJYfUSk
- ZdCDvWwYdbzR9Dqo3QOqP1Oi7ZLOdOhSbGM5JG1SQTEabt4lnJwreVeeQqtbIw9y/c
- hRULBLGqzjK5ig6Zb6b1Oy+9m9eyEjx8HgS3vlg5ajicMrAr/u138wDv5oG/D+QUpZ
- Pc5W0BCuC8kcQ==
+ b=hmlOH6t/AYMMSVzn7e2cKoH+NFkC/02o+EZCSm0XQ+Vj4VMLTVkjwkssNON5py85C
+ By+P6uYfsYaodWWbsNRBHl+aQEEce/Kbfs4miq3/yl3YbcxaObroqv+dt2ZLeyUxq9
+ LEkq/Moi6rslxLIXVImO/H0xVuSQhhMncBgRf1e9CBzeFB3BgK+DI1ELxXj4MEzcfN
+ T4zEdXyG2Fer9x1BXxlV5y6gArwyxu7Ylwom3sMT16iOD4QQEaoHjKtLvGbV7ggycv
+ 3/SKTnrPjCsJHMuf4/utaYFxyw7197MTO88/iLs4MfoxlOOv2LXTip4fyBVTy3QUKx
+ +eui7uEXxzVCw==
 To: linux-xfs@vger.kernel.org, fsverity@lists.linux.dev,
  linux-fsdevel@vger.kernel.org, ebiggers@kernel.org
-Date: Mon,  9 Mar 2026 20:23:28 +0100
-Message-ID: <20260309192355.176980-14-aalbersh@kernel.org>
+Date: Mon,  9 Mar 2026 20:23:29 +0100
+Message-ID: <20260309192355.176980-15-aalbersh@kernel.org>
 X-Mailer: git-send-email 2.51.2
 In-Reply-To: <20260309192355.176980-1-aalbersh@kernel.org>
 References: <20260309192355.176980-1-aalbersh@kernel.org>
@@ -83,12 +83,13 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: fs-verity will read and attach metadata (not the tree itself)
- from a disk for those inodes which already have fs-verity enabled.
+ Content preview:  fs-verity doesn't support DAX. Forbid filesystem to enable
+ DAX on inodes which already have fs-verity enabled. The opposite is checked
+ when fs-verity is enabled, it won't be enabled if DAX is. Signed-off-by:
+ Andrey Albershteyn <aalbersh@kernel.org> [djwong: fix typo in subject]
  Signed-off-by:
- Andrey Albershteyn <aalbersh@kernel.org> Signed-off-by: Darrick J. Wong
- <djwong@kernel.org>
- --- fs/xfs/xfs_file.c | 8 ++++++++ 1 file changed, 8 insertions(+) 
+ Darrick J. Wong <djwong@kernel.org> --- fs/xfs/xfs_iops.c | 2 ++ 1 file
+ changed, 2 insertions(+) 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -100,8 +101,9 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1vzgDx-0001Gf-2i
-Subject: [f2fs-dev] [PATCH v4 13/25] xfs: initialize fs-verity on file open
+X-Headers-End: 1vzgDz-0001Gy-Or
+Subject: [f2fs-dev] [PATCH v4 14/25] xfs: don't allow to enable DAX on
+ fs-verity sealed inode
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -122,7 +124,7 @@ Cc: Andrey Albershteyn <aalbersh@kernel.org>, djwong@kernel.org,
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
-X-Rspamd-Queue-Id: 4859F23FD01
+X-Rspamd-Queue-Id: 95A4323FCEE
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [-8.61 / 15.00];
 	WHITELIST_DMARC(-7.00)[sourceforge.net:D:+];
@@ -163,46 +165,30 @@ X-Spamd-Result: default: False [-8.61 / 15.00];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.sourceforge.net:dkim,lists.sourceforge.net:rdns,lists.sourceforge.net:helo]
 X-Rspamd-Action: no action
 
-fs-verity will read and attach metadata (not the tree itself) from
-a disk for those inodes which already have fs-verity enabled.
+fs-verity doesn't support DAX. Forbid filesystem to enable DAX on
+inodes which already have fs-verity enabled. The opposite is checked
+when fs-verity is enabled, it won't be enabled if DAX is.
 
 Signed-off-by: Andrey Albershteyn <aalbersh@kernel.org>
+[djwong: fix typo in subject]
 Signed-off-by: Darrick J. Wong <djwong@kernel.org>
 ---
- fs/xfs/xfs_file.c | 8 ++++++++
- 1 file changed, 8 insertions(+)
+ fs/xfs/xfs_iops.c | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/fs/xfs/xfs_file.c b/fs/xfs/xfs_file.c
-index 6246f34df9fd..a980ac5196a8 100644
---- a/fs/xfs/xfs_file.c
-+++ b/fs/xfs/xfs_file.c
-@@ -37,6 +37,7 @@
- #include <linux/fadvise.h>
- #include <linux/mount.h>
- #include <linux/filelock.h>
-+#include <linux/fsverity.h>
- 
- static const struct vm_operations_struct xfs_file_vm_ops;
- 
-@@ -1640,11 +1641,18 @@ xfs_file_open(
- 	struct inode	*inode,
- 	struct file	*file)
- {
-+	int		error;
-+
- 	if (xfs_is_shutdown(XFS_M(inode->i_sb)))
- 		return -EIO;
- 	file->f_mode |= FMODE_NOWAIT | FMODE_CAN_ODIRECT;
- 	if (xfs_get_atomic_write_min(XFS_I(inode)) > 0)
- 		file->f_mode |= FMODE_CAN_ATOMIC_WRITE;
-+
-+	error = fsverity_file_open(inode, file);
-+	if (error)
-+		return error;
-+
- 	return generic_file_open(inode, file);
- }
- 
+diff --git a/fs/xfs/xfs_iops.c b/fs/xfs/xfs_iops.c
+index ca369eb96561..17efc83a86ed 100644
+--- a/fs/xfs/xfs_iops.c
++++ b/fs/xfs/xfs_iops.c
+@@ -1387,6 +1387,8 @@ xfs_inode_should_enable_dax(
+ 		return false;
+ 	if (!xfs_inode_supports_dax(ip))
+ 		return false;
++	if (ip->i_diflags2 & XFS_DIFLAG2_VERITY)
++		return false;
+ 	if (xfs_has_dax_always(ip->i_mount))
+ 		return true;
+ 	if (ip->i_diflags2 & XFS_DIFLAG2_DAX)
 -- 
 2.51.2
 
