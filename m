@@ -2,42 +2,42 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id eBsNAHoer2neOAIAu9opvQ
+	id mMHTIn8er2neOAIAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 09 Mar 2026 20:24:42 +0100
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 09 Mar 2026 20:24:47 +0100
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9111223FC5B
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 09 Mar 2026 20:24:41 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 36BF223FC62
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 09 Mar 2026 20:24:45 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
 	List-Unsubscribe:List-Id:Subject:MIME-Version:References:In-Reply-To:
 	Message-ID:Date:To:Sender:Content-ID:Content-Description:Resent-Date:
 	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=CSuzzv8j/TTaxp8pVpu3DLUx/omCGGTKBlak1A3+5xY=; b=l4r9AMGV0Wl4tXN5gS87OrmS5a
-	S31qO2891a0AgvKrpWqEePNzfjwcW266/Q4kon7IyUlxqSsm+q2gO/i+jpPYNBIP9evQymNRZ1tVF
-	AD+ohUVCZ2iw4cPIVp/vBmJKq5wx4uQi7Wf1Crs5ImSgel9ojWIb7mZ52cx5IoBPZkaw=;
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=eJrLyH2TmRpfKoni9U4+fP7tLOZnQJyufi7JGfnUBxY=; b=gtw2WmTSbTx1UCLt5rgbHVuTcC
+	QhkhXKFKwoe6yoZ5gxn4+b0Cg9ovGDUTQB3USF1sOnNGfDQKnaXtOvxbv3y1mI54pjCiWVw7xkjfZ
+	0aUaL2xSh0iijf0D6yrm9C5iGTaDW86uuoWcTHmaTPHrvo3fE48PGMe34tjpJEYD4U+8=;
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vzgDY-00086q-81;
-	Mon, 09 Mar 2026 19:24:40 +0000
+	id 1vzgDU-0006vz-Gr;
+	Mon, 09 Mar 2026 19:24:37 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <aalbersh@kernel.org>) id 1vzgDW-00086d-Rd
+ (envelope-from <aalbersh@kernel.org>) id 1vzgDT-0006vn-55
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 09 Mar 2026 19:24:38 +0000
+ Mon, 09 Mar 2026 19:24:35 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=1k2hm2i2h46H6U/rzGpxy5F1hc7G0B3aCj4dogEdjEE=; b=Qvb7wRr62BoR44B2iE2ohOcF25
- qet1+y1Cfh7rJ8I0t4sBolJiifrHsVAjc7GdLICcdgpKSkTVkHI2c8/u729OpoKWo0zXE/uUxfTrP
- Hlq9TBXePjb0NfusQmp8rctRBuIAxcdDsnPnCtVpbu80nJuFRTKuTSThVLXDDcmjkrUI=;
+ bh=lyEJMtq4Vg9tz4ZnfqvDdE6VSjgbsxeep3Vbyon4cOs=; b=AvFXBhEB6Rq0LSePZ1Az1w+X6c
+ dn7xOt9yZVmYzAdAW0dJD7y1X3iuMY9qzBB9rz7qY2WGEpRv0J8WbqFOqdb4vdA1cQkP5BN2y9YXo
+ /MUCakJ9sLo6dKGotWmVXOKK7Q6EeynpIc6YzZASkLDwhUoOpZ3qqU+msmfvU4jdcns0=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:
@@ -45,63 +45,64 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=1k2hm2i2h46H6U/rzGpxy5F1hc7G0B3aCj4dogEdjEE=; b=MunguI/+AQZEgoO6njXm2OPAe/
- g6E8l/+orFjLa7f35RFaSPNsTTSJPdNtT3t4O+epbxu8LB4BRwG5yE1M1G20kXX2dRCXHQkQEHGn4
- PbYQtBGiJhN0nbn88rL0ZJJMS7EcjGamHcB09BkgZHcLkDOH85gNzOdtIdOC9bwONzDI=;
-Received: from tor.source.kernel.org ([172.105.4.254])
+ bh=lyEJMtq4Vg9tz4ZnfqvDdE6VSjgbsxeep3Vbyon4cOs=; b=fagZtqkjC6Oz6B6RSpYIdM6iF4
+ mwD/aMBnkVIvN63r4rAQX47sTgvPspHQtCO3f1SakdgFwjxB8I1iAaPsau0Ky0ILn68RWCVAJwOFW
+ KtUzXdhRqjyZJ1W5KMiRVk2g/8gfGpnV52u/yQqj8HLr9aSA/S0+SIz1lWgoj4fECD5E=;
+Received: from sea.source.kernel.org ([172.234.252.31])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vzgDW-0001Ep-BX for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 09 Mar 2026 19:24:38 +0000
+ id 1vzgDT-0001El-IQ for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 09 Mar 2026 19:24:35 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id BFB0D60054;
+ by sea.source.kernel.org (Postfix) with ESMTP id 4902444389;
+ Mon,  9 Mar 2026 19:24:30 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E5E2DC4CEF7;
  Mon,  9 Mar 2026 19:24:27 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3ED76C2BCB0;
- Mon,  9 Mar 2026 19:24:25 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1773084267;
- bh=DJSVKyGg+4R0k6WRAuNIeBNAD9pdSqrckhsLvnGW8L4=;
+ s=k20201202; t=1773084270;
+ bh=wQRuJnCf1bULDEahMxnM6u0R5pEwhxszCldFWiYsTqQ=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=Grn19QkKj5XpSF3fVfFe9jhpynhhJbkH1HpjjsPMvNtLiRgaHBWl7hYjbE8y+UKHa
- Gpxb8xC3TMlgOCWiYVCuZ1srjv2xRWkDQ7yodZPEumxG+Qj+wnSBxlM1zwoQhlLaWO
- F6Da5wljSesnhgjWj0io2Sl1Te96tnH+a5Tx9/snzo1DO0YWICtuFp5nO6M/lKJWpa
- cc6YTLg8NVTQ5ML50KHeDOEJatNiMWizF8B9qqKCb7t//TwL+ypU5A2wRJ/zYob3A+
- KUbdgxrFrBEEwDyF41ZyGJM5pdGjM357a4JlszzJbrj/86JPKDKQJYHJDY8HC5PemN
- 3H89ld61kv1cg==
+ b=ID2p+Eo+e08ZZOZC57sSvuvTBJtizCjXJ4fzzhYNy8Fwql+R/vEWBetzWP+yBvjV0
+ bLK2/950zqMciWaKwUevSKUWjRmAJhkHXFPFpfhe5C53tijfJKQq5UG8KBigncNWWK
+ fDqcZl3Hu3/Vnql36DdugEsKPOp0nN4XVPJhsp1SobyyUL3zvMzK11AVg885E3pm6b
+ N4ZTEDIOYwoiMXPSWgIz9dgknfvGp94fEhsiMwG9i1HA+xmBA+VibQilM0aZ24stK5
+ Y+5XTW0j/0k8PmphYpugwN4bxQMHgNEsAKkOv58236nwDji3EyWtll8dqgiM5nVrjK
+ vve0zIMh02X/A==
 To: linux-xfs@vger.kernel.org, fsverity@lists.linux.dev,
  linux-fsdevel@vger.kernel.org, ebiggers@kernel.org
-Date: Mon,  9 Mar 2026 20:23:18 +0100
-Message-ID: <20260309192355.176980-4-aalbersh@kernel.org>
+Date: Mon,  9 Mar 2026 20:23:19 +0100
+Message-ID: <20260309192355.176980-5-aalbersh@kernel.org>
 X-Mailer: git-send-email 2.51.2
 In-Reply-To: <20260309192355.176980-1-aalbersh@kernel.org>
 References: <20260309192355.176980-1-aalbersh@kernel.org>
 MIME-Version: 1.0
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Compute the hash of one filesystem block's worth of zeros.
- A filesystem implementation can decide to elide merkle tree blocks containing
- only this hash and synthesize the contents at read time. Let's pretend that
- there's a file containing six data blocks and whose merkle tree looks roughly
- like this: 
+ Content preview:  Helper to pre-fill folio with hashes of empty blocks. This
+ will be used by iomap to synthesize blocks full of zero hashes on the fly.
+ Signed-off-by: Andrey Albershteyn <aalbersh@kernel.org> ---
+ fs/verity/pagecache.c
+ | 22 ++++++++++++++++++++++ include/linux/fsverity.h | 2 ++ 2 files changed,
+ 24 insertions(+) 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1vzgDW-0001Ep-BX
-Subject: [f2fs-dev] [PATCH v4 03/25] fsverity: generate and store zero-block
- hash
+X-Headers-End: 1vzgDT-0001El-IQ
+Subject: [f2fs-dev] [PATCH v4 04/25] fsverity: introduce
+ fsverity_folio_zero_hash()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -122,7 +123,7 @@ Cc: Andrey Albershteyn <aalbersh@kernel.org>, djwong@kernel.org,
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
-X-Rspamd-Queue-Id: 9111223FC5B
+X-Rspamd-Queue-Id: 36BF223FC62
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [-8.61 / 15.00];
 	WHITELIST_DMARC(-7.00)[sourceforge.net:D:+];
@@ -163,65 +164,64 @@ X-Spamd-Result: default: False [-8.61 / 15.00];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.sourceforge.net:dkim,lists.sourceforge.net:rdns,lists.sourceforge.net:helo]
 X-Rspamd-Action: no action
 
-Compute the hash of one filesystem block's worth of zeros. A filesystem
-implementation can decide to elide merkle tree blocks containing only
-this hash and synthesize the contents at read time.
+Helper to pre-fill folio with hashes of empty blocks. This will be used
+by iomap to synthesize blocks full of zero hashes on the fly.
 
-Let's pretend that there's a file containing six data blocks and whose
-merkle tree looks roughly like this:
-
-root
- +--leaf0
- |   +--data0
- |   +--data1
- |   `--data2
- `--leaf1
-     +--data3
-     +--data4
-     `--data5
-
-If data[0-2] are sparse holes, then leaf0 will contain a repeating
-sequence of @zero_digest.  Therefore, leaf0 need not be written to disk
-because its contents can be synthesized.
-
-A subsequent xfs patch will use this to reduce the size of the merkle
-tree when dealing with sparse gold master disk images and the like.
-
-Signed-off-by: Darrick J. Wong <djwong@kernel.org>
 Signed-off-by: Andrey Albershteyn <aalbersh@kernel.org>
 ---
- fs/verity/fsverity_private.h | 3 +++
- fs/verity/open.c             | 3 +++
- 2 files changed, 6 insertions(+)
+ fs/verity/pagecache.c    | 22 ++++++++++++++++++++++
+ include/linux/fsverity.h |  2 ++
+ 2 files changed, 24 insertions(+)
 
-diff --git a/fs/verity/fsverity_private.h b/fs/verity/fsverity_private.h
-index 6e6854c19078..35636c1e2c41 100644
---- a/fs/verity/fsverity_private.h
-+++ b/fs/verity/fsverity_private.h
-@@ -53,6 +53,9 @@ struct merkle_tree_params {
- 	u64 tree_size;			/* Merkle tree size in bytes */
- 	unsigned long tree_pages;	/* Merkle tree size in pages */
+diff --git a/fs/verity/pagecache.c b/fs/verity/pagecache.c
+index 1819314ecaa3..1d94bf73f38c 100644
+--- a/fs/verity/pagecache.c
++++ b/fs/verity/pagecache.c
+@@ -2,6 +2,7 @@
+ /*
+  * Copyright 2019 Google LLC
+  */
++#include "fsverity_private.h"
  
-+	/* the hash of a merkle block-sized buffer of zeroes */
-+	u8 zero_digest[FS_VERITY_MAX_DIGEST_SIZE];
+ #include <linux/export.h>
+ #include <linux/fsverity.h>
+@@ -56,3 +57,24 @@ void generic_readahead_merkle_tree(struct inode *inode, pgoff_t index,
+ 		folio_put(folio);
+ }
+ EXPORT_SYMBOL_GPL(generic_readahead_merkle_tree);
 +
- 	/*
- 	 * Starting block index for each tree level, ordered from leaf level (0)
- 	 * to root level ('num_levels - 1')
-diff --git a/fs/verity/open.c b/fs/verity/open.c
-index 0483db672526..94407a37aa08 100644
---- a/fs/verity/open.c
-+++ b/fs/verity/open.c
-@@ -153,6 +153,9 @@ int fsverity_init_merkle_tree_params(struct merkle_tree_params *params,
- 		goto out_err;
- 	}
++/**
++ * fsverity_folio_zero_hash() - fill folio with hashes of zero data block
++ * @folio:	folio to fill
++ * @poff:	offset in the folio to start
++ * @plen:	length of the range to fill with hashes
++ * @vi:		fsverity info
++ */
++void fsverity_folio_zero_hash(struct folio *folio, size_t poff, size_t plen,
++			      struct fsverity_info *vi)
++{
++	size_t offset = poff;
++
++	WARN_ON_ONCE(!IS_ALIGNED(poff, vi->tree_params.digest_size));
++	WARN_ON_ONCE(!IS_ALIGNED(plen, vi->tree_params.digest_size));
++
++	for (; offset < (poff + plen); offset += vi->tree_params.digest_size)
++		memcpy_to_folio(folio, offset, vi->tree_params.zero_digest,
++				vi->tree_params.digest_size);
++}
++EXPORT_SYMBOL_GPL(fsverity_folio_zero_hash);
+diff --git a/include/linux/fsverity.h b/include/linux/fsverity.h
+index 8ba7806b225e..b490b2c8a393 100644
+--- a/include/linux/fsverity.h
++++ b/include/linux/fsverity.h
+@@ -321,5 +321,7 @@ void fsverity_cleanup_inode(struct inode *inode);
+ struct page *generic_read_merkle_tree_page(struct inode *inode, pgoff_t index);
+ void generic_readahead_merkle_tree(struct inode *inode, pgoff_t index,
+ 				   unsigned long nr_pages);
++void fsverity_folio_zero_hash(struct folio *folio, size_t poff, size_t plen,
++			      struct fsverity_info *vi);
  
-+	fsverity_hash_block(params, page_address(ZERO_PAGE(0)),
-+			    params->zero_digest);
-+
- 	params->tree_size = offset << log_blocksize;
- 	params->tree_pages = PAGE_ALIGN(params->tree_size) >> PAGE_SHIFT;
- 	return 0;
+ #endif	/* _LINUX_FSVERITY_H */
 -- 
 2.51.2
 
