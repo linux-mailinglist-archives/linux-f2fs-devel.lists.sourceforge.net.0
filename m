@@ -2,12 +2,12 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id mI5dA7Qer2neOAIAu9opvQ
+	id 6DTXAbQer2kgOQIAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
 	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 09 Mar 2026 20:25:40 +0100
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9A38423FD31
+	by mail.lfdr.de (Postfix) with ESMTPS id F1B3823FD39
 	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 09 Mar 2026 20:25:39 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
@@ -15,29 +15,29 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	List-Unsubscribe:List-Id:Subject:MIME-Version:References:In-Reply-To:
 	Message-ID:Date:To:Sender:Content-ID:Content-Description:Resent-Date:
 	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=xmaRVdUMilkvFqDl5GdNqb37ux1k6oGw4Xl9j8M70Hs=; b=RUIUR5xa0aOGNz7WZWQ6RZ+dv5
-	YGrma6HAaz9c9PtjR5LmsPmOOENyJw7JB8IpEwob10xSb9wos2nIOhtIqiwLOpdLf1B5sHMNy2qCe
-	4GEwO0RZk2roUkl+apDDhWTzyn+uzMR6v7tgYLl5yXBaPXwG8cdwE35RYREJvPiqTgcs=;
+	bh=XlrJoWWmUms4mpGLQ0MuAzO3FzbuH9NCoxXRRqC35qA=; b=kslH+UC5tpZan/Zh+N4UClAFue
+	UPx+eWDrANqgri7ow29N9EQs6pHHtB1qWhGp5mw3eJRD0qjjFt5jegLFM/Oe+/oc1LC+lmTQc7oVW
+	zlOc3ynIOc4hx2lrrIeeyOAXRg+QCgeiewIjimanjQWnkSR7T/TTSBW3thhvg3hm55uI=;
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vzgEU-0006Zw-AQ;
+	id 1vzgEU-0006a9-LJ;
 	Mon, 09 Mar 2026 19:25:38 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <aalbersh@kernel.org>) id 1vzgED-0006Yb-PS
+ (envelope-from <aalbersh@kernel.org>) id 1vzgEH-0006Yt-0m
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 09 Mar 2026 19:25:21 +0000
+ Mon, 09 Mar 2026 19:25:25 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=78JjXY8VUbs0HXe9I3i0d/Dzn79xgqsTtoUqUeBTkVs=; b=nDZsV1Luqh7WWDbY5sikEMcxu8
- fEleciN72IBndjQUjmYaO/NZW6ba5AQVdUgF4KJWAdkY4DnHFUO2xYHVkYpULqVKmg5Dde052Le+1
- Y0dpvCMf/4GdiX+v63YTUp26RmJQ+2//TYerks47GBQUW6VOcBtIwGFl6uVTTRmwrsUg=;
+ bh=wPSG6yHBmXCTgUWdrEoZroGLINxSAruo8o7P7+HHpac=; b=Fk7lImwHHl2KUCiEoL6BiEgNzQ
+ L6QGcq4EQsiOkYvG0wQ6rEl1gKzpC4kDmVKkEeulDOXPm9bDIwIq5NgfaEVy+6FYUqic2um0HHoLt
+ dyJQdGnpkvg00wpRYV/omKceUUUUIrmkRvNgRBTJ+VleUhPf0pk8ChRCfrxYojR4gqXY=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:
@@ -45,64 +45,62 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=78JjXY8VUbs0HXe9I3i0d/Dzn79xgqsTtoUqUeBTkVs=; b=IYtV94UweO+COz9fXMa6TWYn8J
- G+tveKtuGwTKJ2HTZM/kyN4GO8qJCP2Zbhkm7DtUoail4sAqtaD3HccjIUF9Pr9AoTUJK8VX7Qr6j
- YT4yNkcsR+rmyh4pqipZqQHqqmifyk4Ca/Tbrhbtffuvv8i+wNDXpiupHVIVyE0ugWd8=;
-Received: from sea.source.kernel.org ([172.234.252.31])
+ bh=wPSG6yHBmXCTgUWdrEoZroGLINxSAruo8o7P7+HHpac=; b=gOhB8nqPfSBCMTumgyWZc3ZNcY
+ cueqXCGWiH/s27xfeorM+/kg9nQ8dcStxcwes7oSksgS6Jxhy+fXzDNSpn2Ve+Zt6pV1G4i31Op/Z
+ qGVSt0AE2bfvDriDxkhCH9Q4F5Uz3JiQ8hkdHVv18QA0qwUPD1/JiURSd09Hu78OTFpw=;
+Received: from tor.source.kernel.org ([172.105.4.254])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vzgED-0001IA-9l for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 09 Mar 2026 19:25:21 +0000
+ id 1vzgEG-0001IX-9y for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 09 Mar 2026 19:25:24 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id D73D143639;
- Mon,  9 Mar 2026 19:25:10 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 75947C2BC87;
- Mon,  9 Mar 2026 19:25:08 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id B573060126;
+ Mon,  9 Mar 2026 19:25:13 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 34C4EC2BC87;
+ Mon,  9 Mar 2026 19:25:11 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1773084310;
- bh=w3fjf18ZoDlPXKJ28b6MR0iStdNztPG0sro78fgsISM=;
+ s=k20201202; t=1773084313;
+ bh=jIkT/LcGwVGK1Mj4yHo/JEL/qmv264sooEL83XrUgxs=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=EI3JFxZaqCOYDI0BG5k5wGiM77hQlk5N5np3QrFpqNjIdM4dmRjoroAQf6Pdz+bh0
- oHgxVeZwHXsE3Dq6GT6LKruSn3C/7vPSvbBPfUjylEz/EORP5FXmzsaXIm4ricH+sK
- V2ioBZFBSj7JGEP+Y9s9uA9JkDqtRWtH+FSdDSF2/ZsMIX31KVi/v3aCuFWkdQ/K0H
- TbTcRtkxCk10WsuhP2yG4pQ94GMGLGa3raeAAyed1mhWdpF1Ihb015bVPqvUaKhJOd
- +YpcDDpW1VUeIKgvUQ4FLk56SbYp3Bb6GlabWSTaGDzzoo2OtDX9Rc2YRystY1K4tL
- pgYhUPCf+AXhA==
+ b=T+FqWf0ZOIeq4130hehzhrGBlB0fQevoAK+ecGVEPqSdm0IU4r4iHeDWyI+X2vtii
+ jXOm+6VhGgXaTr0ZHLClG+gYUyKdeRry74CsD2QXBRv7mLtQV/tQ9BsYAYZm5LTUF/
+ sBSnFHuAgC2Bh1JKpuiI51IOU9anmhy+cOuxiYZzPmkfr8FgZqwJ1LUFe1I7AU30sb
+ q9SYo2ylBUceg+fwi8z55XCT4NSy8YW3bnq2BFh+dZyNSWjkhNxB51+/eZm58iY6xz
+ btW/Qq69MC2Ai1ifOWIaEkEYBzZD7nMa+qG5bEqy580R1JU9MvZcsEiXyy/RhquffU
+ 1PohqSjuG0gdA==
 To: linux-xfs@vger.kernel.org, fsverity@lists.linux.dev,
  linux-fsdevel@vger.kernel.org, ebiggers@kernel.org
-Date: Mon,  9 Mar 2026 20:23:34 +0100
-Message-ID: <20260309192355.176980-20-aalbersh@kernel.org>
+Date: Mon,  9 Mar 2026 20:23:35 +0100
+Message-ID: <20260309192355.176980-21-aalbersh@kernel.org>
 X-Mailer: git-send-email 2.51.2
 In-Reply-To: <20260309192355.176980-1-aalbersh@kernel.org>
 References: <20260309192355.176980-1-aalbersh@kernel.org>
 MIME-Version: 1.0
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  XFS preallocates spaces during writes. In normal I/O this
- space, if unused, is removed by truncate. For files with fsverity, XFS does
- not use truncate as fsverity metadata is stored past EOF. After we're done
- with writing fsverity metadata iterate over extents in that region and remove
- any unwritten ones. These would be preallocation leftovers in the merkle
- tree holes and past fsverity des [...] 
+ Content preview:  Add fs-verity ioctls to enable, dump metadata (descriptor
+ and Merkle tree pages) and obtain file's digest. [djwong: remove unnecessary
+ casting] Signed-off-by: Darrick J. Wong <djwong@kernel.org> Signed-off-by:
+ Andrey Albershteyn <aalbersh@kernel.org> --- fs/xfs/xfs_ioctl.c | 14
+ ++++++++++++++ 1 file change [...] 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1vzgED-0001IA-9l
-Subject: [f2fs-dev] [PATCH v4 19/25] xfs: remove unwritten extents after
- preallocations in fsverity metadata
+X-Headers-End: 1vzgEG-0001IX-9y
+Subject: [f2fs-dev] [PATCH v4 20/25] xfs: add fs-verity ioctls
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -123,7 +121,7 @@ Cc: Andrey Albershteyn <aalbersh@kernel.org>, djwong@kernel.org,
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
-X-Rspamd-Queue-Id: 9A38423FD31
+X-Rspamd-Queue-Id: F1B3823FD39
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [-8.61 / 15.00];
 	WHITELIST_DMARC(-7.00)[sourceforge.net:D:+];
@@ -164,106 +162,48 @@ X-Spamd-Result: default: False [-8.61 / 15.00];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.sourceforge.net:dkim,lists.sourceforge.net:rdns,lists.sourceforge.net:helo]
 X-Rspamd-Action: no action
 
-XFS preallocates spaces during writes. In normal I/O this space, if
-unused, is removed by truncate. For files with fsverity, XFS does not
-use truncate as fsverity metadata is stored past EOF.
+Add fs-verity ioctls to enable, dump metadata (descriptor and Merkle
+tree pages) and obtain file's digest.
 
-After we're done with writing fsverity metadata iterate over extents in
-that region and remove any unwritten ones. These would be preallocation
-leftovers in the merkle tree holes and past fsverity descriptor.
-
+[djwong: remove unnecessary casting]
+Signed-off-by: Darrick J. Wong <djwong@kernel.org>
 Signed-off-by: Andrey Albershteyn <aalbersh@kernel.org>
 ---
- fs/xfs/xfs_fsverity.c | 62 +++++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 62 insertions(+)
+ fs/xfs/xfs_ioctl.c | 14 ++++++++++++++
+ 1 file changed, 14 insertions(+)
 
-diff --git a/fs/xfs/xfs_fsverity.c b/fs/xfs/xfs_fsverity.c
-index e5cd17ec15b6..f78e5f0c2fd0 100644
---- a/fs/xfs/xfs_fsverity.c
-+++ b/fs/xfs/xfs_fsverity.c
-@@ -21,6 +21,8 @@
- #include "xfs_iomap.h"
- #include "xfs_error.h"
- #include "xfs_health.h"
-+#include "xfs_bmap.h"
-+#include "xfs_bmap_util.h"
- #include <linux/fsverity.h>
- #include <linux/iomap.h>
- #include <linux/pagemap.h>
-@@ -189,6 +191,58 @@ xfs_fsverity_delete_metadata(
- 	return error;
- }
+diff --git a/fs/xfs/xfs_ioctl.c b/fs/xfs/xfs_ioctl.c
+index facffdc8dca8..e633d56cad00 100644
+--- a/fs/xfs/xfs_ioctl.c
++++ b/fs/xfs/xfs_ioctl.c
+@@ -46,6 +46,7 @@
  
-+static int
-+xfs_fsverity_cancel_unwritten(
-+	struct xfs_inode	*ip,
-+	xfs_fileoff_t		start,
-+	xfs_fileoff_t		end)
-+{
-+	struct xfs_mount	*mp = ip->i_mount;
-+	struct xfs_trans	*tp;
-+	xfs_fileoff_t		offset_fsb = XFS_B_TO_FSB(mp, start);
-+	xfs_fileoff_t		end_fsb = XFS_B_TO_FSB(mp, end);
-+	struct xfs_bmbt_irec	imap;
-+	int			nimaps;
-+	int			error = 0;
-+	int			done;
-+
-+	error = xfs_trans_alloc(mp, &M_RES(mp)->tr_write, 0, 0, 0, &tp);
-+	if (error)
-+		return error;
-+
-+	xfs_ilock(ip, XFS_ILOCK_EXCL);
-+	xfs_trans_ijoin(tp, ip, 0);
-+
-+	while (offset_fsb < end_fsb) {
-+		nimaps = 1;
-+
-+		error = xfs_bmapi_read(ip, offset_fsb, end_fsb - offset_fsb,
-+							  &imap, &nimaps, 0);
-+		if (error)
-+			goto out_cancel;
-+
-+		if (nimaps == 0)
-+			break;
-+
-+		if (imap.br_state == XFS_EXT_UNWRITTEN) {
-+			error = xfs_bunmapi(tp, ip, imap.br_startoff,
-+					    imap.br_blockcount, 0, 1, &done);
-+			if (error)
-+				goto out_cancel;
-+		}
-+
-+		offset_fsb = imap.br_startoff + imap.br_blockcount;
-+	}
-+
-+	error = xfs_trans_commit(tp);
-+	xfs_iunlock(ip, XFS_ILOCK_EXCL);
-+	return error;
-+out_cancel:
-+	xfs_trans_cancel(tp);
-+	xfs_iunlock(ip, XFS_ILOCK_EXCL);
-+	return error;
-+}
-+
+ #include <linux/mount.h>
+ #include <linux/fileattr.h>
++#include <linux/fsverity.h>
  
- /*
-  * Prepare to enable fsverity by clearing old metadata.
-@@ -264,6 +318,14 @@ xfs_fsverity_end_enable(
- 	if (error)
- 		goto out;
+ /* Return 0 on success or positive error */
+ int
+@@ -1426,6 +1427,19 @@ xfs_file_ioctl(
+ 	case XFS_IOC_VERIFY_MEDIA:
+ 		return xfs_ioc_verify_media(filp, arg);
  
-+	/*
-+	 * Remove unwritten extents left by preallocations in the merkle tree
-+	 * holes and past descriptor
-+	 */
-+	error = xfs_fsverity_cancel_unwritten(ip, range_start, LLONG_MAX);
-+	if (error)
-+		goto out;
++	case FS_IOC_ENABLE_VERITY:
++		if (!xfs_has_verity(mp))
++			return -EOPNOTSUPP;
++		return fsverity_ioctl_enable(filp, arg);
++	case FS_IOC_MEASURE_VERITY:
++		if (!xfs_has_verity(mp))
++			return -EOPNOTSUPP;
++		return fsverity_ioctl_measure(filp, arg);
++	case FS_IOC_READ_VERITY_METADATA:
++		if (!xfs_has_verity(mp))
++			return -EOPNOTSUPP;
++		return fsverity_ioctl_read_metadata(filp, arg);
 +
- 	/*
- 	 * Set fsverity inode flag
- 	 */
+ 	default:
+ 		return -ENOTTY;
+ 	}
 -- 
 2.51.2
 
