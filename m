@@ -2,42 +2,42 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id OAzxH4ger2neOAIAu9opvQ
+	id yORgH4ker2khOQIAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 09 Mar 2026 20:24:56 +0100
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 09 Mar 2026 20:24:57 +0100
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id F05C023FC86
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 09 Mar 2026 20:24:55 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 75A4023FC8D
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 09 Mar 2026 20:24:57 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
 	List-Unsubscribe:List-Id:Subject:MIME-Version:References:In-Reply-To:
 	Message-ID:Date:To:Sender:Content-ID:Content-Description:Resent-Date:
 	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=DAVUFRijhZC3ZxbfVe1pKzJGVdCevsqrDEhAOonRcHs=; b=Q9eg5zcmlI6/e/sVQqilEbWhMS
-	xsTRyJFr9+kjuaUaiDKx/6RBDhTarrMLnEH+JIdIoU6h0UVavW8a/KXm+Mu9a66CFTwuag98jccXC
-	kEVjedVcccZ1VAx4lB6PU94x7OTc9k+oJQAziwSo6APbdF14QXAY43mFyGaqiTduOA7A=;
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=xLSyIEmeTNXo+YrPpge2vTi8/q12HsqfgB7MytmKZgI=; b=OkqLQuc7sZy9DVm9fGa6OKWk50
+	JNYlIfzZ7g+2W1EMXjnKNwLHze5IA0KS3EIXBJlourNgbMr0YY9ElmqnPIjpTeuYZkdCebFMIgZtn
+	1oGhJdJkkic1q7FgANvK1cUNUoYx1edP1y4MgG/aNtjWFgmSIy7810jmLAzKMmHx5HxA=;
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vzgDm-00088Q-LI;
-	Mon, 09 Mar 2026 19:24:54 +0000
+	id 1vzgDo-0001YG-4W;
+	Mon, 09 Mar 2026 19:24:56 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <aalbersh@kernel.org>) id 1vzgDk-00088D-9L
+ (envelope-from <aalbersh@kernel.org>) id 1vzgDm-0001Y4-Dd
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 09 Mar 2026 19:24:52 +0000
+ Mon, 09 Mar 2026 19:24:54 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=4XYDWrn27YbXmc7Iw1YwcEG0vJahSZAQg6TX0BunSmg=; b=bGyi5DQyHRAWLC5fnFSh7owRaL
- jazJetPvb7m1eb9pQkS0ZHsmxBH4ewSbq+pnD3wLfUfGt4X6PkiOPCeVp7gs0CNEGvak3qaCz7tDf
- zu15lBn5O5v/ddfRbJTNeGOy2Hrb7pO+/GZs14QQ4vtAxvA3Rosx6MGXJd4le/wmhBpU=;
+ bh=rny9xtqth13VspWMS0J2Ex3RXLkojrj3wPDFrSrLvMY=; b=S82NCaVYWM7KM/UV7WR7LEM5dg
+ FvvwEy8O7HleEfxG4ir8b609h3qRHcH1HFl0MCPJQJgCbO05kR0wTIwjdCJd8DZnOx1Xg1Juaayd2
+ mptHsjls1klyLg1bHXMMwa39gp4gxpdm/zYVtz7qkzRWpwifZcanQNuzf5SSzJ4uty6c=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:
@@ -45,33 +45,33 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=4XYDWrn27YbXmc7Iw1YwcEG0vJahSZAQg6TX0BunSmg=; b=UaTNFvI685NY4T4HlMrZGcCU16
- sejnAzgtHD0O0dz3EMm0bW/WEuJ5+EheUz+hpZJYaAjHmA5r8uGQwTJXtXu8UfGEEbH08xBzyImGw
- 3Xf2nqRgWJScD13e9pV4ZEc0+X2VoYAiawu6YdkZ3jZ8MrT5cAgjA13gLpXo5SVnCBPY=;
-Received: from tor.source.kernel.org ([172.105.4.254])
+ bh=rny9xtqth13VspWMS0J2Ex3RXLkojrj3wPDFrSrLvMY=; b=SqSDn0efC1/7MJ8vIHBAp3NeFx
+ SPQeExLIAz5HQRq0ONiuE0x2QOFL173hlFsvtzUqe4HGJCrlB+2JMlZlgD9a4/u4xX+3474Zqw5cI
+ SWKvnJfbX3RMJdXk5j246ywBa7oMVWyYMOIQP1XQ+XTm2QKTTXwwEOzb0RQBXV1n8rWM=;
+Received: from sea.source.kernel.org ([172.234.252.31])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vzgDj-0001FX-Qo for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 09 Mar 2026 19:24:52 +0000
+ id 1vzgDm-0001Fr-2S for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 09 Mar 2026 19:24:54 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 3C1C2600C4;
+ by sea.source.kernel.org (Postfix) with ESMTP id C0E0B41B28;
+ Mon,  9 Mar 2026 19:24:43 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 602A6C4CEF7;
  Mon,  9 Mar 2026 19:24:41 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id AB56BC2BC9E;
- Mon,  9 Mar 2026 19:24:38 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1773084280;
- bh=ogWSMF2PJnhgHUDXKpdHXZ+YvdNJgyOyWZkXlSnS970=;
+ s=k20201202; t=1773084283;
+ bh=wy0fgG+OqF6cw22y7JDQIN2MJp1BJ6acjGWjdLKi8F0=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=Ro/9xW5UENPYp71Y2lpc/kQ08y7PL8D4G1tzfy21/0ccpYWmaZnYVPBqMq7KfHLBJ
- pRSr9EuVfurF3pvGeJ8mGC9MyLRqkQQ6ROEjmV8TOMR0a29J2/89ee5+zp20xqsWA5
- 0WAgNArwdLEAIW0tvN3FyOQK0kqZ7oibuYCpLQFIF7Vy+EOQk7CRn0Rqx6NbDpi72m
- R6NpMFqAdfYR+czawOhxqk9HcN4l7b1jm1dIvR1isbZ56bhU9PiWBv+otdUa5osfSK
- MdIhHMwDLMVH3zp4O9XeaSTUqlZ38ymMD5VjK1e27x4xuj3VsM+qXul7EzlworoWQi
- /XxGxz67wqRfw==
+ b=QW2xH7HuqQXoi83jcceoja9TI1YAhDBVMJNuiv/10JIE4wTymwbz9hphQZSXdqHZk
+ 1Fo8vHaMoH02qE0IMf0WXvAujp2unHUTVVoRzZpLecru3kyYMnSIWzdjeGFEwYThMr
+ yigqa4+cyKQAayODnLk1YlPFvvjkAW3IXPfO4our8ug4p2ZBIvmY5eMrtZsL89QIuw
+ RZutFoWAIwsMM6pX6NucYJSCSYjlnslXcRrKLKDopHz6Ti1snJBKH0n4qzkKcbzCOe
+ yO/ntjkLR9zJuqp5evJrth13nVO8S0skkg2N20V/7manmi/inS+jRM0KnAGLKul/JP
+ 1oqZlXfBoS/SQ==
 To: linux-xfs@vger.kernel.org, fsverity@lists.linux.dev,
  linux-fsdevel@vger.kernel.org, ebiggers@kernel.org
-Date: Mon,  9 Mar 2026 20:23:23 +0100
-Message-ID: <20260309192355.176980-9-aalbersh@kernel.org>
+Date: Mon,  9 Mar 2026 20:23:24 +0100
+Message-ID: <20260309192355.176980-10-aalbersh@kernel.org>
 X-Mailer: git-send-email 2.51.2
 In-Reply-To: <20260309192355.176980-1-aalbersh@kernel.org>
 References: <20260309192355.176980-1-aalbersh@kernel.org>
@@ -83,12 +83,10 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Obtain fsverity info for folios with file data. Filesystem
- can pass vi down to ioend and then to fsverity for verification. XFS will
- use it in further patch for fsverity integration. Signed-off-by: Andrey
- Albershteyn
- <aalbersh@kernel.org> --- fs/iomap/buffered-io.c | 7 +++++++
- include/linux/iomap.h | 2 ++ 2 files changed, 9 insertions(+) 
+ Content preview: Issue reading of fsverity merkle tree on the fsverity inodes.
+ This way metadata will be available at I/O completion time. Signed-off-by:
+ Andrey Albershteyn <aalbersh@kernel.org> --- fs/iomap/buffered-io.c | 3 +++
+ 1 file changed, 3 insertions(+) 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -100,9 +98,9 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1vzgDj-0001FX-Qo
-Subject: [f2fs-dev] [PATCH v4 08/25] iomap: obtain fsverity info for read
- path
+X-Headers-End: 1vzgDm-0001Fr-2S
+Subject: [f2fs-dev] [PATCH v4 09/25] iomap: issue readahead for fsverity
+ merkle tree
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -123,7 +121,7 @@ Cc: Andrey Albershteyn <aalbersh@kernel.org>, djwong@kernel.org,
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
-X-Rspamd-Queue-Id: F05C023FC86
+X-Rspamd-Queue-Id: 75A4023FC8D
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [-8.61 / 15.00];
 	WHITELIST_DMARC(-7.00)[sourceforge.net:D:+];
@@ -164,68 +162,28 @@ X-Spamd-Result: default: False [-8.61 / 15.00];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.sourceforge.net:dkim,lists.sourceforge.net:rdns,lists.sourceforge.net:helo]
 X-Rspamd-Action: no action
 
-Obtain fsverity info for folios with file data. Filesystem can pass vi
-down to ioend and then to fsverity for verification. XFS will use it in
-further patch for fsverity integration.
+Issue reading of fsverity merkle tree on the fsverity inodes. This way
+metadata will be available at I/O completion time.
 
 Signed-off-by: Andrey Albershteyn <aalbersh@kernel.org>
 ---
- fs/iomap/buffered-io.c | 7 +++++++
- include/linux/iomap.h  | 2 ++
- 2 files changed, 9 insertions(+)
+ fs/iomap/buffered-io.c | 3 +++
+ 1 file changed, 3 insertions(+)
 
 diff --git a/fs/iomap/buffered-io.c b/fs/iomap/buffered-io.c
-index 530794dcdd91..a335a18c307f 100644
+index a335a18c307f..1d9481f00b41 100644
 --- a/fs/iomap/buffered-io.c
 +++ b/fs/iomap/buffered-io.c
-@@ -9,6 +9,7 @@
- #include <linux/swap.h>
- #include <linux/migrate.h>
- #include <linux/fserror.h>
-+#include <linux/fsverity.h>
- #include "internal.h"
- #include "trace.h"
+@@ -593,6 +593,9 @@ void iomap_read_folio(const struct iomap_ops *ops,
  
-@@ -590,6 +591,9 @@ void iomap_read_folio(const struct iomap_ops *ops,
+ 	if (iter.pos < i_size_read(iter.inode))
+ 		ctx->vi = fsverity_get_info(iter.inode);
++	if (ctx->vi)
++		fsverity_readahead(ctx->vi, folio->index,
++				   folio_nr_pages(folio));
  
- 	trace_iomap_readpage(iter.inode, 1);
- 
-+	if (iter.pos < i_size_read(iter.inode))
-+		ctx->vi = fsverity_get_info(iter.inode);
-+
  	while ((ret = iomap_iter(&iter, ops)) > 0)
  		iter.status = iomap_read_folio_iter(&iter, ctx,
- 				&bytes_submitted);
-@@ -656,6 +660,9 @@ void iomap_readahead(const struct iomap_ops *ops,
- 
- 	trace_iomap_readahead(rac->mapping->host, readahead_count(rac));
- 
-+	if (iter.pos < i_size_read(iter.inode))
-+		ctx->vi = fsverity_get_info(iter.inode);
-+
- 	while (iomap_iter(&iter, ops) > 0)
- 		iter.status = iomap_readahead_iter(&iter, ctx,
- 					&cur_bytes_submitted);
-diff --git a/include/linux/iomap.h b/include/linux/iomap.h
-index dc39837b0d45..89e5a7abc012 100644
---- a/include/linux/iomap.h
-+++ b/include/linux/iomap.h
-@@ -432,6 +432,7 @@ struct iomap_ioend {
- 	loff_t			io_offset;	/* offset in the file */
- 	sector_t		io_sector;	/* start sector of ioend */
- 	void			*io_private;	/* file system private data */
-+	struct fsverity_info	*io_vi;		/* fsverity info */
- 	struct bio		io_bio;		/* MUST BE LAST! */
- };
- 
-@@ -506,6 +507,7 @@ struct iomap_read_folio_ctx {
- 	struct readahead_control *rac;
- 	void			*read_ctx;
- 	loff_t			read_ctx_file_offset;
-+	struct fsverity_info	*vi;
- };
- 
- struct iomap_read_ops {
 -- 
 2.51.2
 
