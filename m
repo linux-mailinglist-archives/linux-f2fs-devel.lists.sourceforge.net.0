@@ -2,42 +2,42 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 4LtQDgLar2kzdAIAu9opvQ
+	id yBi8Eknar2kzdAIAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 10 Mar 2026 09:44:50 +0100
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 10 Mar 2026 09:46:01 +0100
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id E87A4247888
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 10 Mar 2026 09:44:49 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id EC5A22478BA
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 10 Mar 2026 09:46:00 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
 	Subject:In-Reply-To:MIME-Version:References:Message-ID:To:From:Date:Sender:
 	Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
 	:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=e8qfyoSPyPfjE0jCCqLhRQvm/sqiAGHIjfAWqfboNlU=; b=EgAjxOeHZLTGnWH4bTl+CTRWVm
-	Tqum8Ln2Nd6heHru2AXnk4ib4m6eoel8JQqnSJbsmQ6TAgHPbel01Pb11eaOmEdcBZV4v23ac3KmT
-	7hRgucd++uvfPfNruFUPs1Ced2AknzSC726xP0nou8HmEYm2HtS7gWXbfIbzm+G8c5eI=;
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=YumJijyFFyFS/AXXyBfx63kTkSBs51bV8am++fIiKEs=; b=YDkoicLTq4gH+oFecptccDeKss
+	AiE7jF+Bbc2DAcR7Hb8LiVfMlz3i/m15M7EMjAc6UFL2Ovw8UQOYTKY4lQfZtwgEGaUxCmR8gk87n
+	CtlmWdHXr3TqcD6PHbQ2d+k07JICDNsZ4hKlF5P0aPhac2uiILXbgO2q1ADsJffqECd0=;
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vzshn-0001DX-Bn;
-	Tue, 10 Mar 2026 08:44:43 +0000
+	id 1vzsix-00024s-Bb;
+	Tue, 10 Mar 2026 08:45:56 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <hch@lst.de>) id 1vzshl-0001DO-Oa
+ (envelope-from <hch@lst.de>) id 1vzsiw-00024m-MJ
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 10 Mar 2026 08:44:41 +0000
+ Tue, 10 Mar 2026 08:45:55 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=M7NmYC/Iylm9myghHwqILim55SAUt9QrM+UZYk0eJlw=; b=bTqQzv+bMamS2RBl1CNyzEfOCl
- kbQCdX6ukDOkKF89arTPZVXv0ohdocp1DF247teY6lqqXP1Ld2ufTNOAIS+CZB/bDH963/cfmk/sb
- cg+b/GgpNPaK+vApESWguA9m+RLfxziQa8a0GRmyqLmGsFOfGZMA0dH29UkIbS0DTQXY=;
+ bh=2GTo/UKEXmNc6/moESIzVvtsJWPxVqrpeu18Y9/uTE0=; b=VUBemvd8Clfa3zsPirhosHDn9n
+ HN9WBzsZIf1Xt5LxhaMw6Ax+1DHt/yFRcV+V2o8w1uwrhZeg8LtzO6vQ9PawHPRqwdPqr1uCsjG+m
+ v+6l2K6MBUVhqEgApW6MwELcoJXxf8P3bplIZxuxXIxb4vIW3uBJQM+f68oB+z5YSQMw=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -45,40 +45,44 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=M7NmYC/Iylm9myghHwqILim55SAUt9QrM+UZYk0eJlw=; b=VBT0kSYsV9b8CpHBbkneQEtlaB
- jNH3SZMKkyYUM9psp1SZrT0k6LoizIN7IG3fdi/ryWnvXbFAcOfsnPLtaWvDWPjspt5ObRAr4WXzI
- SH8dawWol1h4oGcskplDmw35FA97gFtu+myskURD2pk79557wuLmbslQx3c3fPpTiyO0=;
+ bh=2GTo/UKEXmNc6/moESIzVvtsJWPxVqrpeu18Y9/uTE0=; b=fZQDK1tIsuGYW7NOGurlJK3sVA
+ P8LoRPpOvZmsFAkG28P6oCFr4glOw8AA8M74+qvajdeMYuLe7l7Mqe74YeXnAmMDQfovh1zynMZ7a
+ /2L62vs3kziZqfQpqcUz9FDyENp8O0UHIu/B9RM1R12ijuULs/k4PRhn5i4Oe+dQyKvA=;
 Received: from verein.lst.de ([213.95.11.211])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vzshl-0008HD-8n for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 10 Mar 2026 08:44:41 +0000
+ id 1vzsiw-0008OT-WF for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 10 Mar 2026 08:45:55 +0000
 Received: by verein.lst.de (Postfix, from userid 2407)
- id 1DA606732A; Tue, 10 Mar 2026 09:44:34 +0100 (CET)
-Date: Tue, 10 Mar 2026 09:44:33 +0100
+ id CA0EC68D07; Tue, 10 Mar 2026 09:45:42 +0100 (CET)
+Date: Tue, 10 Mar 2026 09:45:42 +0100
 From: Christoph Hellwig <hch@lst.de>
 To: Andrey Albershteyn <aalbersh@kernel.org>
-Message-ID: <20260310084433.GB17112@lst.de>
+Message-ID: <20260310084542.GC17112@lst.de>
 References: <20260309192355.176980-1-aalbersh@kernel.org>
- <20260309192355.176980-9-aalbersh@kernel.org>
+ <20260309192355.176980-10-aalbersh@kernel.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20260309192355.176980-9-aalbersh@kernel.org>
+In-Reply-To: <20260309192355.176980-10-aalbersh@kernel.org>
 User-Agent: Mutt/1.5.17 (2007-11-01)
 X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Looks good: Reviewed-by: Christoph Hellwig <hch@lst.de> 
+ Content preview:  On Mon, Mar 09, 2026 at 08:23:24PM +0100, Andrey Albershteyn
+ wrote: > Issue reading of fsverity merkle tree on the fsverity inodes. This
+ way > metadata will be available at I/O completion time. The change itself
+ looks good,
+ but we'll also need this for iomap_readahead and not just iomap_read_folio.
  Content analysis details:   (0.0 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
-X-Headers-End: 1vzshl-0008HD-8n
-Subject: Re: [f2fs-dev] [PATCH v4 08/25] iomap: obtain fsverity info for
- read path
+X-Headers-End: 1vzsiw-0008OT-WF
+Subject: Re: [f2fs-dev] [PATCH v4 09/25] iomap: issue readahead for fsverity
+ merkle tree
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -97,7 +101,7 @@ Cc: fsverity@lists.linux.dev, ebiggers@kernel.org, djwong@kernel.org,
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
-X-Rspamd-Queue-Id: E87A4247888
+X-Rspamd-Queue-Id: EC5A22478BA
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [-1.01 / 15.00];
 	RWL_MAILSPIKE_EXCELLENT(-0.40)[216.105.38.7:from];
@@ -120,7 +124,7 @@ X-Spamd-Result: default: False [-1.01 / 15.00];
 	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
-	NEURAL_HAM(-0.00)[-0.999];
+	NEURAL_HAM(-0.00)[-1.000];
 	FROM_NEQ_ENVFROM(0.00)[hch@lst.de,linux-f2fs-devel-bounces@lists.sourceforge.net];
 	FROM_HAS_DN(0.00)[];
 	DKIM_MIXED(0.00)[];
@@ -130,13 +134,15 @@ X-Spamd-Result: default: False [-1.01 / 15.00];
 	RCPT_COUNT_SEVEN(0.00)[10];
 	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
 	TAGGED_RCPT(0.00)[linux-f2fs-devel];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.sourceforge.net:dkim,lists.sourceforge.net:rdns,lists.sourceforge.net:helo,lst.de:mid,lst.de:email]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.sourceforge.net:dkim,lists.sourceforge.net:rdns,lists.sourceforge.net:helo,lst.de:mid]
 X-Rspamd-Action: no action
 
-Looks good:
+On Mon, Mar 09, 2026 at 08:23:24PM +0100, Andrey Albershteyn wrote:
+> Issue reading of fsverity merkle tree on the fsverity inodes. This way
+> metadata will be available at I/O completion time.
 
-Reviewed-by: Christoph Hellwig <hch@lst.de>
-
+The change itself looks good, but we'll also need this for
+iomap_readahead and not just iomap_read_folio.
 
 
 _______________________________________________
