@@ -2,42 +2,42 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id yGSdHEtur2m6YQIAu9opvQ
+	id aBSsMZJur2m6YQIAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 10 Mar 2026 02:05:15 +0100
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 10 Mar 2026 02:06:26 +0100
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id BF213243456
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 10 Mar 2026 02:05:14 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 21CC72434AE
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 10 Mar 2026 02:06:26 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
 	List-Unsubscribe:List-Id:Subject:In-Reply-To:MIME-Version:References:
 	Message-ID:To:Date:Sender:Content-ID:Content-Description:Resent-Date:
 	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=6f4IF84k4E32QcMViiPBcVznHG6bri5zs/u15WFiqKw=; b=lgA0f8a5rhkAauiZTTUnSWvLLJ
-	bKU/G1CIzmgpWvvvhNkUjcwDTV+qTECQynZmLSGDe9+INHgssJiILaTDcfF8agVG39qIJI5MBHcC8
-	H7XTPmiaCt8W5vSotxfPPR8YLa/143IOVY8ROZGE23Nv8HpEAr+osX1SqS9VZlZgXdVM=;
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=j8ZXgnwLp3dLZN3n53iLvkEaa7U/rSAMZYcfJo0caUI=; b=WBjTkWhJEgC06/55HGeIiF7W1V
+	2j6Bn26waek2lj2/f2OU0pE8D+/43NXFaao+YVYdP9Vt/cFkOo3dd7WdPiqn61OvelvcMgVdooyku
+	xQ4xHyYk6Y/06CI50+6JrIaLD8UMPPV4DcIRql8rbFXfvxtac6QdiZ8pCoK/xGiGv7Os=;
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vzlX5-0000hr-Jj;
-	Tue, 10 Mar 2026 01:05:11 +0000
+	id 1vzlYE-0000dG-SQ;
+	Tue, 10 Mar 2026 01:06:22 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <djwong@kernel.org>) id 1vzlX3-0000hi-Hw
+ (envelope-from <djwong@kernel.org>) id 1vzlY0-0000cS-DH
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 10 Mar 2026 01:05:09 +0000
+ Tue, 10 Mar 2026 01:06:08 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Uxcr7dLyY3YxupK60wGoqImoEx61xa9tUdxQ56SrSuA=; b=TPtCSIRmqVYpBXMUFnPisbBXLn
- vg1Fn8HyS58ZX1WKqr0FPjwoguKbFUEvWrB+LHeKunO0M7GeUqW8dY88LMRqy/gWcKyKviKO5LVY7
- R0+3By16gBoYklGOHDlP4sOWmjAw25uPyk4ya+4ShlnZbtvCz9ZiSj3Cyrq12izDvTZk=;
+ bh=FesD3w5RrPyj6c0rAXRclowXWqjPekK4aLqTddmFe0Y=; b=gKqwkkZRe4kfm1GgtApn8GXs1N
+ CIzmXkQT/r38tS/KuUVe/iIBKwjnxEhXmCNXhOkFG9e63Fl2qoMzug/7OC+yDXOhqrHbiIZhxnwg8
+ 9JCjRYa8FEtUlRpaG/gUEsiDE3JLHZRveqsu/NQBSEijGFmDVyrD5JYBYt833EEoMlUk=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -45,61 +45,61 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=Uxcr7dLyY3YxupK60wGoqImoEx61xa9tUdxQ56SrSuA=; b=Hy4Y/Dk325i+lsY7p3psWrhVRb
- ywKyx10lCYmrSHiJoiNvLDRSPo03K2oKC4AYxHxpbm0G7szkQbbCZ3B/mUqiD16HsdkSTWPBDMRTt
- SAeYmuqESq+qLCZNWuO40zgk6wYXQSgDNvjxtjNSS9Al9v4lhJopTS9STt6jwOeZm+Sk=;
+ bh=FesD3w5RrPyj6c0rAXRclowXWqjPekK4aLqTddmFe0Y=; b=hpXFKFW9SSmJtfvH1WQ452CJ1e
+ BD5sbocjYOtC5CGjlw1EP0Lcb8RYjGgCCqzS7qf44cv4jmZ7kTq6vzbqoXCzypABPC3QoXScApH12
+ D8sRjEj+YYnWgs8Qeyr/gZX/mUGTINKmcGOSmD+rK08vC/zGjslA21axHzp93gP7omOw=;
 Received: from sea.source.kernel.org ([172.234.252.31])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vzlX2-0007Ec-O8 for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 10 Mar 2026 01:05:09 +0000
+ id 1vzlXq-0007JJ-0X for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 10 Mar 2026 01:05:58 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 53B52435BC;
- Tue, 10 Mar 2026 01:05:03 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2EE42C4CEF7;
- Tue, 10 Mar 2026 01:05:03 +0000 (UTC)
+ by sea.source.kernel.org (Postfix) with ESMTP id B4E2D417BC;
+ Tue, 10 Mar 2026 01:05:52 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9180CC4CEF7;
+ Tue, 10 Mar 2026 01:05:52 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1773104703;
- bh=u6CMnuNY5RwqjHwe7VoD0sjIRo/Xi7apIs8nnxZUTlM=;
+ s=k20201202; t=1773104752;
+ bh=aUKDupC9eg6IqmhfO1YbMuAZG/32Sgrd20f3Tc9BPdI=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=kBzU40a2H1q3Hf1sSr4uUscCm4/RxwfXHxcwTveop3CP5QU5jPovQWgAuO4nBCqlS
- jaOX/Ej0Oeyw1Dulq2AwhjmqDAUigZVGMwe1uzp8+HNZthbN0evXnzB0gDTHNfihhP
- 28ITyfcW//2l0A+a3kviKcUCklQc2sSiIrqCBPQJ27ykW6dLxT47jdMpTCm5buRCVo
- Qne+Wln2pwpJ6qfXQy6CJ8A7xf1OM1rglOaSRxkbxnT6cQQPPmK3/GlAIExd9ff91W
- PB+YhXDBgzOtziYJQdf72HPU/yoDUXFgjD6XdwDSyN4yNLYfqXhJ+IpdwccJz1QKsd
- RlTARG4vrWgHg==
-Date: Mon, 9 Mar 2026 18:05:02 -0700
+ b=d1jGGpyiSyUBEjiqzNypUpmXJsTHj07FCWLK6mv7BxQeHbQ9yApuaIyw4iD6hEWZt
+ 9UMeBVkNmLvcnwK/b2k3yLspTLZjvNMljELG/Uq3OaGFwCCxdTadxR1qjQxJKmCut3
+ zicmzsUSBiCZFWQ6UbwIx3Sjngu4jGc8Dr3iYHjQzCuZagnbliDwweiHhrwnIaUQy2
+ p3kLWeXgE6xh2p3hNZAkqer9VvdY8S/H4lHStKzbg9ipAWBgZ9aD5ez1tzDlQG0+AR
+ zgxwNdn81hzFjuAfjVrsB5EOA1c4qOO4zInSUv3oGJU5em/WcyqPuz3foFUWsAOezq
+ LhOyEpV9ocTfA==
+Date: Mon, 9 Mar 2026 18:05:52 -0700
 To: Andrey Albershteyn <aalbersh@kernel.org>
-Message-ID: <20260310010502.GB1105363@frogsfrogsfrogs>
+Message-ID: <20260310010552.GC1105363@frogsfrogsfrogs>
 References: <20260309192355.176980-1-aalbersh@kernel.org>
- <20260309192355.176980-11-aalbersh@kernel.org>
+ <20260309192355.176980-13-aalbersh@kernel.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20260309192355.176980-11-aalbersh@kernel.org>
+In-Reply-To: <20260309192355.176980-13-aalbersh@kernel.org>
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Mon, Mar 09, 2026 at 08:23:25PM +0100, Andrey Albershteyn
- wrote: > fsverity metadata has two kinds of holes - ones in merkle tree and
- one > after fsverity descriptor. > > Merkle tree holes are bloc [...] 
+ Content preview:  On Mon, Mar 09, 2026 at 08:23:27PM +0100, Andrey Albershteyn
+ wrote: > Introduce XFS_DIFLAG2_VERITY for inodes with fsverity. This flag
+ > indicates that inode has fs-verity enabled (i.e. descriptor exi [...] 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1vzlX2-0007Ec-O8
-Subject: Re: [f2fs-dev] [PATCH v4 10/25] iomap: teach iomap to handle
- fsverity holes and verify data holes
+X-Headers-End: 1vzlXq-0007JJ-0X
+Subject: Re: [f2fs-dev] [PATCH v4 12/25] xfs: introduce fsverity on-disk
+ changes
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -121,7 +121,7 @@ Cc: fsverity@lists.linux.dev, ebiggers@kernel.org,
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
-X-Rspamd-Queue-Id: BF213243456
+X-Rspamd-Queue-Id: 21CC72434AE
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [-8.11 / 15.00];
 	WHITELIST_DMARC(-7.00)[sourceforge.net:D:+];
@@ -164,86 +164,148 @@ X-Spamd-Result: default: False [-8.11 / 15.00];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.sourceforge.net:dkim,lists.sourceforge.net:rdns,lists.sourceforge.net:helo]
 X-Rspamd-Action: no action
 
-On Mon, Mar 09, 2026 at 08:23:25PM +0100, Andrey Albershteyn wrote:
-> fsverity metadata has two kinds of holes - ones in merkle tree and one
-> after fsverity descriptor.
+On Mon, Mar 09, 2026 at 08:23:27PM +0100, Andrey Albershteyn wrote:
+> Introduce XFS_DIFLAG2_VERITY for inodes with fsverity. This flag
+> indicates that inode has fs-verity enabled (i.e. descriptor exist,
+> tree is built and file is read-only).
 > 
-> Merkle tree holes are blocks full of hashes of zeroed data blocks. These
-> are not stored on the disk but synthesized on the fly. This saves a bit
-> of space for sparse files. Due to this iomap also need to lookup
-> fsverity_info for folios with fsverity metadata. ->vi has a hash of the
-> zeroed data block which will be used to fill the merkle tree block. This
-> patch extends lookup of fsverity_info from just for file data but also
-> for merkle tree holes.
-> 
-> The hole past descriptor is interpreted as end of metadata region. As we
-> don't have EOF here we use this hole as an indication that rest of the
-> folio is empty. This patch marks rest of the folio beyond fsverity
-> descriptor as uptodate.
-> 
-> For file data, fsverity needs to verify consistency of the whole file
-> against the root hash, hashes of holes are included in the merkle tree.
-> Verify them too.
+> Introduce XFS_SB_FEAT_RO_COMPAT_VERITY for filesystems having
+> fsverity inodes. As on-disk changes applies to fsverity inodes only, let
+> older kernels read-only access. This will be enabled in the further
+> patch after full fsverity support.
 > 
 > Signed-off-by: Andrey Albershteyn <aalbersh@kernel.org>
 > ---
->  fs/iomap/buffered-io.c | 28 ++++++++++++++++++++++++++--
->  1 file changed, 26 insertions(+), 2 deletions(-)
+>  fs/xfs/libxfs/xfs_format.h     | 8 +++++++-
+>  fs/xfs/libxfs/xfs_inode_buf.c  | 8 ++++++++
+>  fs/xfs/libxfs/xfs_inode_util.c | 2 ++
+>  fs/xfs/libxfs/xfs_sb.c         | 2 ++
+>  fs/xfs/xfs_iops.c              | 2 ++
+>  fs/xfs/xfs_mount.h             | 2 ++
+>  6 files changed, 23 insertions(+), 1 deletion(-)
 > 
-> diff --git a/fs/iomap/buffered-io.c b/fs/iomap/buffered-io.c
-> index 1d9481f00b41..31e39ab93a2e 100644
-> --- a/fs/iomap/buffered-io.c
-> +++ b/fs/iomap/buffered-io.c
-> @@ -542,9 +542,33 @@ static int iomap_read_folio_iter(struct iomap_iter *iter,
->  		if (plen == 0)
->  			return 0;
+> diff --git a/fs/xfs/libxfs/xfs_format.h b/fs/xfs/libxfs/xfs_format.h
+> index 779dac59b1f3..d67b404964fc 100644
+> --- a/fs/xfs/libxfs/xfs_format.h
+> +++ b/fs/xfs/libxfs/xfs_format.h
+> @@ -374,6 +374,7 @@ xfs_sb_has_compat_feature(
+>  #define XFS_SB_FEAT_RO_COMPAT_RMAPBT   (1 << 1)		/* reverse map btree */
+>  #define XFS_SB_FEAT_RO_COMPAT_REFLINK  (1 << 2)		/* reflinked files */
+>  #define XFS_SB_FEAT_RO_COMPAT_INOBTCNT (1 << 3)		/* inobt block counts */
+> +#define XFS_SB_FEAT_RO_COMPAT_VERITY   (1 << 4)		/* fs-verity */
+>  #define XFS_SB_FEAT_RO_COMPAT_ALL \
+>  		(XFS_SB_FEAT_RO_COMPAT_FINOBT | \
+>  		 XFS_SB_FEAT_RO_COMPAT_RMAPBT | \
+> @@ -1230,16 +1231,21 @@ static inline void xfs_dinode_put_rdev(struct xfs_dinode *dip, xfs_dev_t rdev)
+>   */
+>  #define XFS_DIFLAG2_METADATA_BIT	5
 >  
-> -		/* zero post-eof blocks as the page may be mapped */
-> -		if (iomap_block_needs_zeroing(iter, pos)) {
-> +		/*
-> +		 * Handling of fsverity "holes". We hit this for two case:
-> +		 *   1. No need to go further, the hole after fsverity
-> +		 *	descriptor is the end of the fsverity metadata.
-> +		 *
-> +		 *   2. This folio contains merkle tree blocks which need to be
-> +		 *	synthesized. If we already have fsverity info (ctx->vi)
-> +		 *	synthesize these blocks.
-> +		 */
-> +		if ((iomap->flags & IOMAP_F_FSVERITY) &&
-> +		    iomap->type == IOMAP_HOLE) {
-> +			/*
-> +			 * Don't cause lookup if we already have fsverity
-> +			 * context from the previous tree hole
-> +			 */
-> +			if (!ctx->vi)
-> +				ctx->vi = fsverity_get_info(iter->inode);
-> +			if (ctx->vi)
+> +/* inodes sealed with fs-verity */
+> +#define XFS_DIFLAG2_VERITY_BIT		6
+> +
+>  #define XFS_DIFLAG2_DAX		(1ULL << XFS_DIFLAG2_DAX_BIT)
+>  #define XFS_DIFLAG2_REFLINK	(1ULL << XFS_DIFLAG2_REFLINK_BIT)
+>  #define XFS_DIFLAG2_COWEXTSIZE	(1ULL << XFS_DIFLAG2_COWEXTSIZE_BIT)
+>  #define XFS_DIFLAG2_BIGTIME	(1ULL << XFS_DIFLAG2_BIGTIME_BIT)
+>  #define XFS_DIFLAG2_NREXT64	(1ULL << XFS_DIFLAG2_NREXT64_BIT)
+>  #define XFS_DIFLAG2_METADATA	(1ULL << XFS_DIFLAG2_METADATA_BIT)
+> +#define XFS_DIFLAG2_VERITY	(1ULL << XFS_DIFLAG2_VERITY_BIT)
+>  
+>  #define XFS_DIFLAG2_ANY \
+>  	(XFS_DIFLAG2_DAX | XFS_DIFLAG2_REFLINK | XFS_DIFLAG2_COWEXTSIZE | \
+> -	 XFS_DIFLAG2_BIGTIME | XFS_DIFLAG2_NREXT64 | XFS_DIFLAG2_METADATA)
+> +	 XFS_DIFLAG2_BIGTIME | XFS_DIFLAG2_NREXT64 | XFS_DIFLAG2_METADATA | \
+> +	 XFS_DIFLAG2_VERITY)
+>  
+>  static inline bool xfs_dinode_has_bigtime(const struct xfs_dinode *dip)
+>  {
+> diff --git a/fs/xfs/libxfs/xfs_inode_buf.c b/fs/xfs/libxfs/xfs_inode_buf.c
+> index a017016e9075..c5822d938d81 100644
+> --- a/fs/xfs/libxfs/xfs_inode_buf.c
+> +++ b/fs/xfs/libxfs/xfs_inode_buf.c
+> @@ -756,6 +756,14 @@ xfs_dinode_verify(
+>  	    !xfs_has_rtreflink(mp))
+>  		return __this_address;
+>  
+> +	/* only regular files can have fsverity */
+> +	if (flags2 & XFS_DIFLAG2_VERITY) {
+> +		if (!xfs_has_verity(mp))
+> +			return __this_address;
+> +		if ((mode & S_IFMT) != S_IFREG)
 
-Is it an error if ctx->vi isn't set here?  We won't fill the folio
-with the zerohash, but we'll set uptodate anyway...
+Nit: This can be S_ISREG(mode)
 
-> +				fsverity_folio_zero_hash(folio, poff, plen,
-> +							 ctx->vi);
-> +			iomap_set_range_uptodate(folio, poff, plen);
+With that tidied up,
+Reviewed-by: "Darrick J. Wong" <djwong@kernel.org>
 
-...though I suppose it's the case that the uninitialized folio contents
-will most likely cause fsverity to report data corruption so at least
-it's obvious.
-
-OTOH it does seem a little strange to set uptodate having not
-initialized the folio contents.
 
 --D
 
-> +		} else if (iomap_block_needs_zeroing(iter, pos)) {
-> +			/* zero post-eof blocks as the page may be mapped */
->  			folio_zero_range(folio, poff, plen);
-> +			if (ctx->vi &&
-> +			    !fsverity_verify_blocks(ctx->vi, folio, plen, poff))
-> +				return -EIO;
->  			iomap_set_range_uptodate(folio, poff, plen);
->  		} else {
->  			if (!*bytes_submitted)
+> +			return __this_address;
+> +	}
+> +
+>  	if (xfs_has_zoned(mp) &&
+>  	    dip->di_metatype == cpu_to_be16(XFS_METAFILE_RTRMAP)) {
+>  		if (be32_to_cpu(dip->di_used_blocks) > mp->m_sb.sb_rgextents)
+> diff --git a/fs/xfs/libxfs/xfs_inode_util.c b/fs/xfs/libxfs/xfs_inode_util.c
+> index 551fa51befb6..6b1e20a4bb9b 100644
+> --- a/fs/xfs/libxfs/xfs_inode_util.c
+> +++ b/fs/xfs/libxfs/xfs_inode_util.c
+> @@ -126,6 +126,8 @@ xfs_ip2xflags(
+>  			flags |= FS_XFLAG_DAX;
+>  		if (ip->i_diflags2 & XFS_DIFLAG2_COWEXTSIZE)
+>  			flags |= FS_XFLAG_COWEXTSIZE;
+> +		if (ip->i_diflags2 & XFS_DIFLAG2_VERITY)
+> +			flags |= FS_XFLAG_VERITY;
+>  	}
+>  
+>  	if (xfs_inode_has_attr_fork(ip))
+> diff --git a/fs/xfs/libxfs/xfs_sb.c b/fs/xfs/libxfs/xfs_sb.c
+> index 38d16fe1f6d8..4401a5f16344 100644
+> --- a/fs/xfs/libxfs/xfs_sb.c
+> +++ b/fs/xfs/libxfs/xfs_sb.c
+> @@ -165,6 +165,8 @@ xfs_sb_version_to_features(
+>  		features |= XFS_FEAT_REFLINK;
+>  	if (sbp->sb_features_ro_compat & XFS_SB_FEAT_RO_COMPAT_INOBTCNT)
+>  		features |= XFS_FEAT_INOBTCNT;
+> +	if (sbp->sb_features_ro_compat & XFS_SB_FEAT_RO_COMPAT_VERITY)
+> +		features |= XFS_FEAT_VERITY;
+>  	if (sbp->sb_features_incompat & XFS_SB_FEAT_INCOMPAT_FTYPE)
+>  		features |= XFS_FEAT_FTYPE;
+>  	if (sbp->sb_features_incompat & XFS_SB_FEAT_INCOMPAT_SPINODES)
+> diff --git a/fs/xfs/xfs_iops.c b/fs/xfs/xfs_iops.c
+> index 208543e57eda..ca369eb96561 100644
+> --- a/fs/xfs/xfs_iops.c
+> +++ b/fs/xfs/xfs_iops.c
+> @@ -1415,6 +1415,8 @@ xfs_diflags_to_iflags(
+>  		flags |= S_NOATIME;
+>  	if (init && xfs_inode_should_enable_dax(ip))
+>  		flags |= S_DAX;
+> +	if (xflags & FS_XFLAG_VERITY)
+> +		flags |= S_VERITY;
+>  
+>  	/*
+>  	 * S_DAX can only be set during inode initialization and is never set by
+> diff --git a/fs/xfs/xfs_mount.h b/fs/xfs/xfs_mount.h
+> index 61c71128d171..c746bc90cf3e 100644
+> --- a/fs/xfs/xfs_mount.h
+> +++ b/fs/xfs/xfs_mount.h
+> @@ -385,6 +385,7 @@ typedef struct xfs_mount {
+>  #define XFS_FEAT_EXCHANGE_RANGE	(1ULL << 27)	/* exchange range */
+>  #define XFS_FEAT_METADIR	(1ULL << 28)	/* metadata directory tree */
+>  #define XFS_FEAT_ZONED		(1ULL << 29)	/* zoned RT device */
+> +#define XFS_FEAT_VERITY		(1ULL << 30)	/* fs-verity */
+>  
+>  /* Mount features */
+>  #define XFS_FEAT_NOLIFETIME	(1ULL << 47)	/* disable lifetime hints */
+> @@ -442,6 +443,7 @@ __XFS_HAS_FEAT(exchange_range, EXCHANGE_RANGE)
+>  __XFS_HAS_FEAT(metadir, METADIR)
+>  __XFS_HAS_FEAT(zoned, ZONED)
+>  __XFS_HAS_FEAT(nolifetime, NOLIFETIME)
+> +__XFS_HAS_FEAT(verity, VERITY)
+>  
+>  static inline bool xfs_has_rtgroups(const struct xfs_mount *mp)
+>  {
 > -- 
 > 2.51.2
 > 
