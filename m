@@ -2,143 +2,112 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 6FOFNPVasGn2iQIAu9opvQ
+	id 2A6qBZF9sGl9jwIAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 10 Mar 2026 18:55:01 +0100
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 10 Mar 2026 21:22:41 +0100
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2C00E255FBF
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 10 Mar 2026 18:55:01 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 442D6257ADE
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 10 Mar 2026 21:22:40 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
+	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:
 	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
-	Subject:MIME-Version:Message-ID:Date:To:From:Sender:Reply-To:Content-ID:
+	Subject:To:From:Message-ID:Date:MIME-Version:Sender:Reply-To:Cc:Content-ID:
 	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
 	:Resent-Message-ID:In-Reply-To:References:List-Owner;
-	bh=W66G0lB+rOCOIbs9PvziZ/VJD2U1XzXDp39PrmKgn4Q=; b=AlroGx8XcBaJn+l/Kcw3i+CNXe
-	SAJ1VEGZYv3bLfsolkNJYgWiey+eEqg7qjcR6rNUrQJAxGnl1thIXnBMMYdVvCdf8xssqBglJvQof
-	DWO2+pdp58TwvQiWYS+7rrPSarCAVSQktrRHRtyiRi1x73MxYGoqpBwuxIJWMXgrQL/w=;
+	bh=voZ4N+WsHkyZ/a3Gy00oaeNoGWuJOwCFH4Jc+VX3kuk=; b=cPBPDSRj2n5zfuY0WIx+n/OJoS
+	jm7tzDIV64u5wBN4HisvvsE4lWWBKw004pX+12vcW9IzQEVzRBmxKWIjY5H9fQkOl0Pjcw4nluKNR
+	eoONGpAIY/Pha6YQD4/8zOT1QkMC/R/pmz925xoZvv4GK2sGIGgV8hhv1ZK10J57XiRc=;
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1w01ID-0004Op-8z;
-	Tue, 10 Mar 2026 17:54:53 +0000
+	id 1w03b6-0007Lq-Qs;
+	Tue, 10 Mar 2026 20:22:32 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
- TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <daeho43@gmail.com>) id 1w01I4-0004Od-5v
- for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 10 Mar 2026 17:54:44 +0000
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95) (envelope-from
+ <3fH2waQkbAI09FG1r22v8r66zu.x55x2vB9v8t54Av4A.t53@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com>)
+ id 1w03b5-0007Lj-FX for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 10 Mar 2026 20:22:31 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ d=sourceforge.net; s=x; h=Content-Type:To:From:Subject:Message-ID:Date:
+ MIME-Version:Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=XbzTvS3EAv++rNl9al/HljoKtTK5FcMi/cSpL9WxQWc=; b=GE8QmNiQG8W3ucRL6Sy48XFbl0
- wowZXXK8W0p5fm1RaplGlC5WXPDZ2c6+kXzX2cWwCySZDBuQ7pMjsMhKo8z7MkK7smGbNBlgc85rq
- KgqmEooPqcUveYlqEnSb+1o4R2KCAvfRAPfuwDQkr3pK/R1TwHZzbjPybLsvZxVkObC0=;
+ bh=bjBF6qoYBijr9UqZ/693jcBIL08PLtrpQB2lTanJAtc=; b=ASgW4kodtoqCEVTHJZNit/akmQ
+ TgJWix+qFVipb8Pvuxm9uUthyIyBCdg6ZV1d1VW/F9xqfEnPVOGfQtFy/Ir2oWnF4zJW1pDbaq0Sf
+ y57CgEUgJ9QQY25S1ZvI8kLrCcVJaKdlT0OUXJ+DhUu31ZynIof/hUghXdO3fne65l7I=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ h=Content-Type:To:From:Subject:Message-ID:Date:MIME-Version:Sender:Reply-To
+ :Cc:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
  Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=XbzTvS3EAv++rNl9al/HljoKtTK5FcMi/cSpL9WxQWc=; b=j
- DunNQ1NIggDqu1RwbY7kn8zR8Cf1PYvwcdG3mm0NkadMK/3VmD/y1fn3xe/t3sWUGEWb9OEawJdpC
- sSR1hiKK49oosaZTganlRKhzLM21eqDo4ST+FjiDqLlCspuHXgch/iX7gTSWSPFBsQgaEcJ6shqqu
- LRwkdaqIK5xKVmUQ=;
-Received: from mail-dy1-f175.google.com ([74.125.82.175])
+ List-Owner:List-Archive; bh=bjBF6qoYBijr9UqZ/693jcBIL08PLtrpQB2lTanJAtc=; b=d
+ 9hrxl8tWZa+otOKKSvqADQ5XIQiuWtSdpI9NTcxQfZFEc9o3iNAz2kTDxQa9eoryTMfiaQlc5vuDr
+ ZY2CGHDFPVckQGU1Jodrtn4U+2rJKcYpG3VlHuzqBG2lmHvrH5mk//oQizeX1TV7DPnCPCtV/tCZ2
+ ju00vdb2+Yit++xA=;
+Received: from mail-oo1-f69.google.com ([209.85.161.69])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1w01I3-0002mq-Os for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 10 Mar 2026 17:54:44 +0000
-Received: by mail-dy1-f175.google.com with SMTP id
- 5a478bee46e88-2be19f05d7dso2350668eec.1
+ id 1w03b4-0000te-MO for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 10 Mar 2026 20:22:31 +0000
+Received: by mail-oo1-f69.google.com with SMTP id
+ 006d021491bc7-67bb6081a0dso32005792eaf.2
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Tue, 10 Mar 2026 10:54:43 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1773165273; x=1773770073; darn=lists.sourceforge.net;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=XbzTvS3EAv++rNl9al/HljoKtTK5FcMi/cSpL9WxQWc=;
- b=WF9MF8MrG/Ve9NJBaZHF6EHRLBlFm48I6OQLiob/1N4CGbE4My6Rpj7pbLe83p7MGc
- PyRyCyzLbAkYDE3u6fVjp3UmWOd7hyN6eD+byO0h9BKfL6jYQYHxHYwKI6EClocXG5kY
- LY91QTFSC1hmAU9Bzy8aRQVhDEEEEMmLYwxRGYwrwwFH1KD1buewo3fzDszPNrkEytJP
- 8Q6GQtEmpaFjuY65WBGpMlaTLmP2yy4jqCxbNOwzlzkORsiJG8iiGwdnGFuXfN5OfJ6+
- c2/jcoLwuBKTDfZEKpoWToC60UcjSHUPUMjtVKDkUrcGYjXeoKiMImc0+KNKCYO/QWyb
- cMEw==
+ Tue, 10 Mar 2026 13:22:30 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1773165273; x=1773770073;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=XbzTvS3EAv++rNl9al/HljoKtTK5FcMi/cSpL9WxQWc=;
- b=dqwzlrJ70nQnJ+w80cCUV/5Ia7wVzSYIBc/XHPxOYs8hV1mTIpytWnzPsICqoilYAO
- /ZdEfE/qiTTP3UAbJXUsQerZKYqbhZKZthQzWajUwfhPgZUE3MYjw9dV+LVAxD6SnMem
- GPCHA48APw5LsSpgv+PpxDXrbkdr53fXZoPtxoks/n2Rvl7gbWFdixo0Oh0/6FIUSF/7
- 7r1xEtHaliAw5iyFdNtohMlNROaBjGlRfPOmAJyxWzTIRdCkB7SoX++DzsFcn7Rrp20K
- e3dyipyYEKhgZLT7vZkQf5LIy9QW2yTGlKW55OqqW2lfR0gvcCyjYo28LWCyZSDxKchN
- Kllg==
+ d=1e100.net; s=20230601; t=1773174140; x=1773778940;
+ h=to:from:subject:message-id:date:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=bjBF6qoYBijr9UqZ/693jcBIL08PLtrpQB2lTanJAtc=;
+ b=uLHAondIIsrrmU5R+J5yufQsnApHeqfzDukJF/fUCL6dxxFcbO2wphuyvcl3my43Mg
+ /ggy4ev5yd/dUug6yvEnHgzDLx3Ttx0vq6KFs7YdSKUAWnPBRl3BKIz8BI+SsCTWUxdm
+ g4Mfxbn4J99ngUD0GBIYDaAfHsnBq+8MimYLOH9anX2gDhBgiQhKq7gGwUDITIr7rR1o
+ s7AhxZ+cvfELHUWxWc11Ir2eiCDvUhWDSjeN5yucEvGrFmwDbbyA53ZmckBcIV9Eb3YC
+ Yow/qJ/B3jiVef4q2a6fVe5JfgI982a8SWPPWnMNx6XcISpVIMV9x1alJRdPaloCgw/E
+ 3Dzg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCV2fQY0PtDulP857hv+jkiyMfxFIyUbGi3YZEO/52zf2qiBY1nZ7oaMdoeA1v0QZn/T2xnEk+9nXrz7dC6d5d6K@lists.sourceforge.net
-X-Gm-Message-State: AOJu0YxySx3lDsKto2vWVr4h1vOeZHY4A8oEJeKp9Ur+w2w00FBREf+u
- 4NT6SZJdaSYhE3b66WyJ2eimuuolfzjFe8YrUKoZ1YzL59yXH9t2rwQu/2kN+w==
-X-Gm-Gg: ATEYQzw7sPXHL261T0GRQhBEa+yYtykM4+TmRiMEOXfnYkX+EnGObJ9BDC+wmdwIizD
- EUSPKzYZLhMZCy2GpYeTZ8P5fN4VV3M3TXSPP6WSRNnTeOi8W+lNHr6XlMU6qOLjgFo7l02gsZL
- R1PXU45GCbJTQji4yQgYL88vx9WZnNY0bgoVhkrJ3SvQfDxDeZyJgKcJ4BHGKn9BrtCHGIfGpVx
- YLJQP23h9FQeSfEyVONK0cF4Rgrxmr+IwjGYhBo0xMxz/iEEo/qmwXwLPNnZDdHHWrXxkOcnHJI
- WRxb99dvq60UjJB1cI+ztmArWhmG8uRw+aGum5qX/6V1+dpNWMGgZ1m/0/otLzT/ZLc/YfZY/0j
- vojZtYQcpZWMCswABFGWNyacgrJd65pgkURGlJ7D9ygbPgb0VQNN0PNvt0eSbohc31DPlHkyMHy
- xNDudF4jFJptCqq80+xOrTUK2S0rl2j4yr3rflufopMnu7oerdUqUG2riiw2c7G1NzUzBLifW4M
- Ku0NDDN6XhUgg4mg1V0O8PwsIkdW2XKSNnazKqnNRma6BQdLoOo1osj2e+Vuw==
-X-Received: by 2002:a05:7301:1015:b0:2be:2409:6c6a with SMTP id
- 5a478bee46e88-2be4de76400mr6649719eec.3.1773165273087; 
- Tue, 10 Mar 2026 10:54:33 -0700 (PDT)
-Received: from daehojeong-desktop.mtv.corp.google.com
- ([2a00:79e0:2e7c:8:493f:f39e:ec36:a0a3])
- by smtp.gmail.com with ESMTPSA id
- 5a478bee46e88-2be4f948390sm13951265eec.22.2026.03.10.10.54.32
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 10 Mar 2026 10:54:32 -0700 (PDT)
-From: Daeho Jeong <daeho43@gmail.com>
-To: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
- kernel-team@android.com
-Date: Tue, 10 Mar 2026 10:54:28 -0700
-Message-ID: <20260310175428.1156719-1-daeho43@gmail.com>
-X-Mailer: git-send-email 2.53.0.473.g4a7958ca14-goog
+ AJvYcCUtnVqFu5al47x/d2xgmT+7CxXe+YmklrN2BiAQ1bj2bNZ4lYs0l9m7boTMEr0Kt2r82ZzRc+61xiP7bffpUTbN@lists.sourceforge.net
+X-Gm-Message-State: AOJu0YymzGHOsRKhdoq0gKlqvxIQ6wz3zmOlF5gA4Gdhi6fKSxfe+JiZ
+ CRJJurQ/OyyNiXejjuSghTQMeTbx+hPDAMkDcHoaIB3LvcoG3MBpGyZYLjwty/HAMrbMpPrjjAu
+ 7p7U2a9g6ImJD/7ShO2uRtTjYjTRH1K9pnRCeCidNxMvvqGvA+8n9DBg2Y/Y=
 MIME-Version: 1.0
-X-Spam-Score: 0.1 (/)
+X-Received: by 2002:a05:6820:3086:b0:67b:b45c:bd71 with SMTP id
+ 006d021491bc7-67bc8a8a653mr72541eaf.73.1773174140016; Tue, 10 Mar 2026
+ 13:22:20 -0700 (PDT)
+Date: Tue, 10 Mar 2026 13:22:20 -0700
+X-Google-Appengine-App-Id: s~syzkaller
+X-Google-Appengine-App-Id-Alias: syzkaller
+Message-ID: <69b07d7c.050a0220.8df7.09a1.GAE@google.com>
+From: syzbot <syzbot+62538b67389ee582837a@syzkaller.appspotmail.com>
+To: chao@kernel.org, jaegeuk@kernel.org, 
+ linux-f2fs-devel@lists.sourceforge.net, linux-kernel@vger.kernel.org, 
+ syzkaller-bugs@googlegroups.com
+X-Spam-Score: 0.6 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  From: Daeho Jeong In age-based victim selection (ATGC, AT_SSR,
- or GC_CB), f2fs_get_victim can encounter sections with zero valid blocks.
- This situation often arises when checkpoint is disabled or due to race
- conditions [...] 
- Content analysis details:   (0.1 points, 5.0 required)
+ Content preview:  Hello,
+ syzbot found the following issue on: HEAD commit: 651690480a96
+ Merge tag 'spi-fix-v7.0-rc2' of git://git.ker.. git tree: upstream console
+ output: https://syzkaller.appspot.com/x/log.txt?x=157f58d6580000 kernel
+ config: https://syzkaller.a [...] 
+ Content analysis details:   (0.6 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends in
- digit [daeho43(at)gmail.com]
- 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
- [daeho43(at)gmail.com]
  0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [74.125.82.175 listed in wl.mailspike.net]
+ [209.85.161.69 listed in wl.mailspike.net]
  0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1w01I3-0002mq-Os
-Subject: [f2fs-dev] [PATCH] f2fs: fix to skip empty sections in
- f2fs_get_victim
+ 0.3 FROM_LOCAL_HEX         From: localpart has long hexadecimal sequence
+ 0.2 HEADER_FROM_DIFFERENT_DOMAINS From and EnvelopeFrom 2nd level mail
+ domains are different
+X-Headers-End: 1w03b4-0000te-MO
+Subject: [f2fs-dev] [syzbot] [f2fs?] kernel BUG in f2fs_issue_discard_timeout
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -150,100 +119,144 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Daeho Jeong <daehojeong@google.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
-X-Rspamd-Queue-Id: 2C00E255FBF
+X-Rspamd-Queue-Id: 442D6257ADE
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [-0.01 / 15.00];
-	MID_CONTAINS_FROM(1.00)[];
+	URI_HIDDEN_PATH(1.00)[https://syzkaller.appspot.com/x/.config?x=2a019678b1a3a692];
 	RWL_MAILSPIKE_EXCELLENT(-0.40)[216.105.38.7:from];
-	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
 	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7];
+	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
 	MAILLIST(-0.20)[mailman];
-	DMARC_POLICY_SOFTFAIL(0.10)[gmail.com : SPF not aligned (relaxed), DKIM not aligned (relaxed),none];
 	MIME_GOOD(-0.10)[text/plain];
+	DMARC_POLICY_SOFTFAIL(0.10)[appspotmail.com : SPF not aligned (relaxed), DKIM not aligned (relaxed),none];
 	HAS_LIST_UNSUB(-0.01)[];
-	DKIM_MIXED(0.00)[];
-	RECEIVED_HELO_LOCALHOST(0.00)[];
-	RCVD_TLS_LAST(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:linux-kernel@vger.kernel.org,m:linux-f2fs-devel@lists.sourceforge.net,m:kernel-team@android.com,m:daehojeong@google.com,s:lists@lfdr.de];
-	FORGED_SENDER(0.00)[daeho43@gmail.com,linux-f2fs-devel-bounces@lists.sourceforge.net];
-	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	ARC_NA(0.00)[];
-	TO_DN_SOME(0.00)[];
 	MIME_TRACE(0.00)[0:+];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,gmail.com:-];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
+	RCVD_TLS_LAST(0.00)[];
+	TAGGED_FROM(0.00)[62538b67389ee582837a];
+	RECEIVED_HELO_LOCALHOST(0.00)[];
+	RCVD_COUNT_THREE(0.00)[4];
+	FORGED_RECIPIENTS(0.00)[m:chao@kernel.org,m:jaegeuk@kernel.org,m:linux-f2fs-devel@lists.sourceforge.net,m:linux-kernel@vger.kernel.org,m:syzkaller-bugs@googlegroups.com,s:lists@lfdr.de];
+	FORGED_SENDER(0.00)[syzbot@syzkaller.appspotmail.com,linux-f2fs-devel-bounces@lists.sourceforge.net];
+	ARC_NA(0.00)[];
+	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x];
+	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
+	DKIM_MIXED(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	RCPT_COUNT_FIVE(0.00)[5];
+	TO_DN_NONE(0.00)[];
 	PREVIOUSLY_DELIVERED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
 	FORGED_SENDER_FORWARDING(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[daeho43@gmail.com,linux-f2fs-devel-bounces@lists.sourceforge.net];
-	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,gmail.com:s=20230601];
-	NEURAL_HAM(-0.00)[-1.000];
-	TAGGED_RCPT(0.00)[linux-f2fs-devel];
-	RCPT_COUNT_THREE(0.00)[4];
+	FROM_NEQ_ENVFROM(0.00)[syzbot@syzkaller.appspotmail.com,linux-f2fs-devel-bounces@lists.sourceforge.net];
+	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[goo.gl:url,googlegroups.com:email,storage.googleapis.com:url,lists.sourceforge.net:dkim,lists.sourceforge.net:rdns,lists.sourceforge.net:helo];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	MISSING_XM_UA(0.00)[];
+	NEURAL_HAM(-0.00)[-1.000];
 	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.sourceforge.net:dkim,lists.sourceforge.net:rdns,lists.sourceforge.net:helo]
+	TAGGED_RCPT(0.00)[linux-f2fs-devel];
+	REDIRECTOR_URL(0.00)[goo.gl];
+	SUBJECT_HAS_QUESTION(0.00)[]
 X-Rspamd-Action: no action
 
-From: Daeho Jeong <daehojeong@google.com>
+Hello,
 
-In age-based victim selection (ATGC, AT_SSR, or GC_CB), f2fs_get_victim
-can encounter sections with zero valid blocks. This situation often
-arises when checkpoint is disabled or due to race conditions between
-SIT updates and dirty list management.
+syzbot found the following issue on:
 
-In such cases, f2fs_get_section_mtime() returns INVALID_MTIME, which
-subsequently triggers a fatal f2fs_bug_on(sbi, mtime == INVALID_MTIME)
-in add_victim_entry() or get_cb_cost().
+HEAD commit:    651690480a96 Merge tag 'spi-fix-v7.0-rc2' of git://git.ker..
+git tree:       upstream
+console output: https://syzkaller.appspot.com/x/log.txt?x=157f58d6580000
+kernel config:  https://syzkaller.appspot.com/x/.config?x=2a019678b1a3a692
+dashboard link: https://syzkaller.appspot.com/bug?extid=62538b67389ee582837a
+compiler:       Debian clang version 21.1.8 (++20251221033036+2078da43e25a-1~exp1~20251221153213.50), Debian LLD 21.1.8
 
-This patch adds a check in f2fs_get_victim's selection loop to skip
-sections with no valid blocks. This prevents unnecessary age
-calculations for empty sections and avoids the associated kernel panic.
-This change also allows removing redundant checks in add_victim_entry().
+Unfortunately, I don't have any reproducer for this issue yet.
 
-Signed-off-by: Daeho Jeong <daehojeong@google.com>
+Downloadable assets:
+disk image: https://storage.googleapis.com/syzbot-assets/fd03debd6a84/disk-65169048.raw.xz
+vmlinux: https://storage.googleapis.com/syzbot-assets/6a72bd6fa116/vmlinux-65169048.xz
+kernel image: https://storage.googleapis.com/syzbot-assets/251bc9642a29/bzImage-65169048.xz
+
+IMPORTANT: if you fix the issue, please add the following tag to the commit:
+Reported-by: syzbot+62538b67389ee582837a@syzkaller.appspotmail.com
+
+------------[ cut here ]------------
+kernel BUG at fs/f2fs/segment.c:1900!
+Oops: invalid opcode: 0000 [#1] SMP KASAN PTI
+CPU: 1 UID: 0 PID: 6527 Comm: syz.5.110 Not tainted syzkaller #0 PREEMPT_{RT,(full)} 
+Hardware name: Google Google Compute Engine/Google Compute Engine, BIOS Google 02/12/2026
+RIP: 0010:f2fs_issue_discard_timeout+0x59b/0x5a0 fs/f2fs/segment.c:1900
+Code: d9 80 e1 07 80 c1 03 38 c1 0f 8c d6 fe ff ff 48 89 df e8 a8 5e fa fd e9 c9 fe ff ff e8 4e 46 94 fd 90 0f 0b e8 46 46 94 fd 90 <0f> 0b 0f 1f 00 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 f3
+RSP: 0018:ffffc9000494f940 EFLAGS: 00010283
+RAX: ffffffff843009ca RBX: 0000000000000001 RCX: 0000000000080000
+RDX: ffffc9001ca78000 RSI: 00000000000029f3 RDI: 00000000000029f4
+RBP: 0000000000000000 R08: 0000000000000000 R09: 0000000000000000
+R10: dffffc0000000000 R11: ffffed100893a431 R12: 1ffff1100893a430
+R13: 1ffff1100c2b702c R14: dffffc0000000000 R15: ffff8880449d2160
+FS:  00007ffa35fed6c0(0000) GS:ffff88812643d000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 00007f2b68634000 CR3: 0000000039f62000 CR4: 00000000003526f0
+Call Trace:
+ <TASK>
+ __f2fs_remount fs/f2fs/super.c:2960 [inline]
+ f2fs_reconfigure+0x108a/0x1710 fs/f2fs/super.c:5443
+ reconfigure_super+0x227/0x8a0 fs/super.c:1080
+ do_remount fs/namespace.c:3391 [inline]
+ path_mount+0xdc5/0x10e0 fs/namespace.c:4151
+ do_mount fs/namespace.c:4172 [inline]
+ __do_sys_mount fs/namespace.c:4361 [inline]
+ __se_sys_mount+0x31d/0x420 fs/namespace.c:4338
+ do_syscall_x64 arch/x86/entry/syscall_64.c:63 [inline]
+ do_syscall_64+0x14d/0xf80 arch/x86/entry/syscall_64.c:94
+ entry_SYSCALL_64_after_hwframe+0x77/0x7f
+RIP: 0033:0x7ffa37dbda0a
+Code: 48 c7 c2 e8 ff ff ff f7 d8 64 89 02 b8 ff ff ff ff c3 66 2e 0f 1f 84 00 00 00 00 00 0f 1f 40 00 49 89 ca b8 a5 00 00 00 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 c7 c1 e8 ff ff ff f7 d8 64 89 01 48
+RSP: 002b:00007ffa35fece58 EFLAGS: 00000246 ORIG_RAX: 00000000000000a5
+RAX: ffffffffffffffda RBX: 00007ffa35fecee0 RCX: 00007ffa37dbda0a
+RDX: 0000200000000180 RSI: 0000200000000000 RDI: 0000000000000000
+RBP: 0000200000000180 R08: 00007ffa35fecee0 R09: 00000000018424bc
+R10: 00000000018424bc R11: 0000000000000246 R12: 0000200000000000
+R13: 00007ffa35fecea0 R14: 0000000000000000 R15: 00002000000003c0
+ </TASK>
+Modules linked in:
+---[ end trace 0000000000000000 ]---
+RIP: 0010:f2fs_issue_discard_timeout+0x59b/0x5a0 fs/f2fs/segment.c:1900
+Code: d9 80 e1 07 80 c1 03 38 c1 0f 8c d6 fe ff ff 48 89 df e8 a8 5e fa fd e9 c9 fe ff ff e8 4e 46 94 fd 90 0f 0b e8 46 46 94 fd 90 <0f> 0b 0f 1f 00 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 f3
+RSP: 0018:ffffc9000494f940 EFLAGS: 00010283
+RAX: ffffffff843009ca RBX: 0000000000000001 RCX: 0000000000080000
+RDX: ffffc9001ca78000 RSI: 00000000000029f3 RDI: 00000000000029f4
+RBP: 0000000000000000 R08: 0000000000000000 R09: 0000000000000000
+R10: dffffc0000000000 R11: ffffed100893a431 R12: 1ffff1100893a430
+R13: 1ffff1100c2b702c R14: dffffc0000000000 R15: ffff8880449d2160
+FS:  00007ffa35fed6c0(0000) GS:ffff88812643d000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 00007f2b68634000 CR3: 0000000039f62000 CR4: 00000000003526f0
+
+
 ---
- fs/f2fs/gc.c | 9 +++------
- 1 file changed, 3 insertions(+), 6 deletions(-)
+This report is generated by a bot. It may contain errors.
+See https://goo.gl/tpsmEJ for more information about syzbot.
+syzbot engineers can be reached at syzkaller@googlegroups.com.
 
-diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
-index 2e0f67946914..981eac629fe9 100644
---- a/fs/f2fs/gc.c
-+++ b/fs/f2fs/gc.c
-@@ -521,12 +521,6 @@ static void add_victim_entry(struct f2fs_sb_info *sbi,
- 	struct sit_info *sit_i = SIT_I(sbi);
- 	unsigned long long mtime = 0;
- 
--	if (unlikely(is_sbi_flag_set(sbi, SBI_CP_DISABLED))) {
--		if (p->gc_mode == GC_AT &&
--			get_valid_blocks(sbi, segno, true) == 0)
--			return;
--	}
--
- 	mtime = f2fs_get_section_mtime(sbi, segno);
- 	f2fs_bug_on(sbi, mtime == INVALID_MTIME);
- 
-@@ -889,6 +883,9 @@ int f2fs_get_victim(struct f2fs_sb_info *sbi, unsigned int *result,
- 		if (sec_usage_check(sbi, secno))
- 			goto next;
- 
-+		if (!get_valid_blocks(sbi, segno, true))
-+			goto next;
-+
- 		/* Don't touch checkpointed data */
- 		if (unlikely(is_sbi_flag_set(sbi, SBI_CP_DISABLED))) {
- 			if (p.alloc_mode == LFS) {
--- 
-2.53.0.473.g4a7958ca14-goog
+syzbot will keep track of this issue. See:
+https://goo.gl/tpsmEJ#status for how to communicate with syzbot.
 
+If the report is already addressed, let syzbot know by replying with:
+#syz fix: exact-commit-title
+
+If you want to overwrite report's subsystems, reply with:
+#syz set subsystems: new-subsystem
+(See the list of subsystem names on the web dashboard)
+
+If the report is a duplicate of another one, reply with:
+#syz dup: exact-subject-of-another-report
+
+If you want to undo deduplication, reply with:
+#syz undup
 
 
 _______________________________________________
