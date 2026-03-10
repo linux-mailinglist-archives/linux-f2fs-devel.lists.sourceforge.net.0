@@ -2,134 +2,124 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id QNNNA1E4sGlZhQIAu9opvQ
+	id 6FOFNPVasGn2iQIAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 10 Mar 2026 16:27:13 +0100
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 10 Mar 2026 18:55:01 +0100
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2F9E7253609
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 10 Mar 2026 16:27:12 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2C00E255FBF
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 10 Mar 2026 18:55:01 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
-	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:In-Reply-To:MIME-Version:References:
-	Message-ID:To:Date:Sender:Content-ID:Content-Description:Resent-Date:
-	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=245jH7GGXSI6uB3OHJlxUHuQT/3ynPJGhusAxhNqB/E=; b=KnWXalXdRtrrHM6gjHY0s/RUN6
-	R4H0ArD7hjKQjr7QXUdRsbG79jRVodWm6hpLppHk0554Tv/PkLLPUTiYioT4l8Xrt/AJDmn2K4WzD
-	pXcb6o04yoJEIk3qSpEJnrGJP+KNkGYMcEAVIwIPRcKg2JkcibRnOQJ/tos8iCVbUbpk=;
+	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
+	Subject:MIME-Version:Message-ID:Date:To:From:Sender:Reply-To:Content-ID:
+	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+	:Resent-Message-ID:In-Reply-To:References:List-Owner;
+	bh=W66G0lB+rOCOIbs9PvziZ/VJD2U1XzXDp39PrmKgn4Q=; b=AlroGx8XcBaJn+l/Kcw3i+CNXe
+	SAJ1VEGZYv3bLfsolkNJYgWiey+eEqg7qjcR6rNUrQJAxGnl1thIXnBMMYdVvCdf8xssqBglJvQof
+	DWO2+pdp58TwvQiWYS+7rrPSarCAVSQktrRHRtyiRi1x73MxYGoqpBwuxIJWMXgrQL/w=;
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vzyyz-0001B8-MH;
-	Tue, 10 Mar 2026 15:26:53 +0000
+	id 1w01ID-0004Op-8z;
+	Tue, 10 Mar 2026 17:54:53 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <aalbersh@redhat.com>) id 1vzyyy-0001Az-7x
+ (envelope-from <daeho43@gmail.com>) id 1w01I4-0004Od-5v
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 10 Mar 2026 15:26:52 +0000
+ Tue, 10 Mar 2026 17:54:44 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:In-Reply-To:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=x1gPBnL3nFJNBIyIa1yav05jeafDePL0up3MPLKVYLI=; b=Az34b5XOqwUMuucQ5rxvAIK0qs
- XZJ0tJ60YgtqrPZq5MuLNPeEskt+4f3Rqa0P4uZ92jx/zgdRhNiJ2WlRYHESCd25qYfX0H6jkQRq/
- 9ezZQlh7IbqdBap27voUymA/aWz8izR3N567u51Tr7Ugg17ejzfNhR1WNrjKPSad3xUE=;
+ bh=XbzTvS3EAv++rNl9al/HljoKtTK5FcMi/cSpL9WxQWc=; b=GE8QmNiQG8W3ucRL6Sy48XFbl0
+ wowZXXK8W0p5fm1RaplGlC5WXPDZ2c6+kXzX2cWwCySZDBuQ7pMjsMhKo8z7MkK7smGbNBlgc85rq
+ KgqmEooPqcUveYlqEnSb+1o4R2KCAvfRAPfuwDQkr3pK/R1TwHZzbjPybLsvZxVkObC0=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:In-Reply-To:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=x1gPBnL3nFJNBIyIa1yav05jeafDePL0up3MPLKVYLI=; b=GzwG1oIXufclZSQihXfv9+ISRe
- ZaKMNP1TZ1vc5fHyTaFk0TtV8xk42R0HgUoSS8NedzJpCu95Y44M4xCzu4yAL5mUvZmY0Z7lnv0AO
- xzxgk3dlHxSbNdQHSjCFebSqe80RnHb3AjgUsBouRHD+o7BJeTJPboCWeM9SgeInT8eQ=;
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
+ h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=XbzTvS3EAv++rNl9al/HljoKtTK5FcMi/cSpL9WxQWc=; b=j
+ DunNQ1NIggDqu1RwbY7kn8zR8Cf1PYvwcdG3mm0NkadMK/3VmD/y1fn3xe/t3sWUGEWb9OEawJdpC
+ sSR1hiKK49oosaZTganlRKhzLM21eqDo4ST+FjiDqLlCspuHXgch/iX7gTSWSPFBsQgaEcJ6shqqu
+ LRwkdaqIK5xKVmUQ=;
+Received: from mail-dy1-f175.google.com ([74.125.82.175])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1vzyyx-0004I0-Ga for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 10 Mar 2026 15:26:52 +0000
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1773156405;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=x1gPBnL3nFJNBIyIa1yav05jeafDePL0up3MPLKVYLI=;
- b=a/LMcL23Po8bwC6vocNuIls3kl97sFLFfnI7bdvdjSqdJizYROxCqCzOOVkx89sKu4tmpb
- 5+rPZskYeEx/BS8XftSwHwSVS+VqFVJgBzesQplq3Pm0iHSnjobzmb5oHulmQwUoGH0j5C
- QX5d9Xmu2gtRazkbuflyeg60cMuzR4g=
-Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
- [209.85.128.70]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-496--zX6Z5F8MamPUVlVENJ6Dg-1; Tue, 10 Mar 2026 11:26:44 -0400
-X-MC-Unique: -zX6Z5F8MamPUVlVENJ6Dg-1
-X-Mimecast-MFC-AGG-ID: -zX6Z5F8MamPUVlVENJ6Dg_1773156403
-Received: by mail-wm1-f70.google.com with SMTP id
- 5b1f17b1804b1-4837b6f6b93so103398545e9.3
+ (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
+ id 1w01I3-0002mq-Os for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 10 Mar 2026 17:54:44 +0000
+Received: by mail-dy1-f175.google.com with SMTP id
+ 5a478bee46e88-2be19f05d7dso2350668eec.1
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Tue, 10 Mar 2026 08:26:44 -0700 (PDT)
+ Tue, 10 Mar 2026 10:54:43 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1773165273; x=1773770073; darn=lists.sourceforge.net;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=XbzTvS3EAv++rNl9al/HljoKtTK5FcMi/cSpL9WxQWc=;
+ b=WF9MF8MrG/Ve9NJBaZHF6EHRLBlFm48I6OQLiob/1N4CGbE4My6Rpj7pbLe83p7MGc
+ PyRyCyzLbAkYDE3u6fVjp3UmWOd7hyN6eD+byO0h9BKfL6jYQYHxHYwKI6EClocXG5kY
+ LY91QTFSC1hmAU9Bzy8aRQVhDEEEEMmLYwxRGYwrwwFH1KD1buewo3fzDszPNrkEytJP
+ 8Q6GQtEmpaFjuY65WBGpMlaTLmP2yy4jqCxbNOwzlzkORsiJG8iiGwdnGFuXfN5OfJ6+
+ c2/jcoLwuBKTDfZEKpoWToC60UcjSHUPUMjtVKDkUrcGYjXeoKiMImc0+KNKCYO/QWyb
+ cMEw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1773156403; x=1773761203;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=x1gPBnL3nFJNBIyIa1yav05jeafDePL0up3MPLKVYLI=;
- b=q3FzFDyi+3KSRW/m5xnXoa92H8YsZ1teObvji1rXDRzL8zEMQjFTj9xTdiq5RS+UEp
- KvhIp4FjiORK8yH4cAtyZW77MxfEHeQNFsZNl+evE3uJ6cqvnjYBra879pQF8s1hPIdc
- poltTpNn49E0dGtBirWP2bEcOsbuMp1CFvvxV/edtJ4Vpb53pJ0Eo0fid6xllp+RBZZS
- q6p+Sb+MQON8Dn8SLlHH0T3rjd9oj/GPTs44lm6wUB/QYept5zNOz6lzEYN3YvBW+2N4
- DPbKuCc9/IwoLio9vE6kEyfVbRf43t2QvKuCF5Xdy/umG6vbDx6rAAdKWlLxQ+DWc1jy
- aLAw==
+ d=1e100.net; s=20230601; t=1773165273; x=1773770073;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=XbzTvS3EAv++rNl9al/HljoKtTK5FcMi/cSpL9WxQWc=;
+ b=dqwzlrJ70nQnJ+w80cCUV/5Ia7wVzSYIBc/XHPxOYs8hV1mTIpytWnzPsICqoilYAO
+ /ZdEfE/qiTTP3UAbJXUsQerZKYqbhZKZthQzWajUwfhPgZUE3MYjw9dV+LVAxD6SnMem
+ GPCHA48APw5LsSpgv+PpxDXrbkdr53fXZoPtxoks/n2Rvl7gbWFdixo0Oh0/6FIUSF/7
+ 7r1xEtHaliAw5iyFdNtohMlNROaBjGlRfPOmAJyxWzTIRdCkB7SoX++DzsFcn7Rrp20K
+ e3dyipyYEKhgZLT7vZkQf5LIy9QW2yTGlKW55OqqW2lfR0gvcCyjYo28LWCyZSDxKchN
+ Kllg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXKVdsxHY34pTUv8u+VjlX1sY7QZL3neykyP73UAa3ZvG50ZBKiGoj9RWkXspbWIpFH5E2QcNpS8VlQNXPyLVsG@lists.sourceforge.net
-X-Gm-Message-State: AOJu0YzmUIUe1L7g1TrNwB4VksvSrlIU/RDqu+OEi2F4mp4sHlJ75SqW
- NW6lX1ZLc4/oVmsMePwnJu8/Yo3AdXTiuhfHGNHwaNPqpISRMUFXIEzFYPiwgMECMlfmmKxCWIA
- UiInQIu/Dm9opgre4UdPlmz3GFfW4yLkMlRwikkbvs9W4wdjhP+zNu+qJsvs9f5jcE8uylvr6Yr
- 8NSg==
-X-Gm-Gg: ATEYQzw65zqx8jGaLaKlHltn1AZ1ZRcHhtOwZ/D7pzXjDi7YHiQZR7pK+H1fXttHUjx
- TaHDDOIDmeGz5DOYFdsA7taV/HPlRzoVcqrPMcRhU+FSHeRh5knM18rW7xoi1Ek/trytIZquJhl
- aTldlFIZ8Jnwxrvp/yBHmXEGhkYH4Ro9E5XkJpqDTU33rGSMJ2AWqaRZ5mqLSZEqdxL7ctvNppx
- vZBq+gx5s0b922glAWHOWruX1EHSLQ+AHiq1ri9yth5ADQYycS7UqF+INxV7KaNBzzV2zCDSdSc
- S+AW9Tx1tXmCvYP8pSx/NW+YkOxXIerpbc+rb4rOktqPm2DSE5AI4ChCmhllT62KAPty60/4wT/
- aDOrh44nCihs=
-X-Received: by 2002:a05:600c:3f19:b0:485:3e6c:aabc with SMTP id
- 5b1f17b1804b1-4853e6caf6emr96414905e9.19.1773156402815; 
- Tue, 10 Mar 2026 08:26:42 -0700 (PDT)
-X-Received: by 2002:a05:600c:3f19:b0:485:3e6c:aabc with SMTP id
- 5b1f17b1804b1-4853e6caf6emr96414285e9.19.1773156402225; 
- Tue, 10 Mar 2026 08:26:42 -0700 (PDT)
-Received: from thinky ([217.30.74.39]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4853ebab1a2sm153169175e9.1.2026.03.10.08.26.41
+ AJvYcCV2fQY0PtDulP857hv+jkiyMfxFIyUbGi3YZEO/52zf2qiBY1nZ7oaMdoeA1v0QZn/T2xnEk+9nXrz7dC6d5d6K@lists.sourceforge.net
+X-Gm-Message-State: AOJu0YxySx3lDsKto2vWVr4h1vOeZHY4A8oEJeKp9Ur+w2w00FBREf+u
+ 4NT6SZJdaSYhE3b66WyJ2eimuuolfzjFe8YrUKoZ1YzL59yXH9t2rwQu/2kN+w==
+X-Gm-Gg: ATEYQzw7sPXHL261T0GRQhBEa+yYtykM4+TmRiMEOXfnYkX+EnGObJ9BDC+wmdwIizD
+ EUSPKzYZLhMZCy2GpYeTZ8P5fN4VV3M3TXSPP6WSRNnTeOi8W+lNHr6XlMU6qOLjgFo7l02gsZL
+ R1PXU45GCbJTQji4yQgYL88vx9WZnNY0bgoVhkrJ3SvQfDxDeZyJgKcJ4BHGKn9BrtCHGIfGpVx
+ YLJQP23h9FQeSfEyVONK0cF4Rgrxmr+IwjGYhBo0xMxz/iEEo/qmwXwLPNnZDdHHWrXxkOcnHJI
+ WRxb99dvq60UjJB1cI+ztmArWhmG8uRw+aGum5qX/6V1+dpNWMGgZ1m/0/otLzT/ZLc/YfZY/0j
+ vojZtYQcpZWMCswABFGWNyacgrJd65pgkURGlJ7D9ygbPgb0VQNN0PNvt0eSbohc31DPlHkyMHy
+ xNDudF4jFJptCqq80+xOrTUK2S0rl2j4yr3rflufopMnu7oerdUqUG2riiw2c7G1NzUzBLifW4M
+ Ku0NDDN6XhUgg4mg1V0O8PwsIkdW2XKSNnazKqnNRma6BQdLoOo1osj2e+Vuw==
+X-Received: by 2002:a05:7301:1015:b0:2be:2409:6c6a with SMTP id
+ 5a478bee46e88-2be4de76400mr6649719eec.3.1773165273087; 
+ Tue, 10 Mar 2026 10:54:33 -0700 (PDT)
+Received: from daehojeong-desktop.mtv.corp.google.com
+ ([2a00:79e0:2e7c:8:493f:f39e:ec36:a0a3])
+ by smtp.gmail.com with ESMTPSA id
+ 5a478bee46e88-2be4f948390sm13951265eec.22.2026.03.10.10.54.32
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 10 Mar 2026 08:26:41 -0700 (PDT)
-Date: Tue, 10 Mar 2026 16:26:41 +0100
-To: "Darrick J. Wong" <djwong@kernel.org>
-Message-ID: <njszph4g2g63ijfyatukmgmfyafrhsrtja526gz4pjgn2edymh@l7aq2rpxnold>
-References: <20260309192355.176980-1-aalbersh@kernel.org>
- <20260309192355.176980-19-aalbersh@kernel.org>
- <20260310012658.GF1105363@frogsfrogsfrogs>
+ Tue, 10 Mar 2026 10:54:32 -0700 (PDT)
+From: Daeho Jeong <daeho43@gmail.com>
+To: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
+ kernel-team@android.com
+Date: Tue, 10 Mar 2026 10:54:28 -0700
+Message-ID: <20260310175428.1156719-1-daeho43@gmail.com>
+X-Mailer: git-send-email 2.53.0.473.g4a7958ca14-goog
 MIME-Version: 1.0
-In-Reply-To: <20260310012658.GF1105363@frogsfrogsfrogs>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: j-x_pH5NJ7V-NeYYV0p_RAenEWRxZKRKjLwWKLhhb-g_1773156403
-X-Mimecast-Originator: redhat.com
-Content-Disposition: inline
-X-Spam-Score: -0.2 (/)
+X-Spam-Score: 0.1 (/)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2026-03-09 18:26:58, Darrick J. Wong wrote: > > +/* > >
- + * Retrieve the verity descriptor. > > + */ > > +static int > >
- +xfs_fsverity_get_descriptor(
- > > + struct inode *inode, > > + void *buf, > [...] 
- Content analysis details:   (-0.2 points, 5.0 required)
+ Content preview:  From: Daeho Jeong In age-based victim selection (ATGC, AT_SSR,
+ or GC_CB), f2fs_get_victim can encounter sections with zero valid blocks.
+ This situation often arises when checkpoint is disabled or due to race
+ conditions [...] 
+ Content analysis details:   (0.1 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
@@ -139,12 +129,16 @@ X-Spam-Report: Spam detection software,
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.0 RCVD_IN_MSPIKE_H5      RBL: Excellent reputation (+5)
- [170.10.133.124 listed in wl.mailspike.net]
+ 0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends in
+ digit [daeho43(at)gmail.com]
+ 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
+ [daeho43(at)gmail.com]
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [74.125.82.175 listed in wl.mailspike.net]
  0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1vzyyx-0004I0-Ga
-Subject: Re: [f2fs-dev] [PATCH v4 18/25] xfs: add fs-verity support
+X-Headers-End: 1w01I3-0002mq-Os
+Subject: [f2fs-dev] [PATCH] f2fs: fix to skip empty sections in
+ f2fs_get_victim
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -156,201 +150,99 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Andrey Albershteyn via Linux-f2fs-devel
- <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Andrey Albershteyn <aalbersh@redhat.com>
-Cc: fsverity@lists.linux.dev, ebiggers@kernel.org,
- Andrey Albershteyn <aalbersh@kernel.org>,
- linux-f2fs-devel@lists.sourceforge.net, linux-xfs@vger.kernel.org,
- linux-fsdevel@vger.kernel.org, linux-ext4@vger.kernel.org, hch@lst.de,
- linux-btrfs@vger.kernel.org
+Cc: Daeho Jeong <daehojeong@google.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
-X-Rspamd-Queue-Id: 2F9E7253609
+X-Rspamd-Queue-Id: 2C00E255FBF
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-8.11 / 15.00];
-	WHITELIST_DMARC(-7.00)[sourceforge.net:D:+];
-	MID_RHS_NOT_FQDN(0.50)[];
-	DMARC_POLICY_ALLOW_WITH_FAILURES(-0.50)[];
+X-Spamd-Result: default: False [-0.01 / 15.00];
+	MID_CONTAINS_FROM(1.00)[];
 	RWL_MAILSPIKE_EXCELLENT(-0.40)[216.105.38.7:from];
 	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
-	MAILLIST(-0.20)[mailman];
 	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7];
+	MAILLIST(-0.20)[mailman];
+	DMARC_POLICY_SOFTFAIL(0.10)[gmail.com : SPF not aligned (relaxed), DKIM not aligned (relaxed),none];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RECEIVED_HELO_LOCALHOST(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	RCVD_TLS_LAST(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:djwong@kernel.org,m:fsverity@lists.linux.dev,m:ebiggers@kernel.org,m:aalbersh@kernel.org,m:linux-f2fs-devel@lists.sourceforge.net,m:linux-xfs@vger.kernel.org,m:linux-fsdevel@vger.kernel.org,m:linux-ext4@vger.kernel.org,m:hch@lst.de,m:linux-btrfs@vger.kernel.org,s:lists@lfdr.de];
-	DMARC_POLICY_ALLOW(0.00)[lists.sourceforge.net,none];
 	DKIM_MIXED(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[6];
-	FORGED_SENDER(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
-	TO_DN_SOME(0.00)[];
-	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,redhat.com:s=mimecast20190719];
-	MIME_TRACE(0.00)[0:+];
-	ARC_NA(0.00)[];
+	RECEIVED_HELO_LOCALHOST(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	FORGED_RECIPIENTS(0.00)[m:linux-kernel@vger.kernel.org,m:linux-f2fs-devel@lists.sourceforge.net,m:kernel-team@android.com,m:daehojeong@google.com,s:lists@lfdr.de];
+	FORGED_SENDER(0.00)[daeho43@gmail.com,linux-f2fs-devel-bounces@lists.sourceforge.net];
 	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
-	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
-	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,redhat.com:-];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	RCPT_COUNT_SEVEN(0.00)[10];
-	TAGGED_RCPT(0.00)[linux-f2fs-devel];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	PREVIOUSLY_DELIVERED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
-	NEURAL_HAM(-0.00)[-1.000];
-	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
-	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
+	FREEMAIL_FROM(0.00)[gmail.com];
+	ARC_NA(0.00)[];
+	TO_DN_SOME(0.00)[];
+	MIME_TRACE(0.00)[0:+];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,gmail.com:-];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	MISSING_XM_UA(0.00)[];
-	HAS_REPLYTO(0.00)[aalbersh@redhat.com]
+	RCVD_COUNT_FIVE(0.00)[5];
+	PREVIOUSLY_DELIVERED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[daeho43@gmail.com,linux-f2fs-devel-bounces@lists.sourceforge.net];
+	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,gmail.com:s=20230601];
+	NEURAL_HAM(-0.00)[-1.000];
+	TAGGED_RCPT(0.00)[linux-f2fs-devel];
+	RCPT_COUNT_THREE(0.00)[4];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.sourceforge.net:dkim,lists.sourceforge.net:rdns,lists.sourceforge.net:helo]
 X-Rspamd-Action: no action
 
-On 2026-03-09 18:26:58, Darrick J. Wong wrote:
-> > +/*
-> > + * Retrieve the verity descriptor.
-> > + */
-> > +static int
-> > +xfs_fsverity_get_descriptor(
-> > +	struct inode		*inode,
-> > +	void			*buf,
-> > +	size_t			buf_size)
-> > +{
-> > +	struct xfs_inode	*ip = XFS_I(inode);
-> > +	struct xfs_mount	*mp = ip->i_mount;
-> > +	__be32			d_desc_size;
-> > +	u32			desc_size;
-> > +	u64			desc_size_pos;
-> > +	int			error;
-> > +	u64			desc_pos;
-> > +	struct xfs_bmbt_irec	rec;
-> > +	int			is_empty;
-> > +	uint32_t		blocksize = i_blocksize(VFS_I(ip));
-> > +	xfs_fileoff_t		last_block_offset;
-> > +
-> > +	ASSERT(inode->i_flags & S_VERITY);
-> > +	error = xfs_bmap_last_extent(NULL, ip, XFS_DATA_FORK, &rec, &is_empty);
-> > +	if (error)
-> > +		return error;
-> > +
-> > +	if (is_empty)
-> > +		return -ENODATA;
-> > +
-> > +	last_block_offset =
-> > +		XFS_FSB_TO_B(mp, rec.br_startoff + rec.br_blockcount);
-> > +	if (last_block_offset < xfs_fsverity_metadata_offset(ip))
-> > +		return -ENODATA;
-> > +
-> > +	desc_size_pos = last_block_offset - sizeof(__be32);
-> > +	error = fsverity_pagecache_read(inode, (char *)&d_desc_size,
-> > +				  sizeof(d_desc_size), desc_size_pos);
-> > +	if (error)
-> > +		return error;
-> > +
-> > +	desc_size = be32_to_cpu(d_desc_size);
-> > +	if (XFS_IS_CORRUPT(mp, desc_size > FS_VERITY_MAX_DESCRIPTOR_SIZE))
-> > +		return -ERANGE;
-> > +	if (XFS_IS_CORRUPT(mp, desc_size > desc_size_pos))
-> > +		return -ERANGE;
-> > +
-> > +	if (!buf_size)
-> > +		return desc_size;
-> > +
-> > +	if (XFS_IS_CORRUPT(mp, desc_size > buf_size))
-> > +		return -ERANGE;
-> > +
-> > +	desc_pos = round_down(desc_size_pos - desc_size, blocksize);
-> > +	error = fsverity_pagecache_read(inode, buf, desc_size, desc_pos);
-> 
-> Hmm so at this point ... the very last u32 mapped in the data fork
-> contains the size of the fsverity descriptor; and the descriptor itself
-> is in the bytes just before that u32 size field?
+From: Daeho Jeong <daehojeong@google.com>
 
-Yes. In common case this would be single block. But if descriptor
-has signature it could be up to 16k over a few blocks. The u32 size
-would be still the last mapped u32 of the data fork.
+In age-based victim selection (ATGC, AT_SSR, or GC_CB), f2fs_get_victim
+can encounter sections with zero valid blocks. This situation often
+arises when checkpoint is disabled or due to race conditions between
+SIT updates and dirty list management.
 
-> 
-> The merkle tree itself is in the bytes between
-> xfs_fsverity_metadata_offset() and the block(s) consumed by the
-> descriptor, right?
+In such cases, f2fs_get_section_mtime() returns INVALID_MTIME, which
+subsequently triggers a fatal f2fs_bug_on(sbi, mtime == INVALID_MTIME)
+in add_victim_entry() or get_cb_cost().
 
-Yes. And there is space between merkle tree end and descriptor. The
-descriptor is placed in the next 64k aligned block after last merkle
-tree block (the same way merkle tree is spaced from the data). This
-is different from ext4/f2fs.
+This patch adds a check in f2fs_get_victim's selection loop to skip
+sections with no valid blocks. This prevents unnecessary age
+calculations for empty sections and avoids the associated kernel panic.
+This change also allows removing redundant checks in add_victim_entry().
 
-This is done for merkle tree and descriptor to always get into
-different pages. This requirement is due to merkle tree block
-synthesis (iomap needs descriptor to synthesize these).
+Signed-off-by: Daeho Jeong <daehojeong@google.com>
+---
+ fs/f2fs/gc.c | 9 +++------
+ 1 file changed, 3 insertions(+), 6 deletions(-)
 
-If iomap would read page with descriptor and merkle tree blocks
-requiring to be synthesized but iomap is reading this page to get
-fsverity descriptor, iomap don't know how to handle these blocks. It
-can just skip/zero these blocks and continue. But then when fsverity
-will want to read these blocks they are already uptodate (with
-zeroes/random). This was solved by invalidating the page with
-descriptor in v3. In this rev fsverity is limited by 64k page size
-so if descriptor is far enough this won't be the case.
-
-> 
-> Eventually it'd be awful nice to see an update to the ondisk format
-> docs, though it's probably more useful to have me guess at the format
-> and have you confirm that I got the details right; then at least two
-> people will know what the ondisk format is for fsverity stuff. :)
-> 
-> > +	if (error)
-> > +		return error;
-> > +
-> > +	return desc_size;
-> > +}
-> > +
-> > +static int
-> > +xfs_fsverity_write_descriptor(
-> > +	struct file		*file,
-> > +	const void		*desc,
-> > +	u32			desc_size,
-> > +	u64			merkle_tree_size)
-> > +{
-> > +	int			error;
-> > +	struct inode		*inode = file_inode(file);
-> > +	struct xfs_inode	*ip = XFS_I(inode);
-> > +	unsigned int		blksize = ip->i_mount->m_attr_geo->blksize;
-> > +	u64			tree_last_block =
-> > +		xfs_fsverity_metadata_offset(ip) + merkle_tree_size;
-> > +	u64			desc_pos = round_up(tree_last_block, 65536);
-> > +	u64			desc_end = desc_pos + desc_size;
-> > +	__be32			desc_size_disk = cpu_to_be32(desc_size);
-> > +	u64			desc_size_pos =
-> > +			round_up(desc_end + sizeof(desc_size_disk), blksize) -
-> > +			sizeof(desc_size_disk);
-> > +
-> > +	error = iomap_fsverity_write(file, desc_size_pos, sizeof(__be32),
-> > +				     (const void *)&desc_size_disk,
-> > +				     &xfs_buffered_write_iomap_ops,
-> > +				     &xfs_iomap_write_ops);
-> > +	if (error)
-> > +		return error;
-> > +
-> > +	error = iomap_fsverity_write(file, desc_pos, desc_size, desc,
-> > +				     &xfs_buffered_write_iomap_ops,
-> > +				     &xfs_iomap_write_ops);
-> > +
-> > +	return error;
-> 
-> This could turn into the shorter "return iomap_fsverity_write()"
-
-sure, thanks!
-
-> I don't see anything objectionable here, but I would like confirmation
-> that I've sniffed out the ondisk format correctly.
-
+diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
+index 2e0f67946914..981eac629fe9 100644
+--- a/fs/f2fs/gc.c
++++ b/fs/f2fs/gc.c
+@@ -521,12 +521,6 @@ static void add_victim_entry(struct f2fs_sb_info *sbi,
+ 	struct sit_info *sit_i = SIT_I(sbi);
+ 	unsigned long long mtime = 0;
+ 
+-	if (unlikely(is_sbi_flag_set(sbi, SBI_CP_DISABLED))) {
+-		if (p->gc_mode == GC_AT &&
+-			get_valid_blocks(sbi, segno, true) == 0)
+-			return;
+-	}
+-
+ 	mtime = f2fs_get_section_mtime(sbi, segno);
+ 	f2fs_bug_on(sbi, mtime == INVALID_MTIME);
+ 
+@@ -889,6 +883,9 @@ int f2fs_get_victim(struct f2fs_sb_info *sbi, unsigned int *result,
+ 		if (sec_usage_check(sbi, secno))
+ 			goto next;
+ 
++		if (!get_valid_blocks(sbi, segno, true))
++			goto next;
++
+ 		/* Don't touch checkpointed data */
+ 		if (unlikely(is_sbi_flag_set(sbi, SBI_CP_DISABLED))) {
+ 			if (p.alloc_mode == LFS) {
 -- 
-- Andrey
+2.53.0.473.g4a7958ca14-goog
 
 
 
