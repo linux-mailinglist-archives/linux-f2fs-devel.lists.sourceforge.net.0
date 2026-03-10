@@ -2,118 +2,224 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id UD9/LeqVr2kragIAu9opvQ
+	id jgFQDSq2r2lzbwIAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 10 Mar 2026 04:54:18 +0100
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 10 Mar 2026 07:11:54 +0100
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 00634245132
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 10 Mar 2026 04:54:17 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 339A4245B71
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 10 Mar 2026 07:11:53 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:
-	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
-	Subject:To:From:Message-ID:In-Reply-To:Date:MIME-Version:Sender:Reply-To:Cc:
-	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
-	Resent-To:Resent-Cc:Resent-Message-ID:References:List-Owner;
-	bh=Ry6Q5DQ6cWSGcj9T5CYzi6Li0ErJ3b3E9NqhiylYPDc=; b=h0+S3aonIowpB3AjolRKKRYnRu
-	vkt2x10HHgB8wGyv6sF2Zhcc21TPOWSgo9ywbQlv9fnAstUiQG4x9cCbIK5IN8KrJb+3QUK6cHSKe
-	clx+9g2wfCDOCtm5Bg8BGJWhCIMTj81A/3Hkh3KjGIoiRFzjGIVk+V2sm37S5FH1TXJI=;
+	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
+	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
+	List-Unsubscribe:List-Id:Subject:MIME-Version:In-Reply-To:References:
+	Message-ID:To:Date:Sender:Content-ID:Content-Description:Resent-Date:
+	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
+	bh=c3SPt5+KdZ9F5+2Vp8K2zDaiJw1DJZC+mmOawjs9P54=; b=hAeV7nOUkk5lJJG6palbMwS3Pn
+	eRwAkgnrstVdfevRLobHAjfYYhAJkjKUJa9BINc9ky3uBBgP2qGC0Z7FsBtZSEtvpEtUs1L5qg2Vj
+	kwBtnV0e2kiyJIUWDBVNjueCKQ5YBvpmL5HnivP7+04vNbIaVuUtRKu9o+fj905h/L1E=;
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1vzoAc-000666-3b;
-	Tue, 10 Mar 2026 03:54:10 +0000
+	id 1vzqJk-00071x-Aw;
+	Tue, 10 Mar 2026 06:11:45 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
- TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95) (envelope-from
- <325WvaQkbABoIOPA0BB4H0FF83.6EE6B4KI4H2EDJ4DJ.2EC@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com>)
- id 1vzoAb-00065w-Bv for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 10 Mar 2026 03:54:10 +0000
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
+ (envelope-from <harry.yoo@oracle.com>) id 1vzqJi-00071e-GH
+ for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 10 Mar 2026 06:11:43 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:To:From:Subject:Message-ID:In-Reply-To
- :Date:MIME-Version:Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=MIME-Version:In-Reply-To:Content-Type:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=oIx85w9W7IsG0j4v1Wx1+1hfwFsNA9DgmZnpX/ajWn4=; b=BCzOsCavFwdtGp7K4/KNzSSa42
- 3QjeMOQGSm59LcYn/gr8hBCpCAoXko0S5Wc6K442yECEj17wYXG+ephAidf6JtCiywzyBZTKrzTL1
- 0GRWwkmt/xtwkM3UGFJOmMiK5spT6t7TrJgXBvaxFvL2QmlmaYpytH/meI5qSKB1PEcE=;
+ bh=yci9O3M0i41fvtWaKyQNyINrmXi8nXmXOfWlJa4pjUI=; b=NttN9LxNss/xk+tzVzPfWlYkSM
+ KPFH2iIU9sbS7Hbi+rdD5yUOE4leTNixJwAKV3anIOGPo3gipsY6eEPa2xPbTZn7LMXZP48V6/gE9
+ CWsngJI3FuCbP70HoXaUcjHfxdGwE+bX3qufxWLFB17IZmzlEQX5mOC9gtyWqAurBT38=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:To:From:Subject:Message-ID:In-Reply-To:Date:MIME-Version:
- Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:Content-Description:
- Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=oIx85w9W7IsG0j4v1Wx1+1hfwFsNA9DgmZnpX/ajWn4=; b=T
- eMg6nJK96cgtItwpEW3952VorOBp1+UQYBFz/BXPBuj5j7ZnmKIQOkdhVF433lQeVDqMnypXSjwoR
- ufnIE5YCer7iDS54Bg3Mp0oVWcm0V40hfwg9vH4GKjlTI/X9WWdg+K+hP3ZG06PmjOfWXEn8xVkAA
- w/+0j6FpZAYb678A=;
-Received: from mail-oo1-f72.google.com ([209.85.161.72])
+ h=MIME-Version:In-Reply-To:Content-Type:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=yci9O3M0i41fvtWaKyQNyINrmXi8nXmXOfWlJa4pjUI=; b=jYEergqrw9bD176PhLCkTMt04d
+ so6X4+tzJcwKHLUsFTjAsP2TsIQZYv30UB+XQjWR0FqiIX11+2mfqbS0E2G4VGwPmAX4JpZUdA3LF
+ qFPoevsw9bc8pZWnyZteFN9Op+XFUF9MvdW7v51znJezrbtLmSVHi/TAosRf9DdPSBh8=;
+Received: from mx0b-00069f02.pphosted.com ([205.220.177.32])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1vzoAb-0004kG-GP for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 10 Mar 2026 03:54:10 +0000
-Received: by mail-oo1-f72.google.com with SMTP id
- 006d021491bc7-67bb47e6846so22967043eaf.0
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Mon, 09 Mar 2026 20:54:09 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1773114844; x=1773719644;
- h=to:from:subject:message-id:in-reply-to:date:mime-version
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=oIx85w9W7IsG0j4v1Wx1+1hfwFsNA9DgmZnpX/ajWn4=;
- b=SvzFa4+g/NslTwagO0/HoJZBGcESqQBmcj5iME7V0TIAZr+hmqaI4YnfKY3GVmakwy
- J+R6rlTF+LW8i4mrvkQ++pSt+DzOYplGdbPyWgBYYOGoilOvTfAzOBPXu/nlJqs9IvdY
- x/Df50GGQZ5EQPumtwljp8GBUzf+MJYfFvWZ3udLrDZWnxFOEU6jb2IougaRHfr3xBZp
- 4SGZ69wnb30q0/7oFqVKKa/98rkaqXyp0RumGWsq1GNgfOw1ufei/blyqShhtQ5lUwyS
- 84ZecwDqKWKrbxQ8lDrqgwqH7AcfC4iNeMTFp435D7KqY4I9c0SRH6zx+GSAmnF1b4y6
- 38Hg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUEgEmFl4Pacw7bMnC7d6ah9K9h12DUozl02N1a1gys8dKgRQyVqUxvFjTyaYAnKQ+3lwYk5oVrPaDIx9V14RFB@lists.sourceforge.net
-X-Gm-Message-State: AOJu0Yx3Rkq3F9sr5RzWB8SY/ZQqEv2JjW1cFi2kkbU+bvyps1cmTHOT
- idGMK6WGJDR22XY6+Kc+aK5baosgoiU1e+avgdjx+dKm9fG/QMq3o1gVeIQHxBLrrWWuDuk3d1z
- m022jXxPdmNOA0vZWpZoru7Js+PWKQltkfojALg1LfVMIwl4499RjwAHi3jk=
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
+ id 1vzqJi-0000Qb-JW for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 10 Mar 2026 06:11:43 +0000
+Received: from pps.filterd (m0246632.ppops.net [127.0.0.1])
+ by mx0b-00069f02.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 629IMhXh2910641; Tue, 10 Mar 2026 06:11:20 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com; h=cc
+ :content-type:date:from:in-reply-to:message-id:mime-version
+ :references:subject:to; s=corp-2025-04-25; bh=yci9O3M0i41fvtWaKy
+ QNyINrmXi8nXmXOfWlJa4pjUI=; b=qFHEzSnPPIlbk95nc4X4Q1Vp/DZE5aYzW4
+ S/HCuDmJc/jGakTDEv1lkxbfM9hp+AkhFinnDo7vaJt355LXv9tBU2eyvXr/0kqY
+ hSXZRaTuTMBVD5snik9m2KPcKulWn8FD7CnD536xLPSQSGeZhcUzb84jz2svgkoB
+ QKu1ArcA3k5lXS+xjyYAjoAAeVOfyMuCHyD9KGkDNAlMEdfntWoMc4rYeNPOtvjf
+ uAVaiBc82wJxihqt1WkNWls7Dg6FqcBBSKSwIAzQNzpLy+tn7XYGVsnh8t1WgOuZ
+ SegtLk4kLuQQuoCPprmQy0p7XmNQbbjvJ46hiLZA9XSYQcsK3O7g==
+Received: from phxpaimrmta01.imrmtpd1.prodappphxaev1.oraclevcn.com
+ (phxpaimrmta01.appoci.oracle.com [138.1.114.2])
+ by mx0b-00069f02.pphosted.com (PPS) with ESMTPS id 4cskua293x-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Tue, 10 Mar 2026 06:11:20 +0000 (GMT)
+Received: from pps.filterd
+ (phxpaimrmta01.imrmtpd1.prodappphxaev1.oraclevcn.com [127.0.0.1])
+ by phxpaimrmta01.imrmtpd1.prodappphxaev1.oraclevcn.com (8.18.1.2/8.18.1.2)
+ with ESMTP id 62A48lvB022901; Tue, 10 Mar 2026 06:11:19 GMT
+Received: from cy3pr05cu001.outbound.protection.outlook.com
+ (mail-westcentralusazon11013012.outbound.protection.outlook.com
+ [40.93.201.12])
+ by phxpaimrmta01.imrmtpd1.prodappphxaev1.oraclevcn.com (PPS) with ESMTPS id
+ 4craf9ncs7-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Tue, 10 Mar 2026 06:11:19 +0000
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=kzGt3HMbzNhEYiovpALslRmpswuaSkCkL0pnK12KddbK33tlo+L35obdrFnHGYePnOO39H3RHpdmXTu7O547zr/CR2iiNIaKb3k5Ym+lyrClOMncmykzwzlyFuMD8fzgCzumfloFRMtzeMG2FFv9KFDGOIkwxPiK4CnAgMF1S3cz4xyJuO7wQQLyZHWBFFO/rQIDEeZJD0DTIaKEHH1JWwIVOGNR383Eh/QHA6FGAmqEVM4R6D6iMzb3Jo7fcCLm/Vq6/NachFLfmAvDrVhTgPVm2zenjLybeeETFmF4l8wNoziIpQzliUBX/PSfHP2q7ks0r3TkWtQcq6j0Hy4ZVw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=yci9O3M0i41fvtWaKyQNyINrmXi8nXmXOfWlJa4pjUI=;
+ b=x9boazJK9Jq6JB2R5Rpx8cBOrF2GDJmeLRdcs9w4Yzh9QHQEwrP45DdgxCNqKW1IVsBvGlU0BYn7yoLBHIANU626heE6+0SyAA+5WvXEoOSayq1WQzjjyBavYd8UfBzptYZtMyO78NZ4XNXpY9VnKwWbdW4UdtNaA4uNate653XZFfBImjCKQClOL/yDKxD4wir13KCp8TkJcURI2OrjQ04QLX2WeZg/wtKPhq+a49KZcDi5g2bjUDkU4xnGbGz3PCmOQVlphJ9djK/pdM5WziuhZHqBJMJ0VPDJC82IqOOVoWhNS+Eh1QVjK1tIesFYhd/pjEdj8P36/MU5uA4hkQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=oracle.com; dmarc=pass action=none header.from=oracle.com;
+ dkim=pass header.d=oracle.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=oracle.onmicrosoft.com; s=selector2-oracle-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=yci9O3M0i41fvtWaKyQNyINrmXi8nXmXOfWlJa4pjUI=;
+ b=y2TonhpmMaMe9kEtSsTKMwvgGNMwk195FwdwL/vOmtuxv5Z8dLpTHtmJq5wiFk0Jc3wHo6gqK8Qwfs95o+lxnBbQTNu+RmCSdWpeXq266/OOYCx4AMxOkjZyawRnyfCRzoJWvWZMAcDj4grImATnIQObZZtuLfq7n9Zgx966Ioc=
+Received: from CH3PR10MB7329.namprd10.prod.outlook.com (2603:10b6:610:12c::16)
+ by LV0PR10MB997638.namprd10.prod.outlook.com (2603:10b6:408:346::15)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9678.24; Tue, 10 Mar
+ 2026 06:11:16 +0000
+Received: from CH3PR10MB7329.namprd10.prod.outlook.com
+ ([fe80::c2a4:fdda:f0c2:6f71]) by CH3PR10MB7329.namprd10.prod.outlook.com
+ ([fe80::c2a4:fdda:f0c2:6f71%7]) with mapi id 15.20.9678.024; Tue, 10 Mar 2026
+ 06:11:16 +0000
+Date: Tue, 10 Mar 2026 15:11:05 +0900
+To: syzbot <syzbot+cae7809e9dc1459e4e63@syzkaller.appspotmail.com>
+Message-ID: <aa-1-Y3v3D1hzPvL@hyeyoo>
+References: <aa-SinLe2jrtO1pS@hyeyoo>
+ <69af95db.a00a0220.d013.0001.GAE@google.com>
+Content-Disposition: inline
+In-Reply-To: <69af95db.a00a0220.d013.0001.GAE@google.com>
+X-ClientProxiedBy: SEWP216CA0002.KORP216.PROD.OUTLOOK.COM
+ (2603:1096:101:2b4::7) To CH3PR10MB7329.namprd10.prod.outlook.com
+ (2603:10b6:610:12c::16)
 MIME-Version: 1.0
-X-Received: by 2002:a4a:edc8:0:b0:662:f763:c539 with SMTP id
- 006d021491bc7-67b9bc6ad80mr8703060eaf.14.1773114843722; Mon, 09 Mar 2026
- 20:54:03 -0700 (PDT)
-Date: Mon, 09 Mar 2026 20:54:03 -0700
-In-Reply-To: <aa-SinLe2jrtO1pS@hyeyoo>
-X-Google-Appengine-App-Id: s~syzkaller
-X-Google-Appengine-App-Id-Alias: syzkaller
-Message-ID: <69af95db.a00a0220.d013.0001.GAE@google.com>
-From: syzbot <syzbot+cae7809e9dc1459e4e63@syzkaller.appspotmail.com>
-To: akpm@linux-foundation.org, catalin.marinas@arm.com, chao@kernel.org, 
- hao.li@linux.dev, harry.yoo@oracle.com, jaegeuk@kernel.org, jannh@google.com, 
- liam.howlett@oracle.com, linkinjeon@kernel.org, 
- linux-f2fs-devel@lists.sourceforge.net, linux-fsdevel@vger.kernel.org, 
- linux-kernel@vger.kernel.org, linux-mm@kvack.org, lorenzo.stoakes@oracle.com, 
- pfalcato@suse.de, sj1557.seo@samsung.com, syzkaller-bugs@googlegroups.com, 
- vbabka@kernel.org, vbabka@suse.cz, wangqing7171@gmail.com
-X-Spam-Score: 3.1 (+++)
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CH3PR10MB7329:EE_|LV0PR10MB997638:EE_
+X-MS-Office365-Filtering-Correlation-Id: 4f43fd89-14cc-43cf-a4aa-08de7e6bd6d3
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|7416014|1800799024|366016;
+X-Microsoft-Antispam-Message-Info: wv83xMQfrdzobjyko3lnHPP9eIKcy+/7CYrhwgxUhXZ7xvuO2U9mf2ONVeVtPDCv5/a2eerTD4l0UPgG7+F81DobHxJgUxng4003JmGf38bZo2ptQ/4WHODLOIzmmbFIO+kmODdnJVF6wGnDjx5Fe7sTiDVc0flyCluF6TOSRVO9cc2eEt7+ai0eZEURg0zKA42z6UeqH1ONJuF20g0HSTqEtmbT5vch1l5IV2Av42UavegBIqbspl2gFsB8nH0PV96WF/t8LMeYSZwNRjD4W42Ev1+k3Li4AkHNeSGpj+SIzxuPhDUUapJwkDgKlfFvBLiMK0XLx1bAmep6ZFVE84cIHzRBVtXeR6FY4JKOxwPIU14EOQ3vXIut+k00O32ogZptwxMgUw8Dq4b0td77c4YoolsAhz9rbndK9aOJv8DzpQSgaaql9iQoPqICkyIlZ+V/Fib1IaA/uJFwPjnklbuzRy6+b2DPa3koUzmUfy3yz4eEnbetghf7kAC5SmymYZoOKPdEExtCN16Po8R1Tz++jPwhcOfH9Bi4BMejh5oJYiMX5eSSCv3jZ2wxPAxH+EP7CftXKDPusee6dXM6wy1nncAKhtvP2H+WWOlX8P58GriCmsYsqPeRrK8+X1Yn/leokG9kQB5dQNN/1jXUuw5Sxocj3v0lJT9LhVq3u3ZWdh14AzMZyxOfCBwq9NyWod+b9o+0/x8tIQDuQfADSiZP8W/uqHCz5TpQDDoci5I=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:CH3PR10MB7329.namprd10.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(376014)(7416014)(1800799024)(366016); DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?w9YbY0AagYNlAL/svI92xQn5OIdS4F68YQrmPjjGZRZ8dNfhHWTvCOHwpsVF?=
+ =?us-ascii?Q?EJPDoiObn/MoNrAabazLdZN5UmgYoXi9eJooE0PrGfCPQxvvFpRKb8jSbwVf?=
+ =?us-ascii?Q?VDuD45RVc50QJFh39ocA+Dww1awNlJubcx8/VPebu57VbY+ZZ1uw7XekZhH7?=
+ =?us-ascii?Q?4DR5CmoHqbHm/JLGT7Z9gacWQZhkC+UMNEt2jlj+49DP5PISseQ3UjYOsWO9?=
+ =?us-ascii?Q?1TfsqWt9XmqRFWOmTQZWpX3tb4iDQgpPBhf5UZGQmAhA5ONb6H+DCRdRF08b?=
+ =?us-ascii?Q?j5drd7mueAw/vaOS+lhGD5hCydpu7hBqUE8V0lAYYIBB2KK2KCos6hcQSo7N?=
+ =?us-ascii?Q?SlRv1TZwrHTVILw1cvSmCAffRpOBLujJmL1af1fWL7h1BqM7iYh6ne573jsU?=
+ =?us-ascii?Q?o/97FUbGyLPmIcolh2NrqUn5OkK7jjzpnmZWL1rjgOlt+Ncc9Dp2JFmnfjQ0?=
+ =?us-ascii?Q?J/MvZMER2Jtt4+zl4mtSsyd6LVjKjt0OyOf82qzIXvl8l3urYfLInUDGyojv?=
+ =?us-ascii?Q?pNrNE9b10OldVse71oXH/qSQjVWPLrof+G4b2zup93kY8I4AifjwKagvKHm1?=
+ =?us-ascii?Q?Xpk0CLt1AnVY13T9Srcj0ioHXtSOhqyQthHVYWw7O3ckaK3TXMIl1zmgxQ7+?=
+ =?us-ascii?Q?yQ3DCLjenrUzvwS2ckFiaxl4x9QGxzBPCRbw1vodhfsqCye3FPzM5L4eDVly?=
+ =?us-ascii?Q?B4zGaEJO8/d+Wv1xg+iK4/nOi9jW578dWGWr0jmeS424WmWY7kkeold+9DZh?=
+ =?us-ascii?Q?inrhRodz/Z3elNcxkWZjGk25rex4SleCnuOheXOlbyI04MTW4tmO77Q7Jued?=
+ =?us-ascii?Q?25qZdh62RlPl+fLPxaGlXrBFuD/XeJxFPDUHWvh9lY2x8vor2wMLudK9uS2X?=
+ =?us-ascii?Q?3ctm3GSwYgkXKyEWc03gkdA75rSrw/9d17cJED7BbFNFYWUCA6S6JSjPiFCf?=
+ =?us-ascii?Q?2tvhUkeBT1XphiD0qoqoh5r3u0TxYLnzLqypqK0gpCA0Na9OFTiGvX9OWMTR?=
+ =?us-ascii?Q?wR6cCMF+igEw4afc4bCuHTpCj9AcRhFfOA9LFF/VP370BfqzNNRsPYtUAuH0?=
+ =?us-ascii?Q?kuwtSb340PgqWZQEewQBjkwZxklaqt4FbObMUcPgK+AQhEWlzQTMrXTkcy1H?=
+ =?us-ascii?Q?pquFoFeYTTDAQwWLYKZU/H5No1v1JtvbnY/gnbGI8UTaIRV/niPL7EGc3qY1?=
+ =?us-ascii?Q?BhQc9mxih6TkmEtAzXZSwDWHcaX/FZ+THbwVBj3awW2QwVIQXByjSZBUFRRN?=
+ =?us-ascii?Q?O2aHh+98r/VOmh810E0wrlK5MBhAGclcqhZ+70qAlQu26WmTl5A05+j35WGL?=
+ =?us-ascii?Q?36Yu4tH1gYwWh8Hp1tOeBnTRrY7ZY872c4LkMGNhpAZxjV5c10FZUoxA363r?=
+ =?us-ascii?Q?CH+tyS57+91w6d/iHSR5FZbZk9dNMKv06fvwctd/hU6Lajj351upnvLInr7/?=
+ =?us-ascii?Q?ouDIl7MwEW54J4eGsJbW0VUIlVy5i10ud0Fshz0V3h2IjQdblMdG7sZEwYpt?=
+ =?us-ascii?Q?azhpk1lhO9QA+sm46ml76TcThRBGSgMmjN7SRxoSZvPFiYU+YCPZG3eA7v6T?=
+ =?us-ascii?Q?asL7ZSoOxzTwOKx8GNh+NKl/t/IHpuDs5OvxTD8LEtZn9IrxI5T1Urc7rL+G?=
+ =?us-ascii?Q?t7TjafuZkU9y4bAZBgcrAS9EHW7l9gzIVAkmksrLBbd4q7culzO3pe1pb7vW?=
+ =?us-ascii?Q?K3G9VGKiH5xinceKNzwqB2rD0ITZydshOEwrZoIDU/nreBE+Ar/KE5tPu9Cx?=
+ =?us-ascii?Q?LjvM0oQxdg=3D=3D?=
+X-Exchange-RoutingPolicyChecked: Cj5aV1rz1/3jh1WC9jDph14TuIS7z496dVSBxL4sgoskmItzduUCIOxCZYLIofECJtuto5ZpDF+fi5t+y0E0Z8WkqGMmpPVzEl+YZ/S8QNe+W+EA/8iSRpDVg3PUvqBvT+XhbZSgd6w55+bW3StTvgiyV4CjCPMCablxmKzI7xBNO8GqaVr3pqJPzW8wh6gsWAqgD8nVRfr3nznLfRzgvYA42cyz5oNKq9rskRe3lfWgMI0pWonnJZl/jJLI/as3Vv1/xAEWqf9uuBId0N5Qwo8lBtmWMQRKC3lK0F+AeXybWUtG1owVSiphOCWeD5D9kSFO74KR4djnOgNu0veaNQ==
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-0: wDuxjiRuNpdaKszcy+1n8W4+4EMQtWi5gnrVf0Nsd9Dn6CtdjhOrlRjLsf3pW2ZijMXUtIrP9IXRmiwZt/teiuUU+31sbSIDDh/gvlosxmFvWF2iXVVIMBPNLkLSabCbBrBltifw5toWj+/x/77P/+JJU+u0gzKpfDQlVn2WsRYzPK6t8VCLbABhCHePmKv1RUijBQjdJWArxUcWSii9HVckx8MfaIqUS46isiaF/CpV/rY2bez15lku3fGKazhI74R/7Y/4v/xFK6VFyJB4qXtfSQQsFTRACsZ6vg5h1XIqRNuPpt2LVjjiClQBjPkbiSXgtNb3/xHfQwcHWnT/TqpQwaDR3xh7V33UGjqwc2dprYix8jaty+H8a657PQR/gkPsFXIZYZ5TnwBq/gl2n7oj8VTp5Qv8w5tc5rC/hpYIBgoQK2ZFR2vp+dp7kOB48vFQVe1T/eCYdXeLYrvyvsnqnL1iNM0MF7a/Vitbhmu+c0vDPaA9XfShPzQgoPGoI8Xxqe/n3DWKpVTLi2QR+Z3MupVx3d8hkZaPK/zs+Xn/OJBpiOMwaK7HiS7Ycu3pEBTFRI9pKTginxBrHspfplY21yGxSqqIZEl6JTSkFTM=
+X-OriginatorOrg: oracle.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 4f43fd89-14cc-43cf-a4aa-08de7e6bd6d3
+X-MS-Exchange-CrossTenant-AuthSource: CH3PR10MB7329.namprd10.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Mar 2026 06:11:16.5435 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 4e2c6054-71cb-48f1-bd6c-3a9705aca71b
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: EPsjtnF1RN0wFAtlPqLa6oM8SdWUM13wzxjbj1x/W+g7DNuPF6imrViO2rSueS9HB55if2Hd37Nzh3EWr2NMWA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: LV0PR10MB997638
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.51,FMLib:17.12.100.49
+ definitions=2026-03-10_01,2026-03-09_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 suspectscore=0
+ spamscore=0 bulkscore=0
+ mlxlogscore=999 mlxscore=0 adultscore=0 malwarescore=0 phishscore=0
+ classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2602130000
+ definitions=main-2603100049
+X-Authority-Analysis: v=2.4 cv=Methep/f c=1 sm=1 tr=0 ts=69afb608 cx=c_pps
+ a=XiAAW1AwiKB2Y8Wsi+sD2Q==:117 a=XiAAW1AwiKB2Y8Wsi+sD2Q==:17
+ a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=z/mQ4Ysz8XfWz/Q5cLBRGdckG28=:19
+ a=lCpzRmAYbLLaTzLvsPZ7Mbvzbb8=:19 a=xqWC_Br6kY4A:10 a=kj9zAlcOel0A:10
+ a=Yq5XynenixoA:10 a=GoEa3M9JfhUA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=jiCTI4zE5U7BLdzWsZGv:22 a=3I1J8UUJPc9JN9BFgKH3:22 a=08qs2jb053QYS-sdkIcA:9
+ a=CjuIK1q_8ugA:10
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwMzEwMDA0OSBTYWx0ZWRfX2IgR4YWuV/DG
+ nanbqHoMrnmOzi699Sn/jLh1lURnv9i83Yc+9ZIP+rOQLve4FWcq5Ir2SwBT9gfd46ks/W2IjEC
+ A1UnYm101bUuT94N50kBXVt1VXm/8QZRvT/EeFqFn38S01Ptu1xrNzShuyY8uolRG7W7m+ILEr6
+ wugg69IE82l+dFFZwHoEwUc6YPH1aohUdlCyXjPMb27B63+7uHx6QX3ig7fG7XsS1oU8lHfcGSR
+ CCGRKXo8Il5NiIaftGLuMdW+WuSUk2dpLXHRw4XsJug26OsAnIh18nr6vqenxDhoXYeq97WXx2d
+ XOaRc0dBPteyVhZwLXa8hKdkukN4UAvWZbPlXQiXNTd/MXZFuU7HDg8qU4iD5pUJKKmaBDz4kyn
+ JshHHwS4p+VAxmrsVl7hr+w80RROUL+MGAAq1b6FRjvLOdNWFkoVuY2w4n7peNb/UN5YFKPHRG6
+ 5SSYnlLv1bI7ytDG2eQ==
+X-Proofpoint-ORIG-GUID: 91XXoqZh6DOFNm4s-5D371hw250F_djw
+X-Proofpoint-GUID: 91XXoqZh6DOFNm4s-5D371hw250F_djw
+X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Hello,
- syzbot has tested the proposed patch but the reproducer
- is still triggering an issue: memory leak in __pcs_replace_empty_main BUG:
- memory leak unreferenced object 0xffff888100b60200 (size 512): comm "kthreadd",
- pid 2, jiffies 4294937343 hex dump (first 32 bytes): 00 6c c3 09 81 88 ff
- ff 00 9a 9d 0a 81 88 ff ff .l [...] 
- Content analysis details:   (3.1 points, 5.0 required)
+ Content preview: #syz test diff --git a/Documentation/dev-tools/kmemleak.rst
+ b/Documentation/dev-tools/kmemleak.rst index 7d784e03f3f9..da2c849d4735 100644
+ --- a/Documentation/dev-tools/kmemleak.rst +++ b/Documentation/dev-tool [...]
+ Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.3 FROM_LOCAL_HEX         From: localpart has long hexadecimal sequence
- 2.5 SORTED_RECIPS          Recipient list is sorted by address
- 0.2 HEADER_FROM_DIFFERENT_DOMAINS From and EnvelopeFrom 2nd level mail
- domains are different
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.161.72 listed in wl.mailspike.net]
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ 0.0 ARC_SIGNED             Message has a ARC signature
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+ 0.0 ARC_VALID              Message has a valid ARC signature
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain 0.0 RCVD_IN_MSPIKE_H4      RBL: Very Good reputation (+4)
+ [205.220.177.32 listed in wl.mailspike.net]
  0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1vzoAb-0004kG-GP
+X-Headers-End: 1vzqJi-0000Qb-JW
 Subject: Re: [f2fs-dev] [syzbot] [mm?] [f2fs?] [exfat?] memory leak in
  __kfree_rcu_sheaf
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
@@ -127,232 +233,235 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
+From: Harry Yoo via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Harry Yoo <harry.yoo@oracle.com>
+Cc: wangqing7171@gmail.com, vbabka@kernel.org, lorenzo.stoakes@oracle.com,
+ jannh@google.com, catalin.marinas@arm.com, syzkaller-bugs@googlegroups.com,
+ linux-kernel@vger.kernel.org, liam.howlett@oracle.com,
+ linux-f2fs-devel@lists.sourceforge.net, linux-mm@kvack.org, hao.li@linux.dev,
+ pfalcato@suse.de, linux-fsdevel@vger.kernel.org, jaegeuk@kernel.org,
+ akpm@linux-foundation.org, sj1557.seo@samsung.com, linkinjeon@kernel.org,
+ vbabka@suse.cz
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
-X-Rspamd-Queue-Id: 00634245132
+X-Rspamd-Queue-Id: 339A4245B71
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-0.01 / 15.00];
-	URI_HIDDEN_PATH(1.00)[https://syzkaller.appspot.com/x/.config?x=2c6ad6fefffa76b1];
+X-Spamd-Result: default: False [-5.61 / 15.00];
+	WHITELIST_DMARC(-7.00)[sourceforge.net:D:+];
+	SUSPICIOUS_RECIPS(1.50)[];
+	ARC_REJECT(1.00)[signature check failed: fail, {[1] = sig:microsoft.com:reject}];
+	MID_RHS_NOT_FQDN(0.50)[];
+	DMARC_POLICY_ALLOW_WITH_FAILURES(-0.50)[];
 	RWL_MAILSPIKE_EXCELLENT(-0.40)[216.105.38.7:from];
-	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
 	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7];
 	MAILLIST(-0.20)[mailman];
+	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
 	MIME_GOOD(-0.10)[text/plain];
-	DMARC_POLICY_SOFTFAIL(0.10)[appspotmail.com : SPF not aligned (relaxed), DKIM not aligned (relaxed),none];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	TAGGED_FROM(0.00)[cae7809e9dc1459e4e63];
-	RECEIVED_HELO_LOCALHOST(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[20];
-	FORGED_RECIPIENTS(0.00)[m:akpm@linux-foundation.org,m:catalin.marinas@arm.com,m:chao@kernel.org,m:hao.li@linux.dev,m:harry.yoo@oracle.com,m:jaegeuk@kernel.org,m:jannh@google.com,m:liam.howlett@oracle.com,m:linkinjeon@kernel.org,m:linux-f2fs-devel@lists.sourceforge.net,m:linux-fsdevel@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-mm@kvack.org,m:lorenzo.stoakes@oracle.com,m:pfalcato@suse.de,m:sj1557.seo@samsung.com,m:syzkaller-bugs@googlegroups.com,m:vbabka@kernel.org,m:vbabka@suse.cz,m:wangqing7171@gmail.com,s:lists@lfdr.de];
+	RCPT_COUNT_TWELVE(0.00)[19];
+	FORGED_SENDER(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
+	TO_DN_SOME(0.00)[];
+	DMARC_POLICY_ALLOW(0.00)[lists.sourceforge.net,none];
 	MIME_TRACE(0.00)[0:+];
-	FORGED_SENDER(0.00)[syzbot@syzkaller.appspotmail.com,linux-f2fs-devel-bounces@lists.sourceforge.net];
-	ARC_NA(0.00)[];
+	RECEIVED_HELO_LOCALHOST(0.00)[];
 	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
-	FREEMAIL_TO(0.00)[linux-foundation.org,arm.com,kernel.org,linux.dev,oracle.com,google.com,lists.sourceforge.net,vger.kernel.org,kvack.org,suse.de,samsung.com,googlegroups.com,suse.cz,gmail.com];
-	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x];
-	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-];
+	FORGED_RECIPIENTS(0.00)[m:syzbot+cae7809e9dc1459e4e63@syzkaller.appspotmail.com,m:wangqing7171@gmail.com,m:vbabka@kernel.org,m:lorenzo.stoakes@oracle.com,m:jannh@google.com,m:catalin.marinas@arm.com,m:syzkaller-bugs@googlegroups.com,m:linux-kernel@vger.kernel.org,m:liam.howlett@oracle.com,m:linux-f2fs-devel@lists.sourceforge.net,m:linux-mm@kvack.org,m:hao.li@linux.dev,m:pfalcato@suse.de,m:linux-fsdevel@vger.kernel.org,m:jaegeuk@kernel.org,m:akpm@linux-foundation.org,m:sj1557.seo@samsung.com,m:linkinjeon@kernel.org,m:vbabka@suse.cz,m:syzbot@syzkaller.appspotmail.com,s:lists@lfdr.de];
+	DKIM_MIXED(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	TO_DN_NONE(0.00)[];
-	PREVIOUSLY_DELIVERED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
+	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,oracle.com:s=corp-2025-04-25,oracle.onmicrosoft.com:s=selector2-oracle-onmicrosoft-com];
+	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,oracle.com:-,oracle.onmicrosoft.com:-];
+	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
+	SUBJECT_HAS_QUESTION(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[oracle.com:replyto,lists.sourceforge.net:dkim,lists.sourceforge.net:rdns,lists.sourceforge.net:helo];
+	NEURAL_HAM(-0.00)[-1.000];
 	FORGED_SENDER_FORWARDING(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[syzbot@syzkaller.appspotmail.com,linux-f2fs-devel-bounces@lists.sourceforge.net];
-	DKIM_MIXED(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.sourceforge.net:dkim,lists.sourceforge.net:rdns,lists.sourceforge.net:helo];
+	FROM_NEQ_ENVFROM(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
+	FREEMAIL_CC(0.00)[gmail.com,kernel.org,oracle.com,google.com,arm.com,googlegroups.com,vger.kernel.org,lists.sourceforge.net,kvack.org,linux.dev,suse.de,linux-foundation.org,samsung.com,suse.cz];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
-	MISSING_XM_UA(0.00)[];
-	TAGGED_RCPT(0.00)[linux-f2fs-devel];
 	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
-	SUBJECT_HAS_QUESTION(0.00)[]
+	HAS_REPLYTO(0.00)[harry.yoo@oracle.com];
+	TAGGED_RCPT(0.00)[linux-f2fs-devel,cae7809e9dc1459e4e63];
+	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
+	MISSING_XM_UA(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	RCVD_COUNT_SEVEN(0.00)[9]
 X-Rspamd-Action: no action
 
-Hello,
+#syz test
 
-syzbot has tested the proposed patch but the reproducer is still triggering an issue:
-memory leak in __pcs_replace_empty_main
+diff --git a/Documentation/dev-tools/kmemleak.rst b/Documentation/dev-tools/kmemleak.rst
+index 7d784e03f3f9..da2c849d4735 100644
+--- a/Documentation/dev-tools/kmemleak.rst
++++ b/Documentation/dev-tools/kmemleak.rst
+@@ -163,6 +163,7 @@ See the include/linux/kmemleak.h header for the functions prototype.
+ - ``kmemleak_not_leak``	 - mark an object as not a leak
+ - ``kmemleak_transient_leak``	 - mark an object as a transient leak
+ - ``kmemleak_ignore``		 - do not scan or report an object as leak
++- ``kmemleak_unignore``		 - undo a previous kmemleak_ignore()
+ - ``kmemleak_scan_area``	 - add scan areas inside a memory block
+ - ``kmemleak_no_scan``	 - do not scan a memory block
+ - ``kmemleak_erase``		 - erase an old value in a pointer variable
+diff --git a/include/linux/kmemleak.h b/include/linux/kmemleak.h
+index fbd424b2abb1..4eec0560be09 100644
+--- a/include/linux/kmemleak.h
++++ b/include/linux/kmemleak.h
+@@ -28,6 +28,7 @@ extern void kmemleak_update_trace(const void *ptr) __ref;
+ extern void kmemleak_not_leak(const void *ptr) __ref;
+ extern void kmemleak_transient_leak(const void *ptr) __ref;
+ extern void kmemleak_ignore(const void *ptr) __ref;
++extern void kmemleak_unignore(const void *ptr, int min_count) __ref;
+ extern void kmemleak_ignore_percpu(const void __percpu *ptr) __ref;
+ extern void kmemleak_scan_area(const void *ptr, size_t size, gfp_t gfp) __ref;
+ extern void kmemleak_no_scan(const void *ptr) __ref;
+@@ -104,6 +105,10 @@ static inline void kmemleak_ignore_percpu(const void __percpu *ptr)
+ static inline void kmemleak_ignore(const void *ptr)
+ {
+ }
++
++static inline void kmemleak_unignore(const void *ptr, int min_count)
++{
++}
+ static inline void kmemleak_scan_area(const void *ptr, size_t size, gfp_t gfp)
+ {
+ }
+diff --git a/mm/kmemleak.c b/mm/kmemleak.c
+index d79acf5c5100..871e20ba3d7b 100644
+--- a/mm/kmemleak.c
++++ b/mm/kmemleak.c
+@@ -909,6 +909,8 @@ static void __paint_it(struct kmemleak_object *object, int color)
+ 	object->min_count = color;
+ 	if (color == KMEMLEAK_BLACK)
+ 		object->flags |= OBJECT_NO_SCAN;
++	else
++		object->flags &= ~OBJECT_NO_SCAN;
+ }
 
-BUG: memory leak
-unreferenced object 0xffff888100b60200 (size 512):
-  comm "kthreadd", pid 2, jiffies 4294937343
-  hex dump (first 32 bytes):
-    00 6c c3 09 81 88 ff ff 00 9a 9d 0a 81 88 ff ff  .l..............
-    00 16 04 00 81 88 ff ff 00 00 00 00 00 00 00 00  ................
-  backtrace (crc 8a95531e):
-    kmemleak_alloc_recursive include/linux/kmemleak.h:44 [inline]
-    slab_post_alloc_hook mm/slub.c:4552 [inline]
-    slab_alloc_node mm/slub.c:4874 [inline]
-    __do_kmalloc_node mm/slub.c:5267 [inline]
-    __kmalloc_noprof+0x3bd/0x560 mm/slub.c:5280
-    kmalloc_noprof include/linux/slab.h:954 [inline]
-    kzalloc_noprof include/linux/slab.h:1188 [inline]
-    __alloc_empty_sheaf+0x35/0x50 mm/slub.c:2771
-    alloc_empty_sheaf mm/slub.c:2786 [inline]
-    alloc_full_sheaf mm/slub.c:2834 [inline]
-    __pcs_replace_empty_main+0x1d2/0x260 mm/slub.c:4634
-    alloc_from_pcs mm/slub.c:4725 [inline]
-    slab_alloc_node mm/slub.c:4859 [inline]
-    __do_kmalloc_node mm/slub.c:5267 [inline]
-    __kmalloc_node_noprof+0x57e/0x5d0 mm/slub.c:5274
-    kmalloc_node_noprof include/linux/slab.h:1081 [inline]
-    __vmalloc_area_node mm/vmalloc.c:3855 [inline]
-    __vmalloc_node_range_noprof+0x284/0xe50 mm/vmalloc.c:4064
-    __vmalloc_node_noprof+0x71/0x90 mm/vmalloc.c:4124
-    alloc_thread_stack_node kernel/fork.c:355 [inline]
-    dup_task_struct kernel/fork.c:924 [inline]
-    copy_process+0x3e5/0x28c0 kernel/fork.c:2050
-    kernel_clone+0xac/0x6e0 kernel/fork.c:2654
-    kernel_thread+0x80/0xb0 kernel/fork.c:2715
-    create_kthread kernel/kthread.c:459 [inline]
-    kthreadd+0x186/0x250 kernel/kthread.c:817
-    ret_from_fork+0x23c/0x4b0 arch/x86/kernel/process.c:158
-    ret_from_fork_asm+0x1a/0x30 arch/x86/entry/entry_64.S:245
+ static void paint_it(struct kmemleak_object *object, int color)
+@@ -1292,6 +1294,24 @@ void __ref kmemleak_ignore(const void *ptr)
+ }
+ EXPORT_SYMBOL(kmemleak_ignore);
 
-BUG: memory leak
-unreferenced object 0xffff88810438c200 (size 512):
-  comm "swapper/0", pid 1, jiffies 4294937794
-  hex dump (first 32 bytes):
-    00 02 10 0e 81 88 ff ff 00 56 c3 09 81 88 ff ff  .........V......
-    00 17 04 00 81 88 ff ff 3c 00 00 00 00 00 00 00  ........<.......
-  backtrace (crc 3e1bb722):
-    kmemleak_alloc_recursive include/linux/kmemleak.h:44 [inline]
-    slab_post_alloc_hook mm/slub.c:4552 [inline]
-    slab_alloc_node mm/slub.c:4874 [inline]
-    __do_kmalloc_node mm/slub.c:5267 [inline]
-    __kmalloc_noprof+0x3bd/0x560 mm/slub.c:5280
-    kmalloc_noprof include/linux/slab.h:954 [inline]
-    kzalloc_noprof include/linux/slab.h:1188 [inline]
-    __alloc_empty_sheaf+0x35/0x50 mm/slub.c:2771
-    alloc_empty_sheaf mm/slub.c:2786 [inline]
-    __pcs_replace_full_main+0xe8/0x300 mm/slub.c:5730
-    free_to_pcs mm/slub.c:5783 [inline]
-    slab_free mm/slub.c:6185 [inline]
-    kfree+0x352/0x390 mm/slub.c:6498
-    v4l2_ctrl_handler_free drivers/media/v4l2-core/v4l2-ctrls-core.c:1756 [inline]
-    v4l2_ctrl_handler_free+0x92/0x290 drivers/media/v4l2-core/v4l2-ctrls-core.c:1736
-    vivid_dev_release+0x26/0x90 drivers/media/test-drivers/vivid/vivid-core.c:857
-    v4l2_device_release drivers/media/v4l2-core/v4l2-device.c:51 [inline]
-    kref_put include/linux/kref.h:65 [inline]
-    v4l2_device_put+0x6b/0xa0 drivers/media/v4l2-core/v4l2-device.c:56
-    vivid_create_instance drivers/media/test-drivers/vivid/vivid-core.c:2070 [inline]
-    vivid_probe.cold+0x55a/0x386d drivers/media/test-drivers/vivid/vivid-core.c:2095
-    platform_probe+0x86/0xf0 drivers/base/platform.c:1446
-    call_driver_probe drivers/base/dd.c:583 [inline]
-    really_probe+0x12f/0x3a0 drivers/base/dd.c:661
-    __driver_probe_device+0xc7/0x160 drivers/base/dd.c:803
-    driver_probe_device+0x2a/0x120 drivers/base/dd.c:833
-    __driver_attach drivers/base/dd.c:1227 [inline]
-    __driver_attach+0x10a/0x200 drivers/base/dd.c:1167
-    bus_for_each_dev+0xb8/0x120 drivers/base/bus.c:383
-    bus_add_driver+0x122/0x280 drivers/base/bus.c:715
-    driver_register+0xb1/0x140 drivers/base/driver.c:249
++/**
++ * kmemleak_unignore - undo a previous kmemleak_ignore() on an object
++ * @ptr:	pointer to beginning of the object
++ * @min_count:	minimum number of references the object must have to be
++ *		considered a non-leak (see kmemleak_alloc() for details)
++ *
++ * Calling this function undoes a prior kmemleak_ignore() by restoring the
++ * given min_count, making the object visible to kmemleak again.
++ */
++void __ref kmemleak_unignore(const void *ptr, int min_count)
++{
++	pr_debug("%s(0x%px)\n", __func__, ptr);
++
++	if (kmemleak_enabled && ptr && !IS_ERR(ptr))
++		paint_ptr((unsigned long)ptr, min_count, 0);
++}
++EXPORT_SYMBOL(kmemleak_unignore);
++
+ /**
+  * kmemleak_scan_area - limit the range to be scanned in an allocated object
+  * @ptr:	pointer to beginning or inside the object. This also
+diff --git a/mm/slab_common.c b/mm/slab_common.c
+index d5a70a831a2a..73f4668d870d 100644
+--- a/mm/slab_common.c
++++ b/mm/slab_common.c
+@@ -1954,8 +1954,14 @@ void kvfree_call_rcu(struct rcu_head *head, void *ptr)
+ 	if (!head)
+ 		might_sleep();
 
-BUG: memory leak
-unreferenced object 0xffff888109c35c00 (size 512):
-  comm "kworker/0:1", pid 10, jiffies 4294937868
-  hex dump (first 32 bytes):
-    00 68 d4 09 81 88 ff ff 00 9c de 09 81 88 ff ff  .h..............
-    00 16 04 00 81 88 ff ff 00 00 00 00 00 00 00 00  ................
-  backtrace (crc 9ab54a7c):
-    kmemleak_alloc_recursive include/linux/kmemleak.h:44 [inline]
-    slab_post_alloc_hook mm/slub.c:4552 [inline]
-    slab_alloc_node mm/slub.c:4874 [inline]
-    __do_kmalloc_node mm/slub.c:5267 [inline]
-    __kmalloc_noprof+0x3bd/0x560 mm/slub.c:5280
-    kmalloc_noprof include/linux/slab.h:954 [inline]
-    kzalloc_noprof include/linux/slab.h:1188 [inline]
-    __alloc_empty_sheaf+0x35/0x50 mm/slub.c:2771
-    alloc_empty_sheaf mm/slub.c:2786 [inline]
-    __pcs_replace_full_main+0xe8/0x300 mm/slub.c:5730
-    free_to_pcs mm/slub.c:5783 [inline]
-    slab_free mm/slub.c:6185 [inline]
-    kfree+0x352/0x390 mm/slub.c:6498
-    vfree.part.0+0x1cd/0x4d0 mm/vmalloc.c:3484
-    vfree mm/vmalloc.c:3456 [inline]
-    delayed_vfree_work+0x5b/0x90 mm/vmalloc.c:3398
-    process_one_work+0x26c/0x5d0 kernel/workqueue.c:3275
-    process_scheduled_works kernel/workqueue.c:3358 [inline]
-    worker_thread+0x243/0x490 kernel/workqueue.c:3439
-    kthread+0x14e/0x1a0 kernel/kthread.c:436
-    ret_from_fork+0x23c/0x4b0 arch/x86/kernel/process.c:158
-    ret_from_fork_asm+0x1a/0x30 arch/x86/entry/entry_64.S:245
+-	if (!IS_ENABLED(CONFIG_PREEMPT_RT) && kfree_rcu_sheaf(ptr))
++	if (!IS_ENABLED(CONFIG_PREEMPT_RT) && kfree_rcu_sheaf(ptr)) {
++		/*
++		 * The object is now queued for deferred freeing via an RCU
++		 * sheaf. Tell kmemleak to ignore it.
++		 */
++		kmemleak_ignore(ptr);
+ 		return;
++	}
 
-BUG: memory leak
-unreferenced object 0xffff88810a9d9a00 (size 512):
-  comm "swapper/0", pid 1, jiffies 4294937887
-  hex dump (first 32 bytes):
-    00 02 b6 00 81 88 ff ff 00 98 9d 0a 81 88 ff ff  ................
-    00 16 04 00 81 88 ff ff 00 00 00 00 00 00 00 00  ................
-  backtrace (crc 368f6316):
-    kmemleak_alloc_recursive include/linux/kmemleak.h:44 [inline]
-    slab_post_alloc_hook mm/slub.c:4552 [inline]
-    slab_alloc_node mm/slub.c:4874 [inline]
-    __do_kmalloc_node mm/slub.c:5267 [inline]
-    __kmalloc_noprof+0x3bd/0x560 mm/slub.c:5280
-    kmalloc_noprof include/linux/slab.h:954 [inline]
-    kzalloc_noprof include/linux/slab.h:1188 [inline]
-    __alloc_empty_sheaf+0x35/0x50 mm/slub.c:2771
-    alloc_empty_sheaf mm/slub.c:2786 [inline]
-    __pcs_replace_full_main+0xe8/0x300 mm/slub.c:5730
-    free_to_pcs mm/slub.c:5783 [inline]
-    slab_free mm/slub.c:6185 [inline]
-    kfree+0x352/0x390 mm/slub.c:6498
-    slab_sysfs_init+0xce/0xf0 mm/slub.c:9613
-    do_one_initcall+0x79/0x4c0 init/main.c:1382
-    do_initcall_level init/main.c:1444 [inline]
-    do_initcalls init/main.c:1460 [inline]
-    do_basic_setup init/main.c:1479 [inline]
-    kernel_init_freeable+0x2a4/0x340 init/main.c:1692
-    kernel_init+0x1b/0x1d0 init/main.c:1582
-    ret_from_fork+0x23c/0x4b0 arch/x86/kernel/process.c:158
-    ret_from_fork_asm+0x1a/0x30 arch/x86/entry/entry_64.S:245
+ 	// Queue the object but don't yet schedule the batch.
+ 	if (debug_rcu_head_queue(ptr)) {
+diff --git a/mm/slub.c b/mm/slub.c
+index 20cb4f3b636d..3bfe113ae326 100644
+--- a/mm/slub.c
++++ b/mm/slub.c
+@@ -3014,8 +3014,10 @@ static void pcs_flush_all(struct kmem_cache *s)
+ 		free_empty_sheaf(s, spare);
+ 	}
 
-BUG: memory leak
-unreferenced object 0xffff88810a9d9600 (size 512):
-  comm "swapper/0", pid 1, jiffies 4294937887
-  hex dump (first 32 bytes):
-    00 b6 34 0a 81 88 ff ff 00 6c c3 09 81 88 ff ff  ..4......l......
-    00 16 04 00 81 88 ff ff 00 00 00 00 00 00 00 00  ................
-  backtrace (crc d6fcd7dc):
-    kmemleak_alloc_recursive include/linux/kmemleak.h:44 [inline]
-    slab_post_alloc_hook mm/slub.c:4552 [inline]
-    slab_alloc_node mm/slub.c:4874 [inline]
-    __do_kmalloc_node mm/slub.c:5267 [inline]
-    __kmalloc_noprof+0x3bd/0x560 mm/slub.c:5280
-    kmalloc_noprof include/linux/slab.h:954 [inline]
-    kzalloc_noprof include/linux/slab.h:1188 [inline]
-    __alloc_empty_sheaf+0x35/0x50 mm/slub.c:2771
-    alloc_empty_sheaf mm/slub.c:2786 [inline]
-    __pcs_replace_full_main+0xe8/0x300 mm/slub.c:5730
-    free_to_pcs mm/slub.c:5783 [inline]
-    slab_free mm/slub.c:6185 [inline]
-    kfree+0x352/0x390 mm/slub.c:6498
-    slab_sysfs_init+0xce/0xf0 mm/slub.c:9613
-    do_one_initcall+0x79/0x4c0 init/main.c:1382
-    do_initcall_level init/main.c:1444 [inline]
-    do_initcalls init/main.c:1460 [inline]
-    do_basic_setup init/main.c:1479 [inline]
-    kernel_init_freeable+0x2a4/0x340 init/main.c:1692
-    kernel_init+0x1b/0x1d0 init/main.c:1582
-    ret_from_fork+0x23c/0x4b0 arch/x86/kernel/process.c:158
-    ret_from_fork_asm+0x1a/0x30 arch/x86/entry/entry_64.S:245
+-	if (rcu_free)
++	if (rcu_free) {
++		kmemleak_ignore(rcu_free);
+ 		call_rcu(&rcu_free->rcu_head, rcu_free_sheaf_nobarn);
++	}
 
-connection error: failed to recv *flatrpc.ExecutorMessageRawT: EOF
+ 	sheaf_flush_main(s);
+ }
+@@ -3035,6 +3037,7 @@ static void __pcs_flush_all_cpu(struct kmem_cache *s, unsigned int cpu)
+ 	}
+
+ 	if (pcs->rcu_free) {
++		kmemleak_ignore(pcs->rcu_free);
+ 		call_rcu(&pcs->rcu_free->rcu_head, rcu_free_sheaf_nobarn);
+ 		pcs->rcu_free = NULL;
+ 	}
+@@ -4031,8 +4034,10 @@ static void flush_rcu_sheaf(struct work_struct *w)
+
+ 	local_unlock(&s->cpu_sheaves->lock);
+
+-	if (rcu_free)
++	if (rcu_free) {
++		kmemleak_ignore(rcu_free);
+ 		call_rcu(&rcu_free->rcu_head, rcu_free_sheaf_nobarn);
++	}
+ }
 
 
-Tested on:
+@@ -5832,6 +5837,7 @@ static void rcu_free_sheaf(struct rcu_head *head)
 
-commit:         1f318b96 Linux 7.0-rc3
-git tree:       upstream
-console output: https://syzkaller.appspot.com/x/log.txt?x=17bde806580000
-kernel config:  https://syzkaller.appspot.com/x/.config?x=2c6ad6fefffa76b1
-dashboard link: https://syzkaller.appspot.com/bug?extid=cae7809e9dc1459e4e63
-compiler:       gcc (Debian 14.2.0-19) 14.2.0, GNU ld (GNU Binutils for Debian) 2.44
-patch:          https://syzkaller.appspot.com/x/patch.diff?x=1065375a580000
+ 	if (data_race(barn->nr_full) < MAX_FULL_SHEAVES) {
+ 		stat(s, BARN_PUT);
++		kmemleak_unignore(sheaf, 1);
+ 		barn_put_full_sheaf(barn, sheaf);
+ 		return;
+ 	}
+@@ -5842,6 +5848,7 @@ static void rcu_free_sheaf(struct rcu_head *head)
+
+ empty:
+ 	if (barn && data_race(barn->nr_empty) < MAX_EMPTY_SHEAVES) {
++		kmemleak_unignore(sheaf, 1);
+ 		barn_put_empty_sheaf(barn, sheaf);
+ 		return;
+ 	}
+@@ -5948,8 +5955,10 @@ bool __kfree_rcu_sheaf(struct kmem_cache *s, void *obj)
+ 	 * we flush before local_unlock to make sure a racing
+ 	 * flush_all_rcu_sheaves() doesn't miss this sheaf
+ 	 */
+-	if (rcu_sheaf)
++	if (rcu_sheaf) {
++		kmemleak_ignore(rcu_sheaf);
+ 		call_rcu(&rcu_sheaf->rcu_head, rcu_free_sheaf);
++	}
+
+ 	local_unlock(&s->cpu_sheaves->lock);
+
+@@ -7538,6 +7547,7 @@ static void early_kmem_cache_node_alloc(int node)
+ 	slab->freelist = get_freepointer(kmem_cache_node, n);
+ 	slab->inuse = 1;
+ 	kmem_cache_node->node[node] = n;
++	kmemleak_alloc(n, kmem_cache_node->size, 1, GFP_NOWAIT);
+ 	init_kmem_cache_node(n, NULL);
+ 	inc_slabs_node(kmem_cache_node, node, slab->objects);
+
+
+base-commit: c23719abc3308df7ed3ad35650ad211fb2d2003d
+--
+2.43.0
+
 
 
 
