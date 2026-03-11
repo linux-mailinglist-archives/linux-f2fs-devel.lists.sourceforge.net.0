@@ -2,122 +2,77 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id sNizMXpWsWmGtwIAu9opvQ
+	id uKgvGuCSsWnkDAAAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 11 Mar 2026 12:48:10 +0100
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 11 Mar 2026 17:05:52 +0100
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 25AAD263153
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 11 Mar 2026 12:48:10 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 88038266F5A
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 11 Mar 2026 17:05:51 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:In-Reply-To:MIME-Version:References:
-	Message-ID:To:Date:Sender:Content-ID:Content-Description:Resent-Date:
-	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=NiqYP76M0sD69mqeIdVG44zPg+0LOSVzoBiM+nkGZH4=; b=hvnesloQ04FT4VwtoQh0QmPaPk
-	KY4/bzfn586EON5dljBchEMKwpPN6iGyDH2eAV2ShzI90mX6nzzyuAJnYZJMy0GWzv6ptmsCc8scG
-	GOT/RwXcIzzeomREi13bYBh1gCsQnmIQ5hoancLl7RWV59iJ/XzI3IGirHQv8Y1lY/7k=;
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	List-Unsubscribe:List-Id:Subject:MIME-Version:Message-ID:Date:To:Sender:
+	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+	Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Owner;
+	bh=uBEZrWrqdh2JEoDdox1qeoWKzpqtDIqHFyj0vvzwqfo=; b=dhxS2oQBe8lktb5EIQh/tq5UvU
+	pIgHIAOwOLlWnBwPjiuezQo5Vj/C44scObaiHTQjstLSzTBfXC8LvuBBbP9yDZDpheZTbaAYJ78FG
+	vnQl/ABN7xKyIj7r4mZV8FFZo+uSOf6rYyDFSOFDyZfdWzmTYHoVKvB/E0VEZY921Fnc=;
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1w0I2k-0000Wn-CF;
-	Wed, 11 Mar 2026 11:48:02 +0000
+	id 1w0M4C-0005IW-Ma;
+	Wed, 11 Mar 2026 16:05:48 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <aalbersh@redhat.com>) id 1w0I2j-0000WW-9X
+ (envelope-from <chao@kernel.org>) id 1w0M42-0005IJ-Em
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 11 Mar 2026 11:48:01 +0000
+ Wed, 11 Mar 2026 16:05:38 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:In-Reply-To:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=asRPjwI5YmOjCP6UVRlsstGP3cgkUliMF2dXi85Qbqg=; b=bI8MP1xqF4kDoqNbNVmiNJHz1+
- 0F9nswKk8U5T9Yd7c5+SZRUfQZDNN3idfo1MJW0Dcvt9dkpu4rjgXqEgeOgx7Hj2oiT6JcZHrhxfN
- q32gVkQVmoXqRNLQpNaOlO+d2xZF5GLshtNIdlWUTnwcywBxc7ILOpNHWnRD9XL2dHH8=;
+ bh=vuSJvCiJomcAXtJRslOIVuiHeyyCY5fUmdOYe7vNo7w=; b=Z6j4GrzDgQjgJQZ0E1Y2fmhPay
+ 8uo8uvJYs9aUdnE1pUzEVa2djdxAMR2OUjkQlDyuBJoOvcZKH9lMdqsNo7q1nUngxN7nMGFlc6dm3
+ 5XG9u8LvtyrPEZbp2Yno7GI4lqgkKTKiRuQpabXYqrucXMIt6YE+PBfqngnx/3oLOXwc=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:In-Reply-To:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=asRPjwI5YmOjCP6UVRlsstGP3cgkUliMF2dXi85Qbqg=; b=WXp45A07TEBCqHCeI69/ehMGYo
- 0K+aBAsOx1PQB3iJ/LYd4f5XIMOGLPpX1pw8cbREYGihlEEf3cQmoiT26snrYKEyJHWhCqpeWxyzz
- oAYEkWNeaW723RWAIqT6Mc5RgpOAY9lpbfkZRQorBYuaG7BdFeS6xc1RMIyofdhxgaYQ=;
-Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
+ h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=vuSJvCiJomcAXtJRslOIVuiHeyyCY5fUmdOYe7vNo7w=; b=F
+ t3Y6hFZMjaepUsdZ7KT9Q/+2pd+xIhnJl54xOOhBGQYRUYBoxI2BaZdH1fAd3mdYyjLg09cWw8072
+ 9NOUbLWRBxdYI5s5bGKUOUNxq1SuiTwZrN+7Hh6rgI58f/WyMC6gg2BSJ+17tAAqgLmLQ4cT/mPIi
+ 5/QvQr2QDc+ZLOVw=;
+Received: from sea.source.kernel.org ([172.234.252.31])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1w0I2i-0000c3-SL for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 11 Mar 2026 11:48:01 +0000
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1773229669;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=asRPjwI5YmOjCP6UVRlsstGP3cgkUliMF2dXi85Qbqg=;
- b=bpDtRo8RGzTpUVtHbeV1Dfx0edUf99zv/AurKK0p6Dim+ZIAMOCXO7FMDOlawS4Rb8c/WA
- kDxSil3Q8EuN3ShfFOJ7Fgm/6/dGhp4m6qbLKVuxnItza5G0IH65V+pKHgmfh4icuuFJ0x
- ZNn6YPCSolzS/a0CWqsPLlfvyWO+pHk=
-Received: from mail-wm1-f71.google.com (mail-wm1-f71.google.com
- [209.85.128.71]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-544-97kl7XBTNbi35PYjw6teSA-1; Wed, 11 Mar 2026 07:47:48 -0400
-X-MC-Unique: 97kl7XBTNbi35PYjw6teSA-1
-X-Mimecast-MFC-AGG-ID: 97kl7XBTNbi35PYjw6teSA_1773229667
-Received: by mail-wm1-f71.google.com with SMTP id
- 5b1f17b1804b1-4853ac455b2so29591625e9.1
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Wed, 11 Mar 2026 04:47:48 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1773229667; x=1773834467;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=asRPjwI5YmOjCP6UVRlsstGP3cgkUliMF2dXi85Qbqg=;
- b=mTigLpafsXgDqs45CdkgY4TBnPhBfc1VUCSIdcXpcR9ztPbniZZFVwII2GzcBu+Ssm
- OVJac6SotVvDw32eD+gzZ9NW8uWQLzSFl7arexRlCWnYccT6CFvV6ZLugw4tMHUXk1A5
- oOGySZouc/GPEnwH2254c3xoOkXHX2S2ImlWMzwIT42U7tbCqPFS4l0h+EXCqtcElh5n
- Z9ZdPU8zfCq0cZEAzxL8867bK+arNgj5aqdsoOWSm+EEDBqkZvoY0TphZ1KqN24Gfc30
- w3mAABb2esntcsRBbCFbYi3v6xu8eOyETpMTmYNM4SCaOHiXFMQEeshP6jhxGmqNjvgx
- Oimg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUpJM0OMNE+SzxgrCzAwWwEGwfHeyZXFeRfOskpzHWib6IPzv1ZXzbg57wHBj3IQUa9k721EoNnIY4k4GqU6qe2@lists.sourceforge.net
-X-Gm-Message-State: AOJu0Yw/uGKC4iEodNdYStQs9GG31uRaFfytLfw2ygAHAdA0NLot++O+
- 5YkCX4xxAb2gyMz37KosxoIolC8lhOGMm36i/O7KdaYmBsa/u2lJon36Z/F612GyQv9ZjRRBhg9
- eimTLyJxgYClSx4KolaYMy6NYDQjxaAQafPaPCGoRfwwm8MRliPyvYASpd9Dj+2KdZS5MfK0KlI
- zhwg==
-X-Gm-Gg: ATEYQzz7JVmfBkmuk7hkd/L1jqq2vlGinCMqQ8bVE/ZOECd2ITnrYlvZp7kQEkHdFqO
- kqLBHYZQz2zZ9pX6dBtUCSx4TpMkp2tivvusXZ0bDrxdESVfgO/xeUjvpCuaMH6bn59I5AE9tYj
- kfdLHAFrJrqlUDghhomMdDoanzYqx/AuJpdebeXcZosnoSDEmUeBjwkrQ7HJvWPYV7ZvMgvG5UR
- D1TRTHNOV0GHfHJ55ZD2ugBpuVTWsP4zuFUfKsYHf5/CpiYExA6J6NjXCiK3zL+ZQP0J/eqkXV/
- sbLdNRXNkroq73YKAEfQvTYYbWfONFjRuO2pi8o20BLMqpFSfCD/G0pEL33zqFCjBTtbWPARzze
- 5GMu70v1tUec=
-X-Received: by 2002:a05:600c:6818:b0:485:3ca4:4eee with SMTP id
- 5b1f17b1804b1-4854b144e6dmr35215615e9.34.1773229667257; 
- Wed, 11 Mar 2026 04:47:47 -0700 (PDT)
-X-Received: by 2002:a05:600c:6818:b0:485:3ca4:4eee with SMTP id
- 5b1f17b1804b1-4854b144e6dmr35215345e9.34.1773229666807; 
- Wed, 11 Mar 2026 04:47:46 -0700 (PDT)
-Received: from thinky ([217.30.74.39]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4854ad5ee37sm37540885e9.2.2026.03.11.04.47.46
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 11 Mar 2026 04:47:46 -0700 (PDT)
-Date: Wed, 11 Mar 2026 12:47:45 +0100
-To: "Darrick J. Wong" <djwong@kernel.org>
-Message-ID: <jezqpw7mjdren3gzvmkxv7dzviisf7mx2n6dwtq3iwgypghvne@z76sdkkk2x7n>
-References: <20260309192355.176980-1-aalbersh@kernel.org>
- <20260309192355.176980-2-aalbersh@kernel.org>
- <20260310004627.GV6033@frogsfrogsfrogs>
+ id 1w0M41-0007Om-IQ for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 11 Mar 2026 16:05:38 +0000
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sea.source.kernel.org (Postfix) with ESMTP id 171474329D;
+ Wed, 11 Mar 2026 13:35:51 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8038AC4CEF7;
+ Wed, 11 Mar 2026 13:35:49 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1773236151;
+ bh=B6w+pOLI4c0yj7mh9s6SnyB9dKoUajWjVyf4YAQI7mM=;
+ h=From:To:Cc:Subject:Date:From;
+ b=RpX76wfEcwMcsDM9OR8OP5WRDyQq5f7tccBuDKTvueWQYIrUxum9028wa7FDMBEBW
+ QmqeXX8J+bFmgBNiJA/hxhwKV8fYCc7WemjwYjee35RsU9EWxwP2ohCWUic2dr2+Xl
+ yq/vVNxFhV77nPM0xFmK+PIpsCFrOabtOHHEDdJLfq7AYwbT7lTQ7Qx8+EN7M5q0bT
+ EOlGnAstsNopI/2F85M7+gyo04ZNjJ4jGSLMK5x67Mf2eUS5j0waJmUMx4a3K53WjD
+ Uq6uSmAgePWpjN8IhQjrx9DkH55X19F1nyu9thzjWiXjPDOL5zaVwXUPeZgPBF+O7z
+ My26tIu8KQtDA==
+To: jaegeuk@kernel.org
+Date: Wed, 11 Mar 2026 21:35:42 +0800
+Message-ID: <20260311133542.1074617-1-chao@kernel.org>
+X-Mailer: git-send-email 2.53.0.473.g4a7958ca14-goog
 MIME-Version: 1.0
-In-Reply-To: <20260310004627.GV6033@frogsfrogsfrogs>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: LTZSr_r3LCqeEgfdqoUMtGLAwCFhuem5XSFvDknsePg_1773229667
-X-Mimecast-Originator: redhat.com
-Content-Disposition: inline
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
@@ -125,10 +80,10 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2026-03-09 17:46:27, Darrick J. Wong wrote: > On Mon, Mar
- 09, 2026 at 08:23:16PM +0100,
- Andrey Albershteyn wrote: > > Reported verification
- errors to fsnotify through recently added fserror > > int [...] 
+ Content preview: Syzbot reported a f2fs bug as below: [ cut here ] kernel BUG
+ at fs/f2fs/segment.c:1900! Oops: invalid opcode: 0000 [#1] SMP KASAN PTI
+ CPU: 1 UID: 0 PID: 6527 Comm: syz.5.110 Not tainted syzkaller #0 PREEMPT_{RT,
+ (f [...] 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -138,13 +93,11 @@ X-Spam-Report: Spam detection software,
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain 0.0 RCVD_IN_MSPIKE_H5      RBL: Excellent reputation (+5)
- [170.10.133.124 listed in wl.mailspike.net]
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+ domain
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1w0I2i-0000c3-SL
-Subject: Re: [f2fs-dev] [PATCH v4 01/25] fsverity: report validation errors
- through fserror to fsnotify
+X-Headers-End: 1w0M41-0007Om-IQ
+Subject: [f2fs-dev] [PATCH] f2fs: fix to do sanity check on
+ dcc->discard_cmd_cnt conditionally
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -156,96 +109,207 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Andrey Albershteyn via Linux-f2fs-devel
- <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Andrey Albershteyn <aalbersh@redhat.com>
-Cc: fsverity@lists.linux.dev, ebiggers@kernel.org,
- Andrey Albershteyn <aalbersh@kernel.org>,
- linux-f2fs-devel@lists.sourceforge.net, linux-xfs@vger.kernel.org,
- linux-fsdevel@vger.kernel.org, linux-ext4@vger.kernel.org, hch@lst.de,
- linux-btrfs@vger.kernel.org
+From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Chao Yu <chao@kernel.org>
+Cc: stable@kernel.org, linux-kernel@vger.kernel.org,
+ syzbot+62538b67389ee582837a@syzkaller.appspotmail.com,
+ linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
-X-Rspamd-Queue-Id: 25AAD263153
-X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-8.11 / 15.00];
+X-Spamd-Result: default: False [-6.11 / 15.00];
 	WHITELIST_DMARC(-7.00)[sourceforge.net:D:+];
-	MID_RHS_NOT_FQDN(0.50)[];
+	SUSPICIOUS_RECIPS(1.50)[];
+	MID_RHS_MATCH_TO(1.00)[];
 	DMARC_POLICY_ALLOW_WITH_FAILURES(-0.50)[];
 	RWL_MAILSPIKE_EXCELLENT(-0.40)[216.105.38.7:from];
-	MAILLIST(-0.20)[mailman];
 	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
+	MAILLIST(-0.20)[mailman];
 	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	DMARC_POLICY_ALLOW(0.00)[lists.sourceforge.net,none];
-	RCVD_TLS_LAST(0.00)[];
+	FORGED_RECIPIENTS(0.00)[m:jaegeuk@kernel.org,m:stable@kernel.org,m:linux-kernel@vger.kernel.org,m:syzbot+62538b67389ee582837a@syzkaller.appspotmail.com,m:linux-f2fs-devel@lists.sourceforge.net,m:syzbot@syzkaller.appspotmail.com,s:lists@lfdr.de];
+	REPLYTO_DOM_EQ_TO_DOM(0.00)[];
 	DKIM_MIXED(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
 	RECEIVED_HELO_LOCALHOST(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:djwong@kernel.org,m:fsverity@lists.linux.dev,m:ebiggers@kernel.org,m:aalbersh@kernel.org,m:linux-f2fs-devel@lists.sourceforge.net,m:linux-xfs@vger.kernel.org,m:linux-fsdevel@vger.kernel.org,m:linux-ext4@vger.kernel.org,m:hch@lst.de,m:linux-btrfs@vger.kernel.org,s:lists@lfdr.de];
+	TO_DN_NONE(0.00)[];
 	FORGED_SENDER(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
-	TO_DN_SOME(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,redhat.com:s=mimecast20190719];
-	MIME_TRACE(0.00)[0:+];
 	ARC_NA(0.00)[];
-	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
-	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,redhat.com:-];
-	RCVD_COUNT_FIVE(0.00)[6];
-	PREVIOUSLY_DELIVERED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
-	NEURAL_HAM(-0.00)[-1.000];
-	FORGED_SENDER_FORWARDING(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
-	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
+	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,kernel.org:s=k20201202];
+	DMARC_POLICY_ALLOW(0.00)[lists.sourceforge.net,none];
+	RCVD_COUNT_FIVE(0.00)[5];
+	TAGGED_RCPT(0.00)[linux-f2fs-devel,62538b67389ee582837a];
+	FORGED_SENDER_FORWARDING(0.00)[];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	TAGGED_RCPT(0.00)[linux-f2fs-devel];
-	HAS_REPLYTO(0.00)[aalbersh@redhat.com];
-	RCPT_COUNT_SEVEN(0.00)[10];
-	MISSING_XM_UA(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.sourceforge.net:helo,lists.sourceforge.net:rdns,lists.sourceforge.net:dkim];
+	NEURAL_HAM(-0.00)[-1.000];
+	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
+	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,kernel.org:-];
 	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.sourceforge.net:dkim,lists.sourceforge.net:rdns,lists.sourceforge.net:helo]
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	RCPT_COUNT_FIVE(0.00)[5];
+	HAS_REPLYTO(0.00)[chao@kernel.org]
+X-Rspamd-Queue-Id: 88038266F5A
 X-Rspamd-Action: no action
+X-Rspamd-Server: lfdr
 
-On 2026-03-09 17:46:27, Darrick J. Wong wrote:
-> On Mon, Mar 09, 2026 at 08:23:16PM +0100, Andrey Albershteyn wrote:
-> > Reported verification errors to fsnotify through recently added fserror
-> > interface.
-> > 
-> > Signed-off-by: Andrey Albershteyn <aalbersh@kernel.org>
-> > ---
-> >  fs/verity/verify.c | 2 ++
-> >  1 file changed, 2 insertions(+)
-> > 
-> > diff --git a/fs/verity/verify.c b/fs/verity/verify.c
-> > index 4004a1d42875..99276053d3bb 100644
-> > --- a/fs/verity/verify.c
-> > +++ b/fs/verity/verify.c
-> > @@ -9,6 +9,7 @@
-> >  
-> >  #include <linux/bio.h>
-> >  #include <linux/export.h>
-> > +#include <linux/fserror.h>
-> >  
-> >  #define FS_VERITY_MAX_PENDING_BLOCKS 2
-> >  
-> > @@ -312,6 +313,7 @@ static bool verify_data_block(struct fsverity_info *vi,
-> >  		data_pos, level - 1, params->hash_alg->name, hsize, want_hash,
-> >  		params->hash_alg->name, hsize,
-> >  		level == 0 ? dblock->real_hash : real_hash);
-> > +	fserror_report_data_lost(inode, data_pos, params->block_size, GFP_NOFS);
-> 
-> Don't we also need to cover the "if (unlikely(data_pos >= inode->i_size))"
-> around line 199 in verify_data_block?
+Syzbot reported a f2fs bug as below:
 
-make sense, will add it there too
+------------[ cut here ]------------
+kernel BUG at fs/f2fs/segment.c:1900!
+Oops: invalid opcode: 0000 [#1] SMP KASAN PTI
+CPU: 1 UID: 0 PID: 6527 Comm: syz.5.110 Not tainted syzkaller #0 PREEMPT_{RT,(full)}
+Hardware name: Google Google Compute Engine/Google Compute Engine, BIOS Google 02/12/2026
+RIP: 0010:f2fs_issue_discard_timeout+0x59b/0x5a0 fs/f2fs/segment.c:1900
+Code: d9 80 e1 07 80 c1 03 38 c1 0f 8c d6 fe ff ff 48 89 df e8 a8 5e fa fd e9 c9 fe ff ff e8 4e 46 94 fd 90 0f 0b e8 46 46 94 fd 90 <0f> 0b 0f 1f 00 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90 f3
+RSP: 0018:ffffc9000494f940 EFLAGS: 00010283
+RAX: ffffffff843009ca RBX: 0000000000000001 RCX: 0000000000080000
+RDX: ffffc9001ca78000 RSI: 00000000000029f3 RDI: 00000000000029f4
+RBP: 0000000000000000 R08: 0000000000000000 R09: 0000000000000000
+R10: dffffc0000000000 R11: ffffed100893a431 R12: 1ffff1100893a430
+R13: 1ffff1100c2b702c R14: dffffc0000000000 R15: ffff8880449d2160
+FS:  00007ffa35fed6c0(0000) GS:ffff88812643d000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 00007f2b68634000 CR3: 0000000039f62000 CR4: 00000000003526f0
+Call Trace:
+ <TASK>
+ __f2fs_remount fs/f2fs/super.c:2960 [inline]
+ f2fs_reconfigure+0x108a/0x1710 fs/f2fs/super.c:5443
+ reconfigure_super+0x227/0x8a0 fs/super.c:1080
+ do_remount fs/namespace.c:3391 [inline]
+ path_mount+0xdc5/0x10e0 fs/namespace.c:4151
+ do_mount fs/namespace.c:4172 [inline]
+ __do_sys_mount fs/namespace.c:4361 [inline]
+ __se_sys_mount+0x31d/0x420 fs/namespace.c:4338
+ do_syscall_x64 arch/x86/entry/syscall_64.c:63 [inline]
+ do_syscall_64+0x14d/0xf80 arch/x86/entry/syscall_64.c:94
+ entry_SYSCALL_64_after_hwframe+0x77/0x7f
+RIP: 0033:0x7ffa37dbda0a
 
+The root cause is there will be race condition in between f2fs_ioc_fitrim()
+and f2fs_remount():
+
+- f2fs_remount			- f2fs_ioc_fitrim
+ - f2fs_issue_discard_timeout
+  - __issue_discard_cmd
+  - __drop_discard_cmd
+  - __wait_all_discard_cmd
+				 - f2fs_trim_fs
+				  - f2fs_write_checkpoint
+				   - f2fs_clear_prefree_segments
+				    - f2fs_issue_discard
+				     - __issue_discard_async
+				      - __queue_discard_cmd
+				       - __update_discard_tree_range
+				        - __insert_discard_cmd
+				         - __create_discard_cmd
+				         : atomic_inc(&dcc->discard_cmd_cnt);
+  - sanity check on dcc->discard_cmd_cnt (expect discard_cmd_cnt to be zero)
+
+This will only happen when fitrim races w/ remount rw, if we remount to
+readonly filesystem, remount will wait until mnt_pcp.mnt_writers to zero,
+that means fitrim is not in process at that time.
+
+Cc: stable@kernel.org
+Fixes: 2482c4325dfe ("f2fs: detect bug_on in f2fs_wait_discard_bios")
+Reported-by: syzbot+62538b67389ee582837a@syzkaller.appspotmail.com
+Closes: https://lore.kernel.org/linux-f2fs-devel/69b07d7c.050a0220.8df7.09a1.GAE@google.com
+Signed-off-by: Chao Yu <chao@kernel.org>
+---
+ fs/f2fs/f2fs.h    |  2 +-
+ fs/f2fs/segment.c |  6 +++---
+ fs/f2fs/super.c   | 11 ++++++++---
+ 3 files changed, 12 insertions(+), 7 deletions(-)
+
+diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+index 8942b2a63cfd..e1c2d82ea64e 100644
+--- a/fs/f2fs/f2fs.h
++++ b/fs/f2fs/f2fs.h
+@@ -3989,7 +3989,7 @@ bool f2fs_is_checkpointed_data(struct f2fs_sb_info *sbi, block_t blkaddr);
+ int f2fs_start_discard_thread(struct f2fs_sb_info *sbi);
+ void f2fs_drop_discard_cmd(struct f2fs_sb_info *sbi);
+ void f2fs_stop_discard_thread(struct f2fs_sb_info *sbi);
+-bool f2fs_issue_discard_timeout(struct f2fs_sb_info *sbi);
++bool f2fs_issue_discard_timeout(struct f2fs_sb_info *sbi, bool need_check);
+ void f2fs_clear_prefree_segments(struct f2fs_sb_info *sbi,
+ 					struct cp_control *cpc);
+ void f2fs_dirty_to_prefree(struct f2fs_sb_info *sbi);
+diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
+index 23faf6725632..0bf25786667f 100644
+--- a/fs/f2fs/segment.c
++++ b/fs/f2fs/segment.c
+@@ -1880,7 +1880,7 @@ void f2fs_stop_discard_thread(struct f2fs_sb_info *sbi)
+  *
+  * Return true if issued all discard cmd or no discard cmd need issue, otherwise return false.
+  */
+-bool f2fs_issue_discard_timeout(struct f2fs_sb_info *sbi)
++bool f2fs_issue_discard_timeout(struct f2fs_sb_info *sbi, bool need_check)
+ {
+ 	struct discard_cmd_control *dcc = SM_I(sbi)->dcc_info;
+ 	struct discard_policy dpolicy;
+@@ -1897,7 +1897,7 @@ bool f2fs_issue_discard_timeout(struct f2fs_sb_info *sbi)
+ 	/* just to make sure there is no pending discard commands */
+ 	__wait_all_discard_cmd(sbi, NULL);
+ 
+-	f2fs_bug_on(sbi, atomic_read(&dcc->discard_cmd_cnt));
++	f2fs_bug_on(sbi, need_check && atomic_read(&dcc->discard_cmd_cnt));
+ 	return !dropped;
+ }
+ 
+@@ -2367,7 +2367,7 @@ static void destroy_discard_cmd_control(struct f2fs_sb_info *sbi)
+ 	 * Recovery can cache discard commands, so in error path of
+ 	 * fill_super(), it needs to give a chance to handle them.
+ 	 */
+-	f2fs_issue_discard_timeout(sbi);
++	f2fs_issue_discard_timeout(sbi, true);
+ 
+ 	kfree(dcc);
+ 	SM_I(sbi)->dcc_info = NULL;
+diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
+index 8774c60b4be4..40079fd7886b 100644
+--- a/fs/f2fs/super.c
++++ b/fs/f2fs/super.c
+@@ -2009,7 +2009,7 @@ static void f2fs_put_super(struct super_block *sb)
+ 	}
+ 
+ 	/* be sure to wait for any on-going discard commands */
+-	done = f2fs_issue_discard_timeout(sbi);
++	done = f2fs_issue_discard_timeout(sbi, true);
+ 	if (f2fs_realtime_discard_enable(sbi) && !sbi->discard_blks && done) {
+ 		struct cp_control cpc = {
+ 			.reason = CP_UMOUNT | CP_TRIMMED,
+@@ -2152,7 +2152,7 @@ static int f2fs_unfreeze(struct super_block *sb)
+ 	 * will recover after removal of snapshot.
+ 	 */
+ 	if (test_opt(sbi, DISCARD) && !f2fs_hw_support_discard(sbi))
+-		f2fs_issue_discard_timeout(sbi);
++		f2fs_issue_discard_timeout(sbi, true);
+ 
+ 	clear_sbi_flag(F2FS_SB(sb), SBI_IS_FREEZING);
+ 	return 0;
+@@ -2957,7 +2957,12 @@ static int __f2fs_remount(struct fs_context *fc, struct super_block *sb)
+ 			need_stop_discard = true;
+ 		} else {
+ 			f2fs_stop_discard_thread(sbi);
+-			f2fs_issue_discard_timeout(sbi);
++			/*
++			 * f2fs_ioc_fitrim() won't race w/ "remount ro"
++			 * so it's safe to check discard_cmd_cnt in
++			 * f2fs_issue_discard_timeout().
++			 */
++			f2fs_issue_discard_timeout(sbi, flags & SB_RDONLY);
+ 			need_restart_discard = true;
+ 		}
+ 	}
 -- 
-- Andrey
+2.49.0
 
 
 
