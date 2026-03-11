@@ -2,42 +2,42 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 4B0uHxmUsWnkDAAAu9opvQ
+	id MMO7MveEsWmjCwAAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 11 Mar 2026 17:11:05 +0100
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 11 Mar 2026 16:06:31 +0100
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id C40192670D0
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 11 Mar 2026 17:11:04 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 18CE4266013
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 11 Mar 2026 16:06:31 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Type:Content-Transfer-Encoding:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
 	List-Unsubscribe:List-Id:Subject:In-Reply-To:References:To:MIME-Version:Date:
 	Message-ID:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
 	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=Lsqo7GVKW0vCOfF0MH/DU9Cd6PGWdvrZyxYm1+/656A=; b=e3H7TTjkwQs+lY9Wl7RCiOHkQh
-	kHczXXRzuo3l6hl9zjcgu5mCfWwFRJVUrSe6dI+Y3rickjdIg768jXu4OBC0kuGkzE4CqjMbQ7Cu8
-	3L2/MV/ApkQ1gKHWNH/57WBKCaPXLkmn6WR3rh8n9ZX3v+vkjte7CRCIyvwsgyn69q9k=;
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=yy7inr6yHalfAqeagk19vCQy2X0LnUT7L6l5TPy+JGk=; b=EIR2wH1zReGSglb4AKWw345e0q
+	ybwwgAj9cm9TEpdmhK3wKiqzK+FYz38W8Pjqh9Wgmrw7nLjLg5+s0KxMlPCvkejTZBRY+t/Yy3iGm
+	gNtJOtSOxp70kKRanYFK5SFI55PQkc6J3OmRrIYdm3AWk4sORJOcwAnyr3ViLwIGwK6w=;
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1w0M96-00066t-M9;
-	Wed, 11 Mar 2026 16:10:52 +0000
+	id 1w0L8W-0001WO-EX;
+	Wed, 11 Mar 2026 15:06:12 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1w0M8s-00066d-Nn
+ (envelope-from <chao@kernel.org>) id 1w0L8V-0001WG-GM
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 11 Mar 2026 16:10:38 +0000
+ Wed, 11 Mar 2026 15:06:11 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  From:References:To:Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=jTSsaSwH0SyhBDIOLJIgrBIaHkvNX+GUh3ijmW54UjY=; b=JZfDZXgIk87WX+NfVAnwWBKPmQ
- 2n5jkj7k6m+PzE2rGrqhnJ7rEAiFiDIVPeUgUrXqRVDngybEaY7118GpRF97My/C6X/7cscm1fEep
- cHC7hR0vfVDa/b0tbgULk9Xpu5ujyVz9ALtfUZQK9fNbti3VulnwegnG3/7dbPaof4uU=;
+ bh=Zg/ea103tv4Oko8P0H07gyJ3c/KZT9+uZC4v2/dW2aY=; b=ROt+8jpa2Y98xQ8FRbyJGAQjLn
+ 0wdfJmCPk88J+xfM8dMC3RinCgvqqzlWszGnJ7BMTa+iaa8KQy8c6gdkZBV3vQMSyd1FXn9O6tc5s
+ Y58xXuY1Bf6fuMcA++qJ0lb/NZKhVCZh9W8BwbLjsM4Leh/eTVYOkwFQl95Ui7l1thP4=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
@@ -45,38 +45,38 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=jTSsaSwH0SyhBDIOLJIgrBIaHkvNX+GUh3ijmW54UjY=; b=ORpmCntft5PFh8epL/jDUVLdVg
- q8e3F50qNZcC4I3jM+w8PL277HHcP8MP8vEMjNG1wvaXSa5HdzFFnbD9O2p57K2CQsENCg88nunT6
- Ly/DSjQjfm5MSKo3eCQgo4DkN95byHlT0/+7I/p2C+iFzGKYfq05DRF4OqJOOr2mEIaA=;
-Received: from sea.source.kernel.org ([172.234.252.31])
+ bh=Zg/ea103tv4Oko8P0H07gyJ3c/KZT9+uZC4v2/dW2aY=; b=INL4YnnJR5aKNqZuO36PmR4M1i
+ VpIMdZT0P2D1mwTJD73hMSJGRPfxPPXjtwqxmEvcUir8Y4DiEDSJ994bqAG56u3iaoivLqvu0IPld
+ ckeJKfXDOT+205tEwZz7P7mNKOnvfQAizb2nNEpyMJnrNXmwdXVvutr53ToQyTRl5nUw=;
+Received: from tor.source.kernel.org ([172.105.4.254])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1w0M8r-0007i9-V3 for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 11 Mar 2026 16:10:38 +0000
+ id 1w0L8U-0003S3-RH for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 11 Mar 2026 15:06:11 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 22F1E44460;
- Wed, 11 Mar 2026 13:44:09 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 38BEAC4CEF7;
- Wed, 11 Mar 2026 13:44:07 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id 831796013E;
+ Wed, 11 Mar 2026 14:59:33 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 58847C4CEF7;
+ Wed, 11 Mar 2026 14:59:31 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1773236649;
- bh=OD21PrssA79FIcWIFDQaYFQnABNyQry8BnIpPYlAW5k=;
+ s=k20201202; t=1773241173;
+ bh=mw/8hbJKOG8I5VOQn0pnHUxCpXScj6z6l8URrqggSxY=;
  h=Date:Cc:Subject:To:References:From:In-Reply-To:From;
- b=dso26tImuBnrdem09GdQ3Ix/mRG/Fa9tr1n3i89YtRRhgtw2QyzekfboosrH1WMmB
- nHeyXHVfzpWi3kVNcjUbvVG6xjQimSB2/bWbuzWz77CcDsJaBZgvMozqjp0s5i21m7
- RclE4EwcliBAEqN5f1cAUlMSnGgyFeQYZSJiDKZ7asgUgcVaSWsRkXN9I15QczBxmy
- ofkAQfvQb8zABOdisx2+GRb1lVEcw1bhSz3M0ckiOyLrLH51o9GwU/Ec2/EGk/aC4h
- I+6FbLxTW+RuMmqvJ2TU8jq5wiRHs7iVxl/FPdBFVwOtoUbTF+WNsU76p7qc/D3OyG
- +thI2B3+88KsQ==
-Message-ID: <fbaaef01-5a66-407e-b447-b5741b42d309@kernel.org>
-Date: Wed, 11 Mar 2026 21:44:04 +0800
+ b=cCaGh0KZeg13jJ2hRapjjtYEJlpAOGFAIqC6OttIPQnqngVcdbMFIgMxK+GFp8cDp
+ rpWw87pbGUTmAqDvoX+qRHWuKgWx80vHYO/0RFCUupYZescJ1lhSTkZWAnwmtS2GjJ
+ YjSK63yIR5EtUxqaWJUmICoGbHjod7FIc+qYpsCstye6pGGwuDGY6eVyiyyVACSWDq
+ IV7w+mYOHIbqK/N4ybicV+qf3lBYC779KialhavuL+OQLRUcGVuZOXY9FVMN7w4Rh2
+ I5LgRjxFqJcX5GLUhNoK38oE58H5vq1forKI1t1ulMJZp6a+8BKNb14ShutJziVa7w
+ tpa4h7z5Xulmw==
+Message-ID: <2ab52a8d-a21b-4b74-a2a1-d7b51fb60ca6@kernel.org>
+Date: Wed, 11 Mar 2026 22:59:27 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 To: Daeho Jeong <daeho43@gmail.com>, linux-kernel@vger.kernel.org,
  linux-f2fs-devel@lists.sourceforge.net, kernel-team@android.com
-References: <20260310175428.1156719-1-daeho43@gmail.com>
+References: <20260310204916.1265736-1-daeho43@gmail.com>
 Content-Language: en-US
-In-Reply-To: <20260310175428.1156719-1-daeho43@gmail.com>
+In-Reply-To: <20260310204916.1265736-1-daeho43@gmail.com>
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
@@ -84,9 +84,9 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2026/3/11 01:54, Daeho Jeong wrote: > From: Daeho Jeong
- <daehojeong@google.com> > > In age-based victim selection (ATGC, AT_SSR,
- or GC_CB), f2fs_get_victim > can encounter sections with zero valid [...] 
+ Content preview:  On 2026/3/11 04:49, Daeho Jeong wrote: > From: Daeho Jeong
+ <daehojeong@google.com> > > Suspend can fail if kernel threads do not freeze
+ for a while. > f2fs_gc and f2fs_discard threads can perform long [...] 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -98,9 +98,9 @@ X-Spam-Report: Spam detection software,
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1w0M8r-0007i9-V3
-Subject: Re: [f2fs-dev] [PATCH] f2fs: fix to skip empty sections in
- f2fs_get_victim
+X-Headers-End: 1w0L8U-0003S3-RH
+Subject: Re: [f2fs-dev] [PATCH] f2fs: fix to freeze GC and discard threads
+ quickly
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -156,65 +156,108 @@ X-Spamd-Result: default: False [-8.61 / 15.00];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
 	HAS_REPLYTO(0.00)[chao@kernel.org]
-X-Rspamd-Queue-Id: C40192670D0
+X-Rspamd-Queue-Id: 18CE4266013
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On 2026/3/11 01:54, Daeho Jeong wrote:
+On 2026/3/11 04:49, Daeho Jeong wrote:
 > From: Daeho Jeong <daehojeong@google.com>
 > 
-> In age-based victim selection (ATGC, AT_SSR, or GC_CB), f2fs_get_victim
-> can encounter sections with zero valid blocks. This situation often
-> arises when checkpoint is disabled or due to race conditions between
-> SIT updates and dirty list management.
+> Suspend can fail if kernel threads do not freeze for a while.
+> f2fs_gc and f2fs_discard threads can perform long-running operations
+> that prevent them from reaching a freeze point in a timely manner.
 > 
-> In such cases, f2fs_get_section_mtime() returns INVALID_MTIME, which
-> subsequently triggers a fatal f2fs_bug_on(sbi, mtime == INVALID_MTIME)
-> in add_victim_entry() or get_cb_cost().
+> This patch adds explicit freezing checks in the following locations:
+> 1. f2fs_gc: Added a check at the 'retry' label to exit the loop quickly
+>     if freezing is requested, especially during heavy GC rounds.
+> 2. __issue_discard_cmd: Added a 'suspended' flag to break both inner and
+>     outer loops during discard command issuance if freezing is detected
+>     after at least one command has been issued.
+> 3. __issue_discard_cmd_orderly: Added a similar check for orderly discard
+>     to ensure responsiveness.
 > 
-> This patch adds a check in f2fs_get_victim's selection loop to skip
-> sections with no valid blocks. This prevents unnecessary age
-> calculations for empty sections and avoids the associated kernel panic.
-> This change also allows removing redundant checks in add_victim_entry().
+> These checks ensure that the threads release locks safely and enter the
+> frozen state.
 > 
 > Signed-off-by: Daeho Jeong <daehojeong@google.com>
 > ---
->   fs/f2fs/gc.c | 9 +++------
->   1 file changed, 3 insertions(+), 6 deletions(-)
+>   fs/f2fs/gc.c      |  4 ++++
+>   fs/f2fs/segment.c | 14 ++++++++++++--
+>   2 files changed, 16 insertions(+), 2 deletions(-)
 > 
 > diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
-> index 2e0f67946914..981eac629fe9 100644
+> index 981eac629fe9..fdc3366c4db3 100644
 > --- a/fs/f2fs/gc.c
 > +++ b/fs/f2fs/gc.c
-> @@ -521,12 +521,6 @@ static void add_victim_entry(struct f2fs_sb_info *sbi,
->   	struct sit_info *sit_i = SIT_I(sbi);
->   	unsigned long long mtime = 0;
->   
-> -	if (unlikely(is_sbi_flag_set(sbi, SBI_CP_DISABLED))) {
-> -		if (p->gc_mode == GC_AT &&
-> -			get_valid_blocks(sbi, segno, true) == 0)
-> -			return;
-> -	}
-> -
->   	mtime = f2fs_get_section_mtime(sbi, segno);
->   	f2fs_bug_on(sbi, mtime == INVALID_MTIME);
->   
-> @@ -889,6 +883,9 @@ int f2fs_get_victim(struct f2fs_sb_info *sbi, unsigned int *result,
->   		if (sec_usage_check(sbi, secno))
+> @@ -1962,6 +1962,10 @@ int f2fs_gc(struct f2fs_sb_info *sbi, struct f2fs_gc_control *gc_control)
+>   		goto stop;
+>   	}
+>   retry:
+> +	if (unlikely(freezing(current))) {
+> +		ret = 0;
+> +		goto stop;
+> +	}
+
+Do we need to check freezing() during multiple segments migration?
+especially in large section, e.g. zufs case.
+
+>   	ret = __get_victim(sbi, &segno, gc_type, gc_control->one_time);
+>   	if (ret) {
+>   		/* allow to search victim from sections has pinned data */
+> diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
+> index e9b6d774b985..a6c82ab28288 100644
+> --- a/fs/f2fs/segment.c
+> +++ b/fs/f2fs/segment.c
+> @@ -1606,6 +1606,9 @@ static void __issue_discard_cmd_orderly(struct f2fs_sb_info *sbi,
+>   		if (dc->state != D_PREP)
 >   			goto next;
 >   
-> +		if (!get_valid_blocks(sbi, segno, true))
-> +			goto next;
+> +		if (*issued > 0 && unlikely(freezing(current)))
+> +			break;
+> +
+>   		if (dpolicy->io_aware && !is_idle(sbi, DISCARD_TIME)) {
+>   			io_interrupted = true;
+>   			break;
+> @@ -1645,6 +1648,7 @@ static int __issue_discard_cmd(struct f2fs_sb_info *sbi,
+>   	struct blk_plug plug;
+>   	int i, issued;
+>   	bool io_interrupted = false;
+> +	bool suspended = false;
+>   
+>   	if (dpolicy->timeout)
+>   		f2fs_update_time(sbi, UMOUNT_DISCARD_TIMEOUT);
+> @@ -1675,6 +1679,11 @@ static int __issue_discard_cmd(struct f2fs_sb_info *sbi,
+>   		list_for_each_entry_safe(dc, tmp, pend_list, list) {
+>   			f2fs_bug_on(sbi, dc->state != D_PREP);
+>   
+> +			if (issued > 0 && unlikely(freezing(current))) {
+> +				suspended = true;
+> +				break;
+> +			}
+> +
+>   			if (dpolicy->timeout &&
+>   				f2fs_time_over(sbi, UMOUNT_DISCARD_TIMEOUT))
+>   				break;
+> @@ -1694,11 +1703,12 @@ static int __issue_discard_cmd(struct f2fs_sb_info *sbi,
+>   next:
+>   		mutex_unlock(&dcc->cmd_lock);
+>   
+> -		if (issued >= dpolicy->max_requests || io_interrupted)
+> +		if (issued >= dpolicy->max_requests || io_interrupted ||
+> +					suspended)
+>   			break;
+>   	}
+>   
+> -	if (dpolicy->type == DPOLICY_UMOUNT && issued) {
+> +	if (dpolicy->type == DPOLICY_UMOUNT && issued && !suspended) {
 
-Well, for f2fs_get_victim(, AT_SSR), once there are no dirty segment, if we
-don't count free segment as candidates, then, we can not find any valid victim?
+If we're umounting data partition, it doesn't need to consider suspend?
 
 Thanks,
 
-> +
->   		/* Don't touch checkpointed data */
->   		if (unlikely(is_sbi_flag_set(sbi, SBI_CP_DISABLED))) {
->   			if (p.alloc_mode == LFS) {
+>   		__wait_all_discard_cmd(sbi, dpolicy);
+>   		goto retry;
+>   	}
 
 
 
