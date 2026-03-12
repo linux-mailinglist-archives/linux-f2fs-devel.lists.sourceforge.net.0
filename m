@@ -2,42 +2,42 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id cOKBEmcfsmm5IwAAu9opvQ
+	id +K9KK2cfsmmyIwAAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
 	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 12 Mar 2026 03:05:27 +0100
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id E00F526C14F
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 12 Mar 2026 03:05:26 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id A61EE26C156
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 12 Mar 2026 03:05:27 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Type:Content-Transfer-Encoding:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
 	List-Unsubscribe:List-Id:Subject:In-Reply-To:References:To:MIME-Version:Date:
 	Message-ID:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
 	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=LR2fIgaG/wHa88ZV3T6VIjyAWW8PjDgB15qopYfISjo=; b=NbCjrTqk0HA4uG4ja3Yd/AWEzd
-	jJWChjl3hkqbNUNS3SwTM1235feMi/+CJlUmEGv2/55ue0IpzFVS2Zi/pplhX+L+kj+i1PQhbbzs8
-	45xmxpV3gwke+6hv1eEJqRViZWXPSislCK/qCbWPgG04XwiGYOcrNiDmGhg1p4OohZk8=;
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=0wmjHvZAgM5XEwvJalohiy9P6Dk+Ja7nDY5PND1UWHA=; b=I2AEeBaSA3sCAj6Fg02oFIjqeI
+	d2mqX/T6urwDHrdz/d9qsEe3LRf8uJ2wVx5LZ5eYTJfq54dLvic3KAaJQdDdTggNezN4OtoNuRXds
+	aS9UngAlUOGyrzjhU/fXLI3f/vF9mBKlxnfC7TxOcsypD2fqadbfsurRdNMTj8hLH/aA=;
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1w0VQR-0004lJ-Ej;
-	Thu, 12 Mar 2026 02:05:23 +0000
+	id 1w0VQT-0006TM-Gi;
+	Thu, 12 Mar 2026 02:05:26 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1w0VQP-0004lC-QI
+ (envelope-from <chao@kernel.org>) id 1w0VQR-0006T5-J3
  for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 12 Mar 2026 02:05:21 +0000
+ Thu, 12 Mar 2026 02:05:24 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  From:References:To:Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=5nzb80v/9PJK4b7vfRvf5fNw9RjHYYmV2iZOzh3OGU8=; b=au0KEwW9Yacvrgh0nWhJw9ZARx
- 4hwO/jk3/eYV7X1zBJWlQqpSS8zgIm/meMvROQikupVF0IGHMZu3b5+pzjeaVXKYAuDlMb1HLgKtd
- jIQI7VZqzrkTrLKoSzpMEUDuC5F7gyUK+s2piUZkc6/ZGLRC/pt1tPKO/u3+nB3C5RzM=;
+ bh=V5v8LTDnJhzm9Y7uouPrm0MUhLo8yf4ckTVrKUICZxY=; b=UZ3OMnBdvo4uHc3Dc5sA3yqVYU
+ IHJjlgnV7lGAUq3iL2Xzr07m020gIeuQVxRgL/ignBRefe9+4SfSQVFPbbkaQNFQGSjgWL1f3Y5BH
+ 2O7JdEWvYomPBPIl/BrXOPTBe5BT9uawZh1A0F0uzZPHLERht3G6L6Uong1z4tMTxRmo=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
@@ -45,63 +45,63 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=5nzb80v/9PJK4b7vfRvf5fNw9RjHYYmV2iZOzh3OGU8=; b=iUkXvNHHDtpzGIURNwhaTCMXFR
- 4LvMmIIOZLNaVGcSkFXFff2cVcHZnVKW/Y5QbmDxsiGkD6Yo9VxSmzV84TySBPKIi4gl35x0xgm9t
- joliFIKd56yhi/r2PtB+f8qy9V3EQiG+M42YF6+K/XO5c2EXfxMDCMlDuDtsHQPEe9/Q=;
+ bh=V5v8LTDnJhzm9Y7uouPrm0MUhLo8yf4ckTVrKUICZxY=; b=HI/uNGQJ6rySyqooEVlDhVooL5
+ o8uJ5JQ6W3IkVgucoD9VAAsAWx+frsrFO4L91/n1p1oVoEIUF6SeXvVv9eRzf7RaqfhesmxBgzo6l
+ Q7ix2plxDBArnC/+kXkHsttwi8FYMHpA2bO8/xi1JlsPn3VCvMJdrvbMSVZQndqpXoUA=;
 Received: from sea.source.kernel.org ([172.234.252.31])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1w0VQP-000592-EC for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 12 Mar 2026 02:05:21 +0000
+ id 1w0VQR-00059B-Mo for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 12 Mar 2026 02:05:24 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 076B5437C5;
+ by sea.source.kernel.org (Postfix) with ESMTP id 6AD88441EA;
+ Thu, 12 Mar 2026 02:05:18 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6652EC4CEF7;
  Thu, 12 Mar 2026 02:05:16 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 606A4C4CEF7;
- Thu, 12 Mar 2026 02:05:14 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1773281115;
- bh=dWMdaqCEsEt0RylPk0L1s8atnJmbN/WJgUEBSECy9Gs=;
+ s=k20201202; t=1773281118;
+ bh=8DOJwLks4i9HVYNvW905RyeENIG3RMyFG1QpNrCPUBE=;
  h=Date:Cc:Subject:To:References:From:In-Reply-To:From;
- b=GYJxVu93SXIyV1xDY+Zs+wKXojJewTdZxuTrSMN7a1h96HA/gnuyNbx2XMmKCni6m
- tPo4it0KewGpAhNg8tnhgzDazltxhrzKZZbCsZ3PNHEHeVCmX+QIyN0JsNlyOUMZ+g
- rElTkS492OcnZrcWCCPKbTr3a98mYTZnWukuLPDjrQB1pqpSmbV1Bi9R1mJ0XrqSjW
- GkZh11uL7ijghBNRAJPZqJdvcXORNQVRgK6Hwm2lbhPYO5Kydq3WapjZIQCLxpbBAC
- M9MnU5znNIWrJg7JJRAX1LIQ6NUSbIGUT68fLcMZzBPKX50iS965l55jdG1g5SEbZv
- 2H3FgleVsFvQA==
-Message-ID: <e1e242b4-046f-436a-b535-45db466c2921@kernel.org>
-Date: Thu, 12 Mar 2026 10:02:49 +0800
+ b=RooDS1vsfrMWwmM9PJ4FeGRHCpnB5QJQooSBjG35dtS05OYU5pvaGs62weauhRwzk
+ G+faB80TVgPITCLlmSsvjatER9YMjqGvvpj6I85feRDX5MuAYyyv0884JhBGF/Tf/6
+ 44BuzDtGB3XFWv15ibqDZ5WPWQvrXXFHqruTi4ys4P6KgKUJmiQElE2RcPuFTQxkX9
+ cf7kd+OqV7htZLDuoCHWforxwAemainN3VHJGROg8jVcVn3yKYdGetL9bjuKGACUn/
+ WuazSYugNNpJ6KNgpW/D6IvqN6zCh02Q2HUdoyrGVGVooxmyzd5j8OFqqdn/lfjMpS
+ PF/Wx8JnwxHHw==
+Message-ID: <11512584-09c3-43a0-b380-0b8e98cadfa0@kernel.org>
+Date: Thu, 12 Mar 2026 10:03:37 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 To: Yangyang Zang <zangyangyang66@gmail.com>, jaegeuk@kernel.org,
  daehojeong@google.com
 References: <20260311083530.2582720-1-zangyangyang1@xiaomi.com>
- <20260311083530.2582720-2-zangyangyang1@xiaomi.com>
+ <20260311083530.2582720-3-zangyangyang1@xiaomi.com>
 Content-Language: en-US
-In-Reply-To: <20260311083530.2582720-2-zangyangyang1@xiaomi.com>
+In-Reply-To: <20260311083530.2582720-3-zangyangyang1@xiaomi.com>
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2026/3/11 16:35, Yangyang Zang wrote: > Clean up the code
- to make its semantics more logical, no > logic changes. > > Signed-off-by:
- Yangyang Zang <zangyangyang1@xiaomi.com> Reviewed-by: Chao Yu
- <chao@kernel.org>
+ Content preview:  On 2026/3/11 16:35,
+ Yangyang Zang wrote: > Add logs for zeroing
+ SSA blocks and add an ASSERT to > prevent the issue of zeroing main area
+ blocks from > recurring in the future. > > Signed-off-by: Yangy [...] 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1w0VQP-000592-EC
-Subject: Re: [f2fs-dev] [PATCH v3 2/3] resize.f2fs: clean up the code in
+X-Headers-End: 1w0VQR-00059B-Mo
+Subject: Re: [f2fs-dev] [PATCH v3 3/3] resize.f2fs: add more logs in
  migrate_ssa()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
@@ -143,29 +143,30 @@ X-Spamd-Result: default: False [-8.61 / 15.00];
 	FORGED_SENDER(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
 	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
 	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,kernel.org:s=k20201202];
-	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
 	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,kernel.org:-];
+	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
 	RCVD_COUNT_FIVE(0.00)[5];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[xiaomi.com:email,lists.sourceforge.net:helo,lists.sourceforge.net:rdns,lists.sourceforge.net:dkim];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.sourceforge.net:helo,lists.sourceforge.net:rdns,lists.sourceforge.net:dkim,xiaomi.com:email];
 	FORGED_SENDER_FORWARDING(0.00)[];
 	FROM_HAS_DN(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
 	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
 	TAGGED_RCPT(0.00)[linux-f2fs-devel];
-	RCPT_COUNT_FIVE(0.00)[5];
+	HAS_REPLYTO(0.00)[chao@kernel.org];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
-	HAS_REPLYTO(0.00)[chao@kernel.org]
-X-Rspamd-Queue-Id: E00F526C14F
+	RCPT_COUNT_FIVE(0.00)[5]
+X-Rspamd-Queue-Id: A61EE26C156
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
 On 2026/3/11 16:35, Yangyang Zang wrote:
-> Clean up the code to make its semantics more logical, no
-> logic changes.
+> Add logs for zeroing SSA blocks and add an ASSERT to
+> prevent the issue of zeroing main area blocks from
+> recurring in the future.
 > 
 > Signed-off-by: Yangyang Zang <zangyangyang1@xiaomi.com>
 
