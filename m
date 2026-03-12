@@ -2,42 +2,42 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id KIVsDpwesmlwIwAAu9opvQ
+	id cOKBEmcfsmm5IwAAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 12 Mar 2026 03:02:04 +0100
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 12 Mar 2026 03:05:27 +0100
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id DCAAB26C0E9
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 12 Mar 2026 03:02:03 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id E00F526C14F
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 12 Mar 2026 03:05:26 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Type:Content-Transfer-Encoding:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
 	List-Unsubscribe:List-Id:Subject:In-Reply-To:References:To:MIME-Version:Date:
 	Message-ID:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
 	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=pzk318/zSsPuThS7+y4922JBO8/ERBptACqICuC4h/I=; b=K7KgQQXerMnR5SVGlsKU7D8u6/
-	4NtgFVfKb6hxq9LGKOet35QkjAwi3V9OHiRdkth+9HBLJ9Xq4OJqdMgo5uuzBA+hPoeEgqpFW1pO2
-	pgv1Z8Igc/3P1CWA+pQffnE9yUr0KIX51S7s+minIBu7PXsvNeJGPqEjpU+gVzhZ5GJg=;
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=LR2fIgaG/wHa88ZV3T6VIjyAWW8PjDgB15qopYfISjo=; b=NbCjrTqk0HA4uG4ja3Yd/AWEzd
+	jJWChjl3hkqbNUNS3SwTM1235feMi/+CJlUmEGv2/55ue0IpzFVS2Zi/pplhX+L+kj+i1PQhbbzs8
+	45xmxpV3gwke+6hv1eEJqRViZWXPSislCK/qCbWPgG04XwiGYOcrNiDmGhg1p4OohZk8=;
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1w0VN5-000690-T3;
-	Thu, 12 Mar 2026 02:01:56 +0000
+	id 1w0VQR-0004lJ-Ej;
+	Thu, 12 Mar 2026 02:05:23 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1w0VN5-00068m-1u
+ (envelope-from <chao@kernel.org>) id 1w0VQP-0004lC-QI
  for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 12 Mar 2026 02:01:55 +0000
+ Thu, 12 Mar 2026 02:05:21 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  From:References:To:Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=ednwHbRPRvMOERbf8lQFfp7PPWIQKi0CV/dnQXUB9RI=; b=GoCgwKpniDH4auiih6knmDTKC4
- Q9QXdZiEoOkX6anF+vsyoEm295rGGnSCXZ5QPx62RC5iaZtnoGO03Lw0nPt6Nj5MhFxBeA4caJFFs
- j+jVxlHamQJZfv6Q7x+NDqM+i8Jph/w5/b93KfMzQfK/UxV1iY/1I3/rPiRYGeXIgUcI=;
+ bh=5nzb80v/9PJK4b7vfRvf5fNw9RjHYYmV2iZOzh3OGU8=; b=au0KEwW9Yacvrgh0nWhJw9ZARx
+ 4hwO/jk3/eYV7X1zBJWlQqpSS8zgIm/meMvROQikupVF0IGHMZu3b5+pzjeaVXKYAuDlMb1HLgKtd
+ jIQI7VZqzrkTrLKoSzpMEUDuC5F7gyUK+s2piUZkc6/ZGLRC/pt1tPKO/u3+nB3C5RzM=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
@@ -45,38 +45,39 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=ednwHbRPRvMOERbf8lQFfp7PPWIQKi0CV/dnQXUB9RI=; b=If6Zfvd9kMWDjDFMQIJyTAyCtG
- FDYn+8GEpUsxcFgDyd5XdMvBuhsd+zMDt5SN4pfe+ASt0Rr1WPyue/fLzzbX4Nw2zbD3mhjWw+GJG
- s5gESxYom8mEgpX2n3cZn+5aajfgRnCErhZFlknyUE3r1ytp44l0I8CSSDV2weznhIxU=;
-Received: from tor.source.kernel.org ([172.105.4.254])
+ bh=5nzb80v/9PJK4b7vfRvf5fNw9RjHYYmV2iZOzh3OGU8=; b=iUkXvNHHDtpzGIURNwhaTCMXFR
+ 4LvMmIIOZLNaVGcSkFXFff2cVcHZnVKW/Y5QbmDxsiGkD6Yo9VxSmzV84TySBPKIi4gl35x0xgm9t
+ joliFIKd56yhi/r2PtB+f8qy9V3EQiG+M42YF6+K/XO5c2EXfxMDCMlDuDtsHQPEe9/Q=;
+Received: from sea.source.kernel.org ([172.234.252.31])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1w0VN5-0004xb-EN for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 12 Mar 2026 02:01:55 +0000
+ id 1w0VQP-000592-EC for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 12 Mar 2026 02:05:21 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 977F060141;
- Thu, 12 Mar 2026 02:01:44 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 99C4BC19421;
- Thu, 12 Mar 2026 02:01:41 +0000 (UTC)
+ by sea.source.kernel.org (Postfix) with ESMTP id 076B5437C5;
+ Thu, 12 Mar 2026 02:05:16 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 606A4C4CEF7;
+ Thu, 12 Mar 2026 02:05:14 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1773280904;
- bh=vXYPN5qWNOwCZl2PPb8ENF7ESSrfj0IkQC0F2owwDjs=;
+ s=k20201202; t=1773281115;
+ bh=dWMdaqCEsEt0RylPk0L1s8atnJmbN/WJgUEBSECy9Gs=;
  h=Date:Cc:Subject:To:References:From:In-Reply-To:From;
- b=UaysYsnCdMkPTd1TXaczs1T0KaUWckPwlQVY5//ee8CkHVH8lrTVAehdoe9UbSV6v
- 4ZMBKwJQX903SlTIKeTOa1BQUf9mGtL87yZNzdfFvslX8i4hWkaAWpgIwZ6Z1B2wdf
- 5gh+ag1HsqnHPsvj+zUInVbuEzPtztCSnQzqWGBDvx24YvA3ofV+V+eSSyBQyL8+3d
- olqhxF4X+AKaEdjUQ60fdK9dayR46PGRzCoVtv0VZS2KGUltjt+cyMIphZKyM4Z43C
- wl81aVGMWf0uixz1oR8f6URcEnqbEu5IDVSscmT2kwhESHAzgcc4GWM9P3wI36h1DU
- Iz2q2GQ2rc5CA==
-Message-ID: <6e89694d-5e3d-4d1c-91f6-56dcd36fcced@kernel.org>
-Date: Thu, 12 Mar 2026 10:01:39 +0800
+ b=GYJxVu93SXIyV1xDY+Zs+wKXojJewTdZxuTrSMN7a1h96HA/gnuyNbx2XMmKCni6m
+ tPo4it0KewGpAhNg8tnhgzDazltxhrzKZZbCsZ3PNHEHeVCmX+QIyN0JsNlyOUMZ+g
+ rElTkS492OcnZrcWCCPKbTr3a98mYTZnWukuLPDjrQB1pqpSmbV1Bi9R1mJ0XrqSjW
+ GkZh11uL7ijghBNRAJPZqJdvcXORNQVRgK6Hwm2lbhPYO5Kydq3WapjZIQCLxpbBAC
+ M9MnU5znNIWrJg7JJRAX1LIQ6NUSbIGUT68fLcMZzBPKX50iS965l55jdG1g5SEbZv
+ 2H3FgleVsFvQA==
+Message-ID: <e1e242b4-046f-436a-b535-45db466c2921@kernel.org>
+Date: Thu, 12 Mar 2026 10:02:49 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 To: Yangyang Zang <zangyangyang66@gmail.com>, jaegeuk@kernel.org,
  daehojeong@google.com
 References: <20260311083530.2582720-1-zangyangyang1@xiaomi.com>
+ <20260311083530.2582720-2-zangyangyang1@xiaomi.com>
 Content-Language: en-US
-In-Reply-To: <20260311083530.2582720-1-zangyangyang1@xiaomi.com>
+In-Reply-To: <20260311083530.2582720-2-zangyangyang1@xiaomi.com>
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
@@ -84,10 +85,10 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 2026/3/11 16:35,
- Yangyang Zang wrote: > ad1357c34023 ("f2fs-tools:
- revert summary entry count from 2048 to > 512 in 16kb block support") changed
- the logic for migrating SSA > blocks, regardless of [...] 
+ Content preview:  On 2026/3/11 16:35, Yangyang Zang wrote: > Clean up the code
+ to make its semantics more logical, no > logic changes. > > Signed-off-by:
+ Yangyang Zang <zangyangyang1@xiaomi.com> Reviewed-by: Chao Yu
+ <chao@kernel.org>
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -99,9 +100,9 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1w0VN5-0004xb-EN
-Subject: Re: [f2fs-dev] [PATCH v3 1/3] resize.f2fs: fix to avoid zeroing
- main area blocks in migrate_ssa()
+X-Headers-End: 1w0VQP-000592-EC
+Subject: Re: [f2fs-dev] [PATCH v3 2/3] resize.f2fs: clean up the code in
+ migrate_ssa()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -124,70 +125,48 @@ X-Spamd-Result: default: False [-8.61 / 15.00];
 	WHITELIST_DMARC(-7.00)[sourceforge.net:D:+];
 	DMARC_POLICY_ALLOW_WITH_FAILURES(-0.50)[];
 	RWL_MAILSPIKE_EXCELLENT(-0.40)[216.105.38.7:from];
+	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7:c];
 	MAILLIST(-0.20)[mailman];
-	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7];
 	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	DKIM_MIXED(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:zangyangyang66@gmail.com,m:jaegeuk@kernel.org,m:daehojeong@google.com,m:zangyangyang1@xiaomi.com,m:linux-f2fs-devel@lists.sourceforge.net,s:lists@lfdr.de];
 	RECEIVED_HELO_LOCALHOST(0.00)[];
+	DKIM_MIXED(0.00)[];
+	FORGED_RECIPIENTS(0.00)[m:zangyangyang66@gmail.com,m:jaegeuk@kernel.org,m:daehojeong@google.com,m:zangyangyang1@xiaomi.com,m:linux-f2fs-devel@lists.sourceforge.net,s:lists@lfdr.de];
 	FREEMAIL_TO(0.00)[gmail.com,kernel.org,google.com];
-	FORGED_SENDER(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
+	ARC_NA(0.00)[];
 	TO_DN_SOME(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	DMARC_POLICY_ALLOW(0.00)[lists.sourceforge.net,none];
 	MIME_TRACE(0.00)[0:+];
-	ARC_NA(0.00)[];
+	FORGED_SENDER(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
 	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
 	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,kernel.org:s=k20201202];
-	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,kernel.org:-];
 	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
+	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,kernel.org:-];
 	RCVD_COUNT_FIVE(0.00)[5];
-	NEURAL_HAM(-0.00)[-1.000];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[xiaomi.com:email,lists.sourceforge.net:helo,lists.sourceforge.net:rdns,lists.sourceforge.net:dkim];
 	FORGED_SENDER_FORWARDING(0.00)[];
 	FROM_HAS_DN(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
 	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	RCPT_COUNT_FIVE(0.00)[5];
+	NEURAL_HAM(-0.00)[-1.000];
 	TAGGED_RCPT(0.00)[linux-f2fs-devel];
+	RCPT_COUNT_FIVE(0.00)[5];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
 	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
 	HAS_REPLYTO(0.00)[chao@kernel.org]
-X-Rspamd-Queue-Id: DCAAB26C0E9
+X-Rspamd-Queue-Id: E00F526C14F
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
 On 2026/3/11 16:35, Yangyang Zang wrote:
-> ad1357c34023 ("f2fs-tools: revert summary entry count from 2048 to
-> 512 in 16kb block support") changed the logic for migrating SSA
-> blocks, regardless of whether the packed_ssa feature is enabled.
-> During the reisze process, this patch may corrupt the file system
-> root inode.
+> Clean up the code to make its semantics more logical, no
+> logic changes.
 > 
-> Reproducer:
-> dd if=/dev/zero of=/data/f2fs.img bs=4k count=525312
-> make_f2fs -g android /data/f2fs.img 131072
-> resize.f2fs -F /data/f2fs.img
-> mkdir /mnt/f2fs
-> mount /data/f2fs.img /mnt/f2fs
-
-Hi Yangyang,
-
-Do you have any plan to wrap above testcase into xfsqa?
-
-> 
-> The root cause is that the number of SSA blocks after segment
-> alignment is inconsistent with `get_newsb(segment_count)`.
-> This may result in some SSA blocks not being zeroed out, or
-> the main area blocks being incorrectly zeroed out during SSA
-> migration. Zeroing out the main area blocks may corrupt the
-> root inode.
-> 
-> Fixes: ad1357c34023 ("f2fs-tools: revert summary entry count from 2048 to 512 in 16kb block support")
 > Signed-off-by: Yangyang Zang <zangyangyang1@xiaomi.com>
 
 Reviewed-by: Chao Yu <chao@kernel.org>
