@@ -2,42 +2,42 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id WPQGNE8svGn4twIAu9opvQ
+	id YB8eElUsvGn4twIAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 19 Mar 2026 18:03:11 +0100
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 19 Mar 2026 18:03:17 +0100
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6D1842CF546
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 19 Mar 2026 18:03:11 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 361822CF554
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 19 Mar 2026 18:03:15 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
 	List-Unsubscribe:List-Id:Subject:MIME-Version:References:In-Reply-To:
 	Message-ID:Date:To:Sender:Content-ID:Content-Description:Resent-Date:
 	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=pjiT43DWTGXzA1jq3nZrtXFVpVUxH97KNtr6LENxSgk=; b=O/uik9TmP26CMdr1ATKZFs2QjX
-	ahT0rfxJijXOO+859aVXvR8/ZOV1XMARyp43prA2lj7mVIp221x0jPKnua76FJwvf7ND/rIxMXAG6
-	oQbbZ+4NGNWUJNp80fZv/YO1ezt6svpNfyxGepJ8uRiKikWqCMo318FVgFxbR23SDaT0=;
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=LunQiUtlOsCuvt0AkIT4MQrUrnwtHMvS6KHScnGhPXQ=; b=bV7ROujoLtE5Fn33gUX4Ld0dql
+	BfD8tbl8rfPPGhY5XM7Pz2jMNLdVaynpsE3eKNOP3LfuXdC5glAUW6+mPMQLADhR7tg7wEx6HAzZW
+	lrna0y6GSXfYnD8hql3JfZXIwIYbFu6Bw3drNCpgn7ru7lSuUdjzAQUaTYgEs4iNS6mQ=;
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1w3Gm6-0002EY-3M;
-	Thu, 19 Mar 2026 17:03:10 +0000
+	id 1w3Gm9-0008E0-St;
+	Thu, 19 Mar 2026 17:03:13 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <aalbersh@kernel.org>) id 1w3Gm5-0002ER-Eh
+ (envelope-from <aalbersh@kernel.org>) id 1w3Gm8-0008Dq-2b
  for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 19 Mar 2026 17:03:09 +0000
+ Thu, 19 Mar 2026 17:03:12 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=9uE9fgT2wBRSg80chJHryNfVCPUim0BxYlbl4j4NNYc=; b=h5IqdlikcM8JY3ojTK32g8DZFu
- XtMuCTb+xcBdJFrm7O8mc74Iz6ei7KDsfu88OqWYRSAjrnwEtUP9CJR4i+FwxTobTvmuOb7cnfm9m
- N/OKkSh8nlx1iRBP+Is82vwtddTZV6dqShTFCa8Hh5amLT4h4P54abldTf9BEpmi7djs=;
+ bh=q2QUgXX4karwS/CaOP83NoQtkdpIly6Knjld6roHIW8=; b=RVPtt6O7TjU7l52WQw8YGpEXMW
+ JadqujdmyFSZvTdtaA558Ql+4YC2Rlj9hDUcNSBPSqCbUl0hA88MgUUebluP/VfuQt4xbJGQdUlX6
+ 8MRv13Tyn+MUgWzTqpr17PrpHQ0mYcbrZHtVMaa/qsq/Q6MBZXGzhpHFWZtgu/K+XzuU=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:
@@ -45,62 +45,65 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=9uE9fgT2wBRSg80chJHryNfVCPUim0BxYlbl4j4NNYc=; b=OeGiCqSzakgMap/2IVLxOFUcwV
- VLZ6rg3QGn/YQsuOv0c9/T7J+Cy9cjqLtjBp7DXhodqbUITOvezUgTGdC88gVGUR2xOZR436XTQT/
- 3BX+9ldyjl4UoSyrsKncMNi0uzt0DdI45uf+l81J/ba9mQBBu5ikgYDWOJ5j6Z7phL4M=;
+ bh=q2QUgXX4karwS/CaOP83NoQtkdpIly6Knjld6roHIW8=; b=WqDlf/qMrcEPkK+h1F2V4jLrSJ
+ vmgFnoeyy//u66QXPZac1hUS5VGzCV4FUvecnzMuLaRf7b8oTZ6X06ckB+DI9UotFAi/rjsBUUWIa
+ Wzgmv4vnDima3DU8DsiY5+EYFqYwcgH1YEIRNv7o3LveIGYx0A7wMpPJJuQuFg+XATJg=;
 Received: from sea.source.kernel.org ([172.234.252.31])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1w3Gm4-0005eS-Se for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 19 Mar 2026 17:03:09 +0000
+ id 1w3Gm7-0005ei-GB for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 19 Mar 2026 17:03:12 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 98212419B9;
+ by sea.source.kernel.org (Postfix) with ESMTP id 39130442FA;
+ Thu, 19 Mar 2026 17:03:01 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E661CC2BCB0;
  Thu, 19 Mar 2026 17:02:58 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 549D8C19425;
- Thu, 19 Mar 2026 17:02:56 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1773939778;
- bh=/KyyQpUCy8P4vlPNAPcDv3/5gJAVOfqGcmPf/jxigwA=;
+ s=k20201202; t=1773939781;
+ bh=gP1sMkE4alGb06aslVUo05UwZR7+5Myev4BiXgKcL9s=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=nFXWgNmwlxmzx19/18jyVcIs8wiRZiyLAREPu4rQjmwGunVGE78BkHOhyu5iHFctl
- E9n6NyzupRaKHkzaKXUsXLMgMyjRLl9a1+zO8zeus/0ipRhB62DJxI2jTvxXJlS9nd
- JIgDyVyLrtvmyewqrWIJWOzIHJ//FWibuYr056qaTVsfKRNgo3ZzxVjwHt6pcJaNOO
- EBSA/1tZmBuMrJ/DQFCptefYu6rYmUlDpe/KS7kCXhfQsVzT4UiaFRKq687dPQ9y7o
- V2UuPzaW8EOV4c4MEbekg0ylnKJ3X4KLlSqcjjVSbEv6j3AIfywFyLFNivTVGD8ajL
- PiYmPDbVYSHfA==
+ b=G0FThI4tkK61/VPUW5H8oKb117kHgEAolLW4D2LdSathShqft1Trv1ibO4jv5Wdrk
+ 4Dr88SJsLA7yx6nTA+YSzgK4Ub602uac7809wrsMfpzYpBmXVhNJ8douzlGeFmgR6w
+ giY90uDM9KxuNmLIcj2bE95QJ7McHn7UGU5wHA8iXY33AumPrxKa+pvSOA0Srjf458
+ q3x8OWFSsCSY/wsnriiEWlTJZ3AOwsm7b8EFhS3b9bt2RmydkdkpKCg9TyD1S8wxB3
+ eBhtNtR+XQZGmoxBYsh6ARH94s4RPnBd2klVrjWGxwVZoK1KqpKSmvASx9/33/ZlN8
+ 7QwAyKPDoft5g==
 To: linux-xfs@vger.kernel.org, fsverity@lists.linux.dev,
  linux-fsdevel@vger.kernel.org, ebiggers@kernel.org
-Date: Thu, 19 Mar 2026 18:01:54 +0100
-Message-ID: <20260319170231.1455553-8-aalbersh@kernel.org>
+Date: Thu, 19 Mar 2026 18:01:55 +0100
+Message-ID: <20260319170231.1455553-9-aalbersh@kernel.org>
 X-Mailer: git-send-email 2.51.2
 In-Reply-To: <20260319170231.1455553-1-aalbersh@kernel.org>
 References: <20260319170231.1455553-1-aalbersh@kernel.org>
 MIME-Version: 1.0
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  This flag indicates that I/O is for fsverity metadata. In
- the write path skip i_size check and i_size updates as metadata is past EOF.
- In writeback don't update i_size and continue writeback if even folio is
- beyond EOF. In read path don't zero fsverity fo [...] 
+ Content preview:  Obtain fsverity info for folios with file data. Filesystem
+ can pass vi down to ioend and then to fsverity for verification. XFS will
+ use it in further patch for fsverity integration. Signed-off-by: Andrey
+ Albershteyn
+ <aalbersh@kernel.org> Reviewed-by: "Darrick J. Wong" <djwong@kernel.org>
+ Reviewed-by: Christoph Hellwig <hch@lst.de> --- fs/iomap/buffered-io.c | 7
+ +++++++ include/li [...] 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1w3Gm4-0005eS-Se
-Subject: [f2fs-dev] [PATCH v5 07/25] iomap: introduce IOMAP_F_FSVERITY and
- teach writeback to handle fsverity
+X-Headers-End: 1w3Gm7-0005ei-GB
+Subject: [f2fs-dev] [PATCH v5 08/25] iomap: obtain fsverity info for read
+ path
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -144,13 +147,13 @@ X-Spamd-Result: default: False [-8.61 / 15.00];
 	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
 	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
+	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,kernel.org:-];
 	RCVD_COUNT_FIVE(0.00)[5];
 	NEURAL_HAM(-0.00)[-1.000];
 	FORGED_SENDER_FORWARDING(0.00)[];
 	FROM_HAS_DN(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
-	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,kernel.org:-];
+	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	TAGGED_RCPT(0.00)[linux-f2fs-devel];
 	HAS_REPLYTO(0.00)[aalbersh@kernel.org];
@@ -158,136 +161,74 @@ X-Spamd-Result: default: False [-8.61 / 15.00];
 	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.sourceforge.net:helo,lists.sourceforge.net:rdns,lists.sourceforge.net:dkim]
-X-Rspamd-Queue-Id: 6D1842CF546
+X-Rspamd-Queue-Id: 361822CF554
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-This flag indicates that I/O is for fsverity metadata.
-
-In the write path skip i_size check and i_size updates as metadata is
-past EOF. In writeback don't update i_size and continue writeback if
-even folio is beyond EOF. In read path don't zero fsverity folios, again
-they are past EOF.
-
-The iomap_block_needs_zeroing() is also called from write path. For
-folios of larger order we don't want to zero out pages in the folio as
-these could contain other merkle tree blocks. For fsverity, filesystem
-will request to read PAGE_SIZE memory regions. For data folios, iomap
-will zero the rest of the folio for anything which is beyond EOF. We
-don't want this for fsverity folios.
+Obtain fsverity info for folios with file data. Filesystem can pass vi
+down to ioend and then to fsverity for verification. XFS will use it in
+further patch for fsverity integration.
 
 Signed-off-by: Andrey Albershteyn <aalbersh@kernel.org>
 Reviewed-by: "Darrick J. Wong" <djwong@kernel.org>
+Reviewed-by: Christoph Hellwig <hch@lst.de>
 ---
- fs/iomap/buffered-io.c | 33 ++++++++++++++++++++++++---------
- fs/iomap/trace.h       |  3 ++-
- include/linux/iomap.h  |  5 +++++
- 3 files changed, 31 insertions(+), 10 deletions(-)
+ fs/iomap/buffered-io.c | 7 +++++++
+ include/linux/iomap.h  | 2 ++
+ 2 files changed, 9 insertions(+)
 
 diff --git a/fs/iomap/buffered-io.c b/fs/iomap/buffered-io.c
-index 3cf93ab2e38a..6d17858ffaae 100644
+index 6d17858ffaae..bcfbfbf5cf7c 100644
 --- a/fs/iomap/buffered-io.c
 +++ b/fs/iomap/buffered-io.c
-@@ -353,9 +353,16 @@ static inline bool iomap_block_needs_zeroing(const struct iomap_iter *iter,
- {
- 	const struct iomap *srcmap = iomap_iter_srcmap(iter);
+@@ -9,6 +9,7 @@
+ #include <linux/swap.h>
+ #include <linux/migrate.h>
+ #include <linux/fserror.h>
++#include <linux/fsverity.h>
+ #include "internal.h"
+ #include "trace.h"
  
--	return srcmap->type != IOMAP_MAPPED ||
--		(srcmap->flags & IOMAP_F_NEW) ||
--		pos >= i_size_read(iter->inode);
-+	if (srcmap->type != IOMAP_MAPPED)
-+		return true;
+@@ -599,6 +600,9 @@ void iomap_read_folio(const struct iomap_ops *ops,
+ 
+ 	trace_iomap_readpage(iter.inode, 1);
+ 
++	if (iter.pos < i_size_read(iter.inode))
++		ctx->vi = fsverity_get_info(iter.inode);
 +
-+	if (srcmap->flags & IOMAP_F_NEW)
-+		return true;
+ 	while ((ret = iomap_iter(&iter, ops)) > 0)
+ 		iter.status = iomap_read_folio_iter(&iter, ctx,
+ 				&bytes_submitted);
+@@ -666,6 +670,9 @@ void iomap_readahead(const struct iomap_ops *ops,
+ 
+ 	trace_iomap_readahead(rac->mapping->host, readahead_count(rac));
+ 
++	if (iter.pos < i_size_read(iter.inode))
++		ctx->vi = fsverity_get_info(iter.inode);
 +
-+	if (srcmap->flags & IOMAP_F_FSVERITY)
-+		return false;
-+
-+	return pos >= i_size_read(iter->inode);
- }
- 
- /**
-@@ -1162,13 +1169,14 @@ static int iomap_write_iter(struct iomap_iter *iter, struct iov_iter *i,
- 		 * unlock and release the folio.
- 		 */
- 		old_size = iter->inode->i_size;
--		if (pos + written > old_size) {
-+		if (pos + written > old_size &&
-+		    !(iter->iomap.flags & IOMAP_F_FSVERITY)) {
- 			i_size_write(iter->inode, pos + written);
- 			iter->iomap.flags |= IOMAP_F_SIZE_CHANGED;
- 		}
- 		__iomap_put_folio(iter, write_ops, written, folio);
- 
--		if (old_size < pos)
-+		if (old_size < pos && !(iter->iomap.flags & IOMAP_F_FSVERITY))
- 			pagecache_isize_extended(iter->inode, old_size, pos);
- 
- 		cond_resched();
-@@ -1796,13 +1804,20 @@ static int iomap_writeback_range(struct iomap_writepage_ctx *wpc,
-  * Check interaction of the folio with the file end.
-  *
-  * If the folio is entirely beyond i_size, return false.  If it straddles
-- * i_size, adjust end_pos and zero all data beyond i_size.
-+ * i_size, adjust end_pos and zero all data beyond i_size. Don't skip fsverity
-+ * folios as those are beyond i_size.
-  */
--static bool iomap_writeback_handle_eof(struct folio *folio, struct inode *inode,
--		u64 *end_pos)
-+static bool iomap_writeback_handle_eof(struct folio *folio,
-+		struct iomap_writepage_ctx *wpc, u64 *end_pos)
- {
-+	struct inode *inode = wpc->inode;
- 	u64 isize = i_size_read(inode);
- 
-+	if (wpc->iomap.flags & IOMAP_F_FSVERITY) {
-+		WARN_ON_ONCE(folio_pos(folio) < isize);
-+		return true;
-+	}
-+
- 	if (*end_pos > isize) {
- 		size_t poff = offset_in_folio(folio, isize);
- 		pgoff_t end_index = isize >> PAGE_SHIFT;
-@@ -1868,7 +1883,7 @@ int iomap_writeback_folio(struct iomap_writepage_ctx *wpc, struct folio *folio)
- 
- 	trace_iomap_writeback_folio(inode, pos, folio_size(folio));
- 
--	if (!iomap_writeback_handle_eof(folio, inode, &end_pos))
-+	if (!iomap_writeback_handle_eof(folio, wpc, &end_pos))
- 		return 0;
- 	WARN_ON_ONCE(end_pos <= pos);
- 
-diff --git a/fs/iomap/trace.h b/fs/iomap/trace.h
-index 532787277b16..5252051cc137 100644
---- a/fs/iomap/trace.h
-+++ b/fs/iomap/trace.h
-@@ -118,7 +118,8 @@ DEFINE_RANGE_EVENT(iomap_zero_iter);
- 	{ IOMAP_F_ATOMIC_BIO,	"ATOMIC_BIO" }, \
- 	{ IOMAP_F_PRIVATE,	"PRIVATE" }, \
- 	{ IOMAP_F_SIZE_CHANGED,	"SIZE_CHANGED" }, \
--	{ IOMAP_F_STALE,	"STALE" }
-+	{ IOMAP_F_STALE,	"STALE" }, \
-+	{ IOMAP_F_FSVERITY,	"FSVERITY" }
- 
- 
- #define IOMAP_DIO_STRINGS \
+ 	while (iomap_iter(&iter, ops) > 0)
+ 		iter.status = iomap_readahead_iter(&iter, ctx,
+ 					&cur_bytes_submitted);
 diff --git a/include/linux/iomap.h b/include/linux/iomap.h
-index 531f9ebdeeae..dc39837b0d45 100644
+index dc39837b0d45..89e5a7abc012 100644
 --- a/include/linux/iomap.h
 +++ b/include/linux/iomap.h
-@@ -87,6 +87,11 @@ struct vm_fault;
- #define IOMAP_F_INTEGRITY	0
- #endif /* CONFIG_BLK_DEV_INTEGRITY */
+@@ -432,6 +432,7 @@ struct iomap_ioend {
+ 	loff_t			io_offset;	/* offset in the file */
+ 	sector_t		io_sector;	/* start sector of ioend */
+ 	void			*io_private;	/* file system private data */
++	struct fsverity_info	*io_vi;		/* fsverity info */
+ 	struct bio		io_bio;		/* MUST BE LAST! */
+ };
  
-+/*
-+ * IO happens beyond inode EOF, fsverity metadata is stored there
-+ */
-+#define IOMAP_F_FSVERITY	(1U << 10)
-+
- /*
-  * Flag reserved for file system specific usage
-  */
+@@ -506,6 +507,7 @@ struct iomap_read_folio_ctx {
+ 	struct readahead_control *rac;
+ 	void			*read_ctx;
+ 	loff_t			read_ctx_file_offset;
++	struct fsverity_info	*vi;
+ };
+ 
+ struct iomap_read_ops {
 -- 
 2.51.2
 
