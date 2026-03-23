@@ -2,101 +2,106 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id mMViEjXwwGkUOwQAu9opvQ
+	id uGJjNin8wGmiPQQAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 23 Mar 2026 08:48:05 +0100
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 23 Mar 2026 09:39:05 +0100
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id C3CE32EDBFF
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 23 Mar 2026 08:48:04 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 234202EE593
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 23 Mar 2026 09:39:05 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
-	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
-	Subject:In-Reply-To:MIME-Version:References:Message-ID:To:From:Date:Sender:
-	Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
-	:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=6/qse5PTyK9qS7vQYBkR6IVV8k7fpTlio9IFEzgqR6g=; b=Aq+of7lDrHtoNX9LRDzO3uZdjw
-	MppmLjhJ3jWWlaJhCDxNHeZOdbLhEM9+qvYCT5W1H1/I0lEdZEXFamHi9qIMhTpZ1XuP5yvRmWWXV
-	KhqXNzL8vyUEt+i593BcIouicYv8ls00kPS85YXUtthUCeGW1gxtcxP210Ul/PAW1S4c=;
+	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
+	List-Unsubscribe:List-Id:Subject:MIME-Version:Message-ID:Date:To:Sender:
+	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+	Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Owner;
+	bh=FqMjRXBNz252qxPpRi4VyrHPmjXuahdLucTePHeybEM=; b=cc4HSZ6vbWnJYpu7UGwt+fdrqq
+	bhYnZFJltzpf3ht+vOY3jCOSNcMgkb7ISgJeiQbKMlzR7p5CfnhyakLASBgDK0c7ffxjncsZzvE3f
+	vAndc2HUq8FuUh9C3TN76mKqpc2ld4QeQeXeI5VBsPVkcworzGQgAOv9oQmv5A20f5bY=;
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1w4a0w-00050H-Jj;
-	Mon, 23 Mar 2026 07:47:54 +0000
+	id 1w4aoH-00063Z-NW;
+	Mon, 23 Mar 2026 08:38:53 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <gregkh@linuxfoundation.org>) id 1w4a0S-0004zl-Km
+ (envelope-from <chao@kernel.org>) id 1w4aoF-00063P-NZ
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 23 Mar 2026 07:47:24 +0000
+ Mon, 23 Mar 2026 08:38:51 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=abVxq2N/XBvoVJ/QKQcKt2BA6Lmh0E+elKJeQJld8/0=; b=cp0xR77m1CFX0Y/q4kCUsaLHh/
- DKp7EqOXpxN32V2JZJEbAavulCIQfkkmr2kDRZ6QGAP6QXaURy4Y8mrrQ3jdeVMCB5ZG4H7ZVlD6g
- VaRsreCYZwSyzrlYLCM32ZClviKYRMuch+1yROg8mocTm1QZv9pWvesK+vcMtGX8hH00=;
+ bh=qHNN+LYNtk43wPnrnIc4AOnUQVIISSYy4DuiF/HVqOk=; b=bXIV8LJ3v/aVj4B6Gqastu9m1e
+ M9cwyay/jXDyMLoSeg3i2mWkRUcr2aMESNDN1A/IFVufYodYokaDjle0b0zsCwV3AIDBALCxTra/3
+ raM9+rFRnYgjCx3W0G+tPeEcANtiPwFcIKexmktY1Jvbx4rbwXSojG/YkgYuDBv3/pE0=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=abVxq2N/XBvoVJ/QKQcKt2BA6Lmh0E+elKJeQJld8/0=; b=iZmkiiXetOhbyh53XfrJyH19BO
- +oKDjRkUmT0jwctvf+xmjsxn+vM7b+W8afBAsM4F8mBU5u0Hu1uacfmjylrLfT72zdAhpVjGwK7QK
- fly3mFbmZBQEJSYTDd+MGOWYCJg3rTZzy099Akc/Qyh9n/6x9hJCN4obbY3oQw3h/e/c=;
-Received: from tor.source.kernel.org ([172.105.4.254])
+ h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=qHNN+LYNtk43wPnrnIc4AOnUQVIISSYy4DuiF/HVqOk=; b=j
+ YNaA7EE1jXYY0GDUWSo8D6I8gi9pm4gJVQz4PFQjPqrByFhfaC9rWpvMXGLfMd021PhB7NDF6nhql
+ dPyYK5ZUOTrj2n+hD3CBtJ+KTtsqCdMLsa1RqqnJPCyk+yIw4MRzuThToPSKrPAIb2+/Gq2Htcg6p
+ B4sHjrEHoEeiHOz8=;
+Received: from sea.source.kernel.org ([172.234.252.31])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1w4a0S-0002Lb-0j for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 23 Mar 2026 07:47:24 +0000
+ id 1w4aoE-0004ww-VN for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 23 Mar 2026 08:38:51 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 58B94600C4;
- Mon, 23 Mar 2026 07:47:18 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id B0AFAC4CEF7;
- Mon, 23 Mar 2026 07:47:17 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
- s=korg; t=1774252038;
- bh=6PZXTdesn371F1xVolbnQ7DHxg1Lz3G/w8zESyH2mQE=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=JQhgaswC3IzYKGMvmNVGrSkeJDlhb5N317yKKwI7C6C+722wniC/eyLwlh2X231AT
- pHB8/n8XMZ+pMvHOoSuXRicbK9vfF41y/D0DDuT9yvQOzl2Xz9TiACXE9SDP6CztnC
- W/XK2Ku9wXu+d2FJQJs6gs94BDjkP5XZdWFNr6gs=
-Date: Mon, 23 Mar 2026 08:46:56 +0100
-From: Greg KH <gregkh@linuxfoundation.org>
-To: G S <geoo115@gmail.com>
-Message-ID: <2026032354-country-saddlebag-5331@gregkh>
-References: <CAHor6QJaim=omkU2Uacqrwu5OnzYEcPOseFUoYy3e6KxecdQDA@mail.gmail.com>
+ by sea.source.kernel.org (Postfix) with ESMTP id 988AC4433A
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Mon, 23 Mar 2026 08:38:40 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8C3BFC4CEF7;
+ Mon, 23 Mar 2026 08:38:39 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1774255120;
+ bh=QwZEFeorxpwCaeP5jW8KMO6XgxyYHA/q67+XPWrH+zY=;
+ h=From:To:Cc:Subject:Date:From;
+ b=Sgcbhy+awME8QoAXZtV+/1Rn6iADBlR5tLh+8y6jTh+02ZxgUzJ9GcSzArjM1bxlb
+ y12BxJF3wvPs9qMXZ6iEIWopmNLJQqDGfo+CDwQxvOinGBrwkiWSLQOjjYJUY/Qisn
+ SBTPxor60ETYjAdpcmyB4Du763sqgzbd4jL42OjFWdPE43zvzmd2h7J1lKIxr7OKsx
+ ccaO7FGV2KvgRJQ6xa1AbTtE+Rnik4/GpR5qMHZEDPDEnsXtm4wGXWO8P74VaaBVhm
+ 5AGC0uGjnZEF506FcOcVgmAkDkPbxmm3PIxwy6RBnWnzchWzX4ojeHiZeqmcp5UzyB
+ H1fLtKFMVMj5Q==
+To: jaegeuk@kernel.org
+Date: Mon, 23 Mar 2026 16:38:32 +0800
+Message-ID: <20260323083834.156393-1-chao@kernel.org>
+X-Mailer: git-send-email 2.53.0.959.g497ff81fa9-goog
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <CAHor6QJaim=omkU2Uacqrwu5OnzYEcPOseFUoYy3e6KxecdQDA@mail.gmail.com>
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Sun, Mar 22, 2026 at 09:31:30PM +0000, G S wrote: > Hi,
- > > I found a use-after-free in f2fs_compress_write_end_io() that is the
- > same class of bug as CVE-2026-23234 (UAF in f2fs_write_end_io()) b [...]
+ Content preview: f2fs_handle_page_eio() is the only left place we set
+ CP_ERROR_FLAG
+ directly, it missed to update superblock.s_stop_reason,
+ let's call f2fs_handle_critical_error()
+ instead to fix that. Introduce STOP_CP_REASON_READ_{META, NODE,
+ DATA} stop_cp_reason
+ enum variable to indicate which kind of data we failed to read. 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1w4a0S-0002Lb-0j
-Subject: Re: [f2fs-dev] [PATCH] f2fs: fix use-after-free in
- f2fs_compress_write_end_io()
+X-Headers-End: 1w4aoE-0004ww-VN
+Subject: [f2fs-dev] [PATCH v3 1/2] f2fs: call f2fs_handle_critical_error()
+ to set cp_error flag
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -108,94 +113,119 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: jaegeuk@kernel.org, security@kernel.org,
- linux-f2fs-devel@lists.sourceforge.net
+From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Chao Yu <chao@kernel.org>
+Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
-X-Spamd-Result: default: False [3.49 / 15.00];
-	MID_END_EQ_FROM_USER_PART(4.00)[];
-	MID_RHS_NOT_FQDN(0.50)[];
+X-Spamd-Result: default: False [-7.61 / 15.00];
+	WHITELIST_DMARC(-7.00)[sourceforge.net:D:+];
+	MID_RHS_MATCH_TO(1.00)[];
+	DMARC_POLICY_ALLOW_WITH_FAILURES(-0.50)[];
 	RWL_MAILSPIKE_EXCELLENT(-0.40)[216.105.38.7:from];
-	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7];
 	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
 	MAILLIST(-0.20)[mailman];
+	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7];
 	MIME_GOOD(-0.10)[text/plain];
-	DMARC_POLICY_SOFTFAIL(0.10)[linuxfoundation.org : SPF not aligned (relaxed), DKIM not aligned (relaxed),none];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_TLS_LAST(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:geoo115@gmail.com,m:jaegeuk@kernel.org,m:security@kernel.org,m:linux-f2fs-devel@lists.sourceforge.net,s:lists@lfdr.de];
+	REPLYTO_DOM_EQ_TO_DOM(0.00)[];
 	RECEIVED_HELO_LOCALHOST(0.00)[];
-	FORGED_SENDER(0.00)[gregkh@linuxfoundation.org,linux-f2fs-devel-bounces@lists.sourceforge.net];
 	DKIM_MIXED(0.00)[];
-	TO_DN_SOME(0.00)[];
-	FREEMAIL_TO(0.00)[gmail.com];
+	FORGED_RECIPIENTS(0.00)[m:jaegeuk@kernel.org,m:linux-kernel@vger.kernel.org,m:linux-f2fs-devel@lists.sourceforge.net,s:lists@lfdr.de];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[5];
+	FORGED_SENDER(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,kernel.org:s=k20201202];
 	MIME_TRACE(0.00)[0:+];
 	ARC_NA(0.00)[];
 	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
-	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,linuxfoundation.org:s=korg];
-	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,linuxfoundation.org:-];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
-	NEURAL_HAM(-0.00)[-1.000];
+	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
+	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,kernel.org:-];
 	FORGED_SENDER_FORWARDING(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[gregkh@linuxfoundation.org,linux-f2fs-devel-bounces@lists.sourceforge.net];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	RCPT_COUNT_THREE(0.00)[4];
 	TAGGED_RCPT(0.00)[linux-f2fs-devel];
-	MISSING_XM_UA(0.00)[];
+	NEURAL_HAM(-0.00)[-1.000];
+	TO_DN_NONE(0.00)[];
+	PREVIOUSLY_DELIVERED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
+	DMARC_POLICY_ALLOW(0.00)[lists.sourceforge.net,none];
+	FROM_NEQ_ENVFROM(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
 	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
+	RCPT_COUNT_THREE(0.00)[3];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	HAS_REPLYTO(0.00)[chao@kernel.org];
+	FROM_HAS_DN(0.00)[];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.sourceforge.net:helo,lists.sourceforge.net:rdns,lists.sourceforge.net:dkim]
-X-Rspamd-Queue-Id: C3CE32EDBFF
+X-Rspamd-Queue-Id: 234202EE593
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On Sun, Mar 22, 2026 at 09:31:30PM +0000, G S wrote:
-> Hi,
-> 
-> I found a use-after-free in f2fs_compress_write_end_io() that is the
-> same class of bug as CVE-2026-23234 (UAF in f2fs_write_end_io()) but
-> in the compressed page write completion path. The CVE-2026-23234 fix
-> does not cover this function.
+f2fs_handle_page_eio() is the only left place we set CP_ERROR_FLAG
+directly, it missed to update superblock.s_stop_reason, let's
+call f2fs_handle_critical_error() instead to fix that.
 
-As you have sent this to a public list, no need for security@kernel.org
-to get involved.
+Introduce STOP_CP_REASON_READ_{META,NODE,DATA} stop_cp_reason enum
+variable to indicate which kind of data we failed to read.
 
-Also:
+Signed-off-by: Chao Yu <chao@kernel.org>
+---
+v3:
+- No changes.
+ fs/f2fs/f2fs.h          | 21 +++++++++++++++++++--
+ include/linux/f2fs_fs.h |  3 +++
+ 2 files changed, 22 insertions(+), 2 deletions(-)
 
-> Approach 2 (cache sbi fields): Cache sbi->page_array_slab and
-> sbi->page_array_slab_size into local variables at function entry
-> (before dec_page_count), then use the cached values in the
-> page_array_free equivalent at line 1503. This avoids dereferencing
-> sbi after it may have been freed:
-> 
-> --- a/fs/f2fs/compress.c
-> +++ b/fs/f2fs/compress.c
-> @@ -1478,6 +1478,8 @@ void f2fs_compress_write_end_io(struct bio *bio,
-> struct folio *folio)
->  {
->   struct page *page = &folio->page;
->   struct f2fs_sb_info *sbi = bio->bi_private;
-> + struct kmem_cache *pa_slab = sbi->page_array_slab;
-> + unsigned int pa_slab_size = sbi->page_array_slab_size;
->   struct compress_io_ctx *cic = folio->private;
->   enum count_type type = WB_DATA_TYPE(folio,
->   f2fs_is_compressed_page(folio));
-> @@ -1497,7 +1499,12 @@ void f2fs_compress_write_end_io(struct bio
-> *bio, struct folio *folio)
->   end_page_writeback(cic->rpages[i]);
->   }
+diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+index 660bf88a376f..94cf1e78d892 100644
+--- a/fs/f2fs/f2fs.h
++++ b/fs/f2fs/f2fs.h
+@@ -5073,8 +5073,25 @@ static inline void f2fs_handle_page_eio(struct f2fs_sb_info *sbi,
+ 		return;
+ 
+ 	if (ofs == sbi->page_eio_ofs[type]) {
+-		if (sbi->page_eio_cnt[type]++ == MAX_RETRY_PAGE_EIO)
+-			set_ckpt_flags(sbi, CP_ERROR_FLAG);
++		if (sbi->page_eio_cnt[type]++ == MAX_RETRY_PAGE_EIO) {
++			enum stop_cp_reason stop_reason;
++
++			switch (type) {
++			case META:
++				stop_reason = STOP_CP_REASON_READ_META;
++				break;
++			case NODE:
++				stop_reason = STOP_CP_REASON_READ_NODE;
++				break;
++			case DATA:
++				stop_reason = STOP_CP_REASON_READ_DATA;
++				break;
++			default:
++				f2fs_bug_on(sbi, 1);
++				return;
++			}
++			f2fs_handle_critical_error(sbi, stop_reason);
++		}
+ 	} else {
+ 		sbi->page_eio_ofs[type] = ofs;
+ 		sbi->page_eio_cnt[type] = 0;
+diff --git a/include/linux/f2fs_fs.h b/include/linux/f2fs_fs.h
+index dc41722fcc9d..829a59399dac 100644
+--- a/include/linux/f2fs_fs.h
++++ b/include/linux/f2fs_fs.h
+@@ -80,6 +80,9 @@ enum stop_cp_reason {
+ 	STOP_CP_REASON_NO_SEGMENT,
+ 	STOP_CP_REASON_CORRUPTED_FREE_BITMAP,
+ 	STOP_CP_REASON_CORRUPTED_NID,
++	STOP_CP_REASON_READ_META,
++	STOP_CP_REASON_READ_NODE,
++	STOP_CP_REASON_READ_DATA,
+ 	STOP_CP_REASON_MAX,
+ };
+ 
+-- 
+2.49.0
 
-Can you turn this into a patch that can actually be applied so you get
-full credit for the fix?  See
-Documentation/process/submitting_patches.rst for how to do that.
-
-thanks,
-
-greg k-h
 
 
 _______________________________________________
