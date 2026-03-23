@@ -2,78 +2,83 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id SAK7GAMCwWlUPgQAu9opvQ
+	id eLzFCtUFwWlUPgQAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 23 Mar 2026 10:04:03 +0100
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 23 Mar 2026 10:20:21 +0100
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9138C2EEA0E
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 23 Mar 2026 10:04:02 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id C57FF2EEE63
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 23 Mar 2026 10:20:19 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:MIME-Version:Message-ID:Date:To:Sender:
-	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
-	Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Owner;
-	bh=AU/7SN0HVUmVlYBcBWVXVAlave1V3lD+kTRDSZO3XC8=; b=P6k/QD548Qu4lSs8T0hr803RYb
-	icppy6O7M6j2fiX1zF+lxFe16IBNpIG9DsOK7A6Kqwhwb3dlZWcMB0nOUwHqrDKIqxwO2HMEs+bTQ
-	Mm5Ja45GeJUX94HnV/Q3ZItuB2PGobtNVbCgMj9NHErg47clZ2nvFIftY6Y4onn68Z+c=;
+	List-Unsubscribe:List-Id:Subject:In-Reply-To:References:To:MIME-Version:Date:
+	Message-ID:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
+	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
+	bh=JyLCsMTLJD3jzkSYBlOqKuRreaFbVqwFBUtEI5b3/Hc=; b=J/I/NOyNvumN/AskM5sXIfuQ9Y
+	9vXCFZh29/sUTRjIIWc9wYi2ONojcUO+2kOcXsjVURHFMU8gxTSEa5g/04MoQIFga8DDK8jxD/hdJ
+	7y0bODyqmqllTffpLGd4Jhlhiw1/A+evP8/UpI02WW6G0CqLDSgtSPxldbQlFwLjLprI=;
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1w4bCa-0006hC-PB;
-	Mon, 23 Mar 2026 09:04:00 +0000
+	id 1w4bSC-00072H-3P;
+	Mon, 23 Mar 2026 09:20:08 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1w4bCY-0006h4-L2
+ (envelope-from <chao@kernel.org>) id 1w4bSA-00072A-TB
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 23 Mar 2026 09:03:58 +0000
+ Mon, 23 Mar 2026 09:20:06 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ From:References:To:Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=npQSyxqGq9UawhN7+LrHAqzZklqnFcdtdE88IGpxECg=; b=Rc1Gx7+gL4NDPUmhtWBdc5jPSf
- n6CzU5sgnmFQAJupSl51Dbbu36xaU5JpTiZX5dzXugaUy0KpYY9GNY2irxrvUGeAllZqeIVk8MFPl
- Go6QrGQDMVATFEdgzFRRmuiBQpwOaY9seXrG0oJZKB+0zq6Pc3W3pDu8hDUjmF1EMbPY=;
+ bh=GM2BBkFRSa3YDLvuoXgkSyJcwRM6ylGDaKhI6AWMuVs=; b=bEog6dEDj0Zy8CK2PtAtwtSIwq
+ dWI29So5h7asC6gq0p43oomxnMDJDbbQbtfHjifFPdnKbbKdHV2Vi6mo3tpB3hbvk6zA5GfHFTZeW
+ shMNe8MEvh8jOPFdDHkllhlnEnz20yTpdF7PtEQOnevhCBrHZ6LQox/nLLmPoWz+itng=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=npQSyxqGq9UawhN7+LrHAqzZklqnFcdtdE88IGpxECg=; b=S
- J580e43nkn1Dzj93BrSxZtUMkc6Zc+/NsJEbCUXWQY2SEmfAgKgM3lsp7zhzWwJbapNbTHGtY0zxN
- EuzBMXnvy2ej3cwdBj+K7FvI4NqVE1gEdZuRbHllOqr7TPgC3CYOGfwCJPsrYigdBWn1Rbl2k8YZ7
- hajRAbxEGBm3/kqI=;
-Received: from tor.source.kernel.org ([172.105.4.254])
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
+ Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=GM2BBkFRSa3YDLvuoXgkSyJcwRM6ylGDaKhI6AWMuVs=; b=kFOqv5Z5GeOXXQq0R7mbIcUjnf
+ nNFFr+gFxX+kFw4QozlX5JztzxNU9LeMLSZH53Z6XnsLKYp/Q5P5AKmnVsxLW4IXkaeLg07IoJtWB
+ OKJtvWiplPsFUWJT1e21rRtE9Fw6oK8EDUvIosjRtj3Z2sG30lcYSSMWswKAEvNl+G5g=;
+Received: from sea.source.kernel.org ([172.234.252.31])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1w4bCX-0007ON-MO for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 23 Mar 2026 09:03:58 +0000
+ id 1w4bSA-0008DE-3j for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 23 Mar 2026 09:20:06 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 009A9600C4
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Mon, 23 Mar 2026 09:03:52 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8D310C4CEF7;
- Mon, 23 Mar 2026 09:03:50 +0000 (UTC)
+ by sea.source.kernel.org (Postfix) with ESMTP id 8C2804019F;
+ Mon, 23 Mar 2026 09:19:55 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 36926C2BCB4;
+ Mon, 23 Mar 2026 09:19:54 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1774256631;
- bh=6dCoFJz1IUJdQMgYnUQNNWXL9TETh+tAWNKcbN9KUWE=;
- h=From:To:Cc:Subject:Date:From;
- b=NEBEE6Xnm9CgrlElS7Mxa3yRFYN3hhtu/5Q8F+W6Pc4xEnjZJZt+fvSX4BIb/0eeq
- NLI2i716ihpwOOsrcR13GgTKK+UxxoZcM8BtD1XGlpLurGKy/7QV9aoSiuepDuOqhy
- ZqdStpNzTWTRrVqsGCFWeRYi239kvxhpMHiLaxDtfH1Sk1/YuY2UE1Nd7cnZeJlyIO
- agrzmizwWrpSlLoZWWLs0vog5A9v+8pCQqOlb3IDwmNe2bCGQzMcizrPVlRWtQ9Dzf
- 4+RK6IlqxIwMSLqf/Z/1zd4xlgyqDHRxlE+OgkrgCmunwJpqhsz4HfDf9tZ0vN1e5+
- ogfoQ8cQbtzGg==
-To: jaegeuk@kernel.org
-Date: Mon, 23 Mar 2026 17:03:44 +0800
-Message-ID: <20260323090344.219267-1-chao@kernel.org>
-X-Mailer: git-send-email 2.53.0.959.g497ff81fa9-goog
+ s=k20201202; t=1774257595;
+ bh=7VW8FB4TEVGzOGIkT+hJ4mMlhR505cq7u+QHeHYe7NI=;
+ h=Date:Cc:Subject:To:References:From:In-Reply-To:From;
+ b=gDJpmi8jfoSXvC/9kyhLs92LAzTnh6WOK8Sfz4/cirsND6pm89PN7rFkk3J/huqA6
+ v8XIhSM7dAM2VtWf9D9iD/2NVpiT4JfDbbuveTTf0CquXPgLYWvqgScJIZOmyex1Vd
+ AKeo+fMSx1mdLrLxbEWeXMS4thVdcBf5bCP8LLf+Qin/6rsxUJzu6U9Y+/tzW2ylpH
+ Nez0bTQPmreg9NMStBLfQPKT8JyEy11YQ/NOU1KOUODQofz2ne/E/EVwGHZrhV1Zps
+ bTmitPrSHLxGjglTd5oT9hY3M+BtYeRScMmfmQvw8Fe5WUJaZrKKLYPGX8P3+LGacw
+ MI1tkWeWLtIQg==
+Message-ID: <b206ebf0-5f63-4766-9e4a-d9e8290ef1d6@kernel.org>
+Date: Mon, 23 Mar 2026 17:19:51 +0800
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+To: Yongpeng Yang <monty_pavel@sina.com>, Jaegeuk Kim <jaegeuk@kernel.org>
+References: <20260319132607.686096-2-monty_pavel@sina.com>
+ <20260319132607.686096-4-monty_pavel@sina.com>
+ <03e452c8-b68e-4132-a5d2-aa1300673231@kernel.org>
+ <4fa623df-5ccc-4635-82da-31a9f2a3a1a7@sina.com>
+Content-Language: en-US
+In-Reply-To: <4fa623df-5ccc-4635-82da-31a9f2a3a1a7@sina.com>
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
@@ -81,9 +86,9 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  This patch supports to report fserror, it provides another
- way to let userspace to monitor filesystem level error. In addition, it exports
- /sys/fs/f2fs/features/fserror once f2fs kernel module start t [...] 
+ Content preview:  On 3/23/26 16:42, Yongpeng Yang wrote: > > On 3/23/26 11:28, 
+ Chao Yu via Linux-f2fs-devel wrote: >> On 3/19/26 21:26, Yongpeng Yang wrote:
+ >>> From: Yongpeng Yang <yangyongpeng@xiaomi.com> >>> >>> f2f [...] 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -95,8 +100,9 @@ X-Spam-Report: Spam detection software,
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1w4bCX-0007ON-MO
-Subject: [f2fs-dev] [PATCH] f2fs: support to report fserror
+X-Headers-End: 1w4bSA-0008DE-3j
+Subject: Re: [f2fs-dev] [PATCH v3 2/2] f2fs: fix fiemap boundary handling
+ when read extent cache is incomplete
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -110,485 +116,150 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>,
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
 From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
 Reply-To: Chao Yu <chao@kernel.org>
-Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Cc: stable@kernel.org, Yongpeng Yang <yangyongpeng@xiaomi.com>,
+ linux-f2fs-devel@lists.sourceforge.net
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
-X-Spamd-Result: default: False [-7.61 / 15.00];
+X-Spamd-Result: default: False [-8.51 / 15.00];
 	WHITELIST_DMARC(-7.00)[sourceforge.net:D:+];
-	MID_RHS_MATCH_TO(1.00)[];
 	DMARC_POLICY_ALLOW_WITH_FAILURES(-0.50)[];
 	RWL_MAILSPIKE_EXCELLENT(-0.40)[216.105.38.7:from];
-	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7:c];
-	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
 	MAILLIST(-0.20)[mailman];
+	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7];
+	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
 	MIME_GOOD(-0.10)[text/plain];
+	MIME_BASE64_TEXT(0.10)[];
 	HAS_LIST_UNSUB(-0.01)[];
-	REPLYTO_DOM_EQ_TO_DOM(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	DKIM_MIXED(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:jaegeuk@kernel.org,m:linux-kernel@vger.kernel.org,m:linux-f2fs-devel@lists.sourceforge.net,s:lists@lfdr.de];
-	RCVD_TLS_LAST(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
 	RECEIVED_HELO_LOCALHOST(0.00)[];
-	ARC_NA(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,kernel.org:s=k20201202];
-	MIME_TRACE(0.00)[0:+];
+	DKIM_MIXED(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	FORGED_RECIPIENTS(0.00)[m:monty_pavel@sina.com,m:jaegeuk@kernel.org,m:stable@kernel.org,m:yangyongpeng@xiaomi.com,m:linux-f2fs-devel@lists.sourceforge.net,s:lists@lfdr.de];
+	FREEMAIL_TO(0.00)[sina.com,kernel.org];
 	FORGED_SENDER(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
-	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
-	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
-	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,kernel.org:-];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	TAGGED_RCPT(0.00)[linux-f2fs-devel];
-	NEURAL_HAM(-0.00)[-1.000];
-	TO_DN_NONE(0.00)[];
-	PREVIOUSLY_DELIVERED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
+	TO_DN_SOME(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
 	DMARC_POLICY_ALLOW(0.00)[lists.sourceforge.net,none];
-	FROM_NEQ_ENVFROM(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
-	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
-	RCPT_COUNT_THREE(0.00)[3];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	HAS_REPLYTO(0.00)[chao@kernel.org];
+	MIME_TRACE(0.00)[0:+];
+	ARC_NA(0.00)[];
+	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
+	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,kernel.org:s=k20201202];
+	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,kernel.org:-];
+	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[5];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[xiaomi.com:email,vm:email,lists.sourceforge.net:helo,lists.sourceforge.net:rdns,lists.sourceforge.net:dkim];
+	FORGED_SENDER_FORWARDING(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.sourceforge.net:helo,lists.sourceforge.net:rdns,lists.sourceforge.net:dkim]
-X-Rspamd-Queue-Id: 9138C2EEA0E
+	FROM_NEQ_ENVFROM(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
+	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
+	NEURAL_HAM(-0.00)[-1.000];
+	TAGGED_RCPT(0.00)[linux-f2fs-devel];
+	RCPT_COUNT_FIVE(0.00)[5];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
+	HAS_REPLYTO(0.00)[chao@kernel.org]
+X-Rspamd-Queue-Id: C57FF2EEE63
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-This patch supports to report fserror, it provides another way to let
-userspace to monitor filesystem level error. In addition, it exports
-/sys/fs/f2fs/features/fserror once f2fs kernel module start to support
-the new feature, then generic/791 of fstests can notice the feature,
-and verify validation of fserror report.
-
-Signed-off-by: Chao Yu <chao@kernel.org>
----
- Documentation/ABI/testing/sysfs-fs-f2fs |  3 ++-
- fs/f2fs/compress.c                      |  2 ++
- fs/f2fs/data.c                          | 13 ++++++++++++-
- fs/f2fs/dir.c                           |  2 ++
- fs/f2fs/inline.c                        |  3 +++
- fs/f2fs/inode.c                         |  5 +++++
- fs/f2fs/node.c                          |  8 ++++++++
- fs/f2fs/recovery.c                      |  2 ++
- fs/f2fs/segment.c                       |  2 ++
- fs/f2fs/super.c                         | 26 +++++++++++++++++++++++++
- fs/f2fs/sysfs.c                         |  2 ++
- fs/f2fs/verity.c                        |  2 ++
- fs/f2fs/xattr.c                         |  6 ++++++
- 13 files changed, 74 insertions(+), 2 deletions(-)
-
-diff --git a/Documentation/ABI/testing/sysfs-fs-f2fs b/Documentation/ABI/testing/sysfs-fs-f2fs
-index 423ec40e2e4e..27d5e88facbe 100644
---- a/Documentation/ABI/testing/sysfs-fs-f2fs
-+++ b/Documentation/ABI/testing/sysfs-fs-f2fs
-@@ -270,7 +270,8 @@ Description:	Shows all enabled kernel features.
- 		inode_checksum, flexible_inline_xattr, quota_ino,
- 		inode_crtime, lost_found, verity, sb_checksum,
- 		casefold, readonly, compression, test_dummy_encryption_v2,
--		atomic_write, pin_file, encrypted_casefold, linear_lookup.
-+		atomic_write, pin_file, encrypted_casefold, linear_lookup,
-+		fserror.
- 
- What:		/sys/fs/f2fs/<disk>/inject_rate
- Date:		May 2016
-diff --git a/fs/f2fs/compress.c b/fs/f2fs/compress.c
-index 8c76400ba631..d1650b763e1f 100644
---- a/fs/f2fs/compress.c
-+++ b/fs/f2fs/compress.c
-@@ -14,6 +14,7 @@
- #include <linux/lz4.h>
- #include <linux/zstd.h>
- #include <linux/pagevec.h>
-+#include <linux/fserror.h>
- 
- #include "f2fs.h"
- #include "node.h"
-@@ -760,6 +761,7 @@ void f2fs_decompress_cluster(struct decompress_io_ctx *dic, bool in_task)
- 
- 		/* Avoid f2fs_commit_super in irq context */
- 		f2fs_handle_error(sbi, ERROR_FAIL_DECOMPRESSION);
-+		fserror_report_file_metadata(dic->inode, ret, GFP_NOFS);
- 		goto out_release;
- 	}
- 
-diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
-index 9ade0669d615..6d8bcb0d15bc 100644
---- a/fs/f2fs/data.c
-+++ b/fs/f2fs/data.c
-@@ -20,6 +20,7 @@
- #include <linux/sched/signal.h>
- #include <linux/fiemap.h>
- #include <linux/iomap.h>
-+#include <linux/fserror.h>
- 
- #include "f2fs.h"
- #include "node.h"
-@@ -179,6 +180,11 @@ static void f2fs_finish_read_bio(struct bio *bio, bool in_task)
- 				folio, folio->index, NODE_TYPE_REGULAR, true))
- 			bio->bi_status = BLK_STS_IOERR;
- 
-+		if (bio->bi_status == BLK_STS_IOERR)
-+			fserror_report_io(folio->mapping->host,
-+				FSERR_BUFFERED_READ, folio_pos(folio),
-+				folio_size(folio), -EIO, GFP_NOWAIT);
-+
- 		if (finished)
- 			folio_end_read(folio, bio->bi_status == BLK_STS_OK);
- 	}
-@@ -377,9 +383,13 @@ static void f2fs_write_end_io(struct bio *bio)
- 
- 		if (unlikely(bio->bi_status != BLK_STS_OK)) {
- 			mapping_set_error(folio->mapping, -EIO);
--			if (type == F2FS_WB_CP_DATA)
-+			fserror_report_io(folio->mapping->host,
-+				FSERR_BUFFERED_WRITE, folio_pos(folio),
-+				folio_size(folio), -EIO, GFP_NOWAIT);
-+			if (type == F2FS_WB_CP_DATA) {
- 				f2fs_stop_checkpoint(sbi, true,
- 						STOP_CP_REASON_WRITE_FAIL);
-+			}
- 		}
- 
- 		if (is_node_folio(folio)) {
-@@ -1725,6 +1735,7 @@ int f2fs_map_blocks(struct inode *inode, struct f2fs_map_blocks *map, int flag)
- 			err = -EFSCORRUPTED;
- 			f2fs_handle_error(sbi,
- 					ERROR_CORRUPTED_CLUSTER);
-+			fserror_report_file_metadata(inode, err, GFP_NOFS);
- 			goto sync_out;
- 		}
- 
-diff --git a/fs/f2fs/dir.c b/fs/f2fs/dir.c
-index f70092e231f0..e8d2e27e8cec 100644
---- a/fs/f2fs/dir.c
-+++ b/fs/f2fs/dir.c
-@@ -11,6 +11,7 @@
- #include <linux/filelock.h>
- #include <linux/sched/signal.h>
- #include <linux/unicode.h>
-+#include <linux/fserror.h>
- #include "f2fs.h"
- #include "node.h"
- #include "acl.h"
-@@ -1020,6 +1021,7 @@ int f2fs_fill_dentries(struct dir_context *ctx, struct f2fs_dentry_ptr *d,
- 			set_sbi_flag(sbi, SBI_NEED_FSCK);
- 			err = -EFSCORRUPTED;
- 			f2fs_handle_error(sbi, ERROR_CORRUPTED_DIRENT);
-+			fserror_report_file_metadata(d->inode, err, GFP_NOFS);
- 			goto out;
- 		}
- 
-diff --git a/fs/f2fs/inline.c b/fs/f2fs/inline.c
-index 86d2abbb40ff..cfeb50d46d8d 100644
---- a/fs/f2fs/inline.c
-+++ b/fs/f2fs/inline.c
-@@ -9,6 +9,7 @@
- #include <linux/fs.h>
- #include <linux/f2fs_fs.h>
- #include <linux/fiemap.h>
-+#include <linux/fserror.h>
- 
- #include "f2fs.h"
- #include "node.h"
-@@ -179,6 +180,7 @@ int f2fs_convert_inline_folio(struct dnode_of_data *dn, struct folio *folio)
- 		f2fs_warn(fio.sbi, "%s: corrupted inline inode ino=%lx, i_addr[0]:0x%x, run fsck to fix.",
- 			  __func__, dn->inode->i_ino, dn->data_blkaddr);
- 		f2fs_handle_error(fio.sbi, ERROR_INVALID_BLKADDR);
-+		fserror_report_file_metadata(dn->inode, -EFSCORRUPTED, GFP_NOFS);
- 		return -EFSCORRUPTED;
- 	}
- 
-@@ -435,6 +437,7 @@ static int f2fs_move_inline_dirents(struct inode *dir, struct folio *ifolio,
- 			  __func__, dir->i_ino, dn.data_blkaddr);
- 		f2fs_handle_error(F2FS_F_SB(folio), ERROR_INVALID_BLKADDR);
- 		err = -EFSCORRUPTED;
-+		fserror_report_file_metadata(dn.inode, err, GFP_NOFS);
- 		goto out;
- 	}
- 
-diff --git a/fs/f2fs/inode.c b/fs/f2fs/inode.c
-index e7942e6e312c..43cb4d9fc039 100644
---- a/fs/f2fs/inode.c
-+++ b/fs/f2fs/inode.c
-@@ -11,6 +11,7 @@
- #include <linux/sched/mm.h>
- #include <linux/lz4.h>
- #include <linux/zstd.h>
-+#include <linux/fserror.h>
- 
- #include "f2fs.h"
- #include "node.h"
-@@ -480,6 +481,7 @@ static int do_read_inode(struct inode *inode)
- 		f2fs_folio_put(node_folio, true);
- 		set_sbi_flag(sbi, SBI_NEED_FSCK);
- 		f2fs_handle_error(sbi, ERROR_CORRUPTED_INODE);
-+		fserror_report_file_metadata(inode, -EFSCORRUPTED, GFP_NOFS);
- 		return -EFSCORRUPTED;
- 	}
- 
-@@ -541,6 +543,7 @@ static int do_read_inode(struct inode *inode)
- 	if (!sanity_check_extent_cache(inode, node_folio)) {
- 		f2fs_folio_put(node_folio, true);
- 		f2fs_handle_error(sbi, ERROR_CORRUPTED_INODE);
-+		fserror_report_file_metadata(inode, -EFSCORRUPTED, GFP_NOFS);
- 		return -EFSCORRUPTED;
- 	}
- 
-@@ -583,6 +586,7 @@ struct inode *f2fs_iget(struct super_block *sb, unsigned long ino)
- 			trace_f2fs_iget_exit(inode, ret);
- 			iput(inode);
- 			f2fs_handle_error(sbi, ERROR_CORRUPTED_INODE);
-+			fserror_report_file_metadata(inode, ret, GFP_NOFS);
- 			return ERR_PTR(ret);
- 		}
- 
-@@ -787,6 +791,7 @@ void f2fs_update_inode_page(struct inode *inode)
- 		if (err == -ENOMEM || ++count <= DEFAULT_RETRY_IO_COUNT)
- 			goto retry;
- stop_checkpoint:
-+		fserror_report_file_metadata(inode, -EFSCORRUPTED, GFP_NOFS);
- 		f2fs_stop_checkpoint(sbi, false, STOP_CP_REASON_UPDATE_INODE);
- 		return;
- 	}
-diff --git a/fs/f2fs/node.c b/fs/f2fs/node.c
-index 0de41526f28a..bb302fae75c2 100644
---- a/fs/f2fs/node.c
-+++ b/fs/f2fs/node.c
-@@ -12,6 +12,7 @@
- #include <linux/blkdev.h>
- #include <linux/pagevec.h>
- #include <linux/swap.h>
-+#include <linux/fserror.h>
- 
- #include "f2fs.h"
- #include "node.h"
-@@ -1267,6 +1268,8 @@ int f2fs_truncate_inode_blocks(struct inode *inode, pgoff_t from)
- 		if (err == -ENOENT) {
- 			set_sbi_flag(F2FS_F_SB(folio), SBI_NEED_FSCK);
- 			f2fs_handle_error(sbi, ERROR_INVALID_BLKADDR);
-+			fserror_report_file_metadata(dn.inode, -EFSCORRUPTED,
-+								GFP_NOFS);
- 			f2fs_err_ratelimited(sbi,
- 				"truncate node fail, ino:%lu, nid:%u, "
- 				"offset[0]:%d, offset[1]:%d, nofs:%d",
-@@ -1558,6 +1561,8 @@ int f2fs_sanity_check_node_footer(struct f2fs_sb_info *sbi,
- 		next_blkaddr_of_node(folio));
- 
- 	f2fs_handle_error(sbi, ERROR_INCONSISTENT_FOOTER);
-+	fserror_report_file_metadata(folio->mapping->host,
-+			-EFSCORRUPTED, in_irq ? GFP_NOWAIT : GFP_NOFS);
- 	return -EFSCORRUPTED;
- }
- 
-@@ -1779,6 +1784,7 @@ static bool __write_node_folio(struct folio *folio, bool atomic, bool *submitted
- 
- 	if (f2fs_sanity_check_node_footer(sbi, folio, nid,
- 					NODE_TYPE_REGULAR, false)) {
-+		fserror_report_metadata(sbi->sb, -EFSCORRUPTED, GFP_NOFS);
- 		f2fs_stop_checkpoint(sbi, false, STOP_CP_REASON_CORRUPTED_NID);
- 		goto redirty_out;
- 	}
-@@ -2696,6 +2702,8 @@ bool f2fs_alloc_nid(struct f2fs_sb_info *sbi, nid_t *nid)
- 			spin_unlock(&nm_i->nid_list_lock);
- 			f2fs_err(sbi, "Corrupted nid %u in free_nid_list",
- 								i->nid);
-+			fserror_report_metadata(sbi->sb, -EFSCORRUPTED,
-+								GFP_NOFS);
- 			f2fs_stop_checkpoint(sbi, false,
- 					STOP_CP_REASON_CORRUPTED_NID);
- 			return false;
-diff --git a/fs/f2fs/recovery.c b/fs/f2fs/recovery.c
-index a26071f2b0bc..b127dfc91338 100644
---- a/fs/f2fs/recovery.c
-+++ b/fs/f2fs/recovery.c
-@@ -9,6 +9,7 @@
- #include <linux/fs.h>
- #include <linux/f2fs_fs.h>
- #include <linux/sched/mm.h>
-+#include <linux/fserror.h>
- #include "f2fs.h"
- #include "node.h"
- #include "segment.h"
-@@ -679,6 +680,7 @@ static int do_recover_data(struct f2fs_sb_info *sbi, struct inode *inode,
- 			  ofs_of_node(folio));
- 		err = -EFSCORRUPTED;
- 		f2fs_handle_error(sbi, ERROR_INCONSISTENT_FOOTER);
-+		fserror_report_file_metadata(dn.inode, err, GFP_NOFS);
- 		goto err;
- 	}
- 
-diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
-index 0bf25786667f..ee5c35ce5a0f 100644
---- a/fs/f2fs/segment.c
-+++ b/fs/f2fs/segment.c
-@@ -17,6 +17,7 @@
- #include <linux/freezer.h>
- #include <linux/sched/signal.h>
- #include <linux/random.h>
-+#include <linux/fserror.h>
- 
- #include "f2fs.h"
- #include "segment.h"
-@@ -2886,6 +2887,7 @@ static int get_new_segment(struct f2fs_sb_info *sbi,
- 	/* set it as dirty segment in free segmap */
- 	if (test_bit(segno, free_i->free_segmap)) {
- 		ret = -EFSCORRUPTED;
-+		fserror_report_metadata(sbi->sb, -EFSCORRUPTED, GFP_NOFS);
- 		f2fs_stop_checkpoint(sbi, false, STOP_CP_REASON_CORRUPTED_FREE_BITMAP);
- 		goto out_unlock;
- 	}
-diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
-index 5b552f08fe7b..5330ef981340 100644
---- a/fs/f2fs/super.c
-+++ b/fs/f2fs/super.c
-@@ -29,6 +29,7 @@
- #include <linux/lz4.h>
- #include <linux/ctype.h>
- #include <linux/fs_parser.h>
-+#include <linux/fserror.h>
- 
- #include "f2fs.h"
- #include "node.h"
-@@ -4632,6 +4633,8 @@ static void f2fs_record_stop_reason(struct f2fs_sb_info *sbi)
- 		f2fs_err_ratelimited(sbi,
- 			"f2fs_commit_super fails to record stop_reason, err:%d",
- 			err);
-+
-+	fserror_report_shutdown(sbi->sb, GFP_NOFS);
- }
- 
- void f2fs_save_errors(struct f2fs_sb_info *sbi, unsigned char flag)
-@@ -4646,6 +4649,27 @@ void f2fs_save_errors(struct f2fs_sb_info *sbi, unsigned char flag)
- 	spin_unlock_irqrestore(&sbi->error_lock, flags);
- }
- 
-+static void f2fs_report_fserror(struct f2fs_sb_info *sbi, unsigned char error)
-+{
-+	switch (error) {
-+	case ERROR_INVALID_BLKADDR:
-+	case ERROR_CORRUPTED_INODE:
-+	case ERROR_INCONSISTENT_SUMMARY:
-+	case ERROR_INCONSISTENT_SUM_TYPE:
-+	case ERROR_CORRUPTED_JOURNAL:
-+	case ERROR_INCONSISTENT_NODE_COUNT:
-+	case ERROR_INCONSISTENT_BLOCK_COUNT:
-+	case ERROR_INVALID_CURSEG:
-+	case ERROR_INCONSISTENT_SIT:
-+	case ERROR_INVALID_NODE_REFERENCE:
-+	case ERROR_INCONSISTENT_NAT:
-+		fserror_report_metadata(sbi->sb, -EFSCORRUPTED, GFP_NOFS);
-+		break;
-+	default:
-+		return;
-+	}
-+}
-+
- void f2fs_handle_error(struct f2fs_sb_info *sbi, unsigned char error)
- {
- 	f2fs_save_errors(sbi, error);
-@@ -4655,6 +4679,8 @@ void f2fs_handle_error(struct f2fs_sb_info *sbi, unsigned char error)
- 	if (!test_bit(error, (unsigned long *)sbi->errors))
- 		return;
- 	schedule_work(&sbi->s_error_work);
-+
-+	f2fs_report_fserror(sbi, error);
- }
- 
- static bool system_going_down(void)
-diff --git a/fs/f2fs/sysfs.c b/fs/f2fs/sysfs.c
-index 969e06b65b04..5c1358e48206 100644
---- a/fs/f2fs/sysfs.c
-+++ b/fs/f2fs/sysfs.c
-@@ -1396,6 +1396,7 @@ F2FS_FEATURE_RO_ATTR(pin_file);
- F2FS_FEATURE_RO_ATTR(linear_lookup);
- #endif
- F2FS_FEATURE_RO_ATTR(packed_ssa);
-+F2FS_FEATURE_RO_ATTR(fserror);
- 
- #define ATTR_LIST(name) (&f2fs_attr_##name.attr)
- static struct attribute *f2fs_attrs[] = {
-@@ -1563,6 +1564,7 @@ static struct attribute *f2fs_feat_attrs[] = {
- 	BASE_ATTR_LIST(linear_lookup),
- #endif
- 	BASE_ATTR_LIST(packed_ssa),
-+	BASE_ATTR_LIST(fserror),
- 	NULL,
- };
- ATTRIBUTE_GROUPS(f2fs_feat);
-diff --git a/fs/f2fs/verity.c b/fs/f2fs/verity.c
-index 92ebcc19cab0..39f482515445 100644
---- a/fs/f2fs/verity.c
-+++ b/fs/f2fs/verity.c
-@@ -25,6 +25,7 @@
-  */
- 
- #include <linux/f2fs_fs.h>
-+#include <linux/fserror.h>
- 
- #include "f2fs.h"
- #include "xattr.h"
-@@ -243,6 +244,7 @@ static int f2fs_get_verity_descriptor(struct inode *inode, void *buf,
- 		f2fs_warn(F2FS_I_SB(inode), "invalid verity xattr");
- 		f2fs_handle_error(F2FS_I_SB(inode),
- 				ERROR_CORRUPTED_VERITY_XATTR);
-+		fserror_report_file_metadata(inode, -EFSCORRUPTED, GFP_NOFS);
- 		return -EFSCORRUPTED;
- 	}
- 	if (buf_size) {
-diff --git a/fs/f2fs/xattr.c b/fs/f2fs/xattr.c
-index 941dc62a6d6f..3ef1e5df0036 100644
---- a/fs/f2fs/xattr.c
-+++ b/fs/f2fs/xattr.c
-@@ -19,6 +19,7 @@
- #include <linux/f2fs_fs.h>
- #include <linux/security.h>
- #include <linux/posix_acl_xattr.h>
-+#include <linux/fserror.h>
- #include "f2fs.h"
- #include "xattr.h"
- #include "segment.h"
-@@ -371,6 +372,7 @@ static int lookup_all_xattrs(struct inode *inode, struct folio *ifolio,
- 		err = -ENODATA;
- 		f2fs_handle_error(F2FS_I_SB(inode),
- 					ERROR_CORRUPTED_XATTR);
-+		fserror_report_file_metadata(inode, err, GFP_NOFS);
- 		goto out;
- 	}
- check:
-@@ -590,6 +592,8 @@ ssize_t f2fs_listxattr(struct dentry *dentry, char *buffer, size_t buffer_size)
- 			set_sbi_flag(F2FS_I_SB(inode), SBI_NEED_FSCK);
- 			f2fs_handle_error(F2FS_I_SB(inode),
- 						ERROR_CORRUPTED_XATTR);
-+			fserror_report_file_metadata(inode,
-+						-EFSCORRUPTED, GFP_NOFS);
- 			break;
- 		}
- 
-@@ -677,6 +681,7 @@ static int __f2fs_setxattr(struct inode *inode, int index,
- 		error = -EFSCORRUPTED;
- 		f2fs_handle_error(F2FS_I_SB(inode),
- 					ERROR_CORRUPTED_XATTR);
-+		fserror_report_file_metadata(inode, error, GFP_NOFS);
- 		goto exit;
- 	}
- 
-@@ -705,6 +710,7 @@ static int __f2fs_setxattr(struct inode *inode, int index,
- 			error = -EFSCORRUPTED;
- 			f2fs_handle_error(F2FS_I_SB(inode),
- 						ERROR_CORRUPTED_XATTR);
-+			fserror_report_file_metadata(inode, error, GFP_NOFS);
- 			goto exit;
- 		}
- 		last = XATTR_NEXT_ENTRY(last);
--- 
-2.49.0
-
-
-
-_______________________________________________
-Linux-f2fs-devel mailing list
-Linux-f2fs-devel@lists.sourceforge.net
-https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
+T24gMy8yMy8yNiAxNjo0MiwgWW9uZ3BlbmcgWWFuZyB3cm90ZToKPiAKPiBPbiAzLzIzLzI2IDEx
+OjI4LCBDaGFvIFl1IHZpYSBMaW51eC1mMmZzLWRldmVsIHdyb3RlOgo+PiBPbiAzLzE5LzI2IDIx
+OjI2LCBZb25ncGVuZyBZYW5nIHdyb3RlOgo+Pj4gRnJvbTogWW9uZ3BlbmcgWWFuZyA8eWFuZ3lv
+bmdwZW5nQHhpYW9taS5jb20+Cj4+Pgo+Pj4gZjJmc19maWVtYXAoKSBjYWxscyBmMmZzX21hcF9i
+bG9ja3MoKSB0byBvYnRhaW4gdGhlIGJsb2NrIG1hcHBpbmcgYQo+Pj4gZmlsZSwgYW5kIHRoZW4g
+bWVyZ2VzIGNvbnRpZ3VvdXMgbWFwcGluZ3MgaW50byBleHRlbnRzLiBJZiB0aGUgbWFwcGluZwo+
+Pj4gaXMgZm91bmQgaW4gdGhlIHJlYWQgZXh0ZW50IGNhY2hlLCBub2RlIGJsb2NrcyBkbyBub3Qg
+bmVlZCB0byBiZSByZWFkLgo+Pj4gSG93ZXZlciwgaW4gdGhlIGZvbGxvd2luZyBzY2VuYXJpbywg
+YSBjb250aWd1b3VzIGV4dGVudCBjYW4gYmUgc3BsaXQKPj4+IGludG8gdHdvIGV4dGVudHM6Cj4+
+Pgo+Pj4gcm9vdEB2bTovbW50L2YyZnMjIGRkIGlmPS9kZXYvemVybyBvZj1kYXRhLjRNIGJzPTFN
+IGNvdW50PTQgJiYgc3luYwo+Pj4gcm9vdEB2bTovbW50L2YyZnMjIGRkIGlmPS9kZXYvemVybyBv
+Zj1kYXRhLjRNIGJzPTFNIGNvdW50PTIgc2Vlaz0yIGNvbnY9bm90cnVuYyAmJiBzeW5jCj4+PiBy
+b290QHZtOi9tbnQvZjJmcyMgZWNobyAzID4gL3Byb2Mvc3lzL3ZtL2Ryb3BfY2FjaGVzICMgZHJv
+cCAyTX40TSBleHRlbnQgY2FjaGUKPj4+IHJvb3RAdm06L21udC9mMmZzIyBkZCBpZj0vZGV2L3pl
+cm8gb2Y9ZGF0YS40TSBicz0xTSBjb3VudD0yIHNlZWs9MCBjb252PW5vdHJ1bmMgJiYgc3luYwo+
+Pj4gcm9vdEB2bTovbW50L2YyZnMjIGYyZnNfaW8gZmllbWFwIDAgMTAyNCBkYXRhLjRNCj4+PiBG
+aWVtYXA6IG9mZnNldCA9IDAgbGVuID0gMTAyNAo+Pj4gbG9naWNhbCBhZGRyLiAgICBwaHlzaWNh
+bCBhZGRyLiAgIGxlbmd0aCAgICAgICAgICAgZmxhZ3MKPj4+IDAJMDAwMDAwMDAwMDAwMDAwMCAw
+MDAwMDAwMDA2NDAwMDAwIDAwMDAwMDAwMDAyMDAwMDAgMDAwMDEwMDAKPj4+IDEJMDAwMDAwMDAw
+MDIwMDAwMCAwMDAwMDAwMDA2NjAwMDAwIDAwMDAwMDAwMDAyMDAwMDAgMDAwMDEwMDEKPj4KPj4g
+V2VsbCwgSSBjYW4gbm90IHJlcHJvZHVjZSB0aGlzIHcvIGFib3ZlIHNjcmlwdHMsIGNhbiB5b3Ug
+cGxlYXNlIGNoZWNrCj4+IHRoYXQ/IGFueXdheSwgdGhlIGNvZGUgcGFydCBsb29rcyBmaW5lIHRv
+IG1lLgo+IAo+IFNvcnJ5IGZvciBvbWl0dGluZyB0b28gbWFueSBkZXRhaWxzIGVhcmxpZXIuIFRo
+ZSBmdWxsIHNjcmlwdHMgSSB1c2VkIHRvCj4gcmVwcm9kdWNlIHRoZSBpc3N1ZSBpcyBhcyBiZWxv
+dy4gVGhlIGJhc2ljIGlkZWEgaXMgdG8gbWFrZQo+IGdldF9uZXdfc2VnbWVudCgpIGFsd2F5cyBz
+dGFydCBzY2FubmluZyBmcm9tIHNlY3Rpb24gIzAgZm9yIGVhY2gKPiBhbGxvY2F0aW9uLCBhbmQg
+dG8gYWxsb2NhdGUgaGlnaGVyIGFkZHJlc3NlcyBmaXJzdCwgZm9sbG93ZWQgYnkgbG93ZXIKPiBh
+ZGRyZXNzZXMuCgpZb3UgbWVhbiBhbGxvY2F0ZSBsb3dlciBhZGRyZXNzZXMgZmlyc3QsIHRoZW4g
+aGlnaGVyIGFkZHJlc3NlcyBpbiBMRlMgbW9kZT8KCj4gCj4gZGQgaWY9L2Rldi96ZXJvIG9mPWRh
+dGEuMTI4TSBicz0xTSBjb3VudD0xMjgKPiBsb3NldHVwIC1mIGRhdGEuMTI4TQo+IG1rZnMuZjJm
+cyAvZGV2L2xvb3AwIC1mCj4gbW91bnQgLW8gbW9kZT1sZnMgL2Rldi9sb29wMCAvbW50L2YyZnMv
+Cj4gY2QgL21udC9mMmZzLwo+IGRkIGlmPS9kZXYvemVybyBvZj1kYXRhLjcyTSBicz0xTSBjb3Vu
+dD03MiAmJiBzeW5jCj4gZGQgaWY9L2Rldi96ZXJvIG9mPWRhdGEuNE0gYnM9MU0gY291bnQ9NCAm
+JiBzeW5jCj4gZGQgaWY9L2Rldi96ZXJvIG9mPWRhdGEuNE0gYnM9MU0gY291bnQ9MiBzZWVrPTIg
+Y29udj1ub3RydW5jICYmIHN5bmMKPiBlY2hvIDMgPiAvcHJvYy9zeXMvdm0vZHJvcF9jYWNoZXMK
+PiBkZCBpZj0vZGV2L3plcm8gb2Y9ZGF0YS40TSBicz0xTSBjb3VudD0yIHNlZWs9MCBjb252PW5v
+dHJ1bmMgJiYgc3luYwo+IGRkIGlmPS9kZXYvemVybyBvZj1kYXRhLjRNIGJzPTFNIGNvdW50PTIg
+c2Vlaz0wIGNvbnY9bm90cnVuYyAmJiBzeW5jCj4gZjJmc19pbyBmaWVtYXAgMCAxMDI0IGRhdGEu
+NE0KCkFoLCBub3cgdGhlIHNjcmlwdHMgYW5kIHJlc3VsdCBhcmUgY29uc2lzdGVudCwgY2FuIHlv
+dSBwbGVhc2UgcmVwbGFjZSB0aGUKc2NyaXB0cyBpbiBjb21taXQgbWVzc2FnZT8KClRoYW5rcywK
+Cj4gCj4gVGhhbmtzCj4gWW9uZ3BlbmcsCj4gCj4+Cj4+IFRoYW5rcywKPj4KPj4+Cj4+PiBBbHRo
+b3VnaCB0aGUgcGh5c2ljYWwgYWRkcmVzc2VzIG9mIHRoZSByYW5nZXMgMO+9njJNQiBhbmQgMk3v
+vZ40TUIgYXJlCj4+PiBjb250aWd1b3VzLCB0aGUgbWFwcGluZyBmb3IgdGhlIDJN772eNE1CIHJh
+bmdlIGlzIG5vdCBwcmVzZW50IGluIG1lbW9yeS4KPj4+IFdoZW4gdGhlIHBoeXNpY2FsIGFkZHJl
+c3NlcyBmb3IgdGhlIDDvvZ4yTUIgcmFuZ2UgYXJlIHVwZGF0ZWQsIG5vIG1lcmdlCj4+PiBoYXBw
+ZW5zIGJlY2F1c2UgdGhlIGFkamFjZW50IG1hcHBpbmcgaXMgbWlzc2luZyBmcm9tIHRoZSBpbi1t
+ZW1vcnkKPj4+IGNhY2hlLiBBcyBhIHJlc3VsdCwgZmllbWFwIHJlcG9ydHMgdHdvIHNlcGFyYXRl
+IGV4dGVudHMgaW5zdGVhZCBvZiBhCj4+PiBzaW5nbGUgY29udGlndW91cyBvbmUuCj4+Pgo+Pj4g
+VGhlIHJvb3QgY2F1c2UgaXMgdGhhdCB0aGUgcmVhZCBleHRlbnQgY2FjaGUgZG9lcyBub3QgZ3Vh
+cmFudGVlIHRoYXQgYWxsCj4+PiBibG9ja3Mgb2YgYW4gZXh0ZW50IGFyZSBwcmVzZW50IGluIG1l
+bW9yeS4gVGhlcmVmb3JlLCB3aGVuIHRoZSBleHRlbnQKPj4+IGxlbmd0aCByZXR1cm5lZCBieSBm
+MmZzX21hcF9ibG9ja3NfY2FjaGVkKCkgaXMgc21hbGxlciB0aGFuIG1heGJsb2NrcywKPj4+IHRo
+ZSByZW1haW5pbmcgbWFwcGluZ3MgYXJlIHJldHJpZXZlZCB2aWEgZjJmc19nZXRfZG5vZGVfb2Zf
+ZGF0YSgpIHRvCj4+PiBlbnN1cmUgY29ycmVjdCBmaWVtYXAgZXh0ZW50IGJvdW5kYXJ5IGhhbmRs
+aW5nLgo+Pj4KPj4+IENjOiBzdGFibGVAa2VybmVsLm9yZwo+Pj4gRml4ZXM6IGNkOGZjNTIyNmJl
+ZiAoImYyZnM6IHJlbW92ZSB0aGUgY3JlYXRlIGFyZ3VtZW50IHRvIGYyZnNfbWFwX2Jsb2NrcyIp
+Cj4+PiBTaWduZWQtb2ZmLWJ5OiBZb25ncGVuZyBZYW5nIDx5YW5neW9uZ3BlbmdAeGlhb21pLmNv
+bT4KPj4+IC0tLQo+Pj4gdjM6Cj4+PiAtIENjIHRvIHN0YWJsZSBrZXJuZWwuCj4+PiB2MjoKPj4+
+IC0gRml4IE5VTEwgcG9pbnRlciBkZXJlZmVyZW5jZSBjYXVzZWQgYnkgbWFwLT5tX211bHRpZGV2
+X2Rpby4KPj4+IC0gUmVkdWNlIGNhbGxzIHRvIGYyZnNfZ2V0X2Rub2RlX29mX2RhdGEoKS4KPj4+
+IC0tLQo+Pj4gIGZzL2YyZnMvZGF0YS5jIHwgMjUgKysrKysrKysrKysrKysrKysrKysrKy0tLQo+
+Pj4gIDEgZmlsZSBjaGFuZ2VkLCAyMiBpbnNlcnRpb25zKCspLCAzIGRlbGV0aW9ucygtKQo+Pj4K
+Pj4+IGRpZmYgLS1naXQgYS9mcy9mMmZzL2RhdGEuYyBiL2ZzL2YyZnMvZGF0YS5jCj4+PiBpbmRl
+eCA5ZTRkYjZmMDUwOGEuLmEyMTBhN2E2MjdjNiAxMDA2NDQKPj4+IC0tLSBhL2ZzL2YyZnMvZGF0
+YS5jCj4+PiArKysgYi9mcy9mMmZzL2RhdGEuYwo+Pj4gQEAgLTE2MzcsOCArMTYzNywyNiBAQCBp
+bnQgZjJmc19tYXBfYmxvY2tzKHN0cnVjdCBpbm9kZSAqaW5vZGUsIHN0cnVjdCBmMmZzX21hcF9i
+bG9ja3MgKm1hcCwgaW50IGZsYWcpCj4+PiAgCWxmc19kaW9fd3JpdGUgPSAoZmxhZyA9PSBGMkZT
+X0dFVF9CTE9DS19ESU8gJiYgZjJmc19sZnNfbW9kZShzYmkpICYmCj4+PiAgCQkJCW1hcC0+bV9t
+YXlfY3JlYXRlKTsKPj4+ICAKPj4+IC0JaWYgKCFtYXAtPm1fbWF5X2NyZWF0ZSAmJiBmMmZzX21h
+cF9ibG9ja3NfY2FjaGVkKGlub2RlLCBtYXAsIGZsYWcpKQo+Pj4gLQkJZ290byBvdXQ7Cj4+PiAr
+CWlmICghbWFwLT5tX21heV9jcmVhdGUgJiYgZjJmc19tYXBfYmxvY2tzX2NhY2hlZChpbm9kZSwg
+bWFwLCBmbGFnKSkgewo+Pj4gKwkJc3RydWN0IGV4dGVudF9pbmZvIGVpOwo+Pj4gKwo+Pj4gKwkJ
+LyoKPj4+ICsJCSAqIDEuIElmIG1hcC0+bV9tdWx0aWRldl9kaW8gaXMgdHJ1ZSwgbWFwLT5tX3Bi
+bGsgY2Fubm90IGJlCj4+PiArCQkgKiB3YWl0dGVkIGJ5IGYyZnNfd2FpdF9vbl9ibG9ja193cml0
+ZWJhY2tfcmFuZ2UoKSBhbmQgYXJlIG5vdAo+Pj4gKwkJICogbWVyZ2VhYmxlLgo+Pj4gKwkJICog
+Mi4gSWYgcGdvZnMgaGl0cyB0aGUgcmVhZCBleHRlbnQgY2FjaGUsIGl0IG1lYW5zIHRoZSBtYXBw
+aW5nCj4+PiArCQkgKiBpcyBhbHJlYWR5IGNhY2hlZCBpbiB0aGUgZXh0ZW50IGNhY2hlLCBidXQg
+aXQgaXMgbm90Cj4+PiArCQkgKiBtZXJnZWFibGUsIGFuZCB0aGVyZSBpcyBubyBuZWVkIHRvIHF1
+ZXJ5IHRoZSBtYXBwaW5nIGFnYWluCj4+PiArCQkgKiB2aWEgZjJmc19nZXRfZG5vZGVfb2ZfZGF0
+YSgpLgo+Pj4gKwkJICovCj4+PiArCQlwZ29mcyA9CShwZ29mZl90KW1hcC0+bV9sYmxrICsgbWFw
+LT5tX2xlbjsKPj4+ICsJCWlmIChtYXAtPm1fbGVuID09IG1heGJsb2NrcyB8fAo+Pj4gKwkJCW1h
+cC0+bV9tdWx0aWRldl9kaW8gfHwKPj4+ICsJCQlmMmZzX2xvb2t1cF9yZWFkX2V4dGVudF9jYWNo
+ZShpbm9kZSwgcGdvZnMsICZlaSkpCj4+PiArCQkJZ290byBvdXQ7Cj4+PiArCQlvZnMgPSBtYXAt
+Pm1fbGVuOwo+Pj4gKwkJZ290byBtYXBfbW9yZTsKPj4+ICsJfQo+Pj4gIAo+Pj4gIAltYXAtPm1f
+YmRldiA9IGlub2RlLT5pX3NiLT5zX2JkZXY7Cj4+PiAgCW1hcC0+bV9tdWx0aWRldl9kaW8gPQo+
+Pj4gQEAgLTE2NDksNyArMTY2Nyw4IEBAIGludCBmMmZzX21hcF9ibG9ja3Moc3RydWN0IGlub2Rl
+ICppbm9kZSwgc3RydWN0IGYyZnNfbWFwX2Jsb2NrcyAqbWFwLCBpbnQgZmxhZykKPj4+ICAKPj4+
+ICAJLyogaXQgb25seSBzdXBwb3J0cyBibG9jayBzaXplID09IHBhZ2Ugc2l6ZSAqLwo+Pj4gIAlw
+Z29mcyA9CShwZ29mZl90KW1hcC0+bV9sYmxrOwo+Pj4gLQllbmQgPSBwZ29mcyArIG1heGJsb2Nr
+czsKPj4+ICttYXBfbW9yZToKPj4+ICsJZW5kID0gKHBnb2ZmX3QpbWFwLT5tX2xibGsgKyBtYXhi
+bG9ja3M7Cj4+PiAgCj4+PiAgCWlmIChmbGFnID09IEYyRlNfR0VUX0JMT0NLX1BSRUNBQ0hFKQo+
+Pj4gIAkJbW9kZSA9IExPT0tVUF9OT0RFX1JBOwo+Pgo+Pgo+Pgo+PiBfX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwo+PiBMaW51eC1mMmZzLWRldmVsIG1haWxp
+bmcgbGlzdAo+PiBMaW51eC1mMmZzLWRldmVsQGxpc3RzLnNvdXJjZWZvcmdlLm5ldAo+PiBodHRw
+czovL2xpc3RzLnNvdXJjZWZvcmdlLm5ldC9saXN0cy9saXN0aW5mby9saW51eC1mMmZzLWRldmVs
+Cj4gCgoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCkxp
+bnV4LWYyZnMtZGV2ZWwgbWFpbGluZyBsaXN0CkxpbnV4LWYyZnMtZGV2ZWxAbGlzdHMuc291cmNl
+Zm9yZ2UubmV0Cmh0dHBzOi8vbGlzdHMuc291cmNlZm9yZ2UubmV0L2xpc3RzL2xpc3RpbmZvL2xp
+bnV4LWYyZnMtZGV2ZWwK
