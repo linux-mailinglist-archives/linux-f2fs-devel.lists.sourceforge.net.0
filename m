@@ -2,31 +2,31 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id YCxTL1n5w2kxvQQAu9opvQ
+	id UGGeGVP5w2klvQQAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 25 Mar 2026 16:03:53 +0100
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 25 Mar 2026 16:03:47 +0100
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id B51A8327700
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 25 Mar 2026 16:03:53 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 438C33276F2
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 25 Mar 2026 16:03:47 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
 	Subject:In-Reply-To:MIME-Version:References:Message-ID:To:From:Date:Sender:
 	Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
 	:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=nzWsJz7g2fUdUFzIoNbZFQb066OGKxpJZs1X8SITb8Q=; b=RnpyzZ2qlqP0jHzMFUvdTcKWHL
-	sQDLudLezzv8hyvgwI4XQ2tOTcYYIFgsNSkSXOPLpi55anH9ifc2RGXBjFnsICvSGEMBLG+uZ75RQ
-	LPbHXSajiw9ev6A15cdCdaQ/omJw55QRMo8Udr8VlrdnKElaqyYIsFIKX2flNqusJyXU=;
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=e8qfyoSPyPfjE0jCCqLhRQvm/sqiAGHIjfAWqfboNlU=; b=dpiOFFo8iZHHRIn0Ez13IxdO35
+	V2eNLqwEYk4aD8S5ArbRbxLN+GvjJ0SQ2PA+zetbqqIUsmTXdCNMXUffR3HmliNKDu0fbUNFsmxzJ
+	XQlEm7aUjjA8SmeAbS2Nv7fksa4scY524PQXpheOUdX78BIeGZrXaiFFJPiuVzltPy1c=;
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1w5Plq-0005tq-Mp;
-	Wed, 25 Mar 2026 15:03:46 +0000
+	id 1w5Plp-0002TT-Uj;
+	Wed, 25 Mar 2026 15:03:45 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <hch@lst.de>) id 1w5Plo-0005tk-Sj
+ (envelope-from <hch@lst.de>) id 1w5Plo-0002TL-2z
  for linux-f2fs-devel@lists.sourceforge.net;
  Wed, 25 Mar 2026 15:03:44 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
@@ -35,9 +35,9 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=q2c/xT6XJwEKIiHJmT8558WCfx4UGROZ9aBuiUzMmX0=; b=QmH6Mgxuvtzob5OK7yq+WNkdYk
- BcoeQacN5Irl5EC8uTyqzcPU3/ulCUAKX6y0cF6fbytp6OKN2MPMu4QVHadVPKCKoAx4jw+aipf/L
- /07BQv7DJManKgGk2ANl0MtB2CbDxrZZfFSY0etcKCMBUJJVAAOwoCh49iEYlsJ/a+ss=;
+ bh=M7NmYC/Iylm9myghHwqILim55SAUt9QrM+UZYk0eJlw=; b=PIklGSlTyeqwb3qBc5OthUeywV
+ rbH9rBNm9yerl+tsRgzDM27HOlXFfs46GfeU4c7O7uS9HkrpN4Ad77rPb10T/yAxFBVB/UaXG6Pnd
+ teLxPUTNeG7rXdNkskXS+5SXJvYHxXZ+Nr4fTZEOCeOcF6ytPPWDnignFGPGu2SPAC5M=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -45,43 +45,41 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=q2c/xT6XJwEKIiHJmT8558WCfx4UGROZ9aBuiUzMmX0=; b=NiSdypMgUnlRkUDRLfQDInuwQZ
- 3Dav9LiGLoiy7DNNLKXM5atItEjoob56EfmEdQ5gl84ThDdyCVsgRi/97awozuxiRVvIK18oPaYoc
- pPn9YAjC6Qr9OHUXslqTj96G9IuOrSh7n5OpGCXOBAqK2qZrzLTNsORwP4Wp+9IAf+mg=;
+ bh=M7NmYC/Iylm9myghHwqILim55SAUt9QrM+UZYk0eJlw=; b=GDvF1jjs1DyWoSUPcvJLcS1tIe
+ IF1l4vPSS/0vGCazf130/PKSIt9dqMWxcBKqvtJUPGMJbFjLV6YKGNQAxYAWLSS9jRSoDrNGhXgfJ
+ qs4k7wV2p53tzGQ8KQN2ZQAyQVL0lf71wl/etneSeX3HEJKbWX1Qes2uui7WGgR+9JKQ=;
 Received: from verein.lst.de ([213.95.11.211])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1w5Plo-0006TN-66 for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 25 Mar 2026 15:03:44 +0000
+ id 1w5Pln-0006TA-AW for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 25 Mar 2026 15:03:43 +0000
 Received: by verein.lst.de (Postfix, from userid 2407)
- id DAD7968CFE; Wed, 25 Mar 2026 08:57:37 +0100 (CET)
-Date: Wed, 25 Mar 2026 08:57:37 +0100
+ id 7EF1968D05; Wed, 25 Mar 2026 08:58:09 +0100 (CET)
+Date: Wed, 25 Mar 2026 08:58:09 +0100
 From: Christoph Hellwig <hch@lst.de>
 To: Andrey Albershteyn <aalbersh@kernel.org>
-Message-ID: <20260325075737.GD952@lst.de>
+Message-ID: <20260325075809.GE952@lst.de>
 References: <20260319170231.1455553-1-aalbersh@kernel.org>
- <20260319170231.1455553-5-aalbersh@kernel.org>
+ <20260319170231.1455553-7-aalbersh@kernel.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20260319170231.1455553-5-aalbersh@kernel.org>
+In-Reply-To: <20260319170231.1455553-7-aalbersh@kernel.org>
 User-Agent: Mutt/1.5.17 (2007-11-01)
 X-Spam-Score: 1.1 (+)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Thu, Mar 19, 2026 at 06:01:51PM +0100, Andrey Albershteyn
- wrote: > Helper to pre-fill folio with hashes of empty blocks. This will
- be used > by iomap to synthesize blocks full of zero hashes on the [...] 
+ Content preview:  Looks good: Reviewed-by: Christoph Hellwig <hch@lst.de> 
  Content analysis details:   (1.1 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  1.1 DATE_IN_PAST_06_12     Date: is 6 to 12 hours before Received: date
-X-Headers-End: 1w5Plo-0006TN-66
-Subject: Re: [f2fs-dev] [PATCH v5 04/25] fsverity: introduce
- fsverity_folio_zero_hash()
+X-Headers-End: 1w5Pln-0006TA-AW
+Subject: Re: [f2fs-dev] [PATCH v5 06/25] fsverity: hoist pagecache_read from
+ f2fs/ext4 to fsverity
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -131,15 +129,13 @@ X-Spamd-Result: default: False [-1.01 / 15.00];
 	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
 	TAGGED_RCPT(0.00)[linux-f2fs-devel];
 	FORGED_SENDER_MAILLIST(0.00)[]
-X-Rspamd-Queue-Id: B51A8327700
+X-Rspamd-Queue-Id: 438C33276F2
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On Thu, Mar 19, 2026 at 06:01:51PM +0100, Andrey Albershteyn wrote:
-> Helper to pre-fill folio with hashes of empty blocks. This will be used
-> by iomap to synthesize blocks full of zero hashes on the fly.
+Looks good:
 
-This should probably be merged with the previous patch.
+Reviewed-by: Christoph Hellwig <hch@lst.de>
 
 
 
