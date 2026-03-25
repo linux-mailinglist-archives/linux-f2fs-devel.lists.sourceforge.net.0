@@ -2,12 +2,12 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 2LlJBtf8w2lXvQQAu9opvQ
+	id PJcRCNf8w2l8vQQAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
 	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 25 Mar 2026 16:18:47 +0100
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id BB715327BFB
+	by mail.lfdr.de (Postfix) with ESMTPS id D4570327BFD
 	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 25 Mar 2026 16:18:46 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
@@ -15,29 +15,29 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	Subject:In-Reply-To:MIME-Version:References:Message-ID:To:From:Date:Sender:
 	Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
 	:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=e8qfyoSPyPfjE0jCCqLhRQvm/sqiAGHIjfAWqfboNlU=; b=V+riN3H0CMC8jQqwObG21zi+59
-	xe78T85Xk7HZF/Wh2Yh/5Rqm9PsE8IE/J3sXS8/KzaoJj+jZkor/baMUWPLIS5P1tFS7fgmY/x7nv
-	DeDlzPdPRYMQkVqSECV1Deqe37MBJ3TiGdmE1iYniSY4tV7vM6eJmH766ss2qdlHt/rQ=;
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=e8qfyoSPyPfjE0jCCqLhRQvm/sqiAGHIjfAWqfboNlU=; b=GsVDZuivzfY0U8wUjVLNOodCj8
+	eOm7xPE7mCUvJQH1M9ij2Uskn6Oig1aC72V3SuZPW53SXqZt8VCRHW//aOMEtr37eNm97+oofJ5kq
+	/vs/5OVPBNy/DVd+CjzkmG+gg4WitY9Ov+Gdl6RauwirtNHuBP1pnNx6U5JZGxVLgTZs=;
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1w5Q0L-0006YL-FA;
-	Wed, 25 Mar 2026 15:18:45 +0000
+	id 1w5Q0K-0003BM-Di;
+	Wed, 25 Mar 2026 15:18:44 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <hch@lst.de>) id 1w5Q0J-0006YB-8c
+ (envelope-from <hch@lst.de>) id 1w5Q0I-0003BG-U5
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 25 Mar 2026 15:18:43 +0000
+ Wed, 25 Mar 2026 15:18:42 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=M7NmYC/Iylm9myghHwqILim55SAUt9QrM+UZYk0eJlw=; b=mjEk/8Hl4H3ml7oZQWPM8pmSVZ
- ZtdmnKKP3MjaOSHxgKrGl/p9XyNOuch4XDO1P5bptPSREvElnB7Ig563R7NcbQxRgJeeJ9Q9b0ATK
- IjUpLJrTgaCcTylOe619MRdCfBcXdVZ2S3bUui4vt4xyTClGLI3hJKKBX7+DStI5y5Bs=;
+ bh=M7NmYC/Iylm9myghHwqILim55SAUt9QrM+UZYk0eJlw=; b=Z6ap0ZmpIvpHaulEynGNIeIJG8
+ PO3uaTODsTuSNbAB7LCcigA+DXljmJ6vaRtmdeaXhZV3oaQGaxgIE/HzWSJqBlhwSKyJVtlykPsjC
+ lkyOe18tdnw3mAhwwJdfwOrB7prUK7c9WfgOWrYxj9BAViB3uwy9KSR1j0vv9GzuEGfU=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -45,25 +45,25 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=M7NmYC/Iylm9myghHwqILim55SAUt9QrM+UZYk0eJlw=; b=kwrqszCIQw8pByQyMhYwbt4GFk
- cAGKmVzUZbx3DnKELw/73/LFz6LJPFQUGjlnTINrmoztvtxQV0oC+t2L7AM15dOX6dlQYEIgLpbdq
- utdMIiqyOggHh/kShdxK9r/joFdiF18n+4LTsO85OK++mvk+L63MhEBbbVnK1VTyp9M8=;
+ bh=M7NmYC/Iylm9myghHwqILim55SAUt9QrM+UZYk0eJlw=; b=B+NV8MATGgv0WqAUnIJrI1LBOg
+ zIMFbOCcx6yLhALTnox7ZYkY6Ib/cmZu4vereXHZ69Eiiz9hV6QOR0//p6sjqauqCHHRQbdyzGlr4
+ wc/6FZRqkjB/u90gCjbnbp4pWE8qytovd2q2q0q41Gfj6lL6dFRruQp21CrPO/ZFSXd0=;
 Received: from verein.lst.de ([213.95.11.211])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1w5Q0I-0008EM-Hk for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 25 Mar 2026 15:18:43 +0000
+ id 1w5Q0I-0008EL-90 for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 25 Mar 2026 15:18:42 +0000
 Received: by verein.lst.de (Postfix, from userid 2407)
- id DD10368D1C; Wed, 25 Mar 2026 09:09:59 +0100 (CET)
-Date: Wed, 25 Mar 2026 09:09:59 +0100
+ id C1CAA68D1E; Wed, 25 Mar 2026 09:10:11 +0100 (CET)
+Date: Wed, 25 Mar 2026 09:10:11 +0100
 From: Christoph Hellwig <hch@lst.de>
 To: Andrey Albershteyn <aalbersh@kernel.org>
-Message-ID: <20260325080959.GA2254@lst.de>
+Message-ID: <20260325081011.GB2254@lst.de>
 References: <20260319170231.1455553-1-aalbersh@kernel.org>
- <20260319170231.1455553-21-aalbersh@kernel.org>
+ <20260319170231.1455553-22-aalbersh@kernel.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20260319170231.1455553-21-aalbersh@kernel.org>
+In-Reply-To: <20260319170231.1455553-22-aalbersh@kernel.org>
 User-Agent: Mutt/1.5.17 (2007-11-01)
 X-Spam-Score: 1.1 (+)
 X-Spam-Report: Spam detection software,
@@ -77,8 +77,9 @@ X-Spam-Report: Spam detection software,
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  1.1 DATE_IN_PAST_06_12     Date: is 6 to 12 hours before Received: date
-X-Headers-End: 1w5Q0I-0008EM-Hk
-Subject: Re: [f2fs-dev] [PATCH v5 20/25] xfs: add fs-verity ioctls
+X-Headers-End: 1w5Q0I-0008EL-90
+Subject: Re: [f2fs-dev] [PATCH v5 21/25] xfs: advertise fs-verity being
+ available on filesystem
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -90,7 +91,9 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: fsverity@lists.linux.dev, ebiggers@kernel.org, djwong@kernel.org,
+Cc: fsverity@lists.linux.dev, ebiggers@kernel.org,
+ "Darrick J. Wong" <djwong@kernel.org>,
+ Andrey Albershteyn <aalbersh@redhat.com>,
  linux-f2fs-devel@lists.sourceforge.net, linux-xfs@vger.kernel.org,
  linux-fsdevel@vger.kernel.org, linux-ext4@vger.kernel.org, hch@lst.de,
  linux-btrfs@vger.kernel.org
@@ -107,7 +110,7 @@ X-Spamd-Result: default: False [-1.01 / 15.00];
 	HAS_LIST_UNSUB(-0.01)[];
 	RECEIVED_HELO_LOCALHOST(0.00)[];
 	RCVD_COUNT_THREE(0.00)[4];
-	FORGED_RECIPIENTS(0.00)[m:aalbersh@kernel.org,m:fsverity@lists.linux.dev,m:ebiggers@kernel.org,m:djwong@kernel.org,m:linux-f2fs-devel@lists.sourceforge.net,m:linux-xfs@vger.kernel.org,m:linux-fsdevel@vger.kernel.org,m:linux-ext4@vger.kernel.org,m:hch@lst.de,m:linux-btrfs@vger.kernel.org,s:lists@lfdr.de];
+	FORGED_RECIPIENTS(0.00)[m:aalbersh@kernel.org,m:fsverity@lists.linux.dev,m:ebiggers@kernel.org,m:djwong@kernel.org,m:aalbersh@redhat.com,m:linux-f2fs-devel@lists.sourceforge.net,m:linux-xfs@vger.kernel.org,m:linux-fsdevel@vger.kernel.org,m:linux-ext4@vger.kernel.org,m:hch@lst.de,m:linux-btrfs@vger.kernel.org,s:lists@lfdr.de];
 	ARC_NA(0.00)[];
 	FORGED_SENDER(0.00)[hch@lst.de,linux-f2fs-devel-bounces@lists.sourceforge.net];
 	TO_DN_SOME(0.00)[];
@@ -125,11 +128,11 @@ X-Spamd-Result: default: False [-1.01 / 15.00];
 	MID_RHS_MATCH_FROM(0.00)[];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCPT_COUNT_SEVEN(0.00)[10];
+	RCPT_COUNT_SEVEN(0.00)[11];
 	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
 	TAGGED_RCPT(0.00)[linux-f2fs-devel];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lst.de:email,lst.de:mid,lists.sourceforge.net:helo,lists.sourceforge.net:rdns,lists.sourceforge.net:dkim]
-X-Rspamd-Queue-Id: BB715327BFB
+	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.sourceforge.net:helo,lists.sourceforge.net:rdns,lists.sourceforge.net:dkim,lst.de:email,lst.de:mid]
+X-Rspamd-Queue-Id: D4570327BFD
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
