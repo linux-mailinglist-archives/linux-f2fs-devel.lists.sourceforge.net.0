@@ -2,42 +2,42 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 8E9ANF0AxGmlvQQAu9opvQ
+	id QLdEKFL5w2klvQQAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 25 Mar 2026 16:33:49 +0100
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 25 Mar 2026 16:03:46 +0100
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 23EB3328164
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 25 Mar 2026 16:33:49 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3ABA53276E3
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 25 Mar 2026 16:03:46 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
 	Subject:In-Reply-To:MIME-Version:References:Message-ID:To:From:Date:Sender:
 	Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
 	:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=X1n2bocafqvghwZYWnHAMFN8QYljEYQ2Y0BjHx0y0wc=; b=UritjZIvcfhOHc/RdJmKorbB4f
-	oqmX9y+nNVfRI6QgRYgas+Kp5RrQ7dBNdnalTMcbT53ybkuAkIFAvO0Mp6RPOd7WdsRhua0+BQu7W
-	22V/uARZTlO9GyJuC7H16j/CNH6Q1izpvZpg6/kKW5aCX74fCH+XpObLSk29y+4zysYo=;
+	bh=RG9rG2AZAAEa5Kebjy08mWZ/X9FQ9pFYItHrUXEXYDc=; b=YbswrzqaKk6veo9T2vHk4+mBca
+	Dwji1pQpdzgXcOBYRCmn7IdjQnqbkT1BoWMb92P/qBq6TsIF0HinUFaUQ0KrVGlNpiGM0y0QtjCCm
+	/5HKcRQpLQXQDsD5lW2pmZ2vDx6z+AhgQ8xF2Pqh8VbUwrhO0iiGUfuXlm2JaoyPEalo=;
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1w5QEl-0006y3-8Y;
-	Wed, 25 Mar 2026 15:33:39 +0000
+	id 1w5Plj-0005tH-6e;
+	Wed, 25 Mar 2026 15:03:39 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <hch@lst.de>) id 1w5QEj-0006xw-5p
+ (envelope-from <hch@lst.de>) id 1w5Plh-0005t8-Sl
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 25 Mar 2026 15:33:37 +0000
+ Wed, 25 Mar 2026 15:03:37 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=BRxLAD5LKF5cjGrLrGDf1pCupjHl6+C9Elc1FIuKjPI=; b=VF7qg/OG2Z86Il88d+Up+wL+/T
- qnbbZKC5Yq3yGjYFRYYzvoQlKPKF+HuGQB53N62rlbRbvtB9TFx4BUWXTKTjOqn/6vsgPZzs/Zjmg
- kq91hI12Lx9XBQ5cQvcwRp2i6n+nofZpjqLXqY2TzxKGaj+pZ0ArvwVEByAx2UW7xgik=;
+ bh=DzxASLxZS4HvxYDAUA8yfM2UezI5z6VfoFofepEiZig=; b=XZCyM9nLSFw2Wlt7ztM3pxfMnC
+ UR7BKW1VgBmzlct/NQJKViSwSB8Rm3XXa2usnmfRe8hH3YAjuhnedng9OWMPlbGfHuaCsZxk+Asrh
+ RGYEToetH3DRm8rhfbLTIv7jvhQ9ojbTPYr3nCLwT/UxrUEd3iPh+DXeNTXJx94VWXzg=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -45,42 +45,44 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=BRxLAD5LKF5cjGrLrGDf1pCupjHl6+C9Elc1FIuKjPI=; b=BWp4rOhWX+LR3KqMgfkbVwlFY+
- CJA9GUDKE9NngrwBMTRadMzLIE9F3Ca9OXfd7O+Nl6bGkU1RpOt4FEPDx9qLgO/RxCZNvgT3BRReQ
- ChvSy66J//TEENx9VkwFQ7AVVF1q5r5o1KLT0pt5tv2bFwrWmzqie8hweabctE6Zw1dg=;
+ bh=DzxASLxZS4HvxYDAUA8yfM2UezI5z6VfoFofepEiZig=; b=H2rRatnh1BMbbT8Qdz90TLxZJm
+ jnU51G10Pua5dGBgnDmRQ/wJwLJ7G+hhRf46OA+58K2+UiLgQz6qBCe/5cQW2Zmu6fMEcdwWMcEpj
+ a3GexwoVEx5UZR31GLe7b02IiG1MVXRlKqD9PvcN+aK17X0GzGeDtak3xfkRhUeCToLg=;
 Received: from verein.lst.de ([213.95.11.211])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1w5QEi-0001ua-Gv for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 25 Mar 2026 15:33:37 +0000
+ id 1w5Plh-0006SP-1W for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 25 Mar 2026 15:03:37 +0000
 Received: by verein.lst.de (Postfix, from userid 2407)
- id 11D6C68BEB; Wed, 25 Mar 2026 08:54:03 +0100 (CET)
-Date: Wed, 25 Mar 2026 08:54:02 +0100
+ id B87BB68C4E; Wed, 25 Mar 2026 08:56:11 +0100 (CET)
+Date: Wed, 25 Mar 2026 08:56:11 +0100
 From: Christoph Hellwig <hch@lst.de>
 To: Andrey Albershteyn <aalbersh@kernel.org>
-Message-ID: <20260325075402.GA952@lst.de>
+Message-ID: <20260325075611.GB952@lst.de>
 References: <20260319170231.1455553-1-aalbersh@kernel.org>
- <20260319170231.1455553-2-aalbersh@kernel.org>
+ <20260319170231.1455553-3-aalbersh@kernel.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20260319170231.1455553-2-aalbersh@kernel.org>
+In-Reply-To: <20260319170231.1455553-3-aalbersh@kernel.org>
 User-Agent: Mutt/1.5.17 (2007-11-01)
-X-Spam-Score: 0.0 (/)
+X-Spam-Score: 1.1 (+)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Thu, Mar 19, 2026 at 06:01:48PM +0100, Andrey Albershteyn
- wrote: > Reported verification errors to fsnotify through recently added
- fserror > interface. Looks good: Reviewed-by: Christoph Hellwig <hch@lst.de>
- Content analysis details:   (0.0 points, 5.0 required)
+ Content preview: > -static int ensure_verity_info(struct inode *inode) > +int
+ fsverity_ensure_verity_info(struct inode *inode) This should grow a kerneldoc
+ comment. > +static inline int fsverity_ensure_verity_info(struct inode *inode)
+ > +{ > + WARN_ON_ONCE(1); > + return -EOPNOTSUPP; > +} 
+ Content analysis details:   (1.1 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
-X-Headers-End: 1w5QEi-0001ua-Gv
-Subject: Re: [f2fs-dev] [PATCH v5 01/25] fsverity: report validation errors
- through fserror to fsnotify
+ 1.1 DATE_IN_PAST_06_12     Date: is 6 to 12 hours before Received: date
+X-Headers-End: 1w5Plh-0006SP-1W
+Subject: Re: [f2fs-dev] [PATCH v5 02/25] fsverity: expose
+ ensure_fsverity_info()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -102,50 +104,52 @@ Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 X-Spamd-Result: default: False [-1.01 / 15.00];
 	RWL_MAILSPIKE_EXCELLENT(-0.40)[216.105.38.7:from];
 	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7];
-	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
 	MAILLIST(-0.20)[mailman];
-	DMARC_POLICY_SOFTFAIL(0.10)[lst.de : SPF not aligned (relaxed), DKIM not aligned (relaxed),none];
+	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
 	MIME_GOOD(-0.10)[text/plain];
+	DMARC_POLICY_SOFTFAIL(0.10)[lst.de : SPF not aligned (relaxed), DKIM not aligned (relaxed),none];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_COUNT_THREE(0.00)[4];
+	RCVD_TLS_LAST(0.00)[];
 	RECEIVED_HELO_LOCALHOST(0.00)[];
 	FORGED_RECIPIENTS(0.00)[m:aalbersh@kernel.org,m:fsverity@lists.linux.dev,m:ebiggers@kernel.org,m:djwong@kernel.org,m:linux-f2fs-devel@lists.sourceforge.net,m:linux-xfs@vger.kernel.org,m:linux-fsdevel@vger.kernel.org,m:linux-ext4@vger.kernel.org,m:hch@lst.de,m:linux-btrfs@vger.kernel.org,s:lists@lfdr.de];
 	FORGED_SENDER(0.00)[hch@lst.de,linux-f2fs-devel-bounces@lists.sourceforge.net];
-	ARC_NA(0.00)[];
-	TO_DN_SOME(0.00)[];
-	RCVD_TLS_LAST(0.00)[];
 	MIME_TRACE(0.00)[0:+];
-	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
 	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x];
-	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-];
-	FORGED_SENDER_MAILLIST(0.00)[];
+	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
+	ARC_NA(0.00)[];
+	DKIM_MIXED(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	TO_DN_SOME(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
 	FROM_NEQ_ENVFROM(0.00)[hch@lst.de,linux-f2fs-devel-bounces@lists.sourceforge.net];
 	FROM_HAS_DN(0.00)[];
-	DKIM_MIXED(0.00)[];
+	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-];
 	MID_RHS_MATCH_FROM(0.00)[];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	RCPT_COUNT_SEVEN(0.00)[10];
 	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
 	TAGGED_RCPT(0.00)[linux-f2fs-devel];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lst.de:email,lst.de:mid,lists.sourceforge.net:helo,lists.sourceforge.net:rdns,lists.sourceforge.net:dkim]
-X-Rspamd-Queue-Id: 23EB3328164
+	FORGED_SENDER_MAILLIST(0.00)[]
+X-Rspamd-Queue-Id: 3ABA53276E3
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On Thu, Mar 19, 2026 at 06:01:48PM +0100, Andrey Albershteyn wrote:
-> Reported verification errors to fsnotify through recently added fserror
-> interface.
+> -static int ensure_verity_info(struct inode *inode)
+> +int fsverity_ensure_verity_info(struct inode *inode)
 
-Looks good:
+This should grow a kerneldoc comment.
 
-Reviewed-by: Christoph Hellwig <hch@lst.de>
+> +static inline int fsverity_ensure_verity_info(struct inode *inode)
+> +{
+> +	WARN_ON_ONCE(1);
+> +	return -EOPNOTSUPP;
+> +}
 
-Btw, would it make sense to enhance the interface to tell why the
-data vs considered lost?  i.e. checksum failure vs (part of) device
-disappeared?
+We should not need a stub for this as the only non-fsverity caller
+already checks fsverity_active and the compiler will eliminate the
+dead call.
 
 
 
