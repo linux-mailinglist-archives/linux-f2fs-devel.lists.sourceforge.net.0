@@ -2,42 +2,42 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id aO0/EKr7w2k/vQQAu9opvQ
+	id EMVEE637w2k/vQQAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 25 Mar 2026 16:13:46 +0100
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 25 Mar 2026 16:13:49 +0100
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 399A7327A1C
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 25 Mar 2026 16:13:46 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 446F9327A2C
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 25 Mar 2026 16:13:49 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
 	Subject:In-Reply-To:MIME-Version:References:Message-ID:To:From:Date:Sender:
 	Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
 	:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=/1/0lTNGabcHkVWiMN1y4Vrjb18AvMWkK7Rch+ZrIOU=; b=ZNfIW9a28BcKpEAnL7HrxawaJ0
-	uv8agG48Wo4vFFf66GvoYFQpMuUpUwrd4KI72yBTjmZeZsWD9V7Ma78zNLK2Od6OeLCco1V6D/eZS
-	r3OiNU+PHBXzmR2sbMTB37hLDVzmRai1xVAkKlKlGPfzdsTW76+iISqyo2NZ2uYl59Pc=;
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=e8qfyoSPyPfjE0jCCqLhRQvm/sqiAGHIjfAWqfboNlU=; b=I6m9A2Gf6yoNhGBlvx08UQ6es8
+	6K+d4mzxyeOSjP5nBUBzp4t8g6IA1CT2jP1PxSbxb4OGPf/q5hvkeY0KzxnuiTi6kbCxZjrdXzucU
+	P0/w1gTqJf4O1md2HRg4OmG4mydtEPVCzArwg3sSklIJ8SqL2Y2OA5q5MCGDBcRO4zAI=;
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1w5PvU-0006J8-PF;
-	Wed, 25 Mar 2026 15:13:44 +0000
+	id 1w5PvX-0002ws-8K;
+	Wed, 25 Mar 2026 15:13:47 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <hch@lst.de>) id 1w5PvQ-0006Is-5o
+ (envelope-from <hch@lst.de>) id 1w5PvT-0002wM-69
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 25 Mar 2026 15:13:40 +0000
+ Wed, 25 Mar 2026 15:13:43 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=rNL6GJd5Q5tmhNn8On5YLiKnN15MDWCklKjJxCXufAM=; b=AvTMQbhdifVdeaZZ7UaoVK4SkZ
- 1uXrvQF+4ZCTXQdD/wMHQnDG79JycpFVjuRxwdhLl8AG/0xmBmxqMuTAO+wjRoX5P1+eavOKFKwLa
- Di7ddPFRbd9x/pB6ChSHETeTTCBvrXdPUnm2ma4bTMw3Y5ZNTdRUvar0ZLaqBs4UWtrQ=;
+ bh=M7NmYC/Iylm9myghHwqILim55SAUt9QrM+UZYk0eJlw=; b=bAgL25JdfKokluZ6bF3RvGS8FB
+ rIpfFArRD9XzAu+v4iZo11t8hmMfTpJNXGdHvbE/SGufb4g72xIOIKXm5GvmHSAk4nROji4Md8+lt
+ wQMOFe2uGugab/r57cp4+HylK9FiyS+G0v66U2OgSM6Y47xlq5XeAUkG/u/C6V7vRZ1w=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -45,43 +45,40 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=rNL6GJd5Q5tmhNn8On5YLiKnN15MDWCklKjJxCXufAM=; b=kIr2dzz63/traPN+YqWWpoSEZp
- sJpFHZRQoiWoHbPK3dZR7O05E/Av9VD7gChwC+ejjfTv+xuA9dAYlCbYXubRcj8CcYH5BeaEDZ9+j
- Bk57uhfJW0JRofgIMXwKWyAopf+NNCh0Tx8SJHZ5C2f6YK4oDbUV0HVhq7a0rJuW7SLI=;
+ bh=M7NmYC/Iylm9myghHwqILim55SAUt9QrM+UZYk0eJlw=; b=OJA5eAuj1AZDETd3InQG0WUno+
+ Dprsl3Fygp/fZtxw+wt4zShrjM5y3tsk+WEuzNPRXVyopsvxUEoG5F2iZnWtCaIxnws0kAydxo6Mw
+ V0by34ln4y0riDEgYCxt0MLHgUMI8YMWS9SPypyXrqOBhUHwNj2jj+XsZoa8UiGtUaXY=;
 Received: from verein.lst.de ([213.95.11.211])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1w5PvO-0007l6-B3 for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 25 Mar 2026 15:13:38 +0000
+ id 1w5PvS-0007lJ-Hm for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 25 Mar 2026 15:13:43 +0000
 Received: by verein.lst.de (Postfix, from userid 2407)
- id AC4C968D12; Wed, 25 Mar 2026 09:06:41 +0100 (CET)
-Date: Wed, 25 Mar 2026 09:06:41 +0100
+ id 4731968D13; Wed, 25 Mar 2026 09:07:16 +0100 (CET)
+Date: Wed, 25 Mar 2026 09:07:15 +0100
 From: Christoph Hellwig <hch@lst.de>
 To: Andrey Albershteyn <aalbersh@kernel.org>
-Message-ID: <20260325080641.GL952@lst.de>
+Message-ID: <20260325080715.GM952@lst.de>
 References: <20260319170231.1455553-1-aalbersh@kernel.org>
- <20260319170231.1455553-16-aalbersh@kernel.org>
+ <20260319170231.1455553-17-aalbersh@kernel.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20260319170231.1455553-16-aalbersh@kernel.org>
+In-Reply-To: <20260319170231.1455553-17-aalbersh@kernel.org>
 User-Agent: Mutt/1.5.17 (2007-11-01)
-X-Spam-Score: 1.1 (+)
+X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Thu, Mar 19, 2026 at 06:02:02PM +0100, Andrey Albershteyn
- wrote: > The direct path is not supported on verity files. Attempts to use
- direct > I/O path on such files should fall back to buffered I/O [...] 
- Content analysis details:   (1.1 points, 5.0 required)
+ Content preview:  Looks good: Reviewed-by: Christoph Hellwig <hch@lst.de> 
+ Content analysis details:   (0.0 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 1.1 DATE_IN_PAST_06_12     Date: is 6 to 12 hours before Received: date
-X-Headers-End: 1w5PvO-0007l6-B3
-Subject: Re: [f2fs-dev] [PATCH v5 15/25] xfs: disable direct read path for
- fs-verity files
+X-Headers-End: 1w5PvS-0007lJ-Hm
+Subject: Re: [f2fs-dev] [PATCH v5 16/25] xfs: handle fsverity I/O in
+ write/read path
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -132,13 +129,9 @@ X-Spamd-Result: default: False [-1.01 / 15.00];
 	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
 	TAGGED_RCPT(0.00)[linux-f2fs-devel];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.sourceforge.net:helo,lists.sourceforge.net:rdns,lists.sourceforge.net:dkim]
-X-Rspamd-Queue-Id: 399A7327A1C
+X-Rspamd-Queue-Id: 446F9327A2C
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
-
-On Thu, Mar 19, 2026 at 06:02:02PM +0100, Andrey Albershteyn wrote:
-> The direct path is not supported on verity files. Attempts to use direct
-> I/O path on such files should fall back to buffered I/O path.
 
 Looks good:
 
