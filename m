@@ -2,107 +2,107 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id cIvCFEjxw2lZvAQAu9opvQ
+	id CMGdAjP1w2lZvAQAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 25 Mar 2026 15:29:28 +0100
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 25 Mar 2026 15:46:11 +0100
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0B6D3326C6C
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 25 Mar 2026 15:29:26 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 63C71327078
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 25 Mar 2026 15:46:10 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
 	Subject:MIME-Version:Message-Id:Date:To:From:Sender:Reply-To:Content-ID:
 	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
 	:Resent-Message-ID:In-Reply-To:References:List-Owner;
-	bh=FPoe6W8jH7sjAjLCl1h6c6dkKzN0ZD0jm21CTpQHloE=; b=KBEXdIFVvoAVkPVxfL7qDkjZD6
-	/1+lA+CcLxLG9rCgQl6cvSf9xUxaP5SEy9dCmUtn7I9paP44V0E0DzxSubgYf4cH2PMIwM1Nohuzv
-	Qp8AyLcYzXqzzac7rxCiBtmFh0diVGFLLyFnABn1RphW5saPhklS+7VxBH4PEEpNS7Ys=;
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=8MapugTXozyyPkz+WY0VH3l5jEARHHfNECpA8YtiHXU=; b=ZkUZX7G0AyRZDC4ysan8qmAS+m
+	nbO3DW7P6BdKyJXxT4tQ0zcBqd64qktG8CFQew7kdgQimD0lwsRkSyyiS1xiOQ314D9TuhsTNt5jq
+	IYmElO1jStlqj14XixUaXUf0zDq0pcbga/nkBt7OF+EzkLXL2Bs4rr2mCTOCR6nltXcs=;
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1w5PEN-00042O-0W;
-	Wed, 25 Mar 2026 14:29:11 +0000
+	id 1w5PUm-0005FB-Ko;
+	Wed, 25 Mar 2026 14:46:08 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <ruipengqi3@gmail.com>) id 1w5PEL-000429-Mv
+ (envelope-from <ruipengqi3@gmail.com>) id 1w5PUl-0005F5-Ds
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 25 Mar 2026 14:29:10 +0000
+ Wed, 25 Mar 2026 14:46:07 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
  Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=quuphkWaGWdwrJTlaMXOLCqKrD2sqqcG1Ts3xWVLG0U=; b=KAVuoxrb1Ahj49p9LCu5GAwNxr
- 8nLqBvS2sur2vvZD18jm2qKPuCo+jv3YoFJQhAwFUKZvv1e3mTQsw2XA5fCAZC9Ke4ED5DdMDzO3S
- Y9FCAlRAn+ROuJjRXLyToGDAAQek8Dvo8H1N5RjLmsI38W2MzSMdj+eVDl/NzUW/zU38=;
+ bh=tvyKhPZ3nzUkw+9X1/EbZaf8jGZ4iym5IrAaHhVdOec=; b=ZxqBbThJ+8Fqwc8HWlxcmS13C5
+ Jei+RaFP7NL+/6TIUgunBPjH822u2V/K1pKGjUpsR6i+xsyBEkYsgl/Hx5da+wnJSirLevCL1CDOR
+ TxeKvVQ0XcVurYJ0HK9SQ+/3HlkKHodLcsDR7dNDIk4IGTb5a8ApUdL7T/Hc+ZhYDa5U=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
  :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
  Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=quuphkWaGWdwrJTlaMXOLCqKrD2sqqcG1Ts3xWVLG0U=; b=F
- MF5i/iyZUx8FNqcoUhn0tqmJc6GerMTW2CFS951atdZFNLUBvSNLGGgv4kr48OYT3rJsKD7pLa9/z
- dCh7EHjJWu8iY/SZQyaiiP4dFLIZD9rQwpoF9ItAhidRQzAVQpUP5YCVnRqoJLDOUSiY9mPfp8Wml
- +MqNrMotN5CZcEAw=;
-Received: from mail-pg1-f175.google.com ([209.85.215.175])
+ List-Owner:List-Archive; bh=tvyKhPZ3nzUkw+9X1/EbZaf8jGZ4iym5IrAaHhVdOec=; b=T
+ Qz42q0vXt7k4WXRW0bcCS00gvfVMVymSvZZYE8VmLFAQe+BQnhOymxFjelgI7hksk19XxQCbQYk8M
+ rbwLinyIz+HKtJegs+vy+NJcsn/DyGaUwsOuyaqD39Yz9gtoJHgXOy2kTKV1aOHskDy+rkf14en0A
+ hgehmvfVaXMBgAas=;
+Received: from mail-qv1-f44.google.com ([209.85.219.44])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1w5PEL-0000pz-LE for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 25 Mar 2026 14:29:10 +0000
-Received: by mail-pg1-f175.google.com with SMTP id
- 41be03b00d2f7-c766cf593daso453770a12.3
+ id 1w5PUk-00040M-Rp for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 25 Mar 2026 14:46:07 +0000
+Received: by mail-qv1-f44.google.com with SMTP id
+ 6a1803df08f44-89a06bc2f1bso76034316d6.1
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Wed, 25 Mar 2026 07:29:09 -0700 (PDT)
+ Wed, 25 Mar 2026 07:46:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1774448944; x=1775053744; darn=lists.sourceforge.net;
+ d=gmail.com; s=20251104; t=1774449956; x=1775054756; darn=lists.sourceforge.net;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=quuphkWaGWdwrJTlaMXOLCqKrD2sqqcG1Ts3xWVLG0U=;
- b=P7ebSxCIfo86o4Ko+mPoLLPTmWPEj4YllqDqfxFlkFU7qMGuw9Ja7nWqsQh3/Uy7Y0
- /MuaM6j4EKyZ6FQx5Eu/VZnZQqvyp2Z06DI96+rHsN6grMkHSewBrBkK+XXwmwzpZy/P
- KOujHog+/KrRDVIzOHLaI+TI2s8aNgu+F+8ZKgA0gY8x4NvDCQbxaXjE+QgeyZko50V5
- rE/L2cVSOZ6D2xnI6sLGmhxS8d8vYPPshEOUnksR1BM/Jf90Qf2ZW3ZRFPmR0NphGuqE
- FAhpDmvARnvtuZrTVBntfltKYyuF8UIUNvsjKnXXVJyWOjxPwJBLHqLeeKhP5YOxdXOF
- ykJg==
+ bh=tvyKhPZ3nzUkw+9X1/EbZaf8jGZ4iym5IrAaHhVdOec=;
+ b=sow+BwOMj9TlPZKcnT2lJ1FuWAIv9Y57a+xYG6g5vtBOaUl4LhYvGZc4NItSwRu1sH
+ 05JyTe2UD03TXB1jTt4B5/zu/2qsiQ71lcTuQhmqZ922VTl5iEpj/TAZwdtnIbRFCraK
+ +Xvwue1gkap1X+swwrdIEPlUipOce0LIt0OiKTLqo+IhayHgA5XMxi2jV2CWsATrMUvV
+ QwfPC4ufBZ3orqs4wi5i8BcYk3EAATwp+UkD2NRTmmoMflhj6viHTuUcU8QI66KLLtc3
+ PObdYr4MZVuDO/eHT8wOzZk6y+Ek2yzv5Git9UWgkws6FQJB3Jo0Ob/QBJOQsnu+N1cN
+ V6rw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1774448944; x=1775053744;
+ d=1e100.net; s=20251104; t=1774449956; x=1775054756;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=quuphkWaGWdwrJTlaMXOLCqKrD2sqqcG1Ts3xWVLG0U=;
- b=CEApKW7SxIAGfYhSw7eqdZt2eMmTn3Qn7m9PiYsW91oe6XnnsXeZlS83zFgsCZQAOY
- Lkq8wvHIx5+4zzN64XE+5bxKzV8/Dwd/eMFO6wgcf0KPR8SlmRo+pqYClZy+R+3nSuCr
- ca42TXyaZZQKKvQqHSCeJbdDQcXok0E6zFMN8ubpNoNui2ye7qkHnZM7xHe2cvGhy58A
- Zr4ze9EdCaAO1qAlhPD8NTZStsQG5NnKVydS2C3P9CQ6Zc45gCloAjmhkgI4UkWVxbg0
- KgJrUaNQIFzs8t/p7w6LH4DB94k6ciNFQ/sjG7kOMBAYeN7acircWzAqvdrm+2kyIA4g
- u4wA==
+ bh=tvyKhPZ3nzUkw+9X1/EbZaf8jGZ4iym5IrAaHhVdOec=;
+ b=bPR89HpHeKp+B5fAwKS/Zn7Nqrtn83JDZVbyUXtt0JB2oy3uqoLQMy+Lk09T9/uy3f
+ pGIBotexmCopkWt2nJtEwS5d9cPSUi1G3rABVqF+UUrCEW0fC7y+ogwidxsNYkTJO/vP
+ iVgFMMbHbDogwOK4h6N919egjyRahwhUHZsUSdBnSsziwlh9UN8osvbmEb4+PtDsC/xa
+ ZYQWPypjx5sJOKgcFKc3MyQhF4DR5PFkrr+x/mOJ3JKlkpam2F1MVxHqPSTksfBE4Bts
+ O70JnKJXkONtEsRH3Cnixj9sZEadARbYkQepFuiMaX84hvtEHlEjm8GjlcEJmX2LG6dD
+ L0Hg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCV7jjVFTpXuAzJBIPnymST5aXsIeHKN8lpG7pHvw3rTTXi1LUx1jtU7ELXSd8Sq4Dl/yZ2xpHOPPHusTl1U5bmp@lists.sourceforge.net
-X-Gm-Message-State: AOJu0YwcgiapghJXYCOMqA3quHOMRz2uo353njFO/YmcpXYSQyBt2k3t
- 6B2YTnTsEWJtix89DX5o/+C4cY6qRyILVIIXD11aYWB8eUVtV9gRjzrYwZOkHa2/FU8=
-X-Gm-Gg: ATEYQzyWTDb6z/jFThnVMvjl4ZR4yCMwAHpqM0yGX6ht4hRltt8iBQYAgELi2QBwbyI
- f50RP93DSpGyjRC2LshDHQUFtb6qgDHA5LhoswSmcE3/0NKN78nm+pwwkJJjaD2p7c3ztJKEvqO
- BsUzPyLNPjGDQttegdwjJVRMbf6Au8wgHEXxxShsIEuGtr4vGIKEdbkoWl1yhZSsdCPs/p8M1Sf
- Nv8KqN9E8MMyRZ7Kcq7Q2cYq17IIdYbuEWhijcp4nbdd3WEaJhOQi3zcu6eomY9n5C19EF39kdQ
- A1pbUu9ayRPVT7ZjPuVB3t71aVsqcZjNqVmLuRuuAatjE268mbi0PDbN53Kf722alO367ZAZbXY
- 3BpdWFXO18ivbw0TXFCuLk+tCq608hb+4a8udNQhkyQTTDcDN78svDHF9oQDrpra+d8FBdP62pl
- LdUyu6kgrgebAL9S6Ew2aDp2olXYvJK0vAu8CssZN0YtnsAMNadyKfKhdPbG1lp8FCAzw=
-X-Received: by 2002:a17:903:2f50:b0:2ae:593c:48fe with SMTP id
- d9443c01a7336-2b0b09e6752mr37736355ad.13.1774445617515; 
- Wed, 25 Mar 2026 06:33:37 -0700 (PDT)
+ AJvYcCUGtg3zEZacVY0C34PvhSUBLQmC6pvmnL7PGi3ibO+PFzDx5e/Q6Q0yoT+vMAymDWEIC8yroVmhEa0SRaoJDlhC@lists.sourceforge.net
+X-Gm-Message-State: AOJu0YyNxvkZ4zWVnhBZYBSQ6jR/yKONaW2vFAURsEwIivUlfpQq4oHg
+ tohajA1xMF/zRV2MwgTJhSV4WFaib8ZBrVinZe4Esd6+MKhiA+zTIZQHOGeFJkEZ
+X-Gm-Gg: ATEYQzxTRFiXT/pGMuH/9hhLJ+Fv537hbv4rKKvXhdmo9p2W1GTW8qIskyE2isfBldZ
+ 1fOxYfR8nWzpP6aZ3QcbcZCgYCROB83Z02kctyC5EJKnnbP7MK8un/NtlBAX0ZMrfywF4Ygu5gx
+ cjzNRQ3sKv4t1vhU/N9htJHZlZGW5oBwssrt+AHTaxzfuAj0TTWcNeOQkwerN538QrxgWNGYfip
+ M6hIUjqAQwepDvbqm4ZBrG4YyC5XhmOm5zGbcJNy6UC029Ydx5e2UASiKgvZSssHhk4FSyRNjw4
+ zP4avFoWzsvn47EbSFv2cY5ZaFMYrAHR3lDIlLpeeyeGrHA5o5WUb9Kf4438O341nWzOcRUsp6B
+ x/hzr2OfJdXMabBn00UM9E9G52pMJ1g2tjR2XOlcBCEm66Pj57l7Ntc4pTCDIzLiYCis9rIJGZf
+ BP9gzaTgXPYF6/4PFpCt7WRqiyvDLIcMPkMvaGTFnoBdO2iyLDH+T4d+pjyJR2rCtRmec=
+X-Received: by 2002:a17:90a:dfc8:b0:35c:936:d4cc with SMTP id
+ 98e67ed59e1d1-35c0dca8e19mr3369159a91.14.1774445877607; 
+ Wed, 25 Mar 2026 06:37:57 -0700 (PDT)
 Received: from lixiang-ThinkCentre-M755e-N000.company.local ([210.184.73.204])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2b08355f994sm182631555ad.36.2026.03.25.06.33.29
+ 41be03b00d2f7-c743a7ff961sm11644178a12.5.2026.03.25.06.37.55
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 25 Mar 2026 06:33:36 -0700 (PDT)
+ Wed, 25 Mar 2026 06:37:57 -0700 (PDT)
 From: ruipengqi <ruipengqi3@gmail.com>
 To: jaegeuk@kernel.org
-Date: Wed, 25 Mar 2026 21:33:22 +0800
-Message-Id: <20260325133322.1050573-1-ruipengqi3@gmail.com>
+Date: Wed, 25 Mar 2026 21:37:49 +0800
+Message-Id: <20260325133749.1053541-1-ruipengqi3@gmail.com>
 X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 X-Spam-Score: 0.1 (/)
@@ -112,11 +112,11 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  From: Lance Yang Patch series "hung_task: extend blocking
- task stacktrace dump to semaphore", v5. Inspired by mutex blocker tracking[1], 
- this patch series extend the feature to not only dump the blocker task holding
- a mutex but also to support semaphores. Unlike mutexes,
- semaphores lack explicit o [...] 
+ Content preview:  From: Ruipeng Qi When the f2fs filesystem space is nearly
+ exhausted, we encounter deadlock issues as below: INFO: task A:1890 blocked
+ for more than 120 seconds. Tainted: G O 6.12.41-g3fe07ddf05ab #1 "echo 0
+ > /proc/sys/kernel/hung_task_timeout_secs" disables this message. task:A
+ state:D stack:0 pid:1890 tgi [...] 
  Content analysis details:   (0.1 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -132,10 +132,9 @@ X-Spam-Report: Spam detection software,
  0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
  [ruipengqi3(at)gmail.com]
  0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.215.175 listed in wl.mailspike.net]
-X-Headers-End: 1w5PEL-0000pz-LE
-Subject: [f2fs-dev] [PATCH 1/2] hung_task: replace blocker_mutex with
- encoded blocker
+ [209.85.219.44 listed in wl.mailspike.net]
+X-Headers-End: 1w5PUk-00040M-Rp
+Subject: [f2fs-dev] [PATCH] f2fs: fix potential deadlock in f2fs_balance_fs()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -147,374 +146,245 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Anna Schumaker <anna.schumaker@oracle.com>,
- Kent Overstreet <kent.overstreet@linux.dev>,
- Yongliang Gao <leonylgao@tencent.com>, Peter Zijlstra <peterz@infradead.org>,
- Lance Yang <ioworker0@gmail.com>, linux-kernel@vger.kernel.org,
- Joel Granados <joel.granados@kernel.org>,
- linux-f2fs-devel@lists.sourceforge.net,
- Sergey Senozhatsky <senozhatsky@chromium.org>, Ingo Molnar <mingo@redhat.com>,
- John Stultz <jstultz@google.com>, Masami Hiramatsu <mhiramat@kernel.org>,
- Waiman Long <longman@redhat.com>, Zi Li <amaindex@outlook.com>,
- Steven Rostedt <rostedt@goodmis.org>,
- Andrew Morton <akpm@linux-foundation.org>, Tomasz Figa <tfiga@chromium.org>,
- Will Deacon <will@kernel.org>, Boqun Feng <boqun.feng@gmail.com>,
- Mingzhe Yang <mingzhe.yang@ly.com>
+Cc: linux-kernel@vger.kernel.org, Ruipeng Qi <ruipengqi3@gmail.com>,
+ linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
-X-Spamd-Result: default: False [1.49 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
+X-Spamd-Result: default: False [-0.01 / 15.00];
 	MID_CONTAINS_FROM(1.00)[];
 	RWL_MAILSPIKE_EXCELLENT(-0.40)[216.105.38.7:from];
-	MAILLIST(-0.20)[mailman];
+	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7:c];
 	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
-	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7];
-	MIME_GOOD(-0.10)[text/plain];
+	MAILLIST(-0.20)[mailman];
 	DMARC_POLICY_SOFTFAIL(0.10)[gmail.com : SPF not aligned (relaxed), DKIM not aligned (relaxed),none];
+	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
+	FORGED_RECIPIENTS(0.00)[m:jaegeuk@kernel.org,m:linux-kernel@vger.kernel.org,m:ruipengqi3@gmail.com,m:linux-f2fs-devel@lists.sourceforge.net,s:lists@lfdr.de];
 	RECEIVED_HELO_LOCALHOST(0.00)[];
-	RCVD_TLS_LAST(0.00)[];
 	DKIM_MIXED(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:jaegeuk@kernel.org,m:anna.schumaker@oracle.com,m:kent.overstreet@linux.dev,m:leonylgao@tencent.com,m:peterz@infradead.org,m:ioworker0@gmail.com,m:linux-kernel@vger.kernel.org,m:joel.granados@kernel.org,m:linux-f2fs-devel@lists.sourceforge.net,m:senozhatsky@chromium.org,m:mingo@redhat.com,m:jstultz@google.com,m:mhiramat@kernel.org,m:longman@redhat.com,m:amaindex@outlook.com,m:rostedt@goodmis.org,m:akpm@linux-foundation.org,m:tfiga@chromium.org,m:will@kernel.org,m:boqun.feng@gmail.com,m:mingzhe.yang@ly.com,m:boqunfeng@gmail.com,s:lists@lfdr.de];
+	FROM_NEQ_ENVFROM(0.00)[ruipengqi3@gmail.com,linux-f2fs-devel-bounces@lists.sourceforge.net];
 	FORGED_SENDER(0.00)[ruipengqi3@gmail.com,linux-f2fs-devel-bounces@lists.sourceforge.net];
-	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	FREEMAIL_FROM(0.00)[gmail.com];
 	ARC_NA(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[21];
-	MIME_TRACE(0.00)[0:+];
-	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,gmail.com:s=20251104];
-	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,gmail.com:-];
 	TO_DN_SOME(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
+	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
+	MIME_TRACE(0.00)[0:+];
+	RCVD_TLS_LAST(0.00)[];
+	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,gmail.com:s=20251104];
+	FROM_HAS_DN(0.00)[];
+	NEURAL_HAM(-0.00)[-1.000];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	PREVIOUSLY_DELIVERED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
 	FORGED_SENDER_FORWARDING(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[ruipengqi3@gmail.com,linux-f2fs-devel-bounces@lists.sourceforge.net];
-	FREEMAIL_CC(0.00)[oracle.com,linux.dev,tencent.com,infradead.org,gmail.com,vger.kernel.org,kernel.org,lists.sourceforge.net,chromium.org,redhat.com,google.com,outlook.com,goodmis.org,linux-foundation.org,ly.com];
-	NEURAL_HAM(-0.00)[-1.000];
+	RCVD_COUNT_FIVE(0.00)[5];
+	FREEMAIL_CC(0.00)[vger.kernel.org,gmail.com,lists.sourceforge.net];
 	TAGGED_RCPT(0.00)[linux-f2fs-devel];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,gmail.com:-];
+	RCPT_COUNT_THREE(0.00)[4];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.sourceforge.net:helo,lists.sourceforge.net:rdns,lists.sourceforge.net:dkim]
-X-Rspamd-Queue-Id: 0B6D3326C6C
+X-Rspamd-Queue-Id: 63C71327078
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-From: Lance Yang <ioworker0@gmail.com>
+From: Ruipeng Qi <ruipengqi3@gmail.com>
 
-Patch series "hung_task: extend blocking task stacktrace dump to
-semaphore", v5.
+When the f2fs filesystem space is nearly exhausted, we encounter deadlock
+issues as below:
 
-Inspired by mutex blocker tracking[1], this patch series extend the
-feature to not only dump the blocker task holding a mutex but also to
-support semaphores.  Unlike mutexes, semaphores lack explicit ownership
-tracking, making it challenging to identify the root cause of hangs.  To
-address this, we introduce a last_holder field to the semaphore structure,
-which is updated when a task successfully calls down() and cleared during
-up().
+INFO: task A:1890 blocked for more than 120 seconds.
+      Tainted: G           O       6.12.41-g3fe07ddf05ab #1
+"echo 0 > /proc/sys/kernel/hung_task_timeout_secs" disables this message.
+task:A    state:D stack:0     pid:1890  tgid:1626  ppid:1153   flags:0x00000204
+Call trace:
+ __switch_to+0xf4/0x158
+ __schedule+0x27c/0x908
+ schedule+0x3c/0x118
+ io_schedule+0x44/0x68
+ folio_wait_bit_common+0x174/0x370
+ folio_wait_bit+0x20/0x38
+ folio_wait_writeback+0x54/0xc8
+ truncate_inode_partial_folio+0x70/0x1e0
+ truncate_inode_pages_range+0x1b0/0x450
+ truncate_pagecache+0x54/0x88
+ f2fs_file_write_iter+0x3e8/0xb80
+ do_iter_readv_writev+0xf0/0x1e0
+ vfs_writev+0x138/0x2c8
+ do_writev+0x88/0x130
+ __arm64_sys_writev+0x28/0x40
+ invoke_syscall+0x50/0x120
+ el0_svc_common.constprop.0+0xc8/0xf0
+ do_el0_svc+0x24/0x38
+ el0_svc+0x30/0xf8
+ el0t_64_sync_handler+0x120/0x130
+ el0t_64_sync+0x190/0x198
 
-The assumption is that if a task is blocked on a semaphore, the holders
-must not have released it.  While this does not guarantee that the last
-holder is one of the current blockers, it likely provides a practical hint
-for diagnosing semaphore-related stalls.
+INFO: task kworker/u8:11:2680853 blocked for more than 120 seconds.
+      Tainted: G           O       6.12.41-g3fe07ddf05ab #1
+"echo 0 > /proc/sys/kernel/hung_task_timeout_secs" disables this message.
+task:kworker/u8:11   state:D stack:0     pid:2680853 tgid:2680853 ppid:2      flags:0x00000208
+Workqueue: writeback wb_workfn (flush-254:0)
+Call trace:
+ __switch_to+0xf4/0x158
+ __schedule+0x27c/0x908
+ schedule+0x3c/0x118
+ io_schedule+0x44/0x68
+ folio_wait_bit_common+0x174/0x370
+ __filemap_get_folio+0x214/0x348
+ pagecache_get_page+0x20/0x70
+ f2fs_get_read_data_page+0x150/0x3e8
+ f2fs_get_lock_data_page+0x2c/0x160
+ move_data_page+0x50/0x478
+ do_garbage_collect+0xd38/0x1528
+ f2fs_gc+0x240/0x7e0
+ f2fs_balance_fs+0x1a0/0x208
+ f2fs_write_single_data_page+0x6e4/0x730  //0xfffffe0d6ca08300
+ f2fs_write_cache_pages+0x378/0x9b0
+ f2fs_write_data_pages+0x2e4/0x388
+ do_writepages+0x8c/0x2c8
+ __writeback_single_inode+0x4c/0x498
+ writeback_sb_inodes+0x234/0x4a8
+ __writeback_inodes_wb+0x58/0x118
+ wb_writeback+0x2f8/0x3c0
+ wb_workfn+0x2c4/0x508
+ process_one_work+0x180/0x408
+ worker_thread+0x258/0x368
+ kthread+0x118/0x128
+ ret_from_fork+0x10/0x200
 
-With this change, the hung task detector can now show blocker task's info
-like below:
+INFO: task kworker/u8:8:2641297 blocked for more than 120 seconds.
+      Tainted: G           O       6.12.41-g3fe07ddf05ab #1
+"echo 0 > /proc/sys/kernel/hung_task_timeout_secs" disables this message.
+task:kworker/u8:8    state:D stack:0     pid:2641297 tgid:2641297 ppid:2      flags:0x00000208
+Workqueue: writeback wb_workfn (flush-254:0)
+Call trace:
+ __switch_to+0xf4/0x158
+ __schedule+0x27c/0x908
+ rt_mutex_schedule+0x30/0x60
+ __rt_mutex_slowlock_locked.constprop.0+0x460/0x8a8
+ rwbase_write_lock+0x24c/0x378
+ down_write+0x1c/0x30
+ f2fs_balance_fs+0x184/0x208
+ f2fs_write_inode+0xf4/0x328
+ __writeback_single_inode+0x370/0x498
+ writeback_sb_inodes+0x234/0x4a8
+ __writeback_inodes_wb+0x58/0x118
+ wb_writeback+0x2f8/0x3c0
+ wb_workfn+0x2c4/0x508
+ process_one_work+0x180/0x408
+ worker_thread+0x258/0x368
+ kthread+0x118/0x128
+ ret_from_fork+0x10/0x20
 
-[Tue Apr  8 12:19:07 2025] INFO: task cat:945 blocked for more than 120 seconds.
-[Tue Apr  8 12:19:07 2025]       Tainted: G            E      6.14.0-rc6+ #1
-[Tue Apr  8 12:19:07 2025] "echo 0 > /proc/sys/kernel/hung_task_timeout_secs" disables this message.
-[Tue Apr  8 12:19:07 2025] task:cat             state:D stack:0     pid:945   tgid:945   ppid:828    task_flags:0x400000 flags:0x00000000
-[Tue Apr  8 12:19:07 2025] Call Trace:
-[Tue Apr  8 12:19:07 2025]  <TASK>
-[Tue Apr  8 12:19:07 2025]  __schedule+0x491/0xbd0
-[Tue Apr  8 12:19:07 2025]  schedule+0x27/0xf0
-[Tue Apr  8 12:19:07 2025]  schedule_timeout+0xe3/0xf0
-[Tue Apr  8 12:19:07 2025]  ? __folio_mod_stat+0x2a/0x80
-[Tue Apr  8 12:19:07 2025]  ? set_ptes.constprop.0+0x27/0x90
-[Tue Apr  8 12:19:07 2025]  __down_common+0x155/0x280
-[Tue Apr  8 12:19:07 2025]  down+0x53/0x70
-[Tue Apr  8 12:19:07 2025]  read_dummy_semaphore+0x23/0x60
-[Tue Apr  8 12:19:07 2025]  full_proxy_read+0x5f/0xa0
-[Tue Apr  8 12:19:07 2025]  vfs_read+0xbc/0x350
-[Tue Apr  8 12:19:07 2025]  ? __count_memcg_events+0xa5/0x140
-[Tue Apr  8 12:19:07 2025]  ? count_memcg_events.constprop.0+0x1a/0x30
-[Tue Apr  8 12:19:07 2025]  ? handle_mm_fault+0x180/0x260
-[Tue Apr  8 12:19:07 2025]  ksys_read+0x66/0xe0
-[Tue Apr  8 12:19:07 2025]  do_syscall_64+0x51/0x120
-[Tue Apr  8 12:19:07 2025]  entry_SYSCALL_64_after_hwframe+0x76/0x7e
-[Tue Apr  8 12:19:07 2025] RIP: 0033:0x7f419478f46e
-[Tue Apr  8 12:19:07 2025] RSP: 002b:00007fff1c4d2668 EFLAGS: 00000246 ORIG_RAX: 0000000000000000
-[Tue Apr  8 12:19:07 2025] RAX: ffffffffffffffda RBX: 0000000000020000 RCX: 00007f419478f46e
-[Tue Apr  8 12:19:07 2025] RDX: 0000000000020000 RSI: 00007f4194683000 RDI: 0000000000000003
-[Tue Apr  8 12:19:07 2025] RBP: 00007f4194683000 R08: 00007f4194682010 R09: 0000000000000000
-[Tue Apr  8 12:19:07 2025] R10: fffffffffffffbc5 R11: 0000000000000246 R12: 0000000000000000
-[Tue Apr  8 12:19:07 2025] R13: 0000000000000003 R14: 0000000000020000 R15: 0000000000020000
-[Tue Apr  8 12:19:07 2025]  </TASK>
-[Tue Apr  8 12:19:07 2025] INFO: task cat:945 blocked on a semaphore likely last held by task cat:938
-[Tue Apr  8 12:19:07 2025] task:cat             state:S stack:0     pid:938   tgid:938   ppid:584    task_flags:0x400000 flags:0x00000000
-[Tue Apr  8 12:19:07 2025] Call Trace:
-[Tue Apr  8 12:19:07 2025]  <TASK>
-[Tue Apr  8 12:19:07 2025]  __schedule+0x491/0xbd0
-[Tue Apr  8 12:19:07 2025]  ? _raw_spin_unlock_irqrestore+0xe/0x40
-[Tue Apr  8 12:19:07 2025]  schedule+0x27/0xf0
-[Tue Apr  8 12:19:07 2025]  schedule_timeout+0x77/0xf0
-[Tue Apr  8 12:19:07 2025]  ? __pfx_process_timeout+0x10/0x10
-[Tue Apr  8 12:19:07 2025]  msleep_interruptible+0x49/0x60
-[Tue Apr  8 12:19:07 2025]  read_dummy_semaphore+0x2d/0x60
-[Tue Apr  8 12:19:07 2025]  full_proxy_read+0x5f/0xa0
-[Tue Apr  8 12:19:07 2025]  vfs_read+0xbc/0x350
-[Tue Apr  8 12:19:07 2025]  ? __count_memcg_events+0xa5/0x140
-[Tue Apr  8 12:19:07 2025]  ? count_memcg_events.constprop.0+0x1a/0x30
-[Tue Apr  8 12:19:07 2025]  ? handle_mm_fault+0x180/0x260
-[Tue Apr  8 12:19:07 2025]  ksys_read+0x66/0xe0
-[Tue Apr  8 12:19:07 2025]  do_syscall_64+0x51/0x120
-[Tue Apr  8 12:19:07 2025]  entry_SYSCALL_64_after_hwframe+0x76/0x7e
-[Tue Apr  8 12:19:07 2025] RIP: 0033:0x7f7c584a646e
-[Tue Apr  8 12:19:07 2025] RSP: 002b:00007ffdba8ce158 EFLAGS: 00000246 ORIG_RAX: 0000000000000000
-[Tue Apr  8 12:19:07 2025] RAX: ffffffffffffffda RBX: 0000000000020000 RCX: 00007f7c584a646e
-[Tue Apr  8 12:19:07 2025] RDX: 0000000000020000 RSI: 00007f7c5839a000 RDI: 0000000000000003
-[Tue Apr  8 12:19:07 2025] RBP: 00007f7c5839a000 R08: 00007f7c58399010 R09: 0000000000000000
-[Tue Apr  8 12:19:07 2025] R10: fffffffffffffbc5 R11: 0000000000000246 R12: 0000000000000000
-[Tue Apr  8 12:19:07 2025] R13: 0000000000000003 R14: 0000000000020000 R15: 0000000000020000
-[Tue Apr  8 12:19:07 2025]  </TASK>
+INFO: task B:1902 blocked for more than 120 seconds.
+      Tainted: G           O       6.12.41-g3fe07ddf05ab #1
+"echo 0 > /proc/sys/kernel/hung_task_timeout_secs" disables this message.
+task:B     state:D stack:0     pid:1902  tgid:1626  ppid:1153   flags:0x0000020c
+Call trace:
+ __switch_to+0xf4/0x158
+ __schedule+0x27c/0x908
+ rt_mutex_schedule+0x30/0x60
+ __rt_mutex_slowlock_locked.constprop.0+0x460/0x8a8
+ rwbase_write_lock+0x24c/0x378
+ down_write+0x1c/0x30
+ f2fs_balance_fs+0x184/0x208
+ f2fs_map_blocks+0x94c/0x1110
+ f2fs_file_write_iter+0x228/0xb80
+ do_iter_readv_writev+0xf0/0x1e0
+ vfs_writev+0x138/0x2c8
+ do_writev+0x88/0x130
+ __arm64_sys_writev+0x28/0x40
+ invoke_syscall+0x50/0x120
+ el0_svc_common.constprop.0+0xc8/0xf0
+ do_el0_svc+0x24/0x38
+ el0_svc+0x30/0xf8
+ el0t_64_sync_handler+0x120/0x130
+ el0t_64_sync+0x190/0x198
 
+INFO: task sync:2769849 blocked for more than 120 seconds.
+      Tainted: G           O       6.12.41-g3fe07ddf05ab #1
+"echo 0 > /proc/sys/kernel/hung_task_timeout_secs" disables this message.
+task:sync            state:D stack:0     pid:2769849 tgid:2769849 ppid:736    flags:0x0000020c
+Call trace:
+ __switch_to+0xf4/0x158
+ __schedule+0x27c/0x908
+ schedule+0x3c/0x118
+ wb_wait_for_completion+0xb0/0xe8
+ sync_inodes_sb+0xc8/0x2b0
+ sync_inodes_one_sb+0x24/0x38
+ iterate_supers+0xa8/0x138
+ ksys_sync+0x54/0xc8
+ __arm64_sys_sync+0x18/0x30
+ invoke_syscall+0x50/0x120
+ el0_svc_common.constprop.0+0xc8/0xf0
+ do_el0_svc+0x24/0x38
+ el0_svc+0x30/0xf8
+ el0t_64_sync_handler+0x120/0x130
+ el0t_64_sync+0x190/0x198
 
-This patch (of 3):
+The root cause is a potential deadlock between the following tasks:
 
-This patch replaces 'struct mutex *blocker_mutex' with 'unsigned long
-blocker', as only one blocker is active at a time.
+kworker/u8:11				Thread A
+- f2fs_write_single_data_page
+ - f2fs_do_write_data_page
+  - folio_start_writeback(X)
+  - f2fs_outplace_write_data
+   - bio_add_folio(X)
+ - folio_unlock(X)
+					- truncate_inode_pages_range
+					 - __filemap_get_folio(X, FGP_LOCK)
+					 - truncate_inode_partial_folio(X)
+					  - folio_wait_writeback(X)
+ - f2fs_balance_fs
+  - f2fs_gc
+   - do_garbage_collect
+    - move_data_page
+     - f2fs_get_lock_data_page
+      - __filemap_get_folio(X, FGP_LOCK)
 
-The blocker filed can store both the lock addrees and the lock type, with
-LSB used to encode the type as Masami suggested, making it easier to
-extend the feature to cover other types of locks.
+Both threads try to access folio X. Thread A holds the lock but waits
+for writeback, while kworker waits for the lock. This causes a deadlock.
 
-Also, once the lock type is determined, we can directly extract the
-address and cast it to a lock pointer ;)
+Other threads also enter D state, waiting for locks such as gc_lock and
+writepages.
 
-Link: https://lkml.kernel.org/r/20250414145945.84916-1-ioworker0@gmail.com
-Link: https://lore.kernel.org/all/174046694331.2194069.15472952050240807469.stgit@mhiramat.tok.corp.google.com [1]
-Link: https://lkml.kernel.org/r/20250414145945.84916-2-ioworker0@gmail.com
-Signed-off-by: Mingzhe Yang <mingzhe.yang@ly.com>
-Signed-off-by: Lance Yang <ioworker0@gmail.com>
-Reviewed-by: Masami Hiramatsu (Google) <mhiramat@kernel.org>
-Suggested-by: Andrew Morton <akpm@linux-foundation.org>
-Suggested-by: Masami Hiramatsu (Google) <mhiramat@kernel.org>
-Cc: Anna Schumaker <anna.schumaker@oracle.com>
-Cc: Boqun Feng <boqun.feng@gmail.com>
-Cc: Ingo Molnar <mingo@redhat.com>
-Cc: Joel Granados <joel.granados@kernel.org>
-Cc: John Stultz <jstultz@google.com>
-Cc: Kent Overstreet <kent.overstreet@linux.dev>
-Cc: Peter Zijlstra <peterz@infradead.org>
-Cc: Sergey Senozhatsky <senozhatsky@chromium.org>
-Cc: Steven Rostedt <rostedt@goodmis.org>
-Cc: Tomasz Figa <tfiga@chromium.org>
-Cc: Waiman Long <longman@redhat.com>
-Cc: Will Deacon <will@kernel.org>
-Cc: Yongliang Gao <leonylgao@tencent.com>
-Cc: Zi Li <amaindex@outlook.com>
-Signed-off-by: Andrew Morton <akpm@linux-foundation.org>
+To avoid this potential deadlock, always call f2fs_submit_merged_write
+before triggering f2fs_gc in f2fs_balance_fs.
+
+Signed-off-by: Ruipeng Qi <ruipengqi3@gmail.com>
 ---
- include/linux/hung_task.h | 99 +++++++++++++++++++++++++++++++++++++++
- include/linux/sched.h     |  6 ++-
- kernel/hung_task.c        | 13 +++--
- kernel/locking/mutex.c    |  5 +-
- 4 files changed, 115 insertions(+), 8 deletions(-)
- create mode 100644 include/linux/hung_task.h
+ fs/f2fs/segment.c | 14 ++++++++++++++
+ 1 file changed, 14 insertions(+)
 
-diff --git a/include/linux/hung_task.h b/include/linux/hung_task.h
-new file mode 100644
-index 000000000000..1bc2b3244613
---- /dev/null
-+++ b/include/linux/hung_task.h
-@@ -0,0 +1,99 @@
-+/* SPDX-License-Identifier: GPL-2.0-only */
-+/*
-+ * Detect Hung Task: detecting tasks stuck in D state
-+ *
-+ * Copyright (C) 2025 Tongcheng Travel (www.ly.com)
-+ * Author: Lance Yang <mingzhe.yang@ly.com>
-+ */
-+#ifndef __LINUX_HUNG_TASK_H
-+#define __LINUX_HUNG_TASK_H
+diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
+index 6a97fe76712b..b58299e49c23 100644
+--- a/fs/f2fs/segment.c
++++ b/fs/f2fs/segment.c
+@@ -454,6 +454,20 @@ void f2fs_balance_fs(struct f2fs_sb_info *sbi, bool need)
+ 		io_schedule();
+ 		finish_wait(&sbi->gc_thread->fggc_wq, &wait);
+ 	} else {
 +
-+#include <linux/bug.h>
-+#include <linux/sched.h>
-+#include <linux/compiler.h>
++		/*
++		 * Before triggering foreground GC, submit all cached DATA
++		 * write bios. During writeback, pages may be added to
++		 * write_io[DATA].bio with PG_writeback set but the bio not
++		 * yet submitted. If GC's move_data_page() blocks on
++		 * __folio_lock() for such a folio, and the lock holder waits
++		 * for PG_writeback to clear via VFS folio_wait_writeback()
++		 * neither thread can make progress. Flushing here ensures
++		 * the bio completion callback can clear PG_writeback.
++		 */
 +
-+/*
-+ * @blocker: Combines lock address and blocking type.
-+ *
-+ * Since lock pointers are at least 4-byte aligned(32-bit) or 8-byte
-+ * aligned(64-bit). This leaves the 2 least bits (LSBs) of the pointer
-+ * always zero. So we can use these bits to encode the specific blocking
-+ * type.
-+ *
-+ * Type encoding:
-+ * 00 - Blocked on mutex        (BLOCKER_TYPE_MUTEX)
-+ * 01 - Blocked on semaphore    (BLOCKER_TYPE_SEM)
-+ * 10 - Blocked on rt-mutex     (BLOCKER_TYPE_RTMUTEX)
-+ * 11 - Blocked on rw-semaphore (BLOCKER_TYPE_RWSEM)
-+ */
-+#define BLOCKER_TYPE_MUTEX      0x00UL
-+#define BLOCKER_TYPE_SEM        0x01UL
-+#define BLOCKER_TYPE_RTMUTEX    0x02UL
-+#define BLOCKER_TYPE_RWSEM      0x03UL
++		f2fs_submit_merged_write(sbi, DATA);
 +
-+#define BLOCKER_TYPE_MASK       0x03UL
-+
-+#ifdef CONFIG_DETECT_HUNG_TASK_BLOCKER
-+static inline void hung_task_set_blocker(void *lock, unsigned long type)
-+{
-+	unsigned long lock_ptr = (unsigned long)lock;
-+
-+	WARN_ON_ONCE(!lock_ptr);
-+	WARN_ON_ONCE(READ_ONCE(current->blocker));
-+
-+	/*
-+	 * If the lock pointer matches the BLOCKER_TYPE_MASK, return
-+	 * without writing anything.
-+	 */
-+	if (WARN_ON_ONCE(lock_ptr & BLOCKER_TYPE_MASK))
-+		return;
-+
-+	WRITE_ONCE(current->blocker, lock_ptr | type);
-+}
-+
-+static inline void hung_task_clear_blocker(void)
-+{
-+	WARN_ON_ONCE(!READ_ONCE(current->blocker));
-+
-+	WRITE_ONCE(current->blocker, 0UL);
-+}
-+
-+/*
-+ * hung_task_get_blocker_type - Extracts blocker type from encoded blocker
-+ * address.
-+ *
-+ * @blocker: Blocker pointer with encoded type (via LSB bits)
-+ *
-+ * Returns: BLOCKER_TYPE_MUTEX, BLOCKER_TYPE_SEM, etc.
-+ */
-+static inline unsigned long hung_task_get_blocker_type(unsigned long blocker)
-+{
-+	WARN_ON_ONCE(!blocker);
-+
-+	return blocker & BLOCKER_TYPE_MASK;
-+}
-+
-+static inline void *hung_task_blocker_to_lock(unsigned long blocker)
-+{
-+	WARN_ON_ONCE(!blocker);
-+
-+	return (void *)(blocker & ~BLOCKER_TYPE_MASK);
-+}
-+#else
-+static inline void hung_task_set_blocker(void *lock, unsigned long type)
-+{
-+}
-+static inline void hung_task_clear_blocker(void)
-+{
-+}
-+static inline unsigned long hung_task_get_blocker_type(unsigned long blocker)
-+{
-+	return 0UL;
-+}
-+static inline void *hung_task_blocker_to_lock(unsigned long blocker)
-+{
-+	return NULL;
-+}
-+#endif
-+
-+#endif /* __LINUX_HUNG_TASK_H */
-diff --git a/include/linux/sched.h b/include/linux/sched.h
-index f96ac1982893..393d81978f40 100644
---- a/include/linux/sched.h
-+++ b/include/linux/sched.h
-@@ -1240,7 +1240,11 @@ struct task_struct {
- #endif
- 
- #ifdef CONFIG_DETECT_HUNG_TASK_BLOCKER
--	struct mutex			*blocker_mutex;
-+	/*
-+	 * Encoded lock address causing task block (lower 2 bits = type from
-+	 * <linux/hung_task.h>). Accessed via hung_task_*() helpers.
-+	 */
-+	unsigned long			blocker;
- #endif
- 
- #ifdef CONFIG_DEBUG_ATOMIC_SLEEP
-diff --git a/kernel/hung_task.c b/kernel/hung_task.c
-index dc898ec93463..79558d76ef06 100644
---- a/kernel/hung_task.c
-+++ b/kernel/hung_task.c
-@@ -22,6 +22,7 @@
- #include <linux/sched/signal.h>
- #include <linux/sched/debug.h>
- #include <linux/sched/sysctl.h>
-+#include <linux/hung_task.h>
- 
- #include <trace/events/sched.h>
- 
-@@ -98,16 +99,18 @@ static struct notifier_block panic_block = {
- static void debug_show_blocker(struct task_struct *task)
- {
- 	struct task_struct *g, *t;
--	unsigned long owner;
--	struct mutex *lock;
-+	unsigned long owner, blocker;
- 
- 	RCU_LOCKDEP_WARN(!rcu_read_lock_held(), "No rcu lock held");
- 
--	lock = READ_ONCE(task->blocker_mutex);
--	if (!lock)
-+	blocker = READ_ONCE(task->blocker);
-+	if (!blocker ||
-+	    hung_task_get_blocker_type(blocker) != BLOCKER_TYPE_MUTEX)
- 		return;
- 
--	owner = mutex_get_owner(lock);
-+	owner = mutex_get_owner(
-+		(struct mutex *)hung_task_blocker_to_lock(blocker));
-+
- 	if (unlikely(!owner)) {
- 		pr_err("INFO: task %s:%d is blocked on a mutex, but the owner is not found.\n",
- 			task->comm, task->pid);
-diff --git a/kernel/locking/mutex.c b/kernel/locking/mutex.c
-index 555e2b3a665a..61fa97da7989 100644
---- a/kernel/locking/mutex.c
-+++ b/kernel/locking/mutex.c
-@@ -29,6 +29,7 @@
- #include <linux/interrupt.h>
- #include <linux/debug_locks.h>
- #include <linux/osq_lock.h>
-+#include <linux/hung_task.h>
- 
- #define CREATE_TRACE_POINTS
- #include <trace/events/lock.h>
-@@ -191,7 +192,7 @@ __mutex_add_waiter(struct mutex *lock, struct mutex_waiter *waiter,
- 		   struct list_head *list)
- {
- #ifdef CONFIG_DETECT_HUNG_TASK_BLOCKER
--	WRITE_ONCE(current->blocker_mutex, lock);
-+	hung_task_set_blocker(lock, BLOCKER_TYPE_MUTEX);
- #endif
- 	debug_mutex_add_waiter(lock, waiter, current);
- 
-@@ -209,7 +210,7 @@ __mutex_remove_waiter(struct mutex *lock, struct mutex_waiter *waiter)
- 
- 	debug_mutex_remove_waiter(lock, waiter, current);
- #ifdef CONFIG_DETECT_HUNG_TASK_BLOCKER
--	WRITE_ONCE(current->blocker_mutex, NULL);
-+	hung_task_clear_blocker();
- #endif
- }
- 
+ 		struct f2fs_gc_control gc_control = {
+ 			.victim_segno = NULL_SEGNO,
+ 			.init_gc_type = f2fs_sb_has_blkzoned(sbi) ?
 -- 
 2.25.1
 
