@@ -2,107 +2,102 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id QEYNHLzKwmkBmQQAu9opvQ
+	id SOsDCmJ4w2ktrAQAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 24 Mar 2026 18:32:44 +0100
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 25 Mar 2026 06:53:38 +0100
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5DC2E31A138
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 24 Mar 2026 18:32:44 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id AF28C31FFCD
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 25 Mar 2026 06:53:37 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
-	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:To:In-Reply-To:References:Date:Message-Id:
-	MIME-Version:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
-	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=XiFvh6VqWFKTPJSkiHYWN0auHszNTk7kHhQXu6rVrJ4=; b=EnENu406Tzm+oaPQEgiVAq1Ft3
-	hZ+PWNYFUReh0AwPFZQjq/rnC18s0cfvMRND31fD8gy5fjYlJnfgr/wQlJ9TFLSWca7msEJokBRgZ
-	q/wwJss0zZLDFGoFQ2vgGqoA07XEgILRxPBoEZzCEkAP117oSJoQgAcZsEv6f94k60Vg=;
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
+	Subject:In-Reply-To:MIME-Version:References:Message-ID:To:From:Date:Sender:
+	Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
+	:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
+	bh=x592jE8e+xyFmtzFA4MujbPu9XkQCFHxr3jJS7zP8cM=; b=BI8MD4YNKnpfVE7v+V+V1aFoo2
+	fgXbGtnOJe6taEOP0zRIXVLUsBbpe4/656V9Pop7r+/Rnnw2NdyEwM01in+wE7sSfchGlUBxDGugI
+	qZAC+5nkVtGMBqxm8K5YPKH4MwUBvyDFXICftFeWCL/33dQTL2eKalBapLTqNxqd9wTc=;
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1w55cR-00053B-28;
-	Tue, 24 Mar 2026 17:32:43 +0000
+	id 1w5HB6-0002BB-5V;
+	Wed, 25 Mar 2026 05:53:16 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
- TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1w55cO-00052r-IV
- for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 24 Mar 2026 17:32:40 +0000
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95) (envelope-from
+ <BATV+3b37efca848b3caba94d+8249+infradead.org+hch@bombadil.srs.infradead.org>)
+ id 1w5HB3-0002B3-DQ for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 25 Mar 2026 05:53:13 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Cc:To:In-Reply-To:References:Date:Message-Id:From:
- Subject:Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=bbTV5SZGiZwYCqkNLa4MzhMvvnymyPYu4/ABbt0k+DQ=; b=NhhWvU08U6rIWThXSG8TyDH6fD
- xVL8lru+Pv7CQsWJwA3RtBjv5IehGK50r5kfpo+5HeUCrVMSdeceplKDNoUsJEOjgwwC6EpDWbV5v
- ww8fCE2oNq4oNd9eavCh5amsmn/aoSZb/TykhlvS8CYmg388sjeEGRBh6dw0WFdGxvkQ=;
+ bh=SHDXUeS5jnR7y0znBQ+/KFl+xqNiEw10GPaQ+zVa7q0=; b=ShglfpI0usI6myCM1oTk+3kJKx
+ 37sYUo+tJ/KdyGatPBSrziMESwrsUyonr6PUYOicFDQ6bgCdgxVjAs/K1APQfEOABbxHg+7KBzcwb
+ qB7GUSS0WXCf9Ngj5OVLq1kSrKOzjWDps3hiF/IfV/nDCGABDN0+3vD1YCT5wxMt0spM=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
- ; h=Cc:To:In-Reply-To:References:Date:Message-Id:From:Subject:
- Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=bbTV5SZGiZwYCqkNLa4MzhMvvnymyPYu4/ABbt0k+DQ=; b=OX+mxwqEd9nvke5Q9bj+Ds0fyt
- pVEyvROww9fM9Va6dg+VXokGccNGZlnlHOet6NuXKGZbRNDvxNnTslLy5KjeAUgDeZthOuJv83YJH
- qDzzxl45vdcbq+xBOimNJT8GXwGI82nG/WMTynDamp3eI/naPFYojGoAVSRYvB4WVVzY=;
-Received: from sea.source.kernel.org ([172.234.252.31])
+ ;
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=SHDXUeS5jnR7y0znBQ+/KFl+xqNiEw10GPaQ+zVa7q0=; b=grGWdkSJ4a7JZAW6HzNFcT/mjC
+ 7ki+C5b6i2Uyn/PWIqRosC4+aCdYdvbnJ0lmduIxSXuNUn1+MXCF61YDDS+lQlrj9Y5VyyrkWEOD4
+ wghaxYoFOiyIrLGgs6yoJGSdaiok9pXgPQw2YkIkVZuBTpIV7qxxIZqypcplXXuMnkkY=;
+Received: from bombadil.infradead.org ([198.137.202.133])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1w55cN-0007qR-Sh for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 24 Mar 2026 17:32:40 +0000
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id C66BE43E09;
- Tue, 24 Mar 2026 17:32:39 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id AA934C2BC9E;
- Tue, 24 Mar 2026 17:32:39 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1774373559;
- bh=kRWI/KijUS+BhDaAF3ZSZLA5iwXg4T1CxkO3AnqCnO4=;
- h=Subject:From:Date:References:In-Reply-To:To:Cc:From;
- b=WvnImmmGgAHlDpJ6/fv6GI+F7JBpCLhEEuorJ+a2UicPRHyCrG5J06FC7jzotKcbo
- voDUSpol5+jM2UHTxRJFKmgVZJuBfpBhi9MBzI0S53jklk4h6MRvzR/sgcyxX4UsY/
- OHayym6gl2GuSFKhoar0gzQBSL+2u0hIoAH2zrANSfZ3VAPCQPMcEBzQpcg3AEcabw
- 6M6O/eyONLjG/Bv9opKdipjkRFVba6bhlES+Lm3+B59k2nACmKLl5vfRs7rUOGmn/e
- zA0XylHKFa7erhTe0NjPj4gq0u6d2z8C7nBbvBAkMEpgCvNIRc9yIJkFXPNhmAZ1w0
- bRbt/CDVWlwaw==
-Received: from [10.30.226.235] (localhost [IPv6:::1])
- by aws-us-west-2-korg-oddjob-rhel9-1.codeaurora.org (Postfix) with ESMTP id
- B3D5A3808203; Tue, 24 Mar 2026 17:32:28 +0000 (UTC)
+ id 1w5HB1-0001Fe-V7 for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 25 Mar 2026 05:53:13 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=infradead.org; s=bombadil.20210309; h=In-Reply-To:Content-Type:MIME-Version
+ :References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+ Content-Transfer-Encoding:Content-ID:Content-Description;
+ bh=SHDXUeS5jnR7y0znBQ+/KFl+xqNiEw10GPaQ+zVa7q0=; b=4oEgKq+Z9wK0/UfLZYwjfIQJae
+ QX0Ib6GUJWXRdxWpiZjrnwawzI2WP/kg3FX+sWKJNVm05/u+uHElk0YBR5/GyzYLop8GtNqbdu4VV
+ vZ6NxzKIsZWte3mqlLXNnoEvHSisA3lvqQUH3xcH+S2vbLy0GTLDQ4UOqGPyRpdhMBX37Q1WVm2q2
+ x+RKePvh+V3C0f+bBuLqK8Orn7IbdoIf3vOr50M6a2XD/Azc6x1fHyCkWp75Ryz3cHXlMyab3TIbK
+ +sA+eiytnPpTWT4U4aH0Sd9v6ILU1GN92ML8pPd1OSEFKUK79rGzXowJ/7HA0dprQlfeevZErKiMr
+ irUEVJgw==;
+Received: from hch by bombadil.infradead.org with local (Exim 4.98.2 #2 (Red
+ Hat Linux)) id 1w5HAr-00000002koM-2gNL;
+ Wed, 25 Mar 2026 05:53:01 +0000
+Date: Tue, 24 Mar 2026 22:53:01 -0700
+From: Christoph Hellwig <hch@infradead.org>
+To: Chao Yu <chao@kernel.org>
+Message-ID: <acN4PWKHvk_33VB7@infradead.org>
+References: <20260324025656.493776-1-chao@kernel.org>
 MIME-Version: 1.0
-Message-Id: <177437354753.1223048.633752985554179871.git-patchwork-notify@kernel.org>
-Date: Tue, 24 Mar 2026 17:32:27 +0000
-References: <20260310093611.2865092-2-monty_pavel@sina.com>
-In-Reply-To: <20260310093611.2865092-2-monty_pavel@sina.com>
-To: Yongpeng Yang <monty_pavel@sina.com>
-X-Spam-Score: -0.2 (/)
+Content-Disposition: inline
+In-Reply-To: <20260324025656.493776-1-chao@kernel.org>
+X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by
+ bombadil.infradead.org. See http://www.infradead.org/rpr.html
+X-Spam-Score: -0.1 (/)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: Hello: This series was applied to jaegeuk/f2fs.git (dev) by
- Jaegeuk Kim <jaegeuk@kernel.org>: On Tue, 10 Mar 2026 17:36:10 +0800 you
- wrote: > From: Yongpeng Yang <yangyongpeng@xiaomi.com> > > This patchset
- addresses
- a data consistency issue caused by the lack of > mutual exclusion between
- chec [...] 
- Content analysis details:   (-0.2 points, 5.0 required)
+ Content preview:  On Tue, Mar 24, 2026 at 10:56:55AM +0800, Chao Yu wrote: >
+ This patch allows to run generic/791 on f2fs. When was this introduced? This
+ doesn't currently exist in mainline, and it would probably help to run your
+ fserror implementation past Darrick and fsdevel for review. 
+ Content analysis details:   (-0.1 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1w55cN-0007qR-Sh
-Subject: Re: [f2fs-dev] [PATCH 0/2] f2fs: fix data consistency issue caused
- by nat_entry flag
+X-Headers-End: 1w5HB1-0001Fe-V7
+Subject: Re: [f2fs-dev] [PATCH] common/rc: support f2fs in
+ _require_fanotify_ioerrors()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -114,89 +109,54 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: patchwork-bot+f2fs--- via Linux-f2fs-devel
- <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: patchwork-bot+f2fs@kernel.org
-Cc: jaegeuk@kernel.org, yangyongpeng@xiaomi.com,
+Cc: jaegeuk@kernel.org, Zorro Lang <zlang@kernel.org>, fstests@vger.kernel.org,
  linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
-X-Spamd-Result: default: False [-8.61 / 15.00];
-	WHITELIST_DMARC(-7.00)[sourceforge.net:D:+];
-	DMARC_POLICY_ALLOW_WITH_FAILURES(-0.50)[];
+X-Spamd-Result: default: False [-1.01 / 15.00];
 	RWL_MAILSPIKE_EXCELLENT(-0.40)[216.105.38.7:from];
-	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
 	MAILLIST(-0.20)[mailman];
-	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7:c];
+	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7];
+	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
+	DMARC_POLICY_SOFTFAIL(0.10)[infradead.org : SPF not aligned (relaxed), DKIM not aligned (relaxed),none];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORGED_RECIPIENTS(0.00)[m:monty_pavel@sina.com,m:jaegeuk@kernel.org,m:yangyongpeng@xiaomi.com,m:linux-f2fs-devel@lists.sourceforge.net,s:lists@lfdr.de];
 	RECEIVED_HELO_LOCALHOST(0.00)[];
-	RCVD_TLS_LAST(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	DKIM_MIXED(0.00)[];
-	FREEMAIL_TO(0.00)[sina.com];
+	RCVD_COUNT_THREE(0.00)[4];
+	FORGED_RECIPIENTS(0.00)[m:chao@kernel.org,m:jaegeuk@kernel.org,m:zlang@kernel.org,m:fstests@vger.kernel.org,m:linux-f2fs-devel@lists.sourceforge.net,s:lists@lfdr.de];
 	ARC_NA(0.00)[];
-	TO_DN_SOME(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	DMARC_POLICY_ALLOW(0.00)[lists.sourceforge.net,none];
-	MIME_TRACE(0.00)[0:+];
-	FORGED_SENDER(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
+	FORGED_SENDER(0.00)[hch@infradead.org,linux-f2fs-devel-bounces@lists.sourceforge.net];
+	TO_DN_SOME(0.00)[];
 	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
-	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,kernel.org:s=k20201202];
-	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,kernel.org:-];
-	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[6];
-	NEURAL_HAM(-0.00)[-1.000];
+	MIME_TRACE(0.00)[0:+];
+	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,infradead.org:s=bombadil.20210309];
+	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,infradead.org:-];
+	RCPT_COUNT_FIVE(0.00)[5];
 	FORGED_SENDER_FORWARDING(0.00)[];
+	NEURAL_HAM(-0.00)[-1.000];
+	FROM_NEQ_ENVFROM(0.00)[hch@infradead.org,linux-f2fs-devel-bounces@lists.sourceforge.net];
 	FROM_HAS_DN(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
-	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	HAS_REPLYTO(0.00)[patchwork-bot+f2fs@kernel.org];
+	DKIM_MIXED(0.00)[];
+	MID_RHS_MATCH_FROM(0.00)[];
 	TAGGED_RCPT(0.00)[linux-f2fs-devel];
-	RCPT_COUNT_THREE(0.00)[4];
-	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	MISSING_XM_UA(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.sourceforge.net:helo,lists.sourceforge.net:rdns,lists.sourceforge.net:dkim]
-X-Rspamd-Queue-Id: 5DC2E31A138
+	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[infradead.org:mid,lists.sourceforge.net:helo,lists.sourceforge.net:rdns,lists.sourceforge.net:dkim]
+X-Rspamd-Queue-Id: AF28C31FFCD
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-Hello:
+On Tue, Mar 24, 2026 at 10:56:55AM +0800, Chao Yu wrote:
+> This patch allows to run generic/791 on f2fs.
 
-This series was applied to jaegeuk/f2fs.git (dev)
-by Jaegeuk Kim <jaegeuk@kernel.org>:
-
-On Tue, 10 Mar 2026 17:36:10 +0800 you wrote:
-> From: Yongpeng Yang <yangyongpeng@xiaomi.com>
-> 
-> This patchset addresses a data consistency issue caused by the lack of
-> mutual exclusion between checks of the HAS_FSYNCED_INODE,
-> IS_CHECKPOINTED, and HAS_LAST_FSYNC flags and the checkpoint write path.
-> 
-> In f2fs_flush_nat_entries(), after writing back the NAT block, the code
-> sets HAS_LAST_FSYNC and IS_CHECKPOINTED, and clears HAS_FSYNCED_INODE.
-> Although accesses and updates to these flags are protected by
-> nm_i->nat_tree_lock, observing this state in the fsync context does not
-> guarantee that the corresponding nat_entry state has already been
-> persisted to the device.
-> 
-> [...]
-
-Here is the summary with links:
-  - [f2fs-dev,1/2] f2fs: fix fsck inconsistency caused by incorrect nat_entry flag usage
-    (no matching commit)
-  - [f2fs-dev,2/2] f2fs: fix data loss caused by incorrect use of nat_entry flag
-    https://git.kernel.org/jaegeuk/f2fs/c/06d5ce7683fe
-
-You are awesome, thank you!
--- 
-Deet-doot-dot, I am a bot.
-https://korg.docs.kernel.org/patchwork/pwbot.html
-
+When was this introduced?  This doesn't currently exist in mainline,
+and it would probably help to run your fserror implementation past
+Darrick and fsdevel for review.
 
 
 
