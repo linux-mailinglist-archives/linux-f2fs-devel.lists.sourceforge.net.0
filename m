@@ -2,42 +2,42 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id MEcSIbL7w2k/vQQAu9opvQ
+	id yELeIKX7w2k/vQQAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 25 Mar 2026 16:13:54 +0100
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 25 Mar 2026 16:13:41 +0100
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 78B5F327A55
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 25 Mar 2026 16:13:54 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3329F327A0E
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 25 Mar 2026 16:13:41 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
 	Subject:In-Reply-To:MIME-Version:References:Message-ID:To:From:Date:Sender:
 	Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
 	:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=V28TaasjJoxKY0YPNWnAOecmZO58tuZutV+nXy1Y178=; b=lSTiSHXNkAFnz03uN2DQ5zjoCf
-	HdtvePEoUFm6V92fIlZz12m12NWbUQAbawHmV+JYwbNEr0shGK29qcYiuvsx64rA1Hfwwc6CY06pE
-	zr8+1MypjqMH/gPrmMRgNpomy3V5nMZRHB3tmUW+9Gf+Oj3gQZGSVQI62YNZhSyQomLw=;
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=LQHLJPilqZPVY5kTi9bLTKofWxUXdKoPbrFIB5K8qFU=; b=Gip1VtTGmbodizWVafkxw9m7tr
+	7bguClxAumY+RTJ5Vm3P56y1if/TFfPyk5RNmbVXSA+AT0nUbU1VXFenyC1Oh0VgDLgvwM9mY/wqv
+	CFkDXswgxYqh7XMJ7RdojtOX4TS+LE1VWlHuAlUqh+zsy8ZONdrnxL2LC4riHFMHTpzw=;
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1w5Pvc-00085L-CM;
-	Wed, 25 Mar 2026 15:13:53 +0000
+	id 1w5PvP-0002vh-R9;
+	Wed, 25 Mar 2026 15:13:39 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <hch@lst.de>) id 1w5Pva-00084k-HC
+ (envelope-from <hch@lst.de>) id 1w5PvO-0002vb-IJ
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 25 Mar 2026 15:13:51 +0000
+ Wed, 25 Mar 2026 15:13:38 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=9gYu71sLxjiGAY00IcnKK3oZDRFOWTj7hdRiBFoiQRQ=; b=nWhmSiWrv15x0hldL6tA91AVNY
- hIuNwFotT46u16OwHDK1AheoWkPh4/SU431tm58CBGesXhh35VhqhB04NLiywmk/mWRpUhuAjp5P4
- jwpy62v1LMwNTnWLi6Atz/X6GaD0htvgktZeqhIB7ADwwZ7fOgvuAJA+jemyAHIL64+0=;
+ bh=+19C0e82RyTBkkeFT9u8iv2756DNPQteV+mA0Dh+pEs=; b=B1w6kbs5uZ1u0Ae27HUns1GaFR
+ gBJykcPK8PZqDogreP7r12NsiGG6J5lSrHBip9aivLeA/KlzNQZcias5imtpWClwUE6JsOEsHCcT/
+ ue3TYg4oat77XbUjDoc4Lu/NNLgAXhUljVbO21PPOGV7oPj5e5PNrGd6u6NM8k5I9ocQ=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -45,25 +45,25 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=9gYu71sLxjiGAY00IcnKK3oZDRFOWTj7hdRiBFoiQRQ=; b=I7PorN7e70wHgXl8ue6Ht21WXo
- FjEhPgUTnn9f25C05GVr34MyLwuXxM/GpcpSx163eAg2xHU7s7d/mPlP+tmHZhfGIDSfeQkK7KkHU
- 7lXx46EARJWLXwo8K3AOq4S3R/j9mkXZ7j08gi+Ln3owYIlUo4zYMeGutmA4qRKuGydI=;
+ bh=+19C0e82RyTBkkeFT9u8iv2756DNPQteV+mA0Dh+pEs=; b=P0Nc1QFsq1AcO6sBpA1iYpdwC+
+ xL4nXKtGc1OiKeOok3wPWXI8QMoWydMw+y+5bPfVBE0FJJtYdh/zuiHVJyDdP+JYk0PntKINHIpPq
+ uHLCyhRJjUdfhqzGVy9NIwZQshh7gRYJMqlBYFoQnauJEC4LKmcTILJmKz9N3gMLthPM=;
 Received: from verein.lst.de ([213.95.11.211])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1w5Pva-0007mH-JK for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 25 Mar 2026 15:13:51 +0000
+ id 1w5PvN-0007l5-Sv for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 25 Mar 2026 15:13:38 +0000
 Received: by verein.lst.de (Postfix, from userid 2407)
- id 85D3968D09; Wed, 25 Mar 2026 09:04:07 +0100 (CET)
-Date: Wed, 25 Mar 2026 09:04:07 +0100
+ id A106768D07; Wed, 25 Mar 2026 09:05:25 +0100 (CET)
+Date: Wed, 25 Mar 2026 09:05:25 +0100
 From: Christoph Hellwig <hch@lst.de>
 To: Andrey Albershteyn <aalbersh@kernel.org>
-Message-ID: <20260325080407.GG952@lst.de>
+Message-ID: <20260325080525.GH952@lst.de>
 References: <20260319170231.1455553-1-aalbersh@kernel.org>
- <20260319170231.1455553-10-aalbersh@kernel.org>
+ <20260319170231.1455553-12-aalbersh@kernel.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20260319170231.1455553-10-aalbersh@kernel.org>
+In-Reply-To: <20260319170231.1455553-12-aalbersh@kernel.org>
 User-Agent: Mutt/1.5.17 (2007-11-01)
 X-Spam-Score: 1.1 (+)
 X-Spam-Report: Spam detection software,
@@ -72,19 +72,17 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Thu, Mar 19, 2026 at 06:01:56PM +0100, Andrey Albershteyn
- wrote: > Issue reading of fsverity merkle tree on the fsverity inodes. This
- way > metadata will be available at I/O completion time. Patches 8 to 10
- really look like they should be merged to me. They all add the actual fsverity
- support to the iomap buffered read path, and merging them and having a single
- explanation of the side see [...] 
+ Content preview:  On Thu, Mar 19, 2026 at 06:01:58PM +0100, Andrey Albershteyn
+ wrote: > This is just a wrapper around iomap_file_buffered_write() to create
+ > necessary iterator over metadata. Looks good: Reviewed-by: Christoph Hellwig
+ <hch@lst.de> 
  Content analysis details:   (1.1 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  1.1 DATE_IN_PAST_06_12     Date: is 6 to 12 hours before Received: date
-X-Headers-End: 1w5Pva-0007mH-JK
-Subject: Re: [f2fs-dev] [PATCH v5 09/25] iomap: issue readahead for fsverity
- merkle tree
+X-Headers-End: 1w5PvN-0007l5-Sv
+Subject: Re: [f2fs-dev] [PATCH v5 11/25] iomap: introduce
+ iomap_fsverity_write() for writing fsverity metadata
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -134,19 +132,18 @@ X-Spamd-Result: default: False [-1.01 / 15.00];
 	RCPT_COUNT_SEVEN(0.00)[10];
 	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
 	TAGGED_RCPT(0.00)[linux-f2fs-devel];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lst.de:mid,lists.sourceforge.net:helo,lists.sourceforge.net:rdns,lists.sourceforge.net:dkim]
-X-Rspamd-Queue-Id: 78B5F327A55
+	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.sourceforge.net:helo,lists.sourceforge.net:rdns,lists.sourceforge.net:dkim]
+X-Rspamd-Queue-Id: 3329F327A0E
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On Thu, Mar 19, 2026 at 06:01:56PM +0100, Andrey Albershteyn wrote:
-> Issue reading of fsverity merkle tree on the fsverity inodes. This way
-> metadata will be available at I/O completion time.
+On Thu, Mar 19, 2026 at 06:01:58PM +0100, Andrey Albershteyn wrote:
+> This is just a wrapper around iomap_file_buffered_write() to create
+> necessary iterator over metadata.
 
-Patches 8 to 10 really look like they should be merged to me.  They
-all add the actual fsverity support to the iomap buffered read path,
-and merging them and having a single explanation of the side seems
-helpful both for review and future archeology
+Looks good:
+
+Reviewed-by: Christoph Hellwig <hch@lst.de>
 
 
 
