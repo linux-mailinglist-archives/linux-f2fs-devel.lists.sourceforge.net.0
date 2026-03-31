@@ -2,42 +2,42 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id yDLzFs08zGm9RgYAu9opvQ
+	id gGTyI848zGm9RgYAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 31 Mar 2026 23:29:49 +0200
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 31 Mar 2026 23:29:50 +0200
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id EDCEF371CE0
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 31 Mar 2026 23:29:48 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 829C5371CFF
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 31 Mar 2026 23:29:50 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
 	List-Unsubscribe:List-Id:Subject:MIME-Version:References:In-Reply-To:
 	Message-ID:Date:To:Sender:Content-ID:Content-Description:Resent-Date:
 	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=sWzKRZ3ltb0YlbIxS9bS68XW9BIMZ1qjruq7p8RE7Y8=; b=f+hGmCKOiApvC9Q/UNX1G4V4lD
-	VjEvg7wyi+Beg5fLrDQyB9d6K17xqihMDWG2k4VhBBZcqK3fT4rkfth7gyRKXoKKBNeDE+SRdfoM9
-	EGnJZdX+97ac6pdgENBYzN5i8e2YwtYubYpcMbf/rRSOkCP1RWyaRqVarF6QNufKQCAc=;
+	bh=RjD35q7+ZR84mCZ6djKYEkhgX2lGbUJA2PGK+MJxKDA=; b=hNRNk1PeNRnUYCwjpLokN8pJZh
+	OXUYRNeSipuo/sk7EPA96xdAGaEuC8w8i2hL6gkJTNsVVowdaQQFp6F+zOBD1znLygKO4nRKOar6U
+	xd3jTaaXOPjB5Ge89g5J31fmQTRZEreF90Zfmmoqm9Z9svvBukDWIwg0oti4s3veFWHM=;
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1w7geh-0004To-JQ;
-	Tue, 31 Mar 2026 21:29:47 +0000
+	id 1w7gei-0004UO-UK;
+	Tue, 31 Mar 2026 21:29:48 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <aalbersh@kernel.org>) id 1w7gef-0004TP-SC
+ (envelope-from <aalbersh@kernel.org>) id 1w7geh-0004Te-1M
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 31 Mar 2026 21:29:45 +0000
+ Tue, 31 Mar 2026 21:29:47 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=6UeMIH2sG7EWBuSaTAaE36si3YF2Xq+2W9cLdjGxMTo=; b=LKcwVDRNT72vm+3GlbXgl0bdhV
- pf7eWTTKZ6jjlpZfhVj0l2h5qqcD79hgKKISslcWdLN0soUZqvQxzjw0/uORfiRlgTKnZtqvDrPLZ
- igO3n7FkKAj3G9kI/yCDMsAAyU3eOgtk6lDxLqUmLaDYGk4vXWB4jCPsIX0nAMwjO/a0=;
+ bh=l2fAg6n2xDDtF0NANJUah1SdP84L6Dais1yVUmWtT2s=; b=R2gR9zKv9B+8WnpGjTtozfybii
+ A/kKgfn8zgD5it08VORZ+2ZVTwRPlwHihmK3XqNkdDbA4Y/5z/i6NWN1t1Oztz3NY9zM6jAzle8Ub
+ E+c5hdoCLQFDqcjRRIdIQlyGuY+CMnqrIu6flBk6nzW1qon07/VQKX/S4LMPm7ctEolI=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:
@@ -45,65 +45,64 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=6UeMIH2sG7EWBuSaTAaE36si3YF2Xq+2W9cLdjGxMTo=; b=hTyMismli80wGPPDVYq1Hakanv
- N0Jcfgd4VPEjtztj8yQok+A092DihnlVIg9xiP9x19Te4ZrD13I2gN2ui3bm8ZSt8QsH1uzCK5AmY
- /85ZueCyp4+Hd62IBYCxwMfwih0U1XWDNiJDYhipziPZ5CosvP/1G3zPjR5sGeyfnWSE=;
-Received: from tor.source.kernel.org ([172.105.4.254])
+ bh=l2fAg6n2xDDtF0NANJUah1SdP84L6Dais1yVUmWtT2s=; b=Tv+wQcrwv6vvlO68szQDPmwSIF
+ aqUi+Xm6xStFI4eZLcH0+teViAnvkgr9xl7ctltULDbSTkw5LDepTcgx3PSxdrycl7vQDuRTyoVYR
+ dROevJxiK2XlruB28syEbtGfM6rYi6LITs4Yd+46hRkc+MpAD/eOi+Z2FZdjJ2XjffIg=;
+Received: from sea.source.kernel.org ([172.234.252.31])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1w7gee-00078R-7Z for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 31 Mar 2026 21:29:45 +0000
+ id 1w7geg-00078f-NH for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 31 Mar 2026 21:29:46 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id A2BEF60121;
+ by sea.source.kernel.org (Postfix) with ESMTP id 7042A4452B;
+ Tue, 31 Mar 2026 21:29:41 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id DD17DC2BC9E;
  Tue, 31 Mar 2026 21:29:38 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id E4023C2BC9E;
- Tue, 31 Mar 2026 21:29:35 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1774992578;
- bh=jU8tUIfyDbVmI340bc16qdopl8bEAtAs/sdw4PSwkzA=;
+ s=k20201202; t=1774992581;
+ bh=F9zqK9E4O4jjnMMTNM5mFWuFg4IWtl3pxXGeeyzEVtk=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=u4rU3/l2AYG2PYxbh58mennpg25Nh9feBtGxyxWzlLyBFNVOe++xtB9d1y+f9wlNI
- RDJieKNlxnpIMIjHVlsZnu7IG7HzHfR2cjL25DlQfXzAF3Kl+Jh+XKOnHHalsi3/De
- 0lLcF23GHcr1YBmwDCMCa01Sj/Hpbqr1t7g++a+WtJvX31x8IVo0vq4da4uCTihtED
- Wwg7WjJ1Q5kDiDDoWTOlUTMJ2Z+vBDL8zwokUieiNkBc1RPGjm+oMAi7xyVCXM6peW
- 2pxdui60fS5q9dMsuKrr2cSF+bKXjrupVzpBzSJzF7+O1+kh6uzrp2jQf16cYbZQLh
- l47tNKHURyhkw==
+ b=lKylLcNaSBJR/tEyygtJDJA8xJR/h85y7EHRGv4aUQZWrQRgZwiP0cttXbiArXR68
+ uWvkiLZIxPcNjCAxHUYOo7ABa6L54e39gN33cCcUMqx7fqWI8Jq1ICxJx7UY1pC+iY
+ nsqJBmFRXa1uqNFgp3NKxbdq0+MuGq+KyMhxZEwjMa+m6Yz7IS0ghxqwf/XSGX7e3z
+ 2MtKNx9t8F9C0mrAjoim3qvdUAlVaUnKQatporPKgrPpQCygkqiDuHqpjmv0EC+yuL
+ Yt2IzYy0niovm58tCnaYml7/nNhyCZML4vYzZQgVnobVxg4cGD4ijhG4Pxl4Y2QB3A
+ MzUPtizzBje4Q==
 To: linux-xfs@vger.kernel.org, fsverity@lists.linux.dev,
  linux-fsdevel@vger.kernel.org, ebiggers@kernel.org
-Date: Tue, 31 Mar 2026 23:28:22 +0200
-Message-ID: <20260331212827.2631020-22-aalbersh@kernel.org>
+Date: Tue, 31 Mar 2026 23:28:23 +0200
+Message-ID: <20260331212827.2631020-23-aalbersh@kernel.org>
 X-Mailer: git-send-email 2.51.2
 In-Reply-To: <20260331212827.2631020-1-aalbersh@kernel.org>
 References: <20260331212827.2631020-1-aalbersh@kernel.org>
 MIME-Version: 1.0
 X-Spam-Score: -0.7 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Even though fsverity has traces,
- debugging issues with varying
- block sizes could be a bit less transparent without read/write traces.
+ Content preview: Finalize fs-verity integration in XFS by making kernel
+ fs-verity
+ aware with ro-compat flag. Signed-off-by: Andrey Albershteyn
+ <aalbersh@kernel.org>
+ Reviewed-by: Darrick J. Wong <djwong@kernel.org> [djwong: add spaces]
  Signed-off-by:
- Andrey Albershteyn <aalbersh@kernel.org> Reviewed-by: "Darrick J. Wong"
- <djwong@kernel.org>
- --- fs/xfs/xfs_fsverity.c | 6 ++++++ fs/xfs/xfs_trace.h | 46
- ++++++++++++++++++++++++++++++++ [...] 
+ Darrick J. Wong <djwong@kernel.org> --- fs/xfs/libxfs/xfs_f [...] 
  Content analysis details:   (-0.7 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.5 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1w7gee-00078R-7Z
-Subject: [f2fs-dev] [PATCH v6 21/22] xfs: add fsverity traces
+X-Headers-End: 1w7geg-00078f-NH
+Subject: [f2fs-dev] [PATCH v6 22/22] xfs: enable ro-compat fs-verity flag
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -161,115 +160,37 @@ X-Spamd-Result: default: False [-8.61 / 15.00];
 	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.sourceforge.net:helo,lists.sourceforge.net:rdns,lists.sourceforge.net:dkim]
-X-Rspamd-Queue-Id: EDCEF371CE0
+X-Rspamd-Queue-Id: 829C5371CFF
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-Even though fsverity has traces, debugging issues with varying block
-sizes could be a bit less transparent without read/write traces.
+Finalize fs-verity integration in XFS by making kernel fs-verity
+aware with ro-compat flag.
 
 Signed-off-by: Andrey Albershteyn <aalbersh@kernel.org>
-Reviewed-by: "Darrick J. Wong" <djwong@kernel.org>
+Reviewed-by: Darrick J. Wong <djwong@kernel.org>
+[djwong: add spaces]
+Signed-off-by: Darrick J. Wong <djwong@kernel.org>
 ---
- fs/xfs/xfs_fsverity.c |  6 ++++++
- fs/xfs/xfs_trace.h    | 46 +++++++++++++++++++++++++++++++++++++++++++
- 2 files changed, 52 insertions(+)
+ fs/xfs/libxfs/xfs_format.h | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
 
-diff --git a/fs/xfs/xfs_fsverity.c b/fs/xfs/xfs_fsverity.c
-index ecc66ee8bac5..6db8113da52f 100644
---- a/fs/xfs/xfs_fsverity.c
-+++ b/fs/xfs/xfs_fsverity.c
-@@ -64,6 +64,8 @@ xfs_fsverity_get_descriptor(
- 	uint32_t		blocksize = i_blocksize(VFS_I(ip));
- 	xfs_fileoff_t		last_block_offset;
- 
-+	trace_xfs_fsverity_get_descriptor(ip);
-+
- 	ASSERT(inode->i_flags & S_VERITY);
- 	error = xfs_bmap_last_extent(NULL, ip, XFS_DATA_FORK, &rec, &is_empty);
- 	if (error)
-@@ -377,6 +379,7 @@ xfs_fsverity_read_merkle(
- 	pgoff_t			index)
- {
- 	index += xfs_fsverity_metadata_offset(XFS_I(inode)) >> PAGE_SHIFT;
-+	trace_xfs_fsverity_read_merkle(XFS_I(inode), index, PAGE_SIZE);
- 
- 	return generic_read_merkle_tree_page(inode, index);
- }
-@@ -391,6 +394,7 @@ xfs_fsverity_readahead_merkle_tree(
- 	unsigned long		nr_pages)
- {
- 	index += xfs_fsverity_metadata_offset(XFS_I(inode)) >> PAGE_SHIFT;
-+	trace_xfs_fsverity_read_merkle(XFS_I(inode), index, PAGE_SIZE);
- 
- 	generic_readahead_merkle_tree(inode, index, nr_pages);
- }
-@@ -414,6 +418,8 @@ xfs_fsverity_write_merkle(
- 	const char		*p;
- 	unsigned int		i;
- 
-+	trace_xfs_fsverity_write_merkle(XFS_I(inode), position, size);
-+
- 	if (position + size > inode->i_sb->s_maxbytes)
- 		return -EFBIG;
- 
-diff --git a/fs/xfs/xfs_trace.h b/fs/xfs/xfs_trace.h
-index 5e8190fe2be9..d05f79ec92db 100644
---- a/fs/xfs/xfs_trace.h
-+++ b/fs/xfs/xfs_trace.h
-@@ -6440,6 +6440,52 @@ TRACE_EVENT(xfs_verify_media_error,
- 		  __entry->error)
- );
- 
-+TRACE_EVENT(xfs_fsverity_get_descriptor,
-+	TP_PROTO(struct xfs_inode *ip),
-+	TP_ARGS(ip),
-+	TP_STRUCT__entry(
-+		__field(dev_t, dev)
-+		__field(xfs_ino_t, ino)
-+	),
-+	TP_fast_assign(
-+		__entry->dev = VFS_I(ip)->i_sb->s_dev;
-+		__entry->ino = ip->i_ino;
-+	),
-+	TP_printk("dev %d:%d ino 0x%llx",
-+		  MAJOR(__entry->dev), MINOR(__entry->dev),
-+		  __entry->ino)
-+);
-+
-+DECLARE_EVENT_CLASS(xfs_fsverity_class,
-+	TP_PROTO(struct xfs_inode *ip, u64 pos, size_t length),
-+	TP_ARGS(ip, pos, length),
-+	TP_STRUCT__entry(
-+		__field(dev_t, dev)
-+		__field(xfs_ino_t, ino)
-+		__field(u64, pos)
-+		__field(size_t, length)
-+	),
-+	TP_fast_assign(
-+		__entry->dev = VFS_I(ip)->i_sb->s_dev;
-+		__entry->ino = ip->i_ino;
-+		__entry->pos = pos;
-+		__entry->length = length;
-+	),
-+	TP_printk("dev %d:%d ino 0x%llx pos 0x%llx length 0x%zx",
-+		  MAJOR(__entry->dev), MINOR(__entry->dev),
-+		  __entry->ino,
-+		  __entry->pos,
-+		  __entry->length)
-+)
-+
-+#define DEFINE_FSVERITY_EVENT(name) \
-+DEFINE_EVENT(xfs_fsverity_class, name, \
-+	TP_PROTO(struct xfs_inode *ip, u64 pos, size_t length), \
-+	TP_ARGS(ip, pos, length))
-+DEFINE_FSVERITY_EVENT(xfs_fsverity_read_merkle);
-+DEFINE_FSVERITY_EVENT(xfs_fsverity_write_merkle);
-+DEFINE_FSVERITY_EVENT(xfs_fsverity_file_corrupt);
-+
- #endif /* _TRACE_XFS_H */
- 
- #undef TRACE_INCLUDE_PATH
+diff --git a/fs/xfs/libxfs/xfs_format.h b/fs/xfs/libxfs/xfs_format.h
+index 4dff29659e40..0ce46c234b9c 100644
+--- a/fs/xfs/libxfs/xfs_format.h
++++ b/fs/xfs/libxfs/xfs_format.h
+@@ -378,8 +378,9 @@ xfs_sb_has_compat_feature(
+ #define XFS_SB_FEAT_RO_COMPAT_ALL \
+ 		(XFS_SB_FEAT_RO_COMPAT_FINOBT | \
+ 		 XFS_SB_FEAT_RO_COMPAT_RMAPBT | \
+-		 XFS_SB_FEAT_RO_COMPAT_REFLINK| \
+-		 XFS_SB_FEAT_RO_COMPAT_INOBTCNT)
++		 XFS_SB_FEAT_RO_COMPAT_REFLINK | \
++		 XFS_SB_FEAT_RO_COMPAT_INOBTCNT | \
++		 XFS_SB_FEAT_RO_COMPAT_VERITY)
+ #define XFS_SB_FEAT_RO_COMPAT_UNKNOWN	~XFS_SB_FEAT_RO_COMPAT_ALL
+ static inline bool
+ xfs_sb_has_ro_compat_feature(
 -- 
 2.51.2
 
