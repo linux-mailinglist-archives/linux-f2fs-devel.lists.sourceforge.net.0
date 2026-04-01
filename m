@@ -2,42 +2,42 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id sArnNSeuzWlRfwYAu9opvQ
+	id YC6aMfuwzWmifwYAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 02 Apr 2026 01:45:43 +0200
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 02 Apr 2026 01:57:47 +0200
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8D44B381C62
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 02 Apr 2026 01:45:43 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6E091381D48
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 02 Apr 2026 01:57:47 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
 	List-Unsubscribe:List-Id:Subject:In-Reply-To:MIME-Version:References:
 	Message-ID:To:Date:Sender:Content-ID:Content-Description:Resent-Date:
 	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=r65PkeAkiVSwOjCtmMWaxeKu+vltu0edYkFry4LTROo=; b=WL8FTPs6OIwyEaFKYbws5Xh8iX
-	fgjvuBMAQQXWyAdJ0k0yppLqxbjqxJ7XVpzn/luyeX7eoJxS60jOA+oNGbdzEcqEhBPaW9yaCyQUL
-	14wFdCqspJq/eJLfxNWf6CP0y08Ni1pPiJIDY5imKRZS0gtr+R1NzaaAJ4xz76Cze8xM=;
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=+kf7LhZOxiQb5S+RJaB8aoZsPtwFNe6ekCinhKN+HCs=; b=jm0zTqKClAwpcf96NT2M153coL
+	jq3wYh93qwFaed47UjDhrX2sI8dk0kiz8go8A4TbYGY+GwnA1ZltUXvGPuiHVBJtTvR1NfugPT0OL
+	NDy3ip2HODL6YpI4ZTK0BL4JiSNEGg5D4UBsRmsbShvZzuXYOsq+qkv1f2sZOgFTO4e0=;
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1w85Fg-00067K-9A;
-	Wed, 01 Apr 2026 23:45:36 +0000
+	id 1w85RM-0001TK-A1;
+	Wed, 01 Apr 2026 23:57:41 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <ebiggers@kernel.org>) id 1w85FH-00066w-9R
+ (envelope-from <ebiggers@kernel.org>) id 1w85R8-0001S1-IZ
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 01 Apr 2026 23:45:11 +0000
+ Wed, 01 Apr 2026 23:57:27 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=M4ymidRqv9MfyK6EduM1i6A+RdpLxJNsmcm2ZO3+YWM=; b=hkh+BKLm3G3UAix6T3v3lkZLgm
- pkeKUaxHnEac6O7fDAAtOX5ysOxbKlrUwvyx+9UW84edigfbNB9XVtP0hV7+TLtjIZnepGStiRWAX
- SBA+pWJNjJ3knlcyOO8BsKo3WwlXttVjKY+JJ5tIoEaSY7tN1vm3TdscaeB3BqvEm+UE=;
+ bh=gt+490hTDLu75UHm9ZEuCUr2zVIhMS3KHy6Mg+qVCZg=; b=jT92j5VskdH7bZhcPavh9Xfn4p
+ TpYOQzlQ8nbH4jayW0fskyP6MHiSDQWRnIsdSW52S9kOsfUyJkErzCzBdx5eo+Vp8ln86qE5huVu3
+ Bve1Zi+bmE+idZQ9mBYucT/8wrOECOVzQoJsxSYWhWED0zznYZhI82kIc6ro2oxMAqdQ=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -45,37 +45,37 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=M4ymidRqv9MfyK6EduM1i6A+RdpLxJNsmcm2ZO3+YWM=; b=GFRdRcW7oRVtuGXBX0EkhsubQy
- krAqNgkoTdv4NTOAyUfn3IvckoauexT3eOntVKLgdkIiLFGCbz0mJHe2Nrp/9FhSyOymnVkXJm+Ds
- z22imKowJKm9FSYZQBsJHtvkl0Y9ZTt7gneWL1Uu4iq5SSDZG0H1C7MJgMUaGZ4mImhQ=;
+ bh=gt+490hTDLu75UHm9ZEuCUr2zVIhMS3KHy6Mg+qVCZg=; b=XNmMc4eRz/uXyoMGS1hXMD24vh
+ mS8fLr3gGsPZnxeEdQ7ZZtF3pWr0/Oqw+tJKhz5d2T2IvmISmDc2v7jzDoGoOIt638sd1o+0eMrrW
+ SpOTHf93l8y7PD7R8/cuqh8b6Sj6mYJdyzOU8MwP5JAN0DWUBfHPvC/eE8Y62FMI8zM0=;
 Received: from tor.source.kernel.org ([172.105.4.254])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1w85FG-0008Ct-Rh for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 01 Apr 2026 23:45:11 +0000
+ id 1w85R8-0000E5-Td for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 01 Apr 2026 23:57:27 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 8EAFE600CB;
- Wed,  1 Apr 2026 23:44:59 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id D3DD3C4CEF7;
- Wed,  1 Apr 2026 23:44:58 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id 0AE69600CB;
+ Wed,  1 Apr 2026 23:57:16 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1E119C4CEF7;
+ Wed,  1 Apr 2026 23:57:15 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1775087099;
- bh=I3xgUwZ2fScTOSKu5gwFFScGgHMI2afVQxSZDC/mXks=;
+ s=k20201202; t=1775087835;
+ bh=tcQn0jNvskFSJW+K9iuub+kF7CbhB6AAKIoY7X78kfg=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=kLTTuWYjGkfeV2FsJ7DX/P+c0a9k/HMpIiBn0q0Ya39n328rSNCwdilnVV8I4EvH/
- MNl2/Cm7tlfnJbbX6m2CQKX47RpBqz/zbe1U76f/HBCqhsiBTSUrqSdZhKLQQ88nEP
- GfCnBWR1LjIhUW/RfWd+yNwtwwe6ZL0U76pWLtHfZvGEqpywJHzlu2/Qi/bNEKl9uS
- NUC7IzAlAMFGGqLjvFOTtULL1lUQ/l6DeOynk4NylDpT4dl6lkuxiC9awuGV6MHIXK
- 8+KtBWeqR4Bpu+iicWHk0h6WgL6gfAS6TMkHzsjhOq3FPPqWzZIzQDTKqklnfF1Xe4
- vBzLmiZ/NMdGw==
-Date: Wed, 1 Apr 2026 16:44:57 -0700
+ b=pmqH/gYS7H3A8WIi5YaQwSPGuloLcc9oof281lzvAWGN4iW/sx8PxnpcmLa0fkTwI
+ VLuQCSdS+pad4iKkwf6iYNFDE3CubyeXY+Gg9/AM262caq/JvUaUw9j3K8YSzBXyO3
+ /8B8BvgqIyeJ3QXT26IHd05FmQsg/BwIrsJXNwDoiYKa/Xn45P1xdC1LR1QKuve4fe
+ O0rVwIHQmzCtvy1QZm33yuuaFlHzDjwoQWgGejb3a8A84Lx1VmzrRtNWZ3YQ39eBYG
+ HYB8qVoDf61xKIhY8HVfbWP+sT3x02HLL0iH5yOeRFZWBdyKrOjTQTwiuyIWlU9A7Q
+ 3zO85+iKzq84A==
+Date: Wed, 1 Apr 2026 16:57:13 -0700
 To: Andrey Albershteyn <aalbersh@kernel.org>
-Message-ID: <20260401234457.GB14247@quark>
+Message-ID: <20260401235713.GC14247@quark>
 References: <20260331212827.2631020-1-aalbersh@kernel.org>
- <20260331212827.2631020-6-aalbersh@kernel.org>
+ <20260331212827.2631020-16-aalbersh@kernel.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20260331212827.2631020-6-aalbersh@kernel.org>
+In-Reply-To: <20260331212827.2631020-16-aalbersh@kernel.org>
 X-Spam-Score: -0.7 (/)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
@@ -83,9 +83,9 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Tue, Mar 31, 2026 at 11:28:06PM +0200, Andrey Albershteyn
- wrote: > This is the same function to read from pageache. XFS will also need
- > this, so move this to core fsverity. > > Reviewed-by: Darric [...] 
+ Content preview:  On Tue, Mar 31, 2026 at 11:28:16PM +0200, Andrey Albershteyn
+ wrote: > + /* > + * If this is a block full of hashes of zeroed blocks, don't
+ bother > + * storing the block. We can synthesize them later. [...] 
  Content analysis details:   (-0.7 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -97,9 +97,8 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.5 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1w85FG-0008Ct-Rh
-Subject: Re: [f2fs-dev] [PATCH v6 05/22] fsverity: hoist pagecache_read from
- f2fs/ext4 to fsverity
+X-Headers-End: 1w85R8-0000E5-Td
+Subject: Re: [f2fs-dev] [PATCH v6 15/22] xfs: add fs-verity support
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -159,23 +158,39 @@ X-Spamd-Result: default: False [-8.11 / 15.00];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
 	HAS_REPLYTO(0.00)[ebiggers@kernel.org]
-X-Rspamd-Queue-Id: 8D44B381C62
+X-Rspamd-Queue-Id: 6E091381D48
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On Tue, Mar 31, 2026 at 11:28:06PM +0200, Andrey Albershteyn wrote:
-> This is the same function to read from pageache. XFS will also need
-> this, so move this to core fsverity.
-> 
-> Reviewed-by: Darrick J. Wong <djwong@kernel.org>
-> Reviewed-by: Christoph Hellwig <hch@lst.de>
-> Signed-off-by: Andrey Albershteyn <aalbersh@kernel.org>
+On Tue, Mar 31, 2026 at 11:28:16PM +0200, Andrey Albershteyn wrote:
+> +	/*
+> +	 * If this is a block full of hashes of zeroed blocks, don't bother
+> +	 * storing the block. We can synthesize them later.
+> +	 *
+> +	 * However, do this only in case Merkle tree block == fs block size.
+> +	 * Iomap synthesizes these blocks based on holes in the merkle tree. We
+> +	 * won't be able to tell if something need to be synthesizes for the
+> +	 * range in the fs block. For example, for 4k filesystem block
+> +	 *
+> +	 *	[ 1k | zero hashes | zero hashes | 1k ]
+> +	 *
+> +	 * Iomap won't know about these empty blocks.
+> +	 */
+> +	for (i = 0, p = buf; i < size; i += digest_size, p += digest_size)
+> +		if (memcmp(p, zero_digest, digest_size))
+> +			break;
+> +	if (i == size && size == ip->i_mount->m_sb.sb_blocksize)
+> +		return 0;
 
-Acked-by: Eric Biggers <ebiggers@kernel.org>
+Might be too subtle, but this could be done more efficiently with just
+two calls to memcmp():
 
-Would be worth mentioning that the ext4 and f2fs copies of this function
-had diverged slightly, though.  This patch takes ext4's implementation
-of doing it folio-by-folio, which seems like the right choice.
+	if (size == ip->i_mount->m_sb.sb_blocksize &&
+	    /* first digest is zero_digest */
+	    memcmp(buf, zero_digest, digest_size) == 0 &&
+	    /* every digest is same as previous, thus all are zero_digest */
+	    memcmp(buf + digest_size, buf, size - digest_size) == 0)
+		return 0;
 
 - Eric
 
