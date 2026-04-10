@@ -2,81 +2,83 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id sNi/LzkS2Wl+lggAu9opvQ
+	id mHbQLzkS2Wl3lwgAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
 	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 10 Apr 2026 17:07:37 +0200
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5282C3D8F86
+	by mail.lfdr.de (Postfix) with ESMTPS id 5284D3D8F87
 	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 10 Apr 2026 17:07:36 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
-	Subject:MIME-Version:Message-ID:Date:To:From:Sender:Reply-To:Content-ID:
-	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
-	:Resent-Message-ID:In-Reply-To:References:List-Owner;
-	bh=iq80amtxneDpP0wX4qGeaNNeaRpHvwNrei86Ya7VFts=; b=eR979nZyn2YtTFUCo7bJgtCqMy
-	20qyZa0wC3n6o+AQBlaZky8xvWpPxBmo6sRTQL8MEDXLfXXA/F+LtN1kBEUsuvcBF/Lj/Ykmue5fz
-	w8iQ7FRbLVaZWBPHRMseMWjRVh3hHNaTP3f2ZFLB5JLOJaNr4yAy3OMNE5mdnaVeuv2Y=;
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	Subject:MIME-Version:References:In-Reply-To:Message-ID:Date:To:From:Sender:
+	Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
+	:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
+	bh=xMEiAFfkN9a/t/DDMEBzVa6Ze9uHh+cZtU2/prRlf1E=; b=PDy0TtCkjvhHHYXjjw1VJpKvKp
+	RU96vnP50wyaPAd9jf+fID074n247vaKZ/urbItgey3yMayrCnd5keMhsoIQl0PWIO76M6ISrllkz
+	ILpFrk/qc//DNClt0SeLe0mqyDPspjbOQB57uNakfsZwqEt0VxLk6vE8k8Jd5b4Xng5g=;
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1wBDS7-0007Ql-9N;
-	Fri, 10 Apr 2026 15:07:23 +0000
+	id 1wBDSH-0004AQ-Qr;
+	Fri, 10 Apr 2026 15:07:34 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <monty_pavel@sina.com>) id 1wBDS4-0007Qe-In
+ (envelope-from <monty_pavel@sina.com>) id 1wBDSG-0004AD-Bc
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 10 Apr 2026 15:07:20 +0000
+ Fri, 10 Apr 2026 15:07:33 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
+ In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=RT/aBnrn9Wio2+JvgY0l8e1Lib1a2ABX2LeObdPB2OA=; b=DnxpzwQCNBrQrz/gKxMfwDkyrQ
- bLAJ3glnLxTc/EEIv0vb0BWamyNDmrEUimMAdZrKVX1PQ9l4wDmXalkV5KN1mrT5engvCIXIOGA+E
- c6k7tbnfuVNLExmIVlVbE6DWcqlZIfPgzSJjq5aOQT8wIw5LQ3rfeFgWUWBbghj7zHYI=;
+ bh=QYLaRT/6zwHkuhTkUVTteVkTCIsm2F/KAybLFFalK34=; b=PmfSU19AZAPGWpAanP02lL4IhK
+ eopu/DjmT0UqIcgshIiOJDLaNGemtZMNTajifaGcI0m+QKjcrlXeBGwLO3T8opqBTF1ShwawOdajB
+ TnnNgHDOnf++X7zUTr3rkX3XCTrg1nBd89EhgSv/jQKXwFp6WCuXLaBYc4GUph6MKoDw=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=RT/aBnrn9Wio2+JvgY0l8e1Lib1a2ABX2LeObdPB2OA=; b=H
- OlRbDCG6vRgOS/flaSV7ICJ2X0gMR/6Hlg9QR3Fo5rUiMpQk9EWbMp80li94zjd6cizyrLcjLUL8O
- q4MKH/XHzrbSaDpOlisgkxZT7xTzmZsNMmaO5UjcHNlSSB2SB62EiY7+8CU25CLLOfdAF/05XkdfQ
- LDkdtiQ6OcGUBu8M=;
-Received: from mail115-118.sinamail.sina.com.cn ([218.30.115.118])
+ h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=QYLaRT/6zwHkuhTkUVTteVkTCIsm2F/KAybLFFalK34=; b=BqyowR/pWA0EY42BNOAD7Gqd6t
+ SQIQaTH6wIOjX/Q451HK5M8N146A3fWRu9xIfSmz1hdOHPhGYG7pnNjOWIZQJtxjPe4R9cIBsVzuX
+ 3N76kNlHCH5ffE33/G7AR6zqGNKuZ4yUYM86p+T07ZZTa+McTj7WzQnOawLhnbz3C0Kg=;
+Received: from mail115-171.sinamail.sina.com.cn ([218.30.115.171])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1wBDS2-0005Ee-Ho for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 10 Apr 2026 15:07:20 +0000
+ id 1wBDSG-0005FY-D9 for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 10 Apr 2026 15:07:32 +0000
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sina.com; s=201208;
- t=1775833638; bh=RT/aBnrn9Wio2+JvgY0l8e1Lib1a2ABX2LeObdPB2OA=;
+ t=1775833652; bh=QYLaRT/6zwHkuhTkUVTteVkTCIsm2F/KAybLFFalK34=;
  h=From:Subject:Date:Message-ID;
- b=rV9Li0jP5u9Wh6W6ds7zHltCEAgWcGmZAKWqksvpc8k0TR57B9Ra+p3jYlcIBH6UG
- kGrOqjv2q2WZzgA2kZZe+2SgyYSTo7MhcbxEdlaOeRoMgrORYuYjhPWEeTBP6XOUzZ
- 5GaDLuaKk2FizF0j46Ik805S1f/yJGO+fFiPW6+Y=
+ b=j3snvDpaqbFPjzDYrldd9lVPcHi6lz5OldFFw1YlLqru8WCE4fN14H2b4htnl834G
+ oxjC/lERfWxF6lEzJ7kWIXWgqxv3I1FaCNSB2YNSTY2VN4V3chr3itB+ZFiWa68Y6R
+ O0WCL3rzK6eVP0l6V6vN7X7PE9SYQmJpkK9WUf5I=
 X-SMAIL-HELO: xiaomi-ThinkCentre-M760t.mioffice.cn
 Received: from unknown (HELO
  xiaomi-ThinkCentre-M760t.mioffice.cn)([114.247.175.249])
  by sina.com (10.185.250.24) with ESMTP
- id 69D911F1000046BE; Fri, 10 Apr 2026 23:06:28 +0800 (CST)
+ id 69D911F1000046BE; Fri, 10 Apr 2026 23:06:44 +0800 (CST)
 X-Sender: monty_pavel@sina.com
 X-Auth-ID: monty_pavel@sina.com
 Authentication-Results: sina.com; spf=none smtp.mailfrom=monty_pavel@sina.com;
  dkim=none header.i=none;
  dmarc=none action=none header.from=monty_pavel@sina.com
-X-SMAIL-MID: 86980010748035
-X-SMAIL-UIID: 762E49F6052F42F4A6DE740A20C849DC-20260410-230628-1
+X-SMAIL-MID: 4142810747981
+X-SMAIL-UIID: 8A7FEB21842F4B038D174AC63F264F98-20260410-230644-1
 From: Yongpeng Yang <monty_pavel@sina.com>
 To: Chao Yu <chao@kernel.org>,
 	Jaegeuk Kim <jaegeuk@kernel.org>
-Date: Fri, 10 Apr 2026 23:05:37 +0800
-Message-ID: <20260410150537.1683974-2-monty_pavel@sina.com>
+Date: Fri, 10 Apr 2026 23:05:39 +0800
+Message-ID: <20260410150537.1683974-4-monty_pavel@sina.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20260410150537.1683974-2-monty_pavel@sina.com>
+References: <20260410150537.1683974-2-monty_pavel@sina.com>
 MIME-Version: 1.0
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
@@ -85,10 +87,10 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  From: Yongpeng Yang An extension should not exist in both
- the cold and hot extension lists simultaneously. When adding a hot extension, 
- check whether it already exists in the cold list, and vice versa. Reject
- the operati [...] 
+ Content preview:  From: Yongpeng Yang In f2fs_sbi_show(), the extension_list, 
+ extension_count and hot_ext_count are read without holding sbi->sb_lock.
+ If a concurrent sysfs store modifies the extension list via
+ f2fs_update_extension_list( [...] 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -101,9 +103,9 @@ X-Spam-Report: Spam detection software,
  not necessarily valid
  0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
  [monty_pavel(at)sina.com]
-X-Headers-End: 1wBDS2-0005Ee-Ho
-Subject: [f2fs-dev] [PATCH 1/2] f2fs: disallow setting an extension to both
- cold and hot
+X-Headers-End: 1wBDSG-0005FY-D9
+Subject: [f2fs-dev] [PATCH 2/2] f2fs: protect extension_list reading with
+ sb_lock in f2fs_sbi_show()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -124,7 +126,7 @@ X-Spamd-Result: default: False [-0.01 / 15.00];
 	MID_CONTAINS_FROM(1.00)[];
 	RWL_MAILSPIKE_EXCELLENT(-0.40)[216.105.38.7:from];
 	MAILLIST(-0.20)[mailman];
-	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7];
+	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7:c];
 	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
 	MIME_GOOD(-0.10)[text/plain];
 	DMARC_POLICY_SOFTFAIL(0.10)[sina.com : SPF not aligned (relaxed), DKIM not aligned (relaxed),none];
@@ -154,48 +156,54 @@ X-Spamd-Result: default: False [-0.01 / 15.00];
 	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,sina.com:-];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[xiaomi.com:email,lists.sourceforge.net:helo,lists.sourceforge.net:rdns,lists.sourceforge.net:dkim,sina.com:mid]
-X-Rspamd-Queue-Id: 5282C3D8F86
+X-Rspamd-Queue-Id: 5284D3D8F87
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
 From: Yongpeng Yang <yangyongpeng@xiaomi.com>
 
-An extension should not exist in both the cold and hot extension lists
-simultaneously. When adding a hot extension, check whether it already
-exists in the cold list, and vice versa. Reject the operation with
--EINVAL if a conflict is found.
+In f2fs_sbi_show(), the extension_list, extension_count and
+hot_ext_count are read without holding sbi->sb_lock. If a concurrent
+sysfs store modifies the extension list via f2fs_update_extension_list(),
+the show path may read inconsistent count and array contents, potentially
+leading to out-of-bounds access or displaying stale data.
 
+Fix this by holding sb_lock around the entire extension list read
+and format operation.
+
+Fixes: b6a06cbbb5f7 ("f2fs: support hot file extension")
 Signed-off-by: Yongpeng Yang <yangyongpeng@xiaomi.com>
 ---
- fs/f2fs/namei.c | 15 +++++++++++++++
- 1 file changed, 15 insertions(+)
+ fs/f2fs/sysfs.c | 7 +++++--
+ 1 file changed, 5 insertions(+), 2 deletions(-)
 
-diff --git a/fs/f2fs/namei.c b/fs/f2fs/namei.c
-index e360f08a9586..3215983dc030 100644
---- a/fs/f2fs/namei.c
-+++ b/fs/f2fs/namei.c
-@@ -83,6 +83,21 @@ int f2fs_update_extension_list(struct f2fs_sb_info *sbi, const char *name,
- 	if (set) {
- 		if (total_count == F2FS_MAX_EXTENSION)
- 			return -EINVAL;
-+
-+		if (hot) {
-+			start = 0;
-+			count = cold_count;
-+		} else {
-+			start = cold_count;
-+			count = total_count;
-+		}
-+		for (i = start; i < count; i++) {
-+			if (!strcmp(name, extlist[i])) {
-+				f2fs_warn(sbi, "extension '%s' already exists in %s list",
-+					  name, hot ? "cold" : "hot");
-+				return -EINVAL;
-+			}
-+		}
- 	} else {
- 		if (!hot && !cold_count)
- 			return -EINVAL;
+diff --git a/fs/f2fs/sysfs.c b/fs/f2fs/sysfs.c
+index 5fbfdc96e502..c04eff3ec6d1 100644
+--- a/fs/f2fs/sysfs.c
++++ b/fs/f2fs/sysfs.c
+@@ -379,10 +379,12 @@ static ssize_t f2fs_sbi_show(struct f2fs_attr *a,
+ 	if (!strcmp(a->attr.name, "extension_list")) {
+ 		__u8 (*extlist)[F2FS_EXTENSION_LEN] =
+ 					sbi->raw_super->extension_list;
+-		int cold_count = le32_to_cpu(sbi->raw_super->extension_count);
+-		int hot_count = sbi->raw_super->hot_ext_count;
++		int cold_count, hot_count;
+ 		int len = 0, i;
+ 
++		f2fs_down_read(&sbi->sb_lock);
++		cold_count = le32_to_cpu(sbi->raw_super->extension_count);
++		hot_count = sbi->raw_super->hot_ext_count;
+ 		len += sysfs_emit_at(buf, len, "cold file extension:\n");
+ 		for (i = 0; i < cold_count; i++)
+ 			len += sysfs_emit_at(buf, len, "%s\n", extlist[i]);
+@@ -390,6 +392,7 @@ static ssize_t f2fs_sbi_show(struct f2fs_attr *a,
+ 		len += sysfs_emit_at(buf, len, "hot file extension:\n");
+ 		for (i = cold_count; i < cold_count + hot_count; i++)
+ 			len += sysfs_emit_at(buf, len, "%s\n", extlist[i]);
++		f2fs_up_read(&sbi->sb_lock);
+ 
+ 		return len;
+ 	}
 -- 
 2.43.0
 
