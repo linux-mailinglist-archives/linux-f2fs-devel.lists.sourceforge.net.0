@@ -2,105 +2,139 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id WA9UHHhP2GnRbggAu9opvQ
+	id EChcAtnN2GngiQgAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 10 Apr 2026 03:16:40 +0200
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 10 Apr 2026 12:15:53 +0200
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id B8AD73D10C1
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 10 Apr 2026 03:16:39 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3E4E93D5862
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 10 Apr 2026 12:15:52 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
-	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:In-Reply-To:MIME-Version:References:
-	Message-ID:To:Date:Sender:Content-ID:Content-Description:Resent-Date:
-	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=x8nk75hUIk24Wy9juSZpRQF9DzyZgHc2YW2gXc3TzB0=; b=U2S0l+VHyHgEatLPAEfIJoiJGc
-	HRVVL24GGXV5HhCmzER+Lu4YhkorKX62EBXfukRKXBVinIsSeOaZjIFSEoeyG4Hl/Ztm+tg/eZggQ
-	hB/FcfwPRdXtofsYVIqAlzLjTZuBHrLgVSL2utK6JjMANviregPu7a8+eGV/Nh0auTbU=;
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
+	Subject:MIME-Version:Message-ID:To:From:Date:Sender:Reply-To:Content-ID:
+	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+	:Resent-Message-ID:In-Reply-To:References:List-Owner;
+	bh=uAHTciYVf8HFvouUJBHSzFA+qxDdGe7Icd4J/cWMV7k=; b=QOTljRgV56a5IqeWNXdq//M+QY
+	6ZYTBvlPQFr+7O8yAzeIQsQF/Jk1OASs2rT85c0IM4xjvmP/T21anjeHJC8Iy9Cd8FbslRiRWf3Vn
+	GGVlxPf9lfPMbfGMWBhy5LLtVvMkk2q1WVLQ6p5pB2GMAOejoh6Mad+96jm/W+Oyl0rU=;
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1wB0U9-0008UY-VZ;
-	Fri, 10 Apr 2026 01:16:37 +0000
+	id 1wB8tq-0001V3-9W;
+	Fri, 10 Apr 2026 10:15:42 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jaegeuk@kernel.org>) id 1wB0U8-0008UO-Iu
+ (envelope-from <error27@gmail.com>) id 1wB8tc-0001U7-3P
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 10 Apr 2026 01:16:36 +0000
+ Fri, 10 Apr 2026 10:15:28 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Type:MIME-Version:Message-ID:Subject:Cc:To:
+ From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=e3DrdJO3uAI5eEkN98m9mpp+RCga2injmiXu/n44NOE=; b=CnLjLw2tXqnAbT2XXz2AUpLgKc
- s1EoKvU/56lA6I/yNNqo6ytvtJW3XEImL3UFYTI3r5efCBFj1R4iUwum9tKAAtfh8g9HB2fcAhH4o
- 6nPw0Z8zEz7lK/1P5ch0m6a90Js7NjqAmVXBVlM+NZnY9D4iqeAgmRL7SLwwD8WoRPgo=;
+ bh=ZfgI2pXUOHZS6ZdVdKu3ZMeMeuPIis+Wn+AZheOGMYQ=; b=lZeWh/a/g36jViQZMmNtv4Cv4C
+ 9qnHbAYCOBshi0cm9ChZhvRWIrdCXgZyGxWwOQ9N6rRxYjwxm+pdwobeR6Co9+pswG/DhaLgGn2T9
+ 5gpX/o3533FlTiUqBe3A0wzcd57wlwv8D+HrY5/n/LCgtiv7ZOYXNflCVLZZnjGAf7NE=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=e3DrdJO3uAI5eEkN98m9mpp+RCga2injmiXu/n44NOE=; b=R+POUUAy2tK3eDkxlwDx2k8wJ9
- bQPceT/aekAIVT0lCSZ2i5pu8UMTQfMtGQerv80s7cD2uilYKjJ95eL8dN0aSEdBJMQzK3XV+c187
- 5ZXlO/ZlM6twWypgfKEmuGE8cj6Kse4XJp30wQuxvRpIIFl/ouhyDAnRoT6bSQFW1Zgk=;
-Received: from tor.source.kernel.org ([172.105.4.254])
+ h=Content-Type:MIME-Version:Message-ID:Subject:Cc:To:From:Date:Sender:
+ Reply-To:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date
+ :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=ZfgI2pXUOHZS6ZdVdKu3ZMeMeuPIis+Wn+AZheOGMYQ=; b=h
+ TdrzCUEsyPtQcpAG4JSf1ptP/ePq1rJKFkP+yA4rEhdyfXmW7yQM6gd5LPUWgEp32RFJ0m8OCiPcS
+ h0H/hCK/i3oZYanj57Ag3T36ijWW9WIr+HsadNdX68au1OiWCZiRAs16TDxzPgstkuAbqX1U8C05X
+ BHWhV2TB0sBOff5s=;
+Received: from mail-wr1-f49.google.com ([209.85.221.49])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1wB0U3-0006xI-0o for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 10 Apr 2026 01:16:32 +0000
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id EE49660103;
- Fri, 10 Apr 2026 01:16:24 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8A598C4CEF7;
- Fri, 10 Apr 2026 01:16:24 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1775783784;
- bh=cQz4PnZITEXau7jT7d4A1rQppQdhvLqOJD5PYEnwh+s=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=oVgVeboa1pGyE7Nxl97XiMY/nQj10uSKYt4F/+oNNv7CSu5kdXk6rkVL8kUMBh7rY
- 5Z7UQFddvfqdWVSBEljDdDzs5Gg3vw8sv52WcjeEN2ewwEAGhbZhxgX5QTHF4qmQum
- AcblN1zCvd5sySKS3tUZtfWaJ/vUVRWXTWLsWBJKdM6qim0MnBekNDw27kbgBiRx+6
- H8fGgWxQpECFYZXbeVfaHOetlIrzZi0M7HIpiaN1Hz3ClvThQf/Mkz1y2N/uXzhj2H
- z2+RmoxWughwwPPxApqBgu2p9z1PY+vuyHNTN0W6MhYtbTgvr8wGV+aLblrTPTnyS9
- bgrh9WNz3mTbA==
-Date: Fri, 10 Apr 2026 01:16:23 +0000
-To: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
-Message-ID: <adhPZxtbZxgU-37v@google.com>
-References: <20260409134538.3692605-1-jaegeuk@kernel.org>
+ (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
+ id 1wB8tb-0002Ki-Lp for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 10 Apr 2026 10:15:28 +0000
+Received: by mail-wr1-f49.google.com with SMTP id
+ ffacd0b85a97d-43cfb723698so1386954f8f.3
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Fri, 10 Apr 2026 03:15:27 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20251104; t=1775816116; x=1776420916; darn=lists.sourceforge.net;
+ h=content-disposition:mime-version:message-id:subject:cc:to:from:date
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=ZfgI2pXUOHZS6ZdVdKu3ZMeMeuPIis+Wn+AZheOGMYQ=;
+ b=QVraV+piZERnnnr/NPU2mx4T5baqrLwbbLlqWMgDmv9nseflwiegZ7bTFLVvxRuXES
+ TUXIFgcMjDTaUwG/0uOD1CTmQIIejAfQG/YFvBT548ZWUOGFvQTcVk2ZDT24oCfIyfIX
+ MVrWkhLfs2oHDuMA94fDAjjlq5GPBJqEPMFFcb+/eX08FbFeS8fwd328RZvnVTdHzzPO
+ ygjx++pviRQe/QM6ECDkdX3hivaVDI5weyA9dskILpOVW+Q/34PkKequc/7nfdDr8je5
+ HuQnLl3lYqVoHTYyUEHWbAUvCbTPH4FRl3HWKOi7SDS/d2L8H0KSVUxdst5XQg5Diy6W
+ zakQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1775816116; x=1776420916;
+ h=content-disposition:mime-version:message-id:subject:cc:to:from:date
+ :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=ZfgI2pXUOHZS6ZdVdKu3ZMeMeuPIis+Wn+AZheOGMYQ=;
+ b=AoChYacqebf5dWGwbLabAEjAOFHcLzXrexqooOdtdMjlhdnsMI2VkbfZL+tafA4JzG
+ xad+X9nkBdcOqOU6157i9p56fAd9MyTi6f9iM2fjV44JcCT+nksyzTV2UF/rGwY5syJG
+ EmwFpfQ1cG5fNEjDys6ls8Ad3D6uQFKCgPw1c+IC7mSO295WbkroBWkBbMvLZlNvxLZ5
+ mqrWvL0d8y6waJf8sMWEBDNjZyFLuoqVarR2TYEdGmND8EtzOUX66BHzBX551slpZIE2
+ P2hGO6Ikor96xFOVWKQjCjzl2wOQPwkxvNKW5/41hu0NTgnskjvQ0VvHrXEUrzkRA4Ce
+ 4QTQ==
+X-Gm-Message-State: AOJu0YxH32k92SOPFs6L/zZEdgsbfSiNajfQK2kSrMyRNqZaE7HzuWDV
+ adQkAW/JxVvKq3PWJk9HYBfSRiBF/iDKCsBxEGcGx+oaW42axASulLtI
+X-Gm-Gg: AeBDietsOZTv/+6YQqj+gWIieqTV9vxfL6YVWKbPPhdB9oxC69CoBUe7S1gfX6u0Hvd
+ tAw9nBapaavC4JOte5BCws8FNYZ/I+nfBUJtiRYq33LfsSAfVQXh3rx8VwK8JAvDIbCuTX4/CWY
+ yqxFN+6zUGcgLwWlHWYX0c6T5GJ3ztszNzKqqKSpdpVzS1e8OpQVAgw5VIl5mt23Bhs6FM+IonE
+ zc3vM32aDBQaWizpfYbUI9fEUlkzEQuQQlgQaq+QYRsSrBdT5oPqYwDPGdcttUlYtFuO4VHL8zN
+ ifgSiuHOIFyiFRfpL0JGeR2dEhHUGX1v8ZcBRGzscOGfSDJoVJbBHK0xS1Hqr0sfEl15+ENUr7F
+ F2M3fDNmSuQLkqwfRXO4exuUYcQ1qKHzv6I6HPRrJlS0G4xUyMYErH+Bt3dqUrmNgoSzZL8egkX
+ jPvpC+idBVjH9YGgS2usw=
+X-Received: by 2002:a5d:584c:0:b0:43d:394a:476d with SMTP id
+ ffacd0b85a97d-43d642979a1mr3956182f8f.2.1775816115989; 
+ Fri, 10 Apr 2026 03:15:15 -0700 (PDT)
+Received: from localhost ([196.207.164.177]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-43d63e46881sm6676099f8f.23.2026.04.10.03.15.15
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 10 Apr 2026 03:15:15 -0700 (PDT)
+Date: Fri, 10 Apr 2026 13:15:12 +0300
+From: Dan Carpenter <error27@gmail.com>
+To: Jianan Huang <huangjianan@xiaomi.com>
+Message-ID: <adjNsFjxdTpsOR_K@stanley.mountain>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20260409134538.3692605-1-jaegeuk@kernel.org>
-X-Spam-Score: -0.7 (/)
+X-Spam-Score: 2.1 (++)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  enum { F2FS_XATTR_FADV_LARGEFOLIO, }; unsigned int value =
- BIT(F2FS_XATTR_FADV_LARGEFOLIO); 1. setxattr(file, "user.fadvise", &value,
- sizeof(unsigned int), 0) -> register the inode number for large folio 2.
- chmod(0400, file) -> make Read-Only 3. fsync() && close() && open(READ) ->
- f2fs_iget( [...] 
- Content analysis details:   (-0.7 points, 5.0 required)
+ Content preview:  Hello Jianan Huang, Commit 570e2ccc7cb3 ("f2fs: avoid reading
+ already updated pages during GC") from Mar 5, 2026 (linux-next), leads to
+ the following Smatch static checker warning: fs/f2fs/gc.c:1291 ra_data_block()
+ warn: missing error code 'err' 
+ Content analysis details:   (2.1 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ 1.0 RCVD_IN_UCE2           RBL: IP Subnet Listed in UCEPROTECT Level 2
+ [196.207.164.177 listed in dnsbl-2.uceprotect.net]
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.5 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1wB0U3-0006xI-0o
-Subject: Re: [f2fs-dev] [PATCH v2] f2fs: another way to set large folio by
- remembering inode number
+ 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
+ [error27(at)gmail.com]
+ 0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends in
+ digit [error27(at)gmail.com]
+ 1.0 FORGED_GMAIL_RCVD 'From' gmail.com does not match 'Received' headers
+ 0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [209.85.221.49 listed in wl.mailspike.net]
+X-Headers-End: 1wB8tb-0002Ki-Lp
+Subject: [f2fs-dev] [bug report] f2fs: avoid reading already updated pages
+ during GC
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -112,366 +146,156 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Jaegeuk Kim via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Jaegeuk Kim <jaegeuk@kernel.org>
-Cc: Akilesh Kailash <akailash@google.com>
+Cc: linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
-X-Spamd-Result: default: False [-8.61 / 15.00];
-	WHITELIST_DMARC(-7.00)[sourceforge.net:D:+];
-	DMARC_POLICY_ALLOW_WITH_FAILURES(-0.50)[];
+X-Spamd-Result: default: False [-1.01 / 15.00];
 	RWL_MAILSPIKE_EXCELLENT(-0.40)[216.105.38.7:from];
-	MAILLIST(-0.20)[mailman];
-	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7:c];
+	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7];
 	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
+	MAILLIST(-0.20)[mailman];
 	MIME_GOOD(-0.10)[text/plain];
+	DMARC_POLICY_SOFTFAIL(0.10)[gmail.com : SPF not aligned (relaxed), DKIM not aligned (relaxed),none];
 	HAS_LIST_UNSUB(-0.01)[];
+	RCPT_COUNT_TWO(0.00)[2];
+	RCVD_TLS_LAST(0.00)[];
+	RECEIVED_HELO_LOCALHOST(0.00)[];
+	FORGED_RECIPIENTS(0.00)[m:huangjianan@xiaomi.com,m:linux-f2fs-devel@lists.sourceforge.net,s:lists@lfdr.de];
+	FORGED_SENDER(0.00)[error27@gmail.com,linux-f2fs-devel-bounces@lists.sourceforge.net];
+	ARC_NA(0.00)[];
+	FREEMAIL_FROM(0.00)[gmail.com];
+	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,gmail.com:s=20251104];
+	TO_DN_SOME(0.00)[];
+	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
+	MIME_TRACE(0.00)[0:+];
 	DKIM_MIXED(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCVD_TLS_LAST(0.00)[];
-	DMARC_POLICY_ALLOW(0.00)[lists.sourceforge.net,none];
-	RECEIVED_HELO_LOCALHOST(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:linux-kernel@vger.kernel.org,m:linux-f2fs-devel@lists.sourceforge.net,m:akailash@google.com,s:lists@lfdr.de];
-	MIME_TRACE(0.00)[0:+];
-	TO_DN_SOME(0.00)[];
-	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,kernel.org:s=k20201202];
-	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
-	ARC_NA(0.00)[];
-	FORGED_SENDER(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
-	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
-	RCPT_COUNT_THREE(0.00)[3];
-	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
 	RCVD_COUNT_FIVE(0.00)[5];
-	NEURAL_HAM(-0.00)[-1.000];
+	PREVIOUSLY_DELIVERED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
 	FORGED_SENDER_FORWARDING(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
-	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,kernel.org:-];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[error27@gmail.com,linux-f2fs-devel-bounces@lists.sourceforge.net];
+	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,gmail.com:-];
+	NEURAL_HAM(-0.00)[-1.000];
 	TAGGED_RCPT(0.00)[linux-f2fs-devel];
 	MISSING_XM_UA(0.00)[];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
-	HAS_REPLYTO(0.00)[jaegeuk@kernel.org]
-X-Rspamd-Queue-Id: B8AD73D10C1
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[stanley.mountain:mid]
+X-Rspamd-Queue-Id: 3E4E93D5862
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-enum {
-       F2FS_XATTR_FADV_LARGEFOLIO,
-};
+Hello Jianan Huang,
 
-unsigned int value = BIT(F2FS_XATTR_FADV_LARGEFOLIO);
+Commit 570e2ccc7cb3 ("f2fs: avoid reading already updated pages
+during GC") from Mar 5, 2026 (linux-next), leads to the following
+Smatch static checker warning:
 
-1. setxattr(file, "user.fadvise", &value, sizeof(unsigned int), 0)
- -> register the inode number for large folio
-2. chmod(0400, file)
- -> make Read-Only
-3. fsync() && close() && open(READ)
- -> f2fs_iget() with large folio
-4. open(WRITE), mkwrite on mmap, chmod(WRITE)
- -> return error
-5. close() and open()
- -> goto #3
-6. unlink
- -> deregister the inode number
+	fs/f2fs/gc.c:1291 ra_data_block()
+	warn: missing error code 'err'
 
-Suggested-by: Akilesh Kailash <akailash@google.com>
-Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
----
- 
-  Log from v1:
-   - add a condition in f2fs_drop_inode
-   - add Doc
+fs/f2fs/gc.c
+    1220 static int ra_data_block(struct inode *inode, pgoff_t index)
+    1221 {
+    1222         struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
+    1223         struct address_space *mapping = f2fs_is_cow_file(inode) ?
+    1224                                 F2FS_I(inode)->atomic_inode->i_mapping : inode->i_mapping;
+    1225         struct dnode_of_data dn;
+    1226         struct folio *folio, *efolio;
+    1227         struct f2fs_io_info fio = {
+    1228                 .sbi = sbi,
+    1229                 .ino = inode->i_ino,
+    1230                 .type = DATA,
+    1231                 .temp = COLD,
+    1232                 .op = REQ_OP_READ,
+    1233                 .op_flags = 0,
+    1234                 .encrypted_page = NULL,
+    1235                 .in_list = 0,
+    1236         };
+    1237         int err = 0;
+    1238 
+    1239         folio = f2fs_grab_cache_folio(mapping, index, true);
+    1240         if (IS_ERR(folio))
+    1241                 return PTR_ERR(folio);
+    1242 
+    1243         if (f2fs_lookup_read_extent_cache_block(inode, index,
+    1244                                                 &dn.data_blkaddr)) {
+    1245                 if (unlikely(!f2fs_is_valid_blkaddr(sbi, dn.data_blkaddr,
+    1246                                                 DATA_GENERIC_ENHANCE_READ))) {
+    1247                         err = -EFSCORRUPTED;
+    1248                         goto put_folio;
+    1249                 }
+    1250                 goto got_it;
+    1251         }
+    1252 
+    1253         set_new_dnode(&dn, inode, NULL, NULL, 0);
+    1254         err = f2fs_get_dnode_of_data(&dn, index, LOOKUP_NODE);
+    1255         if (err)
+    1256                 goto put_folio;
+    1257         f2fs_put_dnode(&dn);
+    1258 
+    1259         if (!__is_valid_data_blkaddr(dn.data_blkaddr)) {
+    1260                 err = -ENOENT;
+    1261                 goto put_folio;
+    1262         }
+    1263         if (unlikely(!f2fs_is_valid_blkaddr(sbi, dn.data_blkaddr,
+    1264                                                 DATA_GENERIC_ENHANCE))) {
+    1265                 err = -EFSCORRUPTED;
+    1266                 goto put_folio;
+    1267         }
+    1268 got_it:
+    1269         /* read folio */
+    1270         fio.folio = folio;
+    1271         fio.new_blkaddr = fio.old_blkaddr = dn.data_blkaddr;
+    1272 
+    1273         /*
+    1274          * don't cache encrypted data into meta inode until previous dirty
+    1275          * data were writebacked to avoid racing between GC and flush.
+    1276          */
+    1277         f2fs_folio_wait_writeback(folio, DATA, true, true);
+    1278 
+    1279         f2fs_wait_on_block_writeback(inode, dn.data_blkaddr);
+    1280 
+    1281         efolio = f2fs_filemap_get_folio(META_MAPPING(sbi), dn.data_blkaddr,
+    1282                                         FGP_LOCK | FGP_CREAT, GFP_NOFS);
+    1283         if (IS_ERR(efolio)) {
+    1284                 err = PTR_ERR(efolio);
+    1285                 goto put_folio;
+    1286         }
+    1287 
+    1288         fio.encrypted_page = &efolio->page;
+    1289 
+    1290         if (folio_test_uptodate(efolio))
+--> 1291                 goto put_encrypted_page;
 
- Documentation/filesystems/f2fs.rst | 41 ++++++++++++++++++++++++++----
- fs/f2fs/checkpoint.c               |  2 +-
- fs/f2fs/data.c                     |  2 +-
- fs/f2fs/f2fs.h                     |  1 +
- fs/f2fs/file.c                     | 11 ++++++--
- fs/f2fs/inode.c                    | 19 +++++++++++---
- fs/f2fs/super.c                    |  7 +++++
- fs/f2fs/xattr.c                    | 35 ++++++++++++++++++++++++-
- fs/f2fs/xattr.h                    |  6 +++++
- 9 files changed, 111 insertions(+), 13 deletions(-)
+Should we set an error code here?
 
-diff --git a/Documentation/filesystems/f2fs.rst b/Documentation/filesystems/f2fs.rst
-index 7e4031631286..de899d0d3088 100644
---- a/Documentation/filesystems/f2fs.rst
-+++ b/Documentation/filesystems/f2fs.rst
-@@ -1044,11 +1044,14 @@ page allocation for significant performance gains. To minimize code complexity,
- this support is currently excluded from the write path, which requires handling
- complex optimizations such as compression and block allocation modes.
- 
--This optional feature is triggered only when a file's immutable bit is set.
--Consequently, F2FS will return EOPNOTSUPP if a user attempts to open a cached
--file with write permissions, even immediately after clearing the bit. Write
--access is only restored once the cached inode is dropped. The usage flow is
--demonstrated below:
-+This optional feature is triggered by two mechanisms: the file's immutable bit
-+or a specific xattr flag. In both cases, F2FS ensures data integrity by
-+restricting the file to a read-only state while large folios are active.
-+
-+1. Immutable Bit Approach:
-+Triggered when the FS_IMMUTABLE_FL is set. This is a strict enforcement
-+where the file cannot be modified at all until the bit is cleared and
-+the cached inode is dropped.
- 
- .. code-block::
- 
-@@ -1078,3 +1081,31 @@ demonstrated below:
-    Written 4096 bytes with pattern = zero, total_time = 29 us, max_latency = 28 us
- 
-    # rm /data/testfile_read_seq
-+
-+2. XATTR fadvise Approach:
-+A more flexible registration via extended attributes.
-+
-+.. code-block::
-+
-+    enum {
-+        F2FS_XATTR_FADV_LARGEFOLIO,
-+    };
-+    unsigned int value = BIT(F2FS_XATTR_FADV_LARGEFOLIO);
-+
-+    /* Registers the inode number for large folio support in the subsystem.*/
-+    # setxattr(file, "user.fadvise", &value, sizeof(unsigned int), 0)
-+
-+    /* The file must be made Read-Only to transition into the large folio path. */
-+    # fchmod(0400, fd)
-+
-+    /* clean up dirty inode state. */
-+    # fsync(fd)
-+
-+    /* Drop the inode cache.
-+    # close(fd)
-+
-+    /* f2fs_iget() instantiates the inode with large folio support.*/
-+    # open()
-+
-+    /* Returns -EOPNOTSUPP or error to protect the large folio cache.*/
-+    # open(WRITE), mkwrite on mmap, or chmod(WRITE)
-diff --git a/fs/f2fs/checkpoint.c b/fs/f2fs/checkpoint.c
-index 01e1ba77263e..fdd62ddc3ed6 100644
---- a/fs/f2fs/checkpoint.c
-+++ b/fs/f2fs/checkpoint.c
-@@ -778,7 +778,7 @@ void f2fs_remove_ino_entry(struct f2fs_sb_info *sbi, nid_t ino, int type)
- 	__remove_ino_entry(sbi, ino, type);
- }
- 
--/* mode should be APPEND_INO, UPDATE_INO or TRANS_DIR_INO */
-+/* mode should be APPEND_INO, UPDATE_INO, LARGE_FOLIO_IO, or TRANS_DIR_INO */
- bool f2fs_exist_written_data(struct f2fs_sb_info *sbi, nid_t ino, int mode)
- {
- 	struct inode_management *im = &sbi->im[mode];
-diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
-index 965d4e6443c6..5e46230398d7 100644
---- a/fs/f2fs/data.c
-+++ b/fs/f2fs/data.c
-@@ -2494,7 +2494,7 @@ static int f2fs_read_data_large_folio(struct inode *inode,
- 	int ret = 0;
- 	bool folio_in_bio;
- 
--	if (!IS_IMMUTABLE(inode) || f2fs_compressed_file(inode)) {
-+	if (f2fs_compressed_file(inode)) {
- 		if (folio)
- 			folio_unlock(folio);
- 		return -EOPNOTSUPP;
-diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-index e40b6b2784ee..02bc6eb96a59 100644
---- a/fs/f2fs/f2fs.h
-+++ b/fs/f2fs/f2fs.h
-@@ -381,6 +381,7 @@ enum {
- /* for the list of ino */
- enum {
- 	ORPHAN_INO,		/* for orphan ino list */
-+	LARGE_FOLIO_INO,	/* for large folio case */
- 	APPEND_INO,		/* for append ino list */
- 	UPDATE_INO,		/* for update ino list */
- 	TRANS_DIR_INO,		/* for transactions dir ino list */
-diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
-index c0220cd7b332..64ba900410fc 100644
---- a/fs/f2fs/file.c
-+++ b/fs/f2fs/file.c
-@@ -2068,9 +2068,16 @@ static long f2fs_fallocate(struct file *file, int mode,
- 
- static int f2fs_release_file(struct inode *inode, struct file *filp)
- {
--	if (atomic_dec_and_test(&F2FS_I(inode)->open_count))
-+	if (atomic_dec_and_test(&F2FS_I(inode)->open_count)) {
- 		f2fs_remove_donate_inode(inode);
--
-+		/*
-+		 * In order to get large folio as soon as possible, let's drop
-+		 * inode cache asap. See also f2fs_drop_inode.
-+		 */
-+		if (f2fs_exist_written_data(F2FS_I_SB(inode),
-+					    inode->i_ino, LARGE_FOLIO_INO))
-+                       d_drop(filp->f_path.dentry);
-+	}
- 	/*
- 	 * f2fs_release_file is called at every close calls. So we should
- 	 * not drop any inmemory pages by close called by other process.
-diff --git a/fs/f2fs/inode.c b/fs/f2fs/inode.c
-index 89240be8cc59..e100bc5a378c 100644
---- a/fs/f2fs/inode.c
-+++ b/fs/f2fs/inode.c
-@@ -565,6 +565,20 @@ static bool is_meta_ino(struct f2fs_sb_info *sbi, unsigned int ino)
- 		ino == F2FS_COMPRESS_INO(sbi);
- }
- 
-+static void f2fs_mapping_set_large_folio(struct inode *inode)
-+{
-+	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
-+
-+	if (f2fs_compressed_file(inode))
-+		return;
-+	if (f2fs_quota_file(sbi, inode->i_ino))
-+		return;
-+	if (IS_IMMUTABLE(inode) ||
-+	    (f2fs_exist_written_data(sbi, inode->i_ino, LARGE_FOLIO_INO) &&
-+	     !(inode->i_mode & S_IWUGO)))
-+	    mapping_set_folio_min_order(inode->i_mapping, 0);
-+}
-+
- struct inode *f2fs_iget(struct super_block *sb, unsigned long ino)
- {
- 	struct f2fs_sb_info *sbi = F2FS_SB(sb);
-@@ -620,9 +634,7 @@ struct inode *f2fs_iget(struct super_block *sb, unsigned long ino)
- 		inode->i_op = &f2fs_file_inode_operations;
- 		inode->i_fop = &f2fs_file_operations;
- 		inode->i_mapping->a_ops = &f2fs_dblock_aops;
--		if (IS_IMMUTABLE(inode) && !f2fs_compressed_file(inode) &&
--		    !f2fs_quota_file(sbi, inode->i_ino))
--			mapping_set_folio_min_order(inode->i_mapping, 0);
-+		f2fs_mapping_set_large_folio(inode);
- 	} else if (S_ISDIR(inode->i_mode)) {
- 		inode->i_op = &f2fs_dir_inode_operations;
- 		inode->i_fop = &f2fs_dir_operations;
-@@ -895,6 +907,7 @@ void f2fs_evict_inode(struct inode *inode)
- 	f2fs_remove_ino_entry(sbi, inode->i_ino, APPEND_INO);
- 	f2fs_remove_ino_entry(sbi, inode->i_ino, UPDATE_INO);
- 	f2fs_remove_ino_entry(sbi, inode->i_ino, FLUSH_INO);
-+	f2fs_remove_ino_entry(sbi, inode->i_ino, LARGE_FOLIO_INO);
- 
- 	if (!is_sbi_flag_set(sbi, SBI_IS_FREEZING)) {
- 		sb_start_intwrite(inode->i_sb);
-diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
-index ccf806b676f5..11d1e0c99ac1 100644
---- a/fs/f2fs/super.c
-+++ b/fs/f2fs/super.c
-@@ -1844,6 +1844,13 @@ static int f2fs_drop_inode(struct inode *inode)
- 			return 1;
- 		}
- 	}
-+	/*
-+	 * In order to get large folio as soon as possible, let's drop
-+	 * inode cache asap. See also f2fs_release_file.
-+	 */
-+	if (f2fs_exist_written_data(sbi, inode->i_ino, LARGE_FOLIO_INO) &&
-+	    !is_inode_flag_set(inode, FI_DIRTY_INODE))
-+		return 1;
- 
- 	/*
- 	 * This is to avoid a deadlock condition like below.
-diff --git a/fs/f2fs/xattr.c b/fs/f2fs/xattr.c
-index 941dc62a6d6f..0c0e44c2dcdd 100644
---- a/fs/f2fs/xattr.c
-+++ b/fs/f2fs/xattr.c
-@@ -44,6 +44,16 @@ static void xattr_free(struct f2fs_sb_info *sbi, void *xattr_addr,
- 		kfree(xattr_addr);
- }
- 
-+static int f2fs_xattr_fadvise_get(struct inode *inode, void *buffer)
-+{
-+	if (!buffer)
-+		goto out;
-+	if (mapping_large_folio_support(inode->i_mapping))
-+		*((unsigned int *)buffer) |= BIT(F2FS_XATTR_FADV_LARGEFOLIO);
-+out:
-+	return sizeof(unsigned int);
-+}
-+
- static int f2fs_xattr_generic_get(const struct xattr_handler *handler,
- 		struct dentry *unused, struct inode *inode,
- 		const char *name, void *buffer, size_t size)
-@@ -61,10 +71,29 @@ static int f2fs_xattr_generic_get(const struct xattr_handler *handler,
- 	default:
- 		return -EINVAL;
- 	}
-+	if (handler->flags == F2FS_XATTR_INDEX_USER &&
-+	    !strcmp(name, "fadvise"))
-+		return f2fs_xattr_fadvise_get(inode, buffer);
-+
- 	return f2fs_getxattr(inode, handler->flags, name,
- 			     buffer, size, NULL);
- }
- 
-+static int f2fs_xattr_fadvise_set(struct inode *inode, const void *value)
-+{
-+	unsigned int new_fadvise;
-+
-+	new_fadvise = *(unsigned int *)value;
-+
-+	if (new_fadvise & BIT(F2FS_XATTR_FADV_LARGEFOLIO))
-+		f2fs_add_ino_entry(F2FS_I_SB(inode),
-+				inode->i_ino, LARGE_FOLIO_INO);
-+	else
-+		f2fs_remove_ino_entry(F2FS_I_SB(inode),
-+				inode->i_ino, LARGE_FOLIO_INO);
-+	return 0;
-+}
-+
- static int f2fs_xattr_generic_set(const struct xattr_handler *handler,
- 		struct mnt_idmap *idmap,
- 		struct dentry *unused, struct inode *inode,
-@@ -84,6 +113,10 @@ static int f2fs_xattr_generic_set(const struct xattr_handler *handler,
- 	default:
- 		return -EINVAL;
- 	}
-+	if (handler->flags == F2FS_XATTR_INDEX_USER &&
-+	    !strcmp(name, "fadvise"))
-+		return f2fs_xattr_fadvise_set(inode, value);
-+
- 	return f2fs_setxattr(inode, handler->flags, name,
- 					value, size, NULL, flags);
- }
-@@ -842,4 +875,4 @@ int __init f2fs_init_xattr_cache(void)
- void f2fs_destroy_xattr_cache(void)
- {
- 	kmem_cache_destroy(inline_xattr_slab);
--}
-\ No newline at end of file
-+}
-diff --git a/fs/f2fs/xattr.h b/fs/f2fs/xattr.h
-index bce3d93e4755..455f460d014e 100644
---- a/fs/f2fs/xattr.h
-+++ b/fs/f2fs/xattr.h
-@@ -24,6 +24,7 @@
- #define F2FS_XATTR_REFCOUNT_MAX         1024
- 
- /* Name indexes */
-+#define F2FS_USER_FADVISE_NAME			"user.fadvise"
- #define F2FS_SYSTEM_ADVISE_NAME			"system.advise"
- #define F2FS_XATTR_INDEX_USER			1
- #define F2FS_XATTR_INDEX_POSIX_ACL_ACCESS	2
-@@ -39,6 +40,11 @@
- #define F2FS_XATTR_NAME_ENCRYPTION_CONTEXT	"c"
- #define F2FS_XATTR_NAME_VERITY			"v"
- 
-+/* used for F2FS_USER_FADVISE_NAME */
-+enum {
-+	F2FS_XATTR_FADV_LARGEFOLIO,
-+};
-+
- struct f2fs_xattr_header {
- 	__le32  h_magic;        /* magic number for identification */
- 	__le32  h_refcount;     /* reference count */
--- 
-2.53.0.1213.gd9a14994de-goog
+    1292 
+    1293         err = f2fs_submit_page_bio(&fio);
+    1294         if (err)
+    1295                 goto put_encrypted_page;
+    1296         f2fs_put_page(fio.encrypted_page, false);
+    1297         f2fs_folio_put(folio, true);
+    1298 
+    1299         f2fs_update_iostat(sbi, inode, FS_DATA_READ_IO, F2FS_BLKSIZE);
+    1300         f2fs_update_iostat(sbi, NULL, FS_GDATA_READ_IO, F2FS_BLKSIZE);
+    1301 
+    1302         return 0;
+    1303 put_encrypted_page:
+    1304         f2fs_put_page(fio.encrypted_page, true);
+    1305 put_folio:
+    1306         f2fs_folio_put(folio, true);
+    1307         return err;
+    1308 }
 
+This email is a free service from the Smatch-CI project [smatch.sf.net].
+
+regards,
+dan carpenter
 
 
 _______________________________________________
