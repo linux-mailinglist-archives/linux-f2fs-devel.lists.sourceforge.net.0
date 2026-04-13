@@ -2,42 +2,42 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id GP2bIUq93GliVwkAu9opvQ
+	id cH/EFGXS3GmcWQkAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 13 Apr 2026 11:54:18 +0200
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 13 Apr 2026 13:24:21 +0200
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id CDA0E3EA136
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 13 Apr 2026 11:54:17 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 82E3C3EB3F8
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 13 Apr 2026 13:24:20 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Type:Content-Transfer-Encoding:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
 	List-Unsubscribe:List-Id:Subject:In-Reply-To:References:To:MIME-Version:Date:
 	Message-ID:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
 	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=vC+/o82HxhleYyHm4chxt8SFIuRW54mB1tTcympB4jA=; b=FLfinf+UeAYRi7cq2yQg4i2BTO
-	yvLHRqeUcLZ0Zfn2TPNjus3myKXCeWgS0VJEfE51owsXKWy9CqP5HyyXej866/Tv+MY1TgbmpvR2d
-	1sCk4GTLZKly1azEB3C/QG5T1GXHeEeXw3uWgmVgDb07qfH7Iz20cxrSYCxXkvTJ2Tag=;
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=LDS/7zaJYxwpEa33NN/4QwPu8a1us1EMMQGB3rtE1qs=; b=PjR12XJVk75kaZU3tuEEGdeSQl
+	aKdKio0BGA1ionaVOOPXFOVD8O1IHiYdPgLXfvroUZZXEEKlMXYmdnZh7G5Ik0jSUwnlIWhMQUThC
+	ZL+QdBzv07gpIz5Ei5ZGMjt+NQU7ucjplPoc3cqtgR7cpwl5u4a5bI+1jAsI/raW/RCc=;
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1wCDze-0004jU-S5;
-	Mon, 13 Apr 2026 09:54:10 +0000
+	id 1wCFOb-00050Q-BS;
+	Mon, 13 Apr 2026 11:24:01 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1wCDzd-0004jN-AE
+ (envelope-from <chao@kernel.org>) id 1wCFOZ-00050J-7r
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 13 Apr 2026 09:54:09 +0000
+ Mon, 13 Apr 2026 11:23:59 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  From:References:To:Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=O1Y8SsALU0VPwgpvszBbrWx96etA0UEhirXpimiCtrM=; b=avqScsOIiIcYtzWl7gl8NkDHaJ
- S54rxgCqjVYyFNAwvuVixaE1MCy1bDG4yx0QzZQ1o3wUwWSFEgmFZQBnk/1Jy/JkBfPadMjriw59U
- wFy9ztzi8Q9NhGoepMEdTYFEhnRPlu7LSWZQPBtNVqIc0TYa4bgHpewHe4RqXpbyu44g=;
+ bh=bEBYhYJPNX1en596PJ65OXganit68QkuwI/Xwg15914=; b=Ju8OZXKI1SXpgY2NsC/9lVFBvF
+ Fcq5dQ1jJqeGTi4stcGDvZuyz3zVN4v6qDgDzJAKBQFo+GxSPUQlp6l1Ul7zsTDyxYEkP0FFOQ/Ce
+ fUSUGMEl3AnmRq9ETqpP/z2gQLdQW+le5UOxdFMZQoyOi0QiH9UYFwDsfdnwk+wsqkFA=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
@@ -45,37 +45,37 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=O1Y8SsALU0VPwgpvszBbrWx96etA0UEhirXpimiCtrM=; b=YDNMVOimPEzUoZ8WZUnbtJoxMY
- fAK8S0O+y6qwKZjHOSns0TYjCWZx/g4DZNbLFii+Y9WpwPeQ+1mXqzQm6tHffwdz8tNPjqY5e/OlE
- k5N0KB42maSECezgAzy9rwfQkF0ChzOtM9MeszWaNaxcTdana7R7g4NmbsR4wCAtF82A=;
+ bh=bEBYhYJPNX1en596PJ65OXganit68QkuwI/Xwg15914=; b=PMwjbMG5FKRfWDMqYsSAeXkxs9
+ OhozMmlEpO71kTrCHP6TTG+aHRkhD6SoCb0dPb86wWbCIWP21wPqxJ+m7pW8jmjTkEC0sMUa4MtM/
+ p+VP5Abeekior3WAJM/m4A1z28VhEFfnYXdZZSDoNP/r5oZFYIqDVVwyYFcFr6iBxwaw=;
 Received: from sea.source.kernel.org ([172.234.252.31])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1wCDzc-0006V4-Mp for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 13 Apr 2026 09:54:09 +0000
+ id 1wCFOY-0003EY-Qd for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 13 Apr 2026 11:23:59 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 4CC684414E;
- Mon, 13 Apr 2026 09:54:03 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id D9B6FC116C6;
- Mon, 13 Apr 2026 09:54:01 +0000 (UTC)
+ by sea.source.kernel.org (Postfix) with ESMTP id 54155408D2;
+ Mon, 13 Apr 2026 11:23:48 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 23CACC116C6;
+ Mon, 13 Apr 2026 11:23:44 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1776074043;
- bh=LZ84jfU53L0jzvN/b+Y0kvB0wMvLw74jrXSbVmbKK9g=;
+ s=k20201202; t=1776079428;
+ bh=k40RQpCwrRnxHC9qiekndDrsWXyZfL6OGK0uWcAp7nY=;
  h=Date:Cc:Subject:To:References:From:In-Reply-To:From;
- b=J6ymKspAa+gLD10CemrGCDaRGgYTG3luoQ/jLdcevde6QUFV6N1Jvge+5p93f21Yg
- 8siGYp8LZZU54vH0fdN2i40TIE4KgKX3MESwef56g08i+xKfm6g8Z9JuPi2ucLcv2X
- eAEhdJuSuWjvs1VoKo7FMoYktPHwqQeliIdiUGpf4Q/V+RSL/3QkVV4c3n4wB3Yvv+
- p97/RWmvcetbvM3KOpW+6hBHnxxc0hqQGXf3vjxdvL1VF3GAsSDPkma07K2+JZ2JFQ
- Zp7k/epbuA8oTWl+qzWsv38Md+Px50IdgDgQo78LUGQUd0ffGeSJfWwTv1SyLmcTyo
- hdpdWtleXMcgA==
-Message-ID: <51500762-ec13-4e3e-93e6-80484a7a2a8b@kernel.org>
-Date: Mon, 13 Apr 2026 17:54:03 +0800
+ b=kLmmS7C+SJFkpsO+zZwo6ATHMA7FZmICdvEcxpGL/R7FnnDi0q9GIFTm1USZ+CU9A
+ Vizt/6w+py10hbKAXuOvr5avS4etS48UMTiIjIt6PonNs1199JcNKQoefbPLHgMLZQ
+ 73YR2YZTcZSDk18aBNH2HPmhIVhxr7eaJt++k90zTy8ZOy3zL7/i2wduLFOkaHkPgu
+ rCp8+EwwD84kl2jXCsJXWVMdgD5Z3p9Zbi8wI6f5LQmA4CQJFry1u66EYUs/xH2hsV
+ GEZ65vSp8Jww+RsBSpQ3VdS40jOxSPPb3zpFTAh3iALelfNBybBOVFVHCRQHm4qmPw
+ c8Ix6ktztqp3w==
+Message-ID: <6e33b6f1-7d05-4edd-87f9-28a2a98a6b27@kernel.org>
+Date: Mon, 13 Apr 2026 19:23:46 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-To: liujinbao1 <jinbaoliu365@gmail.com>, jaegeuk@kernel.org
-References: <20260402114559.2030042-1-jinbaoliu365@gmail.com>
+To: Yongpeng Yang <monty_pavel@sina.com>, Jaegeuk Kim <jaegeuk@kernel.org>
+References: <20260403144015.221811-3-monty_pavel@sina.com>
 Content-Language: en-US
-In-Reply-To: <20260402114559.2030042-1-jinbaoliu365@gmail.com>
+In-Reply-To: <20260403144015.221811-3-monty_pavel@sina.com>
 X-Spam-Score: -0.7 (/)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
@@ -83,9 +83,9 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 4/2/2026 7:45 PM, liujinbao1 wrote: > From: liujinbao1
- <liujinbao1@xiaomi.com> > > Add trace_f2fs_fault_report to trigger reporting
- upon f2fs_bug_on, > need_fsck, stop_checkpoint, and handle_eio. S [...] 
+ Content preview:  On 4/3/2026 10:40 PM, Yongpeng Yang wrote: > From: Yongpeng
+ Yang <yangyongpeng@xiaomi.com> > > f2fs_destroy_extent_node() does not set
+ FI_NO_EXTENT before clearing > extent nodes. When called from f2f [...] 
  Content analysis details:   (-0.7 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -97,8 +97,9 @@ X-Spam-Report: Spam detection software,
  envelope-from domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.5 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1wCDzc-0006V4-Mp
-Subject: Re: [f2fs-dev] [PATCH] f2fs: Add trace_f2fs_fault_report
+X-Headers-End: 1wCFOY-0003EY-Qd
+Subject: Re: [f2fs-dev] [PATCH] f2fs: fix node_cnt race between extent node
+ destroy and writeback
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -112,7 +113,8 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>,
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
 From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
 Reply-To: Chao Yu <chao@kernel.org>
-Cc: liujinbao1 <liujinbao1@xiaomi.com>, linux-f2fs-devel@lists.sourceforge.net
+Cc: Yongpeng Yang <yangyongpeng@xiaomi.com>, stable@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net
 Content-Transfer-Encoding: 7bit
 Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
@@ -125,18 +127,18 @@ X-Spamd-Result: default: False [-8.61 / 15.00];
 	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RECEIVED_HELO_LOCALHOST(0.00)[];
-	RCVD_TLS_LAST(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	DKIM_MIXED(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:jinbaoliu365@gmail.com,m:jaegeuk@kernel.org,m:liujinbao1@xiaomi.com,m:linux-f2fs-devel@lists.sourceforge.net,s:lists@lfdr.de];
-	FREEMAIL_TO(0.00)[gmail.com,kernel.org];
-	MIME_TRACE(0.00)[0:+];
-	TO_DN_SOME(0.00)[];
-	DMARC_POLICY_ALLOW(0.00)[lists.sourceforge.net,none];
-	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
+	RCVD_TLS_LAST(0.00)[];
+	FORGED_RECIPIENTS(0.00)[m:monty_pavel@sina.com,m:jaegeuk@kernel.org,m:yangyongpeng@xiaomi.com,m:stable@vger.kernel.org,m:linux-f2fs-devel@lists.sourceforge.net,s:lists@lfdr.de];
+	RECEIVED_HELO_LOCALHOST(0.00)[];
+	FREEMAIL_TO(0.00)[sina.com,kernel.org];
 	FORGED_SENDER(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
+	TO_DN_SOME(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	DMARC_POLICY_ALLOW(0.00)[lists.sourceforge.net,none];
+	MIME_TRACE(0.00)[0:+];
 	ARC_NA(0.00)[];
+	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
 	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,kernel.org:s=k20201202];
 	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,kernel.org:-];
 	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
@@ -148,159 +150,57 @@ X-Spamd-Result: default: False [-8.61 / 15.00];
 	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
+	RCPT_COUNT_FIVE(0.00)[5];
 	TAGGED_RCPT(0.00)[linux-f2fs-devel];
-	RCPT_COUNT_THREE(0.00)[4];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
 	HAS_REPLYTO(0.00)[chao@kernel.org]
-X-Rspamd-Queue-Id: CDA0E3EA136
+X-Rspamd-Queue-Id: 82E3C3EB3F8
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On 4/2/2026 7:45 PM, liujinbao1 wrote:
-> From: liujinbao1 <liujinbao1@xiaomi.com>
+On 4/3/2026 10:40 PM, Yongpeng Yang wrote:
+> From: Yongpeng Yang <yangyongpeng@xiaomi.com>
 > 
-> Add trace_f2fs_fault_report to trigger reporting upon f2fs_bug_on,
-> need_fsck, stop_checkpoint, and handle_eio. Since f2fs_bug_on and
-> need_fsck can be triggered in hundreds of scenarios, define set_sbi_flag
-> as a macro to help capture the effective fault function and line number.
+> f2fs_destroy_extent_node() does not set FI_NO_EXTENT before clearing
+> extent nodes. When called from f2fs_drop_inode() with I_SYNC set,
+> concurrent kworker writeback can insert new extent nodes into the same
+> extent tree, racing with the destroy and triggering f2fs_bug_on() in
+> __destroy_extent_node(). The scenario is as follows:
 > 
-> Signed-off-by: liujinbao1 <liujinbao1@xiaomi.com>
-> ---
->   fs/f2fs/checkpoint.c        | 10 ++++++++++
->   fs/f2fs/f2fs.h              | 20 +++++++++++++++++++-
->   include/trace/events/f2fs.h | 22 ++++++++++++++++++++++
->   3 files changed, 51 insertions(+), 1 deletion(-)
+> drop inode                            writeback
+>   - iput
+>    - f2fs_drop_inode  // I_SYNC set
+>     - f2fs_destroy_extent_node
+>      - __destroy_extent_node
+>       - while (node_cnt) {
+>          write_lock(&et->lock)
+>          __free_extent_tree
+>          write_unlock(&et->lock)
+>                                         - __writeback_single_inode
+>                                          - f2fs_outplace_write_data
+>                                           - f2fs_update_read_extent_cache
+>                                            - __update_extent_tree_range
+>                                             // FI_NO_EXTENT not set,
+>                                             // insert new extent node
+>         } // node_cnt == 0, exit while
+>       - f2fs_bug_on(node_cnt)  // node_cnt > 0
 > 
-> diff --git a/fs/f2fs/checkpoint.c b/fs/f2fs/checkpoint.c
-> index 6dd39b7de11a..698540c0f619 100644
-> --- a/fs/f2fs/checkpoint.c
-> +++ b/fs/f2fs/checkpoint.c
-> @@ -24,6 +24,8 @@
->   #include "iostat.h"
->   #include <trace/events/f2fs.h>
->   
-> +EXPORT_TRACEPOINT_SYMBOL_GPL(f2fs_fault_report);
+> Additionally, __update_extent_tree_range() only checks FI_NO_EXTENT for
+> EX_READ type, leaving EX_BLOCK_AGE updates completely unprotected.
+> 
+> This patch set FI_NO_EXTENT under et->lock in __destroy_extent_node(),
+> consistent with other callers (__update_extent_tree_range and
+> __drop_extent_tree) and check FI_NO_EXTENT for both EX_READ and
+> EX_BLOCK_AGE tree.
+> 
+> Fixes: 3fc5d5a182f6 ("f2fs: fix to shrink read extent node in batches")
+> Cc: stable@vger.kernel.org
+> Signed-off-by: Yongpeng Yang <yangyongpeng@xiaomi.com>
 
-I don't think we need to export this in upstream.
-
-> +
->   static inline void get_lock_elapsed_time(struct f2fs_time_stat *ts)
->   {
->   	ts->total_time = ktime_get();
-> @@ -232,9 +234,17 @@ static inline void f2fs_unlock_all(struct f2fs_sb_info *sbi)
->   static struct kmem_cache *ino_entry_slab;
->   struct kmem_cache *f2fs_inode_entry_slab;
->   
-> +void f2fs_fault_report(unsigned int err_code, const char *func, unsigned int data)
-> +{
-> +	trace_f2fs_fault_report(err_code, func, data);
-> +}
-
-What do you think just calling trace_f2fs_fault_report() directly?
-
-> +
->   void f2fs_stop_checkpoint(struct f2fs_sb_info *sbi, bool end_io,
->   						unsigned char reason)
->   {
-> +	if (reason != STOP_CP_REASON_SHUTDOWN)
-> +		f2fs_fault_report(REPORT_FAULT_STOP_CP, __func__, reason);
-> +
->   	f2fs_build_fault_attr(sbi, 0, 0, FAULT_ALL);
->   	if (!end_io)
->   		f2fs_flush_merged_writes(sbi);
-> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-> index bb34e864d0ef..ac2fa4b6bd37 100644
-> --- a/fs/f2fs/f2fs.h
-> +++ b/fs/f2fs/f2fs.h
-> @@ -97,6 +97,15 @@ extern const char *f2fs_fault_name[FAULT_MAX];
->   #define DEFAULT_FAILURE_RETRY_COUNT		1
->   #endif
->   
-> +enum {
-> +	REPORT_FAULT_NEED_FSCK,
-> +	REPORT_FAULT_PAGE_EIO,
-> +	REPORT_FAULT_STOP_CP,
-> +	REPORT_FAULT_MAX,
-> +};
-> +
-> +void f2fs_fault_report(unsigned int err_code, const char *func, unsigned int data);
-> +
->   /*
->    * For mount options
->    */
-> @@ -2275,11 +2284,18 @@ static inline bool is_sbi_flag_set(struct f2fs_sb_info *sbi, unsigned int type)
->   	return test_bit(type, &sbi->s_flag);
->   }
->   
-> -static inline void set_sbi_flag(struct f2fs_sb_info *sbi, unsigned int type)
-> +static inline void __set_sbi_flag(struct f2fs_sb_info *sbi, unsigned int type)
->   {
->   	set_bit(type, &sbi->s_flag);
->   }
->   
-> +#define set_sbi_flag(sbi, type)				\
-> +do {							\
-> +	__set_sbi_flag(sbi, type);			\
-> +	if ((type) == SBI_NEED_FSCK)			\
-> +		f2fs_fault_report(REPORT_FAULT_NEED_FSCK, __func__, __LINE__);	\
-> +} while (0)
-> +
->   static inline void clear_sbi_flag(struct f2fs_sb_info *sbi, unsigned int type)
->   {
->   	clear_bit(type, &sbi->s_flag);
-> @@ -5064,6 +5080,8 @@ static inline void f2fs_handle_page_eio(struct f2fs_sb_info *sbi,
->   	if (unlikely(f2fs_cp_error(sbi)))
->   		return;
->   
-> +	f2fs_fault_report(REPORT_FAULT_PAGE_EIO, __func__, type);
-
-We have changed to call f2fs_stop_checkpoint() directly in f2fs_handle_page_eio(),
-so it's redundant here?
-
-> +
->   	if (ofs == sbi->page_eio_ofs[type]) {
->   		if (sbi->page_eio_cnt[type]++ == MAX_RETRY_PAGE_EIO)
->   			set_ckpt_flags(sbi, CP_ERROR_FLAG);
-> diff --git a/include/trace/events/f2fs.h b/include/trace/events/f2fs.h
-> index 9364e6775562..039c695c45a8 100644
-> --- a/include/trace/events/f2fs.h
-> +++ b/include/trace/events/f2fs.h
-> @@ -2582,6 +2582,28 @@ DEFINE_EVENT(f2fs_priority_update, f2fs_priority_restore,
->   	TP_ARGS(sbi, lock_name, is_write, p, orig_prio, new_prio)
->   );
->   
-> +TRACE_EVENT(f2fs_fault_report,
-> +
-> +	TP_PROTO(unsigned int err_code, const char *func, unsigned int data),
-> +
-> +	TP_ARGS(err_code, func, data),
-> +
-> +	TP_STRUCT__entry(
-> +		__field(unsigned int, err_code)
-> +		__string(func, func)
-> +		__field(unsigned int, data)
-> +	),
-> +
-> +	TP_fast_assign(
-> +		__entry->err_code = err_code;
-> +		__assign_str(func, func);
-> +		__entry->data = data;
-> +	),
-> +
-> +	TP_printk("err_code=%u func=%s data=%u",
-
-Do we need dev information?
+Reviewed-by: Chao Yu <chao@kernel.org>
 
 Thanks,
-
-> +		__entry->err_code, __get_str(func), __entry->data)
-> +);
-> +
->   #endif /* _TRACE_F2FS_H */
->   
->    /* This part must be outside protection */
-
 
 
 _______________________________________________
