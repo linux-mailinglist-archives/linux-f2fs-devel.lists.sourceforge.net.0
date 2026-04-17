@@ -2,100 +2,94 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id mAadCjw14mm13QAAu9opvQ
+	id CKf/I/5l4mlm5gAAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 17 Apr 2026 15:27:24 +0200
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 17 Apr 2026 18:55:26 +0200
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5C4F441BA00
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 17 Apr 2026 15:27:23 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D40B641D5DC
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 17 Apr 2026 18:55:21 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
-	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
-	Subject:In-Reply-To:From:References:To:MIME-Version:Date:Message-ID:Sender:
-	Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
-	:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=10QAszGJcmf5jD6xVISyVHMBkJNpggkxmzzmF/qOv5Y=; b=aVXXe19mNWIqWSejH5PNx8qTIA
-	avhRow1VaGxuJbfkLHPlg+TT6iErglff6YtRO891lPYDDoVVNaKMkPj88+HwN4qyMoH8xmEg6aDn0
-	e3E54hnwo/K8CcHmxBJbSdPmOoq+1mTEX96HMIOqkf2/xDwQl6AwYqG3EX4kO3wTqmlM=;
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
+	List-Unsubscribe:List-Id:Subject:In-Reply-To:MIME-Version:References:
+	Message-ID:To:Date:Sender:Content-ID:Content-Description:Resent-Date:
+	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
+	bh=hR43EEOzhzcGMm3/5D+VZk+z5uBU7iRdFPSqJmgnIwU=; b=fryx0ge9Bi8NvUHD5+Mx+XC7rD
+	ED1EJcOLDHkZj3bqXh9m0Zrhn8rs1v6d77R03lk9HP5fKvezt22CntXYyyVOIpiKBiksHiU0PAWih
+	iFDrYbWPjb02+wNe2xx8SmCaZWG0SaG1O/+onideRIJRAIbQZ7f+Mav1mejB3AmzHzs4=;
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1wDjDq-0006XX-Lk;
-	Fri, 17 Apr 2026 13:27:03 +0000
+	id 1wDmT8-0002cw-S6;
+	Fri, 17 Apr 2026 16:55:02 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <monty_pavel@sina.com>) id 1wDjDp-0006XJ-5N
+ (envelope-from <jaegeuk@kernel.org>) id 1wDmSs-0002bv-Lc
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 17 Apr 2026 13:27:02 +0000
+ Fri, 17 Apr 2026 16:54:46 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Z+O9I/As2wXd554PDOyLC79OK/LQa94BQasISuolRP8=; b=gf2G9SY30Q+eoZ1pqY4tKJJfJB
- OZTe7ktO2LjR8P3rF1sYNNY4s1Bd7VTKpBly6ypQchKB/wlPm6Bxe6UqBZX6m/iKah5P3L1/3R+J7
- d23d+IkdlFjJzR/iZRCgvuSjEiFP0KW9EgDy+ZT2z313g06Dj/QWXnURdCDdcDeUmzxQ=;
+ bh=w+Q+qsu5eZzgG+zqqs5cnPSd/WOLqs1mT2p+JGf3FVc=; b=TSDTEr/jXUtP+S4VXsFYAb8jj+
+ bzF9kewWCOxmQcYC17LHf2kduRiszP1vGjg9Or+y9iYtNgb8a8odfcNKYePmyrTgeHAUmUKyT5shl
+ U2uwKkU0CHMY0RePQZc0pLP+QKRYWDbCLk3WuERKGDFl8ZO4Q80NUPUNHOPq+YTcmzqQ=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
- Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=Z+O9I/As2wXd554PDOyLC79OK/LQa94BQasISuolRP8=; b=XRFkDRkeC1Pgwsg3GzxUTHKxi0
- psejbEtO5WTO2ksuZYfMIlPgSNBDF5m2/pRPaFAQIpY8CS4sCiBRAV5H7CHsNzANucfMhJP/PgJ0u
- xtRxQpdUOL1rl9aybx84I4G/jK7qJPtGM7+OrH9YJ7FwNojB/8LsrM0ShZpAOBvfAfaQ=;
-Received: from mail3-165.sinamail.sina.com.cn ([202.108.3.165])
+ bh=w+Q+qsu5eZzgG+zqqs5cnPSd/WOLqs1mT2p+JGf3FVc=; b=XUME7LuqPaSV5S61do2t5wN6nr
+ 4uKKLJy02BhzOuigY16gVrGirW9vMV2BHu7z8p1RaKONMLTz79KFKUMa5cbloD/jR/yhyx8fTuKux
+ +TC9u1y1YhaKQ/XRo5/IshFv4tplt1DxFBPRdc/HvvfiCpzLiVNz1qsloE2qzs9VQ/ss=;
+Received: from sea.source.kernel.org ([172.234.252.31])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1wDjDn-0004H4-OZ for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 17 Apr 2026 13:27:01 +0000
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sina.com; s=201208;
- t=1776432419; bh=Z+O9I/As2wXd554PDOyLC79OK/LQa94BQasISuolRP8=;
- h=Message-ID:Date:Subject:From;
- b=NFcL30xN1kUzfvD3DkO6f8AL9wjJXzM9teJr1ps0dwR2xhBP2FquH2Okd0FHuLkep
- aDu/UN5STv+JcdtTXpTNZqlCVX3D/4UwkVcFiGYIBM2oxfYpizMqtkB/8pQmDrvD0p
- vH7IGNQYylaPxS/G8/WbUFQNuD0R/P4Sd+SVFVbs=
-X-SMAIL-HELO: [10.189.138.37]
-Received: from unknown (HELO [10.189.138.37])([114.247.175.249])
- by sina.com (10.54.253.33) with ESMTP
- id 69E23511000004F3; Fri, 17 Apr 2026 21:26:43 +0800 (CST)
-X-Sender: monty_pavel@sina.com
-X-Auth-ID: monty_pavel@sina.com
-Authentication-Results: sina.com; spf=none smtp.mailfrom=monty_pavel@sina.com;
- dkim=none header.i=none;
- dmarc=none action=none header.from=monty_pavel@sina.com
-X-SMAIL-MID: 167296685210
-X-SMAIL-UIID: 5C524A06982C4DD1A6AE6495D6EFA55B-20260417-212643-1
-Message-ID: <5c222edf-6888-4007-9240-9e7988b2dc71@sina.com>
-Date: Fri, 17 Apr 2026 21:26:41 +0800
+ id 1wDmSr-0008KZ-Nh for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 17 Apr 2026 16:54:46 +0000
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sea.source.kernel.org (Postfix) with ESMTP id 5777344245;
+ Fri, 17 Apr 2026 16:54:40 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 11296C19425;
+ Fri, 17 Apr 2026 16:54:40 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1776444880;
+ bh=QWx9eTo7FLv+Py3JhSnantsahTAE2aK/MBCnTx5n/RY=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=Y11KFfJzqw8istHrktvdLN2Pcrqz53wrY7oJEDu7FZQwE5imjzh8yXS7YtqO0UwUm
+ 2deK4ZTcHym3grT00s8YSAtmmw2w79J0Dgq59dDFPd15zCtp/4A43RV58OS6kRfWBx
+ O9KN7td+eI+RlACljRHtFJ1n1usVbIdNhodXgO7mFJqHbYSiEHX/we594figX5SX1Q
+ q52naWjT/8aBV+seFKgN7wR4wgQBg8rf2sUvZoePlpBQSbw3QTaP4IMqnxcTLauCHr
+ sppGLicbZvUCpMuWsA8lwilmSbkVoObq2eSuiFFC3kUXD1ldPKy+WIpgs8ri5mBFbB
+ 595BRWXJzRQSA==
+Date: Fri, 17 Apr 2026 16:54:38 +0000
+To: Chao Yu <chao@kernel.org>
+Message-ID: <aeJlzm7MvZfGDGzj@google.com>
+References: <20260409134538.3692605-1-jaegeuk@kernel.org>
+ <adhPZxtbZxgU-37v@google.com>
+ <7b6334a4-4aa1-4489-8fe1-499f0d32e38f@kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-To: Chao Yu <chao@kernel.org>, Jaegeuk Kim <jaegeuk@kernel.org>
-References: <20260403144015.221811-3-monty_pavel@sina.com>
- <f997ceb6-85d1-4872-be06-2a50469b3b18@kernel.org>
-Content-Language: en-US
-From: Yongpeng Yang <monty_pavel@sina.com>
-In-Reply-To: <f997ceb6-85d1-4872-be06-2a50469b3b18@kernel.org>
-X-Spam-Score: -0.2 (/)
+Content-Disposition: inline
+In-Reply-To: <7b6334a4-4aa1-4489-8fe1-499f0d32e38f@kernel.org>
+X-Spam-Score: -0.7 (/)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 4/17/26 17:00, Chao Yu via Linux-f2fs-devel wrote: > On
- 4/3/26 22:40,
- Yongpeng Yang wrote: >> From: Yongpeng Yang >> >> f2fs_destroy_extent_node()
- does not set FI_NO_EXTENT before clearing >> ex [...] 
- Content analysis details:   (-0.2 points, 5.0 required)
+ Content preview:  On 04/17, Chao Yu wrote: > On 4/10/2026 9:16 AM, Jaegeuk Kim
+ via Linux-f2fs-devel wrote: > > enum { > > F2FS_XATTR_FADV_LARGEFOLIO, >
+ > }; > > > > unsigned int value = BIT(F2FS_XATTR_FADV_LARGEFOLIO); [...] 
+ Content analysis details:   (-0.7 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [202.108.3.165 listed in wl.mailspike.net]
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
@@ -103,12 +97,10 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
- 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
- [monty_pavel(at)sina.com]
-X-Headers-End: 1wDjDn-0004H4-OZ
-Subject: Re: [f2fs-dev] [PATCH] f2fs: fix node_cnt race between extent node
- destroy and writeback
+ -0.5 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1wDmSr-0008KZ-Nh
+Subject: Re: [f2fs-dev] [PATCH v2] f2fs: another way to set large folio by
+ remembering inode number
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -120,170 +112,365 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Yongpeng Yang <yangyongpeng@xiaomi.com>, stable@vger.kernel.org,
+From: Jaegeuk Kim via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Jaegeuk Kim <jaegeuk@kernel.org>
+Cc: Akilesh Kailash <akailash@google.com>, linux-kernel@vger.kernel.org,
  linux-f2fs-devel@lists.sourceforge.net
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
-X-Spamd-Result: default: False [-0.91 / 15.00];
+X-Spamd-Result: default: False [-8.61 / 15.00];
+	WHITELIST_DMARC(-7.00)[sourceforge.net:D:+];
+	DMARC_POLICY_ALLOW_WITH_FAILURES(-0.50)[];
 	RWL_MAILSPIKE_EXCELLENT(-0.40)[216.105.38.7:from];
 	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7];
-	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
 	MAILLIST(-0.20)[mailman];
-	MIME_BASE64_TEXT(0.10)[];
+	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
 	MIME_GOOD(-0.10)[text/plain];
-	DMARC_POLICY_SOFTFAIL(0.10)[sina.com : SPF not aligned (relaxed), DKIM not aligned (relaxed),none];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORGED_RECIPIENTS(0.00)[m:chao@kernel.org,m:jaegeuk@kernel.org,m:yangyongpeng@xiaomi.com,m:stable@vger.kernel.org,m:linux-f2fs-devel@lists.sourceforge.net,s:lists@lfdr.de];
-	FORGED_SENDER(0.00)[monty_pavel@sina.com,linux-f2fs-devel-bounces@lists.sourceforge.net];
-	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
-	RCVD_COUNT_THREE(0.00)[4];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	ARC_NA(0.00)[];
-	FREEMAIL_FROM(0.00)[sina.com];
-	MIME_TRACE(0.00)[0:+];
-	TO_DN_SOME(0.00)[];
+	DKIM_MIXED(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
 	RECEIVED_HELO_LOCALHOST(0.00)[];
-	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,sina.com:s=201208];
-	RCPT_COUNT_FIVE(0.00)[5];
+	REPLYTO_DOM_EQ_TO_DOM(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	FORGED_RECIPIENTS(0.00)[m:chao@kernel.org,m:akailash@google.com,m:linux-kernel@vger.kernel.org,m:linux-f2fs-devel@lists.sourceforge.net,s:lists@lfdr.de];
+	MIME_TRACE(0.00)[0:+];
+	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
+	TO_DN_SOME(0.00)[];
+	ARC_NA(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	FORGED_SENDER(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
+	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,kernel.org:s=k20201202];
+	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,kernel.org:-];
+	DMARC_POLICY_ALLOW(0.00)[lists.sourceforge.net,none];
+	RCVD_COUNT_FIVE(0.00)[5];
 	NEURAL_HAM(-0.00)[-1.000];
-	MID_RHS_MATCH_FROM(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[monty_pavel@sina.com,linux-f2fs-devel-bounces@lists.sourceforge.net];
-	RCVD_TLS_LAST(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
+	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
-	DKIM_MIXED(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	HAS_REPLYTO(0.00)[jaegeuk@kernel.org];
 	TAGGED_RCPT(0.00)[linux-f2fs-devel];
-	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,sina.com:-];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sina.com:mid,xiaomi.com:email]
-X-Rspamd-Queue-Id: 5C4F441BA00
+	RCPT_COUNT_THREE(0.00)[4];
+	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
+	MISSING_XM_UA(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.sourceforge.net:dkim,lists.sourceforge.net:helo,lists.sourceforge.net:rdns]
+X-Rspamd-Queue-Id: D40B641D5DC
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-Ck9uIDQvMTcvMjYgMTc6MDAsIENoYW8gWXUgdmlhIExpbnV4LWYyZnMtZGV2ZWwgd3JvdGU6Cj4g
-T24gNC8zLzI2IDIyOjQwLCBZb25ncGVuZyBZYW5nIHdyb3RlOgo+PiBGcm9tOiBZb25ncGVuZyBZ
-YW5nIDx5YW5neW9uZ3BlbmdAeGlhb21pLmNvbT4KPj4KPj4gZjJmc19kZXN0cm95X2V4dGVudF9u
-b2RlKCkgZG9lcyBub3Qgc2V0IEZJX05PX0VYVEVOVCBiZWZvcmUgY2xlYXJpbmcKPj4gZXh0ZW50
-IG5vZGVzLiBXaGVuIGNhbGxlZCBmcm9tIGYyZnNfZHJvcF9pbm9kZSgpIHdpdGggSV9TWU5DIHNl
-dCwKPj4gY29uY3VycmVudCBrd29ya2VyIHdyaXRlYmFjayBjYW4gaW5zZXJ0IG5ldyBleHRlbnQg
-bm9kZXMgaW50byB0aGUgc2FtZQo+PiBleHRlbnQgdHJlZSwgcmFjaW5nIHdpdGggdGhlIGRlc3Ry
-b3kgYW5kIHRyaWdnZXJpbmcgZjJmc19idWdfb24oKSBpbgo+PiBfX2Rlc3Ryb3lfZXh0ZW50X25v
-ZGUoKS4gVGhlIHNjZW5hcmlvIGlzIGFzIGZvbGxvd3M6Cj4+Cj4+IGRyb3AgaW5vZGXCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgd3JpdGViYWNr
-Cj4+IMKgIC0gaXB1dAo+PiDCoMKgIC0gZjJmc19kcm9wX2lub2RlwqAgLy8gSV9TWU5DIHNldAo+
-PiDCoMKgwqAgLSBmMmZzX2Rlc3Ryb3lfZXh0ZW50X25vZGUKPj4gwqDCoMKgwqAgLSBfX2Rlc3Ry
-b3lfZXh0ZW50X25vZGUKPj4gwqDCoMKgwqDCoCAtIHdoaWxlIChub2RlX2NudCkgewo+PiDCoMKg
-wqDCoMKgwqDCoMKgIHdyaXRlX2xvY2soJmV0LT5sb2NrKQo+PiDCoMKgwqDCoMKgwqDCoMKgIF9f
-ZnJlZV9leHRlbnRfdHJlZQo+PiDCoMKgwqDCoMKgwqDCoMKgIHdyaXRlX3VubG9jaygmZXQtPmxv
-Y2spCj4+IMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCAtIF9fd3JpdGViYWNrX3NpbmdsZV9pbm9kZQo+
-PiDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCAtIGYyZnNfb3V0cGxhY2Vfd3JpdGVfZGF0YQo+PiDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIC0gZjJmc191cGRhdGVfcmVhZF9leHRlbnRfY2FjaGUK
-Pj4gwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIC0gX191cGRhdGVfZXh0ZW50X3RyZWVfcmFu
-Z2UKPj4gwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgLy8gRklfTk9fRVhURU5UIG5vdCBz
-ZXQsCj4+IMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIC8vIGluc2VydCBuZXcgZXh0ZW50
-IG5vZGUKPj4gwqDCoMKgwqDCoMKgwqAgfSAvLyBub2RlX2NudCA9PSAwLCBleGl0IHdoaWxlCj4+
-IMKgwqDCoMKgwqAgLSBmMmZzX2J1Z19vbihub2RlX2NudCnCoCAvLyBub2RlX2NudCA+IDAKPj4K
-Pj4gQWRkaXRpb25hbGx5LCBfX3VwZGF0ZV9leHRlbnRfdHJlZV9yYW5nZSgpIG9ubHkgY2hlY2tz
-IEZJX05PX0VYVEVOVCBmb3IKPj4gRVhfUkVBRCB0eXBlLCBsZWF2aW5nIEVYX0JMT0NLX0FHRSB1
-cGRhdGVzIGNvbXBsZXRlbHkgdW5wcm90ZWN0ZWQuCj4+Cj4+IFRoaXMgcGF0Y2ggc2V0IEZJX05P
-X0VYVEVOVCB1bmRlciBldC0+bG9jayBpbiBfX2Rlc3Ryb3lfZXh0ZW50X25vZGUoKSwKPj4gY29u
-c2lzdGVudCB3aXRoIG90aGVyIGNhbGxlcnMgKF9fdXBkYXRlX2V4dGVudF90cmVlX3JhbmdlIGFu
-ZAo+PiBfX2Ryb3BfZXh0ZW50X3RyZWUpIGFuZCBjaGVjayBGSV9OT19FWFRFTlQgZm9yIGJvdGgg
-RVhfUkVBRCBhbmQKPj4gRVhfQkxPQ0tfQUdFIHRyZWUuCj4gCj4gSSBzdWZmZXJlZCBiZWxvdyB0
-ZXN0IGZhaWx1cmUsIHRoZW4gSSBiaXNlY3QgdG8gdGhpcyBjaGFuZ2UuCj4gCj4gwqDCoMKgIGdl
-bmVyaWMvNDc1wqAgODRzIC4uLiBbZmFpbGVkLCBleGl0IHN0YXR1cyAxXS0gb3V0cHV0IG1pc21h
-dGNoIChzZWUgLwo+IHNoYXJlL2dpdC9mc3Rlc3RzL3Jlc3VsdHMvL2dlbmVyaWMvNDc1Lm91dC5i
-YWQpCj4gwqDCoMKgIC0tLSB0ZXN0cy9nZW5lcmljLzQ3NS5vdXTCoMKgIDIwMjUtMDEtMTIgMjE6
-NTc6NDAuMjc5NDQwNjY0ICswODAwCj4gwqDCoMKgICsrKyAvc2hhcmUvZ2l0L2ZzdGVzdHMvcmVz
-dWx0cy8vZ2VuZXJpYy80NzUub3V0LmJhZCAyMDI2LTA0LTE3Cj4gMTI6MDg6MjguMDAwMDAwMDAw
-ICswODAwCj4gwqDCoMKgIEBAIC0xLDIgKzEsNiBAQAo+IMKgwqDCoMKgIFFBIG91dHB1dCBjcmVh
-dGVkIGJ5IDQ3NQo+IMKgwqDCoMKgIFNpbGVuY2UgaXMgZ29sZGVuLgo+IMKgwqDCoCArbW91bnQ6
-IC9tbnQvc2NyYXRjaF9mMmZzOiBtb3VudCBzeXN0ZW0gY2FsbCBmYWlsZWQ6IFN0cnVjdHVyZSBu
-ZWVkcwo+IGNsZWFuaW5nLgo+IMKgwqDCoCArwqDCoMKgwqDCoMKgIGRtZXNnKDEpIG1heSBoYXZl
-IG1vcmUgaW5mb3JtYXRpb24gYWZ0ZXIgZmFpbGVkIG1vdW50IHN5c3RlbQo+IGNhbGwuCj4gwqDC
-oMKgICttb3VudCBmYWlsZWQKPiDCoMKgwqAgKyhzZWUgL3NoYXJlL2dpdC9mc3Rlc3RzL3Jlc3Vs
-dHMvL2dlbmVyaWMvNDc1LmZ1bGwgZm9yIGRldGFpbHMpCj4gwqDCoMKgIC4uLgo+IMKgwqDCoCAo
-UnVuICdkaWZmIC11IC9zaGFyZS9naXQvZnN0ZXN0cy90ZXN0cy9nZW5lcmljLzQ3NS5vdXQgL3No
-YXJlL2dpdC8KPiBmc3Rlc3RzL3Jlc3VsdHMvL2dlbmVyaWMvNDc1Lm91dC5iYWQnwqAgdG8gc2Vl
-IHRoZSBlbnRpcmUgZGlmZikKPiAKPiAKPiDCoMKgwqAgZ2VuZXJpYy8zODjCoCA3M3MgLi4uIFtm
-YWlsZWQsIGV4aXQgc3RhdHVzIDFdLSBvdXRwdXQgbWlzbWF0Y2ggKHNlZSAvCj4gc2hhcmUvZ2l0
-L2ZzdGVzdHMvcmVzdWx0cy8vZ2VuZXJpYy8zODgub3V0LmJhZCkKPiDCoMKgwqAgLS0tIHRlc3Rz
-L2dlbmVyaWMvMzg4Lm91dMKgwqAgMjAyNS0wMS0xMiAyMTo1Nzo0MC4yNzU0NDA2MDIgKzA4MDAK
-PiDCoMKgwqAgKysrIC9zaGFyZS9naXQvZnN0ZXN0cy9yZXN1bHRzLy9nZW5lcmljLzM4OC5vdXQu
-YmFkIDIwMjYtMDQtMTcKPiAxMTo1ODowNS4wMDAwMDAwMDAgKzA4MDAKPiDCoMKgwqAgQEAgLTEs
-MiArMSw2IEBACj4gwqDCoMKgwqAgUUEgb3V0cHV0IGNyZWF0ZWQgYnkgMzg4Cj4gwqDCoMKgwqAg
-U2lsZW5jZSBpcyBnb2xkZW4uCj4gwqDCoMKgICttb3VudDogL21udC9zY3JhdGNoX2YyZnM6IG1v
-dW50IHN5c3RlbSBjYWxsIGZhaWxlZDogU3RydWN0dXJlIG5lZWRzCj4gY2xlYW5pbmcuCj4gwqDC
-oMKgICvCoMKgwqDCoMKgwqAgZG1lc2coMSkgbWF5IGhhdmUgbW9yZSBpbmZvcm1hdGlvbiBhZnRl
-ciBmYWlsZWQgbW91bnQgc3lzdGVtCj4gY2FsbC4KPiDCoMKgwqAgK2N5Y2xlIG1vdW50IGZhaWxl
-ZAo+IMKgwqDCoCArKHNlZSAvc2hhcmUvZ2l0L2ZzdGVzdHMvcmVzdWx0cy8vZ2VuZXJpYy8zODgu
-ZnVsbCBmb3IgZGV0YWlscykKPiDCoMKgwqAgLi4uCj4gwqDCoMKgIChSdW4gJ2RpZmYgLXUgL3No
-YXJlL2dpdC9mc3Rlc3RzL3Rlc3RzL2dlbmVyaWMvMzg4Lm91dCAvc2hhcmUvZ2l0Lwo+IGZzdGVz
-dHMvcmVzdWx0cy8vZ2VuZXJpYy8zODgub3V0LmJhZCfCoCB0byBzZWUgdGhlIGVudGlyZSBkaWZm
-KQo+IAo+IAo+IMKgwqDCoCBGMkZTLWZzIChkbS0wKTogc2FuaXR5X2NoZWNrX2V4dGVudF9jYWNo
-ZTogaW5vZGUgKGlubz0xNzYxKSBleHRlbnQKPiBpbmZvIFsyMjAwNTcsIDU3LCA2XSBpcyBpbmNv
-cnJlY3QsIHJ1biBmc2NrIHRvIGZpeAo+IAo+IEkgc3VzcGVjdCB3ZSBtYXkgbWlzcyBhbnkgZXh0
-ZW50IHVwZGF0ZXMgYWZ0ZXIgd2Ugc2V0IEZJX05PX0VYVEVOVCBpbgo+IF9fZGVzdHJveV9leHRl
-bnRfbm9kZSgpLCByZXN1bHQgaW4gZmFpbGluZyBpbiBzYW5pdHlfY2hlY2tfZXh0ZW50X2NhY2hl
-KCkuCj4gCj4gQ2FuIHdlIGp1c3QgcmVsb2NhdGUgZjJmc19idWdfb24obm9kZV9jbnQpIHJhdGhl
-ciB0aGFuIGNvbXBsaWNhdGVkIGNoYW5nZT8KPiBUaG91Z2h0cz8KCk9oLCBJIG92ZXJsb29rZWQg
-bGFyZ2VzdCBleHRlbnQuIEhvdyBhYm91dCByZWxvY2F0ZQpmMmZzX2J1Z19vbihub2RlX2NudCkg
-dG8gX19kZXN0cm95X2V4dGVudF90cmVlPwoKc3RhdGljIHZvaWQgX19kZXN0cm95X2V4dGVudF90
-cmVlKHN0cnVjdCBpbm9kZSAqaW5vZGUsIGVudW0gZXh0ZW50X3R5cGUKdHlwZSkKCiAgICAgICAg
-LyogZnJlZSBhbGwgZXh0ZW50IGluZm8gYmVsb25nIHRvIHRoaXMgZXh0ZW50IHRyZWUgKi8KICAg
-ICAgICBub2RlX2NudCA9IF9fZGVzdHJveV9leHRlbnRfbm9kZShpbm9kZSwgdHlwZSk7CisgICAg
-ICAgZjJmc19idWdfb24oc2JpLCBhdG9taWNfcmVhZCgmZXQtPm5vZGVfY250KSk7CgpUaGFua3MK
-WW9uZ3BlbmcsCgo+IAo+IFRoYW5rcywKPiAKPj4KPj4gRml4ZXM6IDNmYzVkNWExODJmNiAoImYy
-ZnM6IGZpeCB0byBzaHJpbmsgcmVhZCBleHRlbnQgbm9kZSBpbiBiYXRjaGVzIikKPj4gQ2M6IHN0
-YWJsZUB2Z2VyLmtlcm5lbC5vcmcKPj4gU2lnbmVkLW9mZi1ieTogWW9uZ3BlbmcgWWFuZyA8eWFu
-Z3lvbmdwZW5nQHhpYW9taS5jb20+Cj4+IC0tLQo+PiDCoCBmcy9mMmZzL2V4dGVudF9jYWNoZS5j
-IHwgMTcgKysrKysrKysrKy0tLS0tLS0KPj4gwqAgMSBmaWxlIGNoYW5nZWQsIDEwIGluc2VydGlv
-bnMoKyksIDcgZGVsZXRpb25zKC0pCj4+Cj4+IGRpZmYgLS1naXQgYS9mcy9mMmZzL2V4dGVudF9j
-YWNoZS5jIGIvZnMvZjJmcy9leHRlbnRfY2FjaGUuYwo+PiBpbmRleCAwZWQ4NGNjMDY1YTcuLjg3
-MTY5ZmQyOWQ4OSAxMDA2NDQKPj4gLS0tIGEvZnMvZjJmcy9leHRlbnRfY2FjaGUuYwo+PiArKysg
-Yi9mcy9mMmZzL2V4dGVudF9jYWNoZS5jCj4+IEBAIC0xMTksOSArMTE5LDEwIEBAIHN0YXRpYyBi
-b29sIF9fbWF5X2V4dGVudF90cmVlKHN0cnVjdCBpbm9kZQo+PiAqaW5vZGUsIGVudW0gZXh0ZW50
-X3R5cGUgdHlwZSkKPj4gwqDCoMKgwqDCoCBpZiAoIV9faW5pdF9tYXlfZXh0ZW50X3RyZWUoaW5v
-ZGUsIHR5cGUpKQo+PiDCoMKgwqDCoMKgwqDCoMKgwqAgcmV0dXJuIGZhbHNlOwo+PiDCoCArwqDC
-oMKgIGlmIChpc19pbm9kZV9mbGFnX3NldChpbm9kZSwgRklfTk9fRVhURU5UKSkKPj4gK8KgwqDC
-oMKgwqDCoMKgIHJldHVybiBmYWxzZTsKPj4gKwo+PiDCoMKgwqDCoMKgIGlmICh0eXBlID09IEVY
-X1JFQUQpIHsKPj4gLcKgwqDCoMKgwqDCoMKgIGlmIChpc19pbm9kZV9mbGFnX3NldChpbm9kZSwg
-RklfTk9fRVhURU5UKSkKPj4gLcKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgcmV0dXJuIGZhbHNlOwo+
-PiDCoMKgwqDCoMKgwqDCoMKgwqAgaWYgKGlzX2lub2RlX2ZsYWdfc2V0KGlub2RlLCBGSV9DT01Q
-UkVTU0VEX0ZJTEUpICYmCj4+IMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCAh
-ZjJmc19zYl9oYXNfcmVhZG9ubHkoRjJGU19JX1NCKGlub2RlKSkpCj4+IMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgIHJldHVybiBmYWxzZTsKPj4gQEAgLTY0NCw2ICs2NDUsOCBAQCBzdGF0aWMg
-dW5zaWduZWQgaW50IF9fZGVzdHJveV9leHRlbnRfbm9kZShzdHJ1Y3QKPj4gaW5vZGUgKmlub2Rl
-LAo+PiDCoCDCoMKgwqDCoMKgIHdoaWxlIChhdG9taWNfcmVhZCgmZXQtPm5vZGVfY250KSkgewo+
-PiDCoMKgwqDCoMKgwqDCoMKgwqAgd3JpdGVfbG9jaygmZXQtPmxvY2spOwo+PiArwqDCoMKgwqDC
-oMKgwqAgaWYgKCFpc19pbm9kZV9mbGFnX3NldChpbm9kZSwgRklfTk9fRVhURU5UKSkKPj4gK8Kg
-wqDCoMKgwqDCoMKgwqDCoMKgwqAgc2V0X2lub2RlX2ZsYWcoaW5vZGUsIEZJX05PX0VYVEVOVCk7
-Cj4+IMKgwqDCoMKgwqDCoMKgwqDCoCBub2RlX2NudCArPSBfX2ZyZWVfZXh0ZW50X3RyZWUoc2Jp
-LCBldCwgbnJfc2hyaW5rKTsKPj4gwqDCoMKgwqDCoMKgwqDCoMKgIHdyaXRlX3VubG9jaygmZXQt
-PmxvY2spOwo+PiDCoMKgwqDCoMKgIH0KPj4gQEAgLTY4OCwxMiArNjkxLDEyIEBAIHN0YXRpYyB2
-b2lkIF9fdXBkYXRlX2V4dGVudF90cmVlX3JhbmdlKHN0cnVjdAo+PiBpbm9kZSAqaW5vZGUsCj4+
-IMKgIMKgwqDCoMKgwqAgd3JpdGVfbG9jaygmZXQtPmxvY2spOwo+PiDCoCAtwqDCoMKgIGlmICh0
-eXBlID09IEVYX1JFQUQpIHsKPj4gLcKgwqDCoMKgwqDCoMKgIGlmIChpc19pbm9kZV9mbGFnX3Nl
-dChpbm9kZSwgRklfTk9fRVhURU5UKSkgewo+PiAtwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCB3cml0
-ZV91bmxvY2soJmV0LT5sb2NrKTsKPj4gLcKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgcmV0dXJuOwo+
-PiAtwqDCoMKgwqDCoMKgwqAgfQo+PiArwqDCoMKgIGlmIChpc19pbm9kZV9mbGFnX3NldChpbm9k
-ZSwgRklfTk9fRVhURU5UKSkgewo+PiArwqDCoMKgwqDCoMKgwqAgd3JpdGVfdW5sb2NrKCZldC0+
-bG9jayk7Cj4+ICvCoMKgwqDCoMKgwqDCoCByZXR1cm47Cj4+ICvCoMKgwqAgfQo+PiDCoCArwqDC
-oMKgIGlmICh0eXBlID09IEVYX1JFQUQpIHsKPj4gwqDCoMKgwqDCoMKgwqDCoMKgIHByZXYgPSBl
-dC0+bGFyZ2VzdDsKPj4gwqDCoMKgwqDCoMKgwqDCoMKgIGRlaS5sZW4gPSAwOwo+PiDCoCAKPiAK
-PiAKPiAKPiBfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwo+
-IExpbnV4LWYyZnMtZGV2ZWwgbWFpbGluZyBsaXN0Cj4gTGludXgtZjJmcy1kZXZlbEBsaXN0cy5z
-b3VyY2Vmb3JnZS5uZXQKPiBodHRwczovL2xpc3RzLnNvdXJjZWZvcmdlLm5ldC9saXN0cy9saXN0
-aW5mby9saW51eC1mMmZzLWRldmVsCgoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fCkxpbnV4LWYyZnMtZGV2ZWwgbWFpbGluZyBsaXN0CkxpbnV4LWYyZnMt
-ZGV2ZWxAbGlzdHMuc291cmNlZm9yZ2UubmV0Cmh0dHBzOi8vbGlzdHMuc291cmNlZm9yZ2UubmV0
-L2xpc3RzL2xpc3RpbmZvL2xpbnV4LWYyZnMtZGV2ZWwK
+On 04/17, Chao Yu wrote:
+> On 4/10/2026 9:16 AM, Jaegeuk Kim via Linux-f2fs-devel wrote:
+> > enum {
+> >         F2FS_XATTR_FADV_LARGEFOLIO,
+> > };
+> > 
+> > unsigned int value = BIT(F2FS_XATTR_FADV_LARGEFOLIO);
+> > 
+> > 1. setxattr(file, "user.fadvise", &value, sizeof(unsigned int), 0)
+> >   -> register the inode number for large folio
+> > 2. chmod(0400, file)
+> >   -> make Read-Only
+> > 3. fsync() && close() && open(READ)
+> >   -> f2fs_iget() with large folio
+> > 4. open(WRITE), mkwrite on mmap, chmod(WRITE)
+> >   -> return error
+> > 5. close() and open()
+> >   -> goto #3
+> > 6. unlink
+> >   -> deregister the inode number
+> > 
+> > Suggested-by: Akilesh Kailash <akailash@google.com>
+> > Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
+> > ---
+> >    Log from v1:
+> >     - add a condition in f2fs_drop_inode
+> >     - add Doc
+> > 
+> >   Documentation/filesystems/f2fs.rst | 41 ++++++++++++++++++++++++++----
+> >   fs/f2fs/checkpoint.c               |  2 +-
+> >   fs/f2fs/data.c                     |  2 +-
+> >   fs/f2fs/f2fs.h                     |  1 +
+> >   fs/f2fs/file.c                     | 11 ++++++--
+> >   fs/f2fs/inode.c                    | 19 +++++++++++---
+> >   fs/f2fs/super.c                    |  7 +++++
+> >   fs/f2fs/xattr.c                    | 35 ++++++++++++++++++++++++-
+> >   fs/f2fs/xattr.h                    |  6 +++++
+> >   9 files changed, 111 insertions(+), 13 deletions(-)
+> > 
+> > diff --git a/Documentation/filesystems/f2fs.rst b/Documentation/filesystems/f2fs.rst
+> > index 7e4031631286..de899d0d3088 100644
+> > --- a/Documentation/filesystems/f2fs.rst
+> > +++ b/Documentation/filesystems/f2fs.rst
+> > @@ -1044,11 +1044,14 @@ page allocation for significant performance gains. To minimize code complexity,
+> >   this support is currently excluded from the write path, which requires handling
+> >   complex optimizations such as compression and block allocation modes.
+> > -This optional feature is triggered only when a file's immutable bit is set.
+> > -Consequently, F2FS will return EOPNOTSUPP if a user attempts to open a cached
+> > -file with write permissions, even immediately after clearing the bit. Write
+> > -access is only restored once the cached inode is dropped. The usage flow is
+> > -demonstrated below:
+> > +This optional feature is triggered by two mechanisms: the file's immutable bit
+> > +or a specific xattr flag. In both cases, F2FS ensures data integrity by
+> > +restricting the file to a read-only state while large folios are active.
+> > +
+> > +1. Immutable Bit Approach:
+> > +Triggered when the FS_IMMUTABLE_FL is set. This is a strict enforcement
+> > +where the file cannot be modified at all until the bit is cleared and
+> > +the cached inode is dropped.
+> >   .. code-block::
+> > @@ -1078,3 +1081,31 @@ demonstrated below:
+> >      Written 4096 bytes with pattern = zero, total_time = 29 us, max_latency = 28 us
+> >      # rm /data/testfile_read_seq
+> > +
+> > +2. XATTR fadvise Approach:
+> > +A more flexible registration via extended attributes.
+> > +
+> > +.. code-block::
+> > +
+> > +    enum {
+> > +        F2FS_XATTR_FADV_LARGEFOLIO,
+> > +    };
+> > +    unsigned int value = BIT(F2FS_XATTR_FADV_LARGEFOLIO);
+> > +
+> > +    /* Registers the inode number for large folio support in the subsystem.*/
+> > +    # setxattr(file, "user.fadvise", &value, sizeof(unsigned int), 0)
+> > +
+> > +    /* The file must be made Read-Only to transition into the large folio path. */
+> > +    # fchmod(0400, fd)
+> > +
+> > +    /* clean up dirty inode state. */
+> > +    # fsync(fd)
+> > +
+> > +    /* Drop the inode cache.
+> > +    # close(fd)
+> 
+> If drop_cache or memory reclaim was called here, then LARGE_FOLIO_INO will
+> be dropped in f2fs_evict_inode(), do we need to keep LARGE_FOLIO_INO if
+> inode->i_nlink is valid in f2fs_evict_inode()?
+
+We remove it only when we delete the file?
+
+> 
+> Thanks,
+> 
+> > +
+> > +    /* f2fs_iget() instantiates the inode with large folio support.*/
+> > +    # open()
+> > +
+> > +    /* Returns -EOPNOTSUPP or error to protect the large folio cache.*/
+> > +    # open(WRITE), mkwrite on mmap, or chmod(WRITE)
+> > diff --git a/fs/f2fs/checkpoint.c b/fs/f2fs/checkpoint.c
+> > index 01e1ba77263e..fdd62ddc3ed6 100644
+> > --- a/fs/f2fs/checkpoint.c
+> > +++ b/fs/f2fs/checkpoint.c
+> > @@ -778,7 +778,7 @@ void f2fs_remove_ino_entry(struct f2fs_sb_info *sbi, nid_t ino, int type)
+> >   	__remove_ino_entry(sbi, ino, type);
+> >   }
+> > -/* mode should be APPEND_INO, UPDATE_INO or TRANS_DIR_INO */
+> > +/* mode should be APPEND_INO, UPDATE_INO, LARGE_FOLIO_IO, or TRANS_DIR_INO */
+> >   bool f2fs_exist_written_data(struct f2fs_sb_info *sbi, nid_t ino, int mode)
+> >   {
+> >   	struct inode_management *im = &sbi->im[mode];
+> > diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
+> > index 965d4e6443c6..5e46230398d7 100644
+> > --- a/fs/f2fs/data.c
+> > +++ b/fs/f2fs/data.c
+> > @@ -2494,7 +2494,7 @@ static int f2fs_read_data_large_folio(struct inode *inode,
+> >   	int ret = 0;
+> >   	bool folio_in_bio;
+> > -	if (!IS_IMMUTABLE(inode) || f2fs_compressed_file(inode)) {
+> > +	if (f2fs_compressed_file(inode)) {
+> >   		if (folio)
+> >   			folio_unlock(folio);
+> >   		return -EOPNOTSUPP;
+> > diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+> > index e40b6b2784ee..02bc6eb96a59 100644
+> > --- a/fs/f2fs/f2fs.h
+> > +++ b/fs/f2fs/f2fs.h
+> > @@ -381,6 +381,7 @@ enum {
+> >   /* for the list of ino */
+> >   enum {
+> >   	ORPHAN_INO,		/* for orphan ino list */
+> > +	LARGE_FOLIO_INO,	/* for large folio case */
+> >   	APPEND_INO,		/* for append ino list */
+> >   	UPDATE_INO,		/* for update ino list */
+> >   	TRANS_DIR_INO,		/* for transactions dir ino list */
+> > diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
+> > index c0220cd7b332..64ba900410fc 100644
+> > --- a/fs/f2fs/file.c
+> > +++ b/fs/f2fs/file.c
+> > @@ -2068,9 +2068,16 @@ static long f2fs_fallocate(struct file *file, int mode,
+> >   static int f2fs_release_file(struct inode *inode, struct file *filp)
+> >   {
+> > -	if (atomic_dec_and_test(&F2FS_I(inode)->open_count))
+> > +	if (atomic_dec_and_test(&F2FS_I(inode)->open_count)) {
+> >   		f2fs_remove_donate_inode(inode);
+> > -
+> > +		/*
+> > +		 * In order to get large folio as soon as possible, let's drop
+> > +		 * inode cache asap. See also f2fs_drop_inode.
+> > +		 */
+> > +		if (f2fs_exist_written_data(F2FS_I_SB(inode),
+> > +					    inode->i_ino, LARGE_FOLIO_INO))
+> > +                       d_drop(filp->f_path.dentry);
+> > +	}
+> >   	/*
+> >   	 * f2fs_release_file is called at every close calls. So we should
+> >   	 * not drop any inmemory pages by close called by other process.
+> > diff --git a/fs/f2fs/inode.c b/fs/f2fs/inode.c
+> > index 89240be8cc59..e100bc5a378c 100644
+> > --- a/fs/f2fs/inode.c
+> > +++ b/fs/f2fs/inode.c
+> > @@ -565,6 +565,20 @@ static bool is_meta_ino(struct f2fs_sb_info *sbi, unsigned int ino)
+> >   		ino == F2FS_COMPRESS_INO(sbi);
+> >   }
+> > +static void f2fs_mapping_set_large_folio(struct inode *inode)
+> > +{
+> > +	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
+> > +
+> > +	if (f2fs_compressed_file(inode))
+> > +		return;
+> > +	if (f2fs_quota_file(sbi, inode->i_ino))
+> > +		return;
+> > +	if (IS_IMMUTABLE(inode) ||
+> > +	    (f2fs_exist_written_data(sbi, inode->i_ino, LARGE_FOLIO_INO) &&
+> > +	     !(inode->i_mode & S_IWUGO)))
+> > +	    mapping_set_folio_min_order(inode->i_mapping, 0);
+> > +}
+> > +
+> >   struct inode *f2fs_iget(struct super_block *sb, unsigned long ino)
+> >   {
+> >   	struct f2fs_sb_info *sbi = F2FS_SB(sb);
+> > @@ -620,9 +634,7 @@ struct inode *f2fs_iget(struct super_block *sb, unsigned long ino)
+> >   		inode->i_op = &f2fs_file_inode_operations;
+> >   		inode->i_fop = &f2fs_file_operations;
+> >   		inode->i_mapping->a_ops = &f2fs_dblock_aops;
+> > -		if (IS_IMMUTABLE(inode) && !f2fs_compressed_file(inode) &&
+> > -		    !f2fs_quota_file(sbi, inode->i_ino))
+> > -			mapping_set_folio_min_order(inode->i_mapping, 0);
+> > +		f2fs_mapping_set_large_folio(inode);
+> >   	} else if (S_ISDIR(inode->i_mode)) {
+> >   		inode->i_op = &f2fs_dir_inode_operations;
+> >   		inode->i_fop = &f2fs_dir_operations;
+> > @@ -895,6 +907,7 @@ void f2fs_evict_inode(struct inode *inode)
+> >   	f2fs_remove_ino_entry(sbi, inode->i_ino, APPEND_INO);
+> >   	f2fs_remove_ino_entry(sbi, inode->i_ino, UPDATE_INO);
+> >   	f2fs_remove_ino_entry(sbi, inode->i_ino, FLUSH_INO);
+> > +	f2fs_remove_ino_entry(sbi, inode->i_ino, LARGE_FOLIO_INO);
+> >   	if (!is_sbi_flag_set(sbi, SBI_IS_FREEZING)) {
+> >   		sb_start_intwrite(inode->i_sb);
+> > diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
+> > index ccf806b676f5..11d1e0c99ac1 100644
+> > --- a/fs/f2fs/super.c
+> > +++ b/fs/f2fs/super.c
+> > @@ -1844,6 +1844,13 @@ static int f2fs_drop_inode(struct inode *inode)
+> >   			return 1;
+> >   		}
+> >   	}
+> > +	/*
+> > +	 * In order to get large folio as soon as possible, let's drop
+> > +	 * inode cache asap. See also f2fs_release_file.
+> > +	 */
+> > +	if (f2fs_exist_written_data(sbi, inode->i_ino, LARGE_FOLIO_INO) &&
+> > +	    !is_inode_flag_set(inode, FI_DIRTY_INODE))
+> > +		return 1;
+> >   	/*
+> >   	 * This is to avoid a deadlock condition like below.
+> > diff --git a/fs/f2fs/xattr.c b/fs/f2fs/xattr.c
+> > index 941dc62a6d6f..0c0e44c2dcdd 100644
+> > --- a/fs/f2fs/xattr.c
+> > +++ b/fs/f2fs/xattr.c
+> > @@ -44,6 +44,16 @@ static void xattr_free(struct f2fs_sb_info *sbi, void *xattr_addr,
+> >   		kfree(xattr_addr);
+> >   }
+> > +static int f2fs_xattr_fadvise_get(struct inode *inode, void *buffer)
+> > +{
+> > +	if (!buffer)
+> > +		goto out;
+> > +	if (mapping_large_folio_support(inode->i_mapping))
+> > +		*((unsigned int *)buffer) |= BIT(F2FS_XATTR_FADV_LARGEFOLIO);
+> > +out:
+> > +	return sizeof(unsigned int);
+> > +}
+> > +
+> >   static int f2fs_xattr_generic_get(const struct xattr_handler *handler,
+> >   		struct dentry *unused, struct inode *inode,
+> >   		const char *name, void *buffer, size_t size)
+> > @@ -61,10 +71,29 @@ static int f2fs_xattr_generic_get(const struct xattr_handler *handler,
+> >   	default:
+> >   		return -EINVAL;
+> >   	}
+> > +	if (handler->flags == F2FS_XATTR_INDEX_USER &&
+> > +	    !strcmp(name, "fadvise"))
+> > +		return f2fs_xattr_fadvise_get(inode, buffer);
+> > +
+> >   	return f2fs_getxattr(inode, handler->flags, name,
+> >   			     buffer, size, NULL);
+> >   }
+> > +static int f2fs_xattr_fadvise_set(struct inode *inode, const void *value)
+> > +{
+> > +	unsigned int new_fadvise;
+> > +
+> > +	new_fadvise = *(unsigned int *)value;
+> > +
+> > +	if (new_fadvise & BIT(F2FS_XATTR_FADV_LARGEFOLIO))
+> > +		f2fs_add_ino_entry(F2FS_I_SB(inode),
+> > +				inode->i_ino, LARGE_FOLIO_INO);
+> > +	else
+> > +		f2fs_remove_ino_entry(F2FS_I_SB(inode),
+> > +				inode->i_ino, LARGE_FOLIO_INO);
+> > +	return 0;
+> > +}
+> > +
+> >   static int f2fs_xattr_generic_set(const struct xattr_handler *handler,
+> >   		struct mnt_idmap *idmap,
+> >   		struct dentry *unused, struct inode *inode,
+> > @@ -84,6 +113,10 @@ static int f2fs_xattr_generic_set(const struct xattr_handler *handler,
+> >   	default:
+> >   		return -EINVAL;
+> >   	}
+> > +	if (handler->flags == F2FS_XATTR_INDEX_USER &&
+> > +	    !strcmp(name, "fadvise"))
+> > +		return f2fs_xattr_fadvise_set(inode, value);
+> > +
+> >   	return f2fs_setxattr(inode, handler->flags, name,
+> >   					value, size, NULL, flags);
+> >   }
+> > @@ -842,4 +875,4 @@ int __init f2fs_init_xattr_cache(void)
+> >   void f2fs_destroy_xattr_cache(void)
+> >   {
+> >   	kmem_cache_destroy(inline_xattr_slab);
+> > -}
+> > \ No newline at end of file
+> > +}
+> > diff --git a/fs/f2fs/xattr.h b/fs/f2fs/xattr.h
+> > index bce3d93e4755..455f460d014e 100644
+> > --- a/fs/f2fs/xattr.h
+> > +++ b/fs/f2fs/xattr.h
+> > @@ -24,6 +24,7 @@
+> >   #define F2FS_XATTR_REFCOUNT_MAX         1024
+> >   /* Name indexes */
+> > +#define F2FS_USER_FADVISE_NAME			"user.fadvise"
+> >   #define F2FS_SYSTEM_ADVISE_NAME			"system.advise"
+> >   #define F2FS_XATTR_INDEX_USER			1
+> >   #define F2FS_XATTR_INDEX_POSIX_ACL_ACCESS	2
+> > @@ -39,6 +40,11 @@
+> >   #define F2FS_XATTR_NAME_ENCRYPTION_CONTEXT	"c"
+> >   #define F2FS_XATTR_NAME_VERITY			"v"
+> > +/* used for F2FS_USER_FADVISE_NAME */
+> > +enum {
+> > +	F2FS_XATTR_FADV_LARGEFOLIO,
+> > +};
+> > +
+> >   struct f2fs_xattr_header {
+> >   	__le32  h_magic;        /* magic number for identification */
+> >   	__le32  h_refcount;     /* reference count */
+
+
+_______________________________________________
+Linux-f2fs-devel mailing list
+Linux-f2fs-devel@lists.sourceforge.net
+https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
