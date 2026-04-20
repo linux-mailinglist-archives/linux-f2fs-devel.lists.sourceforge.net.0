@@ -2,105 +2,102 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id APOkElbX5WnWoQEAu9opvQ
+	id 69APJG4S5mnRrAEAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 20 Apr 2026 09:35:50 +0200
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 20 Apr 2026 13:47:58 +0200
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 61EC5427CB0
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 20 Apr 2026 09:35:49 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B222442A0DD
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 20 Apr 2026 13:47:57 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.sourceforge.net; s=beta; h=Content-Type:Content-Transfer-Encoding:Cc:
+	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:In-Reply-To:References:To:MIME-Version:Date:
-	Message-ID:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
-	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=PWgWcS+zVc96h4D2+AjjKTu1UMJjArahzXEXQbJi0/c=; b=isX813dlP3m6su1Wn80YilKh3m
-	Jwq0OfVQ+uD7wE0ORT5DWSVBZsta3/6niPBtA1HHGmEzeYbYJnmXUBcCIKsieTIR6lT1+dh86wMk+
-	JX+1HRVg2WvM8FXK7IfUbPpI7fu6l+8r7KEN8281kXcpLq+YTJ+Q9GUGGB3VJVce7cwE=;
+	List-Unsubscribe:List-Id:Subject:MIME-Version:Message-ID:Date:To:Sender:
+	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+	Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Owner;
+	bh=VByvA+gX4gnN03qTj2G860OT7r0k6E/lyK+VzacDORQ=; b=GsTrfAlA6ClH3CmMciMcUwF66S
+	em/mQ62IY+zqzoC95oYsXitfmx8llN8FXaNI651soGMUl2eV6+8L+cPAYR3AQ7CVJs4mPvBYzYcfS
+	Aqm4JY0wHPWeciYX8knHy21+zHPOxa6EA6qBY497yDpNgb3lCqTk1u0/+dOXQ3ZBSZHA=;
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1wEjAV-0000gp-4M;
-	Mon, 20 Apr 2026 07:35:43 +0000
+	id 1wEn6R-0006Qo-UP;
+	Mon, 20 Apr 2026 11:47:47 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1wEjAT-0000gg-Qg
+ (envelope-from <aalbersh@kernel.org>) id 1wEn6Q-0006Qh-EH
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 20 Apr 2026 07:35:41 +0000
+ Mon, 20 Apr 2026 11:47:46 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- From:References:To:Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=AQ6nR96MlJ9E70p3Pjy4XTh/JX7e0wc34rlhcCrGKg4=; b=fA7ulqXI+yQ5bvoBfXCu9Wmmgy
- rhr9H8lHzDutJqc3nrZXqmpITrebmlfWOWxiadOdNVg6pgIxjhgPuK/G/iStKA6iLGi0DjsMZxIXc
- qut+coicpiF5jP+QPUPgR73LtYCKep5Bf57pmZ8+wU6FJJigPskXM4WTTPLZOQf4dIto=;
+ bh=laGV7Wb8UFUR+DLmD8duC7FcvN3tikg4uIyf8ELaZ6I=; b=aREwAQoK+vsZADy8VbU8doFoXk
+ XeAjd9+tjxe47dIc21zHO8U+nqX1TLfV8tX+aA/JJIf6jPQvZ4MgaUB6A35yeIMzg51PP8kWvHwES
+ 0jFG7tIEhvzLg4b/qX2XGcrWHdWW9FJX0KDOMf3SfPQ76TOUaXpzXSTDNtlMO2ykTb18=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
- Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=AQ6nR96MlJ9E70p3Pjy4XTh/JX7e0wc34rlhcCrGKg4=; b=XVDVPH0W/wS4OC7k/bKgSNqWC/
- EopJVTq8pNKrASLKDHG6bjr5BMT2cX+7aH7UMbpO/WSeHaj0xIEfTMYtqH0gvjSab31rzbm8tSsV5
- fvp4+QUN9eiFclE2e9x655UexLUVnFYcRRFwI+BrKF0YeQEHxDDDtSRcUUuJhD7uevNg=;
-Received: from tor.source.kernel.org ([172.105.4.254])
+ h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=laGV7Wb8UFUR+DLmD8duC7FcvN3tikg4uIyf8ELaZ6I=; b=P
+ RfiRWXYzz/Tfji1ymBaUXo0r7zujm0fLfRFkSOV3eBs1e/mfkfV0/xvLXnXOsciVdhNhjS0A2IG34
+ Zo+t5cq3T2ep0XxVqXXznJYKlAO16PEQEEXUftrRqd9hQFsgnmIt+9v6yfHHzdHHqg3DmHL/HL5bc
+ AUQpanmLzQjKmPdI=;
+Received: from sea.source.kernel.org ([172.234.252.31])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1wEjAT-00017O-2q for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 20 Apr 2026 07:35:41 +0000
+ id 1wEn6P-0007Cs-NU for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 20 Apr 2026 11:47:46 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 68CD260103;
- Mon, 20 Apr 2026 07:35:30 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id AB894C19425;
- Mon, 20 Apr 2026 07:35:28 +0000 (UTC)
+ by sea.source.kernel.org (Postfix) with ESMTP id 55AC5435CC;
+ Mon, 20 Apr 2026 11:47:35 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 62D4EC19425;
+ Mon, 20 Apr 2026 11:47:32 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1776670530;
- bh=wWspKhQXTOFZHp5pCXuza2DronRfDj4EXc/yRmaytgg=;
- h=Date:Cc:Subject:To:References:From:In-Reply-To:From;
- b=Q0Uj3Y923EnAuoCMYufBwwL9gvkS61xySjzUDSnXkFGxwtiRFCsLhrjfbXMa1fuuw
- OAf7ZYDtX+PH4IhuiJhGvfZy6zgV7p28pkZrySfn73/xMSK76nywAnr2AmHjQ0W8hd
- Tig87zby8ZqaRaePb6XJGpTHAJ6vXQF8GZ6srl4rh0ggv8HS28BjAzuFt3S2MkZBXM
- bopQczJgyvE+5vUfqJTj7ulara1eNR482FK95uQk8W9yl+UASDK3yXRLUKbEuziA4M
- ZJMXfHJgbnkv30MuHVSH0TvbNz/pDLw6us2bUvYp7nGBYAehZz9P54qhSkcFbaFdRh
- 0nfeKKc3VEFRQ==
-Message-ID: <607d2d34-9d58-42d1-8436-e85d9c73eb7a@kernel.org>
-Date: Mon, 20 Apr 2026 15:35:29 +0800
+ s=k20201202; t=1776685655;
+ bh=U950hHS/KgrWm4Bdmh/uVIBdlmQ5hkp3KXne6HzG+qw=;
+ h=From:To:Cc:Subject:Date:From;
+ b=PrJWk7u0le6cJhKeJDedoCTOx//2cDu6CNmKNHDsgt1MR0pU9CzQRaCyZ0VFigS3r
+ OOizB7NkNkgsQRs9VBKnB4Pe73/TgJWlInLzOBHicIBILInycysMPFjpU95mMxtChl
+ r9o60m+0ofvuK10eFFd7fzGnPIJzPBWYcbQPUh60CIGqyNIvEDJxrKKjSrC8rnVLsF
+ t4g7/jhvW1eqgGOBX/KMIKT80sljajn3DGKWyfPGl5CpqJUZpMEOcQi/fnAwZFDNAG
+ q/Z1Jh41PneOOEVVuP/lMCgIBUKS1HAcNKX3fbZ87tc+dpgcVUFvWEip15/sc/sT37
+ fAmdtZjUVQSYg==
+To: linux-xfs@vger.kernel.org, fsverity@lists.linux.dev,
+ linux-fsdevel@vger.kernel.org, ebiggers@kernel.org
+Date: Mon, 20 Apr 2026 13:46:47 +0200
+Message-ID: <20260420114714.1621982-1-aalbersh@kernel.org>
+X-Mailer: git-send-email 2.51.2
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-To: ruipengqi <ruipengqi3@gmail.com>, jaegeuk@kernel.org
-References: <20260325133749.1053541-1-ruipengqi3@gmail.com>
-Content-Language: en-US
-In-Reply-To: <20260325133749.1053541-1-ruipengqi3@gmail.com>
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Hi Ruipeng, Sorry, I missed your patch. On 3/25/2026 9:37
- PM, ruipengqi wrote: > From: Ruipeng Qi <ruipengqi3@gmail.com> > > When the
- f2fs filesystem space is nearly exhausted, we encounter deadlock > issues
- as below: > > INFO: task A:1890 [...] 
- Content analysis details:   (-0.2 points, 5.0 required)
+ Content preview:  Hi all, This patch series adds fs-verity support for XFS.
+ This version stores merkle tree beyond end of the file, the same way as ext4
+ does it. The difference is that verity descriptor is stored at the next a
+ [...] Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1wEjAT-00017O-2q
-Subject: Re: [f2fs-dev] [PATCH] f2fs: fix potential deadlock in
- f2fs_balance_fs()
+X-Headers-End: 1wEn6P-0007Cs-NU
+Subject: [f2fs-dev] [PATCH v8 00/22] fs-verity support for XFS with post EOF
+ merkle tree
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -112,11 +109,15 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Chao Yu <chao@kernel.org>
-Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+From: Andrey Albershteyn via Linux-f2fs-devel
+ <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Andrey Albershteyn <aalbersh@kernel.org>
+Cc: Andrey Albershteyn <aalbersh@kernel.org>, djwong@kernel.org,
+ david@fromorbit.com, linux-unionfs@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, linux-ext4@vger.kernel.org, hch@lst.de,
+ linux-btrfs@vger.kernel.org
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 X-Spamd-Result: default: False [-8.61 / 15.00];
 	WHITELIST_DMARC(-7.00)[sourceforge.net:D:+];
@@ -127,246 +128,218 @@ X-Spamd-Result: default: False [-8.61 / 15.00];
 	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_TLS_LAST(0.00)[];
-	DKIM_MIXED(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:ruipengqi3@gmail.com,m:jaegeuk@kernel.org,m:linux-kernel@vger.kernel.org,m:linux-f2fs-devel@lists.sourceforge.net,s:lists@lfdr.de];
 	RECEIVED_HELO_LOCALHOST(0.00)[];
-	FREEMAIL_TO(0.00)[gmail.com,kernel.org];
+	DKIM_MIXED(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	DMARC_POLICY_ALLOW(0.00)[lists.sourceforge.net,none];
+	FORGED_RECIPIENTS(0.00)[m:linux-xfs@vger.kernel.org,m:fsverity@lists.linux.dev,m:linux-fsdevel@vger.kernel.org,m:ebiggers@kernel.org,m:aalbersh@kernel.org,m:djwong@kernel.org,m:david@fromorbit.com,m:linux-unionfs@vger.kernel.org,m:linux-f2fs-devel@lists.sourceforge.net,m:linux-ext4@vger.kernel.org,m:hch@lst.de,m:linux-btrfs@vger.kernel.org,s:lists@lfdr.de];
 	FORGED_SENDER(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
+	RCPT_COUNT_TWELVE(0.00)[12];
 	TO_DN_SOME(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,kernel.org:s=k20201202];
 	MIME_TRACE(0.00)[0:+];
 	ARC_NA(0.00)[];
 	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
-	DMARC_POLICY_ALLOW(0.00)[lists.sourceforge.net,none];
-	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
 	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,kernel.org:-];
 	RCVD_COUNT_FIVE(0.00)[5];
 	NEURAL_HAM(-0.00)[-1.000];
 	FORGED_SENDER_FORWARDING(0.00)[];
 	FROM_HAS_DN(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
-	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,kernel.org:s=k20201202];
+	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	HAS_REPLYTO(0.00)[chao@kernel.org];
+	HAS_REPLYTO(0.00)[aalbersh@kernel.org];
 	TAGGED_RCPT(0.00)[linux-f2fs-devel];
-	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,kernel.org:-];
+	FORGED_SENDER_MAILLIST(0.00)[];
 	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
-	RCPT_COUNT_THREE(0.00)[4];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.sourceforge.net:dkim,lists.sourceforge.net:helo,lists.sourceforge.net:rdns]
-X-Rspamd-Queue-Id: 61EC5427CB0
+	DBL_BLOCKED_OPENRESOLVER(0.00)[linux.dev:email,lst.de:email,fromorbit.com:email,lists.sourceforge.net:dkim,lists.sourceforge.net:helo,lists.sourceforge.net:rdns]
+X-Rspamd-Queue-Id: B222442A0DD
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-Hi Ruipeng,
+Hi all,
 
-Sorry, I missed your patch.
+This patch series adds fs-verity support for XFS. This version stores
+merkle tree beyond end of the file, the same way as ext4 does it. The
+difference is that verity descriptor is stored at the next aligned 64k
+block after the merkle tree last block. This is done due to sparse
+merkle tree which doesn't store hashes of zero data blocks.
 
-On 3/25/2026 9:37 PM, ruipengqi wrote:
-> From: Ruipeng Qi <ruipengqi3@gmail.com>
-> 
-> When the f2fs filesystem space is nearly exhausted, we encounter deadlock
-> issues as below:
-> 
-> INFO: task A:1890 blocked for more than 120 seconds.
->        Tainted: G           O       6.12.41-g3fe07ddf05ab #1
-> "echo 0 > /proc/sys/kernel/hung_task_timeout_secs" disables this message.
-> task:A    state:D stack:0     pid:1890  tgid:1626  ppid:1153   flags:0x00000204
-> Call trace:
->   __switch_to+0xf4/0x158
->   __schedule+0x27c/0x908
->   schedule+0x3c/0x118
->   io_schedule+0x44/0x68
->   folio_wait_bit_common+0x174/0x370
->   folio_wait_bit+0x20/0x38
->   folio_wait_writeback+0x54/0xc8
->   truncate_inode_partial_folio+0x70/0x1e0
->   truncate_inode_pages_range+0x1b0/0x450
->   truncate_pagecache+0x54/0x88
->   f2fs_file_write_iter+0x3e8/0xb80
->   do_iter_readv_writev+0xf0/0x1e0
->   vfs_writev+0x138/0x2c8
->   do_writev+0x88/0x130
->   __arm64_sys_writev+0x28/0x40
->   invoke_syscall+0x50/0x120
->   el0_svc_common.constprop.0+0xc8/0xf0
->   do_el0_svc+0x24/0x38
->   el0_svc+0x30/0xf8
->   el0t_64_sync_handler+0x120/0x130
->   el0t_64_sync+0x190/0x198
-> 
-> INFO: task kworker/u8:11:2680853 blocked for more than 120 seconds.
->        Tainted: G           O       6.12.41-g3fe07ddf05ab #1
-> "echo 0 > /proc/sys/kernel/hung_task_timeout_secs" disables this message.
-> task:kworker/u8:11   state:D stack:0     pid:2680853 tgid:2680853 ppid:2      flags:0x00000208
-> Workqueue: writeback wb_workfn (flush-254:0)
-> Call trace:
->   __switch_to+0xf4/0x158
->   __schedule+0x27c/0x908
->   schedule+0x3c/0x118
->   io_schedule+0x44/0x68
->   folio_wait_bit_common+0x174/0x370
->   __filemap_get_folio+0x214/0x348
->   pagecache_get_page+0x20/0x70
->   f2fs_get_read_data_page+0x150/0x3e8
->   f2fs_get_lock_data_page+0x2c/0x160
->   move_data_page+0x50/0x478
->   do_garbage_collect+0xd38/0x1528
->   f2fs_gc+0x240/0x7e0
->   f2fs_balance_fs+0x1a0/0x208
->   f2fs_write_single_data_page+0x6e4/0x730  //0xfffffe0d6ca08300
->   f2fs_write_cache_pages+0x378/0x9b0
->   f2fs_write_data_pages+0x2e4/0x388
->   do_writepages+0x8c/0x2c8
->   __writeback_single_inode+0x4c/0x498
->   writeback_sb_inodes+0x234/0x4a8
->   __writeback_inodes_wb+0x58/0x118
->   wb_writeback+0x2f8/0x3c0
->   wb_workfn+0x2c4/0x508
->   process_one_work+0x180/0x408
->   worker_thread+0x258/0x368
->   kthread+0x118/0x128
->   ret_from_fork+0x10/0x200
-> 
-> INFO: task kworker/u8:8:2641297 blocked for more than 120 seconds.
->        Tainted: G           O       6.12.41-g3fe07ddf05ab #1
-> "echo 0 > /proc/sys/kernel/hung_task_timeout_secs" disables this message.
-> task:kworker/u8:8    state:D stack:0     pid:2641297 tgid:2641297 ppid:2      flags:0x00000208
-> Workqueue: writeback wb_workfn (flush-254:0)
-> Call trace:
->   __switch_to+0xf4/0x158
->   __schedule+0x27c/0x908
->   rt_mutex_schedule+0x30/0x60
->   __rt_mutex_slowlock_locked.constprop.0+0x460/0x8a8
->   rwbase_write_lock+0x24c/0x378
->   down_write+0x1c/0x30
->   f2fs_balance_fs+0x184/0x208
->   f2fs_write_inode+0xf4/0x328
->   __writeback_single_inode+0x370/0x498
->   writeback_sb_inodes+0x234/0x4a8
->   __writeback_inodes_wb+0x58/0x118
->   wb_writeback+0x2f8/0x3c0
->   wb_workfn+0x2c4/0x508
->   process_one_work+0x180/0x408
->   worker_thread+0x258/0x368
->   kthread+0x118/0x128
->   ret_from_fork+0x10/0x20
-> 
-> INFO: task B:1902 blocked for more than 120 seconds.
->        Tainted: G           O       6.12.41-g3fe07ddf05ab #1
-> "echo 0 > /proc/sys/kernel/hung_task_timeout_secs" disables this message.
-> task:B     state:D stack:0     pid:1902  tgid:1626  ppid:1153   flags:0x0000020c
-> Call trace:
->   __switch_to+0xf4/0x158
->   __schedule+0x27c/0x908
->   rt_mutex_schedule+0x30/0x60
->   __rt_mutex_slowlock_locked.constprop.0+0x460/0x8a8
->   rwbase_write_lock+0x24c/0x378
->   down_write+0x1c/0x30
->   f2fs_balance_fs+0x184/0x208
->   f2fs_map_blocks+0x94c/0x1110
->   f2fs_file_write_iter+0x228/0xb80
->   do_iter_readv_writev+0xf0/0x1e0
->   vfs_writev+0x138/0x2c8
->   do_writev+0x88/0x130
->   __arm64_sys_writev+0x28/0x40
->   invoke_syscall+0x50/0x120
->   el0_svc_common.constprop.0+0xc8/0xf0
->   do_el0_svc+0x24/0x38
->   el0_svc+0x30/0xf8
->   el0t_64_sync_handler+0x120/0x130
->   el0t_64_sync+0x190/0x198
-> 
-> INFO: task sync:2769849 blocked for more than 120 seconds.
->        Tainted: G           O       6.12.41-g3fe07ddf05ab #1
-> "echo 0 > /proc/sys/kernel/hung_task_timeout_secs" disables this message.
-> task:sync            state:D stack:0     pid:2769849 tgid:2769849 ppid:736    flags:0x0000020c
-> Call trace:
->   __switch_to+0xf4/0x158
->   __schedule+0x27c/0x908
->   schedule+0x3c/0x118
->   wb_wait_for_completion+0xb0/0xe8
->   sync_inodes_sb+0xc8/0x2b0
->   sync_inodes_one_sb+0x24/0x38
->   iterate_supers+0xa8/0x138
->   ksys_sync+0x54/0xc8
->   __arm64_sys_sync+0x18/0x30
->   invoke_syscall+0x50/0x120
->   el0_svc_common.constprop.0+0xc8/0xf0
->   do_el0_svc+0x24/0x38
->   el0_svc+0x30/0xf8
->   el0t_64_sync_handler+0x120/0x130
->   el0t_64_sync+0x190/0x198
-> 
-> The root cause is a potential deadlock between the following tasks:
-> 
-> kworker/u8:11				Thread A
-> - f2fs_write_single_data_page
->   - f2fs_do_write_data_page
->    - folio_start_writeback(X)
->    - f2fs_outplace_write_data
->     - bio_add_folio(X)
->   - folio_unlock(X)
-> 					- truncate_inode_pages_range
-> 					 - __filemap_get_folio(X, FGP_LOCK)
-> 					 - truncate_inode_partial_folio(X)
-> 					  - folio_wait_writeback(X)
->   - f2fs_balance_fs
->    - f2fs_gc
->     - do_garbage_collect
->      - move_data_page
->       - f2fs_get_lock_data_page
->        - __filemap_get_folio(X, FGP_LOCK)
-> 
-> Both threads try to access folio X. Thread A holds the lock but waits
-> for writeback, while kworker waits for the lock. This causes a deadlock.
-> 
-> Other threads also enter D state, waiting for locks such as gc_lock and
-> writepages.
-> 
-> To avoid this potential deadlock, always call f2fs_submit_merged_write
-> before triggering f2fs_gc in f2fs_balance_fs.
-> 
-> Signed-off-by: Ruipeng Qi <ruipengqi3@gmail.com>
-> ---
->   fs/f2fs/segment.c | 14 ++++++++++++++
->   1 file changed, 14 insertions(+)
-> 
-> diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
-> index 6a97fe76712b..b58299e49c23 100644
-> --- a/fs/f2fs/segment.c
-> +++ b/fs/f2fs/segment.c
-> @@ -454,6 +454,20 @@ void f2fs_balance_fs(struct f2fs_sb_info *sbi, bool need)
->   		io_schedule();
->   		finish_wait(&sbi->gc_thread->fggc_wq, &wait);
->   	} else {
-> +
-> +		/*
-> +		 * Before triggering foreground GC, submit all cached DATA
-> +		 * write bios. During writeback, pages may be added to
-> +		 * write_io[DATA].bio with PG_writeback set but the bio not
-> +		 * yet submitted. If GC's move_data_page() blocks on
-> +		 * __folio_lock() for such a folio, and the lock holder waits
-> +		 * for PG_writeback to clear via VFS folio_wait_writeback()
-> +		 * neither thread can make progress. Flushing here ensures
-> +		 * the bio completion callback can clear PG_writeback.
-> +		 */
-> +
-> +		f2fs_submit_merged_write(sbi, DATA);
+The patchset starts with a few fs-verity preparation patches. Then, a
+few patches to allow iomap to work in post EOF region. The XFS fs-verity
+implementation follows.
 
-Do we need to call f2fs_submit_merged_ipu_write(sbi, bio, NULL) to commit
-cached IPU folios as well?
+The tree is read by iomap into page cache at offset of next largest
+folio past end of file. The same offset is used for on-disk.
 
-Not sure, this race condition will happen for node folio.
+This patchsets also synthesizes merkle tree block full of hashes of
+zeroed data blocks. This merkle blocks are not stored on disk, they are
+holes in the tree.
 
-Thanks,
+Testing. The -g verity is passing for 1k, 8k and 4k with/without quota
+on 4k and 64k page size systems. Tested -g quick for enabled/disabled
+fsverity. Also, overlay/080 overlay/089 with XFS as base.
 
-> +
->   		struct f2fs_gc_control gc_control = {
->   			.victim_segno = NULL_SEGNO,
->   			.init_gc_type = f2fs_sb_has_blkzoned(sbi) ?
+This series based on v7.0 with Christoph's read ioends patchset [1].
+
+kernel:
+https://git.kernel.org/pub/scm/linux/kernel/git/aalbersh/xfs-linux.git/log/?h=b4/fsverity
+
+xfsprogs:
+https://github.com/alberand/xfsprogs/tree/b4/fsverity
+
+xfstests:
+https://github.com/alberand/xfstests/tree/b4/fsverity
+
+Cc: fsverity@lists.linux.dev
+Cc: linux-fsdevel@vger.kernel.org
+Cc: linux-xfs@vger.kernel.org
+Cc: linux-unionfs@vger.kernel.org
+
+Cc: david@fromorbit.com
+Cc: djwong@kernel.org
+Cc: ebiggers@kernel.org
+Cc: hch@lst.de
+
+1: https://lore.kernel.org/linux-xfs/20260223132021.292832-1-hch@lst.de/
+
+---
+Changes in v8:
+- Return fsverity_ensure_verity_info() errors from
+  ovl_ensure_verity_loaded()
+Changes in v7:
+- Move kerneldoc to fsverity_ensure_verity_info() definition
+- Drop patch adding XFS traces
+- Fix overly long line in the comment
+- Make order of fserror and fsverity_error consistent
+- Add overlay patch converting to fsverity_ensure_verity_info()
+Changes in v6:
+- Removed stub for fsverity_ensure_verity_info() as it's optimized out
+- Rename fsverity_folio_zero_hash() to fsverify_fill_zerohash()
+- Merge patches 8 to 10 into one
+- Merge patch gerating zero_hash and fsverity_fill_zerohash() into one
+- Add kerneldoc to fsverity_ensure_verity_info()
+- Add comments to iomap_block_needs_zeroing()
+Changes in v5:
+- Add fserror_report_data_lost() for data blocks in page spanning EOF
+- Issue fsverity metadata readahead in data readahead
+- iomap_fsverity_write() return type fix
+- Use of S_ISREG(mode)
+- Make 65536 #define instead of open-coded
+- Use transaction per unwritten extent removal
+- Fetch fsverity_info for all fsverity metadata
+- Revert fsverity_folio_zero_hash() stub as used in iomap
+- Extend cancel_unwritten to whole file range to remove cow leftovers
+- Drop delayed allocation on the COW fork on fsverity completion
+Changes in v4:
+- Use fserror interface in fsverity instead of fs callback
+- Hoist pagecache_read from f2fs/ext4 to fsverity
+- Refactor iomap code
+- Fetch fsverity_info only for file data and merkle tree holes
+- Do not disable preallocation, remove unwritten extents instead
+- Offload fsverity hash I/O to fsverity workqueue in read path
+- Store merkle tree at round_up(i_size, 64k)
+- Add a spacing between merkle tree and fsverity descriptor as next 64k
+  aligned block
+- Squash helpers into first user commits
+- Squash on-disk format changes into single commit
+- Drop different offset for pagecache/on-disk
+- Don't zero out pages in higher order folios in write path
+- Link to v3: https://lore.kernel.org/fsverity/20260217231937.1183679-1-aalbersh@kernel.org/T/#t
+Changes in v3:
+- Different on-disk and pagecache offset
+- Use read path ioends
+- Switch to hashtable fsverity info
+- Synthesize merkle tree blocks full of zeroes
+- Other minor refactors
+- Link to v2: https://lore.kernel.org/fsverity/20260114164210.GO15583@frogsfrogsfrogs/T/#t
+Changes in v2:
+- Move to VFS interface for merkle tree block reading
+- Drop patchset for per filesystem workqueues
+- Change how offsets of the descriptor and tree metadata is calculated
+- Store fs-verity descriptor in data fork side by side with merkle tree
+- Simplify iomap changes, remove interface for post eof read/write
+- Get rid of extended attribute implementation
+- Link to v1: https://lore.kernel.org/r/20250728-fsverity-v1-0-9e5443af0e34@kernel.org
+
+Andrey Albershteyn (20):
+  fsverity: report validation errors through fserror to fsnotify
+  fsverity: expose ensure_fsverity_info()
+  ovl: use core fsverity ensure info interface
+  fsverity: generate and store zero-block hash
+  fsverity: pass digest size and hash of the all-zeroes block to ->write
+  fsverity: hoist pagecache_read from f2fs/ext4 to fsverity
+  iomap: introduce IOMAP_F_FSVERITY and teach writeback to handle
+    fsverity
+  iomap: teach iomap to read files with fsverity
+  iomap: introduce iomap_fsverity_write() for writing fsverity metadata
+  xfs: introduce fsverity on-disk changes
+  xfs: initialize fs-verity on file open
+  xfs: don't allow to enable DAX on fs-verity sealed inode
+  xfs: disable direct read path for fs-verity files
+  xfs: handle fsverity I/O in write/read path
+  xfs: use read ioend for fsverity data verification
+  xfs: add fs-verity support
+  xfs: remove unwritten extents after preallocations in fsverity
+    metadata
+  xfs: add fs-verity ioctls
+  xfs: introduce health state for corrupted fsverity metadata
+  xfs: enable ro-compat fs-verity flag
+
+Darrick J. Wong (2):
+  xfs: advertise fs-verity being available on filesystem
+  xfs: check and repair the verity inode flag state
+
+ fs/btrfs/verity.c              |   6 +-
+ fs/ext4/verity.c               |  36 +--
+ fs/f2fs/verity.c               |  34 +--
+ fs/iomap/buffered-io.c         | 109 +++++++-
+ fs/iomap/trace.h               |   3 +-
+ fs/overlayfs/util.c            |  14 +-
+ fs/verity/enable.c             |   4 +-
+ fs/verity/fsverity_private.h   |   3 +
+ fs/verity/measure.c            |   4 +-
+ fs/verity/open.c               |  25 +-
+ fs/verity/pagecache.c          |  55 ++++
+ fs/verity/verify.c             |   4 +
+ fs/xfs/Makefile                |   1 +
+ fs/xfs/libxfs/xfs_bmap.c       |   7 +
+ fs/xfs/libxfs/xfs_format.h     |  35 ++-
+ fs/xfs/libxfs/xfs_fs.h         |   2 +
+ fs/xfs/libxfs/xfs_health.h     |   4 +-
+ fs/xfs/libxfs/xfs_inode_buf.c  |   8 +
+ fs/xfs/libxfs/xfs_inode_util.c |   2 +
+ fs/xfs/libxfs/xfs_sb.c         |   4 +
+ fs/xfs/scrub/attr.c            |   7 +
+ fs/xfs/scrub/common.c          |  53 ++++
+ fs/xfs/scrub/common.h          |   2 +
+ fs/xfs/scrub/inode.c           |   7 +
+ fs/xfs/scrub/inode_repair.c    |  36 +++
+ fs/xfs/xfs_aops.c              |  62 ++++-
+ fs/xfs/xfs_bmap_util.c         |   8 +
+ fs/xfs/xfs_file.c              |  19 +-
+ fs/xfs/xfs_fsverity.c          | 455 +++++++++++++++++++++++++++++++++
+ fs/xfs/xfs_fsverity.h          |  28 ++
+ fs/xfs/xfs_health.c            |   1 +
+ fs/xfs/xfs_inode.h             |   6 +
+ fs/xfs/xfs_ioctl.c             |  14 +
+ fs/xfs/xfs_iomap.c             |  15 +-
+ fs/xfs/xfs_iops.c              |   4 +
+ fs/xfs/xfs_message.c           |   4 +
+ fs/xfs/xfs_message.h           |   1 +
+ fs/xfs/xfs_mount.h             |   4 +
+ fs/xfs/xfs_super.c             |   7 +
+ include/linux/fsverity.h       |  18 +-
+ include/linux/iomap.h          |  13 +
+ 41 files changed, 1017 insertions(+), 107 deletions(-)
+ create mode 100644 fs/xfs/xfs_fsverity.c
+ create mode 100644 fs/xfs/xfs_fsverity.h
+
+-- 
+2.51.2
 
 
 
