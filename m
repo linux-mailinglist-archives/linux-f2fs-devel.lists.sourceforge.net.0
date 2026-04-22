@@ -2,94 +2,131 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id aJOJG1F76GlvKwIAu9opvQ
+	id gBtPGrCN6GmpMQIAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 22 Apr 2026 09:40:01 +0200
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 22 Apr 2026 10:58:24 +0200
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5313444308D
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 22 Apr 2026 09:39:59 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8E641443B07
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 22 Apr 2026 10:58:23 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
-	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
-	Subject:MIME-Version:Message-ID:Date:To:From:Sender:Reply-To:Content-ID:
-	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
-	:Resent-Message-ID:In-Reply-To:References:List-Owner;
-	bh=sITf78reQt7XUveM4K/v8l68ZqnRGZOgre0NzI08dVQ=; b=R+uBEFkF269rtybm929Dq+9NHT
-	A94Xb8mwNQXaavRqpZCD0Hkgl5MbpyVUckZ7WbjTCtHKHt2qhkm2tdUreDANFmGbY0kv2J/LElzGV
-	W0Nnc0StrTTA0lJXWqCG3ING6inA/7kUpZBVqJ+uCMey019RzgNkZC23a4hpPmiVfU1k=;
+	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
+	List-Unsubscribe:List-Id:Subject:In-Reply-To:MIME-Version:References:
+	Message-ID:To:Date:Sender:Content-ID:Content-Description:Resent-Date:
+	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
+	bh=3R7ECZ+UezlMrSmWQUzbKWDK96UQodZvuFa7TBdehuI=; b=iqAndb7EB3MENklViLQ2/GckhC
+	WMwllOTsSsyN0QlqBNDDMPs82gdZE3U+exUhiMedKGyfQMZ5tBhg6a96dCli26aqiSbN82s1RYhHd
+	aI+RWT3jYj8Cm00vTD/hhNvy90mei8xdBVcJJeZV4B+Z3bNetjJPUseyeLAHHrkmafyc=;
 Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
 	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1wFSBc-0004uZ-9T;
-	Wed, 22 Apr 2026 07:39:52 +0000
+	id 1wFTPS-0006m8-Sh;
+	Wed, 22 Apr 2026 08:58:14 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
  by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <monty_pavel@sina.com>) id 1wFSB9-0004u8-36
+ (envelope-from <aalbersh@redhat.com>) id 1wFTPR-0006m1-3Z
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 22 Apr 2026 07:39:23 +0000
+ Wed, 22 Apr 2026 08:58:13 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Type:In-Reply-To:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=H1trmsrQHG+SXv8TcNk649lze8L80j1LOKIwDN+ZgaY=; b=CuHBkOpSVRVLilbcuJh56jRv4I
- LNYlZ4B+s7J02aoPtntpcgczEBkPryaUOInNbB5bpTkTYRvFcoTobjLz52pcKsLqZRqz5Br1El/9q
- BhXuhtoyDW5MB/Gi9n85BBh5WfKbnrzhMlxbxskLMK1gfMsl+uapllqkyelpInwnzzB4=;
+ bh=FFaygBUBXXsgixj3eSOd6CMo0lj7K6zPcakxuhrDzd4=; b=cGPd4zTrBUvszJv6HgT5tjYqyq
+ Q6Ilj3+EjObwJvrjtg5f2tqjWPQspv9UvAYJROum4VoSdwE+U4x/svJdVDFLW+vviOjDsv3W56+MQ
+ 8yA9PltbcyTU9vxAvxjvZH7RnUNoi82Ts8g+2eO0pM8wuIQQ1wYTSKaM0BU6mpuNmj6s=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=H1trmsrQHG+SXv8TcNk649lze8L80j1LOKIwDN+ZgaY=; b=V
- uLtfzZ1BdTkrpc8c34X8dJEa6KfxTmS+iZr/DAZBEZ2vVE9ACH1s6kWrCm7B9OkE5ymDeOcCYAsoW
- 1zSoKytrr0mmNm4W9LmUdCLBnqax9q5HMm51DaX5gXFMAmzmajpBQlRTv7KCVFEdmHDe70JmKuzmk
- ghIHrsr5Dms1smLU=;
-Received: from smtp153-171.sina.com.cn ([61.135.153.171])
+ h=Content-Type:In-Reply-To:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=FFaygBUBXXsgixj3eSOd6CMo0lj7K6zPcakxuhrDzd4=; b=L7YsnU0e9VPbcWg82XbGH70Fiz
+ F4DP7n80hSO+umequVBA+ghb0j+eND55sN87gqA0P1pBX/wjh+G+BcV9DVMMf3JmWkCsDVJdm85D6
+ Uxu+59NCNIwq110gBYEdWvtXtVJp5hDs8UGQV6fBeVBjxdFLNVPIVpga3v04t05Uxaqk=;
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.129.124])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1wFSB8-00048Q-3R for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 22 Apr 2026 07:39:23 +0000
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sina.com; s=201208;
- t=1776843562; bh=H1trmsrQHG+SXv8TcNk649lze8L80j1LOKIwDN+ZgaY=;
- h=From:Subject:Date:Message-ID;
- b=WMPSzEAQmY8d9mNmbWOYrKZb7XwDBYwFO7tq1MIw5ux/enlPxFvYqfhOVvX1NcTi5
- F1nuIRub4mQCqw4Pt4TkW7P7TU5TUkRsFKy550HJ+ZEE6GFHkaI2k02pnzTSG2PGTv
- JZOi3GTtKbFxDrZJNNqDwYy6fIGWB1ABX/oUjABQ=
-X-SMAIL-HELO: xiaomi-ThinkCentre-M760t.mioffice.cn
-Received: from unknown (HELO
- xiaomi-ThinkCentre-M760t.mioffice.cn)([114.247.175.249])
- by sina.com (10.54.253.34) with ESMTP
- id 69E87B1A00000156; Wed, 22 Apr 2026 15:39:08 +0800 (CST)
-X-Sender: monty_pavel@sina.com
-X-Auth-ID: monty_pavel@sina.com
-Authentication-Results: sina.com; spf=none smtp.mailfrom=monty_pavel@sina.com;
- dkim=none header.i=none;
- dmarc=none action=none header.from=monty_pavel@sina.com
-X-SMAIL-MID: 7173206291732
-X-SMAIL-UIID: 14C6B3A440BA462DBDF0DAFF2F44DA75-20260422-153908-1
-From: Yongpeng Yang <monty_pavel@sina.com>
-To: Chao Yu <chao@kernel.org>,
-	Jaegeuk Kim <jaegeuk@kernel.org>
-Date: Wed, 22 Apr 2026 15:35:26 +0800
-Message-ID: <20260422073525.2063784-2-monty_pavel@sina.com>
-X-Mailer: git-send-email 2.43.0
+ id 1wFTPQ-0001YM-Gn for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 22 Apr 2026 08:58:13 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1776848286;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=FFaygBUBXXsgixj3eSOd6CMo0lj7K6zPcakxuhrDzd4=;
+ b=cHQHEGn4d65uGcHveSIfcaCYX+F8OuoMacUm1MAOmqirZSK4FaBJJv5JD4WXXd/psgrLV4
+ AyeNE1L6dGikldh6xPKHp9tapFPxBEeg5jZczq2A419pFkp0K5EdnG6cEGSDAAe63btKjy
+ 0tAeHahRUjaQ4pK45Cde+QMyNuzt6lE=
+Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
+ [209.85.221.72]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-533-SwoaRPGqMB23oGeHc5hoaA-1; Wed, 22 Apr 2026 04:58:05 -0400
+X-MC-Unique: SwoaRPGqMB23oGeHc5hoaA-1
+X-Mimecast-MFC-AGG-ID: SwoaRPGqMB23oGeHc5hoaA_1776848284
+Received: by mail-wr1-f72.google.com with SMTP id
+ ffacd0b85a97d-43ff0eb2b2aso2763684f8f.2
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Wed, 22 Apr 2026 01:58:04 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1776848284; x=1777453084;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-gg:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=FFaygBUBXXsgixj3eSOd6CMo0lj7K6zPcakxuhrDzd4=;
+ b=IJhjO48j5B5Cu4JgAC/pKPRAOjhbtC2oMbwMwzGl1VU0MLYhZbKrXvR2uuFRWUWL6S
+ AW2c8mhlZ8xybRIReVSsOXH6OchnOcTwaQOKJfv28ASh6XmRdvcK3G5Df3PfEosZMStr
+ WBMvc3PQgbC6yLAjEr1DHP9X5aQwDR3jhKVFpOLNxc0ucsL2SeDBKtUu8OzhZhtvT2Qy
+ GCdzRfOCWybT8jPvfdKqPJ5EegTWYJtqcFUmIFKKSLfo1T+7bylF1qUxqtsXJUok5B3U
+ JWJY03xdxBb92byOt+fTnYikuq3t4rux1GnohFMtN4F5SqTzQ0HtK9Dm2K2GR/yQWC5l
+ eB7A==
+X-Forwarded-Encrypted: i=1;
+ AFNElJ/VhnMZzGSFoteTfYhlGs4+SoUi8IvciITTe236FoiU45SbWXv/V7y2nVgK2bql8Rm1GznH0W9cSaPR45wFRnzQ@lists.sourceforge.net
+X-Gm-Message-State: AOJu0YxtN8I9AP40szOxd3ZwCKqpphtvyhCrT/yriViQTLhdL6E2p43s
+ DoL2wnA3BOEIRiUn0Nk9mCe1P9bZz9fjHIuJnfUk62VARyjwiq7h3M8vrX8vUh/VOyEoy8Qf4mI
+ PgFsT9iseXPAx0oCTNqeu4M0Rs44rzgc8C9mKPvaHQAzx5THl/YB7DUlb4ABD4VhJ4hF9N3JoQV
+ 8gkg==
+X-Gm-Gg: AeBDies5wq7sTxbnt1Mc38/dVNZcsUhvFqPQnZakfJJKiIAEb7kVlxCtW6oLZAzMgIc
+ 4n5OmhEQ445QwsHhM+wrjbZW/ijeG/xAzQNUrBjHM5OyYI+ALDa+49X18KTkqCnqaUVLfU0INHE
+ Cm7FoUDLCvJitajSPQesUE5dgiJEM2Y1j6P9NBBzam+sy4cxBJRMkU9VZjaunHzxFy/JTK+yPdF
+ Ji9zlo3wdo1/SYOsv0X+SxCOTkS9gcIbhNpiJfdHMuAs1vGDfPPWcJjOhGhQPkGlpD9dtKbWzC6
+ ymIDRklL0vRZ0+kcqS9mmGzD1sJcfj9F6lo4zu/1bJjo0eiHy59E2SGfLJyaNscTIHg6MKxYIg4
+ tTPyKBDfLCTYJ+BUybuH5Ag==
+X-Received: by 2002:a05:6000:4022:b0:441:2439:bef2 with SMTP id
+ ffacd0b85a97d-4412439befdmr4594389f8f.24.1776848283806; 
+ Wed, 22 Apr 2026 01:58:03 -0700 (PDT)
+X-Received: by 2002:a05:6000:4022:b0:441:2439:bef2 with SMTP id
+ ffacd0b85a97d-4412439befdmr4594342f8f.24.1776848283286; 
+ Wed, 22 Apr 2026 01:58:03 -0700 (PDT)
+Received: from thinky ([217.30.74.39]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-43fe4e3a341sm47712138f8f.24.2026.04.22.01.58.02
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 22 Apr 2026 01:58:02 -0700 (PDT)
+Date: Wed, 22 Apr 2026 10:58:02 +0200
+To: Eric Biggers <ebiggers@kernel.org>
+Message-ID: <iads77qkk2wjkqfezd4vtqsga6btlkqdyephqojyv76herp6by@l24e2hm2ebas>
+References: <20260420114714.1621982-1-aalbersh@kernel.org>
+ <20260421214316.GB37143@quark>
 MIME-Version: 1.0
+In-Reply-To: <20260421214316.GB37143@quark>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-MFC-PROC-ID: FRRsBtuUKecrTcUXA87C9cL7f7-iYA2nq4hSk_64Qjs_1776848284
+X-Mimecast-Originator: redhat.com
+Content-Disposition: inline
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: From: yangyongpeng When __destroy_extent_node() sets the
- inode
- flag FI_NO_EXTENT, it does not reset the length of the largest extent to
- 0 and update the inode folio. Since modifications to the extent tree are
- disallowed [...] 
+ Content preview:  On 2026-04-21 14:43:16, Eric Biggers wrote: > On Mon, Apr
+ 20, 2026 at 01:46:47PM +0200, Andrey Albershteyn wrote: > > This series based
+ on v7.0 with Christoph's read ioends patchset [1]. > > > > kerne [...] 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -100,11 +137,13 @@ X-Spam-Report: Spam detection software,
  envelope-from domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
- [monty_pavel(at)sina.com]
-X-Headers-End: 1wFSB8-00048Q-3R
-Subject: [f2fs-dev] [PATCH] f2fs: fix incorrect FI_NO_EXTENT handling in
- __destroy_extent_node()
+ 0.0 RCVD_IN_MSPIKE_H4      RBL: Very Good reputation (+4)
+ [170.10.129.124 listed in wl.mailspike.net]
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+ -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
+X-Headers-End: 1wFTPQ-0001YM-Gn
+Subject: Re: [f2fs-dev] [PATCH v8 00/22] fs-verity support for XFS with post
+ EOF merkle tree
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -116,96 +155,79 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Yongpeng Yang <yangyongpeng@xiaomi.com>, stable@vger.kernel.org,
- Yongpeng Yang <monty_pavel@sina.com>, linux-f2fs-devel@lists.sourceforge.net
+From: Andrey Albershteyn via Linux-f2fs-devel
+ <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Andrey Albershteyn <aalbersh@redhat.com>
+Cc: fsverity@lists.linux.dev, Andrey Albershteyn <aalbersh@kernel.org>,
+ djwong@kernel.org, david@fromorbit.com, linux-unionfs@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, linux-xfs@vger.kernel.org,
+ linux-fsdevel@vger.kernel.org, linux-ext4@vger.kernel.org, hch@lst.de,
+ linux-btrfs@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
-X-Spamd-Result: default: False [-0.01 / 15.00];
-	MID_CONTAINS_FROM(1.00)[];
+X-Spamd-Result: default: False [-8.11 / 15.00];
+	WHITELIST_DMARC(-7.00)[sourceforge.net:D:+];
+	MID_RHS_NOT_FQDN(0.50)[];
+	DMARC_POLICY_ALLOW_WITH_FAILURES(-0.50)[];
 	RWL_MAILSPIKE_EXCELLENT(-0.40)[216.105.38.7:from];
-	MAILLIST(-0.20)[mailman];
 	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7];
+	MAILLIST(-0.20)[mailman];
 	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
 	MIME_GOOD(-0.10)[text/plain];
-	DMARC_POLICY_SOFTFAIL(0.10)[sina.com : SPF not aligned (relaxed), DKIM not aligned (relaxed),none];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORGED_SENDER(0.00)[monty_pavel@sina.com,linux-f2fs-devel-bounces@lists.sourceforge.net];
-	FORGED_RECIPIENTS(0.00)[m:chao@kernel.org,m:jaegeuk@kernel.org,m:yangyongpeng@xiaomi.com,m:stable@vger.kernel.org,m:monty_pavel@sina.com,m:linux-f2fs-devel@lists.sourceforge.net,s:lists@lfdr.de];
-	RCVD_COUNT_THREE(0.00)[4];
-	ARC_NA(0.00)[];
-	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
-	FORGED_SENDER_MAILLIST(0.00)[];
 	RECEIVED_HELO_LOCALHOST(0.00)[];
-	FREEMAIL_FROM(0.00)[sina.com];
-	MIME_TRACE(0.00)[0:+];
-	TO_DN_SOME(0.00)[];
-	DKIM_MIXED(0.00)[];
-	FREEMAIL_CC(0.00)[xiaomi.com,vger.kernel.org,sina.com,lists.sourceforge.net];
-	RCPT_COUNT_FIVE(0.00)[6];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
-	FROM_NEQ_ENVFROM(0.00)[monty_pavel@sina.com,linux-f2fs-devel-bounces@lists.sourceforge.net];
 	FROM_HAS_DN(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
-	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,sina.com:s=201208];
+	FORGED_RECIPIENTS(0.00)[m:ebiggers@kernel.org,m:fsverity@lists.linux.dev,m:aalbersh@kernel.org,m:djwong@kernel.org,m:david@fromorbit.com,m:linux-unionfs@vger.kernel.org,m:linux-f2fs-devel@lists.sourceforge.net,m:linux-xfs@vger.kernel.org,m:linux-fsdevel@vger.kernel.org,m:linux-ext4@vger.kernel.org,m:hch@lst.de,m:linux-btrfs@vger.kernel.org,s:lists@lfdr.de];
+	DMARC_POLICY_ALLOW(0.00)[lists.sourceforge.net,none];
+	DKIM_MIXED(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[6];
+	FORGED_SENDER(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
+	RCPT_COUNT_TWELVE(0.00)[12];
+	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,redhat.com:s=mimecast20190719];
+	MIME_TRACE(0.00)[0:+];
+	ARC_NA(0.00)[];
+	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
+	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
+	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
+	FORGED_SENDER_FORWARDING(0.00)[];
 	TAGGED_RCPT(0.00)[linux-f2fs-devel];
-	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,sina.com:-];
+	FROM_NEQ_ENVFROM(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	PREVIOUSLY_DELIVERED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
+	NEURAL_HAM(-0.00)[-1.000];
+	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,redhat.com:-];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	MISSING_XM_UA(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sina.com:mid,xiaomi.com:email]
-X-Rspamd-Queue-Id: 5313444308D
+	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
+	TO_DN_SOME(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	HAS_REPLYTO(0.00)[aalbersh@redhat.com]
+X-Rspamd-Queue-Id: 8E641443B07
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-From: yangyongpeng <yangyongpeng@xiaomi.com>
+On 2026-04-21 14:43:16, Eric Biggers wrote:
+> On Mon, Apr 20, 2026 at 01:46:47PM +0200, Andrey Albershteyn wrote:
+> > This series based on v7.0 with Christoph's read ioends patchset [1].
+> > 
+> > kernel:
+> > https://git.kernel.org/pub/scm/linux/kernel/git/aalbersh/xfs-linux.git/log/?h=b4/fsverity
+> 
+> FYI: the git repository doesn't match what was actually sent out.  For
+> example the patch "ovl: use core fsverity ensure info interface" is a
+> bit different.  The version in git (incorrectly, I think) ignores the
+> error code, while the patch returns it.
+> 
+> - Eric
+> 
 
-When __destroy_extent_node() sets the inode flag FI_NO_EXTENT, it does
-not reset the length of the largest extent to 0 and update the inode
-folio. Since modifications to the extent tree are disallowed afterward,
-the cached largest extent may become stale. This can trigger the
-following error in xfstests generic/388:
+Thanks, you're right, I forgot to push
 
-F2FS-fs (dm-0): sanity_check_extent_cache: inode (ino=1761) extent info [220057, 57, 6] is incorrect, run fsck to fix
-
-In the f2fs_drop_inode path, __destroy_extent_node() does not need to
-guarantee that et->node_cnt is 0, because concurrency with writeback
-is expected in this path, and writeback may update the extent cache.
-
-This patch updates __destroy_extent_node() to avoid setting the inode
-flag FI_NO_EXTENT, and to remove the check zero of et->node_cnt.
-
-Fixes: ed78aeebef05 ("f2fs: fix node_cnt race between extent node destroy and writeback")
-Cc: stable@vger.kernel.org
-Reported-by: Chao Yu <chao@kernel.org>
-Suggested-by: Chao Yu <chao@kernel.org>
-Signed-off-by: yangyongpeng <yangyongpeng@xiaomi.com>
----
- fs/f2fs/extent_cache.c | 4 ----
- 1 file changed, 4 deletions(-)
-
-diff --git a/fs/f2fs/extent_cache.c b/fs/f2fs/extent_cache.c
-index 87169fd29d89..3adbead27953 100644
---- a/fs/f2fs/extent_cache.c
-+++ b/fs/f2fs/extent_cache.c
-@@ -645,14 +645,10 @@ static unsigned int __destroy_extent_node(struct inode *inode,
- 
- 	while (atomic_read(&et->node_cnt)) {
- 		write_lock(&et->lock);
--		if (!is_inode_flag_set(inode, FI_NO_EXTENT))
--			set_inode_flag(inode, FI_NO_EXTENT);
- 		node_cnt += __free_extent_tree(sbi, et, nr_shrink);
- 		write_unlock(&et->lock);
- 	}
- 
--	f2fs_bug_on(sbi, atomic_read(&et->node_cnt));
--
- 	return node_cnt;
- }
- 
 -- 
-2.43.0
+- Andrey
 
 
 
