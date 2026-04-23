@@ -2,42 +2,42 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 2MzWKc8a6mlSuQIAu9opvQ
+	id qxmGLc8a6mlyuQIAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
 	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 23 Apr 2026 15:12:47 +0200
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id E69304528EF
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 23 Apr 2026 15:12:45 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1E0BA4528F1
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 23 Apr 2026 15:12:46 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
 	List-Unsubscribe:List-Id:Subject:To:In-Reply-To:References:Message-Id:
 	MIME-Version:Date:Sender:Content-ID:Content-Description:Resent-Date:
 	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=bxEPZVL863UyEGnijv5YfoOKeUSIBgjUrQdsNW0CHQY=; b=L3Q1t2vO9zdT+0NwYoCscuLmO1
-	h0+ZejUhvuPiZzau9fM8rceiAqhMVqEFrzZIx3O2OfChCSsnYBom7LgM/Mxuy2mI6oiJV9VxlOiTL
-	1hRz/FcYOMS4mH3iO2F3ME6McUpZyhV5FemRYb2XRQ5LNJ5Kk1auN0/Zv++gDU5TMc70=;
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=zp8bmVqtjKNvhzs9Kp/pRkSrvXHjyz5tecgIx9klPPc=; b=jsVX4JKA8c3+iT2bDWjzkqw+xN
+	nkEXy4ptTl+3bsKbT1uEWbItMQXdtVCKHe9pAR9dunxU5hS9btrZiVoCEE/WRn/YWZ8E8YRUWSP0k
+	f8hINDe+exIugPvn54mJ9EkvqQ8D4MmEvaZhknzdUA5ivCaJQTbqWLnyTM0BgOZhdar8=;
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1wFtrF-0002e1-D1;
-	Thu, 23 Apr 2026 13:12:41 +0000
+	id 1wFtr9-0003Ot-Uc;
+	Thu, 23 Apr 2026 13:12:36 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <cel@kernel.org>) id 1wFtrD-0002dr-M3
+ (envelope-from <cel@kernel.org>) id 1wFtr8-0003Of-Da
  for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 23 Apr 2026 13:12:39 +0000
+ Thu, 23 Apr 2026 13:12:35 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Cc:To:In-Reply-To:References:Message-Id:
  Content-Transfer-Encoding:Content-Type:MIME-Version:Subject:Date:From:Sender:
  Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
  :Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=31K4p9+/N/vwMThBtdtITu75dH7WNqb/vvnLPTJftnM=; b=YPx01FIH10LlZHpYwTc8u9+qgp
- Txlq3VybUxm357+CHVp4RzVc3JYUcxh4qFOdnS9nD9tBZyMgZ0nP7eUWPt82URW/1EAb6UDk4Aqez
- Qb+ZbwrQ3WvDOXxMh7ZnUDTA1cylEi5pHVsI0NzWnP8aAkguwJkeDCckvrkw55qmDCCs=;
+ bh=KME06VXxZEDCxiuHOzN0Id0I7W6GQoO3+MJbI5byik4=; b=Jyo441LAY7TEtuAX4+GBn3n3Jy
+ Js1E/mfQjN7HTkofxfD6V00O5Hp/dEC44h9IkJQhLbPvD4x82u3S263cq5l1fbCQzQb0n1UGeJaqQ
+ r5Fc/jrU3bKaeFVJQZRJ2kkIa+ucX6ThLUKMJx85lRWvmcGuTetJKekfQG8Ila6AP0NY=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Cc:To:In-Reply-To:References:Message-Id:Content-Transfer-Encoding:
@@ -45,52 +45,52 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=31K4p9+/N/vwMThBtdtITu75dH7WNqb/vvnLPTJftnM=; b=TxFVd7/L66nW0kq6fv+8squ811
- wj/LwBbwT2GlD4ACmkJWJyzlBIpTm9JhGCDO11GMRoPSS0l5cEurrXNhMUR9SNsgiw4YGWZf+cbpf
- xE+2XisA+/Moy4AWTwa4ntmiMa2YQ8gW+FKleUYet9Cat14GVTCTo2oSwfvB06GxvDJw=;
-Received: from tor.source.kernel.org ([172.105.4.254])
+ bh=KME06VXxZEDCxiuHOzN0Id0I7W6GQoO3+MJbI5byik4=; b=jadMJx1YGQVEZvowJa2TYxSu/+
+ Pxt2XJdCqL7sGyZHCdEsz/N4SirO+ZzFpAVArVjo5TFaxtqel83mkDFDCjxZDd7NSNUbPjOmDegLc
+ rpkx1ks4Wz1SePXKi5uI3/sWcPBWWOvyt5I3Dig69Zb/flLenRUvmdZS/o5AhvuR04x8=;
+Received: from sea.source.kernel.org ([172.234.252.31])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1wFtrA-0006no-Oh for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 23 Apr 2026 13:12:39 +0000
+ id 1wFtr7-0006nd-IY for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 23 Apr 2026 13:12:35 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 0A4606013B;
- Thu, 23 Apr 2026 13:12:26 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 82248C2BCB4;
- Thu, 23 Apr 2026 13:12:23 +0000 (UTC)
+ by sea.source.kernel.org (Postfix) with ESMTP id 416D844314;
+ Thu, 23 Apr 2026 13:12:28 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E8622C2BCB6;
+ Thu, 23 Apr 2026 13:12:25 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1776949945;
- bh=8UqRyDDayDThBQIQ3JhVpzhStC9FLBOMKCqvs54Qc/w=;
+ s=k20201202; t=1776949948;
+ bh=7UJbZffIRnlSy1BsD5KTY53QnosRcT5XUdA8rzeY0m0=;
  h=From:Date:Subject:References:In-Reply-To:To:Cc:From;
- b=h2KYTlGyNhnldToZ6KBhUMCCCZfpY6jBCDpO2/HSziszBWjHNEKeA/Y/tJQyGLBbc
- eIiKC7rIzdOQuu4yZkE0ReHAaqqZkQ/7atH1wYkXOfCt+fOrGNDMQzToYKivIFTBGh
- PwZwWsVBMTkfjxb2f9Ddn+cdnzSlRP1XLlz2KR/6bLW6WbdSQcfSzmIV6tmRaqyVDB
- ZSYqdrDROlpbtFcpZxxUpT8Af23YUxh37JMItVAWwY2U10lS9HO8aKoW9YQ4buS3fU
- nbpm4fEfuVgS7+ZEHQf7BSqN/9aYI+UqosP5IHbi6qn99J0FtQ9XY2v6b5f/G3u4QF
- TdONWt7dY/ZTw==
-Date: Thu, 23 Apr 2026 09:12:04 -0400
+ b=q+8CNK6Ty1dPCj32YKi12DJgeuILKAnyBRpIlf61cLnK+RTqGqCnujyiqkeOrrFXz
+ jDJaAVYPzupJ+M1eAimqvkTh1Uy0GVdjZEgu6V3rfHDTtnPANI356Rq3gpJOGGlaIC
+ E0u10VS6jFOzMiom2mPikCIFd3TmIYnl8LyN9ypBQK1ekAGuAy3zfPL7aFMAICKYiK
+ 1bB9gbxlFshmLeVglyRw/tGHFmcpryFso/LsH1EM3QF3XzfwkBoHtEEMimYZcEfsjg
+ ve1hOkdmg5ymqaE//AwwPVzvWAJ3qA+aE5KG89uv4GT/o3wtAsT24mcDO4HAsvekWU
+ eSBZzk/RyUuWA==
+Date: Thu, 23 Apr 2026 09:12:05 -0400
 MIME-Version: 1.0
-Message-Id: <20260423-case-sensitivity-v10-1-c385d674a6cf@oracle.com>
+Message-Id: <20260423-case-sensitivity-v10-2-c385d674a6cf@oracle.com>
 References: <20260423-case-sensitivity-v10-0-c385d674a6cf@oracle.com>
 In-Reply-To: <20260423-case-sensitivity-v10-0-c385d674a6cf@oracle.com>
 To: Al Viro <viro@zeniv.linux.org.uk>, 
  Christian Brauner <brauner@kernel.org>, Jan Kara <jack@suse.cz>
 X-Mailer: b4 0.16-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=3551;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=3340;
  i=chuck.lever@oracle.com; h=from:subject:message-id;
- bh=bvYDki24delKK+bT1VFKda9bd9+KlESsOU2uc3t1XJU=;
- b=owEBbQKS/ZANAwAKATNqszNvZn+XAcsmYgBp6hqzekdwvJSHCsI01uU5bkBgDmfma+vhsoir1
- hPF4SjFi6qJAjMEAAEKAB0WIQQosuWwEobfJDzyPv4zarMzb2Z/lwUCaeoaswAKCRAzarMzb2Z/
- l46TD/9pmKN2J9EUJXdHjWz8EwTvPYNEbnA1RJwnkVzDTI1/ByZZNw3LwtPEJwex/Oke8czPW41
- 2+KHN98jVc/LGETLoymSjYnqQe6x1ghlyRPAKOEDlwR78kERwpBVooRVN0PfnqglXF4C+rchO2c
- zfiYK7pOFpAhK3TCrUo0xic935TkyMvSQUI0rm3EaT7IwNHKk4XEFaLD19yL+JRatKxFxdf2bBy
- ObB9ErgS+g+bTdB9nneWa/wCOG2c4eDaMO6uCcKt1lU1zDCrvP3NCF2e7lHKiWZ+bDBJ6Xaw2/v
- ePlGjK9vGI4uFju+jAQ+VUwjEH0fdb164DC+pCdFfTe96U0wTXzkm3ikvc+NirIC0oGwI4OQrLq
- A44LvYPuXhpQl3PcDYEQSPH+8DutgHmo36uAD5YtirLorq60YZWI3ifM2faHr5J0JxrpetChpvV
- HQqK5FVOlyGUyowa5bOdnbOYeHXoXZEqrgF+g55FC7Q9gbbczjZC4SDn5RmNXkTq34IyItu1hdm
- ze9TZY7wo12trubTaefnit7n8wFMhjVJS+wZ/1DTREVk1JTdxsm3BA+moJh2aOlDHtq6Mam8HoM
- jDrAoGKgtsLGv+V7cSpCukcY2Hv05GCaGV4K1O6z5EVzPHY6iglTTzaEa5CIywY/5B4Ps16+R3/
- ZYVIIKT+yY8h0cw==
+ bh=+pPurO/+pD2WfwcHWQv0N9xleXhBqxhdJ6hocARUJZ4=;
+ b=owEBbQKS/ZANAwAKATNqszNvZn+XAcsmYgBp6hqzV4rncvMnfwromfgLGjORebeuYGgqBGxix
+ MODx4f0YwiJAjMEAAEKAB0WIQQosuWwEobfJDzyPv4zarMzb2Z/lwUCaeoaswAKCRAzarMzb2Z/
+ lzuJD/9oett156EXicv6rkJiFAEDCXWQPISxbLgBsKNereRLdeoxArncX+k2TCH+NNCNpGYhmsF
+ 5rPmzbKsSI4Z8YDHcVcOWFN+uc2KC75iTOUgDQnRLF0dX4wUOCBmozE2jn6XI8McHNRY7B1illr
+ z5PX3hGmxY/cfyb5aW9G8383RS1L7a0Z2aymfxPFQVQfM24ugoZ9D4VzTNLiwTQqSGHnuIuvyzD
+ eK91r1zb1mYmsRfCOkpEL+3DyA5riUUsJF1x9c9Z/9L4ZVbrEMvTt0s+GIfDUYGTgEBBztfl+PC
+ AC3nxLcV8c13VwPMY43FHJyku2am/FL9snNRum6RYgrLQfPnitU/Hj8ZOIOOdVCNO6Y9/uZyh1y
+ 3n3Sixh3N06mfvsFwVTqT2XG9KC2e8oEB/Ptlw+Lbu84Zv2z4Zp9uTrk4aN37W4gJ9ZQ6Idu74O
+ DM+RdPFyt46ik79+6nMzg5M0ODNO5TsygyN5jXHPfM4Lw7scpGMAvCvJ46rP25FA4cGL2jli7zw
+ uEKwAlEc6Qe6NPfUjIAbQPad8gGz84jgGgbVLaQmQJcbW8onIwSIOjA3ECF9YyX14wxV29TJCS4
+ mLeQMaVYq43CvDhrjWyaSeyo0eWci5orp7Xw0z3rXLUbHJGRYYvVYjqKlJtbuUAjlAZHPFF9VgC
+ 5whXS5Ywg643qhQ==
 X-Developer-Key: i=chuck.lever@oracle.com; a=openpgp;
  fpr=28B2E5B01286DF243CF23EFE336AB3336F667F97
 X-Spam-Score: -0.2 (/)
@@ -100,12 +100,10 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: From: Chuck Lever <chuck.lever@oracle.com>
- fileattr_fill_xflags()
- and fileattr_fill_flags() memset the entire file_kattr struct before
- populating
- select fields, so callers cannot pre-set fields in fa->fsx_xflags without
- having their values clo [...] 
+ Content preview: From: Chuck Lever <chuck.lever@oracle.com> Enable upper
+ layers
+ such as NFSD to retrieve case sensitivity information from file systems by
+ adding FS_XFLAG_CASEFOLD and FS_XFLAG_CASENONPRESERVING flags. 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -117,9 +115,9 @@ X-Spam-Report: Spam detection software,
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.0 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1wFtrA-0006no-Oh
-Subject: [f2fs-dev] [PATCH v10 01/17] fs: Move file_kattr initialization to
- callers
+X-Headers-End: 1wFtr7-0006nd-IY
+Subject: [f2fs-dev] [PATCH v10 02/17] fs: Add case sensitivity flags to
+ file_kattr
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -170,8 +168,8 @@ X-Spamd-Result: default: False [-6.71 / 15.00];
 	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
 	FORGED_SENDER(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
 	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,kernel.org:s=k20201202];
-	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,kernel.org:-];
 	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
+	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,kernel.org:-];
 	FORGED_SENDER_FORWARDING(0.00)[];
 	RCVD_COUNT_FIVE(0.00)[5];
 	MAILSPIKE_FAIL(0.00)[216.105.38.7:server fail];
@@ -186,111 +184,93 @@ X-Spamd-Result: default: False [-6.71 / 15.00];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.sourceforge.net:dkim,lists.sourceforge.net:helo,lists.sourceforge.net:rdns,oracle.com:mid,oracle.com:email]
-X-Rspamd-Queue-Id: E69304528EF
+X-Rspamd-Queue-Id: 1E0BA4528F1
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
 From: Chuck Lever <chuck.lever@oracle.com>
 
-fileattr_fill_xflags() and fileattr_fill_flags() memset the
-entire file_kattr struct before populating select fields, so
-callers cannot pre-set fields in fa->fsx_xflags without having
-their values clobbered. Darrick Wong noted that a function
-named "fill_xflags" touching more than xflags forces callers
-to know implementation details beyond its apparent scope.
+Enable upper layers such as NFSD to retrieve case sensitivity
+information from file systems by adding FS_XFLAG_CASEFOLD and
+FS_XFLAG_CASENONPRESERVING flags.
 
-Drop the memset from both fill functions and initialize at the
-entry points instead: ioctl_setflags(), ioctl_fssetxattr(),
-the file_setattr() syscall, and xfs_ioc_fsgetxattra() now
-declare fa with an aggregate initializer. ioctl_getflags(),
-ioctl_fsgetxattr(), and the file_getattr() syscall already
-aggregate-initialize fa to pass flags_valid/fsx_valid hints
-into vfs_fileattr_get().
+Filesystems report case-insensitive or case-nonpreserving behavior
+by setting these flags directly in fa->fsx_xflags. The default
+(flags unset) indicates POSIX semantics: case-sensitive and
+case-preserving. Both flags are added to FS_XFLAG_RDONLY_MASK so
+FS_IOC_FSSETXATTR silently strips them, keeping the new xflags
+strictly a reporting interface. Callers that want to toggle
+casefolding continue to use FS_IOC_SETFLAGS with FS_CASEFOLD_FL,
+the established UAPI on filesystems that support the operation
+(ext4 and f2fs on empty directories).
 
-Subsequent patches rely on this so that ->fileattr_get()
-handlers can set case-sensitivity flags (FS_XFLAG_CASEFOLD,
-FS_XFLAG_CASENONPRESERVING) in fa->fsx_xflags before the fill
-functions run.
+Case sensitivity information is exported to userspace via the
+fa_xflags field in the FS_IOC_FSGETXATTR ioctl and file_getattr()
+system call.
 
-Suggested-by: Darrick J. Wong <djwong@kernel.org>
+Reviewed-by: "Darrick J. Wong" <djwong@kernel.org>
 Reviewed-by: Jan Kara <jack@suse.cz>
-Reviewed-by: Darrick J. Wong <djwong@kernel.org>
 Signed-off-by: Chuck Lever <chuck.lever@oracle.com>
 ---
- fs/file_attr.c     | 12 ++++--------
- fs/xfs/xfs_ioctl.c |  2 +-
- 2 files changed, 5 insertions(+), 9 deletions(-)
+ fs/file_attr.c           | 4 ++++
+ include/linux/fileattr.h | 3 ++-
+ include/uapi/linux/fs.h  | 7 +++++++
+ 3 files changed, 13 insertions(+), 1 deletion(-)
 
 diff --git a/fs/file_attr.c b/fs/file_attr.c
-index da983e105d70..f429da66a317 100644
+index f429da66a317..bfb00d256dd5 100644
 --- a/fs/file_attr.c
 +++ b/fs/file_attr.c
-@@ -15,12 +15,10 @@
-  * @fa:		fileattr pointer
-  * @xflags:	FS_XFLAG_* flags
-  *
-- * Set ->fsx_xflags, ->fsx_valid and ->flags (translated xflags).  All
-- * other fields are zeroed.
-+ * Set ->fsx_xflags, ->fsx_valid and ->flags (translated xflags).
-  */
- void fileattr_fill_xflags(struct file_kattr *fa, u32 xflags)
- {
--	memset(fa, 0, sizeof(*fa));
- 	fa->fsx_valid = true;
- 	fa->fsx_xflags = xflags;
- 	if (fa->fsx_xflags & FS_XFLAG_IMMUTABLE)
-@@ -48,11 +46,9 @@ EXPORT_SYMBOL(fileattr_fill_xflags);
-  * @flags:	FS_*_FL flags
-  *
-  * Set ->flags, ->flags_valid and ->fsx_xflags (translated flags).
-- * All other fields are zeroed.
-  */
- void fileattr_fill_flags(struct file_kattr *fa, u32 flags)
- {
--	memset(fa, 0, sizeof(*fa));
- 	fa->flags_valid = true;
- 	fa->flags = flags;
- 	if (fa->flags & FS_SYNC_FL)
-@@ -325,7 +321,7 @@ int ioctl_setflags(struct file *file, unsigned int __user *argp)
- {
- 	struct mnt_idmap *idmap = file_mnt_idmap(file);
- 	struct dentry *dentry = file->f_path.dentry;
--	struct file_kattr fa;
-+	struct file_kattr fa = {};
- 	unsigned int flags;
- 	int err;
+@@ -37,6 +37,8 @@ void fileattr_fill_xflags(struct file_kattr *fa, u32 xflags)
+ 		fa->flags |= FS_PROJINHERIT_FL;
+ 	if (fa->fsx_xflags & FS_XFLAG_VERITY)
+ 		fa->flags |= FS_VERITY_FL;
++	if (fa->fsx_xflags & FS_XFLAG_CASEFOLD)
++		fa->flags |= FS_CASEFOLD_FL;
+ }
+ EXPORT_SYMBOL(fileattr_fill_xflags);
  
-@@ -357,7 +353,7 @@ int ioctl_fssetxattr(struct file *file, void __user *argp)
- {
- 	struct mnt_idmap *idmap = file_mnt_idmap(file);
- 	struct dentry *dentry = file->f_path.dentry;
--	struct file_kattr fa;
-+	struct file_kattr fa = {};
- 	int err;
+@@ -67,6 +69,8 @@ void fileattr_fill_flags(struct file_kattr *fa, u32 flags)
+ 		fa->fsx_xflags |= FS_XFLAG_PROJINHERIT;
+ 	if (fa->flags & FS_VERITY_FL)
+ 		fa->fsx_xflags |= FS_XFLAG_VERITY;
++	if (fa->flags & FS_CASEFOLD_FL)
++		fa->fsx_xflags |= FS_XFLAG_CASEFOLD;
+ }
+ EXPORT_SYMBOL(fileattr_fill_flags);
  
- 	err = copy_fsxattr_from_user(&fa, argp);
-@@ -431,7 +427,7 @@ SYSCALL_DEFINE5(file_setattr, int, dfd, const char __user *, filename,
- 	struct path filepath __free(path_put) = {};
- 	unsigned int lookup_flags = 0;
- 	struct file_attr fattr;
--	struct file_kattr fa;
-+	struct file_kattr fa = {};
- 	int error;
+diff --git a/include/linux/fileattr.h b/include/linux/fileattr.h
+index 3780904a63a6..58044b598016 100644
+--- a/include/linux/fileattr.h
++++ b/include/linux/fileattr.h
+@@ -16,7 +16,8 @@
  
- 	BUILD_BUG_ON(sizeof(struct file_attr) < FILE_ATTR_SIZE_VER0);
-diff --git a/fs/xfs/xfs_ioctl.c b/fs/xfs/xfs_ioctl.c
-index 46e234863644..ed9b4846c05f 100644
---- a/fs/xfs/xfs_ioctl.c
-+++ b/fs/xfs/xfs_ioctl.c
-@@ -517,7 +517,7 @@ xfs_ioc_fsgetxattra(
- 	xfs_inode_t		*ip,
- 	void			__user *arg)
- {
--	struct file_kattr	fa;
-+	struct file_kattr	fa = {};
+ /* Read-only inode flags */
+ #define FS_XFLAG_RDONLY_MASK \
+-	(FS_XFLAG_PREALLOC | FS_XFLAG_HASATTR | FS_XFLAG_VERITY)
++	(FS_XFLAG_PREALLOC | FS_XFLAG_HASATTR | FS_XFLAG_VERITY | \
++	 FS_XFLAG_CASEFOLD | FS_XFLAG_CASENONPRESERVING)
  
- 	xfs_ilock(ip, XFS_ILOCK_SHARED);
- 	xfs_fill_fsxattr(ip, XFS_ATTR_FORK, &fa);
+ /* Flags to indicate valid value of fsx_ fields */
+ #define FS_XFLAG_VALUES_MASK \
+diff --git a/include/uapi/linux/fs.h b/include/uapi/linux/fs.h
+index 13f71202845e..2ea4c81df08f 100644
+--- a/include/uapi/linux/fs.h
++++ b/include/uapi/linux/fs.h
+@@ -254,6 +254,13 @@ struct file_attr {
+ #define FS_XFLAG_DAX		0x00008000	/* use DAX for IO */
+ #define FS_XFLAG_COWEXTSIZE	0x00010000	/* CoW extent size allocator hint */
+ #define FS_XFLAG_VERITY		0x00020000	/* fs-verity enabled */
++/*
++ * Case handling flags (read-only, cannot be set via ioctl).
++ * Default (neither set) indicates POSIX semantics: case-sensitive
++ * lookups and case-preserving storage.
++ */
++#define FS_XFLAG_CASEFOLD	0x00040000	/* case-insensitive lookups */
++#define FS_XFLAG_CASENONPRESERVING 0x00080000	/* case not preserved */
+ #define FS_XFLAG_HASATTR	0x80000000	/* no DIFLAG for this	*/
+ 
+ /* the read-only stuff doesn't really belong here, but any other place is
 
 -- 
 2.53.0
