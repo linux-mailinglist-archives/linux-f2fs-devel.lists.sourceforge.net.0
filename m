@@ -2,121 +2,133 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id wKLBL7eV6WldeQIAu9opvQ
+	id uAMeF7Ky6Wl6hwIAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 23 Apr 2026 05:44:55 +0200
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 23 Apr 2026 07:48:34 +0200
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id CE2D144C942
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 23 Apr 2026 05:44:54 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 90B3444D525
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 23 Apr 2026 07:48:33 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
-	Subject:MIME-Version:Message-ID:Date:To:From:Sender:Reply-To:Content-ID:
+	Subject:To:Message-ID:Date:From:MIME-Version:Sender:Reply-To:Content-ID:
 	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
 	:Resent-Message-ID:In-Reply-To:References:List-Owner;
-	bh=ZMlIyFiL59+uhz+ANwzWBsMPxe9nJ4k9jvdYBv8bC2c=; b=nICN12POsYYsf7k1SEquUlvIDF
-	KQV4IgWITnZchJ/nT+TPCpvd3EPyA89IaQdeHFVih/7e/yx9jnobIPm3xxwaaJjKOT1WMVNioXgq/
-	T1UuFHk4luKhKqjVrvBkk9uvI7QbaJYP5+wfeH+1KHpaiu6UDbvK3g/myqspXiajzAAA=;
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=C4EHeOtwv24AvZXWUnkrN1qe2Vdlw3ilvnlhhDFpA7g=; b=DIUoe5Dwk4PTYZ3Aqw1y1U1zfm
+	5NToJEstyhwp/FW+R0NYAJ/qkxjmj/1IYaPfBTrT7myRpppHzkl4tNXLHTvvSKXwanbIiE7BEuTYE
+	ZJwteYGGiLs8sLUVL1sjBVknrcaGBMJlHtpPmGGrwGd/9teNP8hYxznDh9DfN1wmwuZY=;
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1wFkzb-0001Jk-Mw;
-	Thu, 23 Apr 2026 03:44:43 +0000
+	id 1wFmvF-000143-Pk;
+	Thu, 23 Apr 2026 05:48:21 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jinbaoliu365@gmail.com>) id 1wFkzZ-0001Je-TK
+ (envelope-from <ginger.jzllee@gmail.com>) id 1wFmvE-00013v-BW
  for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 23 Apr 2026 03:44:41 +0000
+ Thu, 23 Apr 2026 05:48:20 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ d=sourceforge.net; s=x; h=Content-Type:Cc:To:Subject:Message-ID:Date:From:
+ MIME-Version:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=CuLCO+IisxSmgjGpiuEZKXzGYCqRtBN3ugPoaZV1BR8=; b=MqhbUOwFJpPVmgjqwD6fk0scNi
- yWre6rCRL+YGcp1BO+1rLxvVe/fva7MqPTiadNO3x+7VeSozkSTnNPrAVst3H/rziUxIvZfQxZC1p
- aECwSYqX9BKxzVx8Km4FfjYWhC62lyL3Y7GEFxklPvpwxVBhayQ6oJuUpw/Pg89qbLm8=;
+ bh=5XIJJ+HB9/6ZH3TWKGdyh5Nzg4TBnye3t4cf8uEtxRc=; b=CtQT+OKEtTl4Ziwgr2QOCURcGa
+ KFs5z2YXrBieK1YmPOoPWBs/U2uitxogTMt6gbjIX6hWrhCdLA8BXJ/ZnGgKtgCC7O2/Yr+q5mGNe
+ mYLe4qNHGHekjcjEdFg5TNrmtKtO7/5xBy41tMIE/U6p1YJ36gYgjBHC62+HirkCnlic=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ h=Content-Type:Cc:To:Subject:Message-ID:Date:From:MIME-Version:Sender:
+ Reply-To:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date
+ :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=CuLCO+IisxSmgjGpiuEZKXzGYCqRtBN3ugPoaZV1BR8=; b=f
- sxdSSRCmeceflJ+O/C39KGLe3DqcuDq4vaB63xb61aUnkXoScI+XMmlsl+KOfkCzZ6Imoq8E5YUFG
- 30SgQODWIsXc3ZQ454qtntgIYPs6Ru3xjdae9JlyjoBqjEwtIOOJ2uP6Am1ez07wzUEAVXr0UabND
- ILlo/cfCagHg0qoQ=;
-Received: from mail-pf1-f178.google.com ([209.85.210.178])
+ List-Owner:List-Archive; bh=5XIJJ+HB9/6ZH3TWKGdyh5Nzg4TBnye3t4cf8uEtxRc=; b=h
+ N2ixnZyqsE2zEPAGNOLHR2l6mdkZPTEh6zuJYTHr9OUfFpJCHHGSSMDdNTp/fN28RNvWmJrETJ8P1
+ WOb/kLOnvpsJE7pOI5WuIP/ggYDOU50YLz22zYUIUfvAM+hdsiJuVvMSM/Y1f4POXR4Tm6ZuvWifY
+ qumdYbK2k5Dmv97Q=;
+Received: from mail-yw1-f177.google.com ([209.85.128.177])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1wFkzZ-0001bB-GD for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 23 Apr 2026 03:44:41 +0000
-Received: by mail-pf1-f178.google.com with SMTP id
- d2e1a72fcca58-82f0884bcfaso4354776b3a.1
+ id 1wFmvE-00070A-1j for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 23 Apr 2026 05:48:20 +0000
+Received: by mail-yw1-f177.google.com with SMTP id
+ 00721157ae682-79a46260385so64466857b3.3
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Wed, 22 Apr 2026 20:44:41 -0700 (PDT)
+ Wed, 22 Apr 2026 22:48:20 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1776923294; cv=none;
+ d=google.com; s=arc-20240605;
+ b=MRT+RalQmyFD5LRoKP9oXWXiJns7FfUTCy8JiMLxdDuP2LDDTZtJN+rcwxLfX88xEy
+ srnDvWIvr11kLkogWdgHsIX35vQSNiSgiW7ZDfYRWuXnOcw76ZE6PAoeDXq6NVUclFBr
+ Vzki4jC3dfzif/DQK8NO9UuabVkSthEAeVECzFTeCOm60pwemI3038C8+4tzCJr4uitn
+ 9vo+VV2BOCAfwJjr1JWtheXapdq2SAa2wQO5aXnYiL0i9mM65p9Z/Puakm+HJH5Rb3ag
+ U1UCbI2fWSO1VUu8uurBDJhUK8YfsEU+GTkF0bZFEBYiFbbhOS7JIb7y0hBkCsvOTIya
+ XFRA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20240605; 
+ h=cc:to:subject:message-id:date:from:mime-version:dkim-signature;
+ bh=5XIJJ+HB9/6ZH3TWKGdyh5Nzg4TBnye3t4cf8uEtxRc=;
+ fh=Niin9j0E8Ll3UdqP2bvvWkPTrY5N0ubFRP8/l3a1kXA=;
+ b=Kz2B3LhMoA8mPHrgJeeW8vzULtOa9rwUmiIZXUuwGiyvxeK9+8ZvfMX1mT6SOUpyGH
+ Jm91fVjNWAsTNxRsFYyQ+75AIu0TB4sV/1zAb4Xf7BdrK8QyWKpAdLcvCqGMXqFE7gDq
+ 6TlrMkBBYHff0AEnvBZJlF5aXnCOlrzgskSnIcpQOK35Pk6HwhSCXdSfwXG2DySKXr2H
+ cDBDyEIucJC0dsZ2fiQcF/ERRaSKtV7QlOYMr85buftQHTH97t4THz1W5sBoNx+9cPTp
+ AYbKEME2itmTLyHch5T7iS3xCtyU3r+NsYtx95FZLthe6DWNeoRcMvfsYj/EOCylpX9q
+ HnCw==; darn=lists.sourceforge.net
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1776915871; x=1777520671; darn=lists.sourceforge.net;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=CuLCO+IisxSmgjGpiuEZKXzGYCqRtBN3ugPoaZV1BR8=;
- b=sJmyGhwUYpp7iHnyuc2psSfj9DcS4SiXW2Boll+E2DJ7iFfZaHut2MAx42LAy3o19G
- QqkjWuILDEbojjGNoUZSp4VHl/529XEf0mIYEOYtsbqNjddUX3CtSaN3UUVko/OwJXSP
- 9Gp41sa9A67CQlLcoVZUOAzK6MOGqqW1Lrg2hSR3JnaAuFTW2tp/4x81EQ3JU7djtreZ
- OFAWP0M9AV+V1psuOgpBwh86RD4im8TuDB4MdD9UZmS1f7wuxzFQ3tFm0qCsKOwVJ73o
- jdG2C4Tgm1Y2I6yPnnXrYTxMbj7Y8OeTEdAqkSnknbF9FokktUiYtTM2nOT+Mbi8bJOx
- I75g==
+ d=gmail.com; s=20251104; t=1776923294; x=1777528094; darn=lists.sourceforge.net;
+ h=cc:to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=5XIJJ+HB9/6ZH3TWKGdyh5Nzg4TBnye3t4cf8uEtxRc=;
+ b=IZcgb1vE9TL3fmgxB61HVLe4XHN7qBlTH8Njj9QN+xjtxX+03LhgGj+KTo8Pn+8eaj
+ ZncTjYRZ1BSFz3et7YBbW8C3h9KJgQQ6uMgfvU9TD4pNmGr3z8Oto1UO+SWqNFRx7Upv
+ DblzgYfovQs34CeC/1K1t1ekNXIU9gJYQrJgR+UlNdKxst7qtp33KCABgHWGGi/keWDS
+ o0jK1m/4C/Ay/mceb09VpjfKdP6jGOS2GE1rHydlSDUpnvz6TOF5lCQ5dBHCI6mEOV3m
+ WMGTt/kygieQJ5zd/RauILXCtRiiubXmYRvKnUSSAUkITuq5nBNuXNKOOpSdGoUmZMm2
+ l/PQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1776915871; x=1777520671;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=CuLCO+IisxSmgjGpiuEZKXzGYCqRtBN3ugPoaZV1BR8=;
- b=XKV8+NF6kE8kyz23g/y5ety2JG8gdJmF0oK9/LzPB5Gzx53x6melEgiIfQ3+wcSuuO
- QA9vxYJur4E3tlN0TKjIIGZgZcJy8woUc17ULK36NBsGI+h4A7rIJAJKiYL0eXzRMpYc
- GK4cis0107oE9hmcCcRU90QtaWQU8yr8Qmx/5hUyoh50Yap/kTID+uH/Ainkytxt+LvT
- 2jqTQOGae0gzNOFGCn3H7JSE7u0Va5dEqjIC8SrbkUfEOJKDW1hSnjehUDzOWH2hHLPM
- qcfULZ5KpnmWVEHxDRnEXa3+3kBYimYu5j4JgXMGyyAtsw7jSgpsG7mBN6wQy/MEaV+o
- Bgeg==
-X-Forwarded-Encrypted: i=1;
- AFNElJ/BWe4pQClkLXE/NRHcJ5idm7uuqLAAZ9wUmV3AeJxE/RukvIWiQhPVrh0WmyVZ4luBsaOGtObwY5RaG1pRjbR1@lists.sourceforge.net
-X-Gm-Message-State: AOJu0Yw9e+Q/rM47mudWSk/dYEMBE6dutz0ey5v5HktLzgz/RAC4swtA
- j1YXQD2+W64OnfRe5LamhcrbdWOL+uAGh0qwl5X4boZtk69HVKW4sNhq
-X-Gm-Gg: AeBDieut1LnbtIjoLeT044lDdQ3zSxmaYV3lk32qqBXHrbhsxLdAxDJgdohELC3u91A
- u4qDslyfrGVV8Dr1jddjtIxKffgqYhcxhtphnG6kgJ8keVxZo93BbEbkuObe0M/6mJSlW+w/jPl
- b+rIhzhiibNwLoy/4FnMfHFIQ5uwfzAZSiFMtEjCo+rGedB26naZvTeXy9vNLXHl+dORGVV5AoT
- HVM+ChgQH4NGPd0bSa3vX0auDdBGr1OVftjk2DANa30LDmjDZlt+WTkU1Tsr+znRD+nyENFvAb+
- YbY4XCLlyQSjThO8uXeEiN4ETak6y5HjUpHbX2WvqSxoKPvj6uur6LasUCZ+7pva3Cdf+WLzAx4
- Lrx4x6BO87Vf6vJXOLg7vGpsbyqcDn2CSNL7SsejwqP7KWZEmy8nKOd3SY6u9Ct1mESph5IZvwP
- ZrcKGgaMQV73g7XfMNaBr2Vy94fl7fQlHLi93TF4Kovg==
-X-Received: by 2002:a05:6a00:418b:b0:82c:7383:3745 with SMTP id
- d2e1a72fcca58-82f8c834458mr27740097b3a.19.1776915870688; 
- Wed, 22 Apr 2026 20:44:30 -0700 (PDT)
-Received: from mi.mioffice.cn ([43.224.245.178])
- by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-82f8ebe40dasm18450063b3a.40.2026.04.22.20.44.28
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 22 Apr 2026 20:44:30 -0700 (PDT)
-From: liujinbao1 <jinbaoliu365@gmail.com>
-To: jaegeuk@kernel.org
-Date: Thu, 23 Apr 2026 11:42:23 +0800
-Message-ID: <20260423034223.1369837-1-jinbaoliu365@gmail.com>
-X-Mailer: git-send-email 2.43.0
+ d=1e100.net; s=20251104; t=1776923294; x=1777528094;
+ h=cc:to:subject:message-id:date:from:mime-version:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=5XIJJ+HB9/6ZH3TWKGdyh5Nzg4TBnye3t4cf8uEtxRc=;
+ b=k/VbdExZBlTry3bingX3ZywXnK9eTShyDDmkiDt5URCOnmoK49smwnHBg2PGrelSix
+ VCkBTxHPY08Nq4V+mJ29l/r8xLn90hNHb7IrXwWfCqr3SEk3bzIbK0F2XzGXNzbhuTp8
+ ReNbFo5xeRI/dMeGrSENLbEJOfwRmiA1OgayuWfLJOqa8sVvG/Olv/Pq9pIVTicqgu5o
+ lSsyBymV0cpnCFWLckiq6yo7ywS2obXKKn2ySvtnNMoqEtgEDfQoo6FT26FXJzp63kFF
+ VINXy9wlcm5id4Xzy2H5EDbqvPKiynIxJh52l6alucKkKaXA3s9kJzi7HfhaFfIXD16T
+ lHig==
+X-Gm-Message-State: AOJu0Yzm6OB6AS+8+UUBzOPvL0e95pg5ZS+PQe7+HAkej+y/m/h2HfcT
+ 9k2a2nDDJ9k5Ky1Zb90BQpl0rOz7p8geHJuuzDIg43v4Hc8+jE+svcdKmb3K8yEn4R12rcJKSCg
+ cD0tlLQI1wQ36xmwUW4HS6WWTtyvS2Zc=
+X-Gm-Gg: AeBDiet6pG3UnDOrBZMyxJAO6ws186OS/7gMhslmigv7UBRuwu40vm/AVDmwQXtKELd
+ +xobTRweFd0SXis7g1mLjL8tw9AwpDfpV6ee+sIvjz/TzUuf9UvGU1ouzrTShhRHQ+BBO1gFmCD
+ no5CSzgt529iqCvjg7fqpizOINMZcXfB/tpA4SMAu+af7jU7TBhgfUNd5dGYQ5EmSoT3mVGtSaF
+ KSNxCNGxu3xApymMSBi3DhdvlcpvV0LZFwipCc9AQREl31GibGi1jqj/ai9gVd+P5G2ogYNQmbc
+ opQtQSMOaFFSwMKTejvb
+X-Received: by 2002:a05:690c:1d:b0:7b4:3d82:bf0 with SMTP id
+ 00721157ae682-7b9eceb3a6dmr256373367b3.11.1776923294296; Wed, 22 Apr 2026
+ 22:48:14 -0700 (PDT)
 MIME-Version: 1.0
-X-Spam-Score: 0.1 (/)
+From: Ginger <ginger.jzllee@gmail.com>
+Date: Thu, 23 Apr 2026 13:48:04 +0800
+X-Gm-Features: AQROBzA2VUGijThs0lAAL0QuK8VpG3tdbcueedjLuZhGwq4V3WK5UKX7uUCBBwk
+Message-ID: <CAGp+u1ZpFon+1Cw8WxEv+kr4wRE_ibPACY+kGsoUeeB-aVa78A@mail.gmail.com>
+To: jaegeuk@kernel.org, chao@kernel.org
+X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: From: liujinbao1 F2FS did not collect iostat statistics for
- direct IO reads and writes, hook submit_io to bind an iostat context and
- record the submission timestamp, replace bi_end_io to collect IO latency on
- completi [...] 
- Content analysis details:   (0.1 points, 5.0 required)
+ Content preview:  Dear Linux kernel maintainers,
+ My research-based static analyzer
+ found a potential atomicity bug within the 'fs/f2fs' subsystem,
+ more specifically, 
+ in 'fs/f2fs/segment.c'. Kernel version: long-term kernel v6.18.9 
+ Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
@@ -127,14 +139,12 @@ X-Spam-Report: Spam detection software,
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
- [jinbaoliu365(at)gmail.com]
- 0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends in
- digit [jinbaoliu365(at)gmail.com]
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.210.178 listed in wl.mailspike.net]
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1wFkzZ-0001bB-GD
-Subject: [f2fs-dev] [PATCH] f2fs: add iostat tracking for direct IO
+ [ginger.jzllee(at)gmail.com]
+ 0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [209.85.128.177 listed in wl.mailspike.net]
+X-Headers-End: 1wFmvE-00070A-1j
+Subject: [f2fs-dev] [bug report] potential order violation bug in
+ 'fs/f2fs/segment.c', in '__create_discard_cmd'
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -146,137 +156,81 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: jinbaoliu365@gmail.com, shengyong1 <shengyong1@xiaomi.com>,
- liujinbao1 <liujinbao1@xiaomi.com>, linux-f2fs-devel@lists.sourceforge.net
+Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 X-Spamd-Result: default: False [-0.01 / 15.00];
-	MID_CONTAINS_FROM(1.00)[];
+	ARC_REJECT(1.00)[signature check failed: fail, {[1] = sig:google.com:reject}];
 	RWL_MAILSPIKE_EXCELLENT(-0.40)[216.105.38.7:from];
-	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
 	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7];
 	MAILLIST(-0.20)[mailman];
-	DMARC_POLICY_SOFTFAIL(0.10)[gmail.com : SPF not aligned (relaxed), DKIM not aligned (relaxed),none];
+	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
 	MIME_GOOD(-0.10)[text/plain];
+	DMARC_POLICY_SOFTFAIL(0.10)[gmail.com : SPF not aligned (relaxed), DKIM not aligned (relaxed),none];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
-	RECEIVED_HELO_LOCALHOST(0.00)[];
-	DKIM_MIXED(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:jaegeuk@kernel.org,m:jinbaoliu365@gmail.com,m:shengyong1@xiaomi.com,m:liujinbao1@xiaomi.com,m:linux-f2fs-devel@lists.sourceforge.net,s:lists@lfdr.de];
-	FORGED_SENDER(0.00)[jinbaoliu365@gmail.com,linux-f2fs-devel-bounces@lists.sourceforge.net];
-	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	ARC_NA(0.00)[];
-	TO_DN_SOME(0.00)[];
+	TAGGED_FROM(0.00)[];
 	MIME_TRACE(0.00)[0:+];
+	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
+	RECEIVED_HELO_LOCALHOST(0.00)[];
+	RCVD_COUNT_THREE(0.00)[4];
+	FORGED_RECIPIENTS(0.00)[m:jaegeuk@kernel.org,m:chao@kernel.org,m:linux-kernel@vger.kernel.org,m:linux-f2fs-devel@lists.sourceforge.net,s:lists@lfdr.de];
+	FORGED_SENDER(0.00)[gingerjzllee@gmail.com,linux-f2fs-devel-bounces@lists.sourceforge.net];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	DKIM_MIXED(0.00)[];
 	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,gmail.com:s=20251104];
 	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,gmail.com:-];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
+	FREEMAIL_FROM(0.00)[gmail.com];
+	TO_DN_NONE(0.00)[];
 	PREVIOUSLY_DELIVERED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
 	FORGED_SENDER_FORWARDING(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[jinbaoliu365@gmail.com,linux-f2fs-devel-bounces@lists.sourceforge.net];
-	FREEMAIL_CC(0.00)[gmail.com,xiaomi.com,lists.sourceforge.net];
-	NEURAL_HAM(-0.00)[-1.000];
-	TAGGED_RCPT(0.00)[linux-f2fs-devel];
+	FROM_NEQ_ENVFROM(0.00)[gingerjzllee@gmail.com,linux-f2fs-devel-bounces@lists.sourceforge.net];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	NEURAL_HAM(-0.00)[-1.000];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	RCPT_COUNT_THREE(0.00)[4];
+	MID_RHS_MATCH_FROMTLD(0.00)[];
+	MISSING_XM_UA(0.00)[];
+	TAGGED_RCPT(0.00)[linux-f2fs-devel];
 	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	RCPT_COUNT_FIVE(0.00)[5]
-X-Rspamd-Queue-Id: CE2D144C942
+	DBL_BLOCKED_OPENRESOLVER(0.00)[mail.gmail.com:mid,lists.sourceforge.net:dkim,lists.sourceforge.net:helo,lists.sourceforge.net:rdns]
+X-Rspamd-Queue-Id: 90B3444D525
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-From: liujinbao1 <liujinbao1@xiaomi.com>
+Dear Linux kernel maintainers,
 
-F2FS did not collect iostat statistics for direct IO reads and writes,
-hook submit_io to bind an iostat context and record the submission
-timestamp, replace bi_end_io to collect IO latency on completion and
-then call back to the original iomap_dio_bio_end_io(), to add iostat
-tracking support for F2FS DIO.
+My research-based static analyzer found a potential atomicity bug
+within the 'fs/f2fs' subsystem, more specifically, in
+'fs/f2fs/segment.c'.
 
-Signed-off-by: shengyong1 <shengyong1@xiaomi.com>
-Signed-off-by: liujinbao1 <liujinbao1@xiaomi.com>
----
- fs/f2fs/file.c   | 27 +++++++++++++++++++++++++++
- fs/f2fs/iostat.c |  2 +-
- 2 files changed, 28 insertions(+), 1 deletion(-)
+Kernel version: long-term kernel v6.18.9
 
-diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
-index 2c4880f24b54..fcf725931fd8 100644
---- a/fs/f2fs/file.c
-+++ b/fs/f2fs/file.c
-@@ -4774,6 +4774,16 @@ static bool f2fs_should_use_dio(struct inode *inode, struct kiocb *iocb,
- 	return true;
- }
- 
-+static void f2fs_dio_end_bio(struct bio *bio)
-+{
-+	struct bio_iostat_ctx *iostat_ctx = bio->bi_private;
-+	void *orig_bi_private = iostat_ctx->post_read_ctx;
-+
-+	iostat_update_and_unbind_ctx(bio);
-+	bio->bi_private = orig_bi_private;
-+	iomap_dio_bio_end_io(bio);
-+}
-+
- static int f2fs_dio_read_end_io(struct kiocb *iocb, ssize_t size, int error,
- 				unsigned int flags)
- {
-@@ -4786,8 +4796,21 @@ static int f2fs_dio_read_end_io(struct kiocb *iocb, ssize_t size, int error,
- 	return 0;
- }
- 
-+static void f2fs_dio_read_submit_io(const struct iomap_iter *iter,
-+					struct bio *bio, loff_t file_offset)
-+{
-+	struct f2fs_sb_info *sbi = F2FS_I_SB(iter->inode);
-+	void *bi_private = bio->bi_private;
-+
-+	iostat_alloc_and_bind_ctx(sbi, bio, bi_private);
-+	iostat_update_submit_ctx(bio, DATA);
-+	bio->bi_end_io = f2fs_dio_end_bio;
-+	blk_crypto_submit_bio(bio);
-+}
-+
- static const struct iomap_dio_ops f2fs_iomap_dio_read_ops = {
- 	.end_io = f2fs_dio_read_end_io,
-+	.submit_io = f2fs_dio_read_submit_io,
- };
- 
- static ssize_t f2fs_dio_read_iter(struct kiocb *iocb, struct iov_iter *to)
-@@ -5064,8 +5087,12 @@ static void f2fs_dio_write_submit_io(const struct iomap_iter *iter,
- 	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
- 	enum log_type type = f2fs_rw_hint_to_seg_type(sbi, inode->i_write_hint);
- 	enum temp_type temp = f2fs_get_segment_temp(sbi, type);
-+	void *bi_private = bio->bi_private;
- 
- 	bio->bi_write_hint = f2fs_io_type_to_rw_hint(sbi, DATA, temp);
-+	iostat_alloc_and_bind_ctx(sbi, bio, bi_private);
-+	iostat_update_submit_ctx(bio, DATA);
-+	bio->bi_end_io = f2fs_dio_end_bio;
- 	blk_crypto_submit_bio(bio);
- }
- 
-diff --git a/fs/f2fs/iostat.c b/fs/f2fs/iostat.c
-index f8703038e1d8..57d2c3e68a1b 100644
---- a/fs/f2fs/iostat.c
-+++ b/fs/f2fs/iostat.c
-@@ -218,7 +218,7 @@ static inline void __update_iostat_latency(struct bio_iostat_ctx *iostat_ctx,
- 	struct iostat_lat_info *io_lat = sbi->iostat_io_lat;
- 	unsigned long flags;
- 
--	if (!sbi->iostat_enable)
-+	if (!sbi->iostat_enable || iostat_ctx->submit_ts == 0)
- 		return;
- 
- 	ts_diff = jiffies - iostat_ctx->submit_ts;
--- 
-2.43.0
+Potential concurrent triggering executions:
+T0:
+__create_discard_cmd
+     --> dc = f2fs_kmem_cache_alloc(discard_cmd_slab, GFP_NOFS, true, NULL);
+     --> list_add_tail(&dc->list, pend_list);
+     --> spin_lock_init(&dc->lock);
+     --> dc->bio_ref = 0;
 
+In T0, the freshly allocated 'struct discard_cmd *dc' is first added
+to the globally visible list 'pend_list' (i.e., from
+dcc->pend_list[plist_idx(len)]'.
+However, its fields like 'dc->lock' and 'dc->bio_ref' are set up after
+being globally visible.
+This violated the expected order of setting up private local heap
+variables before exposing them to the global state, causing potential
+concurrency bugs with '__issue_discard_cmd()' or
+'__submit_discard_cmd()' within 'fs/f2fs/segment.c'.
+
+Please kindly check at your convenience. Thank you for your time and
+consideration.
+
+Best regards,
+Ginger
 
 
 _______________________________________________
