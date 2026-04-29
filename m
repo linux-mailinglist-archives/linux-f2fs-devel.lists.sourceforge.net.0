@@ -2,82 +2,101 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id cG33DGW68Wl1kAEAu9opvQ
+	id UNNPI/ZI8mnDpQEAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 29 Apr 2026 09:59:33 +0200
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 29 Apr 2026 20:07:50 +0200
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 36F9F490DC7
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 29 Apr 2026 09:59:31 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id DB4DC4989A2
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 29 Apr 2026 20:07:49 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.sourceforge.net; s=beta; h=Content-Type:Content-Transfer-Encoding:Cc:
+	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:In-Reply-To:References:To:MIME-Version:Date:
-	Message-ID:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
-	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=B4B6vV/DZhdJD4vvCh1sLOghvnlhlJGti24MLXBwfkw=; b=HRBhG+SiYgdt+90DjCkuEBEDQw
-	4E4Wkgflor4A9hrLuvnf5ySU+cwZ4Fm5UnALxaInmX6vGPJ8u4AD9bwyy2kW6e2EnuE4kGKJrOKD8
-	UqeukMlGwXQ9FSXQktJOgbD7gHMDKBtG9AFC7L4anwwvqwA3IZYY1VQDQ9BgXCd6TDEI=;
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	List-Unsubscribe:List-Id:Subject:To:MIME-Version:Message-Id:Date:Sender:
+	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+	Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Owner;
+	bh=lsQg+K1CamsXsm+tn5xiYQ3OlkCyG4tHjG0+5lLPJQY=; b=R4dYwvzd5oiSdneB90GbKupBBt
+	0d7ZGxYwa+2Y/ySt0boM4NLP9t7fLwjevrOmRhD9AgTAJQAmnY7wXS1/5tt/jCXvXToq7BRBUs9Ad
+	1ufx+6Hc7MeKk1tqZJcfgshGNJ/WG9JrzZb819+ZKyRDqIFq71afcQAN7CKEEgBStbeY=;
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1wHzpM-0005Yr-9D;
-	Wed, 29 Apr 2026 07:59:21 +0000
+	id 1wI9K1-0005Er-0Q;
+	Wed, 29 Apr 2026 18:07:41 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1wHzpK-0005Yj-Uf
+ (envelope-from <cel@kernel.org>) id 1wI9Jz-0005Ee-MT
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 29 Apr 2026 07:59:20 +0000
+ Wed, 29 Apr 2026 18:07:40 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- From:References:To:Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Cc:To:Content-Transfer-Encoding:Content-Type:
+ MIME-Version:Message-Id:Date:Subject:From:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=1U7RH0w3hzH5lBUnUIxml5ktZ7HchnE4i/fCveIAbss=; b=ZcFCK/6sHvZFZ32Y7Po75ooROd
- cI5i0HDkP42/nX/Z/qDyywUxXhLLWCmLKdj4J3A1fw5v/Pr9Ps3p/0ivLaiRDr+ngKJxYsZzHP1Yn
- TC8QbIobAi43KvRmE9wR51VY0jjt2NHh3xiJqgAddW+CJog47xvm/Bslrbasyrd8x8t0=;
+ bh=NWKuf9Hq61FpbLAPAiPAnz8KOyMCnSTyJimhRPX2brg=; b=Eza5rmfvIi9yUAFs3rOFNpe9+q
+ 6+QGLFlI887R6hkhNkhfHDSOliMhPS6G3ZEO5LsxjfiLQuauwdH4+C4sec63m/OmzeOP9fmYXTDLw
+ 5ANvMQfxZMOXrnVIp4152Pg7pJW9biJOxuEUbpE6UOVs/Zh6hg4djY3J1rq/idBpjx5s=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
- Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=1U7RH0w3hzH5lBUnUIxml5ktZ7HchnE4i/fCveIAbss=; b=SheDdIwykPClEMtjNMq7fQi+hZ
- LVxKR74Hj7a3dneWwSnasa6KcZXYqPTOHVsxKPXBgugRTO8xA6P+T8Yq5fhaqSUKXysAAAYQ338WV
- zJgCFEHkHJ4CbJZdz5hWQwQ7pIBuAo+pBNUOGtYK9tVqja9gq4xnOHqhSA7arbTKBYLc=;
-Received: from sea.source.kernel.org ([172.234.252.31])
+ h=Cc:To:Content-Transfer-Encoding:Content-Type:MIME-Version:Message-Id:Date
+ :Subject:From:Sender:Reply-To:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=NWKuf9Hq61FpbLAPAiPAnz8KOyMCnSTyJimhRPX2brg=; b=B
+ ZLR2xFFN84Fd8rY9i/ytOdNJ/j2gauLDMo5iTFPTXpp1L4hEsoGsJ5PN4hi55NXpq/oscmpVHhtWT
+ RMlcO7JTbBUwo9O36zyc8g9VtI4wgxxN5QRH2VDY+GQiqrCWHEoPmQaBc4eRygqk2rZKM/hukURtL
+ qJ8uyw54ziEjHtKc=;
+Received: from tor.source.kernel.org ([172.105.4.254])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1wHzpH-0001jV-Jh for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 29 Apr 2026 07:59:20 +0000
+ id 1wI9Jz-00013W-EJ for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 29 Apr 2026 18:07:40 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 0769341E43;
- Wed, 29 Apr 2026 07:59:14 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id BBA6BC19425;
- Wed, 29 Apr 2026 07:59:12 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id AEF656024D;
+ Wed, 29 Apr 2026 18:07:28 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id EFD87C19425;
+ Wed, 29 Apr 2026 18:07:25 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1777449553;
- bh=i8g2ApDhol4IUaR7PbAuD6f37leM3sgS6Tvlc3YkE5w=;
- h=Date:Cc:Subject:To:References:From:In-Reply-To:From;
- b=J+ONH0db01wXV9SBYTNFbxUJTdvYOBfq09uFtnMzi2yQibFCa7Dh/Nk0sHvXc+by6
- HFS3HcPqrvk++fBeOj5+prtET9Q8oAiX+6apRXFqdQd7w7fW54nUz3vHYOKQB/ALz7
- Vblc6fWP18zTXt/RCpTkBiZ6U4FGTFCe5fXgLnPwtm/GUb0Pt6VNO+JiSE8oc3N8sx
- CfOcYM1kOU17H88aiBgDziLZVKXMsVIY7RiYbKGxMVDPJePBeEH7kHO83sekgxqE1T
- JvM87kNZMUUndTV4yX96KM5hZ/JpwsJz3IeMw3GIL6viMkiXm9zTo74XYpI0Zx8MB7
- CWB6eQZk4kHyA==
-Message-ID: <90abfbae-f999-4dad-9d71-d452a98d5ad8@kernel.org>
-Date: Wed, 29 Apr 2026 15:59:10 +0800
+ s=k20201202; t=1777486048;
+ bh=nGIAvTon0zs9b1xP0r8i5cYHOhAA/ZjGGgXeoFYtSA0=;
+ h=From:Subject:Date:To:Cc:From;
+ b=rbpvfHDMiWhiox01PdHgWiDajLy46O57SvBnNBUKJF5rY7CeK0XMvUpeyCnSZtD+M
+ czBdnUPUXQOZ8uTgetzcOdw5qA0Jyqmrqvmm69zYx8CO/MWX4988jXwneseeqF8bjn
+ XCMhT4tBKBbrBzBZdyo1qKAxI99stL20jhATDEAmstQIXnBprsZkztF8pyvQBib75J
+ zIyZ/hBX6tDWqbnzD17epgB7MmmPW/apvdI7qTiqpwWXQIYur6AeEImgwRMtkhXTEc
+ 9CJLuov5syAnb6Sgzi0tx+YofaHT22pMRWsrlgDwL79ATA0hdKElKNIdYNYhU8HQra
+ d6ImeZTBwVbkg==
+Date: Wed, 29 Apr 2026 14:07:11 -0400
+Message-Id: <20260429-case-sensitivity-v12-0-8057123bebe0@oracle.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-To: Ruipeng Qi <ruipengqi3@gmail.com>, jaegeuk@kernel.org
-References: <20260426093239.165767-1-ruipengqi3@gmail.com>
- <d799ebe3-cbdb-4abf-8667-8ef8b112b48a@kernel.org>
- <70254f4c-80ce-4c53-ba60-be023d0cd6fc@gmail.com>
-Content-Language: en-US
-In-Reply-To: <70254f4c-80ce-4c53-ba60-be023d0cd6fc@gmail.com>
+X-B4-Tracking: v=1; b=H4sIAM9I8mkC/33OTW7DIBAF4KtErIsL2Pgnq96j6gKGoZ4qMRG4q
+ FHkuxeSTaJGXcxiRm8+vQtLGAkT2+8uLGKmRGEpi1QvOwazWT6RkysHpoTqRacUB5OQJ1wSrZR
+ pPXMN1nsYvdR6ZOXtFNHTz9V8/7jt6dt+IazVqQlbCRvNAnM9ZZ9ey/ChUU3VfTi4GpsprSGer
+ 93yVLl/WuSJC25RqBZADALVW4gGDthAOLJaI0txT7RPCCmKAe2oXT90pgf/15D3RvfMkMVwqHs
+ 5WXTOPBrbtv0CS7SfZ3MBAAA=
+X-Change-ID: 20260422-case-sensitivity-5cbffc8f1558
+To: Al Viro <viro@zeniv.linux.org.uk>, 
+ Christian Brauner <brauner@kernel.org>, Jan Kara <jack@suse.cz>
+X-Mailer: b4 0.16-dev
+X-Developer-Signature: v=1; a=openpgp-sha256; l=10117;
+ i=chuck.lever@oracle.com; h=from:subject:message-id;
+ bh=nGIAvTon0zs9b1xP0r8i5cYHOhAA/ZjGGgXeoFYtSA0=;
+ b=owEBbQKS/ZANAwAKATNqszNvZn+XAcsmYgBp8kjUruCj6HSCo8h/ROV63cWR/oVu16zwqghlT
+ mPK1ER4ZuWJAjMEAAEKAB0WIQQosuWwEobfJDzyPv4zarMzb2Z/lwUCafJI1AAKCRAzarMzb2Z/
+ l60jD/wOFP5Liv/4++jhg7MCr4gC8zrGZH6SLe53mUycIA01Yl4fSZlymrf+2x/ZbrtzvPJsQMz
+ tdRHlxlJVf7t8N03MaxrwXGis+ciyJyJhjg1WTVKRHhNdGC+eOEpX1ptetE0rU8axoVTge0c+1a
+ 4qjf9lDvy70V8AStRqezRJn51vNjMt14XBRWo+R6HmKVpnM0GPzEj5oPWs+Vu74/d0hNN9cV5if
+ U/e/a9AnV8vm40EmwIHtrgf3DwEdM8kdPu/3seRyspTFDMLuyixZ+4YZaMyF/ruCDI0F/e9g6Rn
+ GO+bAmOEvn4VLXQfEgcAO1lfzIyShSsB7uqAUhDkLaUiGNeRLZE3/oVUzcS3+AuC8ov0rEHAAhZ
+ uEmvXxjJsHL1ESfV6YkxDRWu/a+WmwTwPy0xQ8LwghSSFL80RuuLk1kfW06IxH5jJYnzYMpny4g
+ SX3mKds5MKYu2sO4xjkIKJA9mY9KDBBV3tRZiMZch2buj60MPlW0f7Fe4KxwSS3WN8HxSEC5OIB
+ 5nOiMO2L87RiuMda0PTn7Yb9iH8mEOzsX6omLFnC8m4Zm40B5xG3PlEfNsqOAM7O/nVlKUFShNZ
+ kHL6rF/gMEfTqQmJIXDy/ARe6JSajQpZmtQtQrPJSaG8UnV4pgb354onxVVMYdBXi+i+eZerZL1
+ DfDyZzX3FJpTM7Q==
+X-Developer-Key: i=chuck.lever@oracle.com; a=openpgp;
+ fpr=28B2E5B01286DF243CF23EFE336AB3336F667F97
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
@@ -85,9 +104,11 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 4/29/26 11:39, Ruipeng Qi wrote: > > On 2026/4/27 16:38, 
- Chao Yu wrote: >> On 4/26/26 17:32, ruipengqi wrote: >>> From: Ruipeng Qi
- <ruipengqi3@gmail.com> >>> >>> When the f2fs filesystem space is n [...] 
+ Content preview: Following on from:
+ https://lore.kernel.org/linux-nfs/20251021-zypressen-bazillus-545a44af57fd@brauner/T/#m0ba197d75b7921d994cf284f3cef3a62abb11aaa
+ I'm attempting to implement enough support in the Linux VFS to enable file
+ services like NFSD and ksmbd (and user space equivalents) to provide the
+ actual status of case folding support in local file [...] 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -98,9 +119,8 @@ X-Spam-Report: Spam detection software,
  not necessarily valid
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
-X-Headers-End: 1wHzpH-0001jV-Jh
-Subject: Re: [f2fs-dev] [PATCH v2] f2fs: fix potential deadlock in
- f2fs_balance_fs()
+X-Headers-End: 1wI9Jz-00013W-EJ
+Subject: [f2fs-dev] [PATCH v12 00/15] Exposing case folding behavior
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -112,259 +132,297 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Chao Yu <chao@kernel.org>
-Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+From: Chuck Lever via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Chuck Lever <cel@kernel.org>
+Cc: pc@manguebit.org, yuezhang.mo@sony.com, cem@kernel.org,
+ Roland Mainz <roland.mainz@nrubsig.org>,
+ almaz.alexandrovich@paragon-software.com, adilger.kernel@dilger.ca,
+ linux-cifs@vger.kernel.org, sfrench@samba.org, slava@dubeyko.com,
+ "Darrick J. Wong" <djwong@kernel.org>, linux-ext4@vger.kernel.org,
+ linkinjeon@kernel.org, Steve French <stfrench@microsoft.com>,
+ sprasad@microsoft.com, frank.li@vivo.com, ronniesahlberg@gmail.com,
+ glaubitz@physik.fu-berlin.de, jaegeuk@kernel.org, hirofumi@mail.parknet.co.jp,
+ linux-nfs@vger.kernel.org, tytso@mit.edu, linux-api@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, linux-xfs@vger.kernel.org,
+ senozhatsky@chromium.org, Chuck Lever <chuck.lever@oracle.com>,
+ hansg@kernel.org, anna@kernel.org, linux-fsdevel@vger.kernel.org,
+ sj1557.seo@samsung.com, trondmy@kernel.org
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
-X-Rspamd-Queue-Id: 36F9F490DC7
+X-Rspamd-Queue-Id: DB4DC4989A2
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-8.51 / 15.00];
+X-Spamd-Result: default: False [-7.11 / 15.00];
 	WHITELIST_DMARC(-7.00)[sourceforge.net:D:+];
+	SUSPICIOUS_RECIPS(1.50)[];
 	DMARC_POLICY_ALLOW_WITH_FAILURES(-0.50)[];
 	RWL_MAILSPIKE_EXCELLENT(-0.40)[216.105.38.7:from];
-	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7];
 	MAILLIST(-0.20)[mailman];
 	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
+	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7:c];
 	MIME_GOOD(-0.10)[text/plain];
-	MIME_BASE64_TEXT(0.10)[];
 	HAS_LIST_UNSUB(-0.01)[];
-	TO_DN_SOME(0.00)[];
-	FORGED_SENDER(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
+	FORGED_RECIPIENTS(0.00)[m:viro@zeniv.linux.org.uk,m:brauner@kernel.org,m:jack@suse.cz,m:pc@manguebit.org,m:yuezhang.mo@sony.com,m:cem@kernel.org,m:roland.mainz@nrubsig.org,m:almaz.alexandrovich@paragon-software.com,m:adilger.kernel@dilger.ca,m:linux-cifs@vger.kernel.org,m:sfrench@samba.org,m:slava@dubeyko.com,m:djwong@kernel.org,m:linux-ext4@vger.kernel.org,m:linkinjeon@kernel.org,m:stfrench@microsoft.com,m:sprasad@microsoft.com,m:frank.li@vivo.com,m:ronniesahlberg@gmail.com,m:glaubitz@physik.fu-berlin.de,m:jaegeuk@kernel.org,m:hirofumi@mail.parknet.co.jp,m:linux-nfs@vger.kernel.org,m:tytso@mit.edu,m:linux-api@vger.kernel.org,m:linux-f2fs-devel@lists.sourceforge.net,m:linux-xfs@vger.kernel.org,m:senozhatsky@chromium.org,m:chuck.lever@oracle.com,m:hansg@kernel.org,m:anna@kernel.org,m:linux-fsdevel@vger.kernel.org,m:sj1557.seo@samsung.com,m:trondmy@kernel.org,s:lists@lfdr.de];
 	RECEIVED_HELO_LOCALHOST(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
 	DKIM_MIXED(0.00)[];
+	FREEMAIL_CC(0.00)[manguebit.org,sony.com,kernel.org,nrubsig.org,paragon-software.com,dilger.ca,vger.kernel.org,samba.org,dubeyko.com,microsoft.com,vivo.com,gmail.com,physik.fu-berlin.de,mail.parknet.co.jp,mit.edu,lists.sourceforge.net,chromium.org,oracle.com,samsung.com];
 	ARC_NA(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:ruipengqi3@gmail.com,m:jaegeuk@kernel.org,m:linux-kernel@vger.kernel.org,m:linux-f2fs-devel@lists.sourceforge.net,s:lists@lfdr.de];
-	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
-	MIME_TRACE(0.00)[0:+];
-	FREEMAIL_TO(0.00)[gmail.com,kernel.org];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[34];
+	TO_DN_SOME(0.00)[];
 	DMARC_POLICY_ALLOW(0.00)[lists.sourceforge.net,none];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_SENDER(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
+	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
+	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,kernel.org:s=k20201202];
 	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
-	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
+	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,kernel.org:-];
 	RCVD_COUNT_FIVE(0.00)[5];
-	NEURAL_HAM(-0.00)[-0.999];
+	NEURAL_HAM(-0.00)[-0.813];
 	FORGED_SENDER_FORWARDING(0.00)[];
 	FROM_HAS_DN(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
-	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,kernel.org:s=k20201202];
+	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
+	HAS_REPLYTO(0.00)[cel@kernel.org];
 	TAGGED_RCPT(0.00)[linux-f2fs-devel];
-	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,kernel.org:-];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
-	RCPT_COUNT_THREE(0.00)[4];
-	HAS_REPLYTO(0.00)[chao@kernel.org]
+	FORGED_SENDER_MAILLIST(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[oracle.com:mid,lists.sourceforge.net:helo,lists.sourceforge.net:dkim,lists.sourceforge.net:rdns]
 
-T24gNC8yOS8yNiAxMTozOSwgUnVpcGVuZyBRaSB3cm90ZToKPiAKPiBPbiAyMDI2LzQvMjcgMTY6
-MzgsIENoYW8gWXUgd3JvdGU6Cj4+IE9uIDQvMjYvMjYgMTc6MzIsIHJ1aXBlbmdxaSB3cm90ZToK
-Pj4+IEZyb206IFJ1aXBlbmcgUWkgPHJ1aXBlbmdxaTNAZ21haWwuY29tPgo+Pj4KPj4+IFdoZW4g
-dGhlIGYyZnMgZmlsZXN5c3RlbSBzcGFjZSBpcyBuZWFybHkgZXhoYXVzdGVkLCB3ZSBlbmNvdW50
-ZXIgZGVhZGxvY2sKPj4+IGlzc3VlcyBhcyBiZWxvdzoKPj4+Cj4+PiBJTkZPOiB0YXNrIEE6MTg5
-MCBibG9ja2VkIGZvciBtb3JlIHRoYW4gMTIwIHNlY29uZHMuCj4+PiDCoMKgwqDCoMKgwqAgVGFp
-bnRlZDogR8KgwqDCoMKgwqDCoMKgwqDCoMKgIE/CoMKgwqDCoMKgwqAgNi4xMi40MS1nM2ZlMDdk
-ZGYwNWFiICMxCj4+PiAiZWNobyAwID4gL3Byb2Mvc3lzL2tlcm5lbC9odW5nX3Rhc2tfdGltZW91
-dF9zZWNzIiBkaXNhYmxlcyB0aGlzIG1lc3NhZ2UuCj4+PiB0YXNrOkHCoMKgwqAgc3RhdGU6RCBz
-dGFjazowwqDCoMKgwqAgcGlkOjE4OTDCoCB0Z2lkOjE2MjbCoCBwcGlkOjExNTMgZmxhZ3M6MHgw
-MDAwMDIwNAo+Pj4gQ2FsbCB0cmFjZToKPj4+IMKgIF9fc3dpdGNoX3RvKzB4ZjQvMHgxNTgKPj4+
-IMKgIF9fc2NoZWR1bGUrMHgyN2MvMHg5MDgKPj4+IMKgIHNjaGVkdWxlKzB4M2MvMHgxMTgKPj4+
-IMKgIGlvX3NjaGVkdWxlKzB4NDQvMHg2OAo+Pj4gwqAgZm9saW9fd2FpdF9iaXRfY29tbW9uKzB4
-MTc0LzB4MzcwCj4+PiDCoCBmb2xpb193YWl0X2JpdCsweDIwLzB4MzgKPj4+IMKgIGZvbGlvX3dh
-aXRfd3JpdGViYWNrKzB4NTQvMHhjOAo+Pj4gwqAgdHJ1bmNhdGVfaW5vZGVfcGFydGlhbF9mb2xp
-bysweDcwLzB4MWUwCj4+PiDCoCB0cnVuY2F0ZV9pbm9kZV9wYWdlc19yYW5nZSsweDFiMC8weDQ1
-MAo+Pj4gwqAgdHJ1bmNhdGVfcGFnZWNhY2hlKzB4NTQvMHg4OAo+Pj4gwqAgZjJmc19maWxlX3dy
-aXRlX2l0ZXIrMHgzZTgvMHhiODAKPj4+IMKgIGRvX2l0ZXJfcmVhZHZfd3JpdGV2KzB4ZjAvMHgx
-ZTAKPj4+IMKgIHZmc193cml0ZXYrMHgxMzgvMHgyYzgKPj4+IMKgIGRvX3dyaXRldisweDg4LzB4
-MTMwCj4+PiDCoCBfX2FybTY0X3N5c193cml0ZXYrMHgyOC8weDQwCj4+PiDCoCBpbnZva2Vfc3lz
-Y2FsbCsweDUwLzB4MTIwCj4+PiDCoCBlbDBfc3ZjX2NvbW1vbi5jb25zdHByb3AuMCsweGM4LzB4
-ZjAKPj4+IMKgIGRvX2VsMF9zdmMrMHgyNC8weDM4Cj4+PiDCoCBlbDBfc3ZjKzB4MzAvMHhmOAo+
-Pj4gwqAgZWwwdF82NF9zeW5jX2hhbmRsZXIrMHgxMjAvMHgxMzAKPj4+IMKgIGVsMHRfNjRfc3lu
-YysweDE5MC8weDE5OAo+Pj4KPj4+IElORk86IHRhc2sga3dvcmtlci91ODoxMToyNjgwODUzIGJs
-b2NrZWQgZm9yIG1vcmUgdGhhbiAxMjAgc2Vjb25kcy4KPj4+IMKgwqDCoMKgwqDCoCBUYWludGVk
-OiBHwqDCoMKgwqDCoMKgwqDCoMKgwqAgT8KgwqDCoMKgwqDCoCA2LjEyLjQxLWczZmUwN2RkZjA1
-YWIgIzEKPj4+ICJlY2hvIDAgPiAvcHJvYy9zeXMva2VybmVsL2h1bmdfdGFza190aW1lb3V0X3Nl
-Y3MiIGRpc2FibGVzIHRoaXMgbWVzc2FnZS4KPj4+IHRhc2s6a3dvcmtlci91ODoxMcKgwqAgc3Rh
-dGU6RCBzdGFjazowwqDCoMKgwqAgcGlkOjI2ODA4NTMgdGdpZDoyNjgwODUzIHBwaWQ6MsKgwqDC
-oMKgwqAgZmxhZ3M6MHgwMDAwMDIwOAo+Pj4gV29ya3F1ZXVlOiB3cml0ZWJhY2sgd2Jfd29ya2Zu
-IChmbHVzaC0yNTQ6MCkKPj4+IENhbGwgdHJhY2U6Cj4+PiDCoCBfX3N3aXRjaF90bysweGY0LzB4
-MTU4Cj4+PiDCoCBfX3NjaGVkdWxlKzB4MjdjLzB4OTA4Cj4+PiDCoCBzY2hlZHVsZSsweDNjLzB4
-MTE4Cj4+PiDCoCBpb19zY2hlZHVsZSsweDQ0LzB4NjgKPj4+IMKgIGZvbGlvX3dhaXRfYml0X2Nv
-bW1vbisweDE3NC8weDM3MAo+Pj4gwqAgX19maWxlbWFwX2dldF9mb2xpbysweDIxNC8weDM0OAo+
-Pj4gwqAgcGFnZWNhY2hlX2dldF9wYWdlKzB4MjAvMHg3MAo+Pj4gwqAgZjJmc19nZXRfcmVhZF9k
-YXRhX3BhZ2UrMHgxNTAvMHgzZTgKPj4+IMKgIGYyZnNfZ2V0X2xvY2tfZGF0YV9wYWdlKzB4MmMv
-MHgxNjAKPj4+IMKgIG1vdmVfZGF0YV9wYWdlKzB4NTAvMHg0NzgKPj4+IMKgIGRvX2dhcmJhZ2Vf
-Y29sbGVjdCsweGQzOC8weDE1MjgKPj4+IMKgIGYyZnNfZ2MrMHgyNDAvMHg3ZTAKPj4+IMKgIGYy
-ZnNfYmFsYW5jZV9mcysweDFhMC8weDIwOAo+Pj4gwqAgZjJmc193cml0ZV9zaW5nbGVfZGF0YV9w
-YWdlKzB4NmU0LzB4NzMwwqAgLy8weGZmZmZmZTBkNmNhMDgzMDAKPj4+IMKgIGYyZnNfd3JpdGVf
-Y2FjaGVfcGFnZXMrMHgzNzgvMHg5YjAKPj4+IMKgIGYyZnNfd3JpdGVfZGF0YV9wYWdlcysweDJl
-NC8weDM4OAo+Pj4gwqAgZG9fd3JpdGVwYWdlcysweDhjLzB4MmM4Cj4+PiDCoCBfX3dyaXRlYmFj
-a19zaW5nbGVfaW5vZGUrMHg0Yy8weDQ5OAo+Pj4gwqAgd3JpdGViYWNrX3NiX2lub2RlcysweDIz
-NC8weDRhOAo+Pj4gwqAgX193cml0ZWJhY2tfaW5vZGVzX3diKzB4NTgvMHgxMTgKPj4+IMKgIHdi
-X3dyaXRlYmFjaysweDJmOC8weDNjMAo+Pj4gwqAgd2Jfd29ya2ZuKzB4MmM0LzB4NTA4Cj4+PiDC
-oCBwcm9jZXNzX29uZV93b3JrKzB4MTgwLzB4NDA4Cj4+PiDCoCB3b3JrZXJfdGhyZWFkKzB4MjU4
-LzB4MzY4Cj4+PiDCoCBrdGhyZWFkKzB4MTE4LzB4MTI4Cj4+PiDCoCByZXRfZnJvbV9mb3JrKzB4
-MTAvMHgyMDAKPj4+Cj4+PiBJTkZPOiB0YXNrIGt3b3JrZXIvdTg6ODoyNjQxMjk3IGJsb2NrZWQg
-Zm9yIG1vcmUgdGhhbiAxMjAgc2Vjb25kcy4KPj4+IMKgwqDCoMKgwqDCoCBUYWludGVkOiBHwqDC
-oMKgwqDCoMKgwqDCoMKgwqAgT8KgwqDCoMKgwqDCoCA2LjEyLjQxLWczZmUwN2RkZjA1YWIgIzEK
-Pj4+ICJlY2hvIDAgPiAvcHJvYy9zeXMva2VybmVsL2h1bmdfdGFza190aW1lb3V0X3NlY3MiIGRp
-c2FibGVzIHRoaXMgbWVzc2FnZS4KPj4+IHRhc2s6a3dvcmtlci91ODo4wqDCoMKgIHN0YXRlOkQg
-c3RhY2s6MMKgwqDCoMKgIHBpZDoyNjQxMjk3IHRnaWQ6MjY0MTI5NyBwcGlkOjLCoMKgwqDCoMKg
-IGZsYWdzOjB4MDAwMDAyMDgKPj4+IFdvcmtxdWV1ZTogd3JpdGViYWNrIHdiX3dvcmtmbiAoZmx1
-c2gtMjU0OjApCj4+PiBDYWxsIHRyYWNlOgo+Pj4gwqAgX19zd2l0Y2hfdG8rMHhmNC8weDE1OAo+
-Pj4gwqAgX19zY2hlZHVsZSsweDI3Yy8weDkwOAo+Pj4gwqAgcnRfbXV0ZXhfc2NoZWR1bGUrMHgz
-MC8weDYwCj4+PiDCoCBfX3J0X211dGV4X3Nsb3dsb2NrX2xvY2tlZC5jb25zdHByb3AuMCsweDQ2
-MC8weDhhOAo+Pj4gwqAgcndiYXNlX3dyaXRlX2xvY2srMHgyNGMvMHgzNzgKPj4+IMKgIGRvd25f
-d3JpdGUrMHgxYy8weDMwCj4+PiDCoCBmMmZzX2JhbGFuY2VfZnMrMHgxODQvMHgyMDgKPj4+IMKg
-IGYyZnNfd3JpdGVfaW5vZGUrMHhmNC8weDMyOAo+Pj4gwqAgX193cml0ZWJhY2tfc2luZ2xlX2lu
-b2RlKzB4MzcwLzB4NDk4Cj4+PiDCoCB3cml0ZWJhY2tfc2JfaW5vZGVzKzB4MjM0LzB4NGE4Cj4+
-PiDCoCBfX3dyaXRlYmFja19pbm9kZXNfd2IrMHg1OC8weDExOAo+Pj4gwqAgd2Jfd3JpdGViYWNr
-KzB4MmY4LzB4M2MwCj4+PiDCoCB3Yl93b3JrZm4rMHgyYzQvMHg1MDgKPj4+IMKgIHByb2Nlc3Nf
-b25lX3dvcmsrMHgxODAvMHg0MDgKPj4+IMKgIHdvcmtlcl90aHJlYWQrMHgyNTgvMHgzNjgKPj4+
-IMKgIGt0aHJlYWQrMHgxMTgvMHgxMjgKPj4+IMKgIHJldF9mcm9tX2ZvcmsrMHgxMC8weDIwCj4+
-Pgo+Pj4gSU5GTzogdGFzayBCOjE5MDIgYmxvY2tlZCBmb3IgbW9yZSB0aGFuIDEyMCBzZWNvbmRz
-Lgo+Pj4gwqDCoMKgwqDCoMKgIFRhaW50ZWQ6IEfCoMKgwqDCoMKgwqDCoMKgwqDCoCBPwqDCoMKg
-wqDCoMKgIDYuMTIuNDEtZzNmZTA3ZGRmMDVhYiAjMQo+Pj4gImVjaG8gMCA+IC9wcm9jL3N5cy9r
-ZXJuZWwvaHVuZ190YXNrX3RpbWVvdXRfc2VjcyIgZGlzYWJsZXMgdGhpcyBtZXNzYWdlLgo+Pj4g
-dGFzazpCwqDCoMKgwqAgc3RhdGU6RCBzdGFjazowwqDCoMKgwqAgcGlkOjE5MDLCoCB0Z2lkOjE2
-MjbCoCBwcGlkOjExNTMgZmxhZ3M6MHgwMDAwMDIwYwo+Pj4gQ2FsbCB0cmFjZToKPj4+IMKgIF9f
-c3dpdGNoX3RvKzB4ZjQvMHgxNTgKPj4+IMKgIF9fc2NoZWR1bGUrMHgyN2MvMHg5MDgKPj4+IMKg
-IHJ0X211dGV4X3NjaGVkdWxlKzB4MzAvMHg2MAo+Pj4gwqAgX19ydF9tdXRleF9zbG93bG9ja19s
-b2NrZWQuY29uc3Rwcm9wLjArMHg0NjAvMHg4YTgKPj4+IMKgIHJ3YmFzZV93cml0ZV9sb2NrKzB4
-MjRjLzB4Mzc4Cj4+PiDCoCBkb3duX3dyaXRlKzB4MWMvMHgzMAo+Pj4gwqAgZjJmc19iYWxhbmNl
-X2ZzKzB4MTg0LzB4MjA4Cj4+PiDCoCBmMmZzX21hcF9ibG9ja3MrMHg5NGMvMHgxMTEwCj4+PiDC
-oCBmMmZzX2ZpbGVfd3JpdGVfaXRlcisweDIyOC8weGI4MAo+Pj4gwqAgZG9faXRlcl9yZWFkdl93
-cml0ZXYrMHhmMC8weDFlMAo+Pj4gwqAgdmZzX3dyaXRldisweDEzOC8weDJjOAo+Pj4gwqAgZG9f
-d3JpdGV2KzB4ODgvMHgxMzAKPj4+IMKgIF9fYXJtNjRfc3lzX3dyaXRldisweDI4LzB4NDAKPj4+
-IMKgIGludm9rZV9zeXNjYWxsKzB4NTAvMHgxMjAKPj4+IMKgIGVsMF9zdmNfY29tbW9uLmNvbnN0
-cHJvcC4wKzB4YzgvMHhmMAo+Pj4gwqAgZG9fZWwwX3N2YysweDI0LzB4MzgKPj4+IMKgIGVsMF9z
-dmMrMHgzMC8weGY4Cj4+PiDCoCBlbDB0XzY0X3N5bmNfaGFuZGxlcisweDEyMC8weDEzMAo+Pj4g
-wqAgZWwwdF82NF9zeW5jKzB4MTkwLzB4MTk4Cj4+Pgo+Pj4gSU5GTzogdGFzayBzeW5jOjI3Njk4
-NDkgYmxvY2tlZCBmb3IgbW9yZSB0aGFuIDEyMCBzZWNvbmRzLgo+Pj4gwqDCoMKgwqDCoMKgIFRh
-aW50ZWQ6IEfCoMKgwqDCoMKgwqDCoMKgwqDCoCBPwqDCoMKgwqDCoMKgIDYuMTIuNDEtZzNmZTA3
-ZGRmMDVhYiAjMQo+Pj4gImVjaG8gMCA+IC9wcm9jL3N5cy9rZXJuZWwvaHVuZ190YXNrX3RpbWVv
-dXRfc2VjcyIgZGlzYWJsZXMgdGhpcyBtZXNzYWdlLgo+Pj4gdGFzazpzeW5jwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoCBzdGF0ZTpEIHN0YWNrOjDCoMKgwqDCoCBwaWQ6Mjc2OTg0OSB0Z2lkOjI3Njk4
-NDkgcHBpZDo3MzbCoMKgwqAgZmxhZ3M6MHgwMDAwMDIwYwo+Pj4gQ2FsbCB0cmFjZToKPj4+IMKg
-IF9fc3dpdGNoX3RvKzB4ZjQvMHgxNTgKPj4+IMKgIF9fc2NoZWR1bGUrMHgyN2MvMHg5MDgKPj4+
-IMKgIHNjaGVkdWxlKzB4M2MvMHgxMTgKPj4+IMKgIHdiX3dhaXRfZm9yX2NvbXBsZXRpb24rMHhi
-MC8weGU4Cj4+PiDCoCBzeW5jX2lub2Rlc19zYisweGM4LzB4MmIwCj4+PiDCoCBzeW5jX2lub2Rl
-c19vbmVfc2IrMHgyNC8weDM4Cj4+PiDCoCBpdGVyYXRlX3N1cGVycysweGE4LzB4MTM4Cj4+PiDC
-oCBrc3lzX3N5bmMrMHg1NC8weGM4Cj4+PiDCoCBfX2FybTY0X3N5c19zeW5jKzB4MTgvMHgzMAo+
-Pj4gwqAgaW52b2tlX3N5c2NhbGwrMHg1MC8weDEyMAo+Pj4gwqAgZWwwX3N2Y19jb21tb24uY29u
-c3Rwcm9wLjArMHhjOC8weGYwCj4+PiDCoCBkb19lbDBfc3ZjKzB4MjQvMHgzOAo+Pj4gwqAgZWww
-X3N2YysweDMwLzB4ZjgKPj4+IMKgIGVsMHRfNjRfc3luY19oYW5kbGVyKzB4MTIwLzB4MTMwCj4+
-PiDCoCBlbDB0XzY0X3N5bmMrMHgxOTAvMHgxOTgKPj4+Cj4+PiBUaGUgcm9vdCBjYXVzZSBpcyBh
-IHBvdGVudGlhbCBkZWFkbG9jayBiZXR3ZWVuIHRoZSBmb2xsb3dpbmcgdGFza3M6Cj4+Pgo+Pj4g
-a3dvcmtlci91ODoxMcKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBUaHJlYWQgQQo+Pj4g
-LSBmMmZzX3dyaXRlX3NpbmdsZV9kYXRhX3BhZ2UKPj4+IMKgIC0gZjJmc19kb193cml0ZV9kYXRh
-X3BhZ2UKPj4+IMKgwqAgLSBmb2xpb19zdGFydF93cml0ZWJhY2soWCkKPj4+IMKgwqAgLSBmMmZz
-X291dHBsYWNlX3dyaXRlX2RhdGEKPj4+IMKgwqDCoCAtIGJpb19hZGRfZm9saW8oWCkKPj4+IMKg
-IC0gZm9saW9fdW5sb2NrKFgpCj4+PiDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoCAtIHRydW5jYXRlX2lub2RlX3BhZ2VzX3JhbmdlCj4+PiDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgIC0gX19maWxlbWFwX2dldF9mb2xpbyhYLCBGR1BfTE9DSykK
-Pj4+IMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgLSB0cnVuY2F0ZV9p
-bm9kZV9wYXJ0aWFsX2ZvbGlvKFgpCj4+PiDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqAgLSBmb2xpb193YWl0X3dyaXRlYmFjayhYKQo+Pj4gwqAgLSBmMmZzX2JhbGFu
-Y2VfZnMKPj4+IMKgwqAgLSBmMmZzX2djCj4+PiDCoMKgwqAgLSBkb19nYXJiYWdlX2NvbGxlY3QK
-Pj4+IMKgwqDCoMKgIC0gbW92ZV9kYXRhX3BhZ2UKPj4+IMKgwqDCoMKgwqAgLSBmMmZzX2dldF9s
-b2NrX2RhdGFfcGFnZQo+Pj4gwqDCoMKgwqDCoMKgIC0gX19maWxlbWFwX2dldF9mb2xpbyhYLCBG
-R1BfTE9DSykKPj4+Cj4+PiBCb3RoIHRocmVhZHMgdHJ5IHRvIGFjY2VzcyBmb2xpbyBYLiBUaHJl
-YWQgQSBob2xkcyB0aGUgbG9jayBidXQgd2FpdHMKPj4+IGZvciB3cml0ZWJhY2ssIHdoaWxlIGt3
-b3JrZXIgd2FpdHMgZm9yIHRoZSBsb2NrLiBUaGlzIGNhdXNlcyBhIGRlYWRsb2NrLgo+Pj4KPj4+
-IE90aGVyIHRocmVhZHMgYWxzbyBlbnRlciBEIHN0YXRlLCB3YWl0aW5nIGZvciBsb2NrcyBzdWNo
-IGFzIGdjX2xvY2sgYW5kCj4+PiB3cml0ZXBhZ2VzLgo+Pj4KPj4+IE9QVS9JUFUgREFUQSBmb2xp
-byBhcmUgYWxsIGFmZmVjdGVkIGJ5IHRoaXMgaXNzdWUuIFRvIGF2b2lkIHN1Y2gKPj4+IHBvdGVu
-dGlhbCBkZWFkbG9ja3MsIGFsd2F5cyBjb21taXQgdGhlc2UgY2FjaGVkIGZvbGlvcyBiZWZvcmUK
-Pj4+IHRyaWdnZXJpbmcgZjJmc19nYygpIGluIGYyZnNfYmFsYW5jZV9mcygpLgo+Pj4KPj4+IHYy
-Ogo+Pj4gLSBDb21taXQgY2FjaGVkIE9QVS9JUFUgZm9saW9zLCBub3QganVzdCBPUFUgZm9saW9z
-IGFzIGluIHYxLgo+Pj4KPj4+IFN1Z2dlc3RlZC1ieTogQ2hhbyA8Y2hhb0BrZXJuZWwub3JnPgo+
-Pj4gU2lnbmVkLW9mZi1ieTogUnVpcGVuZyBRaSA8cnVpcGVuZ3FpM0BnbWFpbC5jb20+Cj4+PiAt
-LS0KPj4+IMKgIGZzL2YyZnMvZGF0YS5jwqDCoMKgIHwgMjYgKysrKysrKysrKysrKysrKysrKysr
-KysrKysKPj4+IMKgIGZzL2YyZnMvZjJmcy5owqDCoMKgIHzCoCAxICsKPj4+IMKgIGZzL2YyZnMv
-c2VnbWVudC5jIHzCoCA5ICsrKysrKysrKwo+Pj4gwqAgMyBmaWxlcyBjaGFuZ2VkLCAzNiBpbnNl
-cnRpb25zKCspCj4+Pgo+Pj4gZGlmZiAtLWdpdCBhL2ZzL2YyZnMvZGF0YS5jIGIvZnMvZjJmcy9k
-YXRhLmMKPj4+IGluZGV4IDMzOGRmN2EyYWVhNi4uZmQwMzM2NmIzMjI4IDEwMDY0NAo+Pj4gLS0t
-IGEvZnMvZjJmcy9kYXRhLmMKPj4+ICsrKyBiL2ZzL2YyZnMvZGF0YS5jCj4+PiBAQCAtOTM5LDYg
-KzkzOSwzMiBAQCB2b2lkIGYyZnNfc3VibWl0X21lcmdlZF9pcHVfd3JpdGUoc3RydWN0IGYyZnNf
-c2JfaW5mbyAqc2JpLAo+Pj4gwqDCoMKgwqDCoCB9Cj4+PiDCoCB9Cj4+PiDCoCArdm9pZCBmMmZz
-X3N1Ym1pdF9hbGxfbWVyZ2VkX2lwdV93cml0ZXMoc3RydWN0IGYyZnNfc2JfaW5mbyAqc2JpKQo+
-Pj4gK3sKPj4+ICvCoMKgwqAgc3RydWN0IGJpb19lbnRyeSAqYmUsICp0bXA7Cj4+PiArwqDCoMKg
-IHN0cnVjdCBmMmZzX2Jpb19pbmZvICppbzsKPj4+ICvCoMKgwqAgZW51bSB0ZW1wX3R5cGUgdGVt
-cDsKPj4+ICvCoMKgwqAgTElTVF9IRUFEKGxpc3QpOwo+Pj4gKwo+Pj4gK8KgwqDCoCBmb3IgKHRl
-bXAgPSBIT1Q7IHRlbXAgPCBOUl9URU1QX1RZUEU7IHRlbXArKykgewo+Pj4gK8KgwqDCoMKgwqDC
-oMKgIGlvID0gc2JpLT53cml0ZV9pb1tEQVRBXSArIHRlbXA7Cj4+PiArCj4+PiArwqDCoMKgwqDC
-oMKgwqAgaWYgKGxpc3RfZW1wdHkoJmlvLT5iaW9fbGlzdCkpCj4+PiArwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoCBjb250aW51ZTsKPj4KPj4gTmVlZHMgdG8gYmUgY292ZXJlZCB3LyBiaW9fbGlzdF9s
-b2NrIHRvIGF2b2lkIHJhY2UgY29uZGl0aW9uLgo+IAo+IEhpLENoYW8KPiAKPiBUaGUgbG9ja2xl
-c3MgbGlzdF9lbXB0eSgpIGhlcmUgaXMgaW50ZW50aW9uYWwgYW5kIGFjY2VwdGFibGUuCj4gCj4g
-Cj4gSWYgbGlzdF9lbXB0eSgpIHJldHVybnMgdHJ1ZSBidXQgdGhlIGxpc3QgYmVjb21lcyBub24t
-ZW1wdHkKPiBhZnRlcndhcmRzIChkdWUgdG8gcmFjZSksIHRoZSBuZXdseSBhZGRlZCBiaW8gd2ls
-bCBiZSBzdWJtaXR0ZWQKPiBieSB0aGUgc3Vic2VxdWVudCB3cml0ZSBwYXRoLCBzbyBubyBiaW8g
-d2lsbCBiZSBsb3N0LgoKQWgsIHJpZ2h0LCB3ZSBvbmx5IG5lZWQgdG8gc3VibWl0IHRoZSBmb2xp
-b3MgY2FjaGVkIGJ5IGxvY2FsIHRocmVhZC4KCj4gCj4gCj4gU2ltaWxhciBwYXR0ZXJucyBleGlz
-dCBpbiB0aGUga2VybmVsLCBlLmcuOgo+ICDCoCBuZXQvcmZraWxsL2NvcmUuYzogcmZraWxsX2Zv
-cF9yZWFkKCkKPiAgwqDCoMKgIC8qIHNpbmNlIHdlIHJlLWNoZWNrIGFuZCBpdCBqdXN0IGNvbXBh
-cmVzIHBvaW50ZXJzLAo+ICDCoMKgwqDCoCAqIHVzaW5nICFsaXN0X2VtcHR5KCkgd2l0aG91dCBs
-b2NraW5nIGlzbid0IGEgcHJvYmxlbQo+ICDCoMKgwqDCoCAqLwo+ICDCoCBmcy9mMmZzL2RhdGEu
-YzogZjJmc19zdWJtaXRfbWVyZ2VkX2lwdV93cml0ZSgpCj4gIMKgwqDCoCBsaXN0X2VtcHR5KCkg
-aXMgYWxzbyB1c2VkIHdpdGhvdXQgaG9sZGluZyBiaW9fbGlzdF9sb2NrCj4gIMKgwqDCoCBhcyBh
-IGxvY2tsZXNzIHByZS1jaGVjawo+IAo+IAo+IElmIHlvdSdkIHByZWZlciwgd2UgY2FuIGFkZCBh
-IGNvbW1lbnQgdG8gbWFrZSB0aGUgaW50ZW50IGNsZWFyOgo+IAo+ICDCoMKgwqAgLyogbGlzdF9l
-bXB0eSgpIHdpdGhvdXQgbG9jayBpcyBzYWZlIGhlcmUgLSBSRUFEX09OQ0UoKQo+ICDCoMKgwqDC
-oCAqIGVuc3VyZXMgcG9pbnRlciByZWFkIGF0b21pY2l0eS4gQSBmYWxzZSBuZWdhdGl2ZSBpcwo+
-ICDCoMKgwqDCoCAqIGFjY2VwdGFibGUgc2luY2UgYW55IGJpbyBhZGRlZCBjb25jdXJyZW50bHkg
-d2lsbCBiZQo+ICDCoMKgwqDCoCAqIHN1Ym1pdHRlZCBieSB0aGUgbmV4dCB3cml0ZSBwYXRoLgo+
-ICDCoMKgwqDCoCAqLwo+ICDCoMKgwqAgaWYgKGxpc3RfZW1wdHkoJmlvLT5iaW9fbGlzdCkpCj4g
-IMKgwqDCoMKgwqDCoMKgIGNvbnRpbnVlOwo+Pgo+Pj4gKwo+Pj4gK8KgwqDCoMKgwqDCoMKgIGYy
-ZnNfZG93bl93cml0ZSgmaW8tPmJpb19saXN0X2xvY2spOwo+Pj4gK8KgwqDCoMKgwqDCoMKgIGxp
-c3Rfc3BsaWNlX2luaXQoJmlvLT5iaW9fbGlzdCwgJmxpc3QpOwo+Pj4gK8KgwqDCoMKgwqDCoMKg
-IGYyZnNfdXBfd3JpdGUoJmlvLT5iaW9fbGlzdF9sb2NrKTsKPj4+ICsKPj4+ICvCoMKgwqDCoMKg
-wqDCoCBsaXN0X2Zvcl9lYWNoX2VudHJ5X3NhZmUoYmUsIHRtcCwgJmxpc3QsIGxpc3QpIHsKPj4+
-ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIGYyZnNfc3VibWl0X3dyaXRlX2JpbyhzYmksIGJlLT5i
-aW8sIERBVEEpOwo+Pj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqAgZGVsX2Jpb19lbnRyeShiZSk7
-Cj4+PiArwqDCoMKgwqDCoMKgwqAgfQo+Pj4gKwo+Pgo+PiBVbm5lY2Vzc2FyeSBibGFuayBsaW5l
-Lgo+Pgo+PiBUaGFua3MsCj4gCj4gVGhhbmtzIGZvciB5b3VyIGNvcnJlY3Rpb24uIFdpbGwgZml4
-IGluIHYzLgo+ICDCoMKgwqAgdjM6Cj4gIMKgwqDCoCAtIEZpeGVkIG1pbm9yIGdyYW1tYXRpY2Fs
-IGlzc3Vlcwo+ICDCoMKgwqAgLSBBZGQgY29tbWVudCBvbiBsb2NrbGVzcyBsaXN0X2VtcHR5KCkg
-dG8gZXhwbGFpbiB3aHkgaXQgaXMgc2FmZQo+ICDCoCB3aXRob3V0IGhvbGRpbmcgYmlvX2xpc3Rf
-bG9jawoKU2VlbXMgZmluZS4KCj4gCj4gCj4gVGhhbmtzLAo+IAo+Pgo+Pj4gK8KgwqDCoCB9Cj4+
-PiArCj4+PiArfQo+Pj4gKwo+Pj4gwqAgaW50IGYyZnNfbWVyZ2VfcGFnZV9iaW8oc3RydWN0IGYy
-ZnNfaW9faW5mbyAqZmlvKQo+Pj4gwqAgewo+Pj4gwqDCoMKgwqDCoCBzdHJ1Y3QgYmlvICpiaW8g
-PSAqZmlvLT5iaW87Cj4+PiBkaWZmIC0tZ2l0IGEvZnMvZjJmcy9mMmZzLmggYi9mcy9mMmZzL2Yy
-ZnMuaAo+Pj4gaW5kZXggYmIzNGU4NjRkMGVmLi5lOTAzOGFiMWIyYmQgMTAwNjQ0Cj4+PiAtLS0g
-YS9mcy9mMmZzL2YyZnMuaAo+Pj4gKysrIGIvZnMvZjJmcy9mMmZzLmgKPj4+IEBAIC00MTQ4LDYg
-KzQxNDgsNyBAQCB2b2lkIGYyZnNfc3VibWl0X21lcmdlZF93cml0ZV9mb2xpbyhzdHJ1Y3QgZjJm
-c19zYl9pbmZvICpzYmksCj4+PiDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIHN0
-cnVjdCBmb2xpbyAqZm9saW8sIGVudW0gcGFnZV90eXBlIHR5cGUpOwo+Pj4gwqAgdm9pZCBmMmZz
-X3N1Ym1pdF9tZXJnZWRfaXB1X3dyaXRlKHN0cnVjdCBmMmZzX3NiX2luZm8gKnNiaSwKPj4+IMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBzdHJ1Y3QgYmlvICoqYmlv
-LCBzdHJ1Y3QgZm9saW8gKmZvbGlvKTsKPj4+ICt2b2lkIGYyZnNfc3VibWl0X2FsbF9tZXJnZWRf
-aXB1X3dyaXRlcyhzdHJ1Y3QgZjJmc19zYl9pbmZvICpzYmkpOwo+Pj4gwqAgdm9pZCBmMmZzX2Zs
-dXNoX21lcmdlZF93cml0ZXMoc3RydWN0IGYyZnNfc2JfaW5mbyAqc2JpKTsKPj4+IMKgIGludCBm
-MmZzX3N1Ym1pdF9wYWdlX2JpbyhzdHJ1Y3QgZjJmc19pb19pbmZvICpmaW8pOwo+Pj4gwqAgaW50
-IGYyZnNfbWVyZ2VfcGFnZV9iaW8oc3RydWN0IGYyZnNfaW9faW5mbyAqZmlvKTsKPj4+IGRpZmYg
-LS1naXQgYS9mcy9mMmZzL3NlZ21lbnQuYyBiL2ZzL2YyZnMvc2VnbWVudC5jCj4+PiBpbmRleCA2
-YTk3ZmU3NjcxMmIuLjg1NmZmZTkxYjk0ZiAxMDA2NDQKPj4+IC0tLSBhL2ZzL2YyZnMvc2VnbWVu
-dC5jCj4+PiArKysgYi9mcy9mMmZzL3NlZ21lbnQuYwo+Pj4gQEAgLTQ1NCw2ICs0NTQsMTUgQEAg
-dm9pZCBmMmZzX2JhbGFuY2VfZnMoc3RydWN0IGYyZnNfc2JfaW5mbyAqc2JpLCBib29sIG5lZWQp
-Cj4+PiDCoMKgwqDCoMKgwqDCoMKgwqAgaW9fc2NoZWR1bGUoKTsKPj4+IMKgwqDCoMKgwqDCoMKg
-wqDCoCBmaW5pc2hfd2FpdCgmc2JpLT5nY190aHJlYWQtPmZnZ2Nfd3EsICZ3YWl0KTsKPj4+IMKg
-wqDCoMKgwqAgfSBlbHNlIHsKPj4+ICsKPj4+ICvCoMKgwqDCoMKgwqDCoCAvKgo+Pj4gK8KgwqDC
-oMKgwqDCoMKgwqAgKiBTdWJtaXQgYWxsIGNhY2hlZCBPUFUvSVBVIERBVEEgYmlvcyBiZWZvcmUg
-dHJpZ2dlcmluZwo+Pj4gK8KgwqDCoMKgwqDCoMKgwqAgKiBmb3JlZ3JvdW5kIEdDIHRvIGF2b2lk
-IHBvdGVudGlhbCBkZWFkbG9ja3MuCj4+PiArwqDCoMKgwqDCoMKgwqDCoCAqLwo+Pj4gKwo+Pj4g
-K8KgwqDCoMKgwqDCoMKgIGYyZnNfc3VibWl0X21lcmdlZF93cml0ZShzYmksIERBVEEpOwo+Pj4g
-K8KgwqDCoMKgwqDCoMKgIGYyZnNfc3VibWl0X2FsbF9tZXJnZWRfaXB1X3dyaXRlcyhzYmkpOwoK
-Q2FuIHdlIHJlbG9jYXRlIGFib3ZlIGNvZGUgdG8gYmVsb3cgdGhlIHZhcmlhYmxlIGRlZmluaXRp
-b25zPwoKVGhhbmtzLAoKPj4+ICsKPj4+IMKgwqDCoMKgwqDCoMKgwqDCoCBzdHJ1Y3QgZjJmc19n
-Y19jb250cm9sIGdjX2NvbnRyb2wgPSB7Cj4+PiDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCAu
-dmljdGltX3NlZ25vID0gTlVMTF9TRUdOTywKPj4+IMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-IC5pbml0X2djX3R5cGUgPSBmMmZzX3NiX2hhc19ibGt6b25lZChzYmkpID8KPj4KCgoKX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTGludXgtZjJmcy1kZXZl
-bCBtYWlsaW5nIGxpc3QKTGludXgtZjJmcy1kZXZlbEBsaXN0cy5zb3VyY2Vmb3JnZS5uZXQKaHR0
-cHM6Ly9saXN0cy5zb3VyY2Vmb3JnZS5uZXQvbGlzdHMvbGlzdGluZm8vbGludXgtZjJmcy1kZXZl
-bAo=
+Following on from:
+
+https://lore.kernel.org/linux-nfs/20251021-zypressen-bazillus-545a44af57fd@brauner/T/#m0ba197d75b7921d994cf284f3cef3a62abb11aaa
+
+I'm attempting to implement enough support in the Linux VFS to
+enable file services like NFSD and ksmbd (and user space
+equivalents) to provide the actual status of case folding support
+in local file systems. The default behavior for local file systems
+not explicitly supported in this series is to reflect the usual
+POSIX behaviors:
+
+  case-insensitive = false
+  case-nonpreserving = false
+
+The case-insensitivity and case-nonpreserving booleans can be
+consumed immediately by NFSD. These two attributes have been part of
+the NFSv3 and NFSv4 protocols for decades, in order to support NFS
+client implementations on non-POSIX systems.
+
+Support for user space file servers is why this series exposes case
+folding information via a user-space API. I don't know of any other
+category of user-space application that requires access to case
+folding info.
+
+The Linux NFS community has a growing interest in supporting NFS
+clients on Windows and MacOS platforms, where file name behavior does
+not align with traditional POSIX semantics.
+
+One example of a Windows-based NFS client is [1]. This client
+implementation explicitly requires servers to report
+FATTR4_WORD0_CASE_INSENSITIVE = TRUE for proper operation, a hard
+requirement for Windows client interoperability because Windows
+applications expect case-insensitive behavior. When an NFS client
+knows the server is case-insensitive, it can avoid issuing multiple
+LOOKUP/READDIR requests to search for case variants, and applications
+like Win32 programs work correctly without manual workarounds or
+code changes.
+
+Even the Linux client can take advantage of this information. Trond
+merged patches 4 years ago [2] that introduce support for case
+insensitivity, in support of the Hammerspace NFS server. In
+particular, when a client detects a case-insensitive NFS share,
+negative dentry caching must be disabled (a lookup for "FILE.TXT"
+failing shouldn't cache a negative entry when "file.txt" exists)
+and directory change invalidation must clear all cached case-folded
+file name variants.
+
+Hammerspace servers and several other NFS server implementations
+operate in multi-protocol environments, where a single file service
+instance caters to both NFS and SMB clients. In those cases, things
+work more smoothly for everyone when the NFS client can see and adapt
+to the case folding behavior that SMB users rely on and expect. NFSD
+needs to support the case-insensitivity and case-nonpreserving
+booleans properly in order to participate as a first-class citizen
+in such environments.
+
+[1] https://github.com/kofemann/ms-nfs41-client
+
+[2] https://patchwork.kernel.org/project/linux-nfs/cover/20211217203658.439352-1-trondmy@kernel.org/
+
+---
+Changes since v11:
+- isofs: Wire .fileattr_get only on directory inodes, since
+  NFSD and ksmbd query casefolding on directories (Jan Kara)
+- xfs, hfsplus: Drop the FS_CASEFOLD_FL fileattr_get mask;
+  admit the bit through fileattr_set's allowlist instead
+- Address findings from sashiko(gemini-3) and gpt-5.5:
+  - cifs: Wire .fileattr_get on cifs_namespace_inode_operations
+    so DFS referral / automount directories report case handling
+  - fat, ntfs3: Fill FS_IMMUTABLE_FL in fileattr_get
+  - hfsplus: Hide FS_CASEFOLD_FL from the legacy flags view so
+    chattr round-trips do not hit the setflags whitelist
+  - nfs: Clear NFS_CAP_CASE_INSENSITIVE and
+    NFS_CAP_CASE_NONPRESERVING before re-OR'ing in the v3 and
+    v4 probe paths so re-probe / TSM does not retain stale caps
+  - nfsd: Switch nfsd_get_case_info() to errno return so
+    v3 PATHCONF and v4 GETATTR can apply version-appropriate
+    policy on failure
+  - nfsd: Use dget_parent() in v4 case-attr probe to keep
+    the parent dentry referenced across the query
+  - isofs: Report FS_XFLAG_CASENONPRESERVING for map=n/map=a
+
+Changes since v10:
+- cifs: Source case-handling flags from the server's cached
+  FS_ATTRIBUTE_INFORMATION reply instead of the nocase mount
+  option, with a nocase fallback when the reply is absent
+- Address findings from sashiko(gemini-3) and gpt-5.5:
+  - nfs: Skip pathconf case bits on NFSv4 (set via FATTR4_CASE_*
+    instead)
+  - xfs: Hide FS_CASEFOLD_FL from the legacy flags view so
+    chattr round-trips do not hit the setflags whitelist
+  - ext4, f2fs: Drop redundant fileattr_get patches; the
+    FS_CASEFOLD_FL translation in fileattr_fill_flags() already
+    reports FS_XFLAG_CASEFOLD for casefolded directories
+  - nfsd: Report FATTR4_HOMOGENEOUS = FALSE when the exported
+    filesystem has a Unicode encoding, since per-directory
+    casefold makes the fs-scoped case attributes inhomogeneous
+  - nfsd: Document in nfsd_get_case_info() why -ENOIOCTLCMD and
+    -ENOTTY are swallowed while other errors propagate
+  - fat: Honor vfat 'check=strict' when reporting FS_XFLAG_CASEFOLD
+  - Set FS_CASEFOLD_FL so FS_IOC_GETFLAGS reflects case-insensitive
+    mount
+  - isofs: Register fileattr_get on regular file and symlink inodes,
+    not just directories
+  - nfsd: Query NFSv4 FATTR4_CASE_* from the parent directory for
+    non-directory objects, since casefold lives on the directory
+
+Changes since v9:
+- nfs: always probe PATHCONF for case caps. Default to case-
+  preserving when the server does not report case_preserving
+- nfsd, ksmbd: tolerate -ENOTTY from vfs_fileattr_get() so
+  overlayfs exports on backing filesystems without fileattr_get
+  do not fail the RPC
+- xfs: map FS_XFLAG_CASEFOLD inside xfs_ip2xflags() so BULKSTAT
+  and FS_IOC_FSGETXATTR report the flag consistently
+- vboxsf: reject a short host reply to SHFL_INFO_VOLUME before
+  trusting volinfo.properties.case_sensitive
+
+Changes since v8:
+- Rebase on v7.0-rc1
+
+Changes since v7:
+- Split file_attr initialization changes into a separate patch
+
+Changes since v6:
+- Remove the memset from vfs_fileattr_get
+
+Changes since v5:
+- Finish the conversion to FS_XFLAGs
+- NFSv4 GETATTR now clears the attr mask bit if nfsd_get_case_info()
+  fails
+
+Changes since v4:
+- Observe the MSDOS "nocase" mount option
+- Define new FS_XFLAGs for the user API
+
+Changes since v3:
+- Change fa->case_preserving to fa_case_nonpreserving
+- VFAT is case preserving
+- Make new fields available to user space
+
+Changes since v2:
+- Remove unicode labels
+- Replace vfs_get_case_info
+- Add support for several more local file system implementations
+- Add support for in-kernel SMB server
+
+Changes since RFC:
+- Use file_getattr instead of statx
+- Postpone exposing Unicode version until later
+- Support NTFS and ext4 in addition to FAT
+- Support NFSv4 fattr4 in addition to NFSv3 PATHCONF
+
+---
+Chuck Lever (15):
+      fs: Move file_kattr initialization to callers
+      fs: Add case sensitivity flags to file_kattr
+      fat: Implement fileattr_get for case sensitivity
+      exfat: Implement fileattr_get for case sensitivity
+      ntfs3: Implement fileattr_get for case sensitivity
+      hfs: Implement fileattr_get for case sensitivity
+      hfsplus: Report case sensitivity in fileattr_get
+      xfs: Report case sensitivity in fileattr_get
+      cifs: Implement fileattr_get for case sensitivity
+      nfs: Implement fileattr_get for case sensitivity
+      vboxsf: Implement fileattr_get for case sensitivity
+      isofs: Implement fileattr_get for case sensitivity
+      nfsd: Report export case-folding via NFSv3 PATHCONF
+      nfsd: Implement NFSv4 FATTR4_CASE_INSENSITIVE and FATTR4_CASE_PRESERVING
+      ksmbd: Report filesystem case sensitivity via FS_ATTRIBUTE_INFORMATION
+
+ fs/exfat/exfat_fs.h            |  2 ++
+ fs/exfat/file.c                | 18 +++++++++--
+ fs/exfat/namei.c               |  1 +
+ fs/fat/fat.h                   |  3 ++
+ fs/fat/file.c                  | 36 +++++++++++++++++++++
+ fs/fat/namei_msdos.c           |  1 +
+ fs/fat/namei_vfat.c            |  1 +
+ fs/file_attr.c                 | 16 +++++-----
+ fs/hfs/dir.c                   |  1 +
+ fs/hfs/hfs_fs.h                |  2 ++
+ fs/hfs/inode.c                 | 14 ++++++++
+ fs/hfsplus/inode.c             | 16 +++++++++-
+ fs/isofs/dir.c                 | 16 ++++++++++
+ fs/isofs/isofs.h               |  3 ++
+ fs/nfs/client.c                | 25 +++++++++++----
+ fs/nfs/inode.c                 | 15 +++++++++
+ fs/nfs/internal.h              |  3 ++
+ fs/nfs/namespace.c             |  2 ++
+ fs/nfs/nfs3proc.c              |  2 ++
+ fs/nfs/nfs3xdr.c               |  7 ++--
+ fs/nfs/nfs4proc.c              | 10 ++++--
+ fs/nfs/proc.c                  |  3 ++
+ fs/nfs/symlink.c               |  3 ++
+ fs/nfsd/nfs3proc.c             | 36 ++++++++++++++++-----
+ fs/nfsd/nfs4xdr.c              | 52 ++++++++++++++++++++++++++++--
+ fs/nfsd/vfs.c                  | 72 ++++++++++++++++++++++++++++++++++++++++++
+ fs/nfsd/vfs.h                  |  3 ++
+ fs/nfsd/xdr3.h                 |  4 +--
+ fs/ntfs3/file.c                | 29 +++++++++++++++++
+ fs/ntfs3/inode.c               |  1 +
+ fs/ntfs3/namei.c               |  2 ++
+ fs/ntfs3/ntfs_fs.h             |  1 +
+ fs/smb/client/cifsfs.c         | 41 ++++++++++++++++++++++++
+ fs/smb/client/cifsfs.h         |  3 ++
+ fs/smb/client/namespace.c      |  1 +
+ fs/smb/server/smb2pdu.c        | 30 ++++++++++++++----
+ fs/vboxsf/dir.c                |  1 +
+ fs/vboxsf/file.c               |  6 ++--
+ fs/vboxsf/super.c              |  7 ++++
+ fs/vboxsf/utils.c              | 30 ++++++++++++++++++
+ fs/vboxsf/vfsmod.h             |  6 ++++
+ fs/xfs/libxfs/xfs_inode_util.c |  2 ++
+ fs/xfs/xfs_ioctl.c             | 22 ++++++++++---
+ include/linux/fileattr.h       |  3 +-
+ include/linux/nfs_fs_sb.h      |  2 +-
+ include/linux/nfs_xdr.h        |  2 ++
+ include/uapi/linux/fs.h        |  7 ++++
+ 47 files changed, 513 insertions(+), 50 deletions(-)
+---
+base-commit: 6596a02b207886e9e00bb0161c7fd59fea53c081
+change-id: 20260422-case-sensitivity-5cbffc8f1558
+
+Best regards,
+--  
+Chuck Lever
+
+
+
+_______________________________________________
+Linux-f2fs-devel mailing list
+Linux-f2fs-devel@lists.sourceforge.net
+https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
