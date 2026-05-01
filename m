@@ -2,12 +2,12 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id viwiEpj582mA9QEAu9opvQ
+	id IK2lD5j582lo9QEAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
 	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 01 May 2026 02:53:44 +0200
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 967E64A963E
+	by mail.lfdr.de (Postfix) with ESMTPS id 8FECD4A963D
 	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 01 May 2026 02:53:40 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
@@ -15,29 +15,29 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	List-Unsubscribe:List-Id:Subject:MIME-Version:References:In-Reply-To:
 	Message-ID:Date:To:Sender:Content-ID:Content-Description:Resent-Date:
 	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=Q4KS89st08GXXsLjV/p8QPoCpTuNtxgQMqSvBbJbCO4=; b=YOyjJ4MapvlXgMaKKTGtN6jFGT
-	hNuOK8WtftAkZ51uoOz0+CTr9FyF+rnGBuYWBqd0A84zGVqrfWl6tgYCjXg2VrIEL9nVXtlSJxcTt
-	FJ+ejjA8BrhP2XZK3wO0N9sRyeTEMubJAn8Kb5pDtfBZfxDYgzPuoz5nOG8M52sU2F6I=;
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=4RhZogF0oVzCW3PfYXDcVGYDYxBKl6+r9sD7AhKgL0E=; b=T5A+k/mIDu49Rzuij5AR2veTqW
+	e+1ket3GZtMCS7oRy+VcccaKsO7kPLEpwm5DxKmwA4agWbdWyykU8kQJ9GcEA3YTX87j4Cz0xm16u
+	VQ/7udnPBdmjgwLBWvlMuXK/sLLrGE/jA5Tfk7mEJvo83LGKtmy93tv0n2d+am6WEsWw=;
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1wIc8F-0000RI-Hu;
-	Fri, 01 May 2026 00:53:27 +0000
+	id 1wIc8S-0002SR-Ev;
+	Fri, 01 May 2026 00:53:37 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <sashal@kernel.org>) id 1wIc8D-0000RA-BO
+ (envelope-from <sashal@kernel.org>) id 1wIc8Q-0002SL-Vl
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 01 May 2026 00:53:25 +0000
+ Fri, 01 May 2026 00:53:36 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=KzQTclZuCoJfZ2MNb+MG5u6QR+eoQTmWjD0e6rKq0Qw=; b=YX2m4I1UDoAsw40QCEbvXQWVoQ
- xWprhqO4m+q+wxhHf6lgjkOP0M0Zqn+oCAWJegqmOiyUJ8/uT8qsI5kcWnovefH6qATnrZi1Qs9vM
- VIQMNolkJzp9CWg1p1lhSJUK9GLiwZtXny1ETZdl4qnfPzItF2QOgjGL9T5D8xJNlO1c=;
+ bh=nQF8Ykfj8+2QCwIYCJZ21I3zd5B77lm7Ueq+m26Y97M=; b=MeGopl0KJ1bzlz2HF6a0ytlV6u
+ KH4WeOp9hpz8smY5Dm7QuPebCHC67ySi+PPF3RBGen/a8vLzS+kU1rpMMgwFtVjW5C8Ew3n0jm4Kp
+ /9shL97w2KLhyBVyUr+uzWs/VdkMjh9S2WAW5zYT2LN4msFSqVS1cRKa6HSWNr9iy56A=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:
@@ -45,36 +45,36 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=KzQTclZuCoJfZ2MNb+MG5u6QR+eoQTmWjD0e6rKq0Qw=; b=hi2+ll6v/H0vyTqDg5hY72AEc7
- P8k+X31Kd4ecm3QhLIf38FVqBc5Le38nZf13I8cEvUNBRqtEMB840xjaPWsS0oDq7OGpmkjPshCFO
- Da+sTB/F1Rslzazq+RaZgPNX0nugY6cGlOroWQVC2mK/PPKzhqt4VI/nIJvrQG/yuriA=;
+ bh=nQF8Ykfj8+2QCwIYCJZ21I3zd5B77lm7Ueq+m26Y97M=; b=AXcKXuoyBw2dAlfr5QAPaBDlZI
+ XnmFka0BiBGWUbPR09evqaVvG1ImeoimHImKccJlljKiQ0tHg2BLLLBoXMb8tYIsyNd34BUg4ofNN
+ pKz5LRHyScyUo4xiykt/n6nep3gOxG1eYbgFtYtCy4mVlLQTX4Qcczh31MIq3W2f+Y1M=;
 Received: from sea.source.kernel.org ([172.234.252.31])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1wIc8D-0003iw-0E for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 01 May 2026 00:53:25 +0000
+ id 1wIc8N-0003jS-5C for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 01 May 2026 00:53:36 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id B0678440EC;
- Fri,  1 May 2026 00:53:19 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id DBA5EC2BCB3;
- Fri,  1 May 2026 00:53:18 +0000 (UTC)
+ by sea.source.kernel.org (Postfix) with ESMTP id D05AA444C8;
+ Fri,  1 May 2026 00:53:24 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 06A66C2BCB3;
+ Fri,  1 May 2026 00:53:23 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1777596799;
- bh=KzQTclZuCoJfZ2MNb+MG5u6QR+eoQTmWjD0e6rKq0Qw=;
+ s=k20201202; t=1777596804;
+ bh=nQF8Ykfj8+2QCwIYCJZ21I3zd5B77lm7Ueq+m26Y97M=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=GlJD0K60kmdn1mNAXeHnhfZsjneL3nGCWYf7I/ZdXgzyzXQJiekK1lMzcW87+hydS
- GoiCqTdA74XmXhhW+iC0cBGCE8BaWJiGzYNravm2WFtfEpI/MClfEujZDcqvC81R6O
- Q3KmaylAZtD1v9RUDf1OAYzGj5piq+8YRmHjE68bqcsQMJAfuGV5lkir8KfKKn8E4H
- EMBkRqcOK562uwtlI1/4uF7az0QV2TIBJ4Uvr07vNVOb+4NeFToXgKhU+uUH2H1eca
- PgJ8cnlEAUM69P+ObisYRWX1WWuBmLzQ9NQj3ZWG1EsET19jcyHKf/dzvxZsJzyiua
- xS+W7g+nCYBLw==
+ b=G+fLdPSoHn1ju+dGJ+phcc2I05mJOy2mbsT4Lq1ZmEwhMnDvop0Q6dim8/MZueIwY
+ OpTJBqfazrdzbbZk6WbYyv+EWo+2aJfmDNUSMXENPFwod2TQXlps6crJKWNEzA6OPJ
+ TcXY9Vs5uzTenlGnjho5P5q3YDzsnDKS9W8JaFY9fMN3f7Etmbw6jTFJ60aRdwlub2
+ 4XnTJaA6Cyw123aB6YsWdRttdJYiU5x/VcAKywu7ZLszFWqyqnWRz4tyeORjQt8a2e
+ NMFCR6N8/+MlxQ0GFUQy11b3tZsOww/jM2YGkT/P5PwDEOvfHHWbqzXRXyJi7kybE8
+ ifeott33tBAZg==
 To: stable@vger.kernel.org,
 	Chao Yu <chao@kernel.org>
-Date: Thu, 30 Apr 2026 20:53:17 -0400
-Message-ID: <20260430160000.item006-6.6@kernel.org>
+Date: Thu, 30 Apr 2026 20:53:22 -0400
+Message-ID: <20260430160000.item006-6.1@kernel.org>
 X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20260430054510.2001015-1-rob_garcia@163.com>
-References: <20260430054510.2001015-1-rob_garcia@163.com>
+In-Reply-To: <20260430055537.2105721-1-rob_garcia@163.com>
+References: <20260430055537.2105721-1-rob_garcia@163.com>
 MIME-Version: 1.0
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
@@ -83,7 +83,7 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Thu, Apr 30, 2026 at 01:45:10PM +0800,
+ Content preview:  On Thu, Apr 30, 2026 at 01:55:37PM +0800,
  Robert Garcia wrote:
  > From: Chao Yu <chao@kernel.org> > > [ Upstream commit
  8fc6056dcf79937c46c97fa4996cda65956437a9
@@ -98,8 +98,8 @@ X-Spam-Report: Spam detection software,
  not necessarily valid
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
-X-Headers-End: 1wIc8D-0003iw-0E
-Subject: Re: [f2fs-dev] [PATCH 6.6.y] f2fs: fix to detect potential
+X-Headers-End: 1wIc8N-0003jS-5C
+Subject: Re: [f2fs-dev] [PATCH 6.1.y] f2fs: fix to detect potential
  corrupted nid in free_nid_list
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
@@ -119,7 +119,7 @@ Cc: Robert Garcia <rob_garcia@163.com>, Jaegeuk Kim <jaegeuk@kernel.org>,
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
-X-Rspamd-Queue-Id: 967E64A963E
+X-Rspamd-Queue-Id: 8FECD4A963D
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [-8.61 / 15.00];
@@ -162,7 +162,7 @@ X-Spamd-Result: default: False [-8.61 / 15.00];
 	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
 	HAS_REPLYTO(0.00)[sashal@kernel.org]
 
-On Thu, Apr 30, 2026 at 01:45:10PM +0800, Robert Garcia wrote:
+On Thu, Apr 30, 2026 at 01:55:37PM +0800, Robert Garcia wrote:
 > From: Chao Yu <chao@kernel.org>
 >
 > [ Upstream commit 8fc6056dcf79937c46c97fa4996cda65956437a9 ]
@@ -171,7 +171,7 @@ On Thu, Apr 30, 2026 at 01:45:10PM +0800, Robert Garcia wrote:
 > out-of-range, let's add sanity check on f2fs_alloc_nid() to detect
 > any potential corruption in free_nid_list.
 
-Thanks, queued for 6.6.y.
+Thanks, queued for 6.1.y.
 
 --
 Thanks,
