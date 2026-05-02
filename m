@@ -2,123 +2,114 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id IIICGjvx9WmVQgIAu9opvQ
+	id lW5sLXMI9mlORwIAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 02 May 2026 14:42:35 +0200
+	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 02 May 2026 16:21:39 +0200
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7B6524B1F5D
-	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 02 May 2026 14:42:34 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id DB25C4B2506
+	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 02 May 2026 16:21:38 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
-	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
-	Subject:MIME-Version:Message-Id:Date:To:From:Sender:Reply-To:Content-ID:
-	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
-	:Resent-Message-ID:In-Reply-To:References:List-Owner;
-	bh=3V2P+G7cVT4nfmjSveqanMY8OAfLLiyamrUI/+FWaCQ=; b=l/1fsVtUx5vEouINM3lXikBZQn
-	EGd685JGwNFO+EuR3E5TzzGHDOTeGgIBZrBI2O2x2VjEPaorXGsspEaOIq1Im+rBd1vFCMgHpPRsR
-	bmRBttC0T69+f+eOSG9+6hqIoibtu/EpHuuKbFA1Owetiq9XwdA5xQJFIPkqKiqGZDps=;
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
+	List-Unsubscribe:List-Id:Subject:To:MIME-Version:Message-Id:Date:Sender:
+	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+	Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Owner;
+	bh=vBFsIQHlBm1iW5qK+AtHmmzxas1ykB1KELJmPPOIz5U=; b=iMC9G/dZZ76c0If+ztMkYnN46W
+	xX2oB3qbYoRW1bZBqBtJ2xJLEuDF1DPyT2IDp2OQGIM7hR2ukCCmP/Rhlnpx/iAsL3qPWUh0JZcvM
+	+528+FVZOvTATt0zduC8+73CG3N9stXjA7C6742M0JjOykqLIhoPeHNA4XaE0V5I8S7U=;
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1wJ9fr-0000Zd-3H;
-	Sat, 02 May 2026 12:42:23 +0000
+	id 1wJBDk-0003cX-64;
+	Sat, 02 May 2026 14:21:25 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <ruipengqi3@gmail.com>) id 1wJ9fq-0000ZT-29
+ (envelope-from <cel@kernel.org>) id 1wJBDh-0003cQ-W8
  for linux-f2fs-devel@lists.sourceforge.net;
- Sat, 02 May 2026 12:42:22 +0000
+ Sat, 02 May 2026 14:21:23 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ d=sourceforge.net; s=x; h=Cc:To:Content-Transfer-Encoding:Content-Type:
+ MIME-Version:Message-Id:Date:Subject:From:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=0TYlNOGKPAoKWtSOwNLPArH6N1dYOc6JBwGgHZq51pU=; b=TeUo40VwnXmaEmzq5LUHrQKoBp
- C0i46FFjsTQJhs3zYvPHBCVEpqFnFQow+Z+nLPs+kj2sbN3gUM76m18cXp4SYyXX1jMwIxmg/RbEb
- w0s05taqJ6ulVwl/Bkvl1+43fEAUjYorujV4zJOO8CRo7T2009PPFatHiThOO1/eNMUY=;
+ bh=7WITeB+Qm+9NdTXR9ftykQvICA3HTWab+kIb8wy4kUA=; b=Rro9gimIHmiZcuq+kV4SregIhw
+ LAo+75WNAQzfrGwCc0VE4QrKjqvkBdD6khCUJIvO/yDIhIMT8gqrgFNqORFma1Wx9NKN+hhCVLbIV
+ zjBXlx+/DlCeo9BUO/1CG+f48iLokxGrLhhCleOrsczxfefXWORXXPCIkGvfPFWcRyQ4=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ h=Cc:To:Content-Transfer-Encoding:Content-Type:MIME-Version:Message-Id:Date
+ :Subject:From:Sender:Reply-To:Content-ID:Content-Description:Resent-Date:
  Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=0TYlNOGKPAoKWtSOwNLPArH6N1dYOc6JBwGgHZq51pU=; b=U
- L10MKdfRPNHnQ9ge3IsUZMJTXYaDmSpx88N2J9bKqCLUXEnXoo/bGtic76BNvRqJwDLextJT/pQXk
- T5SSwKCrF7zZ1h08a8kmKf/3hyMpdtREBOcfGtYY6qVcZBD8fYx1xah23OxzGAse4gCfQcx7Z+iCk
- l8GMgLsvf4YTSmZk=;
-Received: from mail-pj1-f46.google.com ([209.85.216.46])
+ List-Owner:List-Archive; bh=7WITeB+Qm+9NdTXR9ftykQvICA3HTWab+kIb8wy4kUA=; b=O
+ LIcmdmwT7laTqGm2FLKQ0OQraX6xbAZozUed2F+P/Ed7s3gSNkwoQvM9o1U6LrorhUhpL0Uqp0NuB
+ 0uA86jY1i+IzuBw1014TaCx9lfwQIMFECzGkjGOOdLiT4y3Pc57KqppEAbuSJscEvZImanTprPfnW
+ Qw3Z3+5iVLeSUyjQ=;
+Received: from sea.source.kernel.org ([172.234.252.31])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1wJ9fl-0003qj-EM for linux-f2fs-devel@lists.sourceforge.net;
- Sat, 02 May 2026 12:42:18 +0000
-Received: by mail-pj1-f46.google.com with SMTP id
- 98e67ed59e1d1-3651fa24c6bso138491a91.2
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Sat, 02 May 2026 05:42:17 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1777725727; x=1778330527; darn=lists.sourceforge.net;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=0TYlNOGKPAoKWtSOwNLPArH6N1dYOc6JBwGgHZq51pU=;
- b=pk4pc9kwYkYT+DDAy9na2dZXhg39iOTiOW5Lyqa8bxN3zwi+IToTO9MyknYyd021ok
- 4mefkq9PdpDvi9rDIvJ8QKXZcSQ6R926jMK/TRoR8XCe+DjXpy4fS5jkUNsV52ttHbig
- yKX606qG8kHirBzws4DtkgSiBH2IE9qfX1ceOhOUJJjFTst0eFzVH7x89pu/lkcl1W5j
- yRov/Ir+G5NixDlf7EtqaNG2bvmkMUWM+dOENdDCYoWooSV8aT/FvHmUckteSz3ZlQW7
- VMDqDcDOTwQOlR92He0XKVepwWS5XlxS8ydkaMpxdKrKRkpWiFG6CxlP7I2ClIFA2oj2
- qqsA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777725727; x=1778330527;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=0TYlNOGKPAoKWtSOwNLPArH6N1dYOc6JBwGgHZq51pU=;
- b=DIsXD72BNunN12+b2RKh+ecUvMQk6MuH1DYT5aVQXS7CHPuq9tq/q61es9FwFgNiY8
- 79h+VLYViVSmkCYpr52M9qVd9MItIAfqG44lIfK5ANbbFUQFrUz8Nar+2UJmijn84Yho
- 9kCwZJQkSNiWlnjsJhAq6jCHB84+/o4Kg/VGDZ9g6MxWrfVYBRUXzYweElDG8d6fEqvh
- 7WLcUOJ7NCmOJMHsaP0DPSRCXk8X+wpLQr2PDTwHnenYrkxAViT1LDVneYNI0sB47lPF
- aVZEXMoESyc2NsjG6CyjwzBfmZ8JDSJfm8nDWk0iEf/4XMXaJ5ZoxY9Xm7BX0MKSuM6/
- LWIg==
-X-Forwarded-Encrypted: i=1;
- AFNElJ8QadLVb5vJvIQRlOSK9xmtaP5Osyu/8OKJyLP/CBG/DsxVperxtqGp/k16OeWUJU7M/SqQK1u+rHzL1W+Ra7kP@lists.sourceforge.net
-X-Gm-Message-State: AOJu0YzHbA99zzMO/pRz+pia6nBzS0Erc+rnAdgOMe+KBSn7JyjGVF/a
- 1UJdlKxtWt7LLA8fkQkbaadiE5WwFuBiFPbzKMAr9PpGllo/Db6VVma5
-X-Gm-Gg: AeBDietKVeVHUZ2krJSXQEBsNNphs9DpbmZhGSy8xQ4pUUoCoiVAW2R54Eqk1lHVmzV
- fKUN+FDWYcI5ykvd6vTlYEjBVQwILtum0dfrRwAurSNPqFsGmRyWCJz3clxJjGzlV0lFelkM5fx
- coMc0YaPTuheb33K7OTOAbySsLw1Piiv++Sv5OWHjCitz4dd6IO5B72lI0IrI/zGAdnAuAgPvfX
- GlBPtXu6Y+AKXA6QPpKKBpdFDKl0lvawnFx5Ez0mDuCehwmQ+F4WGkGwADLYbyh6PVMzIDxNjIJ
- u/VwdYaGym2z8lrj7mj9jsEqV6icbGRRW02tQVBgV15MY847DkGYqEVVFdvm/WgAOM2OtUtOrCJ
- copMvi0I7Cs1NljLhw307NYlekUu3O30dFzRhyvfd55UM4DpaBW0Ad5sObWkCWKn5OLTdDbVtBP
- S719+VGGTqmRMis2GeLH700kC91w04ehXb2wiccDprjoyq0crQ11F5nWU8EwoVorswkfLf5lHei
- CNBJ4OQz6EBAEbF
-X-Received: by 2002:a17:90b:2b45:b0:35f:b69d:7292 with SMTP id
- 98e67ed59e1d1-3650ce36fe3mr2803961a91.15.1777725726567; 
- Sat, 02 May 2026 05:42:06 -0700 (PDT)
-Received: from lixiang-ThinkCentre-M755e-N000.company.local ([210.184.73.204])
- by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-364ebec73aasm5394930a91.2.2026.05.02.05.42.03
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 02 May 2026 05:42:06 -0700 (PDT)
-From: ruipengqi <ruipengqi3@gmail.com>
-To: jaegeuk@kernel.org
-Date: Sat,  2 May 2026 20:41:57 +0800
-Message-Id: <20260502124157.3406780-1-ruipengqi3@gmail.com>
-X-Mailer: git-send-email 2.25.1
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
+ id 1wJBDe-0000rN-EK for linux-f2fs-devel@lists.sourceforge.net;
+ Sat, 02 May 2026 14:21:23 +0000
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sea.source.kernel.org (Postfix) with ESMTP id 0745540B57;
+ Sat,  2 May 2026 14:21:12 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 04C86C19425;
+ Sat,  2 May 2026 14:21:05 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1777731671;
+ bh=S8uXYzoY0/m42R5BMCcNDvtfUd9F8GUKvIduB+tGh50=;
+ h=From:Subject:Date:To:Cc:From;
+ b=T0OplOmM9zbebhox/z03dEvqatD2rPvsRfoOb9fg60pWEuY8I0X1czPc1xuA8Kf6h
+ VqF7q/nHrvm/bZU8ISq6v0oy4X+w3bXrEz4ouewV6B+AVltx3D8UB2UKaOZV5QZi3b
+ 07FxXLEhk2xXPek427XW3nDe6uBe94ux20g7+wrk1/+MPJfOIHwf0cop643dmrJrtq
+ W49HIt3WSyqenbsPGsgDMzk3bHuad0mFqJnIeGOMZKmKr9DT7TdVw7DiXSIQ2pbi4w
+ 4G8Jzg+jSusCacMZsGOwDJQ/wcn4R3g5mWbY8uddhU5R1QLeJQzm/mahTm+Us52uXO
+ e6bNRKaNjiXGA==
+Date: Sat, 02 May 2026 10:20:45 -0400
+Message-Id: <20260502-case-sensitivity-v13-0-aa853140311f@oracle.com>
 MIME-Version: 1.0
-X-Spam-Score: 0.1 (/)
+X-B4-Tracking: v=1; b=H4sIAD0I9mkC/33PzU7EIBAH8FfZcJYK09IPT76H8QDDYDG7xUAlb
+ jZ9d2G91Nh4mMNMZn75z40lip4SezrdWKTskw9LaWT7cGI46+WNuLdlwEBALzoAjjoRT7Qkv/r
+ s1ytXaJzD0UmlRlbOPiI5/3U3X15/+vRp3gnX6tQNUwkT9YJzHWWXHkvxoYGm6i6cbV2bfVpDv
+ N6z5aly/6TIExfckIAWUQyC4DlEjWdqMFxYjZGl2BPtASFFMbAdle2HTvfo/hpyb3RHhiyGJdX
+ LyZC1+sCAvTEdGVCMUahBQmuoPPXL2LbtG3dYE3a3AQAA
+X-Change-ID: 20260422-case-sensitivity-5cbffc8f1558
+To: Al Viro <viro@zeniv.linux.org.uk>, 
+ Christian Brauner <brauner@kernel.org>, Jan Kara <jack@suse.cz>
+X-Mailer: b4 0.16-dev
+X-Developer-Signature: v=1; a=openpgp-sha256; l=10570;
+ i=chuck.lever@oracle.com; h=from:subject:message-id;
+ bh=S8uXYzoY0/m42R5BMCcNDvtfUd9F8GUKvIduB+tGh50=;
+ b=owEBbQKS/ZANAwAKATNqszNvZn+XAcsmYgBp9ghEvWWhuY9tqVLXhDuamT3jpHUCT3lUvVRIb
+ 7JfS0uP7eiJAjMEAAEKAB0WIQQosuWwEobfJDzyPv4zarMzb2Z/lwUCafYIRAAKCRAzarMzb2Z/
+ l3HQD/kBFn78Xr0tZyj5Ds83UBW6IDE/NpNh3EZWcpMwWddk8aPxeP/7LJd2viCy7QrHv81II2K
+ ON90v44o5x8QSAGoWOV5PiZRVwnrIXUkVRff7XSAcgt5iT+Z6bvYvJJXhDgSmVb0I/ugIzrsiye
+ Ia+GRzZwGc85Hosnv+4e8qso7+DodKzaYI1Aw03Mu1vLAw7mLkF+ASzXpdSdyAZvCLsOkGYwQoj
+ 0qU1/0h0yAKjMGzXEl0Ncr6pNNkbq3pm1dL62eS9VPxbVlzAg51rbHnXbcsqpjNQzoAk/ARSLQT
+ JqFWVGVzI+PXhyeEt9tA9XRj14Ln5nFpNvYuG0cbUdRAkhy1fQ7aqEMRtVo1bOq8DcveAVCDjse
+ 9uaadeBmv4wBLugxr4puEMwf76bSnkQW5wg70d9N1yKPPIPKfQM9om0HJebAge+toz/hCHgxHw+
+ BhgWyNeBMvmyI6eBIkRZ3L2DkPUkrOR5DfSgrnaxc5YMYSyI/JBUQXcEYtXIAHs+vEELMXTLb9l
+ SUn1KnEQB2kBpplKSCDpox6FBHGXQQrwKGnY1knvJpDx+LrdlN5qzuQf/lIOrbNCc7J8Nc6LR11
+ KD3BlY6LvU/dAZfQJbExgwfNqgFGF18i+CEZPO6tNqr0duGuJgOPchvjxjr3OHuz6nGNFRKDB1v
+ F4gwq/WzrCu6hYQ==
+X-Developer-Key: i=chuck.lever@oracle.com; a=openpgp;
+ fpr=28B2E5B01286DF243CF23EFE336AB3336F667F97
+X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  From: Ruipeng Qi When the f2fs filesystem space is nearly
- exhausted, we encounter deadlock issues as below: INFO: task A:1890 blocked
- for more than 120 seconds. Tainted: G O 6.12.41-g3fe07ddf05ab #1 "echo 0
- > /proc/sys/kernel/hung_task_timeout_secs" disables this message. task:A
- state:D stack:0 pid:1890 tgi [...] 
- Content analysis details:   (0.1 points, 5.0 required)
+ Content preview: Following on from:
+ https://lore.kernel.org/linux-nfs/20251021-zypressen-bazillus-545a44af57fd@brauner/T/#m0ba197d75b7921d994cf284f3cef3a62abb11aaa
+ I'm attempting to implement enough support in the Linux VFS to enable file
+ services like NFSD and ksmbd (and user space equivalents) to provide the
+ actual status of case folding support in local file [...] 
+ Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
@@ -128,16 +119,8 @@ X-Spam-Report: Spam detection software,
  not necessarily valid
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
- 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
- [ruipengqi3(at)gmail.com]
- 0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends in
- digit [ruipengqi3(at)gmail.com]
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.216.46 listed in wl.mailspike.net]
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1wJ9fl-0003qj-EM
-Subject: [f2fs-dev] [PATCH v3] f2fs: fix potential deadlock in
- f2fs_balance_fs()
+X-Headers-End: 1wJBDe-0000rN-EK
+Subject: [f2fs-dev] [PATCH v13 00/15] Exposing case folding behavior
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -149,305 +132,302 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, Ruipeng Qi <ruipengqi3@gmail.com>,
- linux-f2fs-devel@lists.sourceforge.net
+From: Chuck Lever via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Chuck Lever <cel@kernel.org>
+Cc: pc@manguebit.org, yuezhang.mo@sony.com, cem@kernel.org,
+ Roland Mainz <roland.mainz@nrubsig.org>,
+ almaz.alexandrovich@paragon-software.com, adilger.kernel@dilger.ca,
+ linux-cifs@vger.kernel.org, sfrench@samba.org, slava@dubeyko.com,
+ "Darrick J. Wong" <djwong@kernel.org>, linux-ext4@vger.kernel.org,
+ linkinjeon@kernel.org, Steve French <stfrench@microsoft.com>,
+ sprasad@microsoft.com, frank.li@vivo.com, ronniesahlberg@gmail.com,
+ glaubitz@physik.fu-berlin.de, jaegeuk@kernel.org, hirofumi@mail.parknet.co.jp,
+ linux-nfs@vger.kernel.org, tytso@mit.edu, linux-api@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, linux-xfs@vger.kernel.org,
+ senozhatsky@chromium.org, Chuck Lever <chuck.lever@oracle.com>,
+ hansg@kernel.org, anna@kernel.org, linux-fsdevel@vger.kernel.org,
+ sj1557.seo@samsung.com, trondmy@kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
-X-Rspamd-Queue-Id: 7B6524B1F5D
+X-Rspamd-Queue-Id: DB25C4B2506
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-0.01 / 15.00];
-	MID_CONTAINS_FROM(1.00)[];
+X-Spamd-Result: default: False [-7.11 / 15.00];
+	WHITELIST_DMARC(-7.00)[sourceforge.net:D:+];
+	SUSPICIOUS_RECIPS(1.50)[];
+	DMARC_POLICY_ALLOW_WITH_FAILURES(-0.50)[];
 	RWL_MAILSPIKE_EXCELLENT(-0.40)[216.105.38.7:from];
-	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7];
 	MAILLIST(-0.20)[mailman];
 	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
+	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7:c];
 	MIME_GOOD(-0.10)[text/plain];
-	DMARC_POLICY_SOFTFAIL(0.10)[gmail.com : SPF not aligned (relaxed), DKIM not aligned (relaxed),none];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORGED_RECIPIENTS(0.00)[m:jaegeuk@kernel.org,m:linux-kernel@vger.kernel.org,m:ruipengqi3@gmail.com,m:linux-f2fs-devel@lists.sourceforge.net,s:lists@lfdr.de];
+	FORGED_RECIPIENTS(0.00)[m:viro@zeniv.linux.org.uk,m:brauner@kernel.org,m:jack@suse.cz,m:pc@manguebit.org,m:yuezhang.mo@sony.com,m:cem@kernel.org,m:roland.mainz@nrubsig.org,m:almaz.alexandrovich@paragon-software.com,m:adilger.kernel@dilger.ca,m:linux-cifs@vger.kernel.org,m:sfrench@samba.org,m:slava@dubeyko.com,m:djwong@kernel.org,m:linux-ext4@vger.kernel.org,m:linkinjeon@kernel.org,m:stfrench@microsoft.com,m:sprasad@microsoft.com,m:frank.li@vivo.com,m:ronniesahlberg@gmail.com,m:glaubitz@physik.fu-berlin.de,m:jaegeuk@kernel.org,m:hirofumi@mail.parknet.co.jp,m:linux-nfs@vger.kernel.org,m:tytso@mit.edu,m:linux-api@vger.kernel.org,m:linux-f2fs-devel@lists.sourceforge.net,m:linux-xfs@vger.kernel.org,m:senozhatsky@chromium.org,m:chuck.lever@oracle.com,m:hansg@kernel.org,m:anna@kernel.org,m:linux-fsdevel@vger.kernel.org,m:sj1557.seo@samsung.com,m:trondmy@kernel.org,s:lists@lfdr.de];
 	RECEIVED_HELO_LOCALHOST(0.00)[];
-	DKIM_MIXED(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[ruipengqi3@gmail.com,linux-f2fs-devel-bounces@lists.sourceforge.net];
-	ARC_NA(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	FORGED_SENDER(0.00)[ruipengqi3@gmail.com,linux-f2fs-devel-bounces@lists.sourceforge.net];
-	TO_DN_SOME(0.00)[];
-	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
-	MIME_TRACE(0.00)[0:+];
 	RCVD_TLS_LAST(0.00)[];
-	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,gmail.com:s=20251104];
-	FROM_HAS_DN(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	PREVIOUSLY_DELIVERED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
-	FORGED_SENDER_FORWARDING(0.00)[];
+	DKIM_MIXED(0.00)[];
+	FREEMAIL_CC(0.00)[manguebit.org,sony.com,kernel.org,nrubsig.org,paragon-software.com,dilger.ca,vger.kernel.org,samba.org,dubeyko.com,microsoft.com,vivo.com,gmail.com,physik.fu-berlin.de,mail.parknet.co.jp,mit.edu,lists.sourceforge.net,chromium.org,oracle.com,samsung.com];
+	ARC_NA(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[34];
+	TO_DN_SOME(0.00)[];
+	DMARC_POLICY_ALLOW(0.00)[lists.sourceforge.net,none];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_SENDER(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
+	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
+	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,kernel.org:s=k20201202];
+	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
+	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,kernel.org:-];
 	RCVD_COUNT_FIVE(0.00)[5];
-	FREEMAIL_CC(0.00)[vger.kernel.org,gmail.com,lists.sourceforge.net];
+	NEURAL_HAM(-0.00)[-1.000];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
+	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	HAS_REPLYTO(0.00)[cel@kernel.org];
 	TAGGED_RCPT(0.00)[linux-f2fs-devel];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,gmail.com:-];
-	RCPT_COUNT_THREE(0.00)[4];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.sourceforge.net:helo,lists.sourceforge.net:dkim,lists.sourceforge.net:rdns]
 
-From: Ruipeng Qi <ruipengqi3@gmail.com>
+Following on from:
 
-When the f2fs filesystem space is nearly exhausted, we encounter deadlock
-issues as below:
+https://lore.kernel.org/linux-nfs/20251021-zypressen-bazillus-545a44af57fd@brauner/T/#m0ba197d75b7921d994cf284f3cef3a62abb11aaa
 
-INFO: task A:1890 blocked for more than 120 seconds.
-      Tainted: G           O       6.12.41-g3fe07ddf05ab #1
-"echo 0 > /proc/sys/kernel/hung_task_timeout_secs" disables this message.
-task:A    state:D stack:0     pid:1890  tgid:1626  ppid:1153   flags:0x00000204
-Call trace:
- __switch_to+0xf4/0x158
- __schedule+0x27c/0x908
- schedule+0x3c/0x118
- io_schedule+0x44/0x68
- folio_wait_bit_common+0x174/0x370
- folio_wait_bit+0x20/0x38
- folio_wait_writeback+0x54/0xc8
- truncate_inode_partial_folio+0x70/0x1e0
- truncate_inode_pages_range+0x1b0/0x450
- truncate_pagecache+0x54/0x88
- f2fs_file_write_iter+0x3e8/0xb80
- do_iter_readv_writev+0xf0/0x1e0
- vfs_writev+0x138/0x2c8
- do_writev+0x88/0x130
- __arm64_sys_writev+0x28/0x40
- invoke_syscall+0x50/0x120
- el0_svc_common.constprop.0+0xc8/0xf0
- do_el0_svc+0x24/0x38
- el0_svc+0x30/0xf8
- el0t_64_sync_handler+0x120/0x130
- el0t_64_sync+0x190/0x198
+I'm attempting to implement enough support in the Linux VFS to
+enable file services like NFSD and ksmbd (and user space
+equivalents) to provide the actual status of case folding support
+in local file systems. The default behavior for local file systems
+not explicitly supported in this series is to reflect the usual
+POSIX behaviors:
 
-INFO: task kworker/u8:11:2680853 blocked for more than 120 seconds.
-      Tainted: G           O       6.12.41-g3fe07ddf05ab #1
-"echo 0 > /proc/sys/kernel/hung_task_timeout_secs" disables this message.
-task:kworker/u8:11   state:D stack:0     pid:2680853 tgid:2680853 ppid:2      flags:0x00000208
-Workqueue: writeback wb_workfn (flush-254:0)
-Call trace:
- __switch_to+0xf4/0x158
- __schedule+0x27c/0x908
- schedule+0x3c/0x118
- io_schedule+0x44/0x68
- folio_wait_bit_common+0x174/0x370
- __filemap_get_folio+0x214/0x348
- pagecache_get_page+0x20/0x70
- f2fs_get_read_data_page+0x150/0x3e8
- f2fs_get_lock_data_page+0x2c/0x160
- move_data_page+0x50/0x478
- do_garbage_collect+0xd38/0x1528
- f2fs_gc+0x240/0x7e0
- f2fs_balance_fs+0x1a0/0x208
- f2fs_write_single_data_page+0x6e4/0x730
- f2fs_write_cache_pages+0x378/0x9b0
- f2fs_write_data_pages+0x2e4/0x388
- do_writepages+0x8c/0x2c8
- __writeback_single_inode+0x4c/0x498
- writeback_sb_inodes+0x234/0x4a8
- __writeback_inodes_wb+0x58/0x118
- wb_writeback+0x2f8/0x3c0
- wb_workfn+0x2c4/0x508
- process_one_work+0x180/0x408
- worker_thread+0x258/0x368
- kthread+0x118/0x128
- ret_from_fork+0x10/0x200
+  case-insensitive = false
+  case-nonpreserving = false
 
-INFO: task kworker/u8:8:2641297 blocked for more than 120 seconds.
-      Tainted: G           O       6.12.41-g3fe07ddf05ab #1
-"echo 0 > /proc/sys/kernel/hung_task_timeout_secs" disables this message.
-task:kworker/u8:8    state:D stack:0     pid:2641297 tgid:2641297 ppid:2      flags:0x00000208
-Workqueue: writeback wb_workfn (flush-254:0)
-Call trace:
- __switch_to+0xf4/0x158
- __schedule+0x27c/0x908
- rt_mutex_schedule+0x30/0x60
- __rt_mutex_slowlock_locked.constprop.0+0x460/0x8a8
- rwbase_write_lock+0x24c/0x378
- down_write+0x1c/0x30
- f2fs_balance_fs+0x184/0x208
- f2fs_write_inode+0xf4/0x328
- __writeback_single_inode+0x370/0x498
- writeback_sb_inodes+0x234/0x4a8
- __writeback_inodes_wb+0x58/0x118
- wb_writeback+0x2f8/0x3c0
- wb_workfn+0x2c4/0x508
- process_one_work+0x180/0x408
- worker_thread+0x258/0x368
- kthread+0x118/0x128
- ret_from_fork+0x10/0x20
+The case-insensitivity and case-nonpreserving booleans can be
+consumed immediately by NFSD. These two attributes have been part of
+the NFSv3 and NFSv4 protocols for decades, in order to support NFS
+client implementations on non-POSIX systems.
 
-INFO: task B:1902 blocked for more than 120 seconds.
-      Tainted: G           O       6.12.41-g3fe07ddf05ab #1
-"echo 0 > /proc/sys/kernel/hung_task_timeout_secs" disables this message.
-task:B     state:D stack:0     pid:1902  tgid:1626  ppid:1153   flags:0x0000020c
-Call trace:
- __switch_to+0xf4/0x158
- __schedule+0x27c/0x908
- rt_mutex_schedule+0x30/0x60
- __rt_mutex_slowlock_locked.constprop.0+0x460/0x8a8
- rwbase_write_lock+0x24c/0x378
- down_write+0x1c/0x30
- f2fs_balance_fs+0x184/0x208
- f2fs_map_blocks+0x94c/0x1110
- f2fs_file_write_iter+0x228/0xb80
- do_iter_readv_writev+0xf0/0x1e0
- vfs_writev+0x138/0x2c8
- do_writev+0x88/0x130
- __arm64_sys_writev+0x28/0x40
- invoke_syscall+0x50/0x120
- el0_svc_common.constprop.0+0xc8/0xf0
- do_el0_svc+0x24/0x38
- el0_svc+0x30/0xf8
- el0t_64_sync_handler+0x120/0x130
- el0t_64_sync+0x190/0x198
+Support for user space file servers is why this series exposes case
+folding information via a user-space API. I don't know of any other
+category of user-space application that requires access to case
+folding info.
 
-INFO: task sync:2769849 blocked for more than 120 seconds.
-      Tainted: G           O       6.12.41-g3fe07ddf05ab #1
-"echo 0 > /proc/sys/kernel/hung_task_timeout_secs" disables this message.
-task:sync            state:D stack:0     pid:2769849 tgid:2769849 ppid:736    flags:0x0000020c
-Call trace:
- __switch_to+0xf4/0x158
- __schedule+0x27c/0x908
- schedule+0x3c/0x118
- wb_wait_for_completion+0xb0/0xe8
- sync_inodes_sb+0xc8/0x2b0
- sync_inodes_one_sb+0x24/0x38
- iterate_supers+0xa8/0x138
- ksys_sync+0x54/0xc8
- __arm64_sys_sync+0x18/0x30
- invoke_syscall+0x50/0x120
- el0_svc_common.constprop.0+0xc8/0xf0
- do_el0_svc+0x24/0x38
- el0_svc+0x30/0xf8
- el0t_64_sync_handler+0x120/0x130
- el0t_64_sync+0x190/0x198
+The Linux NFS community has a growing interest in supporting NFS
+clients on Windows and MacOS platforms, where file name behavior does
+not align with traditional POSIX semantics.
 
-The root cause is a potential deadlock between the following tasks:
+One example of a Windows-based NFS client is [1]. This client
+implementation explicitly requires servers to report
+FATTR4_WORD0_CASE_INSENSITIVE = TRUE for proper operation, a hard
+requirement for Windows client interoperability because Windows
+applications expect case-insensitive behavior. When an NFS client
+knows the server is case-insensitive, it can avoid issuing multiple
+LOOKUP/READDIR requests to search for case variants, and applications
+like Win32 programs work correctly without manual workarounds or
+code changes.
 
-kworker/u8:11				Thread A
-- f2fs_write_single_data_page
- - f2fs_do_write_data_page
-  - folio_start_writeback(X)
-  - f2fs_outplace_write_data
-   - bio_add_folio(X)
- - folio_unlock(X)
-					- truncate_inode_pages_range
-					 - __filemap_get_folio(X, FGP_LOCK)
-					 - truncate_inode_partial_folio(X)
-					  - folio_wait_writeback(X)
- - f2fs_balance_fs
-  - f2fs_gc
-   - do_garbage_collect
-    - move_data_page
-     - f2fs_get_lock_data_page
-      - __filemap_get_folio(X, FGP_LOCK)
+Even the Linux client can take advantage of this information. Trond
+merged patches 4 years ago [2] that introduce support for case
+insensitivity, in support of the Hammerspace NFS server. In
+particular, when a client detects a case-insensitive NFS share,
+negative dentry caching must be disabled (a lookup for "FILE.TXT"
+failing shouldn't cache a negative entry when "file.txt" exists)
+and directory change invalidation must clear all cached case-folded
+file name variants.
 
-Both threads try to access folio X. Thread A holds the lock but waits
-for writeback, while kworker waits for the lock. This causes a deadlock.
+Hammerspace servers and several other NFS server implementations
+operate in multi-protocol environments, where a single file service
+instance caters to both NFS and SMB clients. In those cases, things
+work more smoothly for everyone when the NFS client can see and adapt
+to the case folding behavior that SMB users rely on and expect. NFSD
+needs to support the case-insensitivity and case-nonpreserving
+booleans properly in order to participate as a first-class citizen
+in such environments.
 
-Other threads also enter D state, waiting for locks such as gc_lock and
-writepages.
+[1] https://github.com/kofemann/ms-nfs41-client
 
-OPU/IPU DATA folio are all affected by this issue. To avoid such
-potential deadlocks, always commit these cached folios before
-triggering f2fs_gc() in f2fs_balance_fs().
+[2] https://patchwork.kernel.org/project/linux-nfs/cover/20211217203658.439352-1-trondmy@kernel.org/
 
-v2:
-- Commit cached OPU/IPU folios, not just OPU folios as in v1.
-
-v3:
-- Fixed minor grammatical issues
-- Add comment on lockless list_empty() to explain why it is safe
-  without holding bio_list_lock
-
-Suggested-by: Chao <chao@kernel.org>
-Signed-off-by: Ruipeng Qi <ruipengqi3@gmail.com>
 ---
- fs/f2fs/data.c    | 29 +++++++++++++++++++++++++++++
- fs/f2fs/f2fs.h    |  1 +
- fs/f2fs/segment.c |  8 ++++++++
- 3 files changed, 38 insertions(+)
+Changes since v12:
+- Address findings from sashiko (gemini-3.1):
+  - cifs: Restrict case-handling flags to directories per UAPI
+  - nfs: Clear case caps before PATHCONF so a failed reply
+    does not retain stale bits from the prior probe
+  - nfsd: Document the parent-resolution corner cases of
+    nfsd_get_case_info() (single-file exports, disconnected
+    dentries, hardlinks) in the v3 and v4 commit messages
 
-diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
-index 338df7a2aea6..98e3863b9b54 100644
---- a/fs/f2fs/data.c
-+++ b/fs/f2fs/data.c
-@@ -939,6 +939,35 @@ void f2fs_submit_merged_ipu_write(struct f2fs_sb_info *sbi,
- 	}
- }
- 
-+void f2fs_submit_all_merged_ipu_writes(struct f2fs_sb_info *sbi)
-+{
-+	struct bio_entry *be, *tmp;
-+	struct f2fs_bio_info *io;
-+	enum temp_type temp;
-+
-+	for (temp = HOT; temp < NR_TEMP_TYPE; temp++) {
-+		LIST_HEAD(list);
-+
-+		io = sbi->write_io[DATA] + temp;
-+
-+		/* A lockless list_empty() check is safe here: any bios from
-+		 * other kworkers that we miss will be submitted by those
-+		 * kworkers accordingly.
-+		 */
-+		if (list_empty(&io->bio_list))
-+			continue;
-+
-+		f2fs_down_write(&io->bio_list_lock);
-+		list_splice_init(&io->bio_list, &list);
-+		f2fs_up_write(&io->bio_list_lock);
-+
-+		list_for_each_entry_safe(be, tmp, &list, list) {
-+			f2fs_submit_write_bio(sbi, be->bio, DATA);
-+			del_bio_entry(be);
-+		}
-+	}
-+}
-+
- int f2fs_merge_page_bio(struct f2fs_io_info *fio)
- {
- 	struct bio *bio = *fio->bio;
-diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-index bb34e864d0ef..e9038ab1b2bd 100644
---- a/fs/f2fs/f2fs.h
-+++ b/fs/f2fs/f2fs.h
-@@ -4148,6 +4148,7 @@ void f2fs_submit_merged_write_folio(struct f2fs_sb_info *sbi,
- 				struct folio *folio, enum page_type type);
- void f2fs_submit_merged_ipu_write(struct f2fs_sb_info *sbi,
- 					struct bio **bio, struct folio *folio);
-+void f2fs_submit_all_merged_ipu_writes(struct f2fs_sb_info *sbi);
- void f2fs_flush_merged_writes(struct f2fs_sb_info *sbi);
- int f2fs_submit_page_bio(struct f2fs_io_info *fio);
- int f2fs_merge_page_bio(struct f2fs_io_info *fio);
-diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
-index 6a97fe76712b..b57d36f66681 100644
---- a/fs/f2fs/segment.c
-+++ b/fs/f2fs/segment.c
-@@ -462,6 +462,14 @@ void f2fs_balance_fs(struct f2fs_sb_info *sbi, bool need)
- 			.should_migrate_blocks = false,
- 			.err_gc_skipped = false,
- 			.nr_free_secs = 1 };
-+
-+		/*
-+		 * Submit all cached OPU/IPU DATA bios before triggering
-+		 * foreground GC to avoid potential deadlocks.
-+		 */
-+		f2fs_submit_merged_write(sbi, DATA);
-+		f2fs_submit_all_merged_ipu_writes(sbi);
-+
- 		f2fs_down_write_trace(&sbi->gc_lock, &gc_control.lc);
- 		stat_inc_gc_call_count(sbi, FOREGROUND);
- 		f2fs_gc(sbi, &gc_control);
--- 
-2.25.1
+Changes since v11:
+- isofs: Wire .fileattr_get only on directory inodes, since
+  NFSD and ksmbd query casefolding on directories (Jan Kara)
+- xfs, hfsplus: Drop the FS_CASEFOLD_FL fileattr_get mask;
+  admit the bit through fileattr_set's allowlist instead
+- Address findings from sashiko(gemini-3) and gpt-5.5:
+  - cifs: Wire .fileattr_get on cifs_namespace_inode_operations
+    so DFS referral / automount directories report case handling
+  - fat, ntfs3: Fill FS_IMMUTABLE_FL in fileattr_get
+  - hfsplus: Hide FS_CASEFOLD_FL from the legacy flags view so
+    chattr round-trips do not hit the setflags whitelist
+  - nfs: Clear NFS_CAP_CASE_INSENSITIVE and
+    NFS_CAP_CASE_NONPRESERVING before re-OR'ing in the v3 and
+    v4 probe paths so re-probe / TSM does not retain stale caps
+  - nfsd: Switch nfsd_get_case_info() to errno return so
+    v3 PATHCONF and v4 GETATTR can apply version-appropriate
+    policy on failure
+  - nfsd: Use dget_parent() in v4 case-attr probe to keep
+    the parent dentry referenced across the query
+  - isofs: Report FS_XFLAG_CASENONPRESERVING for map=n/map=a
+
+Changes since v10:
+- cifs: Source case-handling flags from the server's cached
+  FS_ATTRIBUTE_INFORMATION reply instead of the nocase mount
+  option, with a nocase fallback when the reply is absent
+- Address findings from sashiko(gemini-3) and gpt-5.5:
+  - nfs: Skip pathconf case bits on NFSv4 (set via FATTR4_CASE_*
+    instead)
+  - xfs: Hide FS_CASEFOLD_FL from the legacy flags view so
+    chattr round-trips do not hit the setflags whitelist
+  - ext4, f2fs: Drop redundant fileattr_get patches; the
+    FS_CASEFOLD_FL translation in fileattr_fill_flags() already
+    reports FS_XFLAG_CASEFOLD for casefolded directories
+  - nfsd: Report FATTR4_HOMOGENEOUS = FALSE when the exported
+    filesystem has a Unicode encoding, since per-directory
+    casefold makes the fs-scoped case attributes inhomogeneous
+  - nfsd: Document in nfsd_get_case_info() why -ENOIOCTLCMD and
+    -ENOTTY are swallowed while other errors propagate
+  - fat: Honor vfat 'check=strict' when reporting FS_XFLAG_CASEFOLD
+  - Set FS_CASEFOLD_FL so FS_IOC_GETFLAGS reflects case-insensitive
+    mount
+  - isofs: Register fileattr_get on regular file and symlink inodes,
+    not just directories
+  - nfsd: Query NFSv4 FATTR4_CASE_* from the parent directory for
+    non-directory objects, since casefold lives on the directory
+
+Changes since v9:
+- nfs: always probe PATHCONF for case caps. Default to case-
+  preserving when the server does not report case_preserving
+- nfsd, ksmbd: tolerate -ENOTTY from vfs_fileattr_get() so
+  overlayfs exports on backing filesystems without fileattr_get
+  do not fail the RPC
+- xfs: map FS_XFLAG_CASEFOLD inside xfs_ip2xflags() so BULKSTAT
+  and FS_IOC_FSGETXATTR report the flag consistently
+- vboxsf: reject a short host reply to SHFL_INFO_VOLUME before
+  trusting volinfo.properties.case_sensitive
+
+Changes since v8:
+- Rebase on v7.0-rc1
+
+Changes since v7:
+- Split file_attr initialization changes into a separate patch
+
+Changes since v6:
+- Remove the memset from vfs_fileattr_get
+
+Changes since v5:
+- Finish the conversion to FS_XFLAGs
+- NFSv4 GETATTR now clears the attr mask bit if nfsd_get_case_info()
+  fails
+
+Changes since v4:
+- Observe the MSDOS "nocase" mount option
+- Define new FS_XFLAGs for the user API
+
+Changes since v3:
+- Change fa->case_preserving to fa_case_nonpreserving
+- VFAT is case preserving
+- Make new fields available to user space
+
+Changes since v2:
+- Remove unicode labels
+- Replace vfs_get_case_info
+- Add support for several more local file system implementations
+- Add support for in-kernel SMB server
+
+Changes since RFC:
+- Use file_getattr instead of statx
+- Postpone exposing Unicode version until later
+- Support NTFS and ext4 in addition to FAT
+- Support NFSv4 fattr4 in addition to NFSv3 PATHCONF
+
+---
+Chuck Lever (15):
+      fs: Move file_kattr initialization to callers
+      fs: Add case sensitivity flags to file_kattr
+      fat: Implement fileattr_get for case sensitivity
+      exfat: Implement fileattr_get for case sensitivity
+      ntfs3: Implement fileattr_get for case sensitivity
+      hfs: Implement fileattr_get for case sensitivity
+      hfsplus: Report case sensitivity in fileattr_get
+      xfs: Report case sensitivity in fileattr_get
+      cifs: Implement fileattr_get for case sensitivity
+      nfs: Implement fileattr_get for case sensitivity
+      vboxsf: Implement fileattr_get for case sensitivity
+      isofs: Implement fileattr_get for case sensitivity
+      nfsd: Report export case-folding via NFSv3 PATHCONF
+      nfsd: Implement NFSv4 FATTR4_CASE_INSENSITIVE and FATTR4_CASE_PRESERVING
+      ksmbd: Report filesystem case sensitivity via FS_ATTRIBUTE_INFORMATION
+
+ fs/exfat/exfat_fs.h            |  2 ++
+ fs/exfat/file.c                | 18 +++++++++--
+ fs/exfat/namei.c               |  1 +
+ fs/fat/fat.h                   |  3 ++
+ fs/fat/file.c                  | 36 +++++++++++++++++++++
+ fs/fat/namei_msdos.c           |  1 +
+ fs/fat/namei_vfat.c            |  1 +
+ fs/file_attr.c                 | 16 +++++-----
+ fs/hfs/dir.c                   |  1 +
+ fs/hfs/hfs_fs.h                |  2 ++
+ fs/hfs/inode.c                 | 14 ++++++++
+ fs/hfsplus/inode.c             | 16 +++++++++-
+ fs/isofs/dir.c                 | 16 ++++++++++
+ fs/isofs/isofs.h               |  3 ++
+ fs/nfs/client.c                | 21 ++++++++----
+ fs/nfs/inode.c                 | 15 +++++++++
+ fs/nfs/internal.h              |  3 ++
+ fs/nfs/namespace.c             |  2 ++
+ fs/nfs/nfs3proc.c              |  2 ++
+ fs/nfs/nfs3xdr.c               |  7 ++--
+ fs/nfs/nfs4proc.c              | 10 ++++--
+ fs/nfs/proc.c                  |  3 ++
+ fs/nfs/symlink.c               |  3 ++
+ fs/nfsd/nfs3proc.c             | 36 ++++++++++++++++-----
+ fs/nfsd/nfs4xdr.c              | 52 ++++++++++++++++++++++++++++--
+ fs/nfsd/vfs.c                  | 72 ++++++++++++++++++++++++++++++++++++++++++
+ fs/nfsd/vfs.h                  |  3 ++
+ fs/nfsd/xdr3.h                 |  4 +--
+ fs/ntfs3/file.c                | 29 +++++++++++++++++
+ fs/ntfs3/inode.c               |  1 +
+ fs/ntfs3/namei.c               |  2 ++
+ fs/ntfs3/ntfs_fs.h             |  1 +
+ fs/smb/client/cifsfs.c         | 53 +++++++++++++++++++++++++++++++
+ fs/smb/client/cifsfs.h         |  3 ++
+ fs/smb/client/namespace.c      |  1 +
+ fs/smb/server/smb2pdu.c        | 30 ++++++++++++++----
+ fs/vboxsf/dir.c                |  1 +
+ fs/vboxsf/file.c               |  6 ++--
+ fs/vboxsf/super.c              |  7 ++++
+ fs/vboxsf/utils.c              | 30 ++++++++++++++++++
+ fs/vboxsf/vfsmod.h             |  6 ++++
+ fs/xfs/libxfs/xfs_inode_util.c |  2 ++
+ fs/xfs/xfs_ioctl.c             | 22 ++++++++++---
+ include/linux/fileattr.h       |  3 +-
+ include/linux/nfs_fs_sb.h      |  2 +-
+ include/linux/nfs_xdr.h        |  2 ++
+ include/uapi/linux/fs.h        |  7 ++++
+ 47 files changed, 522 insertions(+), 49 deletions(-)
+---
+base-commit: 6596a02b207886e9e00bb0161c7fd59fea53c081
+change-id: 20260422-case-sensitivity-5cbffc8f1558
+
+Best regards,
+--  
+Chuck Lever <chuck.lever@oracle.com>
 
 
 
