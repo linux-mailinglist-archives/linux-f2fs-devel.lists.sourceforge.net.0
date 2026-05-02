@@ -2,42 +2,42 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 6L1KLXMI9mk3RwIAu9opvQ
+	id gApgKXMI9mk3RwIAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
 	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 02 May 2026 16:21:39 +0200
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 256564B2508
-	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 02 May 2026 16:21:39 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id BC4114B2503
+	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 02 May 2026 16:21:38 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
 	List-Unsubscribe:List-Id:Subject:To:In-Reply-To:References:Message-Id:
 	MIME-Version:Date:Sender:Content-ID:Content-Description:Resent-Date:
 	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=/0eI7NGNixyPS6zSn/+Ks4hjmSRlHEb87e81a1vdEm4=; b=K1MmdzMD+4Cyzo0Y0jR53jLweD
-	oH9jhyXzK8gjVg0H3MEyVuAtphtTo93VxHTRssi/HzYJ4G6uUrbtzjpBb2RqhhXhaaA7IsVYlvBP9
-	7EliAsWK2pZ9cTZdUt6VlLAG4lhx8AfYi0mP5KuEkJQ5wLenyBDb+2cpx0JsysqNyf7g=;
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=Y7iFWw6vHdic0LpphFRaEUKHjQYZbWVAzljM6v6QfFk=; b=Cl66UlNHhFBBA99WviZw6U1moQ
+	hGRnGTGrxZDJe9RSYwCzADycRByA6HKCtJMTSjJlrC+aPUFJ9+FYhk4bb2+0anYzqVzv8VJzLKpAV
+	mKhWlNs39KQtFuQRGDQJshH80CH8+13dYhxy8+NOTm+UIULqKlh1D8Chhh/bBPWPksOI=;
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1wJBDn-0000UX-Vw;
-	Sat, 02 May 2026 14:21:32 +0000
+	id 1wJBDt-0002hU-EW;
+	Sat, 02 May 2026 14:21:37 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <cel@kernel.org>) id 1wJBDm-0000UR-ND
+ (envelope-from <cel@kernel.org>) id 1wJBDr-0002hM-SI
  for linux-f2fs-devel@lists.sourceforge.net;
- Sat, 02 May 2026 14:21:30 +0000
+ Sat, 02 May 2026 14:21:35 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Cc:To:In-Reply-To:References:Message-Id:
  Content-Transfer-Encoding:Content-Type:MIME-Version:Subject:Date:From:Sender:
  Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
  :Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=M76L0VIZ7k/ZCZVS7EN5BXOb5R2OAPfqgXzdJQ55+yI=; b=dQg2yJo685F4hfu4bZvhzoomD9
- 5YlbLZH8O8G4i1YPUUTi4CXw0vM9ZI4+V3tHSqI+O80pgL26UGumITT2aQxegvyd+CmriMPQTsOjI
- X1j1LC0ZmZXcAEGCItrIkNYtEBLmyS1E8sPPsDgd7YqW3GLAXTequcWI4VfTr+BxRmTg=;
+ bh=K/+nQA2Wh0su98+N815/azVsLyy2ptcHLEd74SX0hIw=; b=jQEytNusak9++wUOGPxhCIvIO/
+ ltntsI+9BXe+GuFZAik+jnT27OGuFIObYSoONVsHY2KnsZNl+AwlJuKZRLLlCbUYBSDFO3oKSkuO9
+ tL04ptSZ+/ceBY75zQcihrK98MKYS74rN2Wo7zisL6ahTWfKOes/S8/U3R2GvHnoR4oQ=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Cc:To:In-Reply-To:References:Message-Id:Content-Transfer-Encoding:
@@ -45,52 +45,52 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=M76L0VIZ7k/ZCZVS7EN5BXOb5R2OAPfqgXzdJQ55+yI=; b=FVWh4U/R961KiSFDBqpakjh/mx
- QfIiqOLnLFGrv1jC9QYkWU+pQ7lDTAZnqeKnkNwyhn2Gw5bAgqWk//Np4rn85RMH1Pk+dSwnETXCF
- 4LPr6oNjCJ0hNz3jEVmyyLW9Kh1MFnzJLasYh8AhUJId5OuFBFhyfrhi3swr7BVpsHCc=;
-Received: from tor.source.kernel.org ([172.105.4.254])
+ bh=K/+nQA2Wh0su98+N815/azVsLyy2ptcHLEd74SX0hIw=; b=LtZADdNwy4LRWcoKnIw7aDLOxQ
+ 8G5j6shk8Dwj89YrwYAOi+vuZtKBDZDQh3K5fiYBixIlGhDPY0Tu26iZ1ubJnELA0lt7zDmnH0KlQ
+ LW+blPkjfSE3Zu3Fl35lzbg8eb4pXcOQ7U/9V8GdEajwWI81bz/sehYhP43lN+FyZofs=;
+Received: from sea.source.kernel.org ([172.234.252.31])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1wJBDm-0000rj-3W for linux-f2fs-devel@lists.sourceforge.net;
- Sat, 02 May 2026 14:21:30 +0000
+ id 1wJBDr-0000s1-9H for linux-f2fs-devel@lists.sourceforge.net;
+ Sat, 02 May 2026 14:21:35 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 6888460120;
+ by sea.source.kernel.org (Postfix) with ESMTP id 02B4040F59;
+ Sat,  2 May 2026 14:21:30 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 80B94C2BCB3;
  Sat,  2 May 2026 14:21:24 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6D525C19425;
- Sat,  2 May 2026 14:21:18 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1777731684;
- bh=TFF/jZiZrtLjdmF8xjSA6CfyQJOvsGBZ0ycggreXc9A=;
+ s=k20201202; t=1777731689;
+ bh=VR5IPc+tFJzycK0UcE5Jbwk0EDkpbGyJE15n77IJHGE=;
  h=From:Date:Subject:References:In-Reply-To:To:Cc:From;
- b=eBqm6JbpRK09m+KExsWIch+7qexNWkXHfSuKfQsPH3igH9S0hx55rOI3RECIyDgut
- ba5hgcKkWHEdgHrELG7V5cu+6Cg8MIy1C2Mw9IxRth2baXXTD//welnTG443nX9+XT
- aY5rLIEQX8fMsSCu4C28ijmsWtz70KPXPvOpVcJI+B32zuZDzhccQgNL2rhyPOr3xq
- TCtYd+Un0PMfk5IknQT81pmR4CFNbuAn7NvSnqcVwyRD96Ek9OXKrgAzmGUzITFIhm
- 4ORFmahgyFsoNuXn5fQOvuzYGJU+hFnEJnTBz/P+jOIqqsZGSvzBJLyUlpg9yYZKPr
- 926vI7LDd8fcA==
-Date: Sat, 02 May 2026 10:20:47 -0400
+ b=mF7HURzMVcc76AIdcJ4gN+EjOH3PvQ+JAuxCubIcHZ3DqTATPTmSOPz/jj0c5a8eD
+ 28ZXs+L6pe/biOR5DUyWkJHPJDw5dleKQ/IRG0xh1H5xyiuhhLw3v4NcwXJX/tNmPl
+ slpIdOSJ4IBOx6SCzJ67PwcS8rkOVM4CDrlRuUhzIXbtan473DhGspkciBPe0VevA6
+ Rp2ocOlWAHkGCdsO0j9rfVlgh+qZXcwWH5E8UI5KU1WwF5OW0XNdX1C6+y6HCJAWle
+ 4bcHP6g4kfp77H3pKtZwKEQurPLu3aTximYGPcgJm6eEg/e7hAw1UNnz826iFUl/eL
+ q1+/gmUdmiL+A==
+Date: Sat, 02 May 2026 10:20:48 -0400
 MIME-Version: 1.0
-Message-Id: <20260502-case-sensitivity-v13-2-aa853140311f@oracle.com>
+Message-Id: <20260502-case-sensitivity-v13-3-aa853140311f@oracle.com>
 References: <20260502-case-sensitivity-v13-0-aa853140311f@oracle.com>
 In-Reply-To: <20260502-case-sensitivity-v13-0-aa853140311f@oracle.com>
 To: Al Viro <viro@zeniv.linux.org.uk>, 
  Christian Brauner <brauner@kernel.org>, Jan Kara <jack@suse.cz>
 X-Mailer: b4 0.16-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=3394;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=4362;
  i=chuck.lever@oracle.com; h=from:subject:message-id;
- bh=42BtA/ECrX4U52i4InslT9hET7DZ27jCO0bDUKFKJW4=;
- b=owEBbQKS/ZANAwAKATNqszNvZn+XAcsmYgBp9ghQV+ptopOEb4wuPXE4DInwNk+An3UAx3Qf5
- fBVOOGX8DGJAjMEAAEKAB0WIQQosuWwEobfJDzyPv4zarMzb2Z/lwUCafYIUAAKCRAzarMzb2Z/
- l5l/EAC2A5aQCzII1dTBCddUEb+UL/2uO93cCUFllxX6Zm/t/Z+JqJhz1tPahCAyJA9rUuS/YSM
- 07Ykt0E2RrWq/U96W9a4pBcrs3oefHicWW1UHARLONhXkXQmgAbFyN9VzVXlcWOehM6wWxOnBTB
- w+qKTrJx2v6V7OHxLzufRkj9kLE4tbFa5wHGfphUqWDhAGQ3rzKTEcIU5DHCyGcF/QMg8y8zUXk
- fhxN+QRr9CBLG/bmwGkOxhM183F9U5qYNDDuYUKXw9kNjOUABNbZezOX+IWFFb7JJn+A0UNtW39
- eDPcseFtPED7Bpy/tIYQFs70Ts/9HvBvPhwSV8iZel3QhJ1Syf1nAzp1fZ2toFlcoydG1g+Mgs8
- Z8rUyHuwVI4F7eKUnfaa0R/a6FgQ/OifSzLXxNV/Fj+6ztb/DEiLalVAQKJXLIE8klSDe1LXpL3
- v8e5CGdoDT+cETDvSffecXeB8CmE4HYD7/XkvKecxBZn2xI4fljsSaRTAVHC/i4CoeSHN1Oiff/
- 4vRX76cWTrqjzjJCfT1UdwJRSSFArYxAGlkXcP1C9oj7sPTR/x214JbqYDG9vTF+ZGF/R1gQyKX
- n3af4+Z+LMuvn0c2LMik5RU+apcS3waaFIvXWmBwuK7jyUF0NNzfVUk9P0jopol+X7eaRnwXeGb
- rBLWb6S8WpyvcjA==
+ bh=9b+u/mWoEz9peMeExQH28HkC0yIPxzHosHi0xcms5fc=;
+ b=owEBbQKS/ZANAwAKATNqszNvZn+XAcsmYgBp9ghQ1BYK25WvfFyqzaHIDtV9hFSfc8aMAu7+E
+ /AjIghIsY2JAjMEAAEKAB0WIQQosuWwEobfJDzyPv4zarMzb2Z/lwUCafYIUAAKCRAzarMzb2Z/
+ l+sCEACEwFRDD4cEH+PMA/LESHjhccu/7sgZ/W4dO0ReHcgG6q8I3VlIBGNwySJb3aQT6tPBR2P
+ 3fEALKs5vj4BcjwnQ/T7wi6mwonrIzt3/H+9ZpBO4ICDfo4eylvEsjK07IBWs6+VZrJSZM50aPO
+ LCpBxPaF/SjqIgV5o3ECVcsngrUolIDiKCFzdZQZ7RQhKwwL62FAkCtT/F4VZK0MlnxVbmeafts
+ i9IBGfkvqLlctMiKC8hRY8VkgQHfePgcxnt5Ls/dSqBQIayK1VGzji8MNrHvBQzltvnpG3JX9Ng
+ 3d7SaNtBapC50AQ6O5E8D50xh3kD3/Q0Ug2WBke9rBQ1lujCwg+QLZrgBf8f9lGnCd1A5yuGuco
+ kkWs7v7kK6Fkpptrz+W5oPDX5UZOv+sZY3trZiulaarYUDRjAnAU5eMnMZk4iD9avtCfSOu/t4M
+ XDrmv8f9YTg829LpDEHZjaT7yjoax6U8UgWHZCuxo/Eh82T/uWHhqFBYmtnEpm8e5zzDlOYGVtV
+ vLmTYoVy/zHK6VRD9YxUUgOMzcqBDdBwXp7Q/ftJiYg9aZoeOt+vX/FaauCtnkig073tY56kXP6
+ eqxS31rR+BIHroVbUd7CHiXnToOhHWg25QOt1V9rfqvGyxziWOIrLyNKY8ExwBn9mYFIPwvAgNY
+ 9+K8ozD0F9oABqw==
 X-Developer-Key: i=chuck.lever@oracle.com; a=openpgp;
  fpr=28B2E5B01286DF243CF23EFE336AB3336F667F97
 X-Spam-Score: -0.2 (/)
@@ -100,10 +100,11 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: From: Chuck Lever <chuck.lever@oracle.com> Enable upper
- layers
- such as NFSD to retrieve case sensitivity information from file systems by
- adding FS_XFLAG_CASEFOLD and FS_XFLAG_CASENONPRESERVING flags. 
+ Content preview: From: Chuck Lever <chuck.lever@oracle.com> Report FAT's case
+ sensitivity behavior via the FS_XFLAG_CASEFOLD and FS_XFLAG_CASENONPRESERVING
+ flags. FAT filesystems are case-insensitive by default. MSDOS supports a
+ 'nocase' mount option that enables case-sensitive behavior; check this option
+ when reporting case sensitivity. 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -114,9 +115,9 @@ X-Spam-Report: Spam detection software,
  not necessarily valid
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
-X-Headers-End: 1wJBDm-0000rj-3W
-Subject: [f2fs-dev] [PATCH v13 02/15] fs: Add case sensitivity flags to
- file_kattr
+X-Headers-End: 1wJBDr-0000s1-9H
+Subject: [f2fs-dev] [PATCH v13 03/15] fat: Implement fileattr_get for case
+ sensitivity
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -134,18 +135,18 @@ Cc: pc@manguebit.org, yuezhang.mo@sony.com, cem@kernel.org,
  Roland Mainz <roland.mainz@nrubsig.org>,
  almaz.alexandrovich@paragon-software.com, adilger.kernel@dilger.ca,
  linux-cifs@vger.kernel.org, sfrench@samba.org, slava@dubeyko.com,
- "Darrick J. Wong" <djwong@kernel.org>, linux-ext4@vger.kernel.org,
- linkinjeon@kernel.org, sprasad@microsoft.com, frank.li@vivo.com,
- ronniesahlberg@gmail.com, glaubitz@physik.fu-berlin.de, jaegeuk@kernel.org,
- hirofumi@mail.parknet.co.jp, linux-nfs@vger.kernel.org, tytso@mit.edu,
- linux-api@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
- linux-xfs@vger.kernel.org, senozhatsky@chromium.org,
- Chuck Lever <chuck.lever@oracle.com>, hansg@kernel.org, anna@kernel.org,
- linux-fsdevel@vger.kernel.org, sj1557.seo@samsung.com, trondmy@kernel.org
+ linux-ext4@vger.kernel.org, linkinjeon@kernel.org, sprasad@microsoft.com,
+ frank.li@vivo.com, ronniesahlberg@gmail.com, glaubitz@physik.fu-berlin.de,
+ jaegeuk@kernel.org, hirofumi@mail.parknet.co.jp, linux-nfs@vger.kernel.org,
+ tytso@mit.edu, linux-api@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, linux-xfs@vger.kernel.org,
+ senozhatsky@chromium.org, Chuck Lever <chuck.lever@oracle.com>,
+ hansg@kernel.org, anna@kernel.org, linux-fsdevel@vger.kernel.org,
+ sj1557.seo@samsung.com, trondmy@kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
-X-Rspamd-Queue-Id: 256564B2508
+X-Rspamd-Queue-Id: BC4114B2503
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [-7.11 / 15.00];
@@ -153,26 +154,26 @@ X-Spamd-Result: default: False [-7.11 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	DMARC_POLICY_ALLOW_WITH_FAILURES(-0.50)[];
 	RWL_MAILSPIKE_EXCELLENT(-0.40)[216.105.38.7:from];
+	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7];
 	MAILLIST(-0.20)[mailman];
 	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
-	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7:c];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORGED_RECIPIENTS(0.00)[m:viro@zeniv.linux.org.uk,m:brauner@kernel.org,m:jack@suse.cz,m:pc@manguebit.org,m:yuezhang.mo@sony.com,m:cem@kernel.org,m:roland.mainz@nrubsig.org,m:almaz.alexandrovich@paragon-software.com,m:adilger.kernel@dilger.ca,m:linux-cifs@vger.kernel.org,m:sfrench@samba.org,m:slava@dubeyko.com,m:djwong@kernel.org,m:linux-ext4@vger.kernel.org,m:linkinjeon@kernel.org,m:sprasad@microsoft.com,m:frank.li@vivo.com,m:ronniesahlberg@gmail.com,m:glaubitz@physik.fu-berlin.de,m:jaegeuk@kernel.org,m:hirofumi@mail.parknet.co.jp,m:linux-nfs@vger.kernel.org,m:tytso@mit.edu,m:linux-api@vger.kernel.org,m:linux-f2fs-devel@lists.sourceforge.net,m:linux-xfs@vger.kernel.org,m:senozhatsky@chromium.org,m:chuck.lever@oracle.com,m:hansg@kernel.org,m:anna@kernel.org,m:linux-fsdevel@vger.kernel.org,m:sj1557.seo@samsung.com,m:trondmy@kernel.org,s:lists@lfdr.de];
-	RECEIVED_HELO_LOCALHOST(0.00)[];
-	RCVD_TLS_LAST(0.00)[];
-	DKIM_MIXED(0.00)[];
-	FREEMAIL_CC(0.00)[manguebit.org,sony.com,kernel.org,nrubsig.org,paragon-software.com,dilger.ca,vger.kernel.org,samba.org,dubeyko.com,microsoft.com,vivo.com,gmail.com,physik.fu-berlin.de,mail.parknet.co.jp,mit.edu,lists.sourceforge.net,chromium.org,oracle.com,samsung.com];
-	ARC_NA(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[33];
-	TO_DN_SOME(0.00)[];
 	DMARC_POLICY_ALLOW(0.00)[lists.sourceforge.net,none];
+	TO_DN_SOME(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[32];
+	DKIM_MIXED(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	RECEIVED_HELO_LOCALHOST(0.00)[];
 	MIME_TRACE(0.00)[0:+];
+	ARC_NA(0.00)[];
+	FORGED_RECIPIENTS(0.00)[m:viro@zeniv.linux.org.uk,m:brauner@kernel.org,m:jack@suse.cz,m:pc@manguebit.org,m:yuezhang.mo@sony.com,m:cem@kernel.org,m:roland.mainz@nrubsig.org,m:almaz.alexandrovich@paragon-software.com,m:adilger.kernel@dilger.ca,m:linux-cifs@vger.kernel.org,m:sfrench@samba.org,m:slava@dubeyko.com,m:linux-ext4@vger.kernel.org,m:linkinjeon@kernel.org,m:sprasad@microsoft.com,m:frank.li@vivo.com,m:ronniesahlberg@gmail.com,m:glaubitz@physik.fu-berlin.de,m:jaegeuk@kernel.org,m:hirofumi@mail.parknet.co.jp,m:linux-nfs@vger.kernel.org,m:tytso@mit.edu,m:linux-api@vger.kernel.org,m:linux-f2fs-devel@lists.sourceforge.net,m:linux-xfs@vger.kernel.org,m:senozhatsky@chromium.org,m:chuck.lever@oracle.com,m:hansg@kernel.org,m:anna@kernel.org,m:linux-fsdevel@vger.kernel.org,m:sj1557.seo@samsung.com,m:trondmy@kernel.org,s:lists@lfdr.de];
 	FORGED_SENDER(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
 	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
 	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,kernel.org:s=k20201202];
-	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
+	FREEMAIL_CC(0.00)[manguebit.org,sony.com,kernel.org,nrubsig.org,paragon-software.com,dilger.ca,vger.kernel.org,samba.org,dubeyko.com,microsoft.com,vivo.com,gmail.com,physik.fu-berlin.de,mail.parknet.co.jp,mit.edu,lists.sourceforge.net,chromium.org,oracle.com,samsung.com];
 	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,kernel.org:-];
+	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
 	RCVD_COUNT_FIVE(0.00)[5];
 	NEURAL_HAM(-0.00)[-1.000];
 	FORGED_SENDER_FORWARDING(0.00)[];
@@ -186,92 +187,137 @@ X-Spamd-Result: default: False [-7.11 / 15.00];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[nrubsig.org:email,lists.sourceforge.net:helo,lists.sourceforge.net:dkim,lists.sourceforge.net:rdns,suse.cz:email]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[nrubsig.org:email,suse.cz:email,lists.sourceforge.net:helo,lists.sourceforge.net:dkim,lists.sourceforge.net:rdns]
 
 From: Chuck Lever <chuck.lever@oracle.com>
 
-Enable upper layers such as NFSD to retrieve case sensitivity
-information from file systems by adding FS_XFLAG_CASEFOLD and
-FS_XFLAG_CASENONPRESERVING flags.
+Report FAT's case sensitivity behavior via the FS_XFLAG_CASEFOLD
+and FS_XFLAG_CASENONPRESERVING flags. FAT filesystems are
+case-insensitive by default.
 
-Filesystems report case-insensitive or case-nonpreserving behavior
-by setting these flags directly in fa->fsx_xflags. The default
-(flags unset) indicates POSIX semantics: case-sensitive and
-case-preserving. Both flags are added to FS_XFLAG_RDONLY_MASK so
-FS_IOC_FSSETXATTR silently strips them, keeping the new xflags
-strictly a reporting interface. Callers that want to toggle
-casefolding continue to use FS_IOC_SETFLAGS with FS_CASEFOLD_FL,
-the established UAPI on filesystems that support the operation
-(ext4 and f2fs on empty directories).
+MSDOS supports a 'nocase' mount option that enables case-sensitive
+behavior; check this option when reporting case sensitivity.
 
-Case sensitivity information is exported to userspace via the
-fa_xflags field in the FS_IOC_FSGETXATTR ioctl and file_getattr()
-system call.
+VFAT long filename entries preserve case; without VFAT, only
+uppercased 8.3 short names are stored. MSDOS with 'nocase' also
+preserves case since the name-formatting code skips upcasing when
+'nocase' is set. Check both options when reporting case preservation.
 
-Reviewed-by: "Darrick J. Wong" <djwong@kernel.org>
 Reviewed-by: Jan Kara <jack@suse.cz>
 Reviewed-by: Roland Mainz <roland.mainz@nrubsig.org>
 Signed-off-by: Chuck Lever <chuck.lever@oracle.com>
 ---
- fs/file_attr.c           | 4 ++++
- include/linux/fileattr.h | 3 ++-
- include/uapi/linux/fs.h  | 7 +++++++
- 3 files changed, 13 insertions(+), 1 deletion(-)
+ fs/fat/fat.h         |  3 +++
+ fs/fat/file.c        | 36 ++++++++++++++++++++++++++++++++++++
+ fs/fat/namei_msdos.c |  1 +
+ fs/fat/namei_vfat.c  |  1 +
+ 4 files changed, 41 insertions(+)
 
-diff --git a/fs/file_attr.c b/fs/file_attr.c
-index f429da66a317..bfb00d256dd5 100644
---- a/fs/file_attr.c
-+++ b/fs/file_attr.c
-@@ -37,6 +37,8 @@ void fileattr_fill_xflags(struct file_kattr *fa, u32 xflags)
- 		fa->flags |= FS_PROJINHERIT_FL;
- 	if (fa->fsx_xflags & FS_XFLAG_VERITY)
- 		fa->flags |= FS_VERITY_FL;
-+	if (fa->fsx_xflags & FS_XFLAG_CASEFOLD)
-+		fa->flags |= FS_CASEFOLD_FL;
- }
- EXPORT_SYMBOL(fileattr_fill_xflags);
+diff --git a/fs/fat/fat.h b/fs/fat/fat.h
+index 5a58f0bf8ce8..99ed9228a677 100644
+--- a/fs/fat/fat.h
++++ b/fs/fat/fat.h
+@@ -10,6 +10,8 @@
+ #include <linux/fs_context.h>
+ #include <linux/fs_parser.h>
  
-@@ -67,6 +69,8 @@ void fileattr_fill_flags(struct file_kattr *fa, u32 flags)
- 		fa->fsx_xflags |= FS_XFLAG_PROJINHERIT;
- 	if (fa->flags & FS_VERITY_FL)
- 		fa->fsx_xflags |= FS_XFLAG_VERITY;
-+	if (fa->flags & FS_CASEFOLD_FL)
++struct file_kattr;
++
+ /*
+  * vfat shortname flags
+  */
+@@ -408,6 +410,7 @@ extern void fat_truncate_blocks(struct inode *inode, loff_t offset);
+ extern int fat_getattr(struct mnt_idmap *idmap,
+ 		       const struct path *path, struct kstat *stat,
+ 		       u32 request_mask, unsigned int flags);
++int fat_fileattr_get(struct dentry *dentry, struct file_kattr *fa);
+ extern int fat_file_fsync(struct file *file, loff_t start, loff_t end,
+ 			  int datasync);
+ 
+diff --git a/fs/fat/file.c b/fs/fat/file.c
+index becccdd2e501..37e7049b4c8c 100644
+--- a/fs/fat/file.c
++++ b/fs/fat/file.c
+@@ -17,6 +17,7 @@
+ #include <linux/fsnotify.h>
+ #include <linux/security.h>
+ #include <linux/falloc.h>
++#include <linux/fileattr.h>
+ #include "fat.h"
+ 
+ static long fat_fallocate(struct file *file, int mode,
+@@ -398,6 +399,40 @@ void fat_truncate_blocks(struct inode *inode, loff_t offset)
+ 	fat_flush_inodes(inode->i_sb, inode, NULL);
+ }
+ 
++int fat_fileattr_get(struct dentry *dentry, struct file_kattr *fa)
++{
++	struct msdos_sb_info *sbi = MSDOS_SB(dentry->d_sb);
++	bool case_sensitive;
++
++	/*
++	 * FAT filesystems are case-insensitive by default. VFAT
++	 * becomes case-sensitive when mounted with 'check=strict',
++	 * which installs vfat_dentry_ops. MSDOS has no such option;
++	 * its 'nocase' mount option selects case-sensitive matching.
++	 *
++	 * VFAT long filename entries preserve case. Without VFAT, only
++	 * uppercased 8.3 short names are stored. MSDOS with 'nocase'
++	 * also preserves case.
++	 */
++	if (sbi->options.isvfat)
++		case_sensitive = sbi->options.name_check == 's';
++	else
++		case_sensitive = sbi->options.nocase;
++
++	if (!case_sensitive) {
 +		fa->fsx_xflags |= FS_XFLAG_CASEFOLD;
- }
- EXPORT_SYMBOL(fileattr_fill_flags);
++		fa->flags |= FS_CASEFOLD_FL;
++		if (!sbi->options.isvfat)
++			fa->fsx_xflags |= FS_XFLAG_CASENONPRESERVING;
++	}
++	if (d_inode(dentry)->i_flags & S_IMMUTABLE) {
++		fa->fsx_xflags |= FS_XFLAG_IMMUTABLE;
++		fa->flags |= FS_IMMUTABLE_FL;
++	}
++	return 0;
++}
++EXPORT_SYMBOL_GPL(fat_fileattr_get);
++
+ int fat_getattr(struct mnt_idmap *idmap, const struct path *path,
+ 		struct kstat *stat, u32 request_mask, unsigned int flags)
+ {
+@@ -575,5 +610,6 @@ EXPORT_SYMBOL_GPL(fat_setattr);
+ const struct inode_operations fat_file_inode_operations = {
+ 	.setattr	= fat_setattr,
+ 	.getattr	= fat_getattr,
++	.fileattr_get	= fat_fileattr_get,
+ 	.update_time	= fat_update_time,
+ };
+diff --git a/fs/fat/namei_msdos.c b/fs/fat/namei_msdos.c
+index 4cc65f330fb7..0fd2971ad4b1 100644
+--- a/fs/fat/namei_msdos.c
++++ b/fs/fat/namei_msdos.c
+@@ -644,6 +644,7 @@ static const struct inode_operations msdos_dir_inode_operations = {
+ 	.rename		= msdos_rename,
+ 	.setattr	= fat_setattr,
+ 	.getattr	= fat_getattr,
++	.fileattr_get	= fat_fileattr_get,
+ 	.update_time	= fat_update_time,
+ };
  
-diff --git a/include/linux/fileattr.h b/include/linux/fileattr.h
-index 3780904a63a6..58044b598016 100644
---- a/include/linux/fileattr.h
-+++ b/include/linux/fileattr.h
-@@ -16,7 +16,8 @@
+diff --git a/fs/fat/namei_vfat.c b/fs/fat/namei_vfat.c
+index 918b3756674c..e909447873e3 100644
+--- a/fs/fat/namei_vfat.c
++++ b/fs/fat/namei_vfat.c
+@@ -1185,6 +1185,7 @@ static const struct inode_operations vfat_dir_inode_operations = {
+ 	.rename		= vfat_rename2,
+ 	.setattr	= fat_setattr,
+ 	.getattr	= fat_getattr,
++	.fileattr_get	= fat_fileattr_get,
+ 	.update_time	= fat_update_time,
+ };
  
- /* Read-only inode flags */
- #define FS_XFLAG_RDONLY_MASK \
--	(FS_XFLAG_PREALLOC | FS_XFLAG_HASATTR | FS_XFLAG_VERITY)
-+	(FS_XFLAG_PREALLOC | FS_XFLAG_HASATTR | FS_XFLAG_VERITY | \
-+	 FS_XFLAG_CASEFOLD | FS_XFLAG_CASENONPRESERVING)
- 
- /* Flags to indicate valid value of fsx_ fields */
- #define FS_XFLAG_VALUES_MASK \
-diff --git a/include/uapi/linux/fs.h b/include/uapi/linux/fs.h
-index 13f71202845e..2ea4c81df08f 100644
---- a/include/uapi/linux/fs.h
-+++ b/include/uapi/linux/fs.h
-@@ -254,6 +254,13 @@ struct file_attr {
- #define FS_XFLAG_DAX		0x00008000	/* use DAX for IO */
- #define FS_XFLAG_COWEXTSIZE	0x00010000	/* CoW extent size allocator hint */
- #define FS_XFLAG_VERITY		0x00020000	/* fs-verity enabled */
-+/*
-+ * Case handling flags (read-only, cannot be set via ioctl).
-+ * Default (neither set) indicates POSIX semantics: case-sensitive
-+ * lookups and case-preserving storage.
-+ */
-+#define FS_XFLAG_CASEFOLD	0x00040000	/* case-insensitive lookups */
-+#define FS_XFLAG_CASENONPRESERVING 0x00080000	/* case not preserved */
- #define FS_XFLAG_HASATTR	0x80000000	/* no DIFLAG for this	*/
- 
- /* the read-only stuff doesn't really belong here, but any other place is
 
 -- 
 2.53.0
