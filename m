@@ -2,112 +2,103 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id OP9CK9b49mkyawIAu9opvQ
+	id YCTvMS389mnBawIAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 03 May 2026 09:27:18 +0200
+	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 03 May 2026 09:41:33 +0200
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4CBFF4B4B07
-	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 03 May 2026 09:27:18 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 933D04B4CDE
+	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 03 May 2026 09:41:33 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:
-	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
-	Subject:To:From:Message-ID:In-Reply-To:Date:MIME-Version:Sender:Reply-To:Cc:
-	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
-	Resent-To:Resent-Cc:Resent-Message-ID:References:List-Owner;
-	bh=3zY29U8+YpaU1x+udlnLCv/gWw8woqqdlYZ973/Gtw4=; b=BDaAISWx8fvYOg714wgzfFICFH
-	m+SlT/iwUgcRHLmENN+woSbM67FY7o1OQy4O/YQIy64xzbrQMJGK4gRToHZNgTfk9ZZsMHMFfvAsO
-	NuUWJmQfMo0mTIWNCi5bn3FG4P7qGU1ch21gMiy6hYHgdBffdCkqefvrjQ9lqu82kEIg=;
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
+	List-Unsubscribe:List-Id:Subject:In-Reply-To:To:References:MIME-Version:Date:
+	Message-ID:Sender:Cc:Content-ID:Content-Description:Resent-Date:Resent-From:
+	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
+	bh=ZFdaDn3jt40fix8z8Ag9nWAtJUzXp6lAbQF1AV0L6Z4=; b=Rbmwb/FsT4PG57MoguIrsiiJuQ
+	Pb1q0qdzPxPLR7ZyrD4ra2IkeAVPzbtJJqmN6ReUU4tj8U0P3HkI8xth53XEPHuwHDY+Cdf9Sbn0J
+	UwkmIepAqbKhZqHQkWrxtFP/omCaO0HU/wEELeL+rpL4Yna6cwfkQWcajin4dqwy87u0=;
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1wJREJ-00074E-Vw;
-	Sun, 03 May 2026 07:27:08 +0000
+	id 1wJRSD-0001e3-BW;
+	Sun, 03 May 2026 07:41:26 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
- TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95) (envelope-from
- <3xfj2aQkbAOgcijUKVVObKZZSN.QYYQVOecObMYXdOXd.MYW@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com>)
- id 1wJREI-000740-Gc for linux-f2fs-devel@lists.sourceforge.net;
- Sun, 03 May 2026 07:27:07 +0000
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
+ (envelope-from <dxdt@dev.snart.me>) id 1wJRSC-0001dx-2Y
+ for linux-f2fs-devel@lists.sourceforge.net;
+ Sun, 03 May 2026 07:41:25 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:To:From:Subject:Message-ID:In-Reply-To
- :Date:MIME-Version:Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ To:From:References:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Cc:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=4+osliUaymIVFH6R5/bEjn0M5p7u7//4ClVsL93EMMI=; b=G4E5XkIUPlaCNYknmiNPIX/ovT
- Qf9h8eNKJAHrNiTG9YcJ9of1iZnDCHV9AgYukbbHhWL5z3FfrTn0GgTyXAA4ig9fcnBnqCqW+2nE+
- Nl9j0s7cpYIdRpg7teliwb8L+qPj885jXj/9Gw9gDrw0pxRHDhna4GK4ESo3cl62T5jM=;
+ bh=LqhWSDCINRPUJBq0NQp54xI0NhCzqPhP9E4SCq7zTsk=; b=HHqGS+CJt0HpBDeS/H3Kr2BEDI
+ IJgNaijqUC/KT+KifAPRHVjOmGSwCHX50Aquw7oSDG+2ORc8IjstB+MJhkgDoDXCZzzRNFvtNfhYL
+ M3fZ0dUyLyXffwhmlbCwMuGK65aGWTQQUWGX5DVvTjZrO5zeIXrPA6jpVMX9A/nIP0sM=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:To:From:Subject:Message-ID:In-Reply-To:Date:MIME-Version:
- Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:Content-Description:
- Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=4+osliUaymIVFH6R5/bEjn0M5p7u7//4ClVsL93EMMI=; b=H
- pXa2Sr7KJpMJMi3PqX5tJpJDe9p1at2ErLpPboDZhjPdaOcj7zlRFUf7lduv3px64m+dTRT/h/EHI
- BuGq0TOSMk2CeA843UwiDFTULIEFn0AA0giYmSJdN9lD6z6CTwwLZKKDBMUGsARMuQMcTk4mLobIm
- ZssyCxokzxCzXol8=;
-Received: from mail-oo1-f72.google.com ([209.85.161.72])
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:To:From:References:
+ Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Cc:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=LqhWSDCINRPUJBq0NQp54xI0NhCzqPhP9E4SCq7zTsk=; b=lk0609ger+pNbvAQaTk2u/ZL4w
+ xD+CzqJQa65klCAAD3JOjCyVzcqMLW1JJyPUHhPISb0QGAumYoyvS4KFeSNUkJXcmOHYPiQ2M3d2A
+ +pXM0aqq9/PNMN4Qu5OUIV2ODtzRSussCH/WckLn3xpYLggK7qt/Q/GNfEt9Xjj9vgmU=;
+Received: from embla.dev.snart.me ([54.252.183.203])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1wJREI-0002jj-K4 for linux-f2fs-devel@lists.sourceforge.net;
- Sun, 03 May 2026 07:27:07 +0000
-Received: by mail-oo1-f72.google.com with SMTP id
- 006d021491bc7-69492bc3a38so4088830eaf.3
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Sun, 03 May 2026 00:27:06 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1777793221; x=1778398021;
- h=to:from:subject:message-id:in-reply-to:date:mime-version
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=4+osliUaymIVFH6R5/bEjn0M5p7u7//4ClVsL93EMMI=;
- b=Vlfs4+EzebCwuTw9SyY5vxGM+uXzwB3HRoV+N06fUszCV/YkE5l5tZvV91kpF4TEmJ
- NdYP+NuqFac7klh2kex/NvB7kH49D4yc2/9fzVdb9llJmXh79I9LXyRK/+K1Ni3tyMEG
- sbWTb55jXVrNXcUeCJo9oiNruGhFc7M5G53mrxWBEpgcuGFUjbmTSsToOc6GLgSIomIm
- iO7KF1fBq1FTxkwI1a1MTVPnGFSvPmR2Q2Wtvy9LJiXwvuytLOOSJXwvLddnYnt/3Bi+
- deZKIEk0lRm2BYla6GA4RsF0+jQuGhaL9oIWum6bs3MSBOGomQ9RLGlo9Uw3XC33qCqk
- 3n7w==
-X-Forwarded-Encrypted: i=1;
- AFNElJ/5O/APEMEZsfd1nhRBVtX5Iwt4PcPULPib8KbIBHfnDp2zLmyQIwMLhVuil1kRDYot7Ye/rPSkJYiBKY6AKMx+@lists.sourceforge.net
-X-Gm-Message-State: AOJu0YzgNN6HAiYE/j7sH8ycLZlX02eNzL8Ykn1/2o7773xjiGaFUzzA
- vIiO2DoP4fXIJno5HcNPpzPg1txhr19HvzC9brkVkLzqLtxhb//pdSRmNf+cr3TRDlWRS2RHLW+
- ZZN4E9lIacZvdLSg0fflqpS3hnnNVYLRuP0y5TeBqZ9kEpO+diH/ol7Mt+qY=
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
+ id 1wJRS8-0003L6-3N for linux-f2fs-devel@lists.sourceforge.net;
+ Sun, 03 May 2026 07:41:25 +0000
+Received: from embla.dev.snart.me (localhost [IPv6:::1])
+ by embla.dev.snart.me (Postfix) with ESMTP id 26A761D490;
+ Sun,  3 May 2026 07:41:09 +0000 (UTC)
+Received: from [192.168.1.18] ([182.226.25.243])
+ by embla.dev.snart.me with ESMTPSA id rQP5MRX89mnzmQAA8KYfjw
+ (envelope-from <dxdt@dev.snart.me>); Sun, 03 May 2026 07:41:09 +0000
+Message-ID: <b6c3cbf5-d8da-4157-9b75-918633bbef1d@dev.snart.me>
+Date: Sun, 3 May 2026 16:41:08 +0900
 MIME-Version: 1.0
-X-Received: by 2002:a05:6820:1626:b0:695:94b4:d4e2 with SMTP id
- 006d021491bc7-696979a4e5amr2197059eaf.5.1777793221036; Sun, 03 May 2026
- 00:27:01 -0700 (PDT)
-Date: Sun, 03 May 2026 00:27:01 -0700
-In-Reply-To: <e50ceb6c-4239-4009-9578-51ece89fdc77@dev.snart.me>
-X-Google-Appengine-App-Id: s~syzkaller
-X-Google-Appengine-App-Id-Alias: syzkaller
-Message-ID: <69f6f8c5.050a0220.1584b9.0044.GAE@google.com>
-From: syzbot <syzbot+cae7809e9dc1459e4e63@syzkaller.appspotmail.com>
-To: dxdt@dev.snart.me, linux-f2fs-devel@lists.sourceforge.net, 
- linux-fsdevel@vger.kernel.org, linux-kernel@vger.kernel.org, 
- linux-mm@kvack.org, syzkaller-bugs@googlegroups.com
-X-Spam-Score: 0.6 (/)
+User-Agent: Mozilla Thunderbird
+References: <69f6f8c5.050a0220.1584b9.0044.GAE@google.com>
+Content-Language: en-US, ko
+Autocrypt: addr=dxdt@dev.snart.me; keydata=
+ xjMEYmJg1hYJKwYBBAHaRw8BAQdAf5E+ri1XLtjqYbZdHOyc8oS+1/XJ5bSlbx5WHXmVBZzN
+ IERhdmlkIFRpbWJlciA8ZHhkdEBkZXYuc25hcnQubWU+wpQEExYKADwWIQQn/Jn96EMUaIoF
+ X+T/ldyyrZpWaAUCYmJg1gIbAwULCQgHAgMiAgEGFQoJCAsCBBYCAwECHgcCF4AACgkQ/5Xc
+ sq2aVmjJZwD8COjPlUwccrlRvbNQ6f87DWchtYO0o8W2DNRM3RLps0EA/jEhIbRV6AsyC8jr
+ 30Ut3aJ3/mO/6G4sLj7OvkEEBH0MzjgEYmJg1hIKKwYBBAGXVQEFAQEHQFpgtIgaByv9lIEY
+ EmpavMO0pYjtu7TMJynwdnGYkN9LAwEIB8J4BBgWCgAgFiEEJ/yZ/ehDFGiKBV/k/5Xcsq2a
+ VmgFAmJiYNYCGwwACgkQ/5Xcsq2aVmhFCwEA0kM9VyYB4bLCM7+SuXUUH+5Ec99Nj4RXxFad
+ Key9GuwA/2BZK6bNyrLSfEk2JDRoskqf7OIL0wa6JOD5SrBnMe8E
+To: syzbot <syzbot+cae7809e9dc1459e4e63@syzkaller.appspotmail.com>,
+ Liam.Howlett@oracle.com, akpm@linux-foundation.org, chao@kernel.org,
+ jaegeuk@kernel.org, jannh@google.com, linkinjeon@kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, linux-fsdevel@vger.kernel.org,
+ linux-kernel@vger.kernel.org, linux-mm@kvack.org,
+ lorenzo.stoakes@oracle.com, pfalcato@suse.de, sj1557.seo@samsung.com,
+ syzkaller-bugs@googlegroups.com, vbabka@suse.cz
+In-Reply-To: <69f6f8c5.050a0220.1584b9.0044.GAE@google.com>
+X-Spam-Score: 1.0 (+)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Hello,
- syzbot has tested the proposed patch and the reproducer
- did not trigger any issue: Reported-by:
- syzbot+cae7809e9dc1459e4e63@syzkaller.appspotmail.com
- Tested-by: syzbot+cae7809e9dc1459e4e63@syzkaller.appspotmail.com 
- Content analysis details:   (0.6 points, 5.0 required)
+ Content preview:  On 5/3/26 16:27, syzbot wrote: > Hello, > > syzbot has tested
+ the proposed patch and the reproducer did not trigger any issue: > >
+ Reported-by:
+ syzbot+cae7809e9dc1459e4e63@syzkaller.appspotmail.com > [...] 
+ Content analysis details:   (1.0 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.3 FROM_LOCAL_HEX         From: localpart has long hexadecimal sequence
- 0.2 HEADER_FROM_DIFFERENT_DOMAINS From and EnvelopeFrom 2nd level mail
- domains are different
- -0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.161.72 listed in wl.mailspike.net]
- -0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1wJREI-0002jj-K4
+ 1.0 RCVD_IN_UCE2           RBL: IP Subnet Listed in UCEPROTECT Level 2
+ [182.226.25.243 listed in dnsbl-2.uceprotect.net]
+X-Headers-End: 1wJRS8-0003L6-3N
 Subject: Re: [f2fs-dev] [syzbot] [mm?] [exfat?] [f2fs?] memory leak in
  __kfree_rcu_sheaf
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
@@ -121,67 +112,88 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
+From: David Timber via Linux-f2fs-devel
+ <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: David Timber <dxdt@dev.snart.me>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
-X-Rspamd-Queue-Id: 4CBFF4B4B07
+X-Rspamd-Queue-Id: 933D04B4CDE
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-0.01 / 15.00];
+X-Spamd-Result: default: False [-6.11 / 15.00];
+	WHITELIST_DMARC(-7.00)[sourceforge.net:D:+];
+	SUSPICIOUS_RECIPS(1.50)[];
 	URI_HIDDEN_PATH(1.00)[https://syzkaller.appspot.com/x/.config?x=9645c21cfd1d3e8f];
+	DMARC_POLICY_ALLOW_WITH_FAILURES(-0.50)[];
 	RWL_MAILSPIKE_EXCELLENT(-0.40)[216.105.38.7:from];
-	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
-	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7];
 	MAILLIST(-0.20)[mailman];
+	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7:c];
+	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
 	MIME_GOOD(-0.10)[text/plain];
-	DMARC_POLICY_SOFTFAIL(0.10)[appspotmail.com : SPF not aligned (relaxed), DKIM not aligned (relaxed),none];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	TAGGED_FROM(0.00)[cae7809e9dc1459e4e63];
-	RECEIVED_HELO_LOCALHOST(0.00)[];
+	DMARC_POLICY_ALLOW(0.00)[lists.sourceforge.net,none];
 	RCVD_TLS_LAST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	FORGED_RECIPIENTS(0.00)[m:dxdt@dev.snart.me,m:linux-f2fs-devel@lists.sourceforge.net,m:linux-fsdevel@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-mm@kvack.org,m:syzkaller-bugs@googlegroups.com,s:lists@lfdr.de];
-	MIME_TRACE(0.00)[0:+];
+	DKIM_MIXED(0.00)[];
+	FORGED_RECIPIENTS(0.00)[m:syzbot+cae7809e9dc1459e4e63@syzkaller.appspotmail.com,m:Liam.Howlett@oracle.com,m:akpm@linux-foundation.org,m:chao@kernel.org,m:jaegeuk@kernel.org,m:jannh@google.com,m:linkinjeon@kernel.org,m:linux-f2fs-devel@lists.sourceforge.net,m:linux-fsdevel@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-mm@kvack.org,m:lorenzo.stoakes@oracle.com,m:pfalcato@suse.de,m:sj1557.seo@samsung.com,m:syzkaller-bugs@googlegroups.com,m:vbabka@suse.cz,m:syzbot@syzkaller.appspotmail.com,s:lists@lfdr.de];
 	ARC_NA(0.00)[];
-	FORGED_SENDER(0.00)[syzbot@syzkaller.appspotmail.com,linux-f2fs-devel-bounces@lists.sourceforge.net];
+	RCPT_COUNT_TWELVE(0.00)[16];
+	TO_DN_SOME(0.00)[];
+	RECEIVED_HELO_LOCALHOST(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_SENDER(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
 	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
 	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x];
+	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
 	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-];
-	RCPT_COUNT_FIVE(0.00)[6];
-	TO_DN_NONE(0.00)[];
-	PREVIOUSLY_DELIVERED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
+	RCVD_COUNT_FIVE(0.00)[5];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[syzkaller.appspot.com:url,lists.sourceforge.net:helo,lists.sourceforge.net:dkim,lists.sourceforge.net:rdns];
+	NEURAL_HAM(-0.00)[-1.000];
 	FORGED_SENDER_FORWARDING(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[syzbot@syzkaller.appspotmail.com,linux-f2fs-devel-bounces@lists.sourceforge.net];
-	DKIM_MIXED(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[syzkaller.appspot.com:url,appspotmail.com:email];
+	FROM_NEQ_ENVFROM(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
+	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	HAS_REPLYTO(0.00)[dxdt@dev.snart.me];
+	TAGGED_RCPT(0.00)[linux-f2fs-devel,cae7809e9dc1459e4e63];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
-	MISSING_XM_UA(0.00)[];
-	TAGGED_RCPT(0.00)[linux-f2fs-devel];
 	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
+	FORGED_SENDER_MAILLIST(0.00)[];
 	SUBJECT_HAS_QUESTION(0.00)[]
 
-Hello,
+On 5/3/26 16:27, syzbot wrote:
+> Hello,
+>
+> syzbot has tested the proposed patch and the reproducer did not trigger any issue:
+>
+> Reported-by: syzbot+cae7809e9dc1459e4e63@syzkaller.appspotmail.com
+> Tested-by: syzbot+cae7809e9dc1459e4e63@syzkaller.appspotmail.com
+>
+> Tested on:
+>
+> commit:         66edb901 Merge tag 'v7.1-p3' of git://git.kernel.org/p..
+> git tree:       upstream
+> console output: https://syzkaller.appspot.com/x/log.txt?x=11fb7082580000
+> kernel config:  https://syzkaller.appspot.com/x/.config?x=9645c21cfd1d3e8f
+> dashboard link: https://syzkaller.appspot.com/bug?extid=cae7809e9dc1459e4e63
+> compiler:       gcc (Debian 14.2.0-19) 14.2.0, GNU ld (GNU Binutils for Debian) 2.44
+> patch:          https://syzkaller.appspot.com/x/patch.diff?x=17f2f326580000
+>
+> Note: testing is done by a robot and is best-effort only.
 
-syzbot has tested the proposed patch and the reproducer did not trigger any issue:
+The error message might be misleading.
 
-Reported-by: syzbot+cae7809e9dc1459e4e63@syzkaller.appspotmail.com
-Tested-by: syzbot+cae7809e9dc1459e4e63@syzkaller.appspotmail.com
+ 1. the report is done after f2fs attempted to mount the corrupt image,
+    not before
+ 2. f2fs exhibits undefined behaviour, evident from the fs attempting to
+    do I/O out of blockdev bounds
 
-Tested on:
+This might have been cause by f2fs corrupting memory in which case the
+leak report is invalid.
 
-commit:         66edb901 Merge tag 'v7.1-p3' of git://git.kernel.org/p..
-git tree:       upstream
-console output: https://syzkaller.appspot.com/x/log.txt?x=11fb7082580000
-kernel config:  https://syzkaller.appspot.com/x/.config?x=9645c21cfd1d3e8f
-dashboard link: https://syzkaller.appspot.com/bug?extid=cae7809e9dc1459e4e63
-compiler:       gcc (Debian 14.2.0-19) 14.2.0, GNU ld (GNU Binutils for Debian) 2.44
-patch:          https://syzkaller.appspot.com/x/patch.diff?x=17f2f326580000
+Davo
 
-Note: testing is done by a robot and is best-effort only.
 
 
 _______________________________________________
