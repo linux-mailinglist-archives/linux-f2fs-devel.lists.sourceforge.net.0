@@ -2,97 +2,82 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id sOZ9CX1T/GlnOQAAu9opvQ
+	id UISmL/d5/GkQQgAAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 07 May 2026 10:55:25 +0200
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 07 May 2026 13:39:35 +0200
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id B07CB4E5478
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 07 May 2026 10:55:24 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 392374E795C
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 07 May 2026 13:39:34 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
-	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:To:In-Reply-To:References:Message-Id:
-	MIME-Version:Date:Sender:Content-ID:Content-Description:Resent-Date:
-	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=hA8efJ+eOjRMla29m2dXQ9bv4Pk4FASyQ9n8PF/GMpM=; b=U0BzMHK+WUg47535Nx9jr7Z4yH
-	HW1Gn+O9Ekmo8ORMx6HpDCJHti7T19EgK8c7iKrIVi2FExleYpHjxsTAUY2NhqqQITeYvpNLeUZuG
-	0GrMUaug33e3U4Z1jC/+o9BOoMEprhNGLUHv/p8kwVuz5z6JBxrXjtfm5bHAf4QXiBzY=;
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
+	Subject:MIME-Version:Message-ID:Date:To:From:Sender:Reply-To:Content-ID:
+	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+	:Resent-Message-ID:In-Reply-To:References:List-Owner;
+	bh=yflDlIxP0z90ysRtNDrq9jFgx6MfXwLEj2iDPN/8lBw=; b=PR6F5xzQu5EvmcONmWKKzIO4Lj
+	zbEmOKqdVrhoGV0lquuTHSJYMMoydNtNKgxRMIrbLdUXYTreBNV4t2d4WUrwJP44UbSYRuQUNYi4W
+	cA+cV3WisjJz+H1cUq6OdZ3f1oHj3Ls2KiU+0jFPNoyDNfWJYTjAK6Yh8TdLV+ZTwSyE=;
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1wKuVv-0005gh-1h;
-	Thu, 07 May 2026 08:55:23 +0000
+	id 1wKx4h-0004bN-Lm;
+	Thu, 07 May 2026 11:39:25 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <cel@kernel.org>) id 1wKuVt-0005gY-Q5
+ (envelope-from <monty_pavel@sina.com>) id 1wKx4e-0004bA-AO
  for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 07 May 2026 08:55:21 +0000
+ Thu, 07 May 2026 11:39:22 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Cc:To:In-Reply-To:References:Message-Id:
- Content-Transfer-Encoding:Content-Type:MIME-Version:Subject:Date:From:Sender:
- Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
- :Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=TRxThEE0rG0zIff4S1AEBrksd0ChfZDwcTBwyktROYQ=; b=IdMCUzDK/UAoS6OdLjvOq3x2VV
- e38VYmss/WdsxVHeeraUMvlHNmCylbQhTls4vH0invoU8F6i1VVz9x6AYZelbz+/XzhYGVHx+cmtx
- hkyuVc9L+gqhxi1MVxdYuvZf/kutm/gLtLc52urRLg30/lNpbIBLvoCuYgGa+F/oVGqY=;
+ bh=svhJxA7M8e6jSkmMPFhr1zfRIcx4YEYO7pH4BZPvcGU=; b=Qm0OTAjJuZEwernWolcHY5K9Ny
+ vI8tB6jZ8sOceAlp5I6bLOxEyfwjfpN+f++8oAhGaU3U9gopCrQNvhJ5uhUECDqUNrQadT0RNzOM/
+ G5Yjn2J7Aaad9fQf89P0rQLKlm5NYFA0BauhGpjSOuQevzYOzMmtPROqBXwkA6B+Qcks=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Cc:To:In-Reply-To:References:Message-Id:Content-Transfer-Encoding:
- Content-Type:MIME-Version:Subject:Date:From:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=TRxThEE0rG0zIff4S1AEBrksd0ChfZDwcTBwyktROYQ=; b=Fv5Sv1S/9GUUmQv8rocxDgT3E5
- zrmir2hDTkluv8ELf+iyBcfjZIb52ctyAQroc5329nE9FZgXIFWm7geV4Fk3draksuV6pyt6sxSSt
- Fen5Q76GJhbTmfpJrYqCp1Sl3jbn+sAIfHXlW4IOIbeLtroTezBgkxq3uqKZ7UmrB7Ks=;
-Received: from sea.source.kernel.org ([172.234.252.31])
+ h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=svhJxA7M8e6jSkmMPFhr1zfRIcx4YEYO7pH4BZPvcGU=; b=i
+ pTVpInWVUcFjMOj6KlYZquhWwTS9objjJrO9CJ+01qtq/uXmAveMQs5XRXKBxiFbewCiJzamGm8WF
+ 9a5rXOSWtdj5KhI4hQj3IbZl2voq2mNL/IJQxWyNF6kxQB99EHDaP3auMJAgt+4fzcCUojLV1k99J
+ OUWUKTN8dQzeuHd0=;
+Received: from r3-18.sinamail.sina.com.cn ([202.108.3.18])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1wKuVs-0002Gc-6C for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 07 May 2026 08:55:21 +0000
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id DE24D43A4F;
- Thu,  7 May 2026 08:55:14 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 95A08C2BCC4;
- Thu,  7 May 2026 08:55:07 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1778144114;
- bh=qee/kCsMg8C4eRFPxmiZaknm+clMPDWXLjgwoKgpYx8=;
- h=From:Date:Subject:References:In-Reply-To:To:Cc:From;
- b=vHelsEcj24pQruLyPkpHtNvcTqrgcxdW5XrAWAHws6zFy8dlmD3lhphWbo6rNoHKL
- pxyKS1lhXpPJY63Pd8/e3qqMQ0aJSwahOYJ5VgRlEX5x9Co+/NVq47XMe389xvO4To
- ef2DV1LLfLHw+byjCIfpNwL7N6t8NwMfqmlrEbLB94MK8/QVfBUlOsnE2pmfqZqs6C
- AgaxUYFWWzGLZHC20yFP04gqVXcotfKbRyjiSlnWoYWl524oYM7+a7jPCdrnHSPMmN
- RuMcRAMn9+ju2vxK9JkVEjzjq+73rGNPmKsZkgkus6BIYXF58eDMi19sSaGrOG8HsF
- snrkCWaSAvDxw==
-Date: Thu, 07 May 2026 04:53:08 -0400
+ id 1wKx4Y-0002kZ-Ns for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 07 May 2026 11:39:21 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sina.com; s=201208;
+ t=1778153958; bh=svhJxA7M8e6jSkmMPFhr1zfRIcx4YEYO7pH4BZPvcGU=;
+ h=From:Subject:Date:Message-ID;
+ b=OwyXfgjYW8GyQPS3Y3VcTdQG9nUgzkdtw02l0L8qOP3IQFog5+EXbnVf6lOfwPjxs
+ IoJlwN9MudR/6oIhv1641T1RyNvAdUNwVkVIfoT/8/cpZ0lH3c8Zu6kzPexJNREYKF
+ LKIQIjjrPDO62ZtjYtIwOAZjFmGhvL8k6Jquf+qA=
+X-SMAIL-HELO: xiaomi-ThinkCentre-M760t.mioffice.cn
+Received: from unknown (HELO
+ xiaomi-ThinkCentre-M760t.mioffice.cn)([114.247.175.249])
+ by sina.com (10.54.253.32) with ESMTP
+ id 69FC79D6000021A4; Thu, 7 May 2026 19:39:04 +0800 (CST)
+X-Sender: monty_pavel@sina.com
+X-Auth-ID: monty_pavel@sina.com
+Authentication-Results: sina.com; spf=none smtp.mailfrom=monty_pavel@sina.com;
+ dkim=none header.i=none;
+ dmarc=none action=none header.from=monty_pavel@sina.com
+X-SMAIL-MID: 8635804456680
+X-SMAIL-UIID: 96D5AB7D6EEC42CBB7EFCDCE2F5CFC89-20260507-193904-1
+From: Yongpeng Yang <monty_pavel@sina.com>
+To: Chao Yu <chao@kernel.org>,
+	Jaegeuk Kim <jaegeuk@kernel.org>
+Date: Thu,  7 May 2026 19:38:37 +0800
+Message-ID: <20260507113840.1353304-2-monty_pavel@sina.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Message-Id: <20260507-case-sensitivity-v14-15-e62cc8200435@oracle.com>
-References: <20260507-case-sensitivity-v14-0-e62cc8200435@oracle.com>
-In-Reply-To: <20260507-case-sensitivity-v14-0-e62cc8200435@oracle.com>
-To: Al Viro <viro@zeniv.linux.org.uk>, 
- Christian Brauner <brauner@kernel.org>, Jan Kara <jack@suse.cz>
-X-Mailer: b4 0.16-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2812;
- i=chuck.lever@oracle.com; h=from:subject:message-id;
- bh=3j19l6mVyr/XReBrhpdSBMPAL80WouHe9sT+TihiyQM=;
- b=owEBbQKS/ZANAwAKATNqszNvZn+XAcsmYgBp/FL2hcwnjdqaNi/5q9kxt3YlM3d3QqSqstzKs
- 8W45Omd9QCJAjMEAAEKAB0WIQQosuWwEobfJDzyPv4zarMzb2Z/lwUCafxS9gAKCRAzarMzb2Z/
- l52vD/9oAzBTyM4xiFJ5QM41gLgiHj7PUdc2Q3lbIQ/lVfup4pis2Im+cGTpEumnlnsanTB+zf2
- FvmRrt8XkGFC32KiHFduHpw9zBL3jUOmcNiQtT+Bqs7MlCQ6DYk3z9T6CNo+QCfCxhtQIrXwJpH
- b8i/mvekEn8IjtcWAXENLEFsjSiZx9E3HCsGhQgNfoRAyD3dE8+4XkNwDzee2Dc5eKM3v5QFSqU
- RnV+cDOufTwJcVeblHkNhsgNCOB0ROntWVU9H8zQFUM2hyZlG+QT0ymaZT5Q7NQkJ6cLbhIbS+S
- l5FdnBjx3AUYQvQ2KPUSBC4kHru8d4OYlvjNi1D+jJhl27RB628LDCQLJrFTeFkAyoRnbmEIG9S
- 6AfCHIJ8Sdjp2kd4eCPbjbBj8l1X5wf8oAOXwLv72MaN0Y3H1eMi4jkgnhpEvzGsXKSDVEJbjXu
- HRICff28yGMX1lc9goVmC4Cs2pdp2KV6Sfjoy4kSYmJzTsSfUG1S5DTdu72bHl637v4GP5RgJfO
- f2NplDdE1Y8eNR0Qgm6WRdJsYAKksiNbK9dw0cmpJm/P5cowWFNYpLvd8yDIRKSvO+dyuQidfSp
- xuQul1Sgfz6933XPhNxs5EtyeDs8YsRhH4UzKDUFSOIIXnktBJpP78JrP5mKqcHv+7YEuDmr0p4
- ehpAkeTd/qm4/gw==
-X-Developer-Key: i=chuck.lever@oracle.com; a=openpgp;
- fpr=28B2E5B01286DF243CF23EFE336AB3336F667F97
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
@@ -100,12 +85,10 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: From: Chuck Lever <chuck.lever@oracle.com>
- FS_ATTRIBUTE_INFORMATION
- responses have always reported FILE_CASE_SENSITIVE_SEARCH and
- FILE_CASE_PRESERVED_NAMES
- unconditionally. Case-insensitive filesystems like exFAT, and casefolded
- directories on [...] 
+ Content preview: From: Yongpeng Yang This patchset introduces an inline extent
+ mapping mechanism for f2fs. Instead of storing individual block addresses
+ in the inode's data block address area (i_addr[]),
+ this feature packs contiguous blo [...] 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -116,9 +99,11 @@ X-Spam-Report: Spam detection software,
  domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
-X-Headers-End: 1wKuVs-0002Gc-6C
-Subject: [f2fs-dev] [PATCH v14 15/15] ksmbd: Report filesystem case
- sensitivity via FS_ATTRIBUTE_INFORMATION
+ 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
+ [monty_pavel(at)sina.com]
+X-Headers-End: 1wKx4Y-0002kZ-Ns
+Subject: [f2fs-dev] [RFC PATCH 0/4] f2fs: introduce inline extent mapping
+ for inode data blocks
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -130,145 +115,139 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Chuck Lever via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Chuck Lever <cel@kernel.org>
-Cc: pc@manguebit.org, yuezhang.mo@sony.com, cem@kernel.org,
- Roland Mainz <roland.mainz@nrubsig.org>,
- almaz.alexandrovich@paragon-software.com, adilger.kernel@dilger.ca,
- linux-cifs@vger.kernel.org, sfrench@samba.org, slava@dubeyko.com,
- linux-ext4@vger.kernel.org, linkinjeon@kernel.org, sprasad@microsoft.com,
- frank.li@vivo.com, ronniesahlberg@gmail.com, glaubitz@physik.fu-berlin.de,
- jaegeuk@kernel.org, hirofumi@mail.parknet.co.jp, linux-nfs@vger.kernel.org,
- tytso@mit.edu, linux-api@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net, linux-xfs@vger.kernel.org,
- senozhatsky@chromium.org, Chuck Lever <chuck.lever@oracle.com>,
- hansg@kernel.org, anna@kernel.org, linux-fsdevel@vger.kernel.org,
- sj1557.seo@samsung.com, trondmy@kernel.org
+Cc: Yongpeng Yang <yangyongpeng@xiaomi.com>,
+ Yongpeng Yang <monty_pavel@sina.com>, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
-X-Rspamd-Queue-Id: B07CB4E5478
+X-Rspamd-Queue-Id: 392374E795C
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-7.11 / 15.00];
-	WHITELIST_DMARC(-7.00)[sourceforge.net:D:+];
-	SUSPICIOUS_RECIPS(1.50)[];
-	DMARC_POLICY_ALLOW_WITH_FAILURES(-0.50)[];
+X-Spamd-Result: default: False [-0.01 / 15.00];
+	MID_CONTAINS_FROM(1.00)[];
 	RWL_MAILSPIKE_EXCELLENT(-0.40)[216.105.38.7:from];
 	MAILLIST(-0.20)[mailman];
-	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7:c];
+	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7];
 	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
 	MIME_GOOD(-0.10)[text/plain];
+	DMARC_POLICY_SOFTFAIL(0.10)[sina.com : SPF not aligned (relaxed), DKIM not aligned (relaxed),none];
 	HAS_LIST_UNSUB(-0.01)[];
-	RECEIVED_HELO_LOCALHOST(0.00)[];
-	RCVD_TLS_LAST(0.00)[];
-	DKIM_MIXED(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:viro@zeniv.linux.org.uk,m:brauner@kernel.org,m:jack@suse.cz,m:pc@manguebit.org,m:yuezhang.mo@sony.com,m:cem@kernel.org,m:roland.mainz@nrubsig.org,m:almaz.alexandrovich@paragon-software.com,m:adilger.kernel@dilger.ca,m:linux-cifs@vger.kernel.org,m:sfrench@samba.org,m:slava@dubeyko.com,m:linux-ext4@vger.kernel.org,m:linkinjeon@kernel.org,m:sprasad@microsoft.com,m:frank.li@vivo.com,m:ronniesahlberg@gmail.com,m:glaubitz@physik.fu-berlin.de,m:jaegeuk@kernel.org,m:hirofumi@mail.parknet.co.jp,m:linux-nfs@vger.kernel.org,m:tytso@mit.edu,m:linux-api@vger.kernel.org,m:linux-f2fs-devel@lists.sourceforge.net,m:linux-xfs@vger.kernel.org,m:senozhatsky@chromium.org,m:chuck.lever@oracle.com,m:hansg@kernel.org,m:anna@kernel.org,m:linux-fsdevel@vger.kernel.org,m:sj1557.seo@samsung.com,m:trondmy@kernel.org,s:lists@lfdr.de];
-	FREEMAIL_CC(0.00)[manguebit.org,sony.com,kernel.org,nrubsig.org,paragon-software.com,dilger.ca,vger.kernel.org,samba.org,dubeyko.com,microsoft.com,vivo.com,gmail.com,physik.fu-berlin.de,mail.parknet.co.jp,mit.edu,lists.sourceforge.net,chromium.org,oracle.com,samsung.com];
-	MIME_TRACE(0.00)[0:+];
-	RCPT_COUNT_TWELVE(0.00)[32];
-	DMARC_POLICY_ALLOW(0.00)[lists.sourceforge.net,none];
-	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
+	FORGED_SENDER(0.00)[monty_pavel@sina.com,linux-f2fs-devel-bounces@lists.sourceforge.net];
+	FORGED_RECIPIENTS(0.00)[m:chao@kernel.org,m:jaegeuk@kernel.org,m:yangyongpeng@xiaomi.com,m:monty_pavel@sina.com,m:linux-f2fs-devel@lists.sourceforge.net,s:lists@lfdr.de];
+	RCVD_COUNT_THREE(0.00)[4];
 	ARC_NA(0.00)[];
-	FORGED_SENDER(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
-	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,kernel.org:s=k20201202];
-	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
-	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,kernel.org:-];
-	RCVD_COUNT_FIVE(0.00)[5];
-	NEURAL_HAM(-0.00)[-1.000];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
-	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TO_DN_SOME(0.00)[];
-	TAGGED_RCPT(0.00)[linux-f2fs-devel];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
+	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	HAS_REPLYTO(0.00)[cel@kernel.org]
+	RECEIVED_HELO_LOCALHOST(0.00)[];
+	FREEMAIL_FROM(0.00)[sina.com];
+	MIME_TRACE(0.00)[0:+];
+	TO_DN_SOME(0.00)[];
+	DKIM_MIXED(0.00)[];
+	FREEMAIL_CC(0.00)[xiaomi.com,sina.com,lists.sourceforge.net];
+	RCPT_COUNT_FIVE(0.00)[5];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	NEURAL_HAM(-0.00)[-1.000];
+	FROM_NEQ_ENVFROM(0.00)[monty_pavel@sina.com,linux-f2fs-devel-bounces@lists.sourceforge.net];
+	FROM_HAS_DN(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
+	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,sina.com:s=201208];
+	TAGGED_RCPT(0.00)[linux-f2fs-devel];
+	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,sina.com:-];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sina.com:mid,xiaomi.com:email,lists.sourceforge.net:rdns,lists.sourceforge.net:helo,lists.sourceforge.net:dkim]
 X-Rspamd-Action: no action
 
-From: Chuck Lever <chuck.lever@oracle.com>
+From: Yongpeng Yang <yangyongpeng@xiaomi.com>
 
-FS_ATTRIBUTE_INFORMATION responses have always reported
-FILE_CASE_SENSITIVE_SEARCH and FILE_CASE_PRESERVED_NAMES
-unconditionally. Case-insensitive filesystems like exFAT, and
-casefolded directories on ext4 or f2fs, have no way to signal
-their actual semantics to SMB clients.
+This patchset introduces an inline extent mapping mechanism for f2fs.
+Instead of storing individual block addresses in the inode's data block
+address area (i_addr[]), this feature packs contiguous block ranges into
+compact extent entries, significantly reducing the number of entries
+needed and enabling faster block address lookups via binary search.
 
-Now that filesystems expose case behavior through ->fileattr_get,
-query it via vfs_fileattr_get() and translate the FS_XFLAG_CASEFOLD
-and FS_XFLAG_CASENONPRESERVING flags into the corresponding SMB
-attributes. Filesystems without ->fileattr_get continue reporting
-default POSIX behavior (case-sensitive, case-preserving).
+The inline extent format is identified by magic numbers in the inode
+data area and is transparent to the rest of f2fs -- when the extent
+area is full or cannot represent the mapping efficiently, it
+automatically converts back to the direct block address format.
 
-SMB's FS_ATTRIBUTE_INFORMATION reports per-share attributes from
-the share root, not per-file. Shares mixing casefold and
-non-casefold directories report the root directory's behavior.
+Patch 1: Preparatory refactoring -- replace raw pointer arithmetic
+         with f2fs_data_blkaddr() to abstract block address access.
+Patch 2: Core implementation -- data structures, extent operations
+         (lookup, insert, merge, split, truncate), format conversion,
+         and integration with f2fs data/node paths.
+Patch 3: ioctl interface -- allow per-file enable/disable of inline
+         extent format via F2FS_EXTENT_FL flag.
+Patch 4: sysfs interface -- runtime enable/disable toggle and file
+         extension list for automatic inline extent activation.
 
-Acked-by: Namjae Jeon <linkinjeon@kernel.org>
-Reviewed-by: Roland Mainz <roland.mainz@nrubsig.org>
-Signed-off-by: Chuck Lever <chuck.lever@oracle.com>
----
- fs/smb/server/smb2pdu.c | 30 ++++++++++++++++++++++++------
- 1 file changed, 24 insertions(+), 6 deletions(-)
+Test setup and results:
+=======================
 
-diff --git a/fs/smb/server/smb2pdu.c b/fs/smb/server/smb2pdu.c
-index ee32e61b6d3c..cf0bc453a036 100644
---- a/fs/smb/server/smb2pdu.c
-+++ b/fs/smb/server/smb2pdu.c
-@@ -14,6 +14,7 @@
- #include <linux/falloc.h>
- #include <linux/mount.h>
- #include <linux/filelock.h>
-+#include <linux/fileattr.h>
- 
- #include "glob.h"
- #include "smbfsctl.h"
-@@ -5541,16 +5542,33 @@ static int smb2_get_info_filesystem(struct ksmbd_work *work,
- 	case FS_ATTRIBUTE_INFORMATION:
- 	{
- 		FILE_SYSTEM_ATTRIBUTE_INFO *info;
-+		struct file_kattr fa = {};
- 		size_t sz;
-+		u32 attrs;
-+		int err;
- 
- 		info = (FILE_SYSTEM_ATTRIBUTE_INFO *)rsp->Buffer;
--		info->Attributes = cpu_to_le32(FILE_SUPPORTS_OBJECT_IDS |
--					       FILE_PERSISTENT_ACLS |
--					       FILE_UNICODE_ON_DISK |
--					       FILE_CASE_PRESERVED_NAMES |
--					       FILE_CASE_SENSITIVE_SEARCH |
--					       FILE_SUPPORTS_BLOCK_REFCOUNTING);
-+		attrs = FILE_SUPPORTS_OBJECT_IDS |
-+			FILE_PERSISTENT_ACLS |
-+			FILE_UNICODE_ON_DISK |
-+			FILE_SUPPORTS_BLOCK_REFCOUNTING;
- 
-+		err = vfs_fileattr_get(path.dentry, &fa);
-+		/*
-+		 * -EINVAL, -EOPNOTSUPP: ntfs-3g and other FUSE
-+		 * filesystems that lack FS_IOC_FSGETXATTR support.
-+		 */
-+		if (err && err != -ENOIOCTLCMD && err != -ENOTTY &&
-+		    err != -EINVAL && err != -EOPNOTSUPP) {
-+			path_put(&path);
-+			return err;
-+		}
-+		if (!(fa.fsx_xflags & FS_XFLAG_CASEFOLD))
-+			attrs |= FILE_CASE_SENSITIVE_SEARCH;
-+		if (!(fa.fsx_xflags & FS_XFLAG_CASENONPRESERVING))
-+			attrs |= FILE_CASE_PRESERVED_NAMES;
-+
-+		info->Attributes = cpu_to_le32(attrs);
- 		info->Attributes |= cpu_to_le32(server_conf.share_fake_fscaps);
- 
- 		if (test_share_config_flag(work->tcon->share_conf,
+Platform: Xiaomi smartphone, UFS 4.0 storage
 
--- 
-2.53.0
+  # Enable inline extent
+  echo 1 > /sys/fs/f2fs/<dev>/inline_extent_enable
+  echo 'mp4' > /sys/fs/f2fs/<dev>/inline_extent_extension_list
+
+  # Prepare data: write with 4K offset stride to create fragmented
+  # extents, then overwrite sequentially so inline extent can cache
+  # all mappings in compact form.
+  fio --name=test --filename=data.mp4 --rw=write:4k --bs=64M \
+      --size=8G --ioengine=libaio --direct=1
+  sync
+  fio --name=test --filename=data.mp4 --rw=write --bs=64M \
+      --size=8G --ioengine=libaio --direct=1
+  sync
+  echo 3 > /proc/sys/vm/drop_caches
+
+  # Benchmark: 64K random buffered read, 1GB total IO
+  fio --name=buffer-read --ioengine=libaio --rw=randread --bs=64K \
+      --size=8G --io_size=1G --numjobs=1 --filename=data.mp4
+
+Results (64K random read bandwidth):
+
+  +---------------------+------------+
+  | Configuration       | Bandwidth  |
+  +---------------------+------------+
+  | inline extent OFF   | 284 MiB/s  |
+  | inline extent ON    | 321 MiB/s  |
+  +---------------------+------------+
+  | Improvement         | +13%       |
+  +---------------------+------------+
+
+The improvement comes from eliminating direct/indirect node page reads
+during block address lookup -- all mappings are stored directly in
+the inode page and found via O(log n) binary search.
+
+Yongpeng Yang (4):
+  f2fs: replace raw dnode pointer arithmetic with f2fs_data_blkaddr()
+  f2fs: introduce inline extent mapping for inode data blocks
+  f2fs: support setting inline extent flag via ioctl
+  f2fs: add sysfs interface for inline extent management
+
+ fs/f2fs/Kconfig    |  18 +
+ fs/f2fs/Makefile   |   1 +
+ fs/f2fs/data.c     | 149 +++++++-
+ fs/f2fs/debug.c    |   4 +
+ fs/f2fs/dir.c      |   9 +
+ fs/f2fs/f2fs.h     |  23 +-
+ fs/f2fs/file.c     |  93 ++++-
+ fs/f2fs/iextent.c  | 826 +++++++++++++++++++++++++++++++++++++++++++++
+ fs/f2fs/iextent.h  | 170 ++++++++++
+ fs/f2fs/inline.c   |   7 +
+ fs/f2fs/namei.c    |  48 +++
+ fs/f2fs/node.c     |  81 ++++-
+ fs/f2fs/node.h     |   4 +
+ fs/f2fs/recovery.c |  17 +
+ fs/f2fs/super.c    |  13 +
+ fs/f2fs/sysfs.c    |  51 +++
+ 16 files changed, 1500 insertions(+), 14 deletions(-)
+ create mode 100644 fs/f2fs/iextent.c
+ create mode 100644 fs/f2fs/iextent.h
+
+--
+2.43.0
 
 
 
