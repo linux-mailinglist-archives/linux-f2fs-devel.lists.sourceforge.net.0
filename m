@@ -2,114 +2,140 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id qGvAOtNr/mkgqgAAu9opvQ
+	id 2MStN7O2/mlxvQAAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 09 May 2026 01:03:47 +0200
+	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 09 May 2026 06:23:15 +0200
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2F3604FC90E
-	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 09 May 2026 01:03:47 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1ED404FE0BF
+	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 09 May 2026 06:23:14 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:
+	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
-	Subject:To:From:Message-ID:Date:MIME-Version:Sender:Reply-To:Cc:Content-ID:
+	Subject:MIME-Version:Message-ID:Date:To:From:Sender:Reply-To:Content-ID:
 	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
 	:Resent-Message-ID:In-Reply-To:References:List-Owner;
-	bh=OsF3UzstDNMI6oYCMGygGD5mvyUyF0gylKsLyJBvKVs=; b=XediFHrpJEvq/1HdNTVynnS7Nw
-	rolWlVrzgMBj0iu0DA8q5MhHJ2BD7HQ9MDE2m/z+ssarzJ1pfyZyetiXVeb74jBjuYtU2o9vTSPV3
-	wX+bvivbcrPcZxewPAPHH4EKzd32Bp5fr94u0KbVFrplGGm3eL5TSszNOxpqxsfWGA1M=;
+	bh=oWECkAsiToauVw9/dmRFKeQ1nz7Cjm3qJ7JrEzdIc6k=; b=eIXgYQPNJQV5379C+7fv4aR6Kn
+	m7bNf9YjJ9jAbUGmi563hjRatNJ98BUncQFlP+09EFc93CX1ivic0nzHpdgRrmygcdb8Q+ngV56P5
+	VLUwzFlqbGLIL2Fz2L8ytgAtcWaJaX74prskfiMlnOMVvRZmWGfBOaxstOywkK1M7Z6Y=;
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1wLUEO-0007KB-UD;
-	Fri, 08 May 2026 23:03:38 +0000
+	id 1wLZDR-00071L-1T;
+	Sat, 09 May 2026 04:22:58 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
- TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95) (envelope-from
- <3umv-aQkbAOEVbcNDOOHUDSSLG.JRRJOHXVHUFRQWHQW.FRP@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com>)
- id 1wLUEM-0007K3-N9 for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 08 May 2026 23:03:36 +0000
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
+ (envelope-from <kartikey406@gmail.com>) id 1wLZDQ-00071E-AL
+ for linux-f2fs-devel@lists.sourceforge.net;
+ Sat, 09 May 2026 04:22:57 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:To:From:Subject:Message-ID:Date:
- MIME-Version:Sender:Reply-To:Cc:Content-Transfer-Encoding:Content-ID:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=I15xJCCUjxuemBNwgUxoW1Pol1NtT3Mxp32OUx/m3Vw=; b=aFe9VU+Cd6nzVgwvQRS3YYh10p
- f9h3p+p3IYtOvBxX9/3Ea8Ln4LjQo0U9HeUjls/ptkYe2vEbgzW1iao3vOpLuMkjvToZxrb+8Wsbs
- um+g/7xIe+8VTigJqATVl0jH5Fa3IZevTufciaP0UCD7PM/TYJz/SSOL/J7FNAUCFiyo=;
+ bh=ohOtV8rB+CS/jFzAppee8CMCT1yPc+ITAAm7H1vRX4U=; b=MxGotuYfzpuI8O5lu4nZ569ITZ
+ z6LHGka5lTe0ZSsWKi5Ist7JbpLcsPFcIOahVUL8cMa4DUndQNnBRSpuuoiL/vt/kM8xoH2aJsc1P
+ Smmicq471aAv5m7LZn79pL35nNPX7L4Q65LNopyHaQdYN2cUxQyeMzzVax9jCtG2qZoc=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Type:To:From:Subject:Message-ID:Date:MIME-Version:Sender:Reply-To
- :Cc:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
+ h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
  Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=I15xJCCUjxuemBNwgUxoW1Pol1NtT3Mxp32OUx/m3Vw=; b=m
- BKY8tQt8yiLkBxxfDwDQijsy7QIkW5A6FA/1sZnf6GGu72C8j6YhG4uRh7EkW3NZhCsZuf2pvJ3Jw
- Kc7wZNMP1jovNg2tpbvGoAk51ZoohMcNTrU93agWxkZmdsaxtIBAzLuvoVu5+1dU4s2BppAwvTJuc
- 8zqKA1RV70U7NT48=;
-Received: from mail-ot1-f79.google.com ([209.85.210.79])
+ List-Owner:List-Archive; bh=ohOtV8rB+CS/jFzAppee8CMCT1yPc+ITAAm7H1vRX4U=; b=D
+ qJztKL9qk4ZZxlgk+/NmVAd6MvBvCPbStA321vqGoBnRDXXhXAkHbesDXF3q3ox68cpyEstkxNLp8
+ NTdG+sXBIY7PyzpcXGUd4+z4EgLdMYpcvpDEAxLQFap/7j+egABrSq99ocC7CeUMbzze0G8rIH0g8
+ JzON2OP/KXfUmdds=;
+Received: from mail-pj1-f50.google.com ([209.85.216.50])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1wLUEH-0001hY-E2 for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 08 May 2026 23:03:36 +0000
-Received: by mail-ot1-f79.google.com with SMTP id
- 46e09a7af769-7dcdcacd141so4172797a34.2
+ id 1wLZDN-0001eF-9r for linux-f2fs-devel@lists.sourceforge.net;
+ Sat, 09 May 2026 04:22:57 +0000
+Received: by mail-pj1-f50.google.com with SMTP id
+ 98e67ed59e1d1-365d8e43759so1490118a91.0
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Fri, 08 May 2026 16:03:33 -0700 (PDT)
+ Fri, 08 May 2026 21:22:57 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20251104; t=1778300567; x=1778905367; darn=lists.sourceforge.net;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=ohOtV8rB+CS/jFzAppee8CMCT1yPc+ITAAm7H1vRX4U=;
+ b=pgBCoJCM/XGol8j6GOGcoKS1YYY9ECC4NfQ21MSyWqCp9MN3o9dKO69bOxhuT6hSm5
+ BWh8qQlUs53QQLd8FujaOr0RZPl9UR6DKwk1l9kMNZPxY/9Sxp7SPs6w5VXRtEuVI/T8
+ //s6M880+HEwI6N3cI0qS/dL9ZKFQrLutnTRR4aIlkYim4/aSEePFCfRVFeTTptrfxWZ
+ kk+DTSGr6NghztYzXfCJp5+oqSJG9P6V7GR28uaufKN0R8hVyj6BLRbj371kdYng7PUb
+ PpX3ZHWLOOx/aeDUGHJLgcrOkczOowCcF/U0MNvLbO9YUJhWvv/e5UyOQltvOJ/uCzpr
+ f+/g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778281403; x=1778886203;
- h=to:from:subject:message-id:date:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=I15xJCCUjxuemBNwgUxoW1Pol1NtT3Mxp32OUx/m3Vw=;
- b=cfxKQOTiMBr7KUCeAv0BJJ47GLUOxfWN1ER8Qy12AXpPqdN9hyoWLHFsnHVbVQq1Zm
- Udx2kzxlrozoK5WsES/qR1JvOobj8qjgfRw1rV8I9I3fS3MG6OlcdnyVsA+V/MtNiytH
- W7oLlqoz2Ycl/M0WS0TaO/eI1G0xPC+oWD2t35kT/ZDJCHG1yavEHyur6q0MrnK0L5YY
- yehNFx6MksHUSFblwRCSfVim5FHoWnxjnZH0dum7OBCoNT9AiO2u9gvftl+xmvlvIYTB
- oXwCEz0x1syUaIGjBxV7113Q8GeOu0rMg9HQ2bSgTqoyqXSRgAL82z01YShpJl5vU1N4
- 3F1g==
-X-Forwarded-Encrypted: i=1;
- AFNElJ/m0l9XlYsVvpyZO33DlVCZr5nG+e4xaD+jEl/WBUZ+35LCBZA7kY1ThfSzOoZ1+wf8+j1lLPDSjA106saGtd4O@lists.sourceforge.net
-X-Gm-Message-State: AOJu0YyPkNqSCP0jWOYdjdEbmmDaqUGGItYWEM8agKLjZ8KkfWsbRKEC
- 8POr/KTz/xoTClPjWhf4k/nqApr7IlbXJb5e5X6NT3nR83oWPjUVSnkhhI9iQeVJQ1jevHlPf65
- rj6MBOt3p2b2AoM4XCrLfT22OBtBbTinaMj5ypnZzPmwPodqt8izhUn40A84=
+ d=1e100.net; s=20251104; t=1778300567; x=1778905367;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ohOtV8rB+CS/jFzAppee8CMCT1yPc+ITAAm7H1vRX4U=;
+ b=jtX0wK75/STeF7Cp4ZDGyXTlLrMfVXbtO5odznKAIUMpbLofDeP7PJuREGzaduH0yu
+ BYaZD8CP39Te1buPuCVrFo8QBxD4kERPX+J8s7pWOj6JRsWjfUultYIzne5ARiHBWoUO
+ ZqbTBnd4gbivID05Fom5qtTHYK8f4Zo6Te7tHn5Xewo/+3fjUvNKTfcZAtB6mX4h/QJt
+ kxFG5sMk0uI2NkKajfdC4VIPmmTwnFYYiiIj/No79HQrKy2LUvnkVg8nFqJ/aFm/11pW
+ JpWwbzlhTrGNbben7Ao3BZl9bnyFqqQhaGy1el38r+goyNDNVjVG+mXXUuOH9/bVlhlE
+ H6lA==
+X-Gm-Message-State: AOJu0YzwGxGCTRSVSGHrsUNbYaF6S/S2saKiIxtomJN0qieFv+Of99SB
+ HoxON8KKqHrPhhfN+OyJOHvJXBgX0oAlUGK3B5nI0bHe2xXQqkX94KoE
+X-Gm-Gg: Acq92OGmkkY9S4rO4A2J+W4UVyZ6WVULoULVAOe0j7SWCMYMo150VWYe5KsiFaJ4cO8
+ 31mKFaD86Z1EgvTq8FBLCAq/BTTc7rMyiEsVyrCtlYXsQdX/s/dhQsxHRKF5IsUJ2phpeDu9fhq
+ Oz+J28gchYwg49daUmULn4QRrv9/ztSDGE4cswyg2puDvBCqgVodiaeW13HKedDpZ1IRtXtiW2n
+ TTM2BZSzFlif1xTTfW57M90LM7InpHmOY6nMWu64/15CVQKr+IRg+Gj4Mau6fmgQDXjQLVxj2Lc
+ mtttubiWk8wsEdX4CntJ/qMgp0zBn5mvdv7WFnZZhrcMrjo+NOzQMBMqUSpLjzICanFO0OSMhK7
+ KFIGi/oqREahQ+CExqUDaaS+v7GINCQAkr7fXGkuGvjHpczIrt+7FhbEuAdDNsqFhUugptgl7K+
+ +uoS31ilk8e3qqYrtj2Uz29KzCbPa3iZlroBKzoPVjNgIv+Uz3IQT5/d9DflNXYPGRvCFUcU5SZ
+ HeGrPw=
+X-Received: by 2002:a17:90a:d646:b0:356:21e9:73ff with SMTP id
+ 98e67ed59e1d1-366055e69demr7918237a91.11.1778300566469; 
+ Fri, 08 May 2026 21:22:46 -0700 (PDT)
+Received: from deepanshu-kernel-hacker..
+ ([2405:201:682f:383f:1ef5:8ccc:13df:edc6])
+ by smtp.gmail.com with ESMTPSA id
+ 98e67ed59e1d1-367d687a2a8sm676599a91.15.2026.05.08.21.22.43
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 08 May 2026 21:22:45 -0700 (PDT)
+From: Deepanshu Kartikey <kartikey406@gmail.com>
+To: jaegeuk@kernel.org,
+	chao@kernel.org
+Date: Sat,  9 May 2026 09:52:39 +0530
+Message-ID: <20260509042239.87763-1-kartikey406@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-X-Received: by 2002:a05:6820:2902:b0:696:2cdf:15e2 with SMTP id
- 006d021491bc7-69998c95d7emr8847064eaf.7.1778281402847; Fri, 08 May 2026
- 16:03:22 -0700 (PDT)
-Date: Fri, 08 May 2026 16:03:22 -0700
-X-Google-Appengine-App-Id: s~syzkaller
-X-Google-Appengine-App-Id-Alias: syzkaller
-Message-ID: <69fe6bba.050a0220.1036b8.0004.GAE@google.com>
-From: syzbot <syzbot+eec8f2693d71386bd600@syzkaller.appspotmail.com>
-To: chao@kernel.org, jaegeuk@kernel.org, 
- linux-f2fs-devel@lists.sourceforge.net, linux-kernel@vger.kernel.org, 
- syzkaller-bugs@googlegroups.com
-X-Spam-Score: 0.6 (/)
+X-Spam-Score: 0.1 (/)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Hello,
- syzbot found the following issue on: HEAD commit: 9d0d467c3572
- Add linux-next specific files for 20260504 git tree: linux-next console
- output:
- https://syzkaller.appspot.com/x/log.txt?x=1654656a580000 kernel config:
- https://syzkaller.apps [...] 
- Content analysis details:   (0.6 points, 5.0 required)
+ Content preview:  When f2fs_get_valid_checkpoint() fails during mount (e.g.
+ due to an invalid checkpoint CRC on a malformed image), f2fs_fill_super()
+ takes an error path that eventually calls iput() on the root inode. [...] 
+ Content analysis details:   (0.1 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.3 FROM_LOCAL_HEX         From: localpart has long hexadecimal sequence
- 0.2 HEADER_FROM_DIFFERENT_DOMAINS From and EnvelopeFrom 2nd level mail
- domains are different
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
+ [kartikey406(at)gmail.com]
+ 0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends in
+ digit [kartikey406(at)gmail.com]
  0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.210.79 listed in wl.mailspike.net]
+ [209.85.216.50 listed in wl.mailspike.net]
  0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1wLUEH-0001hY-E2
-Subject: [f2fs-dev] [syzbot] [f2fs?] INFO: trying to register non-static key
- in f2fs_exist_written_data
+X-Headers-End: 1wLZDN-0001eF-9r
+Subject: [f2fs-dev] [PATCH] f2fs: initialize ino_entry_info before
+ checkpoint load
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -121,143 +147,117 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
+Cc: Deepanshu Kartikey <kartikey406@gmail.com>,
+ syzbot+eec8f2693d71386bd600@syzkaller.appspotmail.com,
+ linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
-X-Rspamd-Queue-Id: 2F3604FC90E
+X-Rspamd-Queue-Id: 1ED404FE0BF
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-0.01 / 15.00];
-	URI_HIDDEN_PATH(1.00)[https://syzkaller.appspot.com/x/.config?x=ef1c15606892fce1];
+X-Spamd-Result: default: False [1.49 / 15.00];
+	SUSPICIOUS_RECIPS(1.50)[];
+	MID_CONTAINS_FROM(1.00)[];
 	RWL_MAILSPIKE_EXCELLENT(-0.40)[216.105.38.7:from];
+	MAILLIST(-0.20)[mailman];
 	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7];
 	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
-	MAILLIST(-0.20)[mailman];
+	DMARC_POLICY_SOFTFAIL(0.10)[gmail.com : SPF not aligned (relaxed), DKIM not aligned (relaxed),none];
 	MIME_GOOD(-0.10)[text/plain];
-	DMARC_POLICY_SOFTFAIL(0.10)[appspotmail.com : SPF not aligned (relaxed), DKIM not aligned (relaxed),none];
 	HAS_LIST_UNSUB(-0.01)[];
+	FORGED_SENDER(0.00)[kartikey406@gmail.com,linux-f2fs-devel-bounces@lists.sourceforge.net];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	RECEIVED_HELO_LOCALHOST(0.00)[];
+	FORGED_RECIPIENTS(0.00)[m:jaegeuk@kernel.org,m:chao@kernel.org,m:kartikey406@gmail.com,m:syzbot+eec8f2693d71386bd600@syzkaller.appspotmail.com,m:linux-kernel@vger.kernel.org,m:linux-f2fs-devel@lists.sourceforge.net,m:syzbot@syzkaller.appspotmail.com,s:lists@lfdr.de];
+	ARC_NA(0.00)[];
+	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
 	MIME_TRACE(0.00)[0:+];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[eec8f2693d71386bd600];
-	RECEIVED_HELO_LOCALHOST(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	FORGED_RECIPIENTS(0.00)[m:chao@kernel.org,m:jaegeuk@kernel.org,m:linux-f2fs-devel@lists.sourceforge.net,m:linux-kernel@vger.kernel.org,m:syzkaller-bugs@googlegroups.com,s:lists@lfdr.de];
-	FORGED_SENDER(0.00)[syzbot@syzkaller.appspotmail.com,linux-f2fs-devel-bounces@lists.sourceforge.net];
-	ARC_NA(0.00)[];
-	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x];
-	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
 	DKIM_MIXED(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCPT_COUNT_FIVE(0.00)[5];
-	TO_DN_NONE(0.00)[];
-	PREVIOUSLY_DELIVERED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[syzbot@syzkaller.appspotmail.com,linux-f2fs-devel-bounces@lists.sourceforge.net];
-	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[syzkaller.appspot.com:url,goo.gl:url,googlegroups.com:email,storage.googleapis.com:url,appspotmail.com:email];
+	FREEMAIL_FROM(0.00)[gmail.com];
+	TO_DN_SOME(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,gmail.com:s=20251104];
+	FROM_NEQ_ENVFROM(0.00)[kartikey406@gmail.com,linux-f2fs-devel-bounces@lists.sourceforge.net];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	MISSING_XM_UA(0.00)[];
+	TAGGED_RCPT(0.00)[linux-f2fs-devel,eec8f2693d71386bd600];
 	NEURAL_HAM(-0.00)[-1.000];
+	RCVD_COUNT_FIVE(0.00)[5];
+	PREVIOUSLY_DELIVERED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
+	FROM_HAS_DN(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	FREEMAIL_CC(0.00)[gmail.com,syzkaller.appspotmail.com,vger.kernel.org,lists.sourceforge.net];
 	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
-	TAGGED_RCPT(0.00)[linux-f2fs-devel];
-	REDIRECTOR_URL(0.00)[goo.gl];
-	SUBJECT_HAS_QUESTION(0.00)[]
+	RCPT_COUNT_FIVE(0.00)[6];
+	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,gmail.com:-];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[syzkaller.appspot.com:url]
 X-Rspamd-Action: no action
 
-Hello,
+When f2fs_get_valid_checkpoint() fails during mount (e.g. due to an
+invalid checkpoint CRC on a malformed image), f2fs_fill_super() takes
+an error path that eventually calls iput() on the root inode. This
+invokes f2fs_drop_inode() -> f2fs_exist_written_data(), which acquires
+sbi->im[]->ino_lock. However, f2fs_init_ino_entry_info() has not run
+yet at this point, so the spinlock is uninitialized and lockdep
+complains:
 
-syzbot found the following issue on:
+  F2FS-fs (loop0): invalid crc value
+  F2FS-fs (loop0): Failed to get valid F2FS checkpoint
+  INFO: trying to register non-static key.
+  The code is fine but needs lockdep annotation, or maybe
+  you didn't initialize this object before use?
+  ...
+   f2fs_exist_written_data+0x53/0x90 fs/f2fs/checkpoint.c:787
+   f2fs_drop_inode+0xda/0xbf0 fs/f2fs/super.c:1852
+   iput+0x651/0xe80 fs/inode.c:2009
+   f2fs_fill_super+0x6047/0x7850 fs/f2fs/super.c:5461
 
-HEAD commit:    9d0d467c3572 Add linux-next specific files for 20260504
-git tree:       linux-next
-console output: https://syzkaller.appspot.com/x/log.txt?x=1654656a580000
-kernel config:  https://syzkaller.appspot.com/x/.config?x=ef1c15606892fce1
-dashboard link: https://syzkaller.appspot.com/bug?extid=eec8f2693d71386bd600
-compiler:       Debian clang version 21.1.8 (++20251221033036+2078da43e25a-1~exp1~20251221153213.50), Debian LLD 21.1.8
-syz repro:      https://syzkaller.appspot.com/x/repro.syz?x=157331ce580000
-C reproducer:   https://syzkaller.appspot.com/x/repro.c?x=161b4a73980000
+Move f2fs_init_ino_entry_info() to before f2fs_get_valid_checkpoint()
+so that sbi->im[] is always fully initialized before any error path
+can trigger iput() -> f2fs_drop_inode(). The init function only
+depends on raw superblock fields (BLKS_PER_SEG, F2FS_CP_PACKS,
+NR_CURSEG_PERSIST_TYPE, __cp_payload), which are populated well
+before checkpoint load, so the move is safe.
 
-Downloadable assets:
-disk image: https://storage.googleapis.com/syzbot-assets/a19ae01a3069/disk-9d0d467c.raw.xz
-vmlinux: https://storage.googleapis.com/syzbot-assets/29f12fe616bd/vmlinux-9d0d467c.xz
-kernel image: https://storage.googleapis.com/syzbot-assets/eea74c667054/bzImage-9d0d467c.xz
-mounted in repro: https://storage.googleapis.com/syzbot-assets/45693b275dc4/mount_0.gz
-  fsck result: failed (log: https://syzkaller.appspot.com/x/fsck.log?x=117331ce580000)
-
-IMPORTANT: if you fix the issue, please add the following tag to the commit:
 Reported-by: syzbot+eec8f2693d71386bd600@syzkaller.appspotmail.com
-
-F2FS-fs (loop0): Image doesn't support compression
-F2FS-fs (loop0): invalid crc value
-F2FS-fs (loop0): invalid crc value
-F2FS-fs (loop0): Failed to get valid F2FS checkpoint
-INFO: trying to register non-static key.
-The code is fine but needs lockdep annotation, or maybe
-you didn't initialize this object before use?
-turning off the locking correctness validator.
-CPU: 1 UID: 0 PID: 5928 Comm: syz.0.17 Not tainted syzkaller #0 PREEMPT_{RT,(full)} 
-Hardware name: Google Google Compute Engine/Google Compute Engine, BIOS Google 04/18/2026
-Call Trace:
- <TASK>
- dump_stack_lvl+0xe8/0x150 lib/dump_stack.c:120
- assign_lock_key+0x133/0x150 kernel/locking/lockdep.c:986
- register_lock_class+0xcc/0x2e0 kernel/locking/lockdep.c:1301
- __lock_acquire+0xad/0x2d10 kernel/locking/lockdep.c:5114
- lock_acquire+0x106/0x350 kernel/locking/lockdep.c:5870
- rt_spin_lock+0x83/0x400 kernel/locking/spinlock_rt.c:56
- spin_lock include/linux/spinlock_rt.h:45 [inline]
- f2fs_exist_written_data+0x53/0x90 fs/f2fs/checkpoint.c:787
- f2fs_drop_inode+0xda/0xbf0 fs/f2fs/super.c:1852
- iput_final fs/inode.c:1926 [inline]
- iput+0x651/0xe80 fs/inode.c:2009
- f2fs_fill_super+0x6047/0x7850 fs/f2fs/super.c:5461
- get_tree_bdev_flags+0x431/0x4f0 fs/super.c:1694
- vfs_get_tree+0x92/0x2a0 fs/super.c:1754
- fc_mount fs/namespace.c:1193 [inline]
- do_new_mount_fc fs/namespace.c:3758 [inline]
- do_new_mount+0x341/0xd30 fs/namespace.c:3834
- do_mount fs/namespace.c:4167 [inline]
- __do_sys_mount fs/namespace.c:4383 [inline]
- __se_sys_mount+0x31d/0x420 fs/namespace.c:4360
- do_syscall_x64 arch/x86/entry/syscall_64.c:63 [inline]
- do_syscall_64+0x15f/0xf80 arch/x86/entry/syscall_64.c:94
- entry_SYSCALL_64_after_hwframe+0x77/0x7f
-RIP: 0033:0x7f39fca4e04a
-Code: 48 c7 c2 e8 ff ff ff f7 d8 64 89 02 b8 ff ff ff ff c3 66 2e 0f 1f 84 00 00 00 00 00 0f 1f 40 00 49 89 ca b8 a5 00 00 00 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 c7 c1 e8 ff ff ff f7 d8 64 89 01 48
-RSP: 002b:00007ffcfe531b98 EFLAGS: 00000246 ORIG_RAX: 00000000000000a5
-RAX: ffffffffffffffda RBX: 00007ffcfe531c20 RCX: 00007f39fca4e04a
-RDX: 0000200000000140 RSI: 00002000000000c0 RDI: 00007ffcfe531be0
-RBP: 0000200000000140 R08: 00007ffcfe531c20 R09: 0000000000000000
-R10: 0000000000000000 R11: 0000000000000246 R12: 00002000000000c0
-R13: 00007ffcfe531be0 R14: 0000000000005553 R15: 00002000000003c0
- </TASK>
-
-
+Closes: https://syzkaller.appspot.com/bug?extid=eec8f2693d71386bd600
+Tested-by: syzbot+eec8f2693d71386bd600@syzkaller.appspotmail.com
+Signed-off-by: Deepanshu Kartikey <kartikey406@gmail.com>
 ---
-This report is generated by a bot. It may contain errors.
-See https://goo.gl/tpsmEJ for more information about syzbot.
-syzbot engineers can be reached at syzkaller@googlegroups.com.
+ fs/f2fs/super.c | 9 +++++++--
+ 1 file changed, 7 insertions(+), 2 deletions(-)
 
-syzbot will keep track of this issue. See:
-https://goo.gl/tpsmEJ#status for how to communicate with syzbot.
+diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
+index c6afdbd6e1cd..6a231a5b0d62 100644
+--- a/fs/f2fs/super.c
++++ b/fs/f2fs/super.c
+@@ -5140,6 +5140,13 @@ static int f2fs_fill_super(struct super_block *sb, struct fs_context *fc)
+ 		goto free_page_array_cache;
+ 	}
+ 
++	/*
++	 * Initialize ino entry info early so f2fs_drop_inode ->
++	 * f2fs_exist_written_data can safely take im->ino_lock if mount
++	 * fails after this point and triggers iput on cleanup.
++	 */
++	f2fs_init_ino_entry_info(sbi);
++
+ 	err = f2fs_get_valid_checkpoint(sbi);
+ 	if (err) {
+ 		f2fs_err(sbi, "Failed to get valid F2FS checkpoint");
+@@ -5184,8 +5191,6 @@ static int f2fs_fill_super(struct super_block *sb, struct fs_context *fc)
+ 
+ 	f2fs_init_extent_cache_info(sbi);
+ 
+-	f2fs_init_ino_entry_info(sbi);
+-
+ 	f2fs_init_fsync_node_info(sbi);
+ 
+ 	/* setup checkpoint request control and start checkpoint issue thread */
+-- 
+2.43.0
 
-If the report is already addressed, let syzbot know by replying with:
-#syz fix: exact-commit-title
-
-If you want syzbot to run the reproducer, reply with:
-#syz test: git://repo/address.git branch-or-commit-hash
-If you attach or paste a git patch, syzbot will apply it before testing.
-
-If you want to overwrite report's subsystems, reply with:
-#syz set subsystems: new-subsystem
-(See the list of subsystem names on the web dashboard)
-
-If the report is a duplicate of another one, reply with:
-#syz dup: exact-subject-of-another-report
-
-If you want to undo deduplication, reply with:
-#syz undup
 
 
 _______________________________________________
