@@ -2,42 +2,42 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id uMZUE8+8AmonwAEAu9opvQ
+	id KMZpJc+8AmonwAEAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
 	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 12 May 2026 07:38:23 +0200
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id A558B51A3A9
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 12 May 2026 07:38:22 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 30B2E51A3AA
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 12 May 2026 07:38:23 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
 	Subject:MIME-Version:References:In-Reply-To:Message-ID:Date:To:From:Sender:
 	Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
 	:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=IAGCbzSNyThDvMhc7M/EMYBZ0zcoE8iQdzryerebv88=; b=ERAOEjP/LQ1GdORggF6zHjP/mm
-	2XE9X75jW5nHCLWRIO7eXz7zj9CGLfQl0RiQIb32ZVzUHa4P/qJ0DRLaUSbKIj5L/CdZdEikIQZiQ
-	Zi06TaAGVNV7rQbSPNn6ww4W0Z9dT1sG7N5CO7BGkI0EMakxG0B8uQiL2dWjr+aSZb0c=;
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=PXI/N/fhG1xg1/1/QTKNdB54vwL6mzQeD9VSupr7DhQ=; b=MOhmr8rtHuxtyJBu/jPzlp4n4o
+	Gb8QUqAy+/8sfQkXE4wHakgnzYGGUCN9AbxMnaReRSMgazEVsLuomSDqG78ixuQEvswAoO9yOlu78
+	FQTElDUum2NH+Yfdhn8CZWdWcpq8vbxPfkfnquvgvde4VD+B7yD87CFwmkDxzXuQPMPk=;
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1wMfov-0002up-OC;
-	Tue, 12 May 2026 05:38:18 +0000
+	id 1wMfoz-0007zo-SU;
+	Tue, 12 May 2026 05:38:21 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95) (envelope-from
  <BATV+9f3c1ea353498f61ccd0+8297+infradead.org+hch@bombadil.srs.infradead.org>)
- id 1wMfoj-0002tB-Bm for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 12 May 2026 05:38:06 +0000
+ id 1wMfov-0007zL-RA for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 12 May 2026 05:38:17 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=M9+U2qOebilkGiCBYkyQkIQiqg6xsbq5mzyvOEMl2d0=; b=S95dKrmSbfvRGADu9cOyDsuU0w
- auXTXA5ZNQal37JvhidKQj1J57l5GGHX1AB/XhMd2WQVKIc+gNlQzFuipNykWbBWs5KETXwYJ8Fjd
- b6c7w1vhHkPFxrBod1UfdNNScxccKKU89OShw82ukEO1zbUsxLs8DftZfhWF/BzjYIk8=;
+ bh=3njmnPYKfXyGxBuvKgaH5GivvgicyjwAkMmByhnmVfs=; b=lIDqZx8WR7AA4dDF94JWfdwVRA
+ EqxVNQ9nf/hV39RLYBlUL8lVqj1G3db7+lUKAQ+sKMu5Ewl8zE/9Da2td1/ovBtvXWXK3zoLVEggf
+ 2jnX3ML1Z6ObbgvehNvhtzNxMfZyI79JnsWH+s156dtJkm/PDg6jRn7pc9PRdFUNSTdA=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:
@@ -45,34 +45,34 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=M9+U2qOebilkGiCBYkyQkIQiqg6xsbq5mzyvOEMl2d0=; b=i14ypk6C5vsLLcIJUmkSpsA28q
- fEjzWfw4uCRTHvuaq5RoGmoust3CptvWXEk0Sozudrg+EIwCgyYfom0Xl2DBBPqnwTky1F8UE42pf
- +IGXAauIGhGVrR6hlNKGNfVTmOsoD++WMTxMkaAIkBsDzFmbKPDgD/Ji6HF0En2/bC6A=;
+ bh=3njmnPYKfXyGxBuvKgaH5GivvgicyjwAkMmByhnmVfs=; b=PZj8RbJBvsOwppPomwtq2SHYGU
+ 0I6xs4ZY5fv9XEveV6X7wslN3crBDH3AnEJCs1FrTVZ5r96s/wT0zzUaZfXZKy4Cbt4VNMYWkq/Mi
+ 79GYq/+Fj6V1b3EShKjv6hr6ftiIs9vCp4bT3AfiEJoBbYgrfPw19qgYIpHPcKG675yY=;
 Received: from bombadil.infradead.org ([198.137.202.133])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1wMfog-0004rt-29 for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 12 May 2026 05:38:03 +0000
+ id 1wMfos-0004sp-J9 for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 12 May 2026 05:38:16 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
  MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender
  :Reply-To:Content-Type:Content-ID:Content-Description;
- bh=M9+U2qOebilkGiCBYkyQkIQiqg6xsbq5mzyvOEMl2d0=; b=Ge+4D1DW2pmkX62K/Bv0iADaDG
- D9R7VZelwjKVRFhBQMh+fdN1xy3bTuTe0Q/vildGqQgQLb2afEaPyK1v8EjHjl8TnlRLR/yk3EOY3
- CpVRLT1IjABfASeE4xKUXId4njNbkiTLXbvLgvpTV9DskB9fVGLdpCqTkGu0rwCamvFqNjPrjYQlk
- YbHGYfjRwa7iH7D+9ACskU7jjidW0jq5xkwsjL3UJn+LvYQDv+evewZXQlDFu8MBYFt9cGvlHes4X
- x8utjRA/kzC2L5QS64m/B+xrrdAcsM9s1jEftrIQO9KN4bMqlXv1c7GOwxY0yHbsBHC6xopqolwXm
- jLuSKVEw==;
+ bh=3njmnPYKfXyGxBuvKgaH5GivvgicyjwAkMmByhnmVfs=; b=LiH5UIQaX7gQOxBmNMmgiW2c9M
+ Sw4TUVUPyiAW+otc+CLl1MH8cNxafrJTke/+5h9ekIgkCCE6wUvC0Wp/hsAmzQNABnrIxxB0la6W2
+ K+LEhQeH/uU0PTzGQAOaFzioXzpzvrHVQb9T7pD4RjGUwIVj2SuL6wcODRIImWU8mDrJOyqjI519P
+ iBAKU++IsFSrs/7KErD6eQrhXvg9hTd/dViywq3t2OWMC0EJF1+UjOFOKgyCW5nmJEynP6BjIbd8B
+ EJroeuDhIKqm7kAp5yFSu5BfA2aMaik60jjBnsCTMAt7RoUPFZ2/yWx0pC0EtQgHohGzZbgEPGihn
+ jJKGY1xg==;
 Received: from
  2a02-8389-2341-5b80-decc-1a96-daaa-a2cc.cable.dynamic.v6.surfer.at
  ([2a02:8389:2341:5b80:decc:1a96:daaa:a2cc] helo=localhost)
  by bombadil.infradead.org with esmtpsa (Exim 4.99.1 #2 (Red Hat Linux))
- id 1wMfoT-0000000FfTW-0JM3; Tue, 12 May 2026 05:37:49 +0000
+ id 1wMfoa-0000000FfVQ-2Hu2; Tue, 12 May 2026 05:37:56 +0000
 From: Christoph Hellwig <hch@lst.de>
 To: Andrew Morton <akpm@linux-foundation.org>, Chris Li <chrisl@kernel.org>,
  Kairui Song <kasong@tencent.com>
-Date: Tue, 12 May 2026 07:35:26 +0200
-Message-ID: <20260512053625.2950900-11-hch@lst.de>
+Date: Tue, 12 May 2026 07:35:27 +0200
+Message-ID: <20260512053625.2950900-12-hch@lst.de>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20260512053625.2950900-1-hch@lst.de>
 References: <20260512053625.2950900-1-hch@lst.de>
@@ -86,12 +86,11 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: Add a helper abstracting away the low-level details of
- enabling
- fs_ops-based swapping. This prepares for taking swap_info_struct private.
- Signed-off-by: Christoph Hellwig <hch@lst.de> --- fs/nfs/file.c | 4 +---
- fs/smb/client/file.c | 3 +-- include/linux/swap.h | 5 +++++ mm/swapfile.c
- | 7 +++++++ 4 files changed, 14 insertions(+), 5 dele [...] 
+ Content preview:  struct swap_extent is only used inside of mm/swapfile.c, so
+ move it there. Signed-off-by: Christoph Hellwig <hch@lst.de> ---
+ include/linux/swap.h
+ | 15 mm/swapfile.c | 15 +++++++++++++++ 2 files changed, 15 insertions(+),
+ 15 deletions(-) 
  Content analysis details:   (0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -100,8 +99,8 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.2 HEADER_FROM_DIFFERENT_DOMAINS From and EnvelopeFrom 2nd level mail
  domains are different
-X-Headers-End: 1wMfog-0004rt-29
-Subject: [f2fs-dev] [PATCH 10/12] swap: add a swap_activate_fs_ops helper
+X-Headers-End: 1wMfos-0004sp-J9
+Subject: [f2fs-dev] [PATCH 11/12] swap: move struct swap_extent to swapfile.c
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -129,7 +128,7 @@ Cc: Paulo Alcantara <pc@manguebit.org>, linux-doc@vger.kernel.org,
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
-X-Rspamd-Queue-Id: A558B51A3A9
+X-Rspamd-Queue-Id: 30B2E51A3AA
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [1.49 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
@@ -168,95 +167,67 @@ X-Spamd-Result: default: False [1.49 / 15.00];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[lst.de:email,lst.de:mid,lists.sourceforge.net:rdns,lists.sourceforge.net:helo,lists.sourceforge.net:dkim]
 X-Rspamd-Action: no action
 
-Add a helper abstracting away the low-level details of enabling
-fs_ops-based swapping.  This prepares for taking swap_info_struct
-private.
+struct swap_extent is only used inside of mm/swapfile.c, so move it
+there.
 
 Signed-off-by: Christoph Hellwig <hch@lst.de>
 ---
- fs/nfs/file.c        | 4 +---
- fs/smb/client/file.c | 3 +--
- include/linux/swap.h | 5 +++++
- mm/swapfile.c        | 7 +++++++
- 4 files changed, 14 insertions(+), 5 deletions(-)
+ include/linux/swap.h | 15 ---------------
+ mm/swapfile.c        | 15 +++++++++++++++
+ 2 files changed, 15 insertions(+), 15 deletions(-)
 
-diff --git a/fs/nfs/file.c b/fs/nfs/file.c
-index 10ab2a923835..ce4d860c4e7a 100644
---- a/fs/nfs/file.c
-+++ b/fs/nfs/file.c
-@@ -588,7 +588,7 @@ int nfs_swap_activate(struct file *file, struct swap_info_struct *sis)
- 	ret = rpc_clnt_swap_activate(clnt);
- 	if (ret)
- 		return ret;
--	ret = add_swap_extent(sis, sis->max, NULL, 0);
-+	ret = swap_activate_fs_ops(sis);
- 	if (ret < 0) {
- 		rpc_clnt_swap_deactivate(clnt);
- 		return ret;
-@@ -596,8 +596,6 @@ int nfs_swap_activate(struct file *file, struct swap_info_struct *sis)
- 
- 	if (cl->rpc_ops->enable_swap)
- 		cl->rpc_ops->enable_swap(inode);
--
--	sis->flags |= SWP_FS_OPS;
- 	return 0;
- }
- EXPORT_SYMBOL_GPL(nfs_swap_activate);
-diff --git a/fs/smb/client/file.c b/fs/smb/client/file.c
-index e1bbc65ce7f3..e11065be1e64 100644
---- a/fs/smb/client/file.c
-+++ b/fs/smb/client/file.c
-@@ -3326,8 +3326,7 @@ int cifs_swap_activate(struct file *swap_file, struct swap_info_struct *sis)
- 	 * from reading or writing the file
- 	 */
- 
--	sis->flags |= SWP_FS_OPS;
--	return add_swap_extent(sis, sis->max, NULL, 0);
-+	return swap_activate_fs_ops(sis);
- }
- 
- void cifs_swap_deactivate(struct file *file)
 diff --git a/include/linux/swap.h b/include/linux/swap.h
-index b1cbb67ddd8e..916889738f08 100644
+index 916889738f08..95237ee065c2 100644
 --- a/include/linux/swap.h
 +++ b/include/linux/swap.h
-@@ -406,6 +406,7 @@ extern void __meminit kswapd_stop(int nid);
- int add_swap_extent(struct swap_info_struct *sis, unsigned long nr_pages,
- 		struct block_device *bdev, sector_t start_block);
- int generic_swap_activate(struct file *swap_file, struct swap_info_struct *sis);
-+int swap_activate_fs_ops(struct swap_info_struct *sis);
+@@ -178,21 +178,6 @@ struct sysinfo;
+ struct writeback_control;
+ struct zone;
  
- static inline unsigned long total_swapcache_pages(void)
- {
-@@ -532,6 +533,10 @@ static inline int add_swap_extent(struct swap_info_struct *sis,
- {
- 	return -EINVAL;
- }
-+static inline int swap_activate_fs_ops(struct swap_info_struct *sis)
-+{
-+	return -EINVAL;
-+}
- #endif /* CONFIG_SWAP */
- #ifdef CONFIG_MEMCG
- static inline int mem_cgroup_swappiness(struct mem_cgroup *memcg)
+-/*
+- * A swap extent maps a range of a swapfile's PAGE_SIZE pages onto a range of
+- * disk blocks.  A rbtree of swap extents maps the entire swapfile (Where the
+- * term `swapfile' refers to either a blockdevice or an IS_REG file). Apart
+- * from setup, they're handled identically.
+- *
+- * We always assume that blocks are of size PAGE_SIZE.
+- */
+-struct swap_extent {
+-	struct rb_node rb_node;
+-	pgoff_t start_page;
+-	pgoff_t nr_pages;
+-	sector_t start_block;
+-};
+-
+ /*
+  * Max bad pages in the new format..
+  */
 diff --git a/mm/swapfile.c b/mm/swapfile.c
-index 2c9d2af736c4..26852c2ad36e 100644
+index 26852c2ad36e..c0479533f9ef 100644
 --- a/mm/swapfile.c
 +++ b/mm/swapfile.c
-@@ -2757,6 +2757,13 @@ add_swap_extent(struct swap_info_struct *sis, unsigned long nr_pages,
+@@ -260,6 +260,21 @@ static int __try_to_reclaim_swap(struct swap_info_struct *si,
+ 	return ret;
  }
- EXPORT_SYMBOL_GPL(add_swap_extent);
  
-+int swap_activate_fs_ops(struct swap_info_struct *sis)
-+{
-+	sis->flags |= SWP_FS_OPS;
-+	return add_swap_extent(sis, sis->max, NULL, 0);
-+}
-+EXPORT_SYMBOL_GPL(swap_activate_fs_ops);
++/*
++ * A swap extent maps a range of a swapfile's PAGE_SIZE pages onto a range of
++ * disk blocks.  A rbtree of swap extents maps the entire swapfile (Where the
++ * term `swapfile' refers to either a blockdevice or an IS_REG file). Apart
++ * from setup, they're handled identically.
++ *
++ * We always assume that blocks are of size PAGE_SIZE.
++ */
++struct swap_extent {
++	struct rb_node rb_node;
++	pgoff_t start_page;
++	pgoff_t nr_pages;
++	sector_t start_block;
++};
 +
- /*
-  * A `swap extent' is a simple thing which maps a contiguous range of pages
-  * onto a contiguous range of disk blocks.  A rbtree of swap extents is
+ static inline struct swap_extent *first_se(struct swap_info_struct *sis)
+ {
+ 	struct rb_node *rb = rb_first(&sis->swap_extent_root);
 -- 
 2.53.0
 
