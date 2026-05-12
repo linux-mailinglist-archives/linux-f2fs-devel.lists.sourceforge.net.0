@@ -2,42 +2,42 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id wHL5CnzUAmpFyAEAu9opvQ
+	id 4GNZCMDUAmpLyAEAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 12 May 2026 09:19:24 +0200
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 12 May 2026 09:20:32 +0200
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id C428151BAFB
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 12 May 2026 09:19:23 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id BD2B451BB4A
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 12 May 2026 09:20:31 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
 	List-Unsubscribe:List-Id:Subject:In-Reply-To:References:To:MIME-Version:Date:
 	Message-ID:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
 	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=FNsuWOdaInQg4gD692+Y0qqCdTOINTyjlKXaHJruO8g=; b=RHoqRN3mGlqh5fYseitLkgz1p5
-	lSec9g8yBt0z3Qet97SfZ4aqt4YWkLRQnFxBNbK7U5EcaWSeo75mvS9GG7VyzLQ5/7Obtxo1S7eth
-	R0PevvEd220TX6qrqcWcwH+Dog4ofcLDAi/8DEAcGKwNd22uZCpZQwAeNRun+uk4+Exc=;
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=MhyIGnlS2bqG6ZCo+4w2xIFZEl36sycLm5Hq1jIlSIM=; b=XKl/nqlavUzR7MGM3Q9HtZwr/y
+	d+pAtAIabYHjpnw+Rm58Q9PaT5vZbnQmDdVeeMuqP/VErhkOBIV1lyX6ZEZ4nhoeXBuNJPYGdLlaO
+	13K8XU4veOJ32D4694NGbmYRfHRIOOzoc587Oe6ERcOi4oSwbkSLqE2FFudgSyQItqmE=;
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1wMhOh-0003gS-7h;
-	Tue, 12 May 2026 07:19:20 +0000
+	id 1wMhPr-0006sD-Dj;
+	Tue, 12 May 2026 07:20:28 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <dlemoal@kernel.org>) id 1wMhOf-0003gL-F5
+ (envelope-from <dlemoal@kernel.org>) id 1wMhPp-0006s5-9I
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 12 May 2026 07:19:18 +0000
+ Tue, 12 May 2026 07:20:26 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=6QE3ewrsfby/Z63hPdgzGnhMlX4OhV3m89/7+h7TDBU=; b=k/0/bozlQQ8ldzAF2FPyw0QLD2
- jaeIsedTYEHlG8t7846U3GmYCD+EKpU2WCJAsi55ZDC1Oka48rL4rPsMGSJ4QQ/Vd+6d/U/v5YL5o
- WkiPLRDfGs+AUG5t/tPWN2S1jQMH9pVCcWOD07KUiMdV6WQLDrVaib5zVVnP+eOtMdGc=;
+ bh=hOK7f6ec2LsMgcWQRwIq/1n3zq7AV3Tu58DuoNcWJL8=; b=lNbtP0VtZuTkXIQV9CN+HXLhB9
+ 7Fxlz5zWIuPvodVESDxa5O+4xS9TdHX1qLTQJSiEg21cTF4fHbn5HJG20xgiLsj30MAUkLac/luFG
+ EakmWYgA0GyD7j++E5B8k9uXRz/PHXh9+iDNe5pm87P2MeDcsrvYeAqlwOKwaSZAelWI=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
@@ -45,64 +45,64 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=6QE3ewrsfby/Z63hPdgzGnhMlX4OhV3m89/7+h7TDBU=; b=MmhiTU3915IXiOFwxxNyyK9ZXm
- npxdfHCOQpfwcL8/UGakJmrWm0svuJR0ku/Unbd0zN5D4BzTb84iRhBN/eIL4UQ3ZzFCCDheg/iwO
- 7GWEFhx8eR1rPln3lJytF+J8+HDdk+s2eWjNJjPcZRScPvrLiBmC/gBHwTLfFw2oy/Yc=;
+ bh=hOK7f6ec2LsMgcWQRwIq/1n3zq7AV3Tu58DuoNcWJL8=; b=JkQFj83hP8+QMDFYRLt+Ndtxir
+ B25ywRRytLGTLhrhWJZSu6jANPRATQMONzBpPYlWXWRTb2fSril3Ownma61RGPx8UetOh13hQq4x1
+ a+6FoKuC2aWapW3e4kbdfuz1/mwGP7bTvkVSfcPcP2y8PROEwBwq0MWRnyKRdlZ0PFCA=;
 Received: from sea.source.kernel.org ([172.234.252.31])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1wMhOc-0001Xy-TI for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 12 May 2026 07:19:18 +0000
+ id 1wMhPi-0001bT-3e for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 12 May 2026 07:20:26 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 09D1643881;
- Tue, 12 May 2026 07:19:05 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9397DC2BCB0;
- Tue, 12 May 2026 07:19:00 +0000 (UTC)
+ by sea.source.kernel.org (Postfix) with ESMTP id 33E7A43F30;
+ Tue, 12 May 2026 07:20:12 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 06282C2BCB0;
+ Tue, 12 May 2026 07:20:06 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1778570344;
- bh=d5SXioBPZwBUI6+SvSlauBL+rdn+SyAPRvBRa2uxfM8=;
+ s=k20201202; t=1778570412;
+ bh=gFxSwQ2vwNGN7Wy+a57I0BqMT4+uCuIw9JWDuf1wsoY=;
  h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=rzpOZbhShhQy53uHWdXI2cpciYpCJ920LLOVTxryHf9v8OKxdXcXv9PcbtWsHhvyX
- AYph9XZFDOqDQwZsiKpkaAi5Tj4jgjyto4NZ8GZ1d1lrpRbMH6BEl1FmQDWqHh9aKt
- wR9hASUhwEfR/x7muZ/iQU+ZY4Unac7EpcjljUYFspFcTRdnBtE6xUk0dzsWRcdpwK
- N2xzyLJkDls7Vy9tVuzq9XXM2918R97/uSORI1dlwtkQ+yKrj8aK6cWW6NBweJ5PnN
- m3/udQQng+yYpR0EBFqLsp20DKAl82altPlAL8TvQYjfsAOHgqXK+IqxQKVepy1L7g
- Pst3cIKtZvjWQ==
-Message-ID: <48752f6c-39ad-4409-9d41-646922a668cc@kernel.org>
-Date: Tue, 12 May 2026 16:18:58 +0900
+ b=soJoZRoMxJtn9BFF3dpQwvk0xi820TNJfptJMtJX/cP/qNW+teYamRrcMVyhtuIf2
+ iR30YL5xnlEO3jTCx2tpM77XOC5OsxBpMB1POJFpEuFKTdBQGIEvxGGPmqeJ32yTYY
+ UA2xlPqKw+9LfjJN4MQdMcexmE51BlA+EqPHlH5f+sN6l+N2Pb4HNurNsKuKugTIio
+ ole6921MHwRdIF7HBTc7tpfjCL6KBtD6BTBQ1Q6GwaBCiWuHWUGJB5v8Me5Q8cQ3NI
+ Tq43OhBP9tdm5zD08MqoxYDF0J0eeB07AIqRJJSRbCGW+bEl8POIDqcxOUAfOS/yGy
+ b9paE8zlD9+yw==
+Message-ID: <f157c318-790d-4931-bcc2-7b3c95c8c2b0@kernel.org>
+Date: Tue, 12 May 2026 16:20:05 +0900
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 To: Christoph Hellwig <hch@lst.de>, Andrew Morton
  <akpm@linux-foundation.org>, Chris Li <chrisl@kernel.org>,
  Kairui Song <kasong@tencent.com>
 References: <20260512053625.2950900-1-hch@lst.de>
- <20260512053625.2950900-6-hch@lst.de>
+ <20260512053625.2950900-7-hch@lst.de>
 Content-Language: en-US
 Organization: Western Digital Research
-In-Reply-To: <20260512053625.2950900-6-hch@lst.de>
+In-Reply-To: <20260512053625.2950900-7-hch@lst.de>
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 5/12/26 14:35,
- Christoph Hellwig wrote: > Reflow setup_swap_extents
- so that the flag checking is not conditional on > a swap_activate method.
- This is currently a no-op because the swapoff > code st [...] 
+ Content preview:  On 5/12/26 14:35, Christoph Hellwig wrote: > Make use of the
+ abstractions we have. This is a preparation for > moving more special casing
+ down into block/. > > Signed-off-by: Christoph Hellwig <hch@ls [...] 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
-X-Headers-End: 1wMhOc-0001Xy-TI
-Subject: Re: [f2fs-dev] [PATCH 05/12] swap: cleanup setup_swap_extents
+X-Headers-End: 1wMhPi-0001bT-3e
+Subject: Re: [f2fs-dev] [PATCH 06/12] swap,
+ block: move the block device swapon code into block/fops.c
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -132,7 +132,7 @@ Cc: Paulo Alcantara <pc@manguebit.org>, linux-doc@vger.kernel.org,
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
-X-Rspamd-Queue-Id: C428151BAFB
+X-Rspamd-Queue-Id: BD2B451BB4A
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [-7.11 / 15.00];
 	WHITELIST_DMARC(-7.00)[sourceforge.net:D:+];
@@ -173,15 +173,12 @@ X-Spamd-Result: default: False [-7.11 / 15.00];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.sourceforge.net:rdns,lists.sourceforge.net:helo,lists.sourceforge.net:dkim,lst.de:email]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[lst.de:email,lists.sourceforge.net:rdns,lists.sourceforge.net:helo,lists.sourceforge.net:dkim]
 X-Rspamd-Action: no action
 
 On 5/12/26 14:35, Christoph Hellwig wrote:
-> Reflow setup_swap_extents so that the flag checking is not conditional on
-> a swap_activate method.  This is currently a no-op because the swapoff
-> code still checks the presence of a swap_deactivate method, but it
-> simplifies adding a new check, and also makes the SWP_ACTIVATED flag
-> more consistent.
+> Make use of the abstractions we have.  This is a preparation for
+> moving more special casing down into block/.
 > 
 > Signed-off-by: Christoph Hellwig <hch@lst.de>
 
