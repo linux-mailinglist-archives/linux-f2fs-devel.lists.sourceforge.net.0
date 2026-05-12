@@ -2,42 +2,42 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id +NPBK6xYA2qh4wEAu9opvQ
+	id IGjWKBZZA2r75AEAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 12 May 2026 18:43:24 +0200
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 12 May 2026 18:45:10 +0200
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 09607524F10
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 12 May 2026 18:43:23 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id F22BA524F76
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 12 May 2026 18:45:09 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
 	List-Unsubscribe:List-Id:Subject:In-Reply-To:MIME-Version:References:
 	Message-ID:To:Date:Sender:Content-ID:Content-Description:Resent-Date:
 	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=pAUOKRuobkWF5VhlaDYOhSUoV0Wz7rf1FMMdUsJCH+g=; b=iyz3ljDSZaSkYU2B/lbO0NEI3H
-	B8M6kpJlthXqIUIv/v9swQVYp7zdAnUOjp6w4eDduXayM+41v5oDm2dH+IFXafdztuVz9jV0HEVKs
-	BCSAQkQW7VwAs8e6mBVG2nKjsK6avRDo8iYqMIwbSmlZlrVJ8C3oibHND1cle8KqzYt0=;
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=mMDjZiftjiUOQaVkB0ISoTH6mw3s9se1r75jodMihNk=; b=krH/yldAxtHXZUh1HN7vCsQJgZ
+	CMdHbmeY8qHMs6k4Vke8yUdDtEmpE9Q8jnEPveHdhHTSuu1xnwaPIWaNSIyR9AA1l7q5bk19yJc6C
+	quothFdT3D1PynRiifBLIJFzFjqM8Mzm7FmSDwLF+uQJVG6EilEr5R8zBTlsn/kqAlV4=;
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1wMqCV-0007hV-6G;
-	Tue, 12 May 2026 16:43:16 +0000
+	id 1wMqE7-0006MG-W6;
+	Tue, 12 May 2026 16:45:00 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <djwong@kernel.org>) id 1wMqCT-0007hO-Vi
+ (envelope-from <djwong@kernel.org>) id 1wMqDp-0006Lw-Ki
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 12 May 2026 16:43:15 +0000
+ Tue, 12 May 2026 16:44:41 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=nSEdh5qhvKHwGvOyzzdlacB9JE8SCO28PhCZho3aXI4=; b=Kv7hSw0FvTwDMfDbIfWiiiLW5O
- 5MpUBqNbRqZWnKfnzSieVWGJ+53061mk9IU/694c92OuUfhVd8hklXHo38S7n8YtBjbz4puWd5Q71
- 42ccMbmAqsqAwA//q9HlPF8jAJO7SHSFxrjo9GdgV1FiKCP9cY9eW+EW3KCGf2o5NySo=;
+ bh=mpgMLCPFNMFUtUG6lufxvu6QdkqjEgXpQgf9/sqIq0Y=; b=DovP5jEnZyle3yVHSYJyUdNo+d
+ pnpiC3wwSSUoZ0am9lgLTvGT0MB9cRm45+JRhUX2lpQcoN9VhKvMq2K/DFBEM2re3F4Go8X6h8kra
+ Aj6I+dk3z/CB7HvcCxZkTVs1I9gu/RrdriGBXIhA7PhAFGOYlNp4OUvuT2bA9Scbaws4=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -45,37 +45,37 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=nSEdh5qhvKHwGvOyzzdlacB9JE8SCO28PhCZho3aXI4=; b=Xllc5gdoBT+hB8hp8N8j/7C/An
- Vz3fKOJTq8/uUZnRaA8RIZ5kgUnLFbLahK2xOIcISY33TDqt9vkKred3cftb67tqMpMReu6dfKeja
- VynLB0/4fqMy8YPCljcbGNq/IIfPjJ8DmfspSHiAXi1dObq3cm/jiORHSGYrJdEU7e28=;
+ bh=mpgMLCPFNMFUtUG6lufxvu6QdkqjEgXpQgf9/sqIq0Y=; b=E1yG4cZ53TO8A4rNXIDo2PzbUb
+ EqVQDE7vD32kvYIio4smTc2LvLj720IPJ96hlqUkGwjGU1JeLf1wQd1cyXlFgbkapeVBmjcqgEypl
+ oPX4ATb3Mz0tsHBg1ej+04drw6pnmKj56+jy0iwdZSBIbIbpwoBdQrqK0lv5hMoyPxxs=;
 Received: from sea.source.kernel.org ([172.234.252.31])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1wMqCP-00078L-Jj for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 12 May 2026 16:43:15 +0000
+ id 1wMqDn-0007FT-IO for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 12 May 2026 16:44:41 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id AE31340332;
- Tue, 12 May 2026 16:43:08 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7F1B5C2BCF6;
- Tue, 12 May 2026 16:43:08 +0000 (UTC)
+ by sea.source.kernel.org (Postfix) with ESMTP id C049443D6F;
+ Tue, 12 May 2026 16:44:34 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 94604C2BCB0;
+ Tue, 12 May 2026 16:44:34 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1778604188;
- bh=PBZrTiN4pAoVDQXCJJ+alWgO2xkZJqjotuEKJ6A2uec=;
+ s=k20201202; t=1778604274;
+ bh=gGFNGe/d0M89UTLDXMOv6nsS+erKCcqBt2dE1dcvtY0=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=LhDaw5alyksUgGWr7B+0tNRNRMhWix5nRIyBwa98tq/kd6I8j+shUG6aVX4PjpvCV
- T0UPqngSxtLEFupErYJkxP6xFRAzIkRfQwy84MuvBPY0FvI7QEYc94CPrTP2bmwrXX
- d/otVY/0Kkw1xfrrVmsd2Er2k2zyg56OwnHH3xBSjgLwQu0/pnFnSdhe5iyEuqvWiJ
- 8Q8dB1D3YHgUfms3a7YcngYBDEhhHjo5vNSt2zuw5VNg0vWPLMGb8+TM2WzzgGb37n
- luePu92paJZ4t8fhc+C51bQBP0YyCtdfc0OkYS94Y5yjSIvG0Ls6lxWYIA4uojhZML
- lBXUfTYggysNQ==
-Date: Tue, 12 May 2026 09:43:08 -0700
+ b=mAWk2Dt7RsZrCFS9unG1nWDOKsnka8WTNpKpmGBNL8x/ti9XtrG3TdXrs6WH4e5BU
+ ltC3sh8hegMiIJhKNXwPCyaCjCxXKcN7sln8gAHEl7XoYVCpVbVRN6wW1HP9LBKZsk
+ 1YYQzisER40xRJI3oK6vUJJiQ3ONyUGUkWtGpG/aUgSSGPIlwoW4VgU6aZVdtHWQjH
+ ScW0d/Qv5EaSpNSN/yMThsRhOcOKiM7uyAHAnhvQpMYABWHMOAwl+sD0eFkON4mfxa
+ nSiVFll9RpwAK0OC8floHetUAzO/VHuZgWvupp/df9NPOhn9OB5hFCFRHSN8xqiz/w
+ MMDfyMlGmVcVw==
+Date: Tue, 12 May 2026 09:44:34 -0700
 To: Christoph Hellwig <hch@lst.de>
-Message-ID: <20260512164308.GF9555@frogsfrogsfrogs>
+Message-ID: <20260512164434.GG9555@frogsfrogsfrogs>
 References: <20260512053625.2950900-1-hch@lst.de>
- <20260512053625.2950900-6-hch@lst.de>
+ <20260512053625.2950900-7-hch@lst.de>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20260512053625.2950900-6-hch@lst.de>
+In-Reply-To: <20260512053625.2950900-7-hch@lst.de>
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
@@ -83,10 +83,9 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Tue, May 12, 2026 at 07:35:21AM +0200, Christoph Hellwig
- wrote: > Reflow setup_swap_extents so that the flag checking is not
- conditional
- on > a swap_activate method. This is currently a no-op becau [...] 
+ Content preview:  On Tue, May 12, 2026 at 07:35:22AM +0200, Christoph Hellwig
+ wrote: > Make use of the abstractions we have. This is a preparation for
+ > moving more special casing down into block/. > > Signed-off-by: C [...] 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -97,8 +96,9 @@ X-Spam-Report: Spam detection software,
  not necessarily valid
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
-X-Headers-End: 1wMqCP-00078L-Jj
-Subject: Re: [f2fs-dev] [PATCH 05/12] swap: cleanup setup_swap_extents
+X-Headers-End: 1wMqDn-0007FT-IO
+Subject: Re: [f2fs-dev] [PATCH 06/12] swap,
+ block: move the block device swapon code into block/fops.c
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -130,7 +130,7 @@ Cc: Paulo Alcantara <pc@manguebit.org>, linux-doc@vger.kernel.org,
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
-X-Rspamd-Queue-Id: 09607524F10
+X-Rspamd-Queue-Id: F22BA524F76
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [-6.61 / 15.00];
 	WHITELIST_DMARC(-7.00)[sourceforge.net:D:+];
@@ -172,67 +172,68 @@ X-Spamd-Result: default: False [-6.61 / 15.00];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	MISSING_XM_UA(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lst.de:email,lists.sourceforge.net:rdns,lists.sourceforge.net:helo,lists.sourceforge.net:dkim]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.sourceforge.net:rdns,lists.sourceforge.net:helo,lists.sourceforge.net:dkim,lst.de:email]
 X-Rspamd-Action: no action
 
-On Tue, May 12, 2026 at 07:35:21AM +0200, Christoph Hellwig wrote:
-> Reflow setup_swap_extents so that the flag checking is not conditional on
-> a swap_activate method.  This is currently a no-op because the swapoff
-> code still checks the presence of a swap_deactivate method, but it
-> simplifies adding a new check, and also makes the SWP_ACTIVATED flag
-> more consistent.
+On Tue, May 12, 2026 at 07:35:22AM +0200, Christoph Hellwig wrote:
+> Make use of the abstractions we have.  This is a preparation for
+> moving more special casing down into block/.
 > 
 > Signed-off-by: Christoph Hellwig <hch@lst.de>
-> ---
->  mm/swapfile.c | 23 +++++++++++------------
->  1 file changed, 11 insertions(+), 12 deletions(-)
-> 
-> diff --git a/mm/swapfile.c b/mm/swapfile.c
-> index 651c1b59ff9f..1b7fc03612f4 100644
-> --- a/mm/swapfile.c
-> +++ b/mm/swapfile.c
-> @@ -2783,25 +2783,24 @@ static int setup_swap_extents(struct swap_info_struct *sis,
->  {
->  	struct address_space *mapping = swap_file->f_mapping;
->  	struct inode *inode = mapping->host;
-> -	int ret;
-> +	int ret, error = 0;
 
-/me wonders why not reuse ret instead of declaring a new variable?
+Nice straightforward hoist.
+
+Reviewed-by: "Darrick J. Wong" <djwong@kernel.org>
 
 --D
 
->  
->  	if (S_ISBLK(inode->i_mode))
->  		return add_swap_extent(sis, sis->max, 0);
->  
-> -	if (swap_file->f_op->swap_activate) {
-> +	if (swap_file->f_op->swap_activate)
->  		ret = swap_file->f_op->swap_activate(swap_file, sis);
-> -		if (ret < 0)
-> -			return ret;
-> -		sis->flags |= SWP_ACTIVATED;
-> -		if ((sis->flags & SWP_FS_OPS) &&
-> -		    sio_pool_init() != 0) {
-> -			destroy_swap_extents(sis, swap_file);
-> -			return -ENOMEM;
-> -		}
-> +	else
-> +		ret = generic_swap_activate(swap_file, sis);
-> +	if (ret < 0)
->  		return ret;
-> -	}
->  
-> -	return generic_swap_activate(swap_file, sis);
-> +	sis->flags |= SWP_ACTIVATED;
-> +	if (sis->flags & SWP_FS_OPS)
-> +		error = sio_pool_init();
-> +	if (error)
-> +		destroy_swap_extents(sis, swap_file);
-> +	return error;
+> ---
+>  block/fops.c  | 6 ++++++
+>  mm/swapfile.c | 5 -----
+>  2 files changed, 6 insertions(+), 5 deletions(-)
+> 
+> diff --git a/block/fops.c b/block/fops.c
+> index bb6642b45937..453141801684 100644
+> --- a/block/fops.c
+> +++ b/block/fops.c
+> @@ -949,6 +949,11 @@ static int blkdev_mmap_prepare(struct vm_area_desc *desc)
+>  	return generic_file_mmap_prepare(desc);
 >  }
 >  
->  static void _enable_swap_info(struct swap_info_struct *si)
+> +static int blkdev_swap_activate(struct file *file, struct swap_info_struct *sis)
+> +{
+> +	return add_swap_extent(sis, sis->max, 0);
+> +}
+> +
+>  const struct file_operations def_blk_fops = {
+>  	.open		= blkdev_open,
+>  	.release	= blkdev_release,
+> @@ -965,6 +970,7 @@ const struct file_operations def_blk_fops = {
+>  	.splice_read	= filemap_splice_read,
+>  	.splice_write	= iter_file_splice_write,
+>  	.fallocate	= blkdev_fallocate,
+> +	.swap_activate	= blkdev_swap_activate,
+>  	.uring_cmd	= blkdev_uring_cmd,
+>  	.fop_flags	= FOP_BUFFER_RASYNC,
+>  };
+> diff --git a/mm/swapfile.c b/mm/swapfile.c
+> index 1b7fc03612f4..fbf11c8c5c69 100644
+> --- a/mm/swapfile.c
+> +++ b/mm/swapfile.c
+> @@ -2781,13 +2781,8 @@ EXPORT_SYMBOL_GPL(add_swap_extent);
+>  static int setup_swap_extents(struct swap_info_struct *sis,
+>  			      struct file *swap_file)
+>  {
+> -	struct address_space *mapping = swap_file->f_mapping;
+> -	struct inode *inode = mapping->host;
+>  	int ret, error = 0;
+>  
+> -	if (S_ISBLK(inode->i_mode))
+> -		return add_swap_extent(sis, sis->max, 0);
+> -
+>  	if (swap_file->f_op->swap_activate)
+>  		ret = swap_file->f_op->swap_activate(swap_file, sis);
+>  	else
 > -- 
 > 2.53.0
 > 
