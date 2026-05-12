@@ -2,78 +2,80 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id Fo1bJYi8AmrKwAEAu9opvQ
+	id +H+CI4i8AmonwAEAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
 	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 12 May 2026 07:37:12 +0200
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id B1E8E51A2ED
+	by mail.lfdr.de (Postfix) with ESMTPS id B1A9051A2EC
 	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 12 May 2026 07:37:11 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
-	Subject:MIME-Version:Message-ID:Date:To:From:Sender:Reply-To:Content-ID:
-	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
-	:Resent-Message-ID:In-Reply-To:References:List-Owner;
-	bh=ByGiSAj/aQj3L0I2rA8b40cGf1p1l/OYsivgTR0yKok=; b=JC6TVQsjROxbAihQs/5LNVdjPy
-	zsxN7oyl5QROGojmB7tWmeqQNLxA0FCOSRfPv1uVKD7N55h8uTBAoyfMPqIRwM680y0ml5H+ak0Pz
-	8AeZP++6kILxgtwA59plROUca+QVZsdjhua5qvuEtrcMVBZH6Al2wYXwlwYnDSXUti3o=;
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	Subject:MIME-Version:References:In-Reply-To:Message-ID:Date:To:From:Sender:
+	Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
+	:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
+	bh=LrWibJKKvYRgFFLcsqy5cwVJAssPhTl5Ndn0xKh0rZg=; b=ld5MKOGQVIa/MEceW58b4p7kms
+	/N/3KiPzN/Tp3lAPgllAjtCreqZG5wCvH6+3YXfKZ6iEVbynhGfU3Vo7aFDS+unN6XN+9LJX3SLd7
+	iRV8q1+ybZ6Zob5ARCK2tG1N0PtLeX+iwdXfcF6uHrjRqeB750ai/zmECNSyhaYyDOVE=;
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1wMfnk-0007Rb-Bb;
-	Tue, 12 May 2026 05:37:01 +0000
+	id 1wMfng-00030h-1w;
+	Tue, 12 May 2026 05:37:00 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95) (envelope-from
  <BATV+9f3c1ea353498f61ccd0+8297+infradead.org+hch@bombadil.srs.infradead.org>)
- id 1wMfni-0007RI-VX for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 12 May 2026 05:37:00 +0000
+ id 1wMfne-00030a-6j for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 12 May 2026 05:36:59 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
+ In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=L6G3lv4jbdMbQ4QsNCiCXE8kA9OQYRVEnsOclxNjvlk=; b=XWf9rnClI0xC2u6uscgFLa7dtO
- 4Fpi/S5NKyXTQ8CrIeMHZRgLvnB5AU8Z6Ykzwz5SVLP8MvHHJhMBoYtErGbOS27x0hvkDgIlhH4KJ
- yxyVCzC60k2sxsKS1y2xMK/7vv/+taCrggA/KDVSULSdgjMjNPD0e5lzMDaN0my7PTQU=;
+ bh=n899WPhwIZ+KymzRJYJT56SoCbIK1OLetz93e2eg8Xs=; b=D6JdYkDcW6rC8Hu2mvjpdv0HhL
+ O0RYf+wiyQlBZLEl9l3RzMLTFzGcUviUigY85UEwN61Nq9VuNyKykWClhPjM6C2W7q34cnT+3TjTi
+ Bp+qKVxx5O3qkIBSHXFEMcBclMF260i8TEsj/R8/aJeK9t6GrQM6UPNHO25Q4aXXtky8=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=L6G3lv4jbdMbQ4QsNCiCXE8kA9OQYRVEnsOclxNjvlk=; b=A
- ocuRveuJeKsIFh6+weckrzlDoJHiTPD2Z5ZdNyXovbBua8QvNgUjzJOIx0CRbvn+iKDNN6KwnOyY0
- MYU/0JxKc1b3/LdKyDQRJGeJkowPkYshmA5et2mGGZvL0f9jT7601cOlaoBqWzdMax4KJn8oQIucj
- W9l+bb6X5ZVV+qb0=;
+ h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=n899WPhwIZ+KymzRJYJT56SoCbIK1OLetz93e2eg8Xs=; b=S+L+O5jXoMZD/RX7PBS5ramwn1
+ xMjaJNpYS0CseoiTgH1GXPtmXZ5YglqP9x7Rj+0wJuYxW0zH3g00dd8iEdYvMwcidKGeUCjBZZ5Qf
+ v2UFyHSUvwou3TiVtRbNYNSujAk6uiSAi1jx7oTqdBt4aZTvQyIZd4Fj4+brOpsCtNcY=;
 Received: from bombadil.infradead.org ([198.137.202.133])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1wMfne-0004nW-Lo for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 12 May 2026 05:37:00 +0000
+ id 1wMfnc-0004nM-Dp for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 12 May 2026 05:36:58 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
- MIME-Version:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
- Content-ID:Content-Description:In-Reply-To:References;
- bh=L6G3lv4jbdMbQ4QsNCiCXE8kA9OQYRVEnsOclxNjvlk=; b=KIK+jQvSnKRXIFRrePcKSt8tSC
- gTDIoVa3ilaBJgAv2JyiBq1oBQNEEVuR8cAKQZACHFbXeQgzOq5bCCS43yMoo3rZpQpygSiDzL+5p
- k8ewxMk5abPknkbI0BLQkk18U//bp1Se74dgd8ytTOIwgIqIRD8+j0upZnmtm9RP/nG0Iay4iv5BI
- 0R0Ux2iGn5C8GSW0QkgvHRpchKQA0HU/3surCqZ+w6g1XBcpaQIEofBGAUjsWIOw9fW5TdRUHOoZH
- pIElcotsE4NXj4I4GC6C78nmVfU4K8GqhWK2VIAj1M/0+2fkttDIMP1Vqdy9WFOxCQtHvlSJJWz7z
- NqzmFnXw==;
+ MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender
+ :Reply-To:Content-Type:Content-ID:Content-Description;
+ bh=n899WPhwIZ+KymzRJYJT56SoCbIK1OLetz93e2eg8Xs=; b=WpIBIsdBq0sBt+PNrgh3yLlis7
+ 6qDcTGTooMfAWemyiheQrD2xqLTMjj9shCEExwkg8sQgrypWxqhtXB8NtwvKzCDQGLh7arQSgqpRS
+ vp6OO9kpk5BFFrHwqKH1Aq14wFz9j/vt9QTrmrWM0n4dMrCEk29dM2vGLGoosLHWnkBGEe9RJodgS
+ L0ZAgsUHOLJSoH4Ls+ioKqJlrBZzoHbAPhWU8PgVPfiV57u10K8gCsAriG2aj5XIquIS/COy+I0+w
+ 6sdAMS4yE6R/qIihIut2DLnwPcK/zKF4yCW9j30M1/q5xrO+zrpDcmTnG0PoO2MhHGS5rQ+OSAcBD
+ i4G4GVUA==;
 Received: from
  2a02-8389-2341-5b80-decc-1a96-daaa-a2cc.cable.dynamic.v6.surfer.at
  ([2a02:8389:2341:5b80:decc:1a96:daaa:a2cc] helo=localhost)
  by bombadil.infradead.org with esmtpsa (Exim 4.99.1 #2 (Red Hat Linux))
- id 1wMfnF-0000000FfDa-0NfM; Tue, 12 May 2026 05:36:33 +0000
+ id 1wMfnN-0000000FfF1-0DCt; Tue, 12 May 2026 05:36:41 +0000
 From: Christoph Hellwig <hch@lst.de>
 To: Andrew Morton <akpm@linux-foundation.org>, Chris Li <chrisl@kernel.org>,
  Kairui Song <kasong@tencent.com>
-Date: Tue, 12 May 2026 07:35:16 +0200
-Message-ID: <20260512053625.2950900-1-hch@lst.de>
+Date: Tue, 12 May 2026 07:35:17 +0200
+Message-ID: <20260512053625.2950900-2-hch@lst.de>
 X-Mailer: git-send-email 2.53.0
+In-Reply-To: <20260512053625.2950900-1-hch@lst.de>
+References: <20260512053625.2950900-1-hch@lst.de>
 MIME-Version: 1.0
 X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by
  bombadil.infradead.org. See http://www.infradead.org/rpr.html
@@ -84,9 +86,12 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Hi all, Darrick recently posted iomap support for fuse-iomap,
- which was trivial but a bit ugly, which triggered me into looking how this
- could be done in a cleaner way. The result of that is this fairly big s [...]
+ Content preview: Always use si->max which is updated setup_swap_extents
+ instead
+ of copying into and out of maxpages. Signed-off-by: Christoph Hellwig
+ <hch@lst.de>
+ --- mm/swapfile.c | 27 +++++++++++ 1 file changed, 11 insertions(+),
+ 16 deletions(-)
  Content analysis details:   (0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -95,8 +100,9 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.2 HEADER_FROM_DIFFERENT_DOMAINS From and EnvelopeFrom 2nd level mail
  domains are different
-X-Headers-End: 1wMfne-0004nW-Lo
-Subject: [f2fs-dev] improve the swap_activate interface
+X-Headers-End: 1wMfnc-0004nM-Dp
+Subject: [f2fs-dev] [PATCH 01/12] swap: remove the maxpages variable in
+ sys_swapon
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -124,7 +130,7 @@ Cc: Paulo Alcantara <pc@manguebit.org>, linux-doc@vger.kernel.org,
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
-X-Rspamd-Queue-Id: B1E8E51A2ED
+X-Rspamd-Queue-Id: B1A9051A2EC
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [1.49 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
@@ -151,7 +157,7 @@ X-Spamd-Result: default: False [1.49 / 15.00];
 	FROM_NEQ_ENVFROM(0.00)[hch@lst.de,linux-f2fs-devel-bounces@lists.sourceforge.net];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	TAGGED_RCPT(0.00)[linux-f2fs-devel];
-	NEURAL_HAM(-0.00)[-0.999];
+	NEURAL_HAM(-0.00)[-1.000];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
@@ -160,56 +166,116 @@ X-Spamd-Result: default: False [1.49 / 15.00];
 	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
 	TO_DN_SOME(0.00)[];
 	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,infradead.org:-];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lst.de:mid]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[lst.de:email,lst.de:mid]
 X-Rspamd-Action: no action
 
-Hi all,
+Always use si->max which is updated setup_swap_extents instead of copying
+into and out of maxpages.
 
-Darrick recently posted iomap support for fuse-iomap, which was trivial
-but a bit ugly, which triggered me into looking how this could be done
-in a cleaner way.  The result of that is this fairly big series that
-reworks how the MM code calls into the file system to activate swap
-files to make it much cleaner and easier to use.
+Signed-off-by: Christoph Hellwig <hch@lst.de>
+---
+ mm/swapfile.c | 27 +++++++++++----------------
+ 1 file changed, 11 insertions(+), 16 deletions(-)
 
-I've tested this with swap devices manually, and using the swap tests
-in xfstests on btrfs, ext3, ext4, f2fs and xfs to exercise the different
-implementation.  Out of those all passed, but f2fs actually notruns all
-tests even in the baseline as it requires special preparation for
-swapfiles which never got wired up in xfstests.
+diff --git a/mm/swapfile.c b/mm/swapfile.c
+index 9174f1eeffb0..f7ebd97e28a3 100644
+--- a/mm/swapfile.c
++++ b/mm/swapfile.c
+@@ -3350,10 +3350,9 @@ static unsigned long read_swap_header(struct swap_info_struct *si,
+ }
+ 
+ static int setup_swap_clusters_info(struct swap_info_struct *si,
+-				    union swap_header *swap_header,
+-				    unsigned long maxpages)
++				    union swap_header *swap_header)
+ {
+-	unsigned long nr_clusters = DIV_ROUND_UP(maxpages, SWAPFILE_CLUSTER);
++	unsigned long nr_clusters = DIV_ROUND_UP(si->max, SWAPFILE_CLUSTER);
+ 	struct swap_cluster_info *cluster_info;
+ 	int err = -ENOMEM;
+ 	unsigned long i;
+@@ -3395,7 +3394,7 @@ static int setup_swap_clusters_info(struct swap_info_struct *si,
+ 		if (err)
+ 			goto err;
+ 	}
+-	for (i = maxpages; i < round_up(maxpages, SWAPFILE_CLUSTER); i++) {
++	for (i = si->max; i < round_up(si->max, SWAPFILE_CLUSTER); i++) {
+ 		err = swap_cluster_setup_bad_slot(si, cluster_info, i, true);
+ 		if (err)
+ 			goto err;
+@@ -3425,7 +3424,7 @@ static int setup_swap_clusters_info(struct swap_info_struct *si,
+ 	si->cluster_info = cluster_info;
+ 	return 0;
+ err:
+-	free_swap_cluster_info(cluster_info, maxpages);
++	free_swap_cluster_info(cluster_info, si->max);
+ 	return err;
+ }
+ 
+@@ -3440,7 +3439,6 @@ SYSCALL_DEFINE2(swapon, const char __user *, specialfile, int, swap_flags)
+ 	union swap_header *swap_header;
+ 	int nr_extents;
+ 	sector_t span;
+-	unsigned long maxpages;
+ 	struct folio *folio = NULL;
+ 	struct inode *inode = NULL;
+ 	bool inced_nr_rotate_swap = false;
+@@ -3512,14 +3510,13 @@ SYSCALL_DEFINE2(swapon, const char __user *, specialfile, int, swap_flags)
+ 	}
+ 	swap_header = kmap_local_folio(folio, 0);
+ 
+-	maxpages = read_swap_header(si, swap_header, inode);
+-	if (unlikely(!maxpages)) {
++	si->max = read_swap_header(si, swap_header, inode);
++	if (unlikely(!si->max)) {
+ 		error = -EINVAL;
+ 		goto bad_swap_unlock_inode;
+ 	}
+ 
+-	si->max = maxpages;
+-	si->pages = maxpages - 1;
++	si->pages = si->max - 1;
+ 	nr_extents = setup_swap_extents(si, swap_file, &span);
+ 	if (nr_extents < 0) {
+ 		error = nr_extents;
+@@ -3531,14 +3528,12 @@ SYSCALL_DEFINE2(swapon, const char __user *, specialfile, int, swap_flags)
+ 		goto bad_swap_unlock_inode;
+ 	}
+ 
+-	maxpages = si->max;
+-
+ 	/* Set up the swap cluster info */
+-	error = setup_swap_clusters_info(si, swap_header, maxpages);
++	error = setup_swap_clusters_info(si, swap_header);
+ 	if (error)
+ 		goto bad_swap_unlock_inode;
+ 
+-	error = swap_cgroup_swapon(si->type, maxpages);
++	error = swap_cgroup_swapon(si->type, si->max);
+ 	if (error)
+ 		goto bad_swap_unlock_inode;
+ 
+@@ -3546,7 +3541,7 @@ SYSCALL_DEFINE2(swapon, const char __user *, specialfile, int, swap_flags)
+ 	 * Use kvmalloc_array instead of bitmap_zalloc as the allocation order might
+ 	 * be above MAX_PAGE_ORDER incase of a large swap file.
+ 	 */
+-	si->zeromap = kvmalloc_array(BITS_TO_LONGS(maxpages), sizeof(long),
++	si->zeromap = kvmalloc_array(BITS_TO_LONGS(si->max), sizeof(long),
+ 				     GFP_KERNEL | __GFP_ZERO);
+ 	if (!si->zeromap) {
+ 		error = -ENOMEM;
+@@ -3597,7 +3592,7 @@ SYSCALL_DEFINE2(swapon, const char __user *, specialfile, int, swap_flags)
+ 		}
+ 	}
+ 
+-	error = zswap_swapon(si->type, maxpages);
++	error = zswap_swapon(si->type, si->max);
+ 	if (error)
+ 		goto bad_swap_unlock_inode;
+ 
+-- 
+2.53.0
 
-Diffstat:
- Documentation/filesystems/iomap/operations.rst |    3 
- Documentation/filesystems/locking.rst          |   35 +--
- Documentation/filesystems/vfs.rst              |   40 ++--
- block/fops.c                                   |   15 +
- fs/btrfs/btrfs_inode.h                         |    3 
- fs/btrfs/file.c                                |    4 
- fs/btrfs/inode.c                               |   72 -------
- fs/ext4/file.c                                 |    6 
- fs/ext4/inode.c                                |   11 -
- fs/f2fs/data.c                                 |   50 -----
- fs/f2fs/f2fs.h                                 |    2 
- fs/f2fs/file.c                                 |    4 
- fs/iomap/swapfile.c                            |  165 +++---------------
- fs/nfs/direct.c                                |    1 
- fs/nfs/file.c                                  |   21 --
- fs/nfs/nfs4file.c                              |    3 
- fs/ntfs/aops.c                                 |    8 
- fs/ntfs/file.c                                 |    6 
- fs/smb/client/cifsfs.c                         |   18 +
- fs/smb/client/cifsfs.h                         |    3 
- fs/smb/client/file.c                           |   16 -
- fs/xfs/xfs_aops.c                              |   48 -----
- fs/xfs/xfs_file.c                              |   39 ++++
- fs/zonefs/file.c                               |   30 +--
- include/linux/fs.h                             |   11 -
- include/linux/iomap.h                          |    5 
- include/linux/nfs_fs.h                         |    3 
- include/linux/swap.h                           |  129 +-------------
- mm/page_io.c                                   |   45 ----
- mm/swap.h                                      |   92 ++++++++++
- mm/swapfile.c                                  |  227 ++++++++++++++-----------
- 31 files changed, 471 insertions(+), 644 deletions(-)
 
 
 _______________________________________________
