@@ -2,42 +2,42 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id oLgyLqK8AmrKwAEAu9opvQ
+	id +ENjFaq8AmrKwAEAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 12 May 2026 07:37:38 +0200
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 12 May 2026 07:37:46 +0200
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5B12751A35D
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 12 May 2026 07:37:38 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C718751A365
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 12 May 2026 07:37:45 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
 	Subject:MIME-Version:References:In-Reply-To:Message-ID:Date:To:From:Sender:
 	Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
 	:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=5AuSp6hiU49hXSd80A+AtHyHLQ05rlzA/gRX8v3MNU4=; b=ZSUa18FCYdVyF2VIZW6AYEYpPc
-	k4PR6khd3L+fAdJZfP/EDQNwyWzBgt4q/NMZNveRfcWe9oaoN75IOMBDRadCFqnQMCIu/gmabHC3W
-	D7Gn6+lo2N633J/vJsdSMwtFdGVEAqZU1JQ5D0XNmsWaO6xSgPJW4vO5T3D60zvUWp1E=;
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=ZDNBN8/Zr38fQe4o0BmH3BMtr2S/zx6FY6hBPjewtEA=; b=EMhnER+e9kC5qnF7LnpQw3WuNw
+	0enXNGOT1cWkGC+i4ZFHbjsNeuvkc9RgkC9mPBcmoDHCay2hRRBjxkEF+ql0uUDD95B2bGPCelMHh
+	4bJj8QzdsoUs7aK72M+L26T4S5nTxajdb3B948ge5YJM2qZYMEex9qyA7c0GxqmUFNoA=;
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1wMfoH-0007vv-22;
-	Tue, 12 May 2026 05:37:37 +0000
+	id 1wMfoN-00032q-Oy;
+	Tue, 12 May 2026 05:37:44 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95) (envelope-from
  <BATV+9f3c1ea353498f61ccd0+8297+infradead.org+hch@bombadil.srs.infradead.org>)
- id 1wMfoF-0007vm-JY for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 12 May 2026 05:37:35 +0000
+ id 1wMfoL-00032k-U6 for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 12 May 2026 05:37:42 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=/e1E43Aw8DTZbb0PWgWlLEg76+pOp+WQ5laY13dT/AY=; b=fviQLTka0/TdD58W+nWq73Tzxr
- rZ2LBqujQxvLbT7yAvxyNuJQoUaC4NOb+eBp5T8NrYOQc6QCVf/KM5hn7qQ1WGOEBkDCqtcM1MjcJ
- aXMSteKa0znlRqTW1vHHHaWH1926d5pJK4FeGsKPMbQKLXyuGROh99CThppUGza3fpFI=;
+ bh=GNG6f/qsobCnQrMhBOENN8KDFhS7LUQniOJgelpzd6g=; b=lBCpFlGr8lS4DpkxSqnZbI7X33
+ z/IUtkJeZlldTUCVHWB3yadGSfagrFydSHODOrBvfivzVawH0V7Z0c6Q2BLL0ym0SmooRruZJzq0z
+ IbcBMlkkZPZJ1ZsF08U8WPZRJcbmnhkzvS9HhMFabc1QsqVWhw/NbrmUfeC7vMxnn62E=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:
@@ -45,34 +45,34 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=/e1E43Aw8DTZbb0PWgWlLEg76+pOp+WQ5laY13dT/AY=; b=Kt62CTXqSYkyUOiUbkUQ7KJK3c
- dNm1/hbLRhr2oXWkOviAJcpkARMTpo/QKQGhEr4WijSklb571FFO2oe0HIdmbXP3c2+Tuqi7EcTiA
- cWnJzNIbz211zvR7rb+cw+IDdLpHd8wImw0UHa/hLcTxMikKshjRcOxBRln2ZBFQM5bM=;
+ bh=GNG6f/qsobCnQrMhBOENN8KDFhS7LUQniOJgelpzd6g=; b=JS1lc4trwSAmTLCN84Nn8ZAEyE
+ yUUqvx0QtFPfeYgJc4JHuOGccOFLGthfUN/YVK6MYAQtTxfkLcLn3CRJTi4gKvz2i5DthSK4kgljj
+ CP20alOBRPUGc0iINqwMBcWjoNXQCWfwabv2mSZHY8qxTPhO8p1iYRNRELyKvDbTJ1v4=;
 Received: from bombadil.infradead.org ([198.137.202.133])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1wMfoD-0004qB-Ox for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 12 May 2026 05:37:35 +0000
+ id 1wMfoK-0004qe-Qp for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 12 May 2026 05:37:42 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
  MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender
  :Reply-To:Content-Type:Content-ID:Content-Description;
- bh=/e1E43Aw8DTZbb0PWgWlLEg76+pOp+WQ5laY13dT/AY=; b=y18jNN6IPZlAJzD9Y2fqbDV5I5
- t70jJrjHcSzL6K2knltP7wGbdjaIIuebiXhzNNCkcG+TLWtCjasTBkVdIyDBJPH7qVtppi1Fon0/0
- D3YfBN/M4uLOPTU6ZZ/Acm4ajvvztkJ12cvkz9SgK99YpZkHkU8u7N0mI63biJ5dye+9DgbDNQ5DC
- dagBVq3ZLbxhntKH6bFTm/9bdWz4oWSJNz8PFJpzqmFN+krxQpbSd4hNsgM3ardXVB8DmstwokTGd
- c9RKK2S6TJNMY4e0fhrn8HP1lGValwj8cZabS4qvNOPa3s8r3rd4r/Vdf2NtDTYPDX4p53/9swG+5
- RMk1SW8A==;
+ bh=GNG6f/qsobCnQrMhBOENN8KDFhS7LUQniOJgelpzd6g=; b=T+9tuwEeXC5tQgcpvWKYfuq6Ar
+ uKkEDYS0He1n12AYyubbJb1pKFwP0d0egx+o3zSlEHg33Z+uNrYMplMAd1fCjYcVjBidd1n34L8DK
+ yofO+zJRzWIbLRHqeLst7TRdnMK1aRDpYTT0iIQ6IIOy6TBzDn6JFvcDscaBZdLTC1OsW2eOjm3YW
+ EFb1C3k0vinDbZ33FIm1eb3PLLRF4xxvmFXprvKiBggk5QgqvmIOvXvpsL8EgCQV8IL6Xkdfigr9F
+ zwHZAG0Q/JdYvWqG+ejmLyrFHsg1w1ZB6VSHKa4nxK61Ndh02jSbtEK//PKZzbVyiFuzG30kwk7vc
+ Bah3mVQg==;
 Received: from
  2a02-8389-2341-5b80-decc-1a96-daaa-a2cc.cable.dynamic.v6.surfer.at
  ([2a02:8389:2341:5b80:decc:1a96:daaa:a2cc] helo=localhost)
  by bombadil.infradead.org with esmtpsa (Exim 4.99.1 #2 (Red Hat Linux))
- id 1wMfnz-0000000FfNY-1SOX; Tue, 12 May 2026 05:37:19 +0000
+ id 1wMfo6-0000000FfOs-3Cda; Tue, 12 May 2026 05:37:27 +0000
 From: Christoph Hellwig <hch@lst.de>
 To: Andrew Morton <akpm@linux-foundation.org>, Chris Li <chrisl@kernel.org>,
  Kairui Song <kasong@tencent.com>
-Date: Tue, 12 May 2026 07:35:22 +0200
-Message-ID: <20260512053625.2950900-7-hch@lst.de>
+Date: Tue, 12 May 2026 07:35:23 +0200
+Message-ID: <20260512053625.2950900-8-hch@lst.de>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20260512053625.2950900-1-hch@lst.de>
 References: <20260512053625.2950900-1-hch@lst.de>
@@ -81,15 +81,15 @@ X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by
  bombadil.infradead.org. See http://www.infradead.org/rpr.html
 X-Spam-Score: 0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: Make use of the abstractions we have. This is a preparation
- for moving more special casing down into block/. Signed-off-by: Christoph
- Hellwig <hch@lst.de> --- block/fops.c | 6 ++++++ mm/swapfile.c | 5 -----
- 2 files changed, 6 insertions(+), 5 deletions(-) 
+ Content preview: Don't blindly pass the value from the swap header to
+ swap_add_extent, 
+ but instead the device size rounded down to page granularity. This activated
+ the sanity checking in the core code that catches a t [...] 
  Content analysis details:   (0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -98,9 +98,9 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.2 HEADER_FROM_DIFFERENT_DOMAINS From and EnvelopeFrom 2nd level mail
  domains are different
-X-Headers-End: 1wMfoD-0004qB-Ox
-Subject: [f2fs-dev] [PATCH 06/12] swap,
- block: move the block device swapon code into block/fops.c
+X-Headers-End: 1wMfoK-0004qe-Qp
+Subject: [f2fs-dev] [PATCH 07/12] swap,
+ block: limit swap file size to device size
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -128,7 +128,7 @@ Cc: Paulo Alcantara <pc@manguebit.org>, linux-doc@vger.kernel.org,
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
-X-Rspamd-Queue-Id: 5B12751A35D
+X-Rspamd-Queue-Id: C718751A365
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [1.49 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
@@ -164,60 +164,34 @@ X-Spamd-Result: default: False [1.49 / 15.00];
 	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
 	TO_DN_SOME(0.00)[];
 	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,infradead.org:-];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lst.de:email,lst.de:mid]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[lst.de:email,lst.de:mid,lists.sourceforge.net:rdns,lists.sourceforge.net:helo,lists.sourceforge.net:dkim]
 X-Rspamd-Action: no action
 
-Make use of the abstractions we have.  This is a preparation for
-moving more special casing down into block/.
+Don't blindly pass the value from the swap header to swap_add_extent,
+but instead the device size rounded down to page granularity.  This
+activated the sanity checking in the core code that catches a too large
+value in the swap header.
 
 Signed-off-by: Christoph Hellwig <hch@lst.de>
 ---
- block/fops.c  | 6 ++++++
- mm/swapfile.c | 5 -----
- 2 files changed, 6 insertions(+), 5 deletions(-)
+ block/fops.c | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
 diff --git a/block/fops.c b/block/fops.c
-index bb6642b45937..453141801684 100644
+index 453141801684..067e46299666 100644
 --- a/block/fops.c
 +++ b/block/fops.c
-@@ -949,6 +949,11 @@ static int blkdev_mmap_prepare(struct vm_area_desc *desc)
- 	return generic_file_mmap_prepare(desc);
+@@ -951,7 +951,9 @@ static int blkdev_mmap_prepare(struct vm_area_desc *desc)
+ 
+ static int blkdev_swap_activate(struct file *file, struct swap_info_struct *sis)
+ {
+-	return add_swap_extent(sis, sis->max, 0);
++	loff_t isize = i_size_read(bdev_file_inode(file));
++
++	return add_swap_extent(sis, div_u64(isize, PAGE_SIZE), 0);
  }
  
-+static int blkdev_swap_activate(struct file *file, struct swap_info_struct *sis)
-+{
-+	return add_swap_extent(sis, sis->max, 0);
-+}
-+
  const struct file_operations def_blk_fops = {
- 	.open		= blkdev_open,
- 	.release	= blkdev_release,
-@@ -965,6 +970,7 @@ const struct file_operations def_blk_fops = {
- 	.splice_read	= filemap_splice_read,
- 	.splice_write	= iter_file_splice_write,
- 	.fallocate	= blkdev_fallocate,
-+	.swap_activate	= blkdev_swap_activate,
- 	.uring_cmd	= blkdev_uring_cmd,
- 	.fop_flags	= FOP_BUFFER_RASYNC,
- };
-diff --git a/mm/swapfile.c b/mm/swapfile.c
-index 1b7fc03612f4..fbf11c8c5c69 100644
---- a/mm/swapfile.c
-+++ b/mm/swapfile.c
-@@ -2781,13 +2781,8 @@ EXPORT_SYMBOL_GPL(add_swap_extent);
- static int setup_swap_extents(struct swap_info_struct *sis,
- 			      struct file *swap_file)
- {
--	struct address_space *mapping = swap_file->f_mapping;
--	struct inode *inode = mapping->host;
- 	int ret, error = 0;
- 
--	if (S_ISBLK(inode->i_mode))
--		return add_swap_extent(sis, sis->max, 0);
--
- 	if (swap_file->f_op->swap_activate)
- 		ret = swap_file->f_op->swap_activate(swap_file, sis);
- 	else
 -- 
 2.53.0
 
