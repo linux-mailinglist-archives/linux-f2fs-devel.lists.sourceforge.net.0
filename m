@@ -2,42 +2,42 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 8DX9Me5eA2qE5QEAu9opvQ
+	id 2HzAIS5fA2r65QEAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 12 May 2026 19:10:06 +0200
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 12 May 2026 19:11:10 +0200
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 52D425257B1
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 12 May 2026 19:10:05 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id CCD5A525840
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 12 May 2026 19:11:09 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
 	List-Unsubscribe:List-Id:Subject:In-Reply-To:MIME-Version:References:
 	Message-ID:To:Date:Sender:Content-ID:Content-Description:Resent-Date:
 	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=xa82BhO2oME5M2SP+mq3az6CWc/PZ9LL3vmCNufVpF4=; b=hGzH8M87xVp3H6iBFs0/VZPIBP
-	YtyVe2t8uTZv72nMXRBYpBHwj2Zxi8LmHITT6K/AzYB+MkEwl80SvLngt9WXk4l0T1hN2R3lijEWG
-	S8GTfHbLCM1KTnNQR2TiUSn6IPnnzQKb6VB9xKbWy49vw8pPbvxG9o1SCuh8DVuqwjdg=;
+	bh=65+MLmzfDsmcCLoCRAb8QWh+OqwsYhzwhIWVKWQrWXg=; b=Qjd98j4jltzOj30eRreWcMfcHP
+	P0njU2SDCokCk+SXdZ5iJmb8WomLxaPHxhO5cvuasA32sVacCRnZ9SfwfadyDc/LaSQUs5eF15zkI
+	1e5Hh/QjktAM+KOJw1pw0wtQVcH3Gj0pjqI6FBiKW4n9G3GO/mJYnY5koeOT52zcWz0Y=;
 Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
 	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1wMqcN-00029C-LC;
-	Tue, 12 May 2026 17:10:04 +0000
+	id 1wMqdL-0002Cc-2S;
+	Tue, 12 May 2026 17:11:03 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
  by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <djwong@kernel.org>) id 1wMqcL-000294-HP
+ (envelope-from <djwong@kernel.org>) id 1wMqd7-0002Bk-JE
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 12 May 2026 17:10:02 +0000
+ Tue, 12 May 2026 17:10:50 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=CQElBpLn1nS3xLhKLyy0LAuDhAI6VScuxHNo4Sy5ycU=; b=dsBEV+ZPq9qROgqWHbpXMNaZuh
- Jn05dxL+CUiR2ip8pkWKyGCt6hC0/JZat+V8KF/4CiTjaw8mkRYcGx5ZgNYmrsuULk4XJjKKjeTLp
- MMq7AaJqfr+2WQ/QNo+20wT38KQCofRzqU+hQ+oFQZBp/Xz15C0eBkTi8tpUvwSySGvo=;
+ bh=dn/UrQGwZJz6vHIUSDxlVTi6FsHF4b+UsK/Rmus24Sc=; b=AzsIj2DetKYNTrAclBwQW7DYqA
+ GcftaDNlOJRaOffCVZMkLWK0RRhqytscxzB2+ckHLFzBFjGrHSpUjM9DPw11T9isrE0UEKKrOzgvi
+ zPUZ88PNpjYzMFU4LK9FC4uKrol4D2V2IiFN1cHvivk0LDnShKkqfWRAbkRot59DVQtg=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -45,37 +45,37 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=CQElBpLn1nS3xLhKLyy0LAuDhAI6VScuxHNo4Sy5ycU=; b=AWvf2ih9P41kQH/Ugeqw120Giv
- 1watgvf1+4QSZrN7pYdM97K3MDehyvshYkIzK2rd3TQNZD/bUA48Ihkjcb0r868gmAv9IaQ15s2Ot
- tUA8w993hcQhpez9Iv2Nt8Ohc4FKMluOk6/W7FwxtfMIDukSKTKFuQRJwZnUXYfpBJXs=;
+ bh=dn/UrQGwZJz6vHIUSDxlVTi6FsHF4b+UsK/Rmus24Sc=; b=Iq4YyVCKUeM9m/N9l/oRZLp7Ez
+ yR7wWxhpqnFef4T6Dlsoq+y61vr6VZYWvepMl2P72Prx7Q5TsbusQYDZwwHWBGo59Su5XMYEZvf3N
+ PK8l6Koz8Yn3kJNvi8aCgygtfe+vsnUkf6Y4aWmcratgeNzu9dtduw3p/f0pOJj4CcOs=;
 Received: from sea.source.kernel.org ([172.234.252.31])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1wMqcK-0000d6-MT for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 12 May 2026 17:10:01 +0000
+ id 1wMqcx-0000hw-Bz for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 12 May 2026 17:10:42 +0000
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id DCF464191B;
- Tue, 12 May 2026 17:09:55 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id AD890C2BCC7;
- Tue, 12 May 2026 17:09:55 +0000 (UTC)
+ by sea.source.kernel.org (Postfix) with ESMTP id 6B6444170F;
+ Tue, 12 May 2026 17:10:29 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3BEBEC2BCB0;
+ Tue, 12 May 2026 17:10:29 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1778605795;
- bh=3aHXpzD86WhvrwXcIwdK9qFl/6Uw/9X6ePBZAS123EQ=;
+ s=k20201202; t=1778605829;
+ bh=UIMc6Epq1jKVpYoN8NQkrsbH35Z/rxkSt0+cjObPXEg=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=RxFaNE5wPAV876f9BvjR4wqLnwTIKIo7fOPGapy+ipTeWdy0jpxo8hQ2Ri0GGHmrp
- CqEc/osq1V/20la7b58M49nDmb9ZDPQ1HRb652DRaiRlrgV68syhNYSwQ7oTHrZcE6
- e3va7ElR0K9PdL8DhzMxSzWHChNELJn1/XKK6AOCxoD6uzKfeHErjVWG/d7wnQJObm
- qV6eLTMTIGPO9wJvaDH523pfBAeOI6zjjN0aAdpxBGGOZXqoEOYhYlGqvV2ZUbFiua
- kABUvY5GndwreOZSc90aCC87nHpz2HeFvQqE+CWvH5k/2Gj9vksO/G6bmHaKnlQRkP
- sADrDRhCj51HQ==
-Date: Tue, 12 May 2026 10:09:55 -0700
+ b=cwQyUKQ7/ehswE6htqBY9YS5WZtrPNKyBqWQCvZt3MGoMAZl38WrdS4VCCUoTtce5
+ 3HXiMl5gnt6E8BE0Wlgn1JAAx+a721k2CiMTFjCC1q/33PgDsydSqQVOEZ0c/aEcPh
+ qqMPItxUFu2pzF96J9wTatigpI1eNoG4appb93SUembefpNXfS+dQ3jx5Zjo7T9pg+
+ Mru+31A2ZvAy//NyZ0pamvIuUJ6MRZj/QrOw+oPtdc5YksLDWF2zrWsZK+3k4Y36/N
+ kUKgR6D21j3nHYHX3zYVq674GjpOqIAusFNnu8t7U2Rep60jDIv6s7wrNPKcxawCYO
+ 7JJLf2m6C5FqQ==
+Date: Tue, 12 May 2026 10:10:28 -0700
 To: Christoph Hellwig <hch@lst.de>
-Message-ID: <20260512170955.GL9555@frogsfrogsfrogs>
+Message-ID: <20260512171028.GM9555@frogsfrogsfrogs>
 References: <20260512053625.2950900-1-hch@lst.de>
- <20260512053625.2950900-12-hch@lst.de>
+ <20260512053625.2950900-13-hch@lst.de>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20260512053625.2950900-12-hch@lst.de>
+In-Reply-To: <20260512053625.2950900-13-hch@lst.de>
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
@@ -83,10 +83,10 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Tue, May 12, 2026 at 07:35:27AM +0200, Christoph Hellwig
- wrote: > struct swap_extent is only used inside of mm/swapfile.c, so move
- it > there. > > Signed-off-by: Christoph Hellwig <hch@lst.de> Woo, information
- hiding! Reviewed-by: "Darrick J. Wong" <djwong@kernel.org> 
+ Content preview:  On Tue, May 12, 2026 at 07:35:28AM +0200, Christoph Hellwig
+ wrote: > swap_info_struct is now internal to the MM subsystem, so remove
+ it from > the public header. > Even more cleaning out of swap.h is nice, so
+ Reviewed-by: "Darrick J. Wong" <djwong@kernel.org> 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -97,9 +97,9 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-X-Headers-End: 1wMqcK-0000d6-MT
-Subject: Re: [f2fs-dev] [PATCH 11/12] swap: move struct swap_extent to
- swapfile.c
+X-Headers-End: 1wMqcx-0000hw-Bz
+Subject: Re: [f2fs-dev] [PATCH 12/12] swap: move swap_info_struct to
+ mm/swap.h
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -131,32 +131,32 @@ Cc: Paulo Alcantara <pc@manguebit.org>, linux-doc@vger.kernel.org,
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
-X-Rspamd-Queue-Id: 52D425257B1
+X-Rspamd-Queue-Id: CCD5A525840
 X-Rspamd-Server: lfdr
 X-Spamd-Result: default: False [-6.61 / 15.00];
 	WHITELIST_DMARC(-7.00)[sourceforge.net:D:+];
 	SUSPICIOUS_RECIPS(1.50)[];
-	DMARC_POLICY_ALLOW_WITH_FAILURES(-0.50)[];
 	MID_RHS_NOT_FQDN(0.50)[];
+	DMARC_POLICY_ALLOW_WITH_FAILURES(-0.50)[];
 	RWL_MAILSPIKE_EXCELLENT(-0.40)[216.105.38.7:from];
-	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
 	MAILLIST(-0.20)[mailman];
+	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
 	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7:c];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	DKIM_MIXED(0.00)[];
-	RCVD_TLS_LAST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[28];
-	DMARC_POLICY_ALLOW(0.00)[lists.sourceforge.net,none];
-	TO_DN_SOME(0.00)[];
-	FORGED_SENDER(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
 	MIME_TRACE(0.00)[0:+];
-	FORGED_RECIPIENTS(0.00)[m:hch@lst.de,m:pc@manguebit.org,m:linux-doc@vger.kernel.org,m:cem@kernel.org,m:hyc.lee@gmail.com,m:linux-mm@kvack.org,m:naohiro.aota@wdc.com,m:linux-xfs@vger.kernel.org,m:linux-ext4@vger.kernel.org,m:linkinjeon@kernel.org,m:chrisl@kernel.org,m:linux-nfs@vger.kernel.org,m:linux-block@vger.kernel.org,m:dlemoal@kernel.org,m:dsterba@suse.com,m:jaegeuk@kernel.org,m:axboe@kernel.dk,m:brauner@kernel.org,m:kasong@tencent.com,m:tytso@mit.edu,m:linux-cifs@vger.kernel.org,m:linux-f2fs-devel@lists.sourceforge.net,m:sfrench@samba.org,m:linux-btrfs@vger.kernel.org,m:anna@kernel.org,m:linux-fsdevel@vger.kernel.org,m:akpm@linux-foundation.org,m:trondmy@kernel.org,m:hyclee@gmail.com,s:lists@lfdr.de];
-	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,kernel.org:s=k20201202];
+	RCVD_TLS_LAST(0.00)[];
+	TO_DN_SOME(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[28];
 	RECEIVED_HELO_LOCALHOST(0.00)[];
-	ARC_NA(0.00)[];
+	DKIM_MIXED(0.00)[];
 	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
+	FORGED_SENDER(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
+	FORGED_RECIPIENTS(0.00)[m:hch@lst.de,m:pc@manguebit.org,m:linux-doc@vger.kernel.org,m:cem@kernel.org,m:hyc.lee@gmail.com,m:linux-mm@kvack.org,m:naohiro.aota@wdc.com,m:linux-xfs@vger.kernel.org,m:linux-ext4@vger.kernel.org,m:linkinjeon@kernel.org,m:chrisl@kernel.org,m:linux-nfs@vger.kernel.org,m:linux-block@vger.kernel.org,m:dlemoal@kernel.org,m:dsterba@suse.com,m:jaegeuk@kernel.org,m:axboe@kernel.dk,m:brauner@kernel.org,m:kasong@tencent.com,m:tytso@mit.edu,m:linux-cifs@vger.kernel.org,m:linux-f2fs-devel@lists.sourceforge.net,m:sfrench@samba.org,m:linux-btrfs@vger.kernel.org,m:anna@kernel.org,m:linux-fsdevel@vger.kernel.org,m:akpm@linux-foundation.org,m:trondmy@kernel.org,m:hyclee@gmail.com,s:lists@lfdr.de];
+	ARC_NA(0.00)[];
+	DMARC_POLICY_ALLOW(0.00)[lists.sourceforge.net,none];
 	FREEMAIL_CC(0.00)[manguebit.org,vger.kernel.org,kernel.org,gmail.com,kvack.org,wdc.com,suse.com,kernel.dk,tencent.com,mit.edu,lists.sourceforge.net,samba.org,linux-foundation.org];
+	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,kernel.org:s=k20201202];
 	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
 	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,kernel.org:-];
 	RCVD_COUNT_FIVE(0.00)[5];
@@ -173,77 +173,288 @@ X-Spamd-Result: default: False [-6.61 / 15.00];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	MISSING_XM_UA(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lst.de:email,lists.sourceforge.net:rdns,lists.sourceforge.net:helo,lists.sourceforge.net:dkim]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.sourceforge.net:rdns,lists.sourceforge.net:helo,lists.sourceforge.net:dkim,lst.de:email]
 X-Rspamd-Action: no action
 
-On Tue, May 12, 2026 at 07:35:27AM +0200, Christoph Hellwig wrote:
-> struct swap_extent is only used inside of mm/swapfile.c, so move it
-> there.
+On Tue, May 12, 2026 at 07:35:28AM +0200, Christoph Hellwig wrote:
+> swap_info_struct is now internal to the MM subsystem, so remove it from
+> the public header.
 > 
-> Signed-off-by: Christoph Hellwig <hch@lst.de>
 
-Woo, information hiding!
+Even more cleaning out of swap.h is nice, so
 Reviewed-by: "Darrick J. Wong" <djwong@kernel.org>
 
 --D
 
+> Signed-off-by: Christoph Hellwig <hch@lst.de>
 > ---
->  include/linux/swap.h | 15 ---------------
->  mm/swapfile.c        | 15 +++++++++++++++
->  2 files changed, 15 insertions(+), 15 deletions(-)
+>  include/linux/swap.h | 98 +-------------------------------------------
+>  mm/swap.h            | 92 +++++++++++++++++++++++++++++++++++++++++
+>  2 files changed, 94 insertions(+), 96 deletions(-)
 > 
 > diff --git a/include/linux/swap.h b/include/linux/swap.h
-> index 916889738f08..95237ee065c2 100644
+> index 95237ee065c2..31eef9b74949 100644
 > --- a/include/linux/swap.h
 > +++ b/include/linux/swap.h
-> @@ -178,21 +178,6 @@ struct sysinfo;
+> @@ -16,9 +16,9 @@
+>  #include <uapi/linux/mempolicy.h>
+>  #include <asm/page.h>
+>  
+> -struct notifier_block;
+> -
+>  struct bio;
+> +struct notifier_block;
+> +struct swap_info_struct;
+>  
+>  #define SWAP_FLAG_PREFER	0x8000	/* set if swap priority specified */
+>  #define SWAP_FLAG_PRIO_MASK	0x7fff
+> @@ -178,29 +178,6 @@ struct sysinfo;
 >  struct writeback_control;
 >  struct zone;
 >  
 > -/*
-> - * A swap extent maps a range of a swapfile's PAGE_SIZE pages onto a range of
-> - * disk blocks.  A rbtree of swap extents maps the entire swapfile (Where the
-> - * term `swapfile' refers to either a blockdevice or an IS_REG file). Apart
-> - * from setup, they're handled identically.
-> - *
-> - * We always assume that blocks are of size PAGE_SIZE.
+> - * Max bad pages in the new format..
 > - */
-> -struct swap_extent {
-> -	struct rb_node rb_node;
-> -	pgoff_t start_page;
-> -	pgoff_t nr_pages;
-> -	sector_t start_block;
+> -#define MAX_SWAP_BADPAGES \
+> -	((offsetof(union swap_header, magic.magic) - \
+> -	  offsetof(union swap_header, info.badpages)) / sizeof(int))
+> -
+> -enum {
+> -	SWP_USED	= (1 << 0),	/* is slot in swap_info[] used? */
+> -	SWP_WRITEOK	= (1 << 1),	/* ok to write to this swap?	*/
+> -	SWP_DISCARDABLE = (1 << 2),	/* blkdev support discard */
+> -	SWP_DISCARDING	= (1 << 3),	/* now discarding a free cluster */
+> -	SWP_SOLIDSTATE	= (1 << 4),	/* blkdev seeks are cheap */
+> -	SWP_BLKDEV	= (1 << 6),	/* its a block device */
+> -	SWP_ACTIVATED	= (1 << 7),	/* set after swap_activate success */
+> -	SWP_FS_OPS	= (1 << 8),	/* swapfile operations go through fs */
+> -	SWP_AREA_DISCARD = (1 << 9),	/* single-time swap area discards */
+> -	SWP_PAGE_DISCARD = (1 << 10),	/* freed swap page-cluster discards */
+> -	SWP_STABLE_WRITES = (1 << 11),	/* no overwrite PG_writeback pages */
+> -	SWP_SYNCHRONOUS_IO = (1 << 12),	/* synchronous IO is efficient */
+> -					/* add others here before... */
 > -};
 > -
+>  #define SWAP_CLUSTER_MAX 32UL
+>  #define SWAP_CLUSTER_MAX_SKIPPED (SWAP_CLUSTER_MAX << 10)
+>  #define COMPACT_CLUSTER_MAX SWAP_CLUSTER_MAX
+> @@ -219,56 +196,6 @@ enum {
+>  #define SWAP_NR_ORDERS		1
+>  #endif
+>  
+> -/*
+> - * We keep using same cluster for rotational device so IO will be sequential.
+> - * The purpose is to optimize SWAP throughput on these device.
+> - */
+> -struct swap_sequential_cluster {
+> -	unsigned int next[SWAP_NR_ORDERS]; /* Likely next allocation offset */
+> -};
+> -
+> -/*
+> - * The in-memory structure used to track swap areas.
+> - */
+> -struct swap_info_struct {
+> -	struct percpu_ref users;	/* indicate and keep swap device valid. */
+> -	unsigned long	flags;		/* SWP_USED etc: see above */
+> -	signed short	prio;		/* swap priority of this type */
+> -	struct plist_node list;		/* entry in swap_active_head */
+> -	signed char	type;		/* strange name for an index */
+> -	unsigned int	max;		/* size of this swap device */
+> -	unsigned long *zeromap;		/* kvmalloc'ed bitmap to track zero pages */
+> -	struct swap_cluster_info *cluster_info; /* cluster info. Only for SSD */
+> -	struct list_head free_clusters; /* free clusters list */
+> -	struct list_head full_clusters; /* full clusters list */
+> -	struct list_head nonfull_clusters[SWAP_NR_ORDERS];
+> -					/* list of cluster that contains at least one free slot */
+> -	struct list_head frag_clusters[SWAP_NR_ORDERS];
+> -					/* list of cluster that are fragmented or contented */
+> -	unsigned int pages;		/* total of usable pages of swap */
+> -	atomic_long_t inuse_pages;	/* number of those currently in use */
+> -	struct swap_sequential_cluster *global_cluster; /* Use one global cluster for rotating device */
+> -	spinlock_t global_cluster_lock;	/* Serialize usage of global cluster */
+> -	struct rb_root swap_extent_root;/* root of the swap extent rbtree */
+> -	struct block_device *bdev;	/* swap device or bdev of swap file */
+> -	struct file *swap_file;		/* seldom referenced */
+> -	struct completion comp;		/* seldom referenced */
+> -	spinlock_t lock;		/*
+> -					 * protect map scan related fields like
+> -					 * inuse_pages and all cluster lists.
+> -					 * Other fields are only changed
+> -					 * at swapon/swapoff, so are protected
+> -					 * by swap_lock. changing flags need
+> -					 * hold this lock and swap_lock. If
+> -					 * both locks need hold, hold swap_lock
+> -					 * first.
+> -					 */
+> -	struct work_struct discard_work; /* discard worker */
+> -	struct work_struct reclaim_work; /* reclaim worker */
+> -	struct list_head discard_clusters; /* discard clusters list */
+> -	struct plist_node avail_list;   /* entry in swap_avail_head */
+> -};
+> -
+>  static inline swp_entry_t page_swap_entry(struct page *page)
+>  {
+>  	struct folio *folio = page_folio(page);
+> @@ -423,10 +350,7 @@ int find_first_swap(dev_t *device);
+>  extern unsigned int count_swap_pages(int, int);
+>  extern sector_t swapdev_block(int, pgoff_t);
+>  extern int __swap_count(swp_entry_t entry);
+> -extern bool swap_entry_swapped(struct swap_info_struct *si, swp_entry_t entry);
+>  extern int swp_swapcount(swp_entry_t entry);
+> -struct backing_dev_info;
+> -extern struct swap_info_struct *get_swap_device(swp_entry_t entry);
+>  sector_t swap_folio_sector(struct folio *folio);
+>  
 >  /*
->   * Max bad pages in the new format..
->   */
-> diff --git a/mm/swapfile.c b/mm/swapfile.c
-> index 26852c2ad36e..c0479533f9ef 100644
-> --- a/mm/swapfile.c
-> +++ b/mm/swapfile.c
-> @@ -260,6 +260,21 @@ static int __try_to_reclaim_swap(struct swap_info_struct *si,
->  	return ret;
+> @@ -452,20 +376,7 @@ bool folio_free_swap(struct folio *folio);
+>  swp_entry_t swap_alloc_hibernation_slot(int type);
+>  void swap_free_hibernation_slot(swp_entry_t entry);
+>  
+> -static inline void put_swap_device(struct swap_info_struct *si)
+> -{
+> -	percpu_ref_put(&si->users);
+> -}
+> -
+>  #else /* CONFIG_SWAP */
+> -static inline struct swap_info_struct *get_swap_device(swp_entry_t entry)
+> -{
+> -	return NULL;
+> -}
+> -
+> -static inline void put_swap_device(struct swap_info_struct *si)
+> -{
+> -}
+>  
+>  #define get_nr_swap_pages()			0L
+>  #define total_swap_pages			0L
+> @@ -497,11 +408,6 @@ static inline int __swap_count(swp_entry_t entry)
+>  	return 0;
 >  }
 >  
+> -static inline bool swap_entry_swapped(struct swap_info_struct *si, swp_entry_t entry)
+> -{
+> -	return false;
+> -}
+> -
+>  static inline int swp_swapcount(swp_entry_t entry)
+>  {
+>  	return 0;
+> diff --git a/mm/swap.h b/mm/swap.h
+> index a77016f2423b..70974495bf15 100644
+> --- a/mm/swap.h
+> +++ b/mm/swap.h
+> @@ -8,6 +8,79 @@ struct swap_iocb;
+>  
+>  extern int page_cluster;
+>  
 > +/*
-> + * A swap extent maps a range of a swapfile's PAGE_SIZE pages onto a range of
-> + * disk blocks.  A rbtree of swap extents maps the entire swapfile (Where the
-> + * term `swapfile' refers to either a blockdevice or an IS_REG file). Apart
-> + * from setup, they're handled identically.
-> + *
-> + * We always assume that blocks are of size PAGE_SIZE.
+> + * We keep using same cluster for rotational device so IO will be sequential.
+> + * The purpose is to optimize SWAP throughput on these device.
 > + */
-> +struct swap_extent {
-> +	struct rb_node rb_node;
-> +	pgoff_t start_page;
-> +	pgoff_t nr_pages;
-> +	sector_t start_block;
+> +struct swap_sequential_cluster {
+> +	unsigned int next[SWAP_NR_ORDERS]; /* Likely next allocation offset */
 > +};
 > +
->  static inline struct swap_extent *first_se(struct swap_info_struct *sis)
+> +/*
+> + * The in-memory structure used to track swap areas.
+> + */
+> +struct swap_info_struct {
+> +	struct percpu_ref users;	/* indicate and keep swap device valid. */
+> +	unsigned long	flags;		/* SWP_USED etc: see above */
+> +	signed short	prio;		/* swap priority of this type */
+> +	struct plist_node list;		/* entry in swap_active_head */
+> +	signed char	type;		/* strange name for an index */
+> +	unsigned int	max;		/* size of this swap device */
+> +	unsigned long *zeromap;		/* kvmalloc'ed bitmap to track zero pages */
+> +	struct swap_cluster_info *cluster_info; /* cluster info. Only for SSD */
+> +	struct list_head free_clusters; /* free clusters list */
+> +	struct list_head full_clusters; /* full clusters list */
+> +	struct list_head nonfull_clusters[SWAP_NR_ORDERS];
+> +					/* list of cluster that contains at least one free slot */
+> +	struct list_head frag_clusters[SWAP_NR_ORDERS];
+> +					/* list of cluster that are fragmented or contented */
+> +	unsigned int pages;		/* total of usable pages of swap */
+> +	atomic_long_t inuse_pages;	/* number of those currently in use */
+> +	struct swap_sequential_cluster *global_cluster; /* Use one global cluster for rotating device */
+> +	spinlock_t global_cluster_lock;	/* Serialize usage of global cluster */
+> +	struct rb_root swap_extent_root;/* root of the swap extent rbtree */
+> +	struct block_device *bdev;	/* swap device or bdev of swap file */
+> +	struct file *swap_file;		/* seldom referenced */
+> +	struct completion comp;		/* seldom referenced */
+> +	spinlock_t lock;		/*
+> +					 * protect map scan related fields like
+> +					 * inuse_pages and all cluster lists.
+> +					 * Other fields are only changed
+> +					 * at swapon/swapoff, so are protected
+> +					 * by swap_lock. changing flags need
+> +					 * hold this lock and swap_lock. If
+> +					 * both locks need hold, hold swap_lock
+> +					 * first.
+> +					 */
+> +	struct work_struct discard_work; /* discard worker */
+> +	struct work_struct reclaim_work; /* reclaim worker */
+> +	struct list_head discard_clusters; /* discard clusters list */
+> +	struct plist_node avail_list;   /* entry in swap_avail_head */
+> +};
+> +
+> +/*
+> + * Max bad pages in the new format..
+> + */
+> +#define MAX_SWAP_BADPAGES \
+> +	((offsetof(union swap_header, magic.magic) - \
+> +	  offsetof(union swap_header, info.badpages)) / sizeof(int))
+> +
+> +enum {
+> +	SWP_USED	= (1 << 0),	/* is slot in swap_info[] used? */
+> +	SWP_WRITEOK	= (1 << 1),	/* ok to write to this swap?	*/
+> +	SWP_DISCARDABLE = (1 << 2),	/* blkdev support discard */
+> +	SWP_DISCARDING	= (1 << 3),	/* now discarding a free cluster */
+> +	SWP_SOLIDSTATE	= (1 << 4),	/* blkdev seeks are cheap */
+> +	SWP_BLKDEV	= (1 << 6),	/* its a block device */
+> +	SWP_ACTIVATED	= (1 << 7),	/* set after swap_activate success */
+> +	SWP_FS_OPS	= (1 << 8),	/* swapfile operations go through fs */
+> +	SWP_AREA_DISCARD = (1 << 9),	/* single-time swap area discards */
+> +	SWP_PAGE_DISCARD = (1 << 10),	/* freed swap page-cluster discards */
+> +	SWP_STABLE_WRITES = (1 << 11),	/* no overwrite PG_writeback pages */
+> +	SWP_SYNCHRONOUS_IO = (1 << 12),	/* synchronous IO is efficient */
+> +					/* add others here before... */
+> +};
+> +
+>  #ifdef CONFIG_THP_SWAP
+>  #define SWAPFILE_CLUSTER	HPAGE_PMD_NR
+>  #define swap_entry_order(order)	(order)
+> @@ -352,6 +425,13 @@ static inline int non_swapcache_batch(swp_entry_t entry, int max_nr)
+>  	return i;
+>  }
+>  
+> +bool swap_entry_swapped(struct swap_info_struct *si, swp_entry_t entry);
+> +struct swap_info_struct *get_swap_device(swp_entry_t entry);
+> +static inline void put_swap_device(struct swap_info_struct *si)
+> +{
+> +	percpu_ref_put(&si->users);
+> +}
+> +
+>  #else /* CONFIG_SWAP */
+>  struct swap_iocb;
+>  static inline struct swap_cluster_info *swap_cluster_lock(
+> @@ -498,5 +578,17 @@ static inline int non_swapcache_batch(swp_entry_t entry, int max_nr)
 >  {
->  	struct rb_node *rb = rb_first(&sis->swap_extent_root);
+>  	return 0;
+>  }
+> +static inline bool swap_entry_swapped(struct swap_info_struct *si,
+> +		swp_entry_t entry)
+> +{
+> +	return false;
+> +}
+> +static inline struct swap_info_struct *get_swap_device(swp_entry_t entry)
+> +{
+> +	return NULL;
+> +}
+> +static inline void put_swap_device(struct swap_info_struct *si)
+> +{
+> +}
+>  #endif /* CONFIG_SWAP */
+>  #endif /* _MM_SWAP_H */
 > -- 
 > 2.53.0
 > 
