@@ -2,121 +2,93 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id wIQeLnCHBGoJLQIAu9opvQ
+	id 0KVnIt6RBGoVLgIAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 13 May 2026 16:15:12 +0200
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 13 May 2026 16:59:42 +0200
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 06BDE534D15
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 13 May 2026 16:15:11 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A23E85359D7
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 13 May 2026 16:59:41 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
-	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
-	Subject:MIME-Version:Message-ID:Date:To:From:Sender:Reply-To:Content-ID:
-	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
-	:Resent-Message-ID:In-Reply-To:References:List-Owner;
-	bh=L/N3ABpC7X5j1ZPpurPmZkM1bXYoFspDTm08HOpFJZw=; b=hdakBOBKcaSRGg70RghIyxNV+G
-	JZzQAbgdgl+JE96E2OfyBeC7GzIUwjLvIF2ehSxOaNHYsITbdoUFgviJivtap1dcSWmkspdrfyKSv
-	PYsDWk/2XrmIcFFsQeu97hOFg8CkRpY+D++Uo1LarhjhTPp5GqSqfk6JX0HipjvLQJ/w=;
+	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
+	List-Unsubscribe:List-Id:Subject:In-Reply-To:MIME-Version:References:
+	Message-ID:To:Date:Sender:Content-ID:Content-Description:Resent-Date:
+	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
+	bh=uuzOG3wmMVe5bMcikLwyYPbOqq9ZuREKUY0aZ9tF3mc=; b=HD1O19tFT+UxgaDS3bJDy/i5Sw
+	HbJCF2sAlhNwOob0ENGCfg/1Rtj5uE1HasFSu8KKzGcLXw/G6AuPkwl0p5akFQehWuKGuEfD+OdFt
+	Q/BWi7noN6OBSx/10GQhg6N03zr+yUnAgUBcHRNn88MXxh6dCtPDov6BTQ5SNNhzXxNc=;
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1wNAMX-0007Pl-Qz;
-	Wed, 13 May 2026 14:14:59 +0000
+	id 1wNB3b-0002v3-F2;
+	Wed, 13 May 2026 14:59:29 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jinbaoliu365@gmail.com>) id 1wNAMW-0007Pf-Jf
+ (envelope-from <djwong@kernel.org>) id 1wNB3Z-0002uu-ND
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 13 May 2026 14:14:58 +0000
+ Wed, 13 May 2026 14:59:27 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=QGiVjld9Fz/Bnj3nYz57d9gyW+vT89JpU+MF+oM8uF8=; b=Dmc9C6q3/TiKRTsF7XjzWwNYLY
- w58rxsmUkt+n3WV0aufqDNpiy5n2goSEW8K/CnRmaDscZ46Ey+wKkeseZbGwHUNDbVF6CNxzd6bHu
- 7zi6tiEozNo/1dRiC8LQznhyexZ23rFXOkOOWDw9QLue4T8+Mn4qy5lizw9vDwwhjt/c=;
+ bh=7C1ah9JccRCi6ntT71qsUZVG/Z79mw1kuhsp9RZIJi0=; b=IJfR+nguUZdmp6EnWs82pjEM0M
+ HPWIYxpJ1lmd+dxcMJn7CqAdlblcoyVX/WNK6BaiYS5Ie3RE0zB3y+9q/lr6blrDmYfRlDG/YqE5t
+ eZC2uZ7ORZYgKj7jg5aVMDrLCWJ2trzXrixhhiO0pguMbvOX0DEMrdlm3r9YuAo4sJgY=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=QGiVjld9Fz/Bnj3nYz57d9gyW+vT89JpU+MF+oM8uF8=; b=P
- 3lQHd6/pFIRfQoi++kcFWijr5fmi2cv/itPyQ7HPOi3frCYdtvd1DngFSOekYyLHs9K+Q3/++a+Vo
- lEdzPVgaUo94HHXU10Wpu1nRMJTbW/GMc6xuG6nlkzemjQOTWLSXxwrfF4lcxQr+EDQ1NgP4H4sp8
- M4fLE3fGop9kwYn8=;
-Received: from mail-pf1-f174.google.com ([209.85.210.174])
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=7C1ah9JccRCi6ntT71qsUZVG/Z79mw1kuhsp9RZIJi0=; b=JnMfqTNOK0tT4N+hAIHV1C4rBv
+ 7/3iE2nZm9EA1rtk9PWlwm66zOhz/XBQlg23iO/CP/NdvMHbFweyaAGoaojojT4OXQMAKkgocOBIc
+ OyWtVfG+kAQgT4nNXw6BVa6T0EjFknh00X9UHjSErR2prrETymRPQrnPZEXvYcG2xR0M=;
+Received: from sea.source.kernel.org ([172.234.252.31])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1wNAMQ-0003C2-T7 for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 13 May 2026 14:14:58 +0000
-Received: by mail-pf1-f174.google.com with SMTP id
- d2e1a72fcca58-83538fbd0b2so2742744b3a.0
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Wed, 13 May 2026 07:14:55 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1778681690; x=1779286490; darn=lists.sourceforge.net;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=QGiVjld9Fz/Bnj3nYz57d9gyW+vT89JpU+MF+oM8uF8=;
- b=gTEV2OX4E+wuVLbqgbjfoPpPItqnYTGQ9RlmOVjA6dEUqqbqBcFyCKVCKXBpQf7JMa
- cfHJPODExoPFWcPxgrV6dEUKjKJH+54g9CAgWhYdKN8qbxBfpB/5K1r08X8olfs6vAom
- hR65W0/2Rlj13bTcdySb8EupSmM+0YlmYxsxR/E9kp5BkMvxbWnNDpe9sM5ImHe4dczN
- r9lBHQLWtZIFGksCe78YJTIPxyX/utu/RbkAARCIav1g356AYDnM77AsMc++qJEhrsKf
- Cv3zGMXqc/kEedK0RVtVd1A/3qE7e5+z0yHtN5uKS0P71706kMz+e17UT+sAhEEoBjAX
- O9nQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778681690; x=1779286490;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=QGiVjld9Fz/Bnj3nYz57d9gyW+vT89JpU+MF+oM8uF8=;
- b=Oav/KwCaHOS2I4Lk+zsUidaMW+xKfGH2A8Lyj58IX51+leHKBEsknm+rs4THFtsDDS
- uDfqSbGREa04l5ouKkjjsYbAKMiEPDEZpcMeFh8eAGGmdSSlzQRQEgnBX9Yhj2C98Yvb
- SaM9VrL+Zf+jJUlZDskEl+O7/5SyCvtxTu+aOZE4pRUDOxCCiciSe6DHC48vIYW1QJsN
- sjNMFKCH8W4fzR70ryuJEg49xJ4cO4zkHwW062Vi+mjHtyk8q8w1pZ/GSp0fkzMv9wnK
- MPCdmoi8uAWAUi+w/tTWhEENVztJRz6YcK0pKI06h5URp2LBqzJ/Ouovc89UBL8vqmX0
- 4HAQ==
-X-Forwarded-Encrypted: i=1;
- AFNElJ+WY3kwwgrvt1bNJMRyF1W3LXqqAxHY9/x+QW0J4jh28kRJFPtTXe4T32/WOCeo66QDR8r3uUBkAe1w2dJTGl63@lists.sourceforge.net
-X-Gm-Message-State: AOJu0YxE6emrvsb72RVHfs74LVuyJ9c3aftPI3i1buBvCRXD2XrhGcrZ
- cyQ8jGdyUcs0/RMq9UfO4U3lg7rhUNt9hE9fuVS51SPymhAf6XNOAY+N
-X-Gm-Gg: Acq92OHe08z8UqwB+BxvQkXYNqf4/EAxdiGyOegfLQTdl86AitTiptRK3LwK0i75cXn
- fnOJMACoNguZdvuqOJr90fRChWRkXMNH2N2315ze+bpcpxYnogdVrWgtrx0y1LPd1Y7QfBHe0AE
- DYnXp0pe+TgNsEpna2YZqfdC0DELC+rN7S0G25iC+rMndQLT+ufbQYzgW8Nc1e7WAWooU7MAviq
- EyrW5IjdkHYHKO2ov45z8oCO4JVahmzgpOXV6kLN8KICmYaSama0pvpLPfs2WxsfWNeB6hP16rU
- 8MvCyyt5+EC5+TiOID5f17ULrYayYFyCHD+YI7pcjk1Qvg3kX7ZOkA3D+tt+uM2bZZ9+/yShmYG
- TCNHfr6x7jcJSH463JkzickzRlJhrrYzjBcvv4Fa4JDm/fsdrIJJLWafZ0Y5ZSUA2iGVVn5DUII
- eJWP8YWJ+iWGZXA+IFIk1H6XH3CXZW7Q==
-X-Received: by 2002:a05:6a20:2451:b0:39b:8905:4e13 with SMTP id
- adf61e73a8af0-3af7ee34f83mr4301803637.6.1778681689607; 
- Wed, 13 May 2026 07:14:49 -0700 (PDT)
-Received: from mi.mioffice.cn ([2408:8607:1b00:8:1053:8f4f:7961:1c05])
- by smtp.gmail.com with ESMTPSA id
- 41be03b00d2f7-c826767c6d7sm15314509a12.7.2026.05.13.07.14.45
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 13 May 2026 07:14:49 -0700 (PDT)
-From: liujinbao1 <jinbaoliu365@gmail.com>
-To: jaegeuk@kernel.org
-Date: Wed, 13 May 2026 22:14:36 +0800
-Message-ID: <20260513141436.1278665-1-jinbaoliu365@gmail.com>
-X-Mailer: git-send-email 2.43.0
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
+ id 1wNB3V-00064V-5g for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 13 May 2026 14:59:27 +0000
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sea.source.kernel.org (Postfix) with ESMTP id 57C5F44179;
+ Wed, 13 May 2026 14:59:20 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2D47CC2BCB3;
+ Wed, 13 May 2026 14:59:20 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1778684360;
+ bh=zbNHyyDRYAeGo6U86F5ea4LHa32zJh59lyteWOe4KGw=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=iIhYEKx51XcVXCXizSytP4ZvhZtiBJmIPf+6O8Mktq3AJeEzUzkfq9zJFMxWWOQN/
+ aoWFZ5To1myUEqEdw7VallkySu/iGPAldgKZg0gl6xnLSnuloIhSu3lBTLqysfs1I0
+ Skg4f9BktAuE18yvvQRJ70VrpwY5SAV36hi26w0P9GMsQkbf7JD+SNU9HxSde3AnHu
+ bo3a4ZV9/09phwV+AioQvcuqmfuB2eTSN/4uxVBmpiaTeWdd95EFcAzHk3DTbz/8je
+ v+mVMmUJ6OM8tMNlaOTQXwFxTd7uJskcOql+wcSZWQ2REyC0QM0b5EqoBwpRfC7ETk
+ FtuJsAzYKU1jA==
+Date: Wed, 13 May 2026 07:59:19 -0700
+To: Christoph Hellwig <hch@lst.de>
+Message-ID: <20260513145919.GP9555@frogsfrogsfrogs>
+References: <20260512053625.2950900-1-hch@lst.de>
+ <20260512053625.2950900-9-hch@lst.de>
+ <20260512170204.GI9555@frogsfrogsfrogs>
+ <20260513065608.GA2250@lst.de>
 MIME-Version: 1.0
-X-Spam-Score: 0.1 (/)
+Content-Disposition: inline
+In-Reply-To: <20260513065608.GA2250@lst.de>
+X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: From: liujinbao1 F2FS did not collect iostat latency for
- direct
- IO reads and writes, hook iomap_dio_ops.submit_io to bind an iostat context
- and record the submission timestamp. Replace bi_end_io with f2fs_dio_end_bio(
- [...] Content analysis details:   (0.1 points, 5.0 required)
+ Content preview:  On Wed, May 13, 2026 at 08:56:08AM +0200, Christoph Hellwig
+ wrote: > On Tue, May 12, 2026 at 10:02:04AM -0700, Darrick J. Wong wrote:
+ > > OH. Now I remember why -- it's to handle contiguous mixed mapp [...] 
+ Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
@@ -126,16 +98,9 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends in
- digit [jinbaoliu365(at)gmail.com]
- 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
- [jinbaoliu365(at)gmail.com]
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.210.174 listed in wl.mailspike.net]
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1wNAMQ-0003C2-T7
-Subject: [f2fs-dev] [PATCH v3] f2fs: add iostat latency tracking for direct
- IO
+X-Headers-End: 1wNB3V-00064V-5g
+Subject: Re: [f2fs-dev] [PATCH 08/12] swap,
+ iomap: simplify iomap_swapfile_iter
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -147,137 +112,132 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: jinbaoliu365@gmail.com, shengyong1 <shengyong1@xiaomi.com>,
- liujinbao1 <liujinbao1@xiaomi.com>, linux-f2fs-devel@lists.sourceforge.net
+From: "Darrick J. Wong via Linux-f2fs-devel"
+ <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: "Darrick J. Wong" <djwong@kernel.org>
+Cc: Paulo Alcantara <pc@manguebit.org>, linux-doc@vger.kernel.org,
+ Carlos Maiolino <cem@kernel.org>, Hyunchul Lee <hyc.lee@gmail.com>,
+ linux-mm@kvack.org, Naohiro Aota <naohiro.aota@wdc.com>,
+ linux-xfs@vger.kernel.org, linux-ext4@vger.kernel.org,
+ Namjae Jeon <linkinjeon@kernel.org>, Chris Li <chrisl@kernel.org>,
+ linux-nfs@vger.kernel.org, linux-block@vger.kernel.org,
+ Damien Le Moal <dlemoal@kernel.org>, David Sterba <dsterba@suse.com>,
+ Jaegeuk Kim <jaegeuk@kernel.org>, Jens Axboe <axboe@kernel.dk>,
+ Christian Brauner <brauner@kernel.org>, Kairui Song <kasong@tencent.com>,
+ Theodore Ts'o <tytso@mit.edu>, linux-cifs@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, Steve French <sfrench@samba.org>,
+ linux-btrfs@vger.kernel.org, Anna Schumaker <anna@kernel.org>,
+ linux-fsdevel@vger.kernel.org, Andrew Morton <akpm@linux-foundation.org>,
+ Trond Myklebust <trondmy@kernel.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
-X-Rspamd-Queue-Id: 06BDE534D15
+X-Rspamd-Queue-Id: A23E85359D7
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [-0.01 / 15.00];
-	MID_CONTAINS_FROM(1.00)[];
+X-Spamd-Result: default: False [-6.61 / 15.00];
+	WHITELIST_DMARC(-7.00)[sourceforge.net:D:+];
+	SUSPICIOUS_RECIPS(1.50)[];
+	DMARC_POLICY_ALLOW_WITH_FAILURES(-0.50)[];
+	MID_RHS_NOT_FQDN(0.50)[];
 	RWL_MAILSPIKE_EXCELLENT(-0.40)[216.105.38.7:from];
-	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7];
-	MAILLIST(-0.20)[mailman];
 	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
+	MAILLIST(-0.20)[mailman];
+	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7];
 	MIME_GOOD(-0.10)[text/plain];
-	DMARC_POLICY_SOFTFAIL(0.10)[gmail.com : SPF not aligned (relaxed), DKIM not aligned (relaxed),none];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORGED_RECIPIENTS(0.00)[m:jaegeuk@kernel.org,m:jinbaoliu365@gmail.com,m:shengyong1@xiaomi.com,m:liujinbao1@xiaomi.com,m:linux-f2fs-devel@lists.sourceforge.net,s:lists@lfdr.de];
-	RECEIVED_HELO_LOCALHOST(0.00)[];
-	FORGED_SENDER(0.00)[jinbaoliu365@gmail.com,linux-f2fs-devel-bounces@lists.sourceforge.net];
-	FROM_NEQ_ENVFROM(0.00)[jinbaoliu365@gmail.com,linux-f2fs-devel-bounces@lists.sourceforge.net];
-	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
 	DKIM_MIXED(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	ARC_NA(0.00)[];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	MIME_TRACE(0.00)[0:+];
-	TO_DN_SOME(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
-	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,gmail.com:s=20251104];
-	FROM_HAS_DN(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[28];
+	DMARC_POLICY_ALLOW(0.00)[lists.sourceforge.net,none];
+	TO_DN_SOME(0.00)[];
+	FORGED_SENDER(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_RECIPIENTS(0.00)[m:hch@lst.de,m:pc@manguebit.org,m:linux-doc@vger.kernel.org,m:cem@kernel.org,m:hyc.lee@gmail.com,m:linux-mm@kvack.org,m:naohiro.aota@wdc.com,m:linux-xfs@vger.kernel.org,m:linux-ext4@vger.kernel.org,m:linkinjeon@kernel.org,m:chrisl@kernel.org,m:linux-nfs@vger.kernel.org,m:linux-block@vger.kernel.org,m:dlemoal@kernel.org,m:dsterba@suse.com,m:jaegeuk@kernel.org,m:axboe@kernel.dk,m:brauner@kernel.org,m:kasong@tencent.com,m:tytso@mit.edu,m:linux-cifs@vger.kernel.org,m:linux-f2fs-devel@lists.sourceforge.net,m:sfrench@samba.org,m:linux-btrfs@vger.kernel.org,m:anna@kernel.org,m:linux-fsdevel@vger.kernel.org,m:akpm@linux-foundation.org,m:trondmy@kernel.org,m:hyclee@gmail.com,s:lists@lfdr.de];
+	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,kernel.org:s=k20201202];
+	RECEIVED_HELO_LOCALHOST(0.00)[];
+	ARC_NA(0.00)[];
+	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
+	FREEMAIL_CC(0.00)[manguebit.org,vger.kernel.org,kernel.org,gmail.com,kvack.org,wdc.com,suse.com,kernel.dk,tencent.com,mit.edu,lists.sourceforge.net,samba.org,linux-foundation.org];
+	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
+	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,kernel.org:-];
+	RCVD_COUNT_FIVE(0.00)[5];
 	NEURAL_HAM(-0.00)[-1.000];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	PREVIOUSLY_DELIVERED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
 	FORGED_SENDER_FORWARDING(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
-	FREEMAIL_CC(0.00)[gmail.com,xiaomi.com,lists.sourceforge.net];
+	FROM_HAS_DN(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
+	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
 	TAGGED_RCPT(0.00)[linux-f2fs-devel];
 	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
-	RCPT_COUNT_FIVE(0.00)[5];
+	HAS_REPLYTO(0.00)[djwong@kernel.org];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,gmail.com:-];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[xiaomi.com:email,lists.sourceforge.net:rdns,lists.sourceforge.net:helo,lists.sourceforge.net:dkim]
+	MISSING_XM_UA(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.sourceforge.net:rdns,lists.sourceforge.net:helo,lists.sourceforge.net:dkim]
 X-Rspamd-Action: no action
 
-From: liujinbao1 <liujinbao1@xiaomi.com>
+On Wed, May 13, 2026 at 08:56:08AM +0200, Christoph Hellwig wrote:
+> On Tue, May 12, 2026 at 10:02:04AM -0700, Darrick J. Wong wrote:
+> > OH.  Now I remember why -- it's to handle contiguous mixed mappings
+> > better.
+> > 
+> > Let's say that you have a 1k fsblock filesystem and 4k base pages.  You
+> > fallocate an 8G swap file and then mkswap it.  The first mapping is a 1k
+> > written mapping at offset 0 for the swap header, followed by an 8388607k
+> > unwritten mapping at offset 3k.
+> > 
+> > The PAGE_SIZE rounding code in iomap_swapfile_add_extent will round the
+> > end of that first mapping down to zero and ignore it.  The second
+> > mapping will be treated as if it were a 8388604k mapping starting at
+> > offset 4096.  Now the page counts are wrong and the swapon fails.
+> 
+> Do we care about this use case?  I guess you did as you implemented
+> his, but still?
 
-F2FS did not collect iostat latency for direct IO reads and writes,
-hook iomap_dio_ops.submit_io to bind an iostat context and record the
-submission timestamp. Replace bi_end_io with f2fs_dio_end_bio() to
-collect IO latency on completion before calling back to the original
-iomap_dio_bio_end_io(), to add iostat latency tracking support for
-F2FS DIO.
+We do, because mkswap -F uses fallocate nowadays:
 
-Signed-off-by: shengyong1 <shengyong1@xiaomi.com>
-Signed-off-by: liujinbao1 <liujinbao1@xiaomi.com>
----
-v3:
-- drop the submit_ts == 0 guard in __update_iostat_latency()
-v2:
-- add f2fs_dio_iostat_start() to avoid duplicated code
-  and CONFIG_F2FS_IOSTAT guard
----
- fs/f2fs/file.c | 35 +++++++++++++++++++++++++++++++++++
- 1 file changed, 35 insertions(+)
+$ mkswap -s 4194304 -F a
+Setting up swapspace version 1, size = 4 MiB (4190208 bytes)
+no label, UUID=bc9746bf-e200-4944-927c-80d83872f1cb
+$ filefrag -v a
+Filesystem type is: 58465342
+File size of a is 4194304 (1024 blocks of 4096 bytes)
+ ext:     logical_offset:        physical_offset: length:   expected: flags:
+   0:        0..       0:  411383552.. 411383552:      1:            
+   1:        1..    1023:  411383553.. 411384575:   1023:             last,unwritten,eof
+a: 1 extent found
 
-diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
-index 2c4880f24b54..c86eaca20955 100644
---- a/fs/f2fs/file.c
-+++ b/fs/f2fs/file.c
-@@ -4774,6 +4774,30 @@ static bool f2fs_should_use_dio(struct inode *inode, struct kiocb *iocb,
- 	return true;
- }
- 
-+#ifdef CONFIG_F2FS_IOSTAT
-+static void f2fs_dio_end_bio(struct bio *bio)
-+{
-+	struct bio_iostat_ctx *iostat_ctx = bio->bi_private;
-+	void *orig_bi_private = iostat_ctx->post_read_ctx;
-+
-+	iostat_update_and_unbind_ctx(bio);
-+	bio->bi_private = orig_bi_private;
-+	iomap_dio_bio_end_io(bio);
-+}
-+
-+static void f2fs_dio_iostat_start(struct f2fs_sb_info *sbi, struct bio *bio)
-+{
-+	void *bi_private = bio->bi_private;
-+
-+	iostat_alloc_and_bind_ctx(sbi, bio, bi_private);
-+	iostat_update_submit_ctx(bio, DATA);
-+	bio->bi_end_io = f2fs_dio_end_bio;
-+}
-+#else
-+static inline void f2fs_dio_iostat_start(struct f2fs_sb_info *sbi,
-+					 struct bio *bio) {}
-+#endif
-+
- static int f2fs_dio_read_end_io(struct kiocb *iocb, ssize_t size, int error,
- 				unsigned int flags)
- {
-@@ -4786,8 +4810,18 @@ static int f2fs_dio_read_end_io(struct kiocb *iocb, ssize_t size, int error,
- 	return 0;
- }
- 
-+static void f2fs_dio_read_submit_io(const struct iomap_iter *iter,
-+					struct bio *bio, loff_t file_offset)
-+{
-+	struct f2fs_sb_info *sbi = F2FS_I_SB(iter->inode);
-+
-+	f2fs_dio_iostat_start(sbi, bio);
-+	blk_crypto_submit_bio(bio);
-+}
-+
- static const struct iomap_dio_ops f2fs_iomap_dio_read_ops = {
- 	.end_io = f2fs_dio_read_end_io,
-+	.submit_io = f2fs_dio_read_submit_io,
- };
- 
- static ssize_t f2fs_dio_read_iter(struct kiocb *iocb, struct iov_iter *to)
-@@ -5066,6 +5100,7 @@ static void f2fs_dio_write_submit_io(const struct iomap_iter *iter,
- 	enum temp_type temp = f2fs_get_segment_temp(sbi, type);
- 
- 	bio->bi_write_hint = f2fs_io_type_to_rw_hint(sbi, DATA, temp);
-+	f2fs_dio_iostat_start(sbi, bio);
- 	blk_crypto_submit_bio(bio);
- }
- 
--- 
-2.43.0
+> > A more generic solution to this would be to change add_swap_extent to
+> > take sector_t addr and length values and use them to construct a bitmap
+> > representing contiguous physical space on the bdev, accounting of course
+> > for PAGE_SIZE alignment.  Except for the swap header page, every other
+> > contiguously set page-aligned region in the bitmap gets added to the
+> > swap extent map.
+> 
+> You don't even need a bitmap, just do basically the same checks as
+> the iomap code when moving to a new swap extent after moving to use
+> the sector_t.  And it really should anyway, as the current abuse of
+> sector_t to store a disk offset in PAGE_SIZE units is pretty gross.
 
+Oh, I meant this to handle the particularly gross case where the fsblock
+size is smaller than a base page, but there are a very large number of
+file mappings that point to a physically contiguous extent but are not
+in logical order:
+
+{.offset=0, .length=1k, .addr=7},
+{.offset=1, .length=1k, .addr=6},
+{.offset=2, .length=1k, .addr=5},
+{.offset=3, .length=1k, .addr=4},
+{.offset=4, .length=1k, .addr=3},
+{.offset=5, .length=1k, .addr=2},
+{.offset=6, .length=1k, .addr=1},
+{.offset=7, .length=1k, .addr=0},
+
+That's two pages of swapfile, but with the current layout accumulation
+code we "cannot" find either.
+
+--D
 
 
 _______________________________________________
