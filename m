@@ -2,143 +2,102 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id +Gw2CmoRCWpXHQQAu9opvQ
+	id yPk0GOCICWrteQQAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 17 May 2026 02:52:58 +0200
+	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 17 May 2026 11:22:40 +0200
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 59B5155ED13
-	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 17 May 2026 02:52:56 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 940E85603A9
+	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 17 May 2026 11:22:39 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
-	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
-	Subject:MIME-Version:Message-ID:Date:To:From:Sender:Reply-To:Content-ID:
-	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
-	:Resent-Message-ID:In-Reply-To:References:List-Owner;
-	bh=UGPF++r+DTmnqFi2YCDELKy399i61yhNo93iYvKP+vY=; b=OzLS5JvWVw1a+KLpvQwbDjIdF7
-	1gfcrNm43R6LF4JbkSSwUeOnE7d6s9NENdaSqxnKLXOHvCGLwOKBPiwMk9mXpx4hQ2YvYqUfV25yd
-	Ylxm14jfWro5fkS0Ntt4V88gVWWA3WvbFzbTCNaxvQSrTwukiG53DiwVyyRstqxgpNv8=;
+	d=lists.sourceforge.net; s=beta; h=Content-Type:Content-Transfer-Encoding:Cc:
+	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
+	List-Unsubscribe:List-Id:Subject:In-Reply-To:References:To:MIME-Version:Date:
+	Message-ID:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
+	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
+	bh=xYXcWM+AqNDv3lAFlN4cviFzaOHRQT+EWDEKHXIKiwM=; b=lvm0dfprZxbaOOYEwmd6d+IojN
+	9ToyLxxIlBnVWlhKf8oRmGtBJCj6KtN5puPozd3r0AGFXKhjwgYQkGiMcmPVwwgmD2wOcdcYGBb6R
+	b0jlPQjTzzaenSCLGYRXoG8VlYaZMijbQPR5GknKqveOGxZAYGVaedo8Q436G7viPk3I=;
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1wOPkM-0007G1-70;
-	Sun, 17 May 2026 00:52:47 +0000
+	id 1wOXhZ-0006tP-8k;
+	Sun, 17 May 2026 09:22:26 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <kartikey406@gmail.com>) id 1wOPkL-0007Fp-4R
+ (envelope-from <chao@kernel.org>) id 1wOXhY-0006tH-Bc
  for linux-f2fs-devel@lists.sourceforge.net;
- Sun, 17 May 2026 00:52:45 +0000
+ Sun, 17 May 2026 09:22:25 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ From:References:To:Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Af16G8zYt4/YY8vU9QwSZfvcmcjmWzXY8R6f0FYmWII=; b=Ojdv/zKqUcCb2xujeL1dNIUe7V
- 9ZvK8L6n3582p7dS0wL3od04/0CvdoBXBI+dgx6wbDG4XEqRxtFsZcxaEAkvyvgfr1uQ4fu6bBvgz
- km+bNG/rHxMHk/srBnu8NrAnSNSwdvc8Hf55nxdOsPwikVlKpNpjkM2zQiq23mCjtgvc=;
+ bh=NNUSR95rCTF1ViFDsjXV6V/ta/h5ih6gw9t7wAWn3ak=; b=gB6mz1Tsy6PMOhYE0+yqJkBVm0
+ G5UvW1kjfeJFW5QkXUaRrGGLL2kN+VXew0kpLPIKVXN69zrU1i2FQftW+KVxq18+ZYWGW0a85lhuh
+ 1Sd6NqsZvPOMzy353hVLLnE8fgasCsbKHci7BQNFM32X9XjAXOaahyneDYBZstTplaBE=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=Af16G8zYt4/YY8vU9QwSZfvcmcjmWzXY8R6f0FYmWII=; b=J
- RnFbENzbkkJe8/i/JbDqNpKF7DMyAgqCGDSYNvrM/EgTMMKYWNyf1ERSOcxZJtbO/5JTra3JHYDYJ
- WZZvNF9chL0lQq4BTqHuIgfrhQ5gsBQaHXy3xyDPFiz8GNrNXEN5E2Q+xVS8ojZU7Y+4wEqbBGbDF
- h9eriebgB1yfXwbM=;
-Received: from mail-pg1-f182.google.com ([209.85.215.182])
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
+ Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=NNUSR95rCTF1ViFDsjXV6V/ta/h5ih6gw9t7wAWn3ak=; b=QIjnKM3Qxb5YxrbFkjiJwgpFkk
+ zKSzNi1j/WkP2kBFhkCkIAd+rmPzOtFUpuF6G6stWb7+k1LstCPu78Atzm9fqBQJ9AeJSD4Xin7cZ
+ d5TWaSZiqAjYS9d6P4F5Jr6/zwI5LqDATvF9BatZS8mAGhq/FEZbXCkjNBNrSu7FyBAQ=;
+Received: from sea.source.kernel.org ([172.234.252.31])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1wOPkK-0008L5-QG for linux-f2fs-devel@lists.sourceforge.net;
- Sun, 17 May 2026 00:52:45 +0000
-Received: by mail-pg1-f182.google.com with SMTP id
- 41be03b00d2f7-c8021c8c42fso345126a12.3
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Sat, 16 May 2026 17:52:45 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1778979159; x=1779583959; darn=lists.sourceforge.net;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=Af16G8zYt4/YY8vU9QwSZfvcmcjmWzXY8R6f0FYmWII=;
- b=c6cMewpDUZNGVdJ7ls/d0at03wmvWO/+1Suu9g0TZCb0y6v+iF3KU5ZWbZcGOqmvPG
- aRYhQ1E1NQJD3Cl3gbSIv81z0tzDu5L1l26Vm+rWR08U6iOzW+jh+eMNAcYylsg3z2va
- At7GW+cqERRjNJYmPjBS49VkkHTkm29bZIBFjN+dDP3hddlEZGVvHbssZ9FgahM5T1eR
- HqGEWEWPNwROfWbGAXTdWDsGUlSkVqGnWbop8eKkImI486Pp/7Eqr8x8sU/B7XbKNGoj
- lTVCT4cxIj5sBEqt+kfl3tVcWBNAJUXox2h5JDE+b3NbyOiQbHKpPL7hbq/SFJm98Iv6
- oRqg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1778979159; x=1779583959;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Af16G8zYt4/YY8vU9QwSZfvcmcjmWzXY8R6f0FYmWII=;
- b=Ap2/B+CCiG/wELfXWU0bL9sw8ICp9MG2AUrFtUIUKoVB9NEkazwgV4mwBtfKffxUfY
- 38qXN3e70WiGLJWF0OsU9x3iJBtOL7eVbNc17b/O07wdsWLn2qp2JdkN9TNkvdnQWsvH
- htsJK/gRv+31NQ0eoi9D2C2mA1U/1pNupw3yyQgE/YIQe2IUo5a9zWMmd8n9fdGUGubo
- lLhRh8tuzcI67G8H2a14EVH/lsELdps1Y5bVkAubwMztI4E8X6kH4KvrCbJQLVPpvfgL
- 0EYCLozll1r9uUvhNk54gdSXcXGe42E4qIm3NTR2r7pJ+0hmsupDCqGWUJlOA72lNiAK
- WANg==
-X-Gm-Message-State: AOJu0Yy5cZ2z2Y5EEfqnuVVMensbL9XoeeoK/+QmfyvHnqJWcWwPcdof
- WW18VtW/V282jt14CXtoe1piYweC2RfkHj8tfKWIKgs0UosfiFVu7Jww
-X-Gm-Gg: Acq92OGHWlXdg0Kn4vrOOk/SKV/j6aNrLVFoL5vlcmzltqrJMZJU+NxSMJY3L7HIUGN
- qO8LJczEGVd36yG8Hald0KTJ1yITcSWemDjMP6iqcr9jk+s3ggYAMkA1lFOqh8Y40C0b5Wmgz0G
- aLpNL2cm/4wd7n27QU4ZQ/lY6rAVtQEIF4vOgGIUuK+TaLOolP7nU1RIQjbabC5TAVM6bLKAU/p
- GTkuU3rC0PGSQlKjzSHPdsKCI2rco9E5pfgW2wSQbaxQ5YDqZ3uNs79Y8WTHs1/b3/6RPEh5Ib1
- SNaEkJw9D0RQ2l/Ef6tF4JzkgcapByYmw+A/0/GRkQUcbTMN4DiH+hPFWbRxeJ89sw0orxzOU5y
- gfm8NYFlvol1Crccds2eUW640BOnPQe1istSFttwwjiM2/z0yexmcZjbnaTb88z/4gyC+XxPVeA
- bHqq/IqLJIJrgSI4bTpRSvFxXlZYMtAhXbuzNptNGJtc6LwWdJFoBv4yPX1DOMPy9pQSgpyKUjN
- x9XJkc=
-X-Received: by 2002:a05:6a00:1904:b0:82f:38:a5b2 with SMTP id
- d2e1a72fcca58-83f33d835b8mr10093396b3a.40.1778979159339; 
- Sat, 16 May 2026 17:52:39 -0700 (PDT)
-Received: from deepanshu-kernel-hacker..
- ([2405:201:682f:383f:29ea:98ba:649e:3b6e])
- by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-83f19c7809esm12627735b3a.44.2026.05.16.17.52.36
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 16 May 2026 17:52:38 -0700 (PDT)
-From: Deepanshu Kartikey <kartikey406@gmail.com>
-To: jaegeuk@kernel.org,
-	chao@kernel.org
-Date: Sun, 17 May 2026 06:22:30 +0530
-Message-ID: <20260517005230.28172-1-kartikey406@gmail.com>
-X-Mailer: git-send-email 2.43.0
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
+ id 1wOXhX-0002ld-MX for linux-f2fs-devel@lists.sourceforge.net;
+ Sun, 17 May 2026 09:22:25 +0000
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sea.source.kernel.org (Postfix) with ESMTP id AF06E40922;
+ Sun, 17 May 2026 09:22:18 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 79E47C2BCB0;
+ Sun, 17 May 2026 09:22:14 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1779009738;
+ bh=pFCRIYmewKHusvusZYzm8Yz8hISgDPWeySFQX+oH4To=;
+ h=Date:Cc:Subject:To:References:From:In-Reply-To:From;
+ b=IzaI7QrciJ4L7EBZbXH+SwuqI+sdme/G+nYpiKhTLfwILxmtNjtarsVa+TlqZOvwi
+ /NMPxOF9Fks6r/9vUooc8IBL+E9f2Hvk/c4uemiImcE2Uk2mubJIKwLC2Avhkt5jcO
+ weTQXrC5utAFSjTrPo1RB3X6DrPhchCLc1/ii4v+Ld1tHqnIt9epQ4rZBPljmcH53O
+ ovj7YP6rqGBwRdBCo3kDIfi7c6EN3azhc5n1SMeVBoqiSHtZQ3cWrybzB17QqSnyuc
+ T5YS+5b10SC4qBz7ugw5Kw2IibmMwO/5BZWY56gSD9l3H8le3VlzotSKQmWkf1VpFB
+ NCfnp0vo/mOIw==
+Message-ID: <f48fd685-21ae-4f1d-9a16-0f926f5e0e61@kernel.org>
+Date: Sun, 17 May 2026 17:22:09 +0800
 MIME-Version: 1.0
-X-Spam-Score: 0.1 (/)
+User-Agent: Mozilla Thunderbird
+To: Ziyu Zhang <ziyuzhang201@gmail.com>, Jaegeuk Kim <jaegeuk@kernel.org>
+References: <20260516035001.272335-1-ziyuzhang201@gmail.com>
+Content-Language: en-US
+In-Reply-To: <20260516035001.272335-1-ziyuzhang201@gmail.com>
+X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: Syzbot reports a recurrence of the kernel BUG in
- f2fs_write_end_io:
- kernel BUG at fs/f2fs/data.c:388! Oops: invalid opcode: 0000 [#1] SMP KASAN
- PTI CPU: 0 UID: 0 PID: 15 Comm: ksoftirqd/0 PREEMPT_{RT,
- (full)} RIP: 0010:f2fs_write_end_io+0x16df/0x1740
- Call Trace: blk_u [...] 
- Content analysis details:   (0.1 points, 5.0 required)
+ Content preview:  On 5/16/2026 11:50 AM, Ziyu Zhang wrote: > gc_thread_func()
+ tests gc_th->gc_wake and then clears it with > separate plain accesses. sysfs
+ gc_urgent writes set the same flag and > wake the GC thread. I [...] 
+ Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- 0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends in
- digit [kartikey406(at)gmail.com]
- 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
- [kartikey406(at)gmail.com]
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.215.182 listed in wl.mailspike.net]
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1wOPkK-0008L5-QG
-Subject: [f2fs-dev] [PATCH] f2fs: don't BUG on node footer mismatch in
- f2fs_write_end_io
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+X-Headers-End: 1wOXhX-0002ld-MX
+Subject: Re: [f2fs-dev] [PATCH] f2fs: make gc_wake test-and-clear atomic
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -150,130 +109,157 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Deepanshu Kartikey <kartikey406@gmail.com>,
- syzbot+4af46ee83100e99bce09@syzkaller.appspotmail.com,
- linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
-Content-Type: text/plain; charset="us-ascii"
+From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Chao Yu <chao@kernel.org>
+Cc: gality369@gmail.com, zhenghaoran154@gmail.com, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, baijiaju1990@gmail.com,
+ zzzccc427@gmail.com, r33s3n6@gmail.com, hanguidong02@gmail.com
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
-X-Rspamd-Queue-Id: 59B5155ED13
+X-Rspamd-Queue-Id: 940E85603A9
 X-Rspamd-Server: lfdr
-X-Spamd-Result: default: False [1.49 / 15.00];
-	SUSPICIOUS_RECIPS(1.50)[];
-	MID_CONTAINS_FROM(1.00)[];
+X-Spamd-Result: default: False [-8.61 / 15.00];
+	WHITELIST_DMARC(-7.00)[sourceforge.net:D:+];
+	DMARC_POLICY_ALLOW_WITH_FAILURES(-0.50)[];
 	RWL_MAILSPIKE_EXCELLENT(-0.40)[216.105.38.7:from];
 	MAILLIST(-0.20)[mailman];
 	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7];
 	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
-	DMARC_POLICY_SOFTFAIL(0.10)[gmail.com : SPF not aligned (relaxed), DKIM not aligned (relaxed),none];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORGED_RECIPIENTS(0.00)[m:jaegeuk@kernel.org,m:chao@kernel.org,m:kartikey406@gmail.com,m:syzbot+4af46ee83100e99bce09@syzkaller.appspotmail.com,m:linux-kernel@vger.kernel.org,m:linux-f2fs-devel@lists.sourceforge.net,m:syzbot@syzkaller.appspotmail.com,s:lists@lfdr.de];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	DKIM_MIXED(0.00)[];
 	RECEIVED_HELO_LOCALHOST(0.00)[];
-	FORGED_SENDER(0.00)[kartikey406@gmail.com,linux-f2fs-devel-bounces@lists.sourceforge.net];
+	RCVD_TLS_LAST(0.00)[];
+	FREEMAIL_CC(0.00)[gmail.com,vger.kernel.org,lists.sourceforge.net];
+	DKIM_MIXED(0.00)[];
+	FREEMAIL_TO(0.00)[gmail.com,kernel.org];
+	DMARC_POLICY_ALLOW(0.00)[lists.sourceforge.net,none];
+	TO_DN_SOME(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	FORGED_RECIPIENTS(0.00)[m:ziyuzhang201@gmail.com,m:jaegeuk@kernel.org,m:gality369@gmail.com,m:zhenghaoran154@gmail.com,m:linux-kernel@vger.kernel.org,m:linux-f2fs-devel@lists.sourceforge.net,m:baijiaju1990@gmail.com,m:zzzccc427@gmail.com,m:r33s3n6@gmail.com,m:hanguidong02@gmail.com,s:lists@lfdr.de];
+	MIME_TRACE(0.00)[0:+];
 	ARC_NA(0.00)[];
 	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	RCVD_TLS_LAST(0.00)[];
-	TO_DN_SOME(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	FROM_HAS_DN(0.00)[];
-	FREEMAIL_CC(0.00)[gmail.com,syzkaller.appspotmail.com,vger.kernel.org,lists.sourceforge.net];
-	FROM_NEQ_ENVFROM(0.00)[kartikey406@gmail.com,linux-f2fs-devel-bounces@lists.sourceforge.net];
-	NEURAL_HAM(-0.00)[-0.995];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	PREVIOUSLY_DELIVERED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
+	FORGED_SENDER(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
+	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,kernel.org:s=k20201202];
+	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,kernel.org:-];
+	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
 	RCVD_COUNT_FIVE(0.00)[5];
-	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,gmail.com:s=20251104];
-	TAGGED_RCPT(0.00)[linux-f2fs-devel,4af46ee83100e99bce09];
-	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,gmail.com:-];
+	NEURAL_HAM(-0.00)[-1.000];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
+	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	TAGGED_RCPT(0.00)[linux-f2fs-devel];
+	HAS_REPLYTO(0.00)[chao@kernel.org];
+	RCPT_COUNT_SEVEN(0.00)[10];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCPT_COUNT_FIVE(0.00)[6]
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.sourceforge.net:rdns,lists.sourceforge.net:helo,lists.sourceforge.net:dkim]
 X-Rspamd-Action: no action
 
-Syzbot reports a recurrence of the kernel BUG in f2fs_write_end_io:
+On 5/16/2026 11:50 AM, Ziyu Zhang wrote:
+> gc_thread_func() tests gc_th->gc_wake and then clears it with
+> separate plain accesses. sysfs gc_urgent writes set the same flag and
+> wake the GC thread. If a sysfs writer stores true between the GC
+> thread's load and store, the later store false can clear the new wake
+> request.
 
-  kernel BUG at fs/f2fs/data.c:388!
-  Oops: invalid opcode: 0000 [#1] SMP KASAN PTI
-  CPU: 0 UID: 0 PID: 15 Comm: ksoftirqd/0 PREEMPT_{RT,(full)}
-  RIP: 0010:f2fs_write_end_io+0x16df/0x1740
-  Call Trace:
-   blk_update_request+0x57e/0xe60
-   blk_mq_end_request+0x3e/0x70
-   blk_done_softirq+0x10a/0x160
-   handle_softirqs+0x1de/0x6d0
-   run_ksoftirqd+0x52/0x180
+I can accept calling "echo 1 > gc_urgent" multiple times, but f2fs only
+trigger one time, because it's rare to change to urgent mode, and there
+should be no multiple users of this mode in Android.
 
-Commit 50ac3ecd8e05 ("f2fs: fix to do sanity check on node footer
-in {read,write}_end_io") added f2fs_sanity_check_node_footer() to
-both end_io paths to catch corrupted node footers reachable from
-fuzzed on-disk images. In f2fs_write_end_io(), however, the
-existing
+> 
+> Store gc_wake as an atomic_t. Use atomic_read() for the wait
+> condition, atomic_xchg(..., 0) in the GC thread, and atomic_set(..., 1)
+> in the sysfs trigger paths. This makes the consume-and-clear operation
+> atomic with respect to new wake requests: a set before the exchange is
+> consumed by the current iteration, while a set after the exchange stays
+> pending for the next wait.
+> 
+> Fixes: d9872a698c39 ("f2fs: introduce gc_urgent mode for background GC")
+> Signed-off-by: Ziyu Zhang <ziyuzhang201@gmail.com>
+> ---
+>   fs/f2fs/gc.c    | 7 +++----
+>   fs/f2fs/gc.h    | 2 +-
+>   fs/f2fs/sysfs.c | 4 ++--
+>   3 files changed, 6 insertions(+), 7 deletions(-)
+> 
+> diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
+> index 098e9f71421e..71e40e4083ad 100644
+> --- a/fs/f2fs/gc.c
+> +++ b/fs/f2fs/gc.c
+> @@ -49,15 +49,14 @@ static int gc_thread_func(void *data)
+>   		wait_event_freezable_timeout(*wq,
+>   				kthread_should_stop() ||
+>   				waitqueue_active(fggc_wq) ||
+> -				gc_th->gc_wake,
+> +				atomic_read(&gc_th->gc_wake),
+>   				msecs_to_jiffies(wait_ms));
+>   
+>   		if (test_opt(sbi, GC_MERGE) && waitqueue_active(fggc_wq))
+>   			foreground = true;
 
-  f2fs_bug_on(sbi, folio->index != nid_of_node(folio));
+If we trigger gc_urgent before, and then trigger again here, atomic_xchg()
+will clear the new wakeup request as well? unless we record the total request
+count into atomic variable.
 
-was left in place immediately after the new helper call. The
-helper detects the mismatch, sets SBI_NEED_FSCK and emits a
-ratelimited warning, but its return value is discarded and the
-following f2fs_bug_on() panics on the exact same condition.
+Thanks,
 
-Tracing the reproducer confirms the failure path. A node folio
-with index=11 is looked up via __get_node_folio(), the
-synchronous sanity check at page_hit fails with -EFSCORRUPTED
-and out_err clears uptodate but leaves the dirty bit set from
-the folio's earlier lifecycle. A subsequent read_node_folio()
-fails with the same error (footer_nid=0, ino=0), and
-folio_end_read(folio, false) does not clear dirty either. The
-writeback iterator then finds the still-dirty folio via the
-PAGECACHE_TAG_DIRTY tag and submits it. f2fs_write_end_io()
-observes folio->index=11 with nid_of_node(folio)=0 and panics
-from softirq context via blk_done_softirq, even though
-f2fs_sanity_check_node_footer() has already correctly identified
-the corruption and would have signalled it via its return value.
-
-A filesystem inconsistency reachable from a mounted image must
-not panic the kernel. Mirror the handling already used in
-f2fs_finish_read_bio(): capture the helper's return value and
-mark the bio with BLK_STS_IOERR on mismatch instead of issuing
-BUG_ON. SBI_NEED_FSCK is set by the helper, so fsck.f2fs will
-repair the inconsistency on the next mount.
-
-Reported-by: syzbot+4af46ee83100e99bce09@syzkaller.appspotmail.com
-Closes: https://syzkaller.appspot.com/bug?extid=4af46ee83100e99bce09
-Fixes: 50ac3ecd8e05 ("f2fs: fix to do sanity check on node footer in {read,write}_end_io")
-Signed-off-by: Deepanshu Kartikey <kartikey406@gmail.com>
----
- fs/f2fs/data.c | 10 +++++-----
- 1 file changed, 5 insertions(+), 5 deletions(-)
-
-diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
-index 8d4f1e75dee3..c149b0ccf22d 100644
---- a/fs/f2fs/data.c
-+++ b/fs/f2fs/data.c
-@@ -382,11 +382,11 @@ static void f2fs_write_end_io(struct bio *bio)
- 						STOP_CP_REASON_WRITE_FAIL);
- 		}
- 
--		if (is_node_folio(folio)) {
--			f2fs_sanity_check_node_footer(sbi, folio,
--				folio->index, NODE_TYPE_REGULAR, true);
--			f2fs_bug_on(sbi, folio->index != nid_of_node(folio));
--		}
-+		if (is_node_folio(folio) &&
-+		    f2fs_sanity_check_node_footer(sbi, folio,
-+						  folio->index, NODE_TYPE_REGULAR, true))
-+			bio->bi_status = BLK_STS_IOERR;
-+
- 		if (f2fs_in_warm_node_list(folio))
- 			f2fs_del_fsync_node_entry(sbi, folio);
- 
--- 
-2.43.0
+>   
+>   		/* give it a try one time */
+> -		if (gc_th->gc_wake)
+> -			gc_th->gc_wake = false;
+> +		atomic_xchg(&gc_th->gc_wake, 0);
+>   
+>   		if (f2fs_readonly(sbi->sb)) {
+>   			stat_other_skip_bggc_count(sbi);
+> @@ -214,7 +213,7 @@ int f2fs_start_gc_thread(struct f2fs_sb_info *sbi)
+>   		gc_th->boost_zoned_gc_percent = 0;
+>   	}
+>   
+> -	gc_th->gc_wake = false;
+> +	atomic_set(&gc_th->gc_wake, 0);
+>   
+>   	sbi->gc_thread = gc_th;
+>   	init_waitqueue_head(&sbi->gc_thread->gc_wait_queue_head);
+> diff --git a/fs/f2fs/gc.h b/fs/f2fs/gc.h
+> index 24e8b1c27acc..65e5b062a0d3 100644
+> --- a/fs/f2fs/gc.h
+> +++ b/fs/f2fs/gc.h
+> @@ -56,7 +56,7 @@ struct f2fs_gc_kthread {
+>   	unsigned int no_gc_sleep_time;
+>   
+>   	/* for changing gc mode */
+> -	bool gc_wake;
+> +	atomic_t gc_wake;
+>   
+>   	/* for GC_MERGE mount option */
+>   	wait_queue_head_t fggc_wq;		/*
+> diff --git a/fs/f2fs/sysfs.c b/fs/f2fs/sysfs.c
+> index f736052dea50..6ca5943450d5 100644
+> --- a/fs/f2fs/sysfs.c
+> +++ b/fs/f2fs/sysfs.c
+> @@ -586,7 +586,7 @@ static ssize_t __sbi_store(struct f2fs_attr *a,
+>   		} else if (t == 1) {
+>   			sbi->gc_mode = GC_URGENT_HIGH;
+>   			if (sbi->gc_thread) {
+> -				sbi->gc_thread->gc_wake = true;
+> +				atomic_set(&sbi->gc_thread->gc_wake, 1);
+>   				wake_up_interruptible_all(
+>   					&sbi->gc_thread->gc_wait_queue_head);
+>   				wake_up_discard_thread(sbi, true);
+> @@ -596,7 +596,7 @@ static ssize_t __sbi_store(struct f2fs_attr *a,
+>   		} else if (t == 3) {
+>   			sbi->gc_mode = GC_URGENT_MID;
+>   			if (sbi->gc_thread) {
+> -				sbi->gc_thread->gc_wake = true;
+> +				atomic_set(&sbi->gc_thread->gc_wake, 1);
+>   				wake_up_interruptible_all(
+>   					&sbi->gc_thread->gc_wait_queue_head);
+>   			}
 
 
 
