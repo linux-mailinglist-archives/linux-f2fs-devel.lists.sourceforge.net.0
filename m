@@ -2,141 +2,105 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id sNSpFw+kDWq10QUAu9opvQ
+	id qPxgBAypDWpr1AUAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 20 May 2026 14:07:43 +0200
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 20 May 2026 14:29:00 +0200
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9DFE058D4A8
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 20 May 2026 14:07:42 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4085B58DA7C
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 20 May 2026 14:28:59 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
-	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
-	Subject:MIME-Version:Message-ID:Date:To:From:Sender:Reply-To:Content-ID:
-	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
-	:Resent-Message-ID:In-Reply-To:References:List-Owner;
-	bh=8ZcQ/Z/lR1QXRsYHjKix2nOPhuUSLApVhcnTFvEcAvY=; b=eSL2lUxzHOt7VKQ2cxwNNsGwn3
-	RZAamA96aCnKRnHxM3iDTVdjsZVrUf0TapaFqHsk4TxF/CBlF+3iK+4aLLzpWOxx292sgp9yhtrc7
-	eycpPWYvME7PzQvJetWDLZa9F+VHvhmZnjQLUDegkVwOmOsa4x0DF5wbpyqNtuqS2KIo=;
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
+	List-Unsubscribe:List-Id:Subject:In-Reply-To:MIME-Version:References:
+	Message-ID:To:Date:Sender:Content-ID:Content-Description:Resent-Date:
+	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
+	bh=29N+otIVv2oj1GWDx7G/haicF7v0AL07iPlbZfevtoo=; b=F4UNz375NoEFJkWuCG40pjRlRz
+	ULX0m1h004ZEzTLmKxjlXH5GbsS/ldXxrZkfSDnBp5swCIwfD1D4XgFw/cIdi7O5balzaJesMc4oQ
+	FlFmk6fu0L/OTOJ7SRpgdrX01yRrprOkXF5iChjXWU4nTMzb1l+MUvR521vWAUo6cvyw=;
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1wPfhz-000650-OK;
-	Wed, 20 May 2026 12:07:29 +0000
+	id 1wPg2Z-0001KE-PW;
+	Wed, 20 May 2026 12:28:47 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <qwjhust@gmail.com>) id 1wPfhy-00064u-3J
+ (envelope-from <zlang@kernel.org>) id 1wPg2X-0001K7-1B
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 20 May 2026 12:07:27 +0000
+ Wed, 20 May 2026 12:28:45 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=gPZaZ4osb8hVVu2xsq4TPAaFFKt1rpp+aWrxoF098CA=; b=gQ0m5AAB8HlIXKgKHGMmfqfzXf
- FiFY97dWYa6aQp7O21T7fJ86wAC2CQzCyrKmn/Zxm4GPlIDldusQK0xFKoI+UMw7qnnbkH0Qn3MfD
- c8+jznMAjc48rGgvfO/dzgdAg/R8boiwcbekz4FN294GnyhxjbqvOtk029lImvwKeADE=;
+ bh=/w3xRDdSB1Oue9DDBq9k8Rn4urhWgVsSGxIhJfb9Q7g=; b=i2FQR7LmgIN0ppKlYVydnl+w8a
+ +Y1Eww9SVK/p/uRazaAGKO3V6efHQK3R83+APzI1ibSJ0GOWq+rxY4lCuuiORDW8MPhDQM8nogL4G
+ VRmVUJ4YEFHOQt98ar+jsuh73BHXIkG9eG0bgNDuI6pqG8gJo2Fz4aa5TfINSTtxkAVw=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=gPZaZ4osb8hVVu2xsq4TPAaFFKt1rpp+aWrxoF098CA=; b=Q
- nW/2cPhbPh6q+zLJtX/Sp3lPCMWS7PZRtc9vU4egABR+W+aX9cG1D7JsNT8o/NdVtqGojptswAhWc
- 8kcc4olBG57JTuoe/yGeoN3aikwF0QnxUV6syhRisKpOTEpaYlVgai6mV+gr/516I7UGYi1eK30JP
- xX/djnhENb+S9MDA=;
-Received: from mail-pj1-f46.google.com ([209.85.216.46])
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=/w3xRDdSB1Oue9DDBq9k8Rn4urhWgVsSGxIhJfb9Q7g=; b=WMadoN9nzPKLt9VEP9/Z3L16Q2
+ uPVvGTNKPpT7Ame+cC/+a4nHwoogisaNXCofrk/ymzaWXICGiLObI1XH0k6p4W9vKsCSI3nvrnvoX
+ bVVQl2zFe4oebzgb29ToyA2w19C11TvYR1yL7qiLVBQ5mYJCUC7FYTsNn/9Dab+mptlk=;
+Received: from sea.source.kernel.org ([172.234.252.31])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1wPfhq-00059S-TC for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 20 May 2026 12:07:27 +0000
-Received: by mail-pj1-f46.google.com with SMTP id
- 98e67ed59e1d1-365d8e43759so2552564a91.0
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Wed, 20 May 2026 05:07:23 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1779278833; x=1779883633; darn=lists.sourceforge.net;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=gPZaZ4osb8hVVu2xsq4TPAaFFKt1rpp+aWrxoF098CA=;
- b=lSura/o6OyO/QBPszk/YpCk7Q8owdXxAPZwRXxAmIIjyx8aeWInejZ8q9dnGBwtbqY
- u0LNl8W/Nk/eh8hO86e+B1YT4U4djE9hMbMGfIYFJCOrkDHyVMlbWPFK/ojqL8fL45mS
- qoJNwgZX4GRZ7hnuL/JnBpMDPKBp2K8JVmhhfxa8p4s6lrdTP0/h+OoCBI+n2K3hjo3V
- aUhcARYSl1Hb2JOb6gWBj9QI6n9KRZ4Y4pcMI4w/3nGuDVuKsQrH5OZ5eigwfOY8zP95
- 4BfRyJF+KxGxNp0l21RLRdzLzuKA1+mSEqqUmsM4Ti5p/bNVZ0K+hSzWSmTAMDlaINrd
- 4ppw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1779278833; x=1779883633;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=gPZaZ4osb8hVVu2xsq4TPAaFFKt1rpp+aWrxoF098CA=;
- b=ptd1IlsxVFJCf8uoS0VqVJOKCdrHIdPGEYPYIaJCJGgPpTYFIgPox+WfHLs9jQQKAj
- 0RvRnSR3twkONdSNycswfTPxCrwr1WXIoZbVT/RoQYtbXNFTC/tHgpOZF0h5l3U6pxmz
- nSxXjmgF7mwe1AWPLcGes5fOUJO8cKX1gGotQ/Fq6gIweJFZYc4Yo78JPpGG6/uZTskO
- 5BDrJGUvrEiCKnxyICnzBQ3Xmjq2vIlpvkzdMl5//xUF0JksLOPPXQzSQ1ObUcIyOLfK
- WfkJZaihulNv8bLgXHb6cNtVmxnZ0GBbQ9bLrMmDK9z18SIYDWRmmn0xDE9XAaFhO/6v
- d7eA==
-X-Forwarded-Encrypted: i=1;
- AFNElJ9tKcdTlcqfoILWKSywzHheR/tDUNphxhGzhPXFTe+Wx2bV2bgFI++aZ7NaAlrK072cKdFNGQiuVl9mFRs9S3CA@lists.sourceforge.net
-X-Gm-Message-State: AOJu0YwzhGCeP1kt5WHBNYgFg3K8ULRWDx4cNR1I5EdKKJ7cvDOpirt+
- FKayFgMdVyoVhC00F5rP2/4vzES0GGOg+nAOY/Ne/rNRYSc0aZoo90lV
-X-Gm-Gg: Acq92OGP9XMlB8+vXBpYKkvyDeoJUNFKNopKfNJMKBm+Eh/aDp2sGx+oLGEY6krfby6
- G0Kkws9N4cG+jmjDeTgvF/WCbAfZQ5nHRHkQeZWO7uEaCE4kNT4LPSss3qBDxa65rSWKCAaOij6
- tYcZxFGII3oXJcaDrosAz6X/v0oMhfnkoVJXXg6DhNoob9oKwWnYqZqr1oey2yTIgKEk3gzFbKu
- YQpoA3pPURrDDO6LmHjaQOMR/5yOIvuShp8kzGa1GgM9Ypcs5wVcxrdzk8LoJSynEE57DTYyOOH
- Unm/fFTbSEo4qE/bDhZg70jKzpuSYrpc+dWf4/r1D6itR8vYqUKxR54SzNTZQUkdvkdkOMY0G5p
- rsLt73vZi2J93F44u4n3rjsUtio9ZAYUr1n1IzxJj2mb3tKhEfQ33QkHLVxVHLOePyIt/lzoQYi
- 1mVLk3MUitKpOa0YW7Eg9qzSHW+sjcctCVwKl1X4SCcXxg0U+tybcwbBfNrSgYcKN5MSxrsA==
-X-Received: by 2002:a17:90a:c2ce:b0:35f:b9f1:fded with SMTP id
- 98e67ed59e1d1-369514e68b3mr18404250a91.12.1779278832689; 
- Wed, 20 May 2026 05:07:12 -0700 (PDT)
-Received: from qiwenjie-ThinkCentre-M760t.mioffice.cn ([43.224.245.179])
- by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-3695157c3cfsm17512595a91.5.2026.05.20.05.07.10
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 20 May 2026 05:07:12 -0700 (PDT)
-From: Wenjie Qi <qwjhust@gmail.com>
-X-Google-Original-From: Wenjie Qi <qiwenjie@xiaomi.com>
-To: jaegeuk@kernel.org,
-	chao@kernel.org
-Date: Wed, 20 May 2026 20:07:05 +0800
-Message-ID: <20260520120705.1263756-1-qiwenjie@xiaomi.com>
-X-Mailer: git-send-email 2.43.0
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
+ id 1wPg2V-0006FW-3g for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 20 May 2026 12:28:44 +0000
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+ by sea.source.kernel.org (Postfix) with ESMTP id 34EFF436B0;
+ Wed, 20 May 2026 12:28:38 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 694541F000E9;
+ Wed, 20 May 2026 12:28:35 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+ s=k20260515; t=1779280118;
+ bh=/w3xRDdSB1Oue9DDBq9k8Rn4urhWgVsSGxIhJfb9Q7g=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To;
+ b=U7AzNmR4ufuz8RzeqbLm4M+bR3KDu12MqbzJ4QvdnaQyABBdPqIMEM2XGOUvPnyOj
+ uGT8FCdzduuKSjnYv9cu8F2uN3jl0j4uyBHMW6pYUSdeia17qcbFQ6YK+WHkI/OiXk
+ q/4Nn1gEwIdsEVf9vLYPK6d8PtZ/zJqsniXGCztnbUvnS4amcytafs0f0osDD4+0ho
+ XwlAfgQY4t3YsBI/ipQN3ZgDUd+yFfLcd+Nb7BRzldgqH70YjZMginVD+PwG6IaYFm
+ PVsGaGrdvkNeveC8LjttzVjDCjc/+xs/6HeecDUZA4XLrVwBB2ji2EG1oXC0Z4Yni5
+ rgpWNOO8CmgPg==
+Date: Wed, 20 May 2026 20:28:29 +0800
+To: Chao Yu <chao@kernel.org>
+Message-ID: <ag2Rh-4_Tp082XXx@zlang-mailbox>
+Mail-Followup-To: Chao Yu <chao@kernel.org>, fstests@vger.kernel.org, 
+ jaegeuk@kernel.org, jprusakowski@google.com, joannechien@google.com, 
+ linux-f2fs-devel@lists.sourceforge.net
+References: <20260518101252.445214-1-chao@kernel.org>
 MIME-Version: 1.0
+Content-Disposition: inline
+In-Reply-To: <20260518101252.445214-1-chao@kernel.org>
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  f2fs_write_single_node_folio() takes an io_type argument,
- but still passes FS_GC_NODE_IO to __write_node_folio() unconditionally. This
- was harmless while the helper was only used by f2fs_move_node_folio(), whose
- caller passes FS_GC_NODE_IO. However, commit fe9b8b30b971 ("f2fs: fix inline
- data not being written to disk in writeba [...] 
+ Content preview:  On Mon, May 18, 2026 at 06:12:52PM +0800, Chao Yu wrote: >
+ Without commit 520760b9f915 ("f2fs: optimize representative type determination
+ > in GC"), f2fs GC will report inconsistent segment type in la [...] 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
- [qwjhust(at)gmail.com]
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.216.46 listed in wl.mailspike.net]
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1wPfhq-00059S-TC
-Subject: [f2fs-dev] [PATCH] f2fs: pass correct iostat type for single node
- writes
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+X-Headers-End: 1wPg2V-0006FW-3g
+Subject: Re: [f2fs-dev] [PATCH] f2fs/025: test to do sanity check section
+ type correctly in f2fs GC
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -148,85 +112,202 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: qwjhust@gmail.com, qiwenjie@xiaomi.com, yangyongpeng@xiaomi.com,
- linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+From: Zorro Lang via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Zorro Lang <zlang@kernel.org>
+Cc: joannechien@google.com, jaegeuk@kernel.org, fstests@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
-X-Spamd-Result: default: False [-1.01 / 15.00];
+X-Spamd-Result: default: False [-8.11 / 15.00];
+	WHITELIST_DMARC(-7.00)[sourceforge.net:D:+];
+	MID_RHS_NOT_FQDN(0.50)[];
+	DMARC_POLICY_ALLOW_WITH_FAILURES(-0.50)[];
 	RWL_MAILSPIKE_EXCELLENT(-0.40)[216.105.38.7:from];
 	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7];
-	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
 	MAILLIST(-0.20)[mailman];
+	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
 	MIME_GOOD(-0.10)[text/plain];
-	DMARC_POLICY_SOFTFAIL(0.10)[gmail.com : SPF not aligned (relaxed), DKIM not aligned (relaxed),none];
 	HAS_LIST_UNSUB(-0.01)[];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	DKIM_MIXED(0.00)[];
-	ARC_NA(0.00)[];
-	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,gmail.com:s=20251104];
+	FORGED_SENDER_MAILLIST(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
 	RECEIVED_HELO_LOCALHOST(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:jaegeuk@kernel.org,m:chao@kernel.org,m:qwjhust@gmail.com,m:qiwenjie@xiaomi.com,m:yangyongpeng@xiaomi.com,m:linux-kernel@vger.kernel.org,m:linux-f2fs-devel@lists.sourceforge.net,s:lists@lfdr.de];
-	MIME_TRACE(0.00)[0:+];
+	REPLYTO_DOM_EQ_TO_DOM(0.00)[];
+	TO_DN_SOME(0.00)[];
+	FORGED_RECIPIENTS(0.00)[m:chao@kernel.org,m:joannechien@google.com,m:jaegeuk@kernel.org,m:fstests@vger.kernel.org,m:linux-f2fs-devel@lists.sourceforge.net,s:lists@lfdr.de];
 	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
-	FORGED_SENDER(0.00)[qwjhust@gmail.com,linux-f2fs-devel-bounces@lists.sourceforge.net];
-	FREEMAIL_CC(0.00)[gmail.com,xiaomi.com,vger.kernel.org,lists.sourceforge.net];
-	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,gmail.com:-];
-	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
-	FORGED_SENDER_MAILLIST(0.00)[];
+	ARC_NA(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_SENDER(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
+	DKIM_MIXED(0.00)[];
+	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,kernel.org:s=k20260515];
+	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,kernel.org:-];
+	DMARC_POLICY_ALLOW(0.00)[lists.sourceforge.net,none];
 	RCVD_COUNT_FIVE(0.00)[5];
-	TO_DN_NONE(0.00)[];
+	NEURAL_HAM(-0.00)[-1.000];
 	FORGED_SENDER_FORWARDING(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[qwjhust@gmail.com,linux-f2fs-devel-bounces@lists.sourceforge.net];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	PREVIOUSLY_DELIVERED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
+	FROM_NEQ_ENVFROM(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
+	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
+	RCPT_COUNT_FIVE(0.00)[5];
 	TAGGED_RCPT(0.00)[linux-f2fs-devel];
-	RCPT_COUNT_SEVEN(0.00)[7];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.sourceforge.net:dkim,lists.sourceforge.net:rdns,lists.sourceforge.net:helo]
-X-Rspamd-Queue-Id: 9DFE058D4A8
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
+	MISSING_XM_UA(0.00)[];
+	HAS_REPLYTO(0.00)[zlang@kernel.org]
+X-Rspamd-Queue-Id: 4085B58DA7C
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-f2fs_write_single_node_folio() takes an io_type argument, but still
-passes FS_GC_NODE_IO to __write_node_folio() unconditionally.
+On Mon, May 18, 2026 at 06:12:52PM +0800, Chao Yu wrote:
+> Without commit 520760b9f915 ("f2fs: optimize representative type determination
+> in GC"), f2fs GC will report inconsistent segment type in large section issue,
+> and then it will force to shutdown filesystem.
+> 
+> [  768.190903] F2FS-fs (loop51): Inconsistent segment (3) type [1, 0] in SIT and SSA
+> 
+> The reason is f2fs kernel will assume all segment type inside large section is
+> the same, during GC it loads type from one segment and compare it to other
+> segments' type, however due to recovery flow, the chosen segment may has zero
+> valid blocks w/ different segment type, since the segment is invalid(free) one,
+> it will never be migrated, so that we should not treat such state as abnormal
+> condition.
+> 
+> This testcase is created to simulate above condition to see whether f2fs kernel
+> module can handle it correctly
+> 
+> Signed-off-by: Chao Yu <chao@kernel.org>
+> ---
+>  tests/f2fs/025     | 88 ++++++++++++++++++++++++++++++++++++++++++++++
+>  tests/f2fs/025.out |  2 ++
+>  2 files changed, 90 insertions(+)
+>  create mode 100644 tests/f2fs/025
+>  create mode 100644 tests/f2fs/025.out
+> 
+> diff --git a/tests/f2fs/025 b/tests/f2fs/025
+> new file mode 100644
+> index 00000000..1eba7158
+> --- /dev/null
+> +++ b/tests/f2fs/025
+> @@ -0,0 +1,88 @@
+> +#! /bin/bash
+> +# SPDX-License-Identifier: GPL-2.0
+> +# Copyright (c) 2026 Chao Yu <chao@kernel.org>
+> +#
+> +# FS QA Test No. f2fs/025
+> +#
+> +# Check whether f2fs will encounter cp_error (Inconsistent segment type)
+> +# when doing sanity check on type of segments inside large section during
+> +# garbage collection.
+> +#
+> +. ./common/preamble
+> +_begin_fstest auto quick
+> +
+> +_fixed_by_kernel_commit 520760b9f915 \
+> +	"f2fs: optimize representative type determination in GC"
+> +
+> +. ./common/filter
+> +
+> +_cleanup()
+> +{
+> +	cd /
+> +	rm -r -f $tmp.*
+> +}
+> +
+> +_require_scratch
+> +_require_xfs_io_command "pwrite"
+> +_require_xfs_io_command "truncate"
+> +_require_command "$F2FS_IO_PROG" f2fs_io
+> +_require_check_dmesg
+> +
+> +# Format with 96MB size and 2 segments per section
+> +_scratch_mkfs_sized $((96 * 1024 * 1024)) "" "-s 2" >> $seqres.full 2>&1
+> +
+> +# Mount with mode=lfs
+> +_scratch_mount -o mode=lfs >> $seqres.full 2>&1
+> +
+> +# Create files to fill whole filesystem, then segment type will be changed to node type
+> +for ((i=0;i<5120;i++)) do
+> +	touch $SCRATCH_MNT/$i >> $seqres.full 2>&1
 
-This was harmless while the helper was only used by
-f2fs_move_node_folio(), whose caller passes FS_GC_NODE_IO. However,
-commit fe9b8b30b971 ("f2fs: fix inline data not being written to disk
-in writeback path") made f2fs_inline_data_fiemap() call the helper with
-FS_NODE_IO for FIEMAP_FLAG_SYNC.
+5120 * 4k = 20MB
 
-Honor the caller supplied io_type so inline-data FIEMAP sync writeback is
-accounted as normal node IO instead of GC node IO, while the GC path
-continues to pass FS_GC_NODE_IO explicitly.
+> +done
+> +sync
+> +
+> +# Remove all files to create free(empty) node segments
+> +rm -f $SCRATCH_MNT/*
+> +sync
+> +
+> +# Allocate free space so that we have chance to reuse free(empty) node segments
+> +$XFS_IO_PROG -f -c "pwrite -b 4k 0 1928k" $SCRATCH_MNT/file >> $seqres.full 2>&1
+> +sync
+> +
+> +$XFS_IO_PROG -c "truncate 0" $SCRATCH_MNT/file >> $seqres.full 2>&1
+> +$XFS_IO_PROG -d -c "pwrite -b 4k 0 16M" $SCRATCH_MNT/file >> $seqres.full 2>&1
+> +$XFS_IO_PROG -c "truncate 0" $SCRATCH_MNT/file >> $seqres.full 2>&1
+> +$XFS_IO_PROG -d -c "pwrite -b 4k 0 16M" $SCRATCH_MNT/file >> $seqres.full 2>&1
+> +$XFS_IO_PROG -c "truncate 0" $SCRATCH_MNT/file >> $seqres.full 2>&1
+> +sync
+> +
+> +$XFS_IO_PROG -d -c "pwrite -b 4k 0 8M" $SCRATCH_MNT/file >> $seqres.full 2>&1
+> +$XFS_IO_PROG -c "truncate 0" $SCRATCH_MNT/file >> $seqres.full 2>&1
+> +$XFS_IO_PROG -d -c "pwrite -b 4k 0 32K" $SCRATCH_MNT/file >> $seqres.full 2>&1
+> +$XFS_IO_PROG -c "truncate 0" $SCRATCH_MNT/file >> $seqres.full 2>&1
 
-Fixes: fe9b8b30b971 ("f2fs: fix inline data not being written to disk in writeback path")
-Signed-off-by: Wenjie Qi <qiwenjie@xiaomi.com>
----
- fs/f2fs/node.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+1928k + 16M + 16M + 8M + 32K ~= 40M
 
-diff --git a/fs/f2fs/node.c b/fs/f2fs/node.c
-index 4e5bd9e4cfc..6a9e77c87d1 100644
---- a/fs/f2fs/node.c
-+++ b/fs/f2fs/node.c
-@@ -1875,7 +1875,7 @@ int f2fs_write_single_node_folio(struct folio *node_folio, int sync_mode,
- 	}
- 
- 	if (!__write_node_folio(node_folio, false, false, NULL,
--				&wbc, false, FS_GC_NODE_IO, NULL))
-+				&wbc, false, io_type, NULL))
- 		err = -EAGAIN;
- 	goto release_folio;
- out_folio:
--- 
-2.43.0
+> +$XFS_IO_PROG -d -c "pwrite -b 4k 0 2M" -c "fsync" $SCRATCH_MNT/file >> $seqres.full 2>&1
 
+96M - 40M - 20M = 36M
+
+I'm not a f2fs expert, I think you hope to (almost) fill the fs before this 2M
+pwrite step. If so, I'm wondering can we ensure that other metadata takes ~36 MB
+of space, thereby guaranteeing that this 2 MB write triggers the reuse of that
+1928 KB segment (no matter with any MKFS_OPTIONS)?
+
+Thanks,
+Zorro
+
+> +
+> +# Shutdown the filesystem without checkpoint
+> +$F2FS_IO_PROG shutdown 2 $SCRATCH_MNT >> $seqres.full 2>&1
+> +
+> +_scratch_unmount >> $seqres.full 2>&1
+> +
+> +_scratch_mount -o mode=lfs >> $seqres.full 2>&1
+> +
+> +# Run urgent_gc mode to trigger garbage collection
+> +dev_name=$(_short_dev $SCRATCH_DEV)
+> +if [ -f /sys/fs/f2fs/$dev_name/gc_urgent ]; then
+> +	echo 1 > /sys/fs/f2fs/$dev_name/gc_urgent
+> +fi
+> +
+> +# Wait background GC thread to wake up to run and potentially encounter the inconsistency
+> +sleep 5
+> +
+> +_scratch_unmount >> $seqres.full 2>&1
+> +
+> +# Check whether the dmesg has the warning indicating the bug
+> +_check_dmesg_for "F2FS-fs \($dev_name\): Inconsistent segment" && \
+> +	_fail "F2FS-fs ($dev_name): Inconsistent segment type detected in dmesg!"
+> +
+> +echo "Silence is golden"
+> +status=0
+> +exit
+> diff --git a/tests/f2fs/025.out b/tests/f2fs/025.out
+> new file mode 100644
+> index 00000000..3d70951e
+> --- /dev/null
+> +++ b/tests/f2fs/025.out
+> @@ -0,0 +1,2 @@
+> +QA output created by 025
+> +Silence is golden
+> -- 
+> 2.49.0
+> 
 
 
 _______________________________________________
