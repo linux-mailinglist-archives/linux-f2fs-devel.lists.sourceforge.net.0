@@ -2,42 +2,42 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id gAuUCDOrDWox1QUAu9opvQ
+	id sJHmJzOrDWox1QUAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
 	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 20 May 2026 14:38:11 +0200
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 71C1558DD63
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 20 May 2026 14:38:10 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3E64258DD71
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 20 May 2026 14:38:11 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
 	List-Unsubscribe:List-Id:Subject:MIME-Version:References:In-Reply-To:
 	Message-ID:Date:To:Sender:Content-ID:Content-Description:Resent-Date:
 	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=A9slJnsbnGzcOGOion1Jqqdg8P8bjuwRxVxlFOT9DWk=; b=W7/IBvVpTUfuAs/eBIKOsZ+EMm
-	4Pu+z4qKHAdoVDzaqYTJUDxuuYPhlK8Eyvcog1oxO1w95r29YRG6sesn5RPbOv3PsQW6eY9LIuJ1o
-	vLU0LevHUSTY6OWFsEEDnyVIJuxNDWxWotQLSWJ/igW+X5zB2mkkuy2tFOZURAAKAk2o=;
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=/fAqInZdBacf6ZHc7H2lNOIH+bjlWY9XlbgZ8Hdtk7g=; b=ASbSC82/mLdZEVW/xUdc17tTn6
+	ASdElmxItYvynDz44uGmaWo2J4yS+PN6h2RWr2LTrST9uH6teU2st+KNXMltkIyFexU2MQz6yO33C
+	3VBXiaE1bIJoeRysM7TZ8pbbt3TrzAmsgEtOsRcou/2UQuL0nlNa2H9G5sPELPMbpuMo=;
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1wPgBZ-0007Nx-HM;
-	Wed, 20 May 2026 12:38:06 +0000
+	id 1wPgBc-0001ed-IN;
+	Wed, 20 May 2026 12:38:08 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <aalbersh@kernel.org>) id 1wPgBO-0007NL-Bp
+ (envelope-from <aalbersh@kernel.org>) id 1wPgBO-0001dv-Nv
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 20 May 2026 12:37:55 +0000
+ Wed, 20 May 2026 12:37:54 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=bE8p1397UMHMZu2/AK9ljMJak3Vf/v+sTTscAk6wHps=; b=BztFz6opWL7TSc4UHVv/BEypLU
- qKnuAE5XRykK5ggcoDxge/u+yFXgH8K7pqQcquDlWhvXVoN6SqryNTvWuyfP1pI0y4rV4RlxkoWuC
- mbvTsjvSp/j2knlqN/KrJ5O6NR1UiQosC0dKaXLFVtieKIqpJTJpiaok/stE7TkOdQrI=;
+ bh=sVTGGPE/qLWPG7zNwh5xf7mxjHPGfB8oH+pkWcFtnJk=; b=kijDTGaWVYND7JiJ1SqgPLWmjB
+ XTQCDXWR8IJcWZlQlJKywWFf86IecKjr4uWhhv4lnqV6UV5N+o5lUYqVyTSFXos0u5usXSn4W6W+u
+ 96jqNRJVMXth+qkL2T5JuKIYJZDguGDPusRsgNqzY74GWuGfJmjzISRQ/vaWTb0DkmFE=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:
@@ -45,33 +45,33 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=bE8p1397UMHMZu2/AK9ljMJak3Vf/v+sTTscAk6wHps=; b=Uncm3ChDlMa72yx63CiMHhagej
- z94VhAV5nNfWXVNle2stWpMF7yay8PaOmn21OsoWRsXAxKvZ5HFcVPLuRml9n6H48KGN9+7ciPD5t
- fmapJ/lnzaiSK4f6RFlba8sgVwlbG9n3j4LbkOL7VDa7E1ajOqxZ3Ht0C5TYKjk0uvDM=;
-Received: from sea.source.kernel.org ([172.234.252.31])
+ bh=sVTGGPE/qLWPG7zNwh5xf7mxjHPGfB8oH+pkWcFtnJk=; b=NpOkINOK+ynD+Mlpu90zxgx78S
+ 14AidJl/WtMLz0xyescJ3j9DyriG3bMCCOgSXiEUnRvsRf71CZtZjQQ3i+e1E44sQdRyQFr+fiFTx
+ ITLOlFLT58qWu6linkI0RR6nFGQ6lztJe5BCnet6ziOOz12QoJXzrpSbd/2Otyotoxjo=;
+Received: from tor.source.kernel.org ([172.105.4.254])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1wPgBK-0006Yn-LG for linux-f2fs-devel@lists.sourceforge.net;
+ id 1wPgBN-0006Z0-Ij for linux-f2fs-devel@lists.sourceforge.net;
  Wed, 20 May 2026 12:37:54 +0000
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by sea.source.kernel.org (Postfix) with ESMTP id D8D0C41824;
- Wed, 20 May 2026 12:37:40 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id B949A1F00893;
- Wed, 20 May 2026 12:37:38 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id 7CAD660121;
+ Wed, 20 May 2026 12:37:43 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2CA101F000E9;
+ Wed, 20 May 2026 12:37:41 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
- s=k20260515; t=1779280660;
- bh=bE8p1397UMHMZu2/AK9ljMJak3Vf/v+sTTscAk6wHps=;
+ s=k20260515; t=1779280663;
+ bh=sVTGGPE/qLWPG7zNwh5xf7mxjHPGfB8oH+pkWcFtnJk=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References;
- b=Wabb3xiVBTvAjY6O6/AG4iCtybK9opWo5Df5CWefc3wetFZ0rMSlvR0UjHLKa8y9g
- vctH26tq7t9YGZaSgrwLlzUKMOp7UROHV/dYX1U8v4jAbQYtM6VB75SlWz4ASBYKpk
- oslX64E/cB/cppaMdks1CX+0yEboCZYCm5s/WyPOgtBdOPdjSIFJuOUGu3cBpeN5A/
- AL9VtTGxKFRqSHDZcfU6e/CrZr15JkqmteEX74OtLf/D1LQoVrgGYKVNIzWMd1l4mg
- 9i/x5QZlyO4ki94OPGJGP959Pzgcwla+RpyfPYcr745kWC7MPSuG63ZUvDEGlpzMVn
- MAy/gDZs9xiWA==
+ b=VNdrrnMI3QGrKsC6xCans4vZw+6UW20seaIUCO1pNlUeRfV9Oks5TiUEPtn/jdJXP
+ Ibft1w5C+ptBIk2yGfbtJlp3R6sFXaX+NmJ4jHZBFQ+xN2lZjW5moHqU11Hd+JroUS
+ aiMd3fpKYnto9qi9LkLnedd0pxvXUWvPcVqxNdqY97PxVws0ePWwGYiEnsnbRv/DYG
+ is4vc900/0RGyB3lrh9IAHCxh6w6vzN+4zlnP7ca83HDPlmlBAxVT0xf6MJlYtnp4K
+ VqKp/kO3UJW6PNp+1HGopotW6Ib717bSVXx/hP8zis1t+B/SJShJq8l8fE+I3JTHok
+ jDmMR9teV49dw==
 To: linux-xfs@vger.kernel.org, fsverity@lists.linux.dev,
  linux-fsdevel@vger.kernel.org, ebiggers@kernel.org
-Date: Wed, 20 May 2026 14:37:03 +0200
-Message-ID: <20260520123722.405752-6-aalbersh@kernel.org>
+Date: Wed, 20 May 2026 14:37:04 +0200
+Message-ID: <20260520123722.405752-7-aalbersh@kernel.org>
 X-Mailer: git-send-email 2.51.2
 In-Reply-To: <20260520123722.405752-1-aalbersh@kernel.org>
 References: <20260520123722.405752-1-aalbersh@kernel.org>
@@ -83,13 +83,11 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Let filesystem iterate over hashes in the block and check
- if these are hashes of zeroed data blocks. XFS will use this to decide if
- it want to store tree block full of these hashes. Signed-off-by: Andrey
- Albershteyn
- <aalbersh@kernel.org> Reviewed-by: "Darrick J. Wong" <djwong@kernel.org>
- Acked-by: Eric Biggers <ebiggers@kernel.org> --- fs/btrfs/verity.c | 6 +++++-
- fs/ext4/verity. [...] 
+ Content preview:  This is the same function to read from pageache. XFS will
+ also need this,
+ so move this to core fsverity. Note that f2fs and ext4 functions
+ diverged a bit, as ext4 operated over folios and f2fs operated over pages.
+ The common one will operate over folios. 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -100,9 +98,9 @@ X-Spam-Report: Spam detection software,
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-X-Headers-End: 1wPgBK-0006Yn-LG
-Subject: [f2fs-dev] [PATCH v10 05/22] fsverity: pass digest size and hash of
- the all-zeroes block to ->write
+X-Headers-End: 1wPgBN-0006Z0-Ij
+Subject: [f2fs-dev] [PATCH v10 06/22] fsverity: hoist pagecache_read from
+ f2fs/ext4 to fsverity
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -127,7 +125,7 @@ X-Spamd-Result: default: False [-8.61 / 15.00];
 	WHITELIST_DMARC(-7.00)[sourceforge.net:D:+];
 	DMARC_POLICY_ALLOW_WITH_FAILURES(-0.50)[];
 	RWL_MAILSPIKE_EXCELLENT(-0.40)[216.105.38.7:from];
-	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7];
+	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7:c];
 	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
 	MAILLIST(-0.20)[mailman];
 	MIME_GOOD(-0.10)[text/plain];
@@ -137,138 +135,209 @@ X-Spamd-Result: default: False [-8.61 / 15.00];
 	DMARC_POLICY_ALLOW(0.00)[lists.sourceforge.net,none];
 	RECEIVED_HELO_LOCALHOST(0.00)[];
 	FORGED_RECIPIENTS(0.00)[m:linux-xfs@vger.kernel.org,m:fsverity@lists.linux.dev,m:linux-fsdevel@vger.kernel.org,m:ebiggers@kernel.org,m:aalbersh@kernel.org,m:djwong@kernel.org,m:linux-unionfs@vger.kernel.org,m:linux-f2fs-devel@lists.sourceforge.net,m:linux-ext4@vger.kernel.org,m:hch@lst.de,m:linux-btrfs@vger.kernel.org,s:lists@lfdr.de];
-	FORGED_SENDER(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
+	ARC_NA(0.00)[];
 	TO_DN_SOME(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,kernel.org:s=k20260515];
 	MIME_TRACE(0.00)[0:+];
-	ARC_NA(0.00)[];
+	FORGED_SENDER(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
 	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
 	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
+	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,kernel.org:-];
 	RCVD_COUNT_FIVE(0.00)[5];
 	NEURAL_HAM(-0.00)[-1.000];
 	FORGED_SENDER_FORWARDING(0.00)[];
 	FROM_HAS_DN(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
-	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,kernel.org:-];
+	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	TAGGED_RCPT(0.00)[linux-f2fs-devel];
 	HAS_REPLYTO(0.00)[aalbersh@kernel.org];
 	RCPT_COUNT_SEVEN(0.00)[11];
 	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.sourceforge.net:dkim,lists.sourceforge.net:rdns,lists.sourceforge.net:helo]
-X-Rspamd-Queue-Id: 71C1558DD63
+	DBL_BLOCKED_OPENRESOLVER(0.00)[lst.de:email,lists.sourceforge.net:dkim,lists.sourceforge.net:rdns,lists.sourceforge.net:helo]
+X-Rspamd-Queue-Id: 3E64258DD71
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-Let filesystem iterate over hashes in the block and check if these are
-hashes of zeroed data blocks. XFS will use this to decide if it want to
-store tree block full of these hashes.
+This is the same function to read from pageache. XFS will also need
+this, so move this to core fsverity.
 
-Signed-off-by: Andrey Albershteyn <aalbersh@kernel.org>
-Reviewed-by: "Darrick J. Wong" <djwong@kernel.org>
+Note that f2fs and ext4 functions diverged a bit, as ext4 operated over
+folios and f2fs operated over pages. The common one will operate over
+folios.
+
+Reviewed-by: Darrick J. Wong <djwong@kernel.org>
+Reviewed-by: Christoph Hellwig <hch@lst.de>
 Acked-by: Eric Biggers <ebiggers@kernel.org>
+Signed-off-by: Andrey Albershteyn <aalbersh@kernel.org>
 ---
- fs/btrfs/verity.c        | 6 +++++-
- fs/ext4/verity.c         | 4 +++-
- fs/f2fs/verity.c         | 4 +++-
- fs/verity/enable.c       | 4 +++-
- include/linux/fsverity.h | 6 +++++-
- 5 files changed, 19 insertions(+), 5 deletions(-)
+ fs/ext4/verity.c         | 32 +++-----------------------------
+ fs/f2fs/verity.c         | 30 +-----------------------------
+ fs/verity/pagecache.c    | 33 +++++++++++++++++++++++++++++++++
+ include/linux/fsverity.h |  2 ++
+ 4 files changed, 39 insertions(+), 58 deletions(-)
 
-diff --git a/fs/btrfs/verity.c b/fs/btrfs/verity.c
-index 0062b3a55781..fd3696d3f4ce 100644
---- a/fs/btrfs/verity.c
-+++ b/fs/btrfs/verity.c
-@@ -773,11 +773,15 @@ static struct page *btrfs_read_merkle_tree_page(struct inode *inode,
-  * @buf:	Merkle tree block to write
-  * @pos:	the position of the block in the Merkle tree (in bytes)
-  * @size:	the Merkle tree block size (in bytes)
-+ * @zero_digest:	the hash of the all-zeroes block
-+ * @digest_size:	size of zero_digest, in bytes
-  *
-  * Returns 0 on success or negative error code on failure
-  */
- static int btrfs_write_merkle_tree_block(struct file *file, const void *buf,
--					 u64 pos, unsigned int size)
-+					 u64 pos, unsigned int size,
-+					 const u8 *zero_digest,
-+					 unsigned int digest_size)
- {
- 	struct inode *inode = file_inode(file);
- 	loff_t merkle_pos = merkle_file_pos(inode);
 diff --git a/fs/ext4/verity.c b/fs/ext4/verity.c
-index ca61da53f313..347945ac23a4 100644
+index 347945ac23a4..ac5c133f5529 100644
 --- a/fs/ext4/verity.c
 +++ b/fs/ext4/verity.c
-@@ -374,7 +374,9 @@ static void ext4_readahead_merkle_tree(struct inode *inode, pgoff_t index,
+@@ -34,32 +34,6 @@ static inline loff_t ext4_verity_metadata_pos(const struct inode *inode)
+ 	return round_up(inode->i_size, 65536);
  }
  
- static int ext4_write_merkle_tree_block(struct file *file, const void *buf,
--					u64 pos, unsigned int size)
-+					u64 pos, unsigned int size,
-+					const u8 *zero_digest,
-+					unsigned int digest_size)
- {
- 	pos += ext4_verity_metadata_pos(file_inode(file));
+-/*
+- * Read some verity metadata from the inode.  __vfs_read() can't be used because
+- * we need to read beyond i_size.
+- */
+-static int pagecache_read(struct inode *inode, void *buf, size_t count,
+-			  loff_t pos)
+-{
+-	while (count) {
+-		struct folio *folio;
+-		size_t n;
+-
+-		folio = read_mapping_folio(inode->i_mapping, pos >> PAGE_SHIFT,
+-					 NULL);
+-		if (IS_ERR(folio))
+-			return PTR_ERR(folio);
+-
+-		n = memcpy_from_file_folio(buf, folio, pos, count);
+-		folio_put(folio);
+-
+-		buf += n;
+-		pos += n;
+-		count -= n;
+-	}
+-	return 0;
+-}
+-
+ /*
+  * Write some verity metadata to the inode for FS_IOC_ENABLE_VERITY.
+  * kernel_write() can't be used because the file descriptor is readonly.
+@@ -311,8 +285,8 @@ static int ext4_get_verity_descriptor_location(struct inode *inode,
+ 		goto bad;
+ 	desc_size_pos -= sizeof(desc_size_disk);
  
+-	err = pagecache_read(inode, &desc_size_disk, sizeof(desc_size_disk),
+-			     desc_size_pos);
++	err = fsverity_pagecache_read(inode, &desc_size_disk,
++				      sizeof(desc_size_disk), desc_size_pos);
+ 	if (err)
+ 		return err;
+ 	desc_size = le32_to_cpu(desc_size_disk);
+@@ -352,7 +326,7 @@ static int ext4_get_verity_descriptor(struct inode *inode, void *buf,
+ 	if (buf_size) {
+ 		if (desc_size > buf_size)
+ 			return -ERANGE;
+-		err = pagecache_read(inode, buf, desc_size, desc_pos);
++		err = fsverity_pagecache_read(inode, buf, desc_size, desc_pos);
+ 		if (err)
+ 			return err;
+ 	}
 diff --git a/fs/f2fs/verity.c b/fs/f2fs/verity.c
-index 92ebcc19cab0..b3b3e71604ac 100644
+index b3b3e71604ac..5ea0a9b40443 100644
 --- a/fs/f2fs/verity.c
 +++ b/fs/f2fs/verity.c
-@@ -270,7 +270,9 @@ static void f2fs_readahead_merkle_tree(struct inode *inode, pgoff_t index,
+@@ -36,34 +36,6 @@ static inline loff_t f2fs_verity_metadata_pos(const struct inode *inode)
+ 	return round_up(inode->i_size, 65536);
  }
  
- static int f2fs_write_merkle_tree_block(struct file *file, const void *buf,
--					u64 pos, unsigned int size)
-+					u64 pos, unsigned int size,
-+					const u8 *zero_digest,
-+					unsigned int digest_size)
- {
- 	pos += f2fs_verity_metadata_pos(file_inode(file));
- 
-diff --git a/fs/verity/enable.c b/fs/verity/enable.c
-index 42dfed1ce0ce..ad4ff71d7dd9 100644
---- a/fs/verity/enable.c
-+++ b/fs/verity/enable.c
-@@ -50,7 +50,9 @@ static int write_merkle_tree_block(struct file *file, const u8 *buf,
- 	int err;
- 
- 	err = inode->i_sb->s_vop->write_merkle_tree_block(file, buf, pos,
--							  params->block_size);
-+							  params->block_size,
-+							  params->zero_digest,
-+							  params->digest_size);
- 	if (err)
- 		fsverity_err(inode, "Error %d writing Merkle tree block %lu",
- 			     err, index);
+-/*
+- * Read some verity metadata from the inode.  __vfs_read() can't be used because
+- * we need to read beyond i_size.
+- */
+-static int pagecache_read(struct inode *inode, void *buf, size_t count,
+-			  loff_t pos)
+-{
+-	while (count) {
+-		size_t n = min_t(size_t, count,
+-				 PAGE_SIZE - offset_in_page(pos));
+-		struct page *page;
+-
+-		page = read_mapping_page(inode->i_mapping, pos >> PAGE_SHIFT,
+-					 NULL);
+-		if (IS_ERR(page))
+-			return PTR_ERR(page);
+-
+-		memcpy_from_page(buf, page, offset_in_page(pos), n);
+-
+-		put_page(page);
+-
+-		buf += n;
+-		pos += n;
+-		count -= n;
+-	}
+-	return 0;
+-}
+-
+ /*
+  * Write some verity metadata to the inode for FS_IOC_ENABLE_VERITY.
+  * kernel_write() can't be used because the file descriptor is readonly.
+@@ -248,7 +220,7 @@ static int f2fs_get_verity_descriptor(struct inode *inode, void *buf,
+ 	if (buf_size) {
+ 		if (size > buf_size)
+ 			return -ERANGE;
+-		res = pagecache_read(inode, buf, size, pos);
++		res = fsverity_pagecache_read(inode, buf, size, pos);
+ 		if (res)
+ 			return res;
+ 	}
+diff --git a/fs/verity/pagecache.c b/fs/verity/pagecache.c
+index 99f5f53eea98..9d82e6b74ba1 100644
+--- a/fs/verity/pagecache.c
++++ b/fs/verity/pagecache.c
+@@ -78,3 +78,36 @@ void fsverity_fill_zerohash(struct folio *folio, size_t offset, size_t len,
+ 				vi->tree_params.digest_size);
+ }
+ EXPORT_SYMBOL_GPL(fsverity_fill_zerohash);
++
++/**
++ * fsverity_pagecache_read() - read page and copy data to buffer
++ * @inode:	copy from this inode's address space
++ * @buf:	buffer to copy to
++ * @count:	number of bytes to copy
++ * @pos:	position of the folio to copy from
++ *
++ * Read some verity metadata from the inode.  __vfs_read() can't be used because
++ * we need to read beyond i_size.
++ */
++int fsverity_pagecache_read(struct inode *inode, void *buf, size_t count,
++			  loff_t pos)
++{
++	while (count) {
++		struct folio *folio;
++		size_t n;
++
++		folio = read_mapping_folio(inode->i_mapping, pos >> PAGE_SHIFT,
++					 NULL);
++		if (IS_ERR(folio))
++			return PTR_ERR(folio);
++
++		n = memcpy_from_file_folio(buf, folio, pos, count);
++		folio_put(folio);
++
++		buf += n;
++		pos += n;
++		count -= n;
++	}
++	return 0;
++}
++EXPORT_SYMBOL_GPL(fsverity_pagecache_read);
 diff --git a/include/linux/fsverity.h b/include/linux/fsverity.h
-index 3c3250f6f272..9e7d946676b9 100644
+index 9e7d946676b9..f9433332c274 100644
 --- a/include/linux/fsverity.h
 +++ b/include/linux/fsverity.h
-@@ -124,6 +124,8 @@ struct fsverity_operations {
- 	 * @buf: the Merkle tree block to write
- 	 * @pos: the position of the block in the Merkle tree (in bytes)
- 	 * @size: the Merkle tree block size (in bytes)
-+	 * @zero_digest: the hash of the all-zeroes block
-+	 * @digest_size: size of zero_digest, in bytes
- 	 *
- 	 * This is only called between ->begin_enable_verity() and
- 	 * ->end_enable_verity().
-@@ -131,7 +133,9 @@ struct fsverity_operations {
- 	 * Return: 0 on success, -errno on failure
- 	 */
- 	int (*write_merkle_tree_block)(struct file *file, const void *buf,
--				       u64 pos, unsigned int size);
-+				       u64 pos, unsigned int size,
-+				       const u8 *zero_digest,
-+				       unsigned int digest_size);
- };
+@@ -328,5 +328,7 @@ void fsverity_cleanup_inode(struct inode *inode);
+ struct page *generic_read_merkle_tree_page(struct inode *inode, pgoff_t index);
+ void generic_readahead_merkle_tree(struct inode *inode, pgoff_t index,
+ 				   unsigned long nr_pages);
++int fsverity_pagecache_read(struct inode *inode, void *buf, size_t count,
++			    loff_t pos);
  
- #ifdef CONFIG_FS_VERITY
+ #endif	/* _LINUX_FSVERITY_H */
 -- 
 2.51.2
 
