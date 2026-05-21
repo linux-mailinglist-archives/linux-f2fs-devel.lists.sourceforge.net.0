@@ -2,76 +2,109 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id kBGKFU5gDmoD+QUAu9opvQ
+	id sEKqDURlDmqp+QUAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 21 May 2026 03:30:54 +0200
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 21 May 2026 03:52:04 +0200
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 734AE59DAA5
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 21 May 2026 03:30:53 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 680A959DD07
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 21 May 2026 03:52:02 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
-	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:MIME-Version:Message-ID:Date:To:Sender:
-	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
-	Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Owner;
-	bh=HMq58TMGyoGkLalMizL+mlGSOh8oSjoDJjYR/OedQC4=; b=StIeMELFbiU1iQEoWwOid1UQKX
-	xhj/v+yadOECmXmnTjW56nQBZhVdhq0l1DvusR7RAz++AY8sUNXV4ASIjDKhjyVnpG0k9BodgW7Jv
-	lyULybKHt0XJIvNLg3wlsNJtFFGc62ZFWxQbA/s9FRbp9dtq+blWDJqXppEKKm6hz02A=;
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
+	Subject:MIME-Version:Message-ID:Date:To:From:Sender:Reply-To:Content-ID:
+	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+	:Resent-Message-ID:In-Reply-To:References:List-Owner;
+	bh=k7uIMOWTQjQRUkcXwSG4fXYMrkit0CP7sPMeLtw0dfY=; b=J5hV7Ne9GoQkHSpl58JcDUzpwf
+	8QNj1+E8pl7CqYB+1/fE4IbmTrj6iKEWJtw5n53LnQj+LWxv5dAkayoNxad55M8ApCL0u7MK9CvVq
+	ZXBkXMC2I61jn5YHyKw/rk03SdVg1qDiFtWizAXFM9Wq97faSOz3slroPoFZwhEJvNoM=;
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1wPsFA-00020a-Mn;
-	Thu, 21 May 2026 01:30:36 +0000
+	id 1wPsZf-0008D3-AE;
+	Thu, 21 May 2026 01:51:48 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1wPsEj-0001ya-06
+ (envelope-from <qwjhust@gmail.com>) id 1wPsZd-0008Cw-33
  for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 21 May 2026 01:30:09 +0000
+ Thu, 21 May 2026 01:51:45 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
  Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=9YGt2++WFNyjiYBB6q9LeDg3jwsBN8tocw4HLbw/iTg=; b=lbAvsV2DD1YDycLIR6bOqFCcjr
- QiaGA4nB9RmDpWLDF//Zc+MTXPAVofPMSmAujcQRKZeGAzgiSwq60samxmsqafAokAYd+wXp0j1SP
- EyafWhZ3b8N+YjdQLa1JQBfwF0arGGMaqSSWw6DwiC2QIIzSLHRTv7nTUyHtFQ7EU75s=;
+ bh=rybzgIgzvHGYiQF9jRUihAcDFOY5JFL5Nz+b/9q97sQ=; b=CzGB0HR7qcNOH1K7vWX7ZP1Jfr
+ FVT3YaClKvfRAX2f9UeZ/TujZ9DGQ5n6vgOmuKjdhU2+y9W1/ImcKUqX7bCRNgk6OS8uHp2QxBdHw
+ FPBlePN9dsSVPrLFF/kd9UX5keQyVcPTXR3+rHPXkjmiizQ0iis7H0g1vhKJzpVFWPnI=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
  :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
  Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=9YGt2++WFNyjiYBB6q9LeDg3jwsBN8tocw4HLbw/iTg=; b=n
- VANI2mzH54FGs1lJWcOENOjFXz4EkKL1P2r7KjkcY/4Cv1LP3fSG+V0hOvmXSFgJZfd+QLRw//HnJ
- lpUSkvZXR0OewdC/zD6/2dw14sNHDJ2JdzVe2DRsgZS4TFUvsKEQcFnu8t83iAOXiTnMz3Q3C3o+v
- ma5iJJ/nFciXMK4o=;
-Received: from tor.source.kernel.org ([172.105.4.254])
+ List-Owner:List-Archive; bh=rybzgIgzvHGYiQF9jRUihAcDFOY5JFL5Nz+b/9q97sQ=; b=a
+ EAXsDUTHeQqAKmg7FjIYkPmMG4q06wvu39w/3T9KF4QDtE0sD5n1iKD97LDcJzu8INPucdsfjaLgo
+ z3DkeTEg/iM5r9s3psyTThwcN0Gu/Lr/MzQSxHA23bpL5n6+zuMoxMMFgVS7gTC10YoWB+/7BuHas
+ h3ouJn7hSgNlPlIQ=;
+Received: from mail-pl1-f172.google.com ([209.85.214.172])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1wPsEg-0007tb-0O for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 21 May 2026 01:30:08 +0000
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by tor.source.kernel.org (Postfix) with ESMTP id CD67260098;
- Thu, 21 May 2026 01:29:55 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1B43B1F000E9;
- Thu, 21 May 2026 01:29:53 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
- s=k20260515; t=1779326995;
- bh=9YGt2++WFNyjiYBB6q9LeDg3jwsBN8tocw4HLbw/iTg=;
- h=From:To:Cc:Subject:Date;
- b=QkdQbfCYlO/bvG4mu5ZWBNvBEjOor9KHPrHtvEoP48oPIMX7Ht6oRl0P/AhXid+vW
- dm4ng9kgIB2bjUNqHO/D1ysZ0JKh1s0s51uUd5fZYE19klL9B8A9xdRLjAUAsWu9+g
- NtFb8AIRuT59EYD+WooOVP/Lge2ik8AH90mdPww59yQMBSb9nqQT7eqzy3viizVbHy
- WpzGMZbW6exfPGhDjxF9Bmg99S8HEB23T8xLVeZRs8FV1zOt1mt6yc3JsJNVNWDWAu
- SmdrtYmcOjSald7/bt7+BFPfPBPjZxTx31XL8Qmdtcp+LvZ8jVAXNwqdoFXW/KsMx3
- JTS31FRNf58tA==
-To: jaegeuk@kernel.org
-Date: Thu, 21 May 2026 09:29:42 +0800
-Message-ID: <20260521012942.1345592-1-chao@kernel.org>
-X-Mailer: git-send-email 2.54.0.669.g59709faab0-goog
+ (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
+ id 1wPsZb-0001jp-Um for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 21 May 2026 01:51:45 +0000
+Received: by mail-pl1-f172.google.com with SMTP id
+ d9443c01a7336-2bcd730e090so42358345ad.2
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Wed, 20 May 2026 18:51:44 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20251104; t=1779328294; x=1779933094; darn=lists.sourceforge.net;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=rybzgIgzvHGYiQF9jRUihAcDFOY5JFL5Nz+b/9q97sQ=;
+ b=EVisZWPrPtmTpt0+0NKdVhJIH75IbwByAsZIdgwZ5CPm/HJ1I5Xd8OBPI2vRcx6oX1
+ R00gM74FRUniit72dPPmaDjgJN2MlpCOHycVHuwRnc4u4MzHziuLeBqrXJ6loq4qI534
+ SRgmTpOO18sy45kEt6I0A0U4uQuOyNHlipsxJHbWjnNtsf9yTuIBHpTP0CY79jTcgI/W
+ mhngRmxn/ZA8s9nNzWMOyfwHXnqyvEHwacyIhKVqQ+A5XBNpIsmAu9sVRoFl6MJXY4BR
+ L4ZLbFMPHVPUgzU7C+NCjC31DlvwvgldRuFXIYmyX9c9f7y6rUn6awmWsF15qkJFykLm
+ elnQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1779328294; x=1779933094;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=rybzgIgzvHGYiQF9jRUihAcDFOY5JFL5Nz+b/9q97sQ=;
+ b=LCCnPSR9uRQpnD1AfZjlkFOz/4v8AN6hwP/GjY8ed72u6I9IfhVrtHRsOdf2YrKJxv
+ cOe/IE43OulPyd/dEmZ0PB0bAailPqJFTDbmsWCpyFkETH4OI0JyG7OOreSQk86R9rDp
+ hoIDsMPUBLMt7kMZ5dVhBU9SOzOZnv9HACBH4XEc6LoOI0wk6mhWpXv1/ejnHqmgrE+W
+ 9iN5uXHSl77e7TzAt1HxMTAdgZU0W3l/iUSl7bAT1wqgryyOKNJ9biogVHDTt/Js7QR0
+ AAuTpOYCWQWKIFryPNyo3N31vAMz0iJknC0kA1GlNpXTyJfpuhsAt4Tyz+nMTVuAwxJt
+ ZZBw==
+X-Gm-Message-State: AOJu0Yxk+D+Gh0zm0p6DV42TstgLxic1nH4WaSDYxhgAWQXTHCYaZNYq
+ vCvkQO7ivzMhR/lNse0xYP8EgVDIt8FJEQfc29cVmU9N+LDMCxQry/RX
+X-Gm-Gg: Acq92OE1n0zPjZXbueRcLzmdHqwY+0SV0wXzJIS2pC0F9VygjBuWDifo6n899BOVrN6
+ sn9OIWmOB6BljXO5JhzhobeBnQONbDjqnfeMUOqmwfMTVAOs0a6FiwsFQlSfqgGw6lqrbOMBRWR
+ lOnNH5AA++r0DqL4+EGaaXeQtGMKBon4GIfohPW+ApRzHSCim8GKut/mzlE4Z1XPcd2JQejgoNr
+ yNr5+ONuJLbeiYzdlj1mpy3J6rmPymO1SJqnwea7vhV3Skvs2DN4v4Cs1hN28iZV/LZxLohFvlC
+ yhpnDBDJ/FFFDbjbwGdMIU0KLnB4CVcRyTeAKRvTFPslsh0OhmATBOdJeI07IZRvoFU9aD3/RT2
+ xalvCpQONBQmtafSqEAXz3TXwfmgVKkUyn0VmhKjxMdr1tdMgggorDfD3WGrvQuXfEOfnTayPxj
+ rp+rqi43AGrvgVImlLrlrIHWgjsr0OR2GNoORdM+AVqbhWn+IcTcF4hCaC1dYKoZ/7NHdDXfIwb
+ tGQLJ9t
+X-Received: by 2002:a17:902:db04:b0:2b9:87e0:1f80 with SMTP id
+ d9443c01a7336-2bea3386598mr5807845ad.24.1779328293659; 
+ Wed, 20 May 2026 18:51:33 -0700 (PDT)
+Received: from qiwenjie-ThinkCentre-M760t.mioffice.cn ([43.224.245.241])
+ by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-2bdc4c2cda4sm144600225ad.58.2026.05.20.18.51.31
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 20 May 2026 18:51:33 -0700 (PDT)
+From: Wenjie Qi <qwjhust@gmail.com>
+X-Google-Original-From: Wenjie Qi <qiwenjie@xiaomi.com>
+To: jaegeuk@kernel.org,
+	chao@kernel.org
+Date: Thu, 21 May 2026 09:51:26 +0800
+Message-ID: <20260521015126.1663277-1-qiwenjie@xiaomi.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
@@ -80,10 +113,9 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: fsck.f2fs -d1 <device> [fix_section_type:3036] wrong
- sit->type
- (4) in DATA secno:1 segno:2 [fix_section_type:3036] wrong sit->type (4) in
- DATA secno:5 segno:11 fsck.f2fs -f <device> 
+ Content preview: F2FS records image errors and checkpoint-stop reasons through
+ the same s_error_work worker. The ordinary f2fs_handle_error() path only
+ updates s_errors, but the worker still calls fserror_report_shutd [...] 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -94,9 +126,12 @@ X-Spam-Report: Spam detection software,
  not necessarily valid
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
-X-Headers-End: 1wPsEg-0007tb-0O
-Subject: [f2fs-dev] [PATCH v2] fsck.f2fs: support to fix inconsistent
- sit->type of segments in large section
+ 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
+ [qwjhust(at)gmail.com]
+ 0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+ [209.85.214.172 listed in wl.mailspike.net]
+X-Headers-End: 1wPsZb-0001jp-Um
+Subject: [f2fs-dev] [PATCH] f2fs: avoid false shutdown fserror reports
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -108,223 +143,125 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Chao Yu <chao@kernel.org>
-Cc: Daeho Jeong <daehojeong@google.com>, linux-f2fs-devel@lists.sourceforge.net
+Cc: qwjhust@gmail.com, djwong@kernel.org, qiwenjie@xiaomi.com,
+ linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
-X-Spamd-Result: default: False [-7.61 / 15.00];
-	WHITELIST_DMARC(-7.00)[sourceforge.net:D:+];
-	MID_RHS_MATCH_TO(1.00)[];
-	DMARC_POLICY_ALLOW_WITH_FAILURES(-0.50)[];
+X-Spamd-Result: default: False [-1.01 / 15.00];
 	RWL_MAILSPIKE_EXCELLENT(-0.40)[216.105.38.7:from];
+	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7];
 	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
 	MAILLIST(-0.20)[mailman];
-	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7];
 	MIME_GOOD(-0.10)[text/plain];
+	DMARC_POLICY_SOFTFAIL(0.10)[gmail.com : SPF not aligned (relaxed), DKIM not aligned (relaxed),none];
 	HAS_LIST_UNSUB(-0.01)[];
-	REPLYTO_DOM_EQ_TO_DOM(0.00)[];
+	FREEMAIL_FROM(0.00)[gmail.com];
+	DKIM_MIXED(0.00)[];
+	ARC_NA(0.00)[];
+	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,gmail.com:s=20251104];
 	RCVD_TLS_LAST(0.00)[];
 	RECEIVED_HELO_LOCALHOST(0.00)[];
-	DKIM_MIXED(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:jaegeuk@kernel.org,m:daehojeong@google.com,m:linux-f2fs-devel@lists.sourceforge.net,s:lists@lfdr.de];
-	FORGED_SENDER(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
-	TO_DN_SOME(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	FORGED_RECIPIENTS(0.00)[m:jaegeuk@kernel.org,m:chao@kernel.org,m:qwjhust@gmail.com,m:djwong@kernel.org,m:qiwenjie@xiaomi.com,m:linux-kernel@vger.kernel.org,m:linux-f2fs-devel@lists.sourceforge.net,s:lists@lfdr.de];
 	MIME_TRACE(0.00)[0:+];
-	ARC_NA(0.00)[];
 	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
-	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,kernel.org:s=k20260515];
-	RCPT_COUNT_THREE(0.00)[3];
-	DMARC_POLICY_ALLOW(0.00)[lists.sourceforge.net,none];
+	FORGED_SENDER(0.00)[qwjhust@gmail.com,linux-f2fs-devel-bounces@lists.sourceforge.net];
+	FREEMAIL_CC(0.00)[gmail.com,kernel.org,xiaomi.com,vger.kernel.org,lists.sourceforge.net];
+	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,gmail.com:-];
+	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
+	FORGED_SENDER_MAILLIST(0.00)[];
 	RCVD_COUNT_FIVE(0.00)[5];
-	NEURAL_HAM(-0.00)[-1.000];
+	TO_DN_NONE(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
-	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[qwjhust@gmail.com,linux-f2fs-devel-bounces@lists.sourceforge.net];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	PREVIOUSLY_DELIVERED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,kernel.org:-];
+	NEURAL_HAM(-0.00)[-1.000];
 	TAGGED_RCPT(0.00)[linux-f2fs-devel];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
-	HAS_REPLYTO(0.00)[chao@kernel.org]
-X-Rspamd-Queue-Id: 734AE59DAA5
+	RCPT_COUNT_SEVEN(0.00)[7];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[xiaomi.com:mid,xiaomi.com:email,lists.sourceforge.net:dkim,lists.sourceforge.net:rdns,lists.sourceforge.net:helo]
+X-Rspamd-Queue-Id: 680A959DD07
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-fsck.f2fs -d1 <device>
+F2FS records image errors and checkpoint-stop reasons through the same
+s_error_work worker.  The ordinary f2fs_handle_error() path only updates
+s_errors, but the worker still calls fserror_report_shutdown()
+unconditionally after committing the superblock.
 
-[fix_section_type:3036] wrong sit->type (4) in DATA secno:1 segno:2
-[fix_section_type:3036] wrong sit->type (4) in DATA secno:5 segno:11
+As a result, a metadata corruption report can be followed by a synthetic
+FAN_FS_ERROR event with ESHUTDOWN and an invalid superblock file handle,
+even though no stop reason was recorded.
 
-fsck.f2fs -f <device>
+Track whether save_stop_reason() actually changed the stop_reason array
+and only report the shutdown fserror for that case.  Pure s_errors updates
+still commit the superblock, but no longer generate a false shutdown event.
 
-[FIX] (fix_section_type:3040)  --> Fix wrong sit->type (4 -> 2) in DATA secno (1), segno (2)
-[FIX] (fix_section_type:3050)  --> Fix wrong sit->type in DATA secno (1), totally 1 empty segment(s)
-[FIX] (fix_section_type:3040)  --> Fix wrong sit->type (4 -> 2) in DATA secno (5), segno (11)
-[FIX] (fix_section_type:3050)  --> Fix wrong sit->type in DATA secno (5), totally 1 empty segment(s)
-
-Now it can only fix wrong sit->type of segment from NODE to DATA in a DATA
-section, such inconsistent image can be generated by recovery.
-
-For fuzzed image which contains below inconsistent sit->type, we can support
-to detect and repair later:
-1) empty NODE segment in DATA section (FIXED w/ current patch)
-2) empty DATA segment in NODE section
-3) valid segments w/ different temperature in DATA section
-4) valid segments w/ different temperature in NODE section
-5) valid segments w/ different sit->type in section
-
-Cc: Daeho Jeong <daehojeong@google.com>
-Signed-off-by: Chao Yu <chao@kernel.org>
+Fixes: 50faed607d32 ("f2fs: support to report fserror")
+Signed-off-by: Wenjie Qi <qiwenjie@xiaomi.com>
 ---
-v2:
-- fix printed log
- fsck/f2fs.h | 13 ++++++++
- fsck/fsck.c | 94 +++++++++++++++++++++++++++++++++++++++++++++++++++++
- 2 files changed, 107 insertions(+)
+ fs/f2fs/f2fs.h  | 1 +
+ fs/f2fs/super.c | 9 ++++++++-
+ 2 files changed, 9 insertions(+), 1 deletion(-)
 
-diff --git a/fsck/f2fs.h b/fsck/f2fs.h
-index 5e7eb63..e4e5d0c 100644
---- a/fsck/f2fs.h
-+++ b/fsck/f2fs.h
-@@ -572,6 +572,19 @@ static inline int IS_CUR_SEGNO(struct f2fs_sb_info *sbi, u32 segno)
- 	return 0;
+diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+index f0a54883b88..fffb516b78f 100644
+--- a/fs/f2fs/f2fs.h
++++ b/fs/f2fs/f2fs.h
+@@ -1990,6 +1990,7 @@ struct f2fs_sb_info {
+ 	unsigned char stop_reason[MAX_STOP_REASON];	/* stop reason */
+ 	spinlock_t error_lock;			/* protect errors/stop_reason array */
+ 	bool error_dirty;			/* errors of sb is dirty */
++	bool stop_reason_dirty;			/* stop reason of sb is dirty */
+ 
+ 	/* For reclaimed segs statistics per each GC mode */
+ 	unsigned int gc_segment_mode;		/* GC state for reclaimed segments */
+diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
+index ada8098f8b3..718feb854b1 100644
+--- a/fs/f2fs/super.c
++++ b/fs/f2fs/super.c
+@@ -4616,6 +4616,7 @@ static void save_stop_reason(struct f2fs_sb_info *sbi, unsigned char reason)
+ 	spin_lock_irqsave(&sbi->error_lock, flags);
+ 	if (sbi->stop_reason[reason] < GENMASK(BITS_PER_BYTE - 1, 0))
+ 		sbi->stop_reason[reason]++;
++	sbi->stop_reason_dirty = true;
+ 	spin_unlock_irqrestore(&sbi->error_lock, flags);
  }
  
-+static inline int IS_CUR_SECNO(struct f2fs_sb_info *sbi, u32 secno)
-+{
-+	int i;
-+
-+	for (i = 0; i < NO_CHECK_TYPE; i++) {
-+		struct curseg_info *curseg = CURSEG_I(sbi, i);
-+
-+		if (secno == GET_SEC_FROM_SEG(sbi, curseg->segno))
-+			return 1;
-+	}
-+	return 0;
-+}
-+
- static inline u64 BLKOFF_FROM_MAIN(struct f2fs_sb_info *sbi, u64 blk_addr)
+@@ -4623,6 +4624,7 @@ static void f2fs_record_stop_reason(struct f2fs_sb_info *sbi)
  {
- 	ASSERT(blk_addr >= SM_I(sbi)->main_blkaddr);
-diff --git a/fsck/fsck.c b/fsck/fsck.c
-index 1230d7b..4fca4dd 100644
---- a/fsck/fsck.c
-+++ b/fsck/fsck.c
-@@ -3012,6 +3012,97 @@ int check_sit_types(struct f2fs_sb_info *sbi)
+ 	struct f2fs_super_block *raw_super = F2FS_RAW_SUPER(sbi);
+ 	unsigned long flags;
++	bool report_shutdown = false;
+ 	int err;
+ 
+ 	f2fs_down_write(&sbi->sb_lock);
+@@ -4634,6 +4636,10 @@ static void f2fs_record_stop_reason(struct f2fs_sb_info *sbi)
+ 		sbi->error_dirty = false;
  	}
- 	return err;
+ 	memcpy(raw_super->s_stop_reason, sbi->stop_reason, MAX_STOP_REASON);
++	if (sbi->stop_reason_dirty) {
++		report_shutdown = true;
++		sbi->stop_reason_dirty = false;
++	}
+ 	spin_unlock_irqrestore(&sbi->error_lock, flags);
+ 
+ 	err = f2fs_commit_super(sbi, false);
+@@ -4644,7 +4650,8 @@ static void f2fs_record_stop_reason(struct f2fs_sb_info *sbi)
+ 			"f2fs_commit_super fails to record stop_reason, err:%d",
+ 			err);
+ 
+-	fserror_report_shutdown(sbi->sb, GFP_NOFS);
++	if (report_shutdown)
++		fserror_report_shutdown(sbi->sb, GFP_NOFS);
  }
-+enum type_fix   {
-+	TYPE_DATA,		/* fix sit->type of empty node segment to data */
-+	TYPE_NODE,		/* fix sit->type of empty data segment to node */
-+	TYPE_DATA_TEMP,		/* fix inconsistent sit->type temperature of data segment */
-+	TYPE_NODE_TEMP,		/* fix inconsistent sit->type temperature of node segment */
-+	TYPE_MIGRATE,		/* migrate node segments in mixed section */
-+};
-+static bool fix_section_type(struct f2fs_sb_info *sbi, unsigned int secno,
-+				unsigned char type, enum type_fix type_fix)
-+{
-+	unsigned int segno = secno * sbi->segs_per_sec;
-+	unsigned int end_segno = segno + sbi->segs_per_sec;
-+	unsigned int empty = 0;
-+	bool fixed = false;
-+
-+	for (; segno < end_segno; segno++) {
-+		struct seg_entry *se = get_seg_entry(sbi, segno);
-+
-+		if (type_fix == TYPE_DATA) {
-+			if (se->valid_blocks)
-+				continue;
-+			DBG(1, "wrong sit->type (%d) in DATA secno:%d segno:%d\n",
-+				se->type, secno, segno);
-+			if (!c.fix_on)
-+				continue;
-+			FIX_MSG("Fix wrong sit->type (%d -> %d) in DATA secno (%u), segno (%d)",
-+				se->type, type, secno, segno);
-+			se->type = type;
-+			empty++;
-+			fixed = true;
-+			continue;
-+		}
-+	}
-+
-+	if (fixed && type_fix == TYPE_DATA)
-+		FIX_MSG("Fix wrong sit->type in DATA secno (%u), totally %d empty segment(s)",
-+			secno, empty);
-+
-+	return fixed;
-+}
-+
-+static bool check_large_section_types(struct f2fs_sb_info *sbi)
-+{
-+	unsigned int secno;
-+	bool fixed = false;
-+
-+	if (sbi->segs_per_sec <= 1)
-+		return 0;
-+
-+	for (secno = 0; secno < sbi->total_sections; secno++) {
-+		struct seg_entry *se;
-+		unsigned int segno = secno * sbi->segs_per_sec;
-+		unsigned int end_segno = segno + sbi->segs_per_sec;
-+		unsigned short data_seg = 0;
-+		unsigned short node_seg = 0;
-+		unsigned short empty_data_seg = 0;
-+		unsigned short empty_node_seg = 0;
-+		unsigned char data_type = NO_CHECK_TYPE;
-+
-+		if (IS_CUR_SECNO(sbi, secno))
-+			continue;
-+
-+		for (; segno < end_segno; segno++) {
-+			se = get_seg_entry(sbi, segno);
-+			if (IS_DATASEG(se->type)) {
-+				if (se->valid_blocks) {
-+					data_seg++;
-+					data_type = se->type;
-+				} else {
-+					empty_data_seg++;
-+				}
-+			} else {
-+				if (se->valid_blocks)
-+					node_seg++;
-+				else
-+					empty_node_seg++;
-+			}
-+		}
-+
-+		/* skip free section */
-+		if (!data_seg && !node_seg)
-+			continue;
-+
-+		/* data section, fix sit->type of empty node segment to data */
-+		if (data_seg && !node_seg && empty_node_seg) {
-+			if (fix_section_type(sbi, secno, data_type, TYPE_DATA))
-+				fixed = true;
-+		}
-+	}
-+	return fixed;
-+}
  
- static struct f2fs_node *fsck_get_lpf(struct f2fs_sb_info *sbi)
- {
-@@ -3834,6 +3925,9 @@ int fsck_verify(struct f2fs_sb_info *sbi)
- 	if (check_sit_types(sbi) != 0)
- 		force = 1;
- 
-+	if (check_large_section_types(sbi))
-+		force = 1;
-+
- 	printf("[FSCK] other corrupted bugs                          ");
- 	if (c.bug_on == 0) {
- 		printf(" [Ok..]\n");
+ void f2fs_save_errors(struct f2fs_sb_info *sbi, unsigned char flag)
 -- 
-2.49.0
+2.43.0
 
 
 
