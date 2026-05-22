@@ -2,82 +2,90 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id ULRSEjgTEGryTAYAu9opvQ
+	id OBuxCiMpEGrLUQYAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 22 May 2026 10:26:32 +0200
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 22 May 2026 12:00:03 +0200
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7A55E5B08B9
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 22 May 2026 10:26:30 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 56AF95B1915
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 22 May 2026 12:00:02 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
-	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
-	Subject:MIME-Version:Message-ID:Date:To:From:Sender:Reply-To:Content-ID:
-	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
-	:Resent-Message-ID:In-Reply-To:References:List-Owner;
-	bh=HcGuoSer9ZUCdSRGWpkWTlCdna9Qj+Dx73MTUsQKjZg=; b=DOnpHuCgy6M6r45jpO1q+PzkEk
-	Ad1DHQ09KGLdZtbJrnUgZjNY8riq4Gh8IQrJpsbxk4ez8HPdD+SECeyEn8y4gQLqXTvjSQAb4d7l9
-	acl4tUv5i+oasha7vdKWa5/IWEVGfJTzkMZuwW1zb2OM1yCsgwWS0NOitLbwlf/YJ4/E=;
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
+	List-Unsubscribe:List-Id:Subject:Message-Id:Date:References:In-Reply-To:To:
+	MIME-Version:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
+	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
+	bh=Jyt6VOMjMrNjofCmtYl63N+xFiugfluqXFihFbi2MVM=; b=PFTNHW/Wdr2L9//8X8yXxH1lmK
+	bVWFP3sTTpWoeuiPveLckH6/VmA9NC9Kmj/m76zjdEYaL56e1Mq/o9BQr+QLvslOsFlGuW6PSyl6r
+	kdxwo0hxBoIK6LLZCDDIFtt7lLmG95A5iPNdiiaTCEZOr3H8c3YvS9ivn70pHxNWzzbk=;
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1wQLD9-0004p2-Hn;
-	Fri, 22 May 2026 08:26:25 +0000
+	id 1wQMfX-0008Pt-Bz;
+	Fri, 22 May 2026 09:59:52 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <monty_pavel@sina.com>) id 1wQLD0-0004km-D7
+ (envelope-from <brauner@kernel.org>) id 1wQMfV-0008Pf-S8
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 22 May 2026 08:26:16 +0000
+ Fri, 22 May 2026 09:59:50 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Message-Id:Date:References:In-Reply-To:Cc:To:From:
+ Subject:Content-Transfer-Encoding:Content-Type:MIME-Version:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=RZb97fPIEBQ2kgV9tOcdvOhMShqwfgTknavbgpERkeM=; b=eKslhQcNrzoPyz8fPBWp27uXHv
- nWLyYo2u4jv8PoLGdJ3qR6o5CBHXX8ZtPYScPG8Qonsif6Z/E2xF7blPlKoDcJWkzil519ISh/fah
- u00ZU9hb0h5CDE2X1MjVceG3lYsZAXTP5c2VFTsDKScVGkoqbaPPrVP4z32MddYAen5Q=;
+ bh=8p0T4HNyPt2rtXXItCwHLCB30PYbM6+SRmeDyHpW9cw=; b=QkVmMxdb4APjK7QD45/WZ57IDc
+ 1lF3K9qC/TnF+//dnAlFMRXVkf0IwIQiVXoCAw2K2hJn5ro10P7bwOA5aPOE9Dge/UBfkfAOoSStj
+ 04ldx2uozMil/22RPn5y/ZD+xeSp88dP0thZtbxdJMDwfRiXzFbV/A4X0FtziaHp9IvU=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
- ;
- h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=RZb97fPIEBQ2kgV9tOcdvOhMShqwfgTknavbgpERkeM=; b=b
- wfVYpX3MDrzwj44wXxpaxzUed3fpVG0TabkkV2wovPCX50gfDudfJ1Fnp+3cPvW1i3560znswwRbD
- ALv+sMZuDGIFb4V2uJybOAiWCh186zLXK9ASN0ueMn2NdDLqQk/eorBBMTYPZXMkW1pjATEgu5cuG
- Sk0xix8XAJukXsEQ=;
-Received: from r3-23.sinamail.sina.com.cn ([202.108.3.23])
+ ; h=Message-Id:Date:References:In-Reply-To:Cc:To:From:Subject:
+ Content-Transfer-Encoding:Content-Type:MIME-Version:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=8p0T4HNyPt2rtXXItCwHLCB30PYbM6+SRmeDyHpW9cw=; b=aUD3rgH0zf/l7Gwd+BnRAgz93f
+ /jCHgVDcwvmMdY8STiNa+icmZj49tWT558b3LZ8qq/gkb1WYfV75v3ft1AUlgfc/ut0EWq5ZpM9/F
+ gFHIBHGPrfe0zT04Ee8ppTwfF5cvpFXXuY410ADofsgoKB0P95u7hUZJPtG27uhmKi2U=;
+Received: from tor.source.kernel.org ([172.105.4.254])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1wQLCv-00084s-Ei for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 22 May 2026 08:26:15 +0000
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sina.com; s=201208;
- t=1779438374; bh=RZb97fPIEBQ2kgV9tOcdvOhMShqwfgTknavbgpERkeM=;
- h=From:Subject:Date:Message-ID;
- b=y89loQluIB2iE3Xos8aI4tZIOrNQHdq01KLm3VW1vGlkSAor7gAO0P6YO0gfhdKpV
- 8jmkDiXXTVkpCyB+hCG5gHPhL6+7A37fcTLMNeofW0lUhtTHEL97GAmKHFqdtx1MMY
- n6edYYL/NeKi3EYDTokNKCFusEFMcM2M6hLDbpHw=
-X-SMAIL-HELO: xiaomi-ThinkCentre-M760t.mioffice.cn
-Received: from unknown (HELO
- xiaomi-ThinkCentre-M760t.mioffice.cn)([114.247.175.249])
- by sina.com (10.54.253.31) with ESMTP
- id 6A10131A000005F2; Fri, 22 May 2026 16:26:05 +0800 (CST)
-X-Sender: monty_pavel@sina.com
-X-Auth-ID: monty_pavel@sina.com
-Authentication-Results: sina.com; spf=none smtp.mailfrom=monty_pavel@sina.com;
- dkim=none header.i=none;
- dmarc=none action=none header.from=monty_pavel@sina.com
-X-SMAIL-MID: 9246366816258
-X-SMAIL-UIID: BDDB5E34FF4F45649126E73581957B72-20260522-162605-1
-From: Yongpeng Yang <monty_pavel@sina.com>
-To: Chao Yu <chao@kernel.org>,
-	Jaegeuk Kim <jaegeuk@kernel.org>
-Date: Fri, 22 May 2026 16:25:52 +0800
-Message-ID: <20260522082551.3728258-2-monty_pavel@sina.com>
-X-Mailer: git-send-email 2.43.0
+ id 1wQMfU-0000xm-EH for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 22 May 2026 09:59:50 +0000
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+ by tor.source.kernel.org (Postfix) with ESMTP id D240B60136;
+ Fri, 22 May 2026 09:59:37 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3190A1F000E9;
+ Fri, 22 May 2026 09:59:35 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+ s=k20260515; t=1779443977;
+ bh=8p0T4HNyPt2rtXXItCwHLCB30PYbM6+SRmeDyHpW9cw=;
+ h=Subject:From:To:Cc:In-Reply-To:References:Date;
+ b=KqGHgDrZsdOsieHVKysVXhcHgaodUEd3YW69EUjImDXu74JlBtzE+02Vun3dI1EPC
+ 9AdaM39GaGHFsm4W9fje1kSJnTeI+Bgsu4DfNFhXFRRQswSpxfNVxRjlw+HPqz8sa/
+ 1HeGG9B0JdvT705Ndutn8tb1FsaJdTsnGAPsQEzuEIr4WQk2TZmKtWrniq+cHcTEx8
+ +h0XvbKl5qLScCnPomNuOS4jDsAhdrG9mZFrMkOd0T7N9F6zInDzfA3I4No0vUpmID
+ Z9fCZ9Pgd1wPc4NJyYicruwHkBPpuI6VQbfbdi5lE4IS4inSNUq/8Kh3FFnJ45Y8K5
+ S8PGC+EW4gutg==
 MIME-Version: 1.0
+To: Theodore Tso <tytso@mit.edu>
+In-Reply-To: <20260521155748.GA79343@macsyma-wired.lan>
+References: <20260409134538.3692605-1-jaegeuk@kernel.org>
+ <adhPZxtbZxgU-37v@google.com> <ad30g9xMs9wNJhFb@infradead.org>
+ <ad_AVHe7RMnGrGTb@google.com> <ad_HwhzlNPUEKQi6@casper.infradead.org>
+ <ag7HfNryTmQ-bVIS@infradead.org>
+ <20260521155748.GA79343@macsyma-wired.lan>
+Date: Fri, 22 May 2026 11:59:32 +0200
+Message-Id: <20260522-stollen-fabuliert-helium-82376a109c5e@brauner>
+X-Mailer: b4 0.16-dev-05c9c
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1846; i=brauner@kernel.org;
+ h=from:subject:message-id; bh=YuVuEhwaHMb0Ugfecndd7/67rNAO5cvP1w5w6tDsGuw=;
+ b=owGbwMvMwCU28Zj0gdSKO4sYT6slMWQJaLJ9nsafzv/su3jKF497K1aGzw071/TmS38665l8H
+ 7/wtEWfOkpZGMS4GGTFFFkc2k3C5ZbzVGw2ytSAmcPKBDKEgYtTACbyq5Hhf5qa1v/j2cyaK90u
+ /pascZaX+2H0V3tm+4TPG0169h/25mJkeHl/+epvi1jLAjit1KbOXmerZxfQYFh8/urqWXN0vb/
+ w8gMA
+X-Developer-Key: i=brauner@kernel.org; a=openpgp;
+ fpr=4880B8C9BD0E5106FC070F4F7B3C391EFEA93624
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
@@ -85,10 +93,9 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: From: Yongpeng Yang Add support for
- F2FS_IOC_GET_READ_CACHE_EXTENTS
- ioctl which exports the read extent cache of a file to userspace. Uses a
- two-call pattern: first queries node_count, then fetches all extents. 
+ Content preview:  On 2026-05-21 11:57 -0400, Theodore Tso wrote: > On Thu, May
+ 21, 2026 at 01:51:08AM -0700, Christoph Hellwig wrote: > > > You haven't
+ sent a proposal. This is a reply to a reply to a reply of a > > > [...] 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -99,11 +106,9 @@ X-Spam-Report: Spam detection software,
  envelope-from domain
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
- 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
- [monty_pavel(at)sina.com]
-X-Headers-End: 1wQLCv-00084s-Ei
-Subject: [f2fs-dev] [PATCH] f2fs_io: add get_read_extents command for read
- extent cache ioctl
+X-Headers-End: 1wQMfU-0000xm-EH
+Subject: Re: [f2fs-dev] [PATCH v2] f2fs: another way to set large folio by
+ remembering inode number
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -115,189 +120,96 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Yongpeng Yang <yangyongpeng@xiaomi.com>,
- Yongpeng Yang <monty_pavel@sina.com>, linux-f2fs-devel@lists.sourceforge.net
+From: Christian Brauner via Linux-f2fs-devel
+ <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Christian Brauner <brauner@kernel.org>
+Cc: linux-api@vger.kernel.org, linux-kernel@vger.kernel.org,
+ Matthew Wilcox <willy@infradead.org>, linux-f2fs-devel@lists.sourceforge.net,
+ Christoph Hellwig <hch@infradead.org>, linux-mm@kvack.org,
+ Akilesh Kailash <akailash@google.com>, linux-fsdevel@vger.kernel.org,
+ Jaegeuk Kim <jaegeuk@kernel.org>, Christian Brauner <christian@brauner.io>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
-X-Spamd-Result: default: False [-0.01 / 15.00];
-	MID_CONTAINS_FROM(1.00)[];
+X-Spamd-Result: default: False [-8.11 / 15.00];
+	WHITELIST_DMARC(-7.00)[sourceforge.net:D:+];
+	DMARC_POLICY_ALLOW_WITH_FAILURES(-0.50)[];
+	MID_RHS_NOT_FQDN(0.50)[];
 	RWL_MAILSPIKE_EXCELLENT(-0.40)[216.105.38.7:from];
+	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7];
 	MAILLIST(-0.20)[mailman];
-	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7:c];
 	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
 	MIME_GOOD(-0.10)[text/plain];
-	DMARC_POLICY_SOFTFAIL(0.10)[sina.com : SPF not aligned (relaxed), DKIM not aligned (relaxed),none];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORGED_SENDER(0.00)[monty_pavel@sina.com,linux-f2fs-devel-bounces@lists.sourceforge.net];
-	FORGED_RECIPIENTS(0.00)[m:chao@kernel.org,m:jaegeuk@kernel.org,m:yangyongpeng@xiaomi.com,m:monty_pavel@sina.com,m:linux-f2fs-devel@lists.sourceforge.net,s:lists@lfdr.de];
-	RCVD_COUNT_THREE(0.00)[4];
-	ARC_NA(0.00)[];
-	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	RECEIVED_HELO_LOCALHOST(0.00)[];
-	FREEMAIL_FROM(0.00)[sina.com];
+	DKIM_MIXED(0.00)[];
+	DMARC_POLICY_ALLOW(0.00)[lists.sourceforge.net,none];
+	RCVD_TLS_LAST(0.00)[];
 	MIME_TRACE(0.00)[0:+];
 	TO_DN_SOME(0.00)[];
-	DKIM_MIXED(0.00)[];
-	FREEMAIL_CC(0.00)[xiaomi.com,sina.com,lists.sourceforge.net];
-	RCPT_COUNT_FIVE(0.00)[5];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
-	FROM_NEQ_ENVFROM(0.00)[monty_pavel@sina.com,linux-f2fs-devel-bounces@lists.sourceforge.net];
-	FROM_HAS_DN(0.00)[];
-	RCVD_TLS_LAST(0.00)[];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
-	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,sina.com:s=201208];
-	TAGGED_RCPT(0.00)[linux-f2fs-devel];
-	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,sina.com:-];
+	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
+	RECEIVED_HELO_LOCALHOST(0.00)[];
+	FORGED_SENDER(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
+	ARC_NA(0.00)[];
+	FORGED_RECIPIENTS(0.00)[m:tytso@mit.edu,m:linux-api@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:willy@infradead.org,m:linux-f2fs-devel@lists.sourceforge.net,m:hch@infradead.org,m:linux-mm@kvack.org,m:akailash@google.com,m:linux-fsdevel@vger.kernel.org,m:jaegeuk@kernel.org,m:christian@brauner.io,s:lists@lfdr.de];
+	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,kernel.org:s=k20260515];
+	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[xiaomi.com:email,lists.sourceforge.net:dkim,lists.sourceforge.net:rdns,lists.sourceforge.net:helo,sina.com:mid]
-X-Rspamd-Queue-Id: 7A55E5B08B9
+	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,kernel.org:-];
+	RCVD_COUNT_FIVE(0.00)[5];
+	NEURAL_HAM(-0.00)[-1.000];
+	FORGED_SENDER_FORWARDING(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
+	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	TAGGED_RCPT(0.00)[linux-f2fs-devel];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCPT_COUNT_SEVEN(0.00)[11];
+	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	HAS_REPLYTO(0.00)[brauner@kernel.org]
+X-Rspamd-Queue-Id: 56AF95B1915
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-From: Yongpeng Yang <yangyongpeng@xiaomi.com>
+On 2026-05-21 11:57 -0400, Theodore Tso wrote:
+> On Thu, May 21, 2026 at 01:51:08AM -0700, Christoph Hellwig wrote:
+> > > You haven't sent a proposal.  This is a reply to a reply to a reply of a
+> > > patch.  There's no justification for why f2fs is so special that it
+> > > needs this.  What the hell is going on?  You know this is not the way to
+> > > get code merged into Linux.
+> > 
+> > None of this got properly answers, and this broken interface now landed
+> > in linux-next. IT is offloading a user.* xattr which is free-form
+> > user data with semantics that are weird to say it very nicely.
+> > 
+> > All this was done against the advice in the mailing list discussion.
+> 
+> So let me get this straight.  This is a magic xattr interface which is
+> not even persisted in the file system, but instead sets a 32-bit
+> bitmask in the struct inode which disappears once the inode gets
+> flushed from the inode stack.  And it uses a generic xattr name,
+> "user.fadvise".
+> 
+> There's no way in *hell* any other file system is likely to adopt such
+> a broken interface, so why didn't you just use an ioctl to set this
+> magic f2fs-specific flag?
+> 
+> > I think at some point we just need to stop taking f2fs updates likes
+> > this.
+> 
+> Well, that's ultiamtely up to Linus.  I'll say that if I were Linus
+> (and I'm glad I'm not :-), and I saw this in a pull request, I'd
+> reject it out of hand.  But whether it's worth making a huge fuss and
+> asking escalating this mess to Linus, we probably should get a bit
+> more community consensus before taking such a drastic step.
+> 
+> Christian, since you're one of the VFS maintaienrs, what's your
+> opinion about escalating this to Linus?
 
-Add support for F2FS_IOC_GET_READ_CACHE_EXTENTS ioctl which exports
-the read extent cache of a file to userspace. Uses a two-call pattern:
-first queries node_count, then fetches all extents.
-
-Signed-off-by: Yongpeng Yang <yangyongpeng@xiaomi.com>
----
- tools/f2fs_io/f2fs_io.c | 73 +++++++++++++++++++++++++++++++++++++++++
- tools/f2fs_io/f2fs_io.h | 20 +++++++++++
- 2 files changed, 93 insertions(+)
-
-diff --git a/tools/f2fs_io/f2fs_io.c b/tools/f2fs_io/f2fs_io.c
-index 94e61b8..3084dda 100644
---- a/tools/f2fs_io/f2fs_io.c
-+++ b/tools/f2fs_io/f2fs_io.c
-@@ -1948,6 +1948,78 @@ static void do_precache_extents(int argc, char **argv, const struct cmd_desc *cm
- 	exit(0);
- }
- 
-+#define get_read_extents_desc "get read extent cache entries"
-+#define get_read_extents_help					\
-+"f2fs_io get_read_extents [file_path]\n\n"			\
-+"  file_path : path to the target file\n"
-+
-+static void do_get_read_extents(int argc, char **argv,
-+				const struct cmd_desc *cmd)
-+{
-+	struct f2fs_read_cache_extent *rec;
-+	unsigned int i, count;
-+	size_t alloc_size;
-+	int fd, ret;
-+
-+	if (argc != 2) {
-+		fputs("Excess arguments\n\n", stderr);
-+		fputs(cmd->cmd_help, stderr);
-+		exit(1);
-+	}
-+
-+	fd = xopen(argv[1], O_RDONLY, 0);
-+
-+	/* first call: ext_count=0 to query the actual count */
-+	alloc_size = sizeof(struct f2fs_read_cache_extent);
-+	rec = xmalloc(alloc_size);
-+	memset(rec, 0, alloc_size);
-+
-+	ret = ioctl(fd, F2FS_IOC_GET_READ_CACHE_EXTENTS, rec);
-+	if (ret < 0)
-+		die_errno("F2FS_IOC_GET_READ_CACHE_EXTENTS (query) failed");
-+
-+	count = rec->node_count;
-+	printf("flags: 0x%x", rec->flags);
-+	if (rec->flags & F2FS_EXT_FL_NO_EXTENT)
-+		printf(" (NO_EXTENT: extent cache disabled)");
-+	printf("\n");
-+	printf("largest extent: fofs=%u blk=%u len=%u access_mode=%u\n",
-+		rec->largest.fofs, rec->largest.blk, rec->largest.len,
-+		rec->largest.last_access_mode);
-+	printf("extent node count: %u\n", count);
-+
-+	if ((rec->flags & F2FS_EXT_FL_NO_EXTENT) || count == 0) {
-+		free(rec);
-+		close(fd);
-+		exit(0);
-+	}
-+	free(rec);
-+
-+	/* second call: allocate array and fetch all extents */
-+	alloc_size = sizeof(struct f2fs_read_cache_extent) +
-+			count * sizeof(struct f2fs_cache_extent_info);
-+	rec = xmalloc(alloc_size);
-+	memset(rec, 0, alloc_size);
-+	rec->ext_count = count;
-+
-+	ret = ioctl(fd, F2FS_IOC_GET_READ_CACHE_EXTENTS, rec);
-+	if (ret < 0)
-+		die_errno("F2FS_IOC_GET_READ_CACHE_EXTENTS (fetch) failed");
-+
-+	printf("\t%-12s%-12s%-12s%-12s\n", "fofs", "blk", "len", "access_mode");
-+	for (i = 0; i < rec->ext_count && i < count; i++) {
-+		printf("%u\t%-12u%-12u%-12u%-12u\n", i,
-+			rec->extents[i].fofs,
-+			rec->extents[i].blk,
-+			rec->extents[i].len,
-+			rec->extents[i].last_access_mode);
-+	}
-+
-+	free(rec);
-+	close(fd);
-+	exit(0);
-+}
-+
- #define move_range_desc "moving a range of data blocks from source file to destination file"
- #define move_range_help						\
- "f2fs_io move_range [src_path] [dst_path] [src_start] [dst_start] "	\
-@@ -2650,6 +2722,7 @@ const struct cmd_desc cmd_list[] = {
- 	CMD(gc),
- 	CMD(checkpoint),
- 	CMD(precache_extents),
-+	CMD(get_read_extents),
- 	CMD(move_range),
- 	CMD(gc_range),
- 	CMD(listxattr),
-diff --git a/tools/f2fs_io/f2fs_io.h b/tools/f2fs_io/f2fs_io.h
-index 539964f..a84a299 100644
---- a/tools/f2fs_io/f2fs_io.h
-+++ b/tools/f2fs_io/f2fs_io.h
-@@ -96,6 +96,8 @@ typedef u32	__be32;
- #define F2FS_IOC_START_ATOMIC_REPLACE	_IO(F2FS_IOCTL_MAGIC, 25)
- #define F2FS_IOC_GET_DEV_ALIAS_FILE	_IOR(F2FS_IOCTL_MAGIC, 26, __u32)
- #define F2FS_IOC_IO_PRIO		_IOW(F2FS_IOCTL_MAGIC, 27, __u32)
-+#define F2FS_IOC_GET_READ_CACHE_EXTENTS	_IOWR(F2FS_IOCTL_MAGIC, 28,	\
-+						struct f2fs_read_cache_extent)
- 
- #ifndef FSCRYPT_POLICY_V1
- #define FSCRYPT_POLICY_V1		0
-@@ -263,3 +265,21 @@ struct f2fs_comp_option {
- 	u8 algorithm;
- 	u8 log_cluster_size;
- };
-+
-+struct f2fs_cache_extent_info {
-+	u32 fofs;		/* start file offset in blocks */
-+	u32 blk;		/* start block address */
-+	u32 len;		/* length in blocks */
-+	u32 last_access_mode;	/* last access mode of extent_node */
-+};
-+
-+#define F2FS_EXT_FL_NO_EXTENT	0x1
-+
-+struct f2fs_read_cache_extent {
-+	u32 ext_count;		/* in: array capacity; out: mapped extent count */
-+	u32 flags;		/* out: status flags */
-+	u32 node_count;		/* out: total extent nodes in tree */
-+	u32 reserved;
-+	struct f2fs_cache_extent_info largest;		/* out: largest extent */
-+	struct f2fs_cache_extent_info extents[];	/* out: extent array */
-+};
--- 
-2.43.0
+I think we don't need to involve Linus.
+The interface as is is broken. Using xattrs for this makes no sense
+whatsoever.
 
 
 
