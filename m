@@ -2,42 +2,42 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id GFPmNVTVD2rIQAYAu9opvQ
+	id +LW8A63ZD2o/QQYAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 22 May 2026 06:02:28 +0200
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 22 May 2026 06:21:01 +0200
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 31E795AE734
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 22 May 2026 06:02:28 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B33045AE8F2
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 22 May 2026 06:21:00 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
 	List-Unsubscribe:List-Id:Subject:In-Reply-To:MIME-Version:References:
 	Message-ID:To:Date:Sender:Content-ID:Content-Description:Resent-Date:
 	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=4HYvLM7o+MFGXYMOgitKy5Vl72hOkDBhHtK0ozJzJOg=; b=iSERhi8DEfR5EPWMFCMNg1qO0I
-	iFZabZt1006ne91Vtcc1Qc5zWWWETjWnF1EqdYnGmNtRPlktR+r0RqxXv2xP1dBOeYV3aNhUOQ2kz
-	hbekk+kJn/m+uSqnZjETsSBxAztwOoQ03XCVEbtHP2zdKQr2OGUXAomYGgMloNjyoLW4=;
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=34XQ7y6gOrGqCU0dh1UYqSa1608Q9V3xPjsXnpGv87I=; b=AzY7U0K6TeTLMwJWesIyGHjIpW
+	+nEtuytjFHmuhul0deFXNbUzNCKRbNjyp1wevzXc+CQL65gpAG1TL8qsaEWNSAX73fAXZRbUgKwVq
+	4m4UG4UA4a3a5BICB1HMwSP7Y09TQUdUYk/x2MSDCXkeZJ1mX43p3CfQS5xWGJ8koXG4=;
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1wQH5b-0004DQ-IE;
-	Fri, 22 May 2026 04:02:23 +0000
+	id 1wQHNT-0007l3-0n;
+	Fri, 22 May 2026 04:20:48 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jaegeuk@kernel.org>) id 1wQH5Y-0004DI-Jz
+ (envelope-from <jaegeuk@kernel.org>) id 1wQHNR-0007ku-BG
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 22 May 2026 04:02:20 +0000
+ Fri, 22 May 2026 04:20:46 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=GFwLqtBegPrYOeSN0ye6SbCQz3TQv1Qmus2tJiQyxPs=; b=WZ8rU+pcCdkf1gBSuprkf4wvwl
- urD/+CPq9OGzNfuA30Ed3qVLSDgX629x7Ut/Mqnkws3rmrq0sExPJoy0iogGEP0/zLW1SnnB6gJqT
- KsDSkBKWKewErWhBtHj3CZCFlgBM0MnuZPFXVZ9mp3DA4kIIjNx0ZPEGoSKNMOs1toDA=;
+ bh=AuDebTp9wF0S/Xn282lC6vcJ0n88XySW4ZxE0I84xZc=; b=dj+2xtSWX6Q/WqjdArcW2tg8CA
+ c/I8SFaNmwLeGSNza9c9XBz6YfGHxUuTXWUIHmJ3EgZXzRBnupuiPCUiQEq/tH0Vc9J4CyEqwH4+p
+ SN3Sc72OEpnHgXriSLY93B5POd+q+aqDyLl/EZAaXJa+vcqZ817E+cTjPGnLnvTb2Zd8=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -45,42 +45,37 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=GFwLqtBegPrYOeSN0ye6SbCQz3TQv1Qmus2tJiQyxPs=; b=mpvCQk8lmxnKmcZGJFOCSmQaGL
- Gs9LzbM6Z5SAhom+yEoS9FdIa7ExKfuTOD3sqm/fQA0plVEiIqtjGtFOjnUdyPjs1fQYtF4Np+t0z
- QzrMOAHmYtuuzagpqoMBh528N4pGaFDww48lzcPMDU7NML7SQ1i9TAhwGTM5dVv/33hQ=;
+ bh=AuDebTp9wF0S/Xn282lC6vcJ0n88XySW4ZxE0I84xZc=; b=ADIfqkEyQgwNx7nFea5n9VMj9o
+ PjVcxoOgoIWHulLyu8Ju3jUoJaeFrO2GpSGdON9qlqUDeHW6ooa6flZH3k8QaiuY+hlaSppbHcIvd
+ kZINQwjoHtr4ST/hup/uNfFV9L5MI0Ol+6UuUHb+y0irOANXQBCYUsmB7RfWjRC1YFhM=;
 Received: from tor.source.kernel.org ([172.105.4.254])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1wQH5W-0005o2-Ep for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 22 May 2026 04:02:20 +0000
+ id 1wQHNN-0006wh-PI for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 22 May 2026 04:20:46 +0000
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by tor.source.kernel.org (Postfix) with ESMTP id 5E6676014B;
- Fri, 22 May 2026 04:02:07 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id A80681F000E9;
- Fri, 22 May 2026 04:02:06 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id 9FD2D60138;
+ Fri, 22 May 2026 04:20:35 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 216531F000E9;
+ Fri, 22 May 2026 04:20:35 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
- s=k20260515; t=1779422527;
- bh=GFwLqtBegPrYOeSN0ye6SbCQz3TQv1Qmus2tJiQyxPs=;
+ s=k20260515; t=1779423635;
+ bh=AuDebTp9wF0S/Xn282lC6vcJ0n88XySW4ZxE0I84xZc=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To;
- b=V5U8pIq9CYVjKN1M26c9b9NKyxbKNnsst43BpYHw1DsITUIVizoffTmheov44CS5q
- RC4YKVuVcJV1HeIny7fKMAPNUaVudn/uTOVvE44fxeitC4tGQLrVW5VFS7IbGno+H+
- cT2aATaZRzZsglm4rt0Y9AF1jrW8fI5GyXvQw0rIyoOyDQW+I92HQ7KEz4K8PpOoiP
- 83HyHOFnC80JpiUmO6zQ2C4JY4DUjKUow0IeN7OzXJfPEspGNm+1XkSkX6RsNMyFZx
- hWGUUq+V+NminNRePBFveQW0fsFFOrqS7G+6Qjvo70M6y6660opAlN7QRmJHAlwatb
- Ezhvlm7T0Nwlg==
-Date: Fri, 22 May 2026 04:02:05 +0000
-To: Eric Biggers <ebiggers@kernel.org>
-Message-ID: <ag_VPae3w2z_SXD9@google.com>
-References: <20260409134538.3692605-1-jaegeuk@kernel.org>
- <adhPZxtbZxgU-37v@google.com> <ad30g9xMs9wNJhFb@infradead.org>
- <ad_AVHe7RMnGrGTb@google.com>
- <ad_HwhzlNPUEKQi6@casper.infradead.org>
- <ag7HfNryTmQ-bVIS@infradead.org>
- <20260521155748.GA79343@macsyma-wired.lan>
- <ag_OVwPF49LSZ7rz@google.com> <20260522035331.GE5937@quark>
+ b=dvvB9zuAFepo3DHpMkWgqI60W2yhMhSg+mzRgM6P7piG79MnWnXXbWceTEI0tWUop
+ AufT/oPAJadaJA7sk2Ta+p66F0bM/gj3OID4REL85XY738izVf+d/RJ3O1XZASEUlb
+ iLJW3ORg4zLDYCqi3su/SJn87hHIQU8Qwb3m5KAY21D45+W+3yZPYkTjnWifpf7OZD
+ 9nznJ2UDG4HnOd+HwNHvk68xlcma439jfJQi8r9UegwSlC/jxmya1rsE5h4Dr6fCpZ
+ SYW2xXSuWX/bMWHBcJEPptwrrABPIFzgn/eO3koct41PLwGxOrhrO5fpHEtaETA0T0
+ syvx2XA1RNThA==
+Date: Fri, 22 May 2026 04:20:33 +0000
+To: Chao Yu <chao@kernel.org>
+Message-ID: <ag_ZkRNeMqSf8sSb@google.com>
+References: <20260520095204.1175117-1-qwjhust@gmail.com>
+ <39c59d05-c998-456a-afae-1eee7379a04c@kernel.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20260522035331.GE5937@quark>
+In-Reply-To: <39c59d05-c998-456a-afae-1eee7379a04c@kernel.org>
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
@@ -88,9 +83,9 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 05/21, Eric Biggers via Linux-f2fs-devel wrote: > On Fri, 
- May 22, 2026 at 03:32:39AM +0000, Jaegeuk Kim wrote: > > On 05/21, Theodore
- Tso wrote: > > > On Thu, May 21, 2026 at 01:51:08AM -0700, Chri [...] 
+ Content preview:  On 05/21, Chao Yu via Linux-f2fs-devel wrote: > On 5/20/26
+ 17:52, Wenjie Qi wrote: > > From: Wenjie Qi <qiwenjie@xiaomi.com> > > > >
+ f2fs_read_data_large_folio() can keep a read bio across multiple > [...] 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -101,9 +96,9 @@ X-Spam-Report: Spam detection software,
  domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
-X-Headers-End: 1wQH5W-0005o2-Ep
-Subject: Re: [f2fs-dev] [PATCH v2] f2fs: another way to set large folio by
- remembering inode number
+X-Headers-End: 1wQHNN-0006wh-PI
+Subject: Re: [f2fs-dev] [PATCH] f2fs: fix missing read bio submission on
+ large folio error
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -117,12 +112,8 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>,
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
 From: Jaegeuk Kim via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
 Reply-To: Jaegeuk Kim <jaegeuk@kernel.org>
-Cc: Theodore Tso <tytso@mit.edu>, linux-api@vger.kernel.org,
- linux-kernel@vger.kernel.org, Matthew Wilcox <willy@infradead.org>,
- linux-f2fs-devel@lists.sourceforge.net, Christoph Hellwig <hch@infradead.org>,
- linux-mm@kvack.org, linux-fsdevel@vger.kernel.org,
- Akilesh Kailash <akailash@google.com>,
- Christian Brauner <christian@brauner.io>
+Cc: Wenjie Qi <qwjhust@gmail.com>, linux-f2fs-devel@lists.sourceforge.net,
+ qiwenjie@xiaomi.com, linux-kernel@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
@@ -130,82 +121,77 @@ X-Spamd-Result: default: False [-8.61 / 15.00];
 	WHITELIST_DMARC(-7.00)[sourceforge.net:D:+];
 	DMARC_POLICY_ALLOW_WITH_FAILURES(-0.50)[];
 	RWL_MAILSPIKE_EXCELLENT(-0.40)[216.105.38.7:from];
-	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
+	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7];
 	MAILLIST(-0.20)[mailman];
-	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7:c];
+	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	REPLYTO_DOM_EQ_TO_DOM(0.00)[];
-	RCVD_TLS_LAST(0.00)[];
 	DKIM_MIXED(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:ebiggers@kernel.org,m:tytso@mit.edu,m:linux-api@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:willy@infradead.org,m:linux-f2fs-devel@lists.sourceforge.net,m:hch@infradead.org,m:linux-mm@kvack.org,m:linux-fsdevel@vger.kernel.org,m:akailash@google.com,m:christian@brauner.io,s:lists@lfdr.de];
 	RECEIVED_HELO_LOCALHOST(0.00)[];
 	ARC_NA(0.00)[];
-	TO_DN_SOME(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,kernel.org:s=k20260515];
+	FREEMAIL_CC(0.00)[gmail.com,lists.sourceforge.net,xiaomi.com,vger.kernel.org];
+	RCVD_TLS_LAST(0.00)[];
+	REPLYTO_DOM_EQ_TO_DOM(0.00)[];
+	TO_DN_SOME(0.00)[];
+	FORGED_RECIPIENTS(0.00)[m:chao@kernel.org,m:qwjhust@gmail.com,m:linux-f2fs-devel@lists.sourceforge.net,m:qiwenjie@xiaomi.com,m:linux-kernel@vger.kernel.org,s:lists@lfdr.de];
+	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
 	MIME_TRACE(0.00)[0:+];
 	FORGED_SENDER(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
-	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
+	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,kernel.org:s=k20260515];
 	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,kernel.org:-];
 	RCVD_COUNT_FIVE(0.00)[5];
-	NEURAL_HAM(-0.00)[-1.000];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.sourceforge.net:dkim,lists.sourceforge.net:rdns,lists.sourceforge.net:helo,xiaomi.com:email];
 	FORGED_SENDER_FORWARDING(0.00)[];
 	FROM_HAS_DN(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
 	DMARC_POLICY_ALLOW(0.00)[lists.sourceforge.net,none];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	NEURAL_HAM(-0.00)[-1.000];
 	TAGGED_RCPT(0.00)[linux-f2fs-devel];
-	HAS_REPLYTO(0.00)[jaegeuk@kernel.org];
-	RCPT_COUNT_SEVEN(0.00)[11];
+	RCPT_COUNT_FIVE(0.00)[5];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	MISSING_XM_UA(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.sourceforge.net:dkim,lists.sourceforge.net:rdns,lists.sourceforge.net:helo]
-X-Rspamd-Queue-Id: 31E795AE734
+	HAS_REPLYTO(0.00)[jaegeuk@kernel.org]
+X-Rspamd-Queue-Id: B33045AE8F2
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-On 05/21, Eric Biggers via Linux-f2fs-devel wrote:
-> On Fri, May 22, 2026 at 03:32:39AM +0000, Jaegeuk Kim wrote:
-> > On 05/21, Theodore Tso wrote:
-> > > On Thu, May 21, 2026 at 01:51:08AM -0700, Christoph Hellwig wrote:
-> > > > > You haven't sent a proposal.  This is a reply to a reply to a reply of a
-> > > > > patch.  There's no justification for why f2fs is so special that it
-> > > > > needs this.  What the hell is going on?  You know this is not the way to
-> > > > > get code merged into Linux.
-> > > > 
-> > > > None of this got properly answers, and this broken interface now landed
-> > > > in linux-next. IT is offloading a user.* xattr which is free-form
-> > > > user data with semantics that are weird to say it very nicely.
-> > > > 
-> > > > All this was done against the advice in the mailing list discussion.
-> > > 
-> > > So let me get this straight.  This is a magic xattr interface which is
-> > > not even persisted in the file system, but instead sets a 32-bit
-> > > bitmask in the struct inode which disappears once the inode gets
-> > > flushed from the inode stack.  And it uses a generic xattr name,
-> > > "user.fadvise".
-> > > 
-> > > There's no way in *hell* any other file system is likely to adopt such
-> > > a broken interface, so why didn't you just use an ioctl to set this
-> > > magic f2fs-specific flag?
+On 05/21, Chao Yu via Linux-f2fs-devel wrote:
+> On 5/20/26 17:52, Wenjie Qi wrote:
+> > From: Wenjie Qi <qiwenjie@xiaomi.com>
 > > 
-> > I went this route because Android heavily restricts ioctl() permissions
-> > and we needed broader access for this to work within the framework.
+> > f2fs_read_data_large_folio() can keep a read bio across multiple
+> > readahead folios.  If a later folio hits an error before any of its
+> > blocks are added to the bio, folio_in_bio is false and the current error
+> > path returns immediately after ending that folio.
+> > 
+> > This can leave the bio accumulated for earlier folios unsubmitted.  Those
+> > folios then never receive read completion, and readers can wait
+> > indefinitely on the locked folios.
+> > 
+> > Route errors through the common out path so any pending bio is submitted
+> > before returning.  Stop consuming more readahead folios once an error is
+> > seen, and only wait on and clear the current folio when it was actually
+> > added to the bio.
+> > 
 > 
-> It's straightforward (2 lines I think) to update Android's SELinux
-> policy to allow an ioctl in all domains.  So that doesn't seem like a
-> reason to not use an ioctl.  In fact this is actually a reason *to* use
-> an ioctl, as it shows that ioctls can be allowed/denied independently as
-> needed, whereas xattrs just use the file write permission.
+> Cc: stable@kernel.org
+> 
+> > Fixes: a5d8b9d94e18 ("f2fs: fix to unlock folio in f2fs_read_data_large_folio()")
+> > Signed-off-by: Wenjie Qi <qiwenjie@xiaomi.com>
+> 
+> Reviewed-by: Chao Yu <chao@kernel.org>
+> 
+> BTW, I can not apply the patch, can you please rebase it to last dev branch?
 
-Ok, that's also great news to me.
+I applied.
 
 > 
-> - Eric
+> Thanks,
 > 
 > 
 > _______________________________________________
