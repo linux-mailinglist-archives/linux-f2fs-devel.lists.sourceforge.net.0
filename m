@@ -2,12 +2,12 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 8BiEBGYxFWouTgcAu9opvQ
+	id WC1QB2YxFWouTgcAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
 	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 26 May 2026 07:36:38 +0200
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5906E5D0E2D
+	by mail.lfdr.de (Postfix) with ESMTPS id 5B36E5D0E2E
 	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 26 May 2026 07:36:36 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
@@ -18,17 +18,17 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	bh=hs9f/O2q8zsB+73Vzjv/6VC17leo0sjKn7Z4nU0Gmn4=; b=JEfP+y440NBxE78BnvCfq75HzN
 	Al+r5t5jz/6qYx8IpQ7xnZtInyVbrnwVy5eeuJhFys/9M/kVBBG1LT440OBL7w7VGbP65ln/LAp73
 	fJkYBRbU9CYi3WH5wjN5hlhB95/ET2Z/TuUDR3ereBqUmH70HpX8cRjh1zKCIuv8szPQ=;
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1wRkSv-0006D3-5I;
-	Tue, 26 May 2026 05:36:33 +0000
+	id 1wRkSj-00009Q-3O;
+	Tue, 26 May 2026 05:36:21 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <qwjhust@gmail.com>) id 1wRkSt-0006Cv-7t
+ (envelope-from <qwjhust@gmail.com>) id 1wRkSh-00009J-Mj
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 26 May 2026 05:36:31 +0000
+ Tue, 26 May 2026 05:36:19 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
  Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
@@ -48,49 +48,49 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  UD6pUBWYwHEum/ZuOKWB0Fjv3R9FR0hQ55PdCDedVq1pq16B+CZE1QdWCTl92imZssbbdaag+R0zQ
  dMJis+iTihgngOha9x7c5mZYCkDIh8jFBhXp45nIJfDaVChlbzKt93NsdzwJ1J+q6FPFfORRJlXoT
  Ahg1P7fiXQfz1UFU=;
-Received: from mail-dy1-f180.google.com ([74.125.82.180])
+Received: from mail-pj1-f46.google.com ([209.85.216.46])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1wRkSq-0004ke-CW for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 26 May 2026 05:36:31 +0000
-Received: by mail-dy1-f180.google.com with SMTP id
- 5a478bee46e88-30246cfd41aso3179002eec.1
+ id 1wRkSf-0004kO-Qs for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 26 May 2026 05:36:19 +0000
+Received: by mail-pj1-f46.google.com with SMTP id
+ 98e67ed59e1d1-36a8ee1e28cso2656716a91.0
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Mon, 25 May 2026 22:36:28 -0700 (PDT)
+ Mon, 25 May 2026 22:36:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1779773778; x=1780378578; darn=lists.sourceforge.net;
+ d=gmail.com; s=20251104; t=1779773768; x=1780378568; darn=lists.sourceforge.net;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
  bh=L8sMiHhDi5X06YZ5Z6Hrq+UhNSJVExmPOyUWtvQndg4=;
- b=IQilJwhAEwGsaWQYZa5eYPQTWl1Hy8JNmkyWr0yS68XcDVRI+79/nPGWZLmBu1V2rV
- f2Yqa99/n8OOyObSxX0okqdmb4lkEKEmIFXbeomGw/8shUhYC09dcCr3O2pMOIt4GhJT
- SvIi8AKkzZbV/S3E87or3RwwcqBS375z7rAx42SHAdUn1aUQomVbrnTIoIfMITWOWotl
- FtBpVdO2C9+dOjMrwdAawxb7XoDgB/7fYJKTyresb2+CeI29eA0kEP5jfiNkR9aNXx46
- snur7JlCGXxEu4Wd7dOaTsGYXipu3FvPYgax+0tQEibQtBC5Rht9CdB7uxSJqeBBbeK2
- XNNg==
+ b=V2S9VNxV/aQjAd60Mvfg4059ydi17yvCRihAtbnjD7WyhlzIX9aKH5ryxfdNTum9Il
+ V/IPRhlexzRVPzjoZd7h/AJbiC8rM997xRLSFtcVK+i1TVgcDdQo4r8i3MUO7IeiFj4M
+ OAfgg2wcV4S47f2dzGy2h11TZVCKktVw4qcms3IPM2xzX4Cv+NXYxAboBdOWfG+8Guly
+ 8v4bTxJmwsbkHS9M8b9K04NfQyPCw9ZcpkGS1dgapUAwdbEa8wHfwDSD6ARRZkROqBBV
+ AinhaZKGIFJ4uIU07k/CujhIGIBWwxvQTdWQjNnGIAt+NAq9XWLLQlQru8G0CejIi5Yo
+ 660g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1779773778; x=1780378578;
+ d=1e100.net; s=20251104; t=1779773768; x=1780378568;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
  bh=L8sMiHhDi5X06YZ5Z6Hrq+UhNSJVExmPOyUWtvQndg4=;
- b=EKVts8Mb67qzzU7rVDEgl0t1nDpMSA7ClPpxm++OjXewR+axtA+NYLqUFWXgqTWf5Q
- uVYtsrchi/foNWxI79ynzI/Z9lGs3zCsaREpfNq2d2mHUo0bR8HfP66cyW05kllKsQdp
- J09jC6Hpfb/U7J+ndWskmyuOdDpH7hfabd/jzbiYTS+XCj8nlzRf8ybd6FCh1bGDlkVn
- q2beE68AKaqnYvGf+3re2tpgBm5/KJEeab013SUrBfg1qnb+HaGno+Ja4CgOU4sZnYSE
- gQhbGgxfA1lrcmVQQHLQxR2KaCtfoUqQCfw3Q8f1oV7pS9KosnKrC6QtxYrtvBEWlOt/
- QQNQ==
+ b=ZGuQkGNnC5LJ+L0zEfND0+ay8AYgLHwgjgbqNvzhcKDfqjvTHAU22AryEoaairzwtR
+ BSRLlh8dSMej22Oa45Tq99wrGVSpejjCE/LNt4mrcRhVW8VNBG+M3Upazx5kavPb4ofY
+ K1It/Zf2mxxBDwWf5DEydZ2aslFch6fQK/HG3LW8WHQRDlND53IusFjBC6RiZQEFln4z
+ Cosn3LjdCoJgd/F3tGtXqwVRarAaAJHQ+ruJGm+9+cxN2ukcfcfpQiajupZVVYxKMjrA
+ x0M1E34ZqrSPZqGM4sEhI2ONtgbakTrKrY29ckJ7n8Y1P/1jyscRk4fUff23cYNy+bZ7
+ i7rQ==
 X-Forwarded-Encrypted: i=1;
- AFNElJ9gQ4pVGq4/7UPACS3GeGmOiiynhvbW5MFIBR8G7s1o5VkeLcmOScwyhkHWXcAuvqXoiqM2aZ/+/D7jKVYlHfeV@lists.sourceforge.net
-X-Gm-Message-State: AOJu0YxXRqDlmS9jGZk3fswkunnqTkBV7QU/HlGvFeIAEqdApTy1tTM5
- NUQ6kkJqNMWjd/TIsj+H0MnOMoGncqYGQlkgRhsztqtdkZJAZt00JA485IZ49Q==
-X-Gm-Gg: Acq92OFwpNmoSa25aUnZ6PBvzkjNrAet7YyRik4kwFLC3yO5JXbNxIzohE9WwcM3EFI
- VD/FQ2m9WQdEpl7DZNsTpa88L/yAuwHAePINgXXalx/PdBBQVxh61nGD+sCb09KsFhQE0DQAXxp
- ZMn2HG8MRoyNpXvS77vRw9kFEZK6l15ggO2Ufg7kRFDi/UWKQsjBmBMT0n7s1vOL1EyjM2u5TMH
- 7+j8wVZbuZK7RjyEdvugJWp+E/1GN3quJEDI+KxNKee16Z+ClO5fsP+axti9KKYZLS+rW6wID7c
- 72vu5YWXMk0vuaT7CrzXDDwp0i7QaXGI/L+qB/E4IZkSN32fFeIbTO6+Na88fnjuAz0EU0Yxhhb
- RXh0UVX3hla/M+HaGCCU8rsybOqPeLdgZYns5+Aub14n6ZCDhTbPTn1p2YBXjYVH/kMuR/RawPn
- ZM4ssG8Xu3W8TZrbmbxRUUwE4ZWCsqxETqeUoPG4nPF0xfHdPdVyAEKwEkexoRWpStBRUxPA==
+ AFNElJ8/3lIy+7nKW6aRl0m6S/dqZfHNDSOAucsxZkcmfgGgrSq7HoMkL14wimQPiW7jtKYVt4MMefSKmRR8y/FN8afg@lists.sourceforge.net
+X-Gm-Message-State: AOJu0YwH9OAR+taWaeOzwkrvXppo8hAMue8slROQV4c2AlpW9fyY7oBx
+ jo0hqPk3QPWfbEkATmf0jB8x2AONO/b9lO5h7SXOJvZqO8alc1EuqpuI
+X-Gm-Gg: Acq92OEAsupf+buIbxqtmqMZWwpym16eZoA60uncU8ud7P/8DdHLyC2i5YZ/ZgDicgN
+ OvXq70SHWMlXBUd9smNHz11sHKpiU2eFWSuKSwgbYbzCL1+UM497zPJWAVvne4sfXTRXrOQlRFR
+ 1z0ivwP+hesa6ES0WRkTjtNcMMxkdA0zGSSC0yWQMhY9zuxsHIChDtsXKLyTmCkm7Roavx4KcoE
+ C6Nv7khLNogN4B6VIfdrG5pO5F7vlIuCxMK6uwBSJNF7Iwx3gSapHj5yAHoJrg1GPa0wEQpQsm6
+ YDvHed4DZ3aKIESq3CoAs/0AJy/KNWh3m6ru8qVgPL+iCjLHap8uxZO2Wl3uzLQyAckBMoEF41X
+ 64BhxtLCkFrtiuHzqm147jtnRdlplzsG1WNpTXd+rz/S5XThKcq82XxWolOIGuY5Lgl71pyvbez
+ 2+4iPWGKmj2tDCQTVplhemoiLVHoW0tU6PTAavVdwGkoHlLfrrN/JFZdGFeAyy+yEjUzMcqw==
 X-Received: by 2002:a17:90b:48c1:b0:35f:c729:de9b with SMTP id
  98e67ed59e1d1-36a677f44b2mr18075721a91.20.1779773767539; 
  Mon, 25 May 2026 22:36:07 -0700 (PDT)
@@ -109,7 +109,7 @@ X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
@@ -121,19 +121,19 @@ X-Spam-Report: Spam detection software,
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
  [qwjhust(at)gmail.com]
  0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [74.125.82.180 listed in wl.mailspike.net]
+ [209.85.216.46 listed in wl.mailspike.net]
  0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1wRkSq-0004ke-CW
+X-Headers-End: 1wRkSf-0004kO-Qs
 Subject: [f2fs-dev] [PATCH v2] f2fs: validate orphan inode entry count
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
@@ -164,9 +164,9 @@ X-Spamd-Result: default: False [-1.01 / 15.00];
 	ARC_NA(0.00)[];
 	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,gmail.com:s=20251104];
 	RCVD_TLS_LAST(0.00)[];
-	RECEIVED_HELO_LOCALHOST(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:jaegeuk@kernel.org,m:chao@kernel.org,m:qwjhust@gmail.com,m:linux-kernel@vger.kernel.org,m:linux-f2fs-devel@lists.sourceforge.net,m:stable@kernel.org,m:qiwenjie@xiaomi.com,s:lists@lfdr.de];
 	MIME_TRACE(0.00)[0:+];
+	FORGED_RECIPIENTS(0.00)[m:jaegeuk@kernel.org,m:chao@kernel.org,m:qwjhust@gmail.com,m:linux-kernel@vger.kernel.org,m:linux-f2fs-devel@lists.sourceforge.net,m:stable@kernel.org,m:qiwenjie@xiaomi.com,s:lists@lfdr.de];
+	RECEIVED_HELO_LOCALHOST(0.00)[];
 	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
 	FORGED_SENDER(0.00)[qwjhust@gmail.com,linux-f2fs-devel-bounces@lists.sourceforge.net];
 	FREEMAIL_CC(0.00)[gmail.com,vger.kernel.org,lists.sourceforge.net,kernel.org,xiaomi.com];
@@ -186,7 +186,7 @@ X-Spamd-Result: default: False [-1.01 / 15.00];
 	TAGGED_RCPT(0.00)[linux-f2fs-devel];
 	RCPT_COUNT_SEVEN(0.00)[7];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[xiaomi.com:mid,xiaomi.com:email,lists.sourceforge.net:dkim,lists.sourceforge.net:rdns,lists.sourceforge.net:helo]
-X-Rspamd-Queue-Id: 5906E5D0E2D
+X-Rspamd-Queue-Id: 5B36E5D0E2E
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
