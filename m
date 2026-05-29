@@ -2,88 +2,108 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id 8FLTEc2xGGoemQgAu9opvQ
+	id GOF1NiL6GGqvpQgAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 28 May 2026 23:21:17 +0200
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 29 May 2026 04:29:54 +0200
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id C38055FA5AF
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 28 May 2026 23:21:16 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1B5655FC63E
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 29 May 2026 04:29:54 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
-	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:MIME-Version:References:In-Reply-To:
-	Message-ID:Date:To:Sender:Content-ID:Content-Description:Resent-Date:
-	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=FgYve/o8xCjL5OjpcusXoew9cSAHzhfWNYy32NNlsC0=; b=dGGyZo0d3F7AoKMWp5fIm17Hul
-	RbWTfycgU3akUY6ZvUi4ZrAic0ktW4gFOS08etJia4UD7u4WN4WeYwgQK9ime7i1SlvFkag3yqQr+
-	ziYWTORgJYbE30unBUCOu0GOPDSrOvJ+6tEW89cmRK70BFBe2PKspVJJgP8cFJk3lQPY=;
+	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
+	Subject:MIME-Version:Message-ID:Date:To:From:Sender:Reply-To:Content-ID:
+	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+	:Resent-Message-ID:In-Reply-To:References:List-Owner;
+	bh=ZGa9RwOMC7xhJuV9iF1XiLCqbDU94G0loQ0OlNeRsFg=; b=aeT4WLv/i1booNzwnfm4C7/uJs
+	80aI9p0dnxNFb5BVIX7xTvesUnWAgwpgBtWtoClv5p0QP6H5DOQBYJpD/55rIkxHcrtKK0I9r1+qU
+	Lt1+t7zdz7irFlJaKT2G4loG0h9Fy9wGGPrmw4xvbp4aqe5RJN3j/70kBy7XVIBLE02Y=;
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1wSiAG-0005Fr-TK;
-	Thu, 28 May 2026 21:21:14 +0000
+	id 1wSmym-0007vy-Ft;
+	Fri, 29 May 2026 02:29:42 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <bvanassche@acm.org>) id 1wSiAF-0005Fk-EZ
+ (envelope-from <qwjhust@gmail.com>) id 1wSmyl-0007vq-RI
  for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 28 May 2026 21:21:12 +0000
+ Fri, 29 May 2026 02:29:41 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
- In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=n1VOSmKYD1rBYtN8Kre1Zg5NQryiUvUCCOyqR3Ikguc=; b=FGGmTGEuhCWUgRPkDhZFOCPz+7
- mmnGFhJvt8k5OjahG81gdxQlifgZwJncu3F0P9begmQuvH03RBw7XRbF/lthB+E/qLPbpG1xYQU6E
- q1N0lZ0DvSOsuEh4C5y/m81Qn4YESGGGmnoDEqHBLmgNSoIvs+D23TJsX2jmAbTjnVlY=;
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
- ;
- h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
  Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=n1VOSmKYD1rBYtN8Kre1Zg5NQryiUvUCCOyqR3Ikguc=; b=l74gldqhFCO8mfuOQICnoHlzK4
- gTpXvdvyQOTDfbdhzN5XasF+eDkCsr766vI84PayMoSKSarbWJzv1bwgJ+YqnQ5/cfEacBxuNYivS
- m8bnzHRYGiuW48XnLf8+bH6WS+bPWpX15E+AS5zC9n74w/DnCA3j+S0Wdohl3pS0XKoo=;
-Received: from 013.lax.mailroute.net ([199.89.1.16])
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=8ZOkaYrqky10WkHIDKr7bJwwYWzRRoO9WOSbHh2V/Zw=; b=jsbcGScU3UIufwB8azvY8zUEDk
+ O+iRtKAWXFuSHg2/VWz/BG3n8Z5/BEanpCEUmwtK1JfQ6R86N2i5P8akS8JSW6I7j2MEXRSDxe/o/
+ YqUz3HmpbnuCAMLrilFzUFP6wKOY4eV4zxj/R5VZHcZNZ/eTh5Dh0uLG7TgqRBA1spAU=;
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
+ ;
+ h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=8ZOkaYrqky10WkHIDKr7bJwwYWzRRoO9WOSbHh2V/Zw=; b=h
+ 1mVBmMRTakWY/4akUgr2knLofD10TJVGKK7SlRTCIFy09YmTykiDsyZ5TZJkHz3Zih+i41TEAnqsU
+ 9wM96AEiNKG5aCooYNbNo0f3YLf4qhKu6bpvoRmCWO2+Phhe6fI5D3WxurXumglZGDdGYPaSybtiW
+ KYTU/Ka/YYtLJJWY=;
+Received: from mail-pj1-f46.google.com ([209.85.216.46])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1wSiAA-0002vD-UP for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 28 May 2026 21:21:12 +0000
-Received: from localhost (localhost [127.0.0.1])
- by 013.lax.mailroute.net (Postfix) with ESMTP id 4gRKCk4vXwzlfwHM;
- Thu, 28 May 2026 21:20:50 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=acm.org; h=
- content-transfer-encoding:mime-version:references:in-reply-to
- :x-mailer:message-id:date:date:subject:subject:from:from
- :received:received; s=mr01; t=1780003247; x=1782595248; bh=n1VOS
- mKYD1rBYtN8Kre1Zg5NQryiUvUCCOyqR3Ikguc=; b=GbXUq5GqgmDziOyXw2k0R
- 0Xrs3+ZxhlQhtvedcO6OK2ottbq7VT1EGfDPnXIwGfmajezGd22fqrADp44DCN7o
- YK2bw03t3k1L/LvjSJMDlL2Qm8kmAiVBU7yJEoCxqAMkJm1WqVSvnu1+3znQcQtA
- UzIouACL9aco1wgHkkEs6BADMulZ9WHWugkVqQH0gmWWMDeIFR5jEYcAvpopvhgU
- KP4Ix1vNGOgoWHK6pMtaxjEfHUjcbyS7T8nPtRIqAVe5yWS0CJY5GwMZBZyRbubc
- BpRSB5TTmbU4mX+YEva1VBBGobsXVxEptTCXmw4JQr7NFaOnPp/Kj0wtt3IUUfsw
- g==
-X-Virus-Scanned: by MailRoute
-Received: from 013.lax.mailroute.net ([127.0.0.1])
- by localhost (013.lax [127.0.0.1]) (mroute_mailscanner, port 10029) with LMTP
- id 3QhYEtL4fGNC; Thu, 28 May 2026 21:20:47 +0000 (UTC)
-Received: from bvanassche.mtv.corp.google.com (unknown [104.135.180.219])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- (Authenticated sender: bvanassche@acm.org)
- by 013.lax.mailroute.net (Postfix) with ESMTPSA id 4gRKCf3hl5zlgyGm;
- Thu, 28 May 2026 21:20:46 +0000 (UTC)
-To: Jaegeuk Kim <jaegeuk@kernel.org>
-Date: Thu, 28 May 2026 14:20:28 -0700
-Message-ID: <0e18152026cacd1e61fb5fb5483fc1d3c57bdc51.1780003055.git.bvanassche@acm.org>
-X-Mailer: git-send-email 2.54.0.823.g6e5bcc1fc9-goog
-In-Reply-To: <cover.1780003055.git.bvanassche@acm.org>
-References: <cover.1780003055.git.bvanassche@acm.org>
+ (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
+ id 1wSmyi-0002FZ-8M for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 29 May 2026 02:29:41 +0000
+Received: by mail-pj1-f46.google.com with SMTP id
+ 98e67ed59e1d1-36b9ec98144so616439a91.1
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Thu, 28 May 2026 19:29:40 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20251104; t=1780021770; x=1780626570; darn=lists.sourceforge.net;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=8ZOkaYrqky10WkHIDKr7bJwwYWzRRoO9WOSbHh2V/Zw=;
+ b=W6Zc2+KuQ/U+LcZSs7TL1zC84mbD74Yyaj1WQLIyXgqX6OpL44y7FhTXUdW+HhFnmL
+ foflZ2OkVKNWsoWj5aE6AIDtb7znqb2Hj3USTbTEMB1/w82fjWfirStABkCaEfh2ZLT9
+ URjx50qKSEhb2mPGlUr9zRaX4ObhGMEb4fmo6Bsj0JpFYLEOWefXLHrKqHax0icPNMcP
+ 4wwbTM9QGBHl0XAhT+AxCeMNepuG6xEsl5bA1EQzR5I/Z+Cxkh62ics9oxnb09mAlIok
+ 2DOGKKM6NLIbMot+6TfE1EmRBekbfIM9DGzyCSIBVL4LMHg/JVsF65yg8bMGlFLhHKO8
+ 3ZkA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1780021770; x=1780626570;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=8ZOkaYrqky10WkHIDKr7bJwwYWzRRoO9WOSbHh2V/Zw=;
+ b=L5SwAxfIkAC5PWtUOjcOAe1wViM37x8Na5M2iBfwJQiv+d5MvOW56qgV2wfyzLk7Oq
+ XN/68LmsGJfSp+M3piIzCaLaDxF92/69M43OwMIeRAoEdKRhpgusl6LLge2ciXH+9ABl
+ PqwxYnGfFDx6n4GDt+g1EyHMcLc9Opizrcu4J8odKeQM1oe+e/qNu89ZZAGl1YLBR7wK
+ o5FZB+kFLVQqCusdmAvsMxWVS3HkvvFrZYt/tq8GtKEDHy3j3ip92oqAy5FO/qJ0bkDJ
+ slu7j1i6X8nJFnk54aFLpDamA6/CsWdYq6JqlL9tyPQ5fOXh8TYqCVJ6B1IRWCw2dep6
+ XWWg==
+X-Gm-Message-State: AOJu0YxGwdFKMJ9RKiqPsgjqTikikPTyhXPpXYox0j9kalr6YkU+W21c
+ yVqOdB2J3idtq0Rh84nD/Eb4FMemDcVLPvvLOve6cEr7ANik/iW0UPfM
+X-Gm-Gg: Acq92OEl2wGN9igmwJk5vZze1CTZ5t6obZMW1F/5weaQjJ5tmUS5973LbSoA+1nJAuL
+ xXGIyUCny4hz/Yw+aCA03h7ZzlUQcFv9skd7GJ5DrmEHs2XoD+pv3UvqPJgGdLpnTb5ZRt3Qhdd
+ aZYK5tq7kb1vZU8PZkR28jzEeCh6vE2D1stugnyjKElfLJVcNdg1HSllE6S8xpBNLWUk6oQXZJZ
+ IXC2pqYsBK1+kzPoUAxxRWCO+T5SGcpG4D2E5pjucWEWsJ9g+jwCyAejtQDg+dneGB/2JcEmbGD
+ CUS5ytRzzWwcLRQtcMRNTxBhTaNFRrv59r/sV2ISpyLjsH7CdrQ0kG9EKQ/dnfU9XKJScZFeD6i
+ adj1r9xjWOFwFecR6bDL5xrWmhoJ4W6WMoS1pZBAG4qc+aZp+DjBC6X6T3jXZAzR3g5Z7JiReFQ
+ Dtk2rMrAwn2IPA9y7t20ESAdX4MtlZGPy5hId4nX2d7F/tQDr83rGUIlyjF38ELpI+4y3GhA==
+X-Received: by 2002:a17:902:fc48:b0:2bd:8822:d8cb with SMTP id
+ d9443c01a7336-2bf209b0cf6mr12616285ad.23.1780021769903; 
+ Thu, 28 May 2026 19:29:29 -0700 (PDT)
+Received: from qiwenjie-ThinkCentre-M760t.mioffice.cn ([43.224.245.241])
+ by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-2bf23c2da36sm1375735ad.69.2026.05.28.19.29.27
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 28 May 2026 19:29:29 -0700 (PDT)
+From: Wenjie Qi <qwjhust@gmail.com>
+X-Google-Original-From: Wenjie Qi <qiwenjie@xiaomi.com>
+To: jaegeuk@kernel.org,
+	chao@kernel.org
+Date: Fri, 29 May 2026 10:29:24 +0800
+Message-ID: <20260529022924.3655519-1-qiwenjie@xiaomi.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
@@ -92,10 +112,9 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  The bio_for_each_segment_all() loop can take more than 10
- ms for a large bio on an ARM little core. This is too much for interrupt
- context.
- Hence perform the write bio completion work asynchronously i [...] 
+ Content preview: prepare_write_begin() first gets the inode folio and builds
+ a dnode, then checks the read extent cache. For an ordinary overwrite of
+ a non-inline and non-compressed file, an extent-cache hit already g [...] 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -106,8 +125,14 @@ X-Spam-Report: Spam detection software,
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-X-Headers-End: 1wSiAA-0002vD-UP
-Subject: [f2fs-dev] [PATCH 4/4] f2fs: Run f2fs_write_end_io() asynchronously
+ 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
+ [qwjhust(at)gmail.com]
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [209.85.216.46 listed in wl.mailspike.net]
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+X-Headers-End: 1wSmyi-0002FZ-8M
+Subject: [f2fs-dev] [PATCH] f2fs: skip inode folio lookup for cached
+ overwrite
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -119,154 +144,97 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Bart Van Assche via Linux-f2fs-devel
- <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Bart Van Assche <bvanassche@acm.org>
-Cc: Bart Van Assche <bvanassche@acm.org>,
+Cc: qwjhust@gmail.com, qiwenjie@xiaomi.com, linux-kernel@vger.kernel.org,
  linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
-X-Spamd-Result: default: False [-8.61 / 15.00];
-	WHITELIST_DMARC(-7.00)[sourceforge.net:D:+];
-	DMARC_POLICY_ALLOW_WITH_FAILURES(-0.50)[];
+X-Spamd-Result: default: False [-1.01 / 15.00];
 	RWL_MAILSPIKE_EXCELLENT(-0.40)[216.105.38.7:from];
-	MAILLIST(-0.20)[mailman];
-	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7:c];
+	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7];
 	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
+	MAILLIST(-0.20)[mailman];
 	MIME_GOOD(-0.10)[text/plain];
+	DMARC_POLICY_SOFTFAIL(0.10)[gmail.com : SPF not aligned (relaxed), DKIM not aligned (relaxed),none];
 	HAS_LIST_UNSUB(-0.01)[];
+	RECEIVED_HELO_LOCALHOST(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
 	DKIM_MIXED(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:jaegeuk@kernel.org,m:bvanassche@acm.org,m:linux-f2fs-devel@lists.sourceforge.net,s:lists@lfdr.de];
-	DMARC_POLICY_ALLOW(0.00)[lists.sourceforge.net,none];
+	FORGED_RECIPIENTS(0.00)[m:jaegeuk@kernel.org,m:chao@kernel.org,m:qwjhust@gmail.com,m:qiwenjie@xiaomi.com,m:linux-kernel@vger.kernel.org,m:linux-f2fs-devel@lists.sourceforge.net,s:lists@lfdr.de];
+	FREEMAIL_FROM(0.00)[gmail.com];
+	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,gmail.com:s=20251104];
 	MIME_TRACE(0.00)[0:+];
-	TO_DN_SOME(0.00)[];
-	RECEIVED_HELO_LOCALHOST(0.00)[];
-	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
 	ARC_NA(0.00)[];
-	FORGED_SENDER(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
-	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,acm.org:s=mr01];
-	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,acm.org:-];
-	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[6];
-	NEURAL_HAM(-0.00)[-1.000];
+	FORGED_SENDER(0.00)[qwjhust@gmail.com,linux-f2fs-devel-bounces@lists.sourceforge.net];
+	FREEMAIL_CC(0.00)[gmail.com,xiaomi.com,vger.kernel.org,lists.sourceforge.net];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	RCPT_COUNT_FIVE(0.00)[6];
+	RCVD_COUNT_FIVE(0.00)[5];
+	TO_DN_NONE(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
-	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[qwjhust@gmail.com,linux-f2fs-devel-bounces@lists.sourceforge.net];
+	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,gmail.com:-];
+	PREVIOUSLY_DELIVERED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	TAGGED_RCPT(0.00)[linux-f2fs-devel];
-	RCPT_COUNT_THREE(0.00)[3];
 	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
-	HAS_REPLYTO(0.00)[bvanassche@acm.org]
-X-Rspamd-Queue-Id: C38055FA5AF
+	NEURAL_HAM(-0.00)[-1.000];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	TAGGED_RCPT(0.00)[linux-f2fs-devel];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[xiaomi.com:mid,xiaomi.com:email]
+X-Rspamd-Queue-Id: 1B5655FC63E
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-The bio_for_each_segment_all() loop can take more than 10 ms for a large
-bio on an ARM little core. This is too much for interrupt context. Hence
-perform the write bio completion work asynchronously if a bio is large and
-if f2fs_write_end_io() is called from atomic context. This patch reduces
-the time spent in f2fs_write_end_io() from about 10 ms to about 150
-microseconds on an Arm Cortex-A520 core.
+prepare_write_begin() first gets the inode folio and builds a dnode,
+then checks the read extent cache. For an ordinary overwrite of a
+non-inline and non-compressed file, an extent-cache hit already gives the
+data block address and the following path does not need to allocate or
+update any node state.
 
-Signed-off-by: Bart Van Assche <bvanassche@acm.org>
+Check the read extent cache before fetching the inode folio for that
+narrow case. Keep the existing paths for inline data, compressed files,
+and writes that may extend past EOF, where the helper may need inline
+conversion, compression preparation, or block reservation.
+
+This avoids a node-folio lookup in the buffered overwrite fast path when
+the mapping is already cached.
+
+In a QEMU/KASAN x86_64 VM, using a small buffered overwrite workload on
+an existing 1MiB file, median time improved as follows:
+
+  64-byte overwrites:  1724.93 ns/write -> 1560.24 ns/write
+  256-byte overwrites: 1713.38 ns/write -> 1577.85 ns/write
+
+Function profiling of 20k 64-byte overwrites showed
+f2fs_get_inode_folio() calls drop from 20004 to 4.
+
+Signed-off-by: Wenjie Qi <qiwenjie@xiaomi.com>
 ---
- fs/f2fs/data.c  | 21 ++++++++++++++++++++-
- fs/f2fs/f2fs.h  |  2 ++
- fs/f2fs/super.c |  5 +++++
- fs/f2fs/sysfs.c |  2 ++
- 4 files changed, 29 insertions(+), 1 deletion(-)
+ fs/f2fs/data.c | 5 +++++
+ 1 file changed, 5 insertions(+)
 
 diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
-index 48c004976c4e..6e169490c4cf 100644
+index d83a21998ec2..3b32f9b75b77 100644
 --- a/fs/f2fs/data.c
 +++ b/fs/f2fs/data.c
-@@ -409,11 +409,30 @@ static void f2fs_write_end_bio(struct bio *bio)
- 	bio_put(bio);
- }
+@@ -3719,6 +3719,11 @@ static int prepare_write_begin(struct f2fs_sb_info *sbi,
+ 	int flag = F2FS_GET_BLOCK_PRE_AIO;
+ 	int err = 0;
  
-+static void f2fs_write_end_io_work(struct work_struct *work)
-+{
-+	struct bio *bio = &container_of(work, struct f2fs_bio, work)->bio;
++	if (!f2fs_has_inline_data(inode) && !f2fs_compressed_file(inode) &&
++	    (pos & PAGE_MASK) < i_size_read(inode) &&
++	    f2fs_lookup_read_extent_cache_block(inode, index, blk_addr))
++		return 0;
 +
-+	f2fs_write_end_bio(bio);
-+}
-+
- static void f2fs_write_end_io(struct bio *bio)
- {
-+	struct f2fs_sb_info *sbi;
-+
- 	iostat_update_and_unbind_ctx(bio);
- 
--	f2fs_write_end_bio(bio);
-+	sbi = bio->bi_private;
-+
-+	if (in_atomic() && bio->bi_iter.bi_size > sbi->max_atc_write_bio_size) {
-+		struct work_struct *w;
-+
-+		w = &container_of(bio, struct f2fs_bio, bio)->work;
-+		INIT_WORK(w, f2fs_write_end_io_work);
-+		queue_work(sbi->wq, w);
-+	} else {
-+		f2fs_write_end_bio(bio);
-+	}
- }
- 
- #ifdef CONFIG_BLK_DEV_ZONED
-diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-index 30353c439d3c..a6a3e01122e1 100644
---- a/fs/f2fs/f2fs.h
-+++ b/fs/f2fs/f2fs.h
-@@ -1763,6 +1763,8 @@ struct f2fs_sb_info {
- 	struct f2fs_sm_info *sm_info;		/* segment manager */
- 
- 	/* for bio operations */
-+	/* Largest write bio size completed in atomic context (atc). */
-+	u32 max_atc_write_bio_size;
- 	struct f2fs_bio_info *write_io[NR_PAGE_TYPE];	/* for write bios */
- 	/* keep migration IO order for LFS mode */
- 	struct f2fs_rwsem io_order_lock;
-diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
-index 5a100f740b3f..1e822380edb3 100644
---- a/fs/f2fs/super.c
-+++ b/fs/f2fs/super.c
-@@ -5007,6 +5007,11 @@ static int f2fs_fill_super(struct super_block *sb, struct fs_context *fc)
- 
- 	sb->s_fs_info = sbi;
- 	sbi->raw_super = raw_super;
-+	/*
-+	 * SZ_16K restricts the time spent on completing writes to about 150
-+	 * microseconds on an Arm Cortex-A520 core.
-+	 */
-+	sbi->max_atc_write_bio_size = SZ_16K;
- 
- 	INIT_WORK(&sbi->s_error_work, f2fs_record_error_work);
- 	memcpy(sbi->errors, raw_super->s_errors, MAX_F2FS_ERRORS);
-diff --git a/fs/f2fs/sysfs.c b/fs/f2fs/sysfs.c
-index 352e96ad5c3a..70b2e9be8f8b 100644
---- a/fs/f2fs/sysfs.c
-+++ b/fs/f2fs/sysfs.c
-@@ -1266,6 +1266,7 @@ F2FS_SBI_RW_ATTR(gc_idle_interval, interval_time[GC_TIME]);
- F2FS_SBI_RW_ATTR(umount_discard_timeout, interval_time[UMOUNT_DISCARD_TIMEOUT]);
- F2FS_SBI_RW_ATTR(gc_pin_file_thresh, gc_pin_file_threshold);
- F2FS_SBI_RW_ATTR(gc_reclaimed_segments, gc_reclaimed_segs);
-+F2FS_SBI_RW_ATTR(max_atc_write_bio_size, max_atc_write_bio_size);
- F2FS_SBI_GENERAL_RW_ATTR(max_victim_search);
- F2FS_SBI_GENERAL_RW_ATTR(migration_granularity);
- F2FS_SBI_GENERAL_RW_ATTR(migration_window_granularity);
-@@ -1508,6 +1509,7 @@ static struct attribute *f2fs_attrs[] = {
- 	ATTR_LIST(seq_file_ra_mul),
- 	ATTR_LIST(gc_segment_mode),
- 	ATTR_LIST(gc_reclaimed_segments),
-+	ATTR_LIST(max_atc_write_bio_size),
- 	ATTR_LIST(max_fragment_chunk),
- 	ATTR_LIST(max_fragment_hole),
- 	ATTR_LIST(current_atomic_write),
+ 	/*
+ 	 * If a whole page is being written and we already preallocated all the
+ 	 * blocks, then there is no need to get a block address now.
+-- 
+2.43.0
+
 
 
 _______________________________________________
