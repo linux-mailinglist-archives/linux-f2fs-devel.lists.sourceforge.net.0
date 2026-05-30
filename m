@@ -2,125 +2,123 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by lfdr with LMTP
-	id OCb5Fg2bGmpA6AgAu9opvQ
+	id sCm9DpzYGmqE9QgAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 30 May 2026 10:08:45 +0200
+	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 30 May 2026 14:31:24 +0200
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 72FD060BA8C
-	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 30 May 2026 10:08:43 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6A85160CD11
+	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 30 May 2026 14:31:23 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
-	Subject:In-Reply-To:MIME-Version:Message-ID:To:From:Date:Sender:Reply-To:
-	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
-	Resent-To:Resent-Cc:Resent-Message-ID:References:List-Owner;
-	bh=82jKTrKosYqWIdYC1zrvnFztoz43d8Gatbsga/IcxuM=; b=MRuHqMCvhcgMDkhf9919edjeHY
-	hHqxFeWF7KS8qkqHqyGj6ztqMs6SNfXM6GqHFTbZ0LJ0i/qEi1jZ67yr8t80JlkIpewa0wtE34Pij
-	DE8dUEFZdckgFaOirLheJCkiVxKrtY3gBPIhjU1TtYWAZWaJ+lewOWukuM+xYoP+81Ro=;
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	Subject:MIME-Version:Message-ID:Date:To:From:Sender:Reply-To:Content-ID:
+	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+	:Resent-Message-ID:In-Reply-To:References:List-Owner;
+	bh=EUpCD8eZdzyRDAzRZ/qBxv1sEOROV5kB/QJnuKVIerE=; b=hChZAFoaBrN+fESXYnl2yTcxFG
+	LqOR5P4cUJntZEwoXoCRWvV7I7oCNnb1GnY6XJiLp5SJTiybAvBYIYnCr6KkMRKZrJEK3GRk/s/HX
+	hoWU/d5fikteJ2YlCe6wGVBQz5jkrqxBzF0KjNgaYVpw7wiuks9sJ/NmKAgBWJS/dIl0=;
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1wTEk8-0006Aq-IZ;
-	Sat, 30 May 2026 08:08:28 +0000
+	id 1wTIqJ-0000Xs-4L;
+	Sat, 30 May 2026 12:31:07 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <error27@gmail.com>) id 1wTEk7-0006Aj-1X
+ (envelope-from <jinbaoliu365@gmail.com>) id 1wTIqH-0000Xl-Iv
  for linux-f2fs-devel@lists.sourceforge.net;
- Sat, 30 May 2026 08:08:27 +0000
+ Sat, 30 May 2026 12:31:06 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:Message-ID:
- Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:References:List-Id:List-Help:List-Unsubscribe:
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=kH8Pl7SP8LWSHPvqI1Gh+YwqGQGUx2sMcX2ZQOOsAWo=; b=Ov6DPS2Ct8+yygnprCj+URnVGR
- 5PiN9h2iBhF40jDJoEyDMcdUdt5iZ4V+tu/KDV5hc4OEeC77fL/+VocqUd03gEi8ZCKBIXMAT7DKy
- shapgVSkcjsPWXxP/mBsrwZKSnYZq+QdV8wM9mSk1/5tEcUgza7z6ermFl4YhKdpQ4bs=;
+ bh=9YJyvxL7Jrkm9RBWjxB07D2M41AzDBwFnFXawxioncI=; b=Se5ry924aarK9Z6OFejl30Plvy
+ XdsLZ6UP460dvhgwxy1vcvg/2kHCjKsU5G+oLIVHfAmuEG+woi5u9un8WhIdBZU18/73Zl3xCrIVB
+ Wywbs37Pr2RvC55tjvQvaGYEQyOdwxVBAEpnVV1C1Gjx6Sw3gBELnt9Q57KH1aucCCuw=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:Message-ID:Subject:Cc:To:From:Date:
- Sender:Reply-To:Content-Transfer-Encoding:Content-ID:Content-Description:
- Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
+ h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=kH8Pl7SP8LWSHPvqI1Gh+YwqGQGUx2sMcX2ZQOOsAWo=; b=B
- o/A2vapFrML8GV+JRL3R0bv/WE9SePKFb3IWwCJ4FQ07j+rea5OKvk6xUTHe30VdJ9D6Pecf0iLqW
- QIAOua8HjW9DKrmJ1LHsRR0tWIxIrZGXa9e9Oe2iptUhpQDbQH+2Swwq9/DxUzPIab3voayUk9X/S
- ltrqIjLs5hPIVvqQ=;
-Received: from mail-wm1-f42.google.com ([209.85.128.42])
+ List-Owner:List-Archive; bh=9YJyvxL7Jrkm9RBWjxB07D2M41AzDBwFnFXawxioncI=; b=C
+ zc0JOUOLO4JREEaV6MJt7zXbH7NK1ZfAlWDG8uWr+hHDoymKu/nD5Tw8F6qEjPSE6g+IDFzsSCbmx
+ JH6dkV+mfkiwze+tNpG/gfGqaGO62enpy64eCZdf1Rpg6OrcG+VYqpM4dIMsgqV/qPrCdXuwXiz+G
+ T2lI4CXCBzgElJJQ=;
+Received: from mail-pl1-f180.google.com ([209.85.214.180])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1wTEk4-00053Q-RF for linux-f2fs-devel@lists.sourceforge.net;
- Sat, 30 May 2026 08:08:26 +0000
-Received: by mail-wm1-f42.google.com with SMTP id
- 5b1f17b1804b1-490388fd0dbso89493725e9.0
+ id 1wTIqG-0007TA-6f for linux-f2fs-devel@lists.sourceforge.net;
+ Sat, 30 May 2026 12:31:06 +0000
+Received: by mail-pl1-f180.google.com with SMTP id
+ d9443c01a7336-2bf237e1433so15791025ad.1
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Sat, 30 May 2026 01:08:25 -0700 (PDT)
+ Sat, 30 May 2026 05:31:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1780128494; x=1780733294; darn=lists.sourceforge.net;
- h=in-reply-to:content-disposition:mime-version:message-id:subject:cc
- :to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=kH8Pl7SP8LWSHPvqI1Gh+YwqGQGUx2sMcX2ZQOOsAWo=;
- b=sVsdJAZot7YiZvBCO3UYLZ0dEclcT1qBFEwnJaogGY1irLgcBinObmD73gSMw4BPlf
- V9p3ECt+9hCwmQwSjhr3JTPBb/D9I7dmhk5XaCkDgZIPias89hduiiWPtuubOa4edQk5
- N+kMr+X9CB2Bo5Mot/sz34RH6jmDSL0w8qc1faz+ttHqyGQMnv16fLbA1x1s+M6YlbqC
- ykJyTz5u+3MyEgZuHm7LHS5wg0I7oAgGhjhBFDO5PSRVCPvZFvgC126USp4oIVifPGKW
- aetJhchO5Tu2+jlWzS7uYNQacYV2uFr2fX/8daZDdQ2FNmEzw3IKRM754fB3hMZjM90W
- 7YSw==
+ d=gmail.com; s=20251104; t=1780144259; x=1780749059; darn=lists.sourceforge.net;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=9YJyvxL7Jrkm9RBWjxB07D2M41AzDBwFnFXawxioncI=;
+ b=c7pYFUKra5yMDkaDzC8NxlNQD6qwj9fnxGU2J0qTGLal0zFUxGt3r3s1NE2Rh57Dyh
+ 7+7JFbZhmcxxGEBJD7NB7tmnI9zjkWyxvMPK/AE5m/h4INVFxeOROTs+9GhhheG4QBWX
+ hpEIspqDhJjn9Jr5/9pKCaDIyVCQEzfJP10zFADvf6ssbkGwbjaC/qKuPK0oSPCjwDVu
+ jKJunBzEeBeWTq3yvK6loLic/p3EYCITOHfll+YhJrLPSm8sanaknA295hKjettCxLKx
+ 3E+at1uB8eEIUI4vrwcX5suCaqYNb7hf9epVAbZKhDFSOre/yx+si3Bmb0IfqmqVOt8W
+ zVaQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1780128494; x=1780733294;
- h=in-reply-to:content-disposition:mime-version:message-id:subject:cc
- :to:from:date:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ d=1e100.net; s=20251104; t=1780144259; x=1780749059;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=kH8Pl7SP8LWSHPvqI1Gh+YwqGQGUx2sMcX2ZQOOsAWo=;
- b=HiilCQcvYFsYjKWdkLxNdC+x0usiqPpxHL8YUpihSB8Ax6EBn7TPcr1wKo2j5M3bZJ
- X00ncsVsMXD/u5n735Olp5hLbqXZ7hiVAxzwWUudFhYfCc6dLGKyvzhuOmBTy5dj+f2A
- 9ed1CBEuEA4Fm9SQpPzuh1P26F8iCQEVAgWYCchL5ZBiSgDFoXbBcyGu9zrBKP8Ub7tw
- xC+NC9DUjL/riqH4pziqMeaaPNSw4wAqcki4M4EUj2PShWxPl3cDPIRncAb8OBGE85H6
- XEr97faB67au3o7FIqfiRGwh2/w9oluoh4JujkaGNcprL9663Ri3wou5XzghH6ZlylSa
- rETQ==
+ bh=9YJyvxL7Jrkm9RBWjxB07D2M41AzDBwFnFXawxioncI=;
+ b=dfMFkY2Hns9qjsQtRJITNwSliWwKmgGUS7JuW0H8sHC3Zp2nCyVtadIYC5eao/hazX
+ 4hcKcaaHFJpe/uZBzw7YsZZqa8wqDMgWehWI0bLCCZizbdGLafDgZgtTWCCvouPrtUfm
+ 9sbbE/rKDSFEUfbVJB/rIwBPv5brNwSS7Jd8vWNnAAnP9ORrOSqxCK7XqxElkeqhlj63
+ hdzD3dKwC6UbMA+KXpEHhsqjrqKCQG2zGWZMbMffyz2+/MisE44w2bcS++JSr78VEX/a
+ sIbgrLJffueor8KgnOVL2uqNklb/Oaian0MZzgX3IubOOGSYM1JGrRQGAYs2IMiTM/Dk
+ OPSQ==
 X-Forwarded-Encrypted: i=1;
- AFNElJ8GF/jYH74k4WvwAwhVOGR7nG1HaIKFqdHYdb9NirWjStzyHF0xF7t3svO0YJpTyWOYEOvhavsT/C+rS1SWUAw7@lists.sourceforge.net
-X-Gm-Message-State: AOJu0Yyvw1rGCZT1ZusuJXa1ckOygbupNsg7ZeJfq2nGw3Zd0xrAefjj
- yssMarZh9jD+5Fk+ijRif+KS6u7tGz9/Ag1eIqYFkcPfVADYEFbOcbUv
-X-Gm-Gg: Acq92OGJ6aas9RDqHTmOWrOAgxZTmWjYoYoIa6yJmh7qZNwuX2Wakq5ekUEy68LBalu
- IYiYPlno9E1Oa7lk8QeIneGqQgXJtj3l7XFWFRmhyvvr4z0upqgaYIEAvvP+FJGHFNX6tZ/nT7Z
- pC9NaYCf61K1SC0BS69knDbqreHc4oEhzROPicuGOYczx1w4xVuddbdayRw+Xg9EQx8zQMZ0FQO
- ZY/xuR/9hc2eJCkGqJzsqvo5hceqhHYVP9NZQUDyeavpWfqotdNzpOFIKRFEBapYcchJPkB5shp
- tUfNv6Uo9vOfyOzhekI7MDxCuqKsF5nDXt+yhMvZKLwAXcFikPtxzDBJ8kfopU8Hxg2cPSbg2f4
- euoUqSLq7+VctqkKxh59ReHmfJL6yrO2HRve/jNF98y3TcpouVYOO5Ft4AgqtoTuvRHCVMbMgAG
- /vgvxIm00YVF5ssR4IIfb3NT5BdR79JEq4Yg==
-X-Received: by 2002:a05:600c:34c8:b0:488:ac01:72de with SMTP id
- 5b1f17b1804b1-490a2b6e3d2mr43745985e9.5.1780128493612; 
- Sat, 30 May 2026 01:08:13 -0700 (PDT)
-Received: from localhost ([196.207.164.177]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4909c09abadsm29881905e9.1.2026.05.30.01.08.12
+ AFNElJ+mqTD3Do0spP9DCmroE8nqqiDIRDS7IMtSS+B0FMHc3bF1Jr8BGJVUHOwUR9dHklcnHFK6jScvdIfvKkGJi377@lists.sourceforge.net
+X-Gm-Message-State: AOJu0YytICWZZdGLheowK09iUgfdXDrtAxgOBM9f8Ih75CQS/jUzHU/Z
+ 6kGOT6XU6JvlygvxqGOE8GK1MW29ez4IlmAuhJ1iEMII3TvS7JnyDu8N
+X-Gm-Gg: Acq92OHS54X1F5V5LP/l9hZCmCel4kUStS6594MgvWs43F87748NFR337eWoyLGL5VI
+ QPyPMiBEfpjGqFcJKfsiDeoIxt0fPXfopzjGHraDroUTZjTZ0hgOkogPDwqRXwclM5mDL2wcWjq
+ 9eIW+H3xZvKmFPkCiS71ORRpiZg4/iyooceA7n+Yvs5N0/QeRSyQuZ3LBdxLWQVY41kwH9mhZMW
+ 3bJOnDsJy2x0AA2cdnDS5q3bRyP1n0Hl3qTx/lTO4HinsUab9Rh3X3W/9vze+4eEoWJavx6vwRS
+ FYVPkHcQSPzXa8MIAZ2Pq45WVzPxpddWy6iIJXOQ8fWx6FDslhpxV66i7sp26M3HZRUtmmNz3rM
+ HzIchjPUXQG/oXmXqiTk2kTF/iocQGcECkfSb6c1pjd1lKZKls3M1JLMZRoft99JJ3b6Y8RHZF1
+ mK2LV+zYIp1np0BhgHtPhdfbbivPtyHw5DPkckmeW6
+X-Received: by 2002:a17:902:e88c:b0:2b2:4d36:7aa with SMTP id
+ d9443c01a7336-2bf368859d8mr41607765ad.35.1780144258863; 
+ Sat, 30 May 2026 05:30:58 -0700 (PDT)
+Received: from mi.mioffice.cn ([2408:8607:1b00:8:f8ee:63c8:7705:c6bf])
+ by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-2bf239fd6desm48094995ad.24.2026.05.30.05.30.54
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 30 May 2026 01:08:12 -0700 (PDT)
-Date: Sat, 30 May 2026 11:08:09 +0300
-From: Dan Carpenter <error27@gmail.com>
-To: oe-kbuild@lists.linux.dev, Zhang Cen <rollkingzzc@gmail.com>,
- Jaegeuk Kim <jaegeuk@kernel.org>, Chao Yu <chao@kernel.org>
-Message-ID: <202605300627.kUlwXIge-lkp@intel.com>
+ Sat, 30 May 2026 05:30:58 -0700 (PDT)
+From: liujinbao1 <jinbaoliu365@gmail.com>
+To: jaegeuk@kernel.org
+Date: Sat, 30 May 2026 20:30:38 +0800
+Message-ID: <20260530123038.2101877-1-jinbaoliu365@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20260528065601.3257303-1-rollkingzzc@gmail.com>
-X-Spam-Score: 1.1 (+)
+X-Spam-Score: 0.1 (/)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Hi Zhang,
- kernel test robot noticed the following build warnings:
- https://git-scm.com/docs/git-format-patch#_base_tree_information] 
- Content analysis details:   (1.1 points, 5.0 required)
+ Content preview:  From: liujinbao1 When CP has CP_COMPACT_SUM_FLAG set, the
+ nat/sit journal is stored in compact summary blocks at start_sum_block()
+ rather
+ than in the regular summary area. However, rewrite_nat_in_journal() and rewrite
+ [...] Content analysis details:   (0.1 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 1.0 RCVD_IN_UCE2           RBL: IP Subnet Listed in UCEPROTECT Level 2
- [196.207.164.177 listed in dnsbl-2.uceprotect.net]
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
@@ -129,14 +127,15 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
- [error27(at)gmail.com]
+ [jinbaoliu365(at)gmail.com]
  0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends in
- digit [error27(at)gmail.com]
- 0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.128.42 listed in wl.mailspike.net]
-X-Headers-End: 1wTEk4-00053Q-RF
-Subject: Re: [f2fs-dev] [PATCH v3] f2fs: protect published gc_thread during
- teardown
+ digit [jinbaoliu365(at)gmail.com]
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [209.85.214.180 listed in wl.mailspike.net]
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+X-Headers-End: 1wTIqG-0007TA-6f
+Subject: [f2fs-dev] [PATCH] inject.f2fs: fix injecting nat/sit journal in
+ compact summary
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -148,172 +147,117 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: lkp@intel.com, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net, 2045gemini@gmail.com,
- oe-kbuild-all@lists.linux.dev, Gao Xiang <xiang@kernel.org>,
- zerocling0077@gmail.com, Zhang Cen <rollkingzzc@gmail.com>
+Cc: jinbaoliu365@gmail.com, Sheng Yong <shengyong1@xiaomi.com>,
+ liujinbao1 <liujinbao1@xiaomi.com>, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
-X-Spamd-Result: default: False [-1.01 / 15.00];
+X-Spamd-Result: default: False [-0.01 / 15.00];
+	MID_CONTAINS_FROM(1.00)[];
 	RWL_MAILSPIKE_EXCELLENT(-0.40)[216.105.38.7:from];
 	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7];
-	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
 	MAILLIST(-0.20)[mailman];
+	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
 	MIME_GOOD(-0.10)[text/plain];
 	DMARC_POLICY_SOFTFAIL(0.10)[gmail.com : SPF not aligned (relaxed), DKIM not aligned (relaxed),none];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORGED_RECIPIENTS(0.00)[m:oe-kbuild@lists.linux.dev,m:rollkingzzc@gmail.com,m:jaegeuk@kernel.org,m:chao@kernel.org,m:lkp@intel.com,m:linux-kernel@vger.kernel.org,m:linux-f2fs-devel@lists.sourceforge.net,m:2045gemini@gmail.com,m:oe-kbuild-all@lists.linux.dev,m:xiang@kernel.org,m:zerocling0077@gmail.com,s:lists@lfdr.de];
-	DKIM_MIXED(0.00)[];
-	RCVD_TLS_LAST(0.00)[];
+	FORGED_RECIPIENTS(0.00)[m:jaegeuk@kernel.org,m:jinbaoliu365@gmail.com,m:shengyong1@xiaomi.com,m:liujinbao1@xiaomi.com,m:linux-f2fs-devel@lists.sourceforge.net,s:lists@lfdr.de];
 	RECEIVED_HELO_LOCALHOST(0.00)[];
-	FORGED_SENDER(0.00)[error27@gmail.com,linux-f2fs-devel-bounces@lists.sourceforge.net];
-	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,gmail.com:s=20251104];
-	RCPT_COUNT_TWELVE(0.00)[12];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	FREEMAIL_TO(0.00)[lists.linux.dev,gmail.com,kernel.org];
-	MIME_TRACE(0.00)[0:+];
-	ARC_NA(0.00)[];
+	FORGED_SENDER(0.00)[jinbaoliu365@gmail.com,linux-f2fs-devel-bounces@lists.sourceforge.net];
+	FROM_NEQ_ENVFROM(0.00)[jinbaoliu365@gmail.com,linux-f2fs-devel-bounces@lists.sourceforge.net];
 	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
-	FREEMAIL_CC(0.00)[intel.com,vger.kernel.org,lists.sourceforge.net,gmail.com,lists.linux.dev,kernel.org];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	ARC_NA(0.00)[];
+	FREEMAIL_FROM(0.00)[gmail.com];
+	MIME_TRACE(0.00)[0:+];
 	TO_DN_SOME(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
+	DKIM_MIXED(0.00)[];
+	FREEMAIL_CC(0.00)[gmail.com,xiaomi.com,lists.sourceforge.net];
+	FROM_HAS_DN(0.00)[];
+	NEURAL_HAM(-0.00)[-1.000];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	PREVIOUSLY_DELIVERED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
 	FORGED_SENDER_FORWARDING(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[error27@gmail.com,linux-f2fs-devel-bounces@lists.sourceforge.net];
-	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,gmail.com:-];
-	NEURAL_HAM(-0.00)[-1.000];
+	RCVD_COUNT_FIVE(0.00)[5];
+	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,gmail.com:s=20251104];
 	TAGGED_RCPT(0.00)[linux-f2fs-devel];
-	MISSING_XM_UA(0.00)[];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
-	FORGED_SENDER_MAILLIST(0.00)[];
+	RCPT_COUNT_FIVE(0.00)[5];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[01.org:url]
-X-Rspamd-Queue-Id: 72FD060BA8C
+	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,gmail.com:-];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[xiaomi.com:email]
+X-Rspamd-Queue-Id: 6A85160CD11
 X-Rspamd-Action: no action
 X-Rspamd-Server: lfdr
 
-Hi Zhang,
+From: liujinbao1 <liujinbao1@xiaomi.com>
 
-kernel test robot noticed the following build warnings:
+When CP has CP_COMPACT_SUM_FLAG set, the nat/sit journal is stored in
+compact summary blocks at start_sum_block() rather than in the regular
+summary area. However, rewrite_nat_in_journal() and
+rewrite_sit_in_journal() only handled CP_UMOUNT_FLAG and the running
+state, missing the compact summary case.This caused the fault injection
+to fail.
 
-https://git-scm.com/docs/git-format-patch#_base_tree_information]
+Fix this by adding the CP_COMPACT_SUM_FLAG check before the existing
+CP_UMOUNT_FLAG check in both functions, writing the journal to the
+correct compact summary block location.
 
-url:    https://github.com/intel-lab-lkp/linux/commits/Zhang-Cen/f2fs-protect-published-gc_thread-during-teardown/20260528-145912
-base:   linus/master
-patch link:    https://lore.kernel.org/r/20260528065601.3257303-1-rollkingzzc%40gmail.com
-patch subject: [PATCH v3] f2fs: protect published gc_thread during teardown
-config: i386-randconfig-r071-20260529 (https://download.01.org/0day-ci/archive/20260530/202605300627.kUlwXIge-lkp@intel.com/config)
-compiler: gcc-14 (Debian 14.2.0-19) 14.2.0
-smatch: v0.5.0-9185-gbcc58b9c
+Test steps:
+1. NAT journal injection (nid=4, quota file):
+  inject.f2fs --nat 0 --mb block_addr --nid 4 --val 12345 /dev/block/by-name/userdata
+  Before: blkaddr unchanged (308225)
+  After:  blkaddr = 12345
 
-If you fix the issue in a separate patch/commit (i.e. not just a new version of
-the same patch/commit), kindly add following tags
-| Reported-by: kernel test robot <lkp@intel.com>
-| Reported-by: Dan Carpenter <error27@gmail.com>
-| Closes: https://lore.kernel.org/r/202605300627.kUlwXIge-lkp@intel.com/
+2. SIT journal injection (segno=61075, CURSEG_COLD_DATA):
+  inject.f2fs --sit 0 --blk 0x1e1da00 --mb vblocks --val 123 /dev/block/by-name/userdata
+  Before: vblocks unchanged (0)
+  After:  vblocks = 123
 
-smatch warnings:
-fs/f2fs/super.c:5006 f2fs_fill_super() warn: missing error code 'err'
-fs/f2fs/sysfs.c:1027 __f2fs_sbi_store() warn: inconsistent indenting
+Signed-off-by: Sheng Yong <shengyong1@xiaomi.com>
+Signed-off-by: liujinbao1 <liujinbao1@xiaomi.com>
+---
+ fsck/inject.c | 16 ++++++++++++++++
+ 1 file changed, 16 insertions(+)
 
-vim +/err +5006 fs/f2fs/super.c
-
-aff063e266cbf4 Jaegeuk Kim      2012-11-02  4961  
-ed2e621a95d704 Jaegeuk Kim      2014-08-08  4962  try_onemore:
-d1267b5f0b476d Zhang Cen        2026-05-28  4963  	gc_thread_srcu_inited = false;
-da554e48caab95 hujianyang       2015-05-21  4964  	err = -EINVAL;
-da554e48caab95 hujianyang       2015-05-21  4965  	raw_super = NULL;
-e8240f656d4d5d Chao Yu          2015-12-15  4966  	valid_super_block = -1;
-da554e48caab95 hujianyang       2015-05-21  4967  	recovery = 0;
-da554e48caab95 hujianyang       2015-05-21  4968  
-aff063e266cbf4 Jaegeuk Kim      2012-11-02  4969  	/* allocate memory for f2fs-specific super block info */
-bf4afc53b77aea Linus Torvalds   2026-02-21  4970  	sbi = kzalloc_obj(struct f2fs_sb_info);
-aff063e266cbf4 Jaegeuk Kim      2012-11-02  4971  	if (!sbi)
-aff063e266cbf4 Jaegeuk Kim      2012-11-02  4972  		return -ENOMEM;
-aff063e266cbf4 Jaegeuk Kim      2012-11-02  4973  
-df728b0f6954c3 Jaegeuk Kim      2016-03-23  4974  	sbi->sb = sb;
-df728b0f6954c3 Jaegeuk Kim      2016-03-23  4975  
-92b4cf5b48955a Tetsuo Handa     2022-11-09  4976  	/* initialize locks within allocated memory */
-e605302c14ffda Chao Yu          2026-01-04  4977  	init_f2fs_rwsem_trace(&sbi->gc_lock, sbi, LOCK_NAME_GC_LOCK);
-92b4cf5b48955a Tetsuo Handa     2022-11-09  4978  	mutex_init(&sbi->writepages);
-ce9fe67c9cdb21 Chao Yu          2026-01-04  4979  	init_f2fs_rwsem_trace(&sbi->cp_global_sem, sbi, LOCK_NAME_CP_GLOBAL);
-6a5e3de9c2bb0b Chao Yu          2026-03-06  4980  #ifdef CONFIG_DEBUG_LOCK_ALLOC
-6a5e3de9c2bb0b Chao Yu          2026-03-06  4981  	lockdep_register_key(&sbi->cp_global_sem_key);
-6a5e3de9c2bb0b Chao Yu          2026-03-06  4982  	lockdep_set_class(&sbi->cp_global_sem.internal_rwsem,
-6a5e3de9c2bb0b Chao Yu          2026-03-06  4983  					&sbi->cp_global_sem_key);
-6a5e3de9c2bb0b Chao Yu          2026-03-06  4984  #endif
-bb28b66875cca7 Chao Yu          2026-01-04  4985  	init_f2fs_rwsem_trace(&sbi->node_write, sbi, LOCK_NAME_NODE_WRITE);
-f9f93602512bce Chao Yu          2026-01-04  4986  	init_f2fs_rwsem_trace(&sbi->node_change, sbi, LOCK_NAME_NODE_CHANGE);
-92b4cf5b48955a Tetsuo Handa     2022-11-09  4987  	spin_lock_init(&sbi->stat_lock);
-66e9e0d55d117a Chao Yu          2026-01-04  4988  	init_f2fs_rwsem_trace(&sbi->cp_rwsem, sbi, LOCK_NAME_CP_RWSEM);
-92b4cf5b48955a Tetsuo Handa     2022-11-09  4989  	init_f2fs_rwsem(&sbi->quota_sem);
-92b4cf5b48955a Tetsuo Handa     2022-11-09  4990  	init_waitqueue_head(&sbi->cp_wait);
-92b4cf5b48955a Tetsuo Handa     2022-11-09  4991  	spin_lock_init(&sbi->error_lock);
-92b4cf5b48955a Tetsuo Handa     2022-11-09  4992  
-92b4cf5b48955a Tetsuo Handa     2022-11-09  4993  	for (i = 0; i < NR_INODE_TYPE; i++) {
-92b4cf5b48955a Tetsuo Handa     2022-11-09  4994  		INIT_LIST_HEAD(&sbi->inode_list[i]);
-92b4cf5b48955a Tetsuo Handa     2022-11-09  4995  		spin_lock_init(&sbi->inode_lock[i]);
-92b4cf5b48955a Tetsuo Handa     2022-11-09  4996  	}
-92b4cf5b48955a Tetsuo Handa     2022-11-09  4997  	mutex_init(&sbi->flush_lock);
-d1267b5f0b476d Zhang Cen        2026-05-28  4998  	err = init_srcu_struct(&sbi->gc_thread_srcu);
-d1267b5f0b476d Zhang Cen        2026-05-28  4999  	if (err)
-d1267b5f0b476d Zhang Cen        2026-05-28  5000  		goto free_sbi;
-d1267b5f0b476d Zhang Cen        2026-05-28  5001  	gc_thread_srcu_inited = true;
-92b4cf5b48955a Tetsuo Handa     2022-11-09  5002  
-ff9234ad4e9747 Namjae Jeon      2013-01-12  5003  	/* set a block size */
-6bacf52fb58aeb Jaegeuk Kim      2013-12-06  5004  	if (unlikely(!sb_set_blocksize(sb, F2FS_BLKSIZE))) {
-dcbb4c10e6d969 Joe Perches      2019-06-18  5005  		f2fs_err(sbi, "unable to set blocksize");
-aff063e266cbf4 Jaegeuk Kim      2012-11-02 @5006  		goto free_sbi;
-
-error code?
-
-a07ef784356cf9 Namjae Jeon      2012-12-30  5007  	}
-aff063e266cbf4 Jaegeuk Kim      2012-11-02  5008  
-df728b0f6954c3 Jaegeuk Kim      2016-03-23  5009  	err = read_raw_super_block(sbi, &raw_super, &valid_super_block,
-e8240f656d4d5d Chao Yu          2015-12-15  5010  								&recovery);
-c0d39e65ba3243 Namjae Jeon      2013-03-17  5011  	if (err)
-9076a75f8e0f23 Gu Zheng         2013-10-14  5012  		goto free_sbi;
-9076a75f8e0f23 Gu Zheng         2013-10-14  5013  
-5fb08372a68936 Gu Zheng         2013-06-07  5014  	sb->s_fs_info = sbi;
-52763a4b7a2112 Jaegeuk Kim      2016-06-13  5015  	sbi->raw_super = raw_super;
-52763a4b7a2112 Jaegeuk Kim      2016-06-13  5016  
-b62e71be2110d8 Chao Yu          2023-04-23  5017  	INIT_WORK(&sbi->s_error_work, f2fs_record_error_work);
-92b4cf5b48955a Tetsuo Handa     2022-11-09  5018  	memcpy(sbi->errors, raw_super->s_errors, MAX_F2FS_ERRORS);
-b62e71be2110d8 Chao Yu          2023-04-23  5019  	memcpy(sbi->stop_reason, raw_super->s_stop_reason, MAX_STOP_REASON);
-92b4cf5b48955a Tetsuo Handa     2022-11-09  5020  
-704956ecf5bcdc Chao Yu          2017-07-31  5021  	/* precompute checksum seed for metadata */
-7beb01f74415c5 Chao Yu          2018-10-24  5022  	if (f2fs_sb_has_inode_chksum(sbi))
-d005af3b6756e5 Eric Biggers     2025-05-12  5023  		sbi->s_chksum_seed = f2fs_chksum(~0, raw_super->uuid,
-704956ecf5bcdc Chao Yu          2017-07-31  5024  						 sizeof(raw_super->uuid));
-704956ecf5bcdc Chao Yu          2017-07-31  5025  
-458c15dfbce62c Chao Yu          2023-05-23  5026  	default_options(sbi, false);
-dabc4a5c60f796 Jaegeuk Kim      2015-01-23  5027  
-94b3ce7f1509d9 Hongbo Li        2025-07-10  5028  	err = f2fs_check_opt_consistency(fc, sb);
-dabc4a5c60f796 Jaegeuk Kim      2015-01-23  5029  	if (err)
-94b3ce7f1509d9 Hongbo Li        2025-07-10  5030  		goto free_sb_buf;
-d185351325237d Hongbo Li        2025-07-10  5031  
-94b3ce7f1509d9 Hongbo Li        2025-07-10  5032  	f2fs_apply_options(fc, sb);
-d185351325237d Hongbo Li        2025-07-10  5033  
-d185351325237d Hongbo Li        2025-07-10  5034  	err = f2fs_sanity_check_options(sbi, false);
-abd0e040e9a516 Eric Sandeen     2025-03-03  5035  	if (err)
-abd0e040e9a516 Eric Sandeen     2025-03-03  5036  		goto free_options;
-abd0e040e9a516 Eric Sandeen     2025-03-03  5037  
-6d1451bf7f84ea Chengguang Xu    2021-01-13  5038  	sb->s_maxbytes = max_file_blocks(NULL) <<
-e0afc4d6d0d3e7 Chao Yu          2015-12-31  5039  				le32_to_cpu(raw_super->log_blocksize);
-aff063e266cbf4 Jaegeuk Kim      2012-11-02  5040  	sb->s_max_links = F2FS_LINK_MAX;
-aff063e266cbf4 Jaegeuk Kim      2012-11-02  5041  
-5aba54302a46fd Daniel Rosenberg 2019-07-23  5042  	err = f2fs_setup_casefold(sbi);
-5aba54302a46fd Daniel Rosenberg 2019-07-23  5043  	if (err)
-5aba54302a46fd Daniel Rosenberg 2019-07-23  5044  		goto free_options;
-5aba54302a46fd Daniel Rosenberg 2019-07-23  5045  
-
---
-0-DAY CI Kernel Test Service
-https://github.com/intel/lkp-tests/wiki
+diff --git a/fsck/inject.c b/fsck/inject.c
+index b00e356..60a2d20 100644
+--- a/fsck/inject.c
++++ b/fsck/inject.c
+@@ -675,6 +675,14 @@ static void rewrite_nat_in_journal(struct f2fs_sb_info *sbi, u32 nid,
+ 		}
+ 	}
+ 
++	if (is_set_ckpt_flags(cp, CP_COMPACT_SUM_FLAG)) {
++		blkaddr = start_sum_block(sbi);
++		ret = dev_write(&journal->n_nats, blkaddr << F2FS_BLKSIZE_BITS,
++				SUM_JOURNAL_SIZE, WRITE_LIFE_NONE);
++		ASSERT(ret >= 0);
++		return;
++	}
++
+ 	if (is_set_ckpt_flags(cp, CP_UMOUNT_FLAG))
+ 		blkaddr = sum_blk_addr(sbi, NR_CURSEG_TYPE, CURSEG_HOT_DATA);
+ 	else
+@@ -806,6 +814,14 @@ static void rewrite_sit_in_journal(struct f2fs_sb_info *sbi, unsigned int segno,
+ 		}
+ 	}
+ 
++	if (is_set_ckpt_flags(cp, CP_COMPACT_SUM_FLAG)) {
++		blkaddr = start_sum_block(sbi);
++		ret = dev_write(&journal->n_sits, (blkaddr << F2FS_BLKSIZE_BITS) + SUM_JOURNAL_SIZE,
++				SUM_JOURNAL_SIZE, WRITE_LIFE_NONE);
++		ASSERT(ret >= 0);
++		return;
++	}
++
+ 	if (is_set_ckpt_flags(cp, CP_UMOUNT_FLAG))
+ 		blkaddr = sum_blk_addr(sbi, NR_CURSEG_TYPE, CURSEG_COLD_DATA);
+ 	else
+-- 
+2.43.0
 
 
 
