@@ -2,18 +2,18 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id nAgNDERNIGqy0gAAu9opvQ
+	id qPykE01SIGoE1AAAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 03 Jun 2026 17:50:28 +0200
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 03 Jun 2026 18:11:57 +0200
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 55C9A63969D
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 03 Jun 2026 17:50:27 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9202C639949
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 03 Jun 2026 18:11:56 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=lists.sourceforge.net header.s=beta header.b=LhyISBvO;
-	dkim=fail ("body hash did not verify") header.d=sourceforge.net header.s=x header.b="Ck4M2/63";
-	dkim=fail ("body hash did not verify") header.d=sf.net header.s=x header.b="E IUoCZf";
-	dkim=fail ("body hash did not verify") header.d=trailofbits.com header.s=google header.b="NmaHN/wQ";
+	dkim=pass header.d=lists.sourceforge.net header.s=beta header.b=ZV+WKt8T;
+	dkim=fail ("body hash did not verify") header.d=sourceforge.net header.s=x header.b=WigV0tuj;
+	dkim=fail ("body hash did not verify") header.d=sf.net header.s=x header.b="I qhk8vu";
+	dkim=fail ("body hash did not verify") header.d=trailofbits.com header.s=google header.b=AaSU44bj;
 	spf=pass (mail.lfdr.de: domain of linux-f2fs-devel-bounces@lists.sourceforge.net designates 216.105.38.7 as permitted sender) smtp.mailfrom=linux-f2fs-devel-bounces@lists.sourceforge.net;
 	dmarc=pass (policy=none) header.from=lists.sourceforge.net
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
@@ -22,94 +22,94 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	List-Unsubscribe:List-Id:Subject:MIME-Version:Message-ID:Date:To:Sender:
 	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
 	Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Owner;
-	bh=EUm9nsG0soJUMeWxhHGCrz+Uw6tl0yUyU1gKAVy1d78=; b=LhyISBvOXPS5Wd0R5kpDeOHEiE
-	SjUMF7jABp5pjRhyukpjjtKrPNt66BjGh/ZcQ64DQwqjlFcuv9kttyKPQMaOTFZmldbx7jBvB15SU
-	ZGM6eeMiRzyZUQ7XRilftCjCxZS/e9f1khTVfW1uilI/FFVWYDUGO4DPm1qvhxUxhLSI=;
+	bh=gEYrIEmwW4xsQuAjNE7ic0ceT0b8Dz9+vNPNeOMmbJk=; b=ZV+WKt8Td/7kwvzOREA6IEEK8a
+	6ZmLFUdxYjj8lsBpZ85lbJGNnfpwCCc7Lrdh/AJGbG+vbNw0M4i97ATxvMKbBvID5kk5dXoX1uZd5
+	w4q+8nZbKoTma56URA5G/4qQOFDXIVq40UgPzCFvRqcWpVql7CjJsybyWQHuuU7vf54k=;
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1wUnr5-0002by-VG;
-	Wed, 03 Jun 2026 15:50:05 +0000
+	id 1wUoC5-0003rw-73;
+	Wed, 03 Jun 2026 16:11:46 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <sam.moelius@trailofbits.com>) id 1wUnqq-0002ak-9t
+ (envelope-from <sam.moelius@trailofbits.com>) id 1wUoC3-0003ro-Mm
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 03 Jun 2026 15:49:49 +0000
+ Wed, 03 Jun 2026 16:11:45 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
  Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Q7Bnzm+zoUq1PmybAub5hEImADXF9AGqvVXRPxWBhyo=; b=Ck4M2/63npYyzr8QOP4rI+2DG7
- bvXcv22Fg9U5BGgXPfzCpCJlZ2qWzAiFx8Q6VtMbq7PTmoh15OxdL80/BTbzitkZ7zTR+XbQ59vb+
- UwrLomkWXgv1QgGP+VcaDslZzLoPcziILlXkHURZMBRPXXVm/N+sXhkUfKmXr68Z8suY=;
+ bh=xNqB2JQWYAKjwg81Phk/lsiaycyc8892EHyx2k8tINw=; b=WigV0tuj7jnOaKB4Fs9IQOEkyZ
+ g0VStvknJNFFCoWk0AvpFV/tj6AvqbF4wNmjWcNdSTIeOGf6uN8stuvcZp+gNL3qDsvD1LNJJwICM
+ xfn+OptjToG5ocxkhYVjJLY1pcdJkeNu2UCA8/bpR9q6340D/UijY+7bSLWKyS+7FaAw=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
  :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
  Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=Q7Bnzm+zoUq1PmybAub5hEImADXF9AGqvVXRPxWBhyo=; b=E
- IUoCZfbM+7RdASffIsJ4Vr7ThXhHLVC9j9gN76efzfFOhDw+AF/BWjRfE9W059y3HlzXDHu/7nFL7
- m66UF8BFldhs+GRb9Cc2wtIxFi6+9Xkx/xrgX7QMQsZgMY4uWEochadspuxvp7vpfcnZKbN1vrrFN
- ar/8daIZtNzB5XIY=;
-Received: from mail-qv1-f52.google.com ([209.85.219.52])
+ List-Owner:List-Archive; bh=xNqB2JQWYAKjwg81Phk/lsiaycyc8892EHyx2k8tINw=; b=I
+ qhk8vuHaK0TTXFrL8enHfrfGoV1AvDDPT3L5sYM5TnwqOREKn1/L1j7/qzmmFUG8XmLp61fYtuuMH
+ YBpFeaNFu1XSp9ojJwkeeAi+XHuolxDQrsyi22QNDrLEPPtv6bSiNlgeztt1KHwR9Jy8c/EDDVVKe
+ H8rICy2uy3r2n2rQ=;
+Received: from mail-qv1-f41.google.com ([209.85.219.41])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1wUnql-0008Hz-Hp for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 03 Jun 2026 15:49:48 +0000
-Received: by mail-qv1-f52.google.com with SMTP id
- 6a1803df08f44-8ccda0ac4fcso72559106d6.2
+ id 1wUoBw-0002K1-Qr for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 03 Jun 2026 16:11:45 +0000
+Received: by mail-qv1-f41.google.com with SMTP id
+ 6a1803df08f44-8ccf0fa0aacso72095526d6.2
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Wed, 03 Jun 2026 08:49:47 -0700 (PDT)
+ Wed, 03 Jun 2026 09:11:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=trailofbits.com; s=google; t=1780501776; x=1781106576;
+ d=trailofbits.com; s=google; t=1780503090; x=1781107890;
  darn=lists.sourceforge.net; 
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=Q7Bnzm+zoUq1PmybAub5hEImADXF9AGqvVXRPxWBhyo=;
- b=NmaHN/wQsrW/axvWVrAZtzp9opNkhvrkjrxiZDxmRcIC+jedEAgHlEymEg9GW5Hcvp
- rUYDrpE7N2wKEOY9R8ncoKFvET+8ukR2D89vldjY2GtRzLO9fCIHDMIFj5MZO/SwCHfN
- KZdFF4Q1FSpQVKpHZxckGKYStMtui2HTLBoHl97GTaIw5cAEE7L/0vHq3BqpWHCeEjtm
- h5gDR+5IS5RZOWATntreCDEWY2+75y3Dz7ZzOoarbnzou7x2DawbPO4aZrapcZwwuEML
- VPk1LoCyToq6FqE8nUsfyM74mjJg2BKXRZ+nGzB9lbYqlJv91CQ8WzkTsTh+NDEOtEEE
- U1rw==
+ bh=xNqB2JQWYAKjwg81Phk/lsiaycyc8892EHyx2k8tINw=;
+ b=AaSU44bjbLCvdTWd0ugNeEOUhTlIUmvW1O5ZVFjtn7mDCThvg/HHfLe61AjIZSeE24
+ nIg0tS+UyYZJL7bNMDelSCUCyF+jmZLWgtX5tt7U00M8xaqiBsvEbTUuW7/249vJARPm
+ tnLY2Vm1fu/UGV9iGoXNxjOzgo+WmO3cyXeqYsOCTVbI2Ys5opvh0uVISiX7ulflnKtG
+ MY6NvpjGEX1MhW9R8eVLph8NhLsbjLhgsJyk4GFY7/nIpS6etA7DhGoyiYx/LmrAsnBj
+ sNJx9w30ddZk7LNg3R1Eyku83LADbRGXFLL5tCPCWm3sWvD83bPVuE6XJe4xq4GSIJNT
+ V2tw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1780501776; x=1781106576;
+ d=1e100.net; s=20251104; t=1780503090; x=1781107890;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Q7Bnzm+zoUq1PmybAub5hEImADXF9AGqvVXRPxWBhyo=;
- b=Ag1umxKhs+menZl2LvZQjjQSLKE9Xndudlgnf6eKn0WZ4cG3A0raCwhG7HVXg3ahLR
- GBimvHMYv674MdBIxyU0ZcMQYb4jsuqKZGivUDXi4zmZfkCHezWLkfj0gNoN42bEelgo
- bQ/a0mVhvU/s1aEeCc02GeciNuDU85U/y3oShy4DAe52Zi41pdspOfxUsxvPBYes76kl
- k48wC6z2AE99r9mIqnEqw+Jx3N1exbqoLFNwaZRq6WY+DqQ5BQqRDDCe7wlbbM3G4bH/
- 1moL7/WH3FruNkTOyCIS8X9oDFXTYIxQ2X/VB1VTVwAzOt1VaIuEVQkq/TFPFCGlyVmn
- Egbg==
+ bh=xNqB2JQWYAKjwg81Phk/lsiaycyc8892EHyx2k8tINw=;
+ b=asuclP67u9k3HqiVC32HTPpx9kpD0oSlibZdauH3lhi/7m1XyromUrePj1S1hSieQZ
+ Juy+7fXcOFCjBw8Trt1oshU3aYpZnNiBpI2HkoUZ7W57683N6sdN/yrbhHfwdU5fmHFN
+ amLKlWBiPKUMTx9f3MBrToFrQ38WOdNPpdeYTfw6jgh8SoSZddg6ra4LeMAogKul8Mxy
+ 6yA/Z7lFxd3FmRMj7rG7OtocXbMx60a2dKD/wZB9gHpX5sAscozb9HrJ3oX4LP2SMgT9
+ OLUb+OJOZEYvHqR8v/eSvnbN4nojs29HQ/XRj+Lkr1j69+v/9WDY0Cgn5+p3xmlkUZXr
+ vL4w==
 X-Forwarded-Encrypted: i=1;
- AFNElJ81pXoNaNT4wLM+QlPxJccuQq0ajmD72n36aVLZ7lPEiWaPlK7e5TPRoVFjb6Ej8IxMGbX+Mcn8PShQYhY8CL7q@lists.sourceforge.net
-X-Gm-Message-State: AOJu0YwOspBMrtM+KCFyx0lAB4PlNdGnKU+dVzPebrM4PYnUCd/d4tPs
- /u5DeG/GNf+ChoVTuoV7eB9v1XIMC4Vr1hro12d8QWydX5TfwH8qbF14QNcEcQn738lzsjT6rTG
- LE7Ty2tc=
-X-Gm-Gg: Acq92OEHY3IMELzm+Jb4DNYF9yWWrqZxyF9kdmnPGI8vfJJs6l0IfDQakoLWVhDMwoY
- ZPVzojuQzATAL3rtlrkWNt38weVVttMuP2tJcC510o+gAH5hnLidMjH7Ka+Yc5cIc7IEVEUuKj0
- Rv9E3Q5kiZ/SS/GHQNl6NIxNVuE369N5gfxp/uunj7Cddx+LSAFee1XtW8OiE1GDJ8cLCbfOpMk
- vu5p1U3KVnBZoCqbfT1VWPOkSjvhoTdRnTWEQUjF4q8gsIo3tSRTYLNpFGBqNj67q81pZgWWit8
- c370swN6FBAyMWCRO8h5Bfq4QT3vq/SvJULHLqkGGfpdb+TtP8ejaGhtPB+R+cRF+lc5RbaKXSB
- nce01i/9egbWAQfVgtSiNdNtq4706TZNEuJQCtTR5uzC74IyPzaMzSl5lZQuIdGjuigwGBDybQG
- rqRsCXeGF856lxm6nPWGpEVCdGnMNl9RzeA99eZQ==
-X-Received: by 2002:a05:6214:4302:b0:8cc:f899:bb79 with SMTP id
- 6a1803df08f44-8cece16246cmr54331596d6.46.1780501776353; 
- Wed, 03 Jun 2026 08:49:36 -0700 (PDT)
+ AFNElJ9b6vo0x/riiD8VFxnafmyyfDeciotCP/8tsszEo1jftWgT8yJqFSOwQLvJxMow/7qY91becEvgT3Tq/BTOketP@lists.sourceforge.net
+X-Gm-Message-State: AOJu0YxpCthGvxSmDGL0NNgtiOnf1s5yDF/p7NluYGVHrh8ezULLB/fL
+ m12NNnkGBGpFIn62AKYYL00g4YZUiAq5S6YvY4EmJAMEkZ9t0isR+D2LreGJMuaPqPIzW5bNuY2
+ xvJ5KRVE=
+X-Gm-Gg: Acq92OHTkwr3lL+NaWGhED+iflz0MRClv8Y6T505oNjknoTpNCZXWDCTirs8hmQW2KJ
+ JQl126wjGIIBPxWeeDrz2TJCzJH73B8MVvFx9L63TqlJlRwLfYLxsL4h4C3a14k8brB0h8fReU+
+ KS0TzDZkIcHu1dDeBHah9V/dD/LNvIXli4AR8fAcuzgb5teoEE92rXjp8iKOJAkLKrAYGgUZjRB
+ 5aHbNZlSZP4Scomn0EgcAXTnryuJLkMtcHRPSiltlm4XB2iYrLexXhw6k7DmmqFGKNRrtwwsOKl
+ LFmA1KfUH6SONpD4bjWZVKQP+v1ugJM0mcob4o703bNVSWw+D9mHRchja3hZTPb8kSiAKKSxBva
+ TrGkP5pBccDbB8TG0zc1voMmXZwEakKkRQxhmbAAbyLn4XdlqwhF4998DLbb4h+VXD6/JRbBS2F
+ cVoNvZo1DKyyYQmwqT8OSRVB+htxgjuXYUkSUPzg==
+X-Received: by 2002:ad4:5c68:0:b0:8ce:9ecf:e92c with SMTP id
+ 6a1803df08f44-8cecded8622mr58787436d6.15.1780503090189; 
+ Wed, 03 Jun 2026 09:11:30 -0700 (PDT)
 Received: from localhost ([161.35.96.86]) by smtp.gmail.com with UTF8SMTPSA id
- 6a1803df08f44-8cecd055181sm23176366d6.30.2026.06.03.08.49.35
+ 6a1803df08f44-8ceccdcc968sm25080086d6.22.2026.06.03.09.11.29
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 03 Jun 2026 08:49:35 -0700 (PDT)
+ Wed, 03 Jun 2026 09:11:29 -0700 (PDT)
 To: Jaegeuk Kim <jaegeuk@kernel.org>
-Date: Wed,  3 Jun 2026 15:49:32 +0000
-Message-ID: <20260603154933.16368-1-sam.moelius@trailofbits.com>
+Date: Wed,  3 Jun 2026 16:11:26 +0000
+Message-ID: <20260603161127.17464-1-sam.moelius@trailofbits.com>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 X-Spam-Score: -0.2 (/)
@@ -119,12 +119,11 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: Inline dentry conversion copies names out of the inline
- dentry
- area before checking that each recorded name length fits in the available
- filename slots. A corrupted image can therefore make the conversion path
- read past the inline filename storage while building the regular dentry block.
- Content analysis details:   (-0.2 points, 5.0 required)
+ Content preview: The f2fs dentry lookup path can use the on-disk name length
+ before checking that the name fits in the dentry filename area. A corrupted
+ dentry can then make lookup read beyond the filename slots. The bounds check
+ needs to happen before any comparison that consumes the name length from
+ disk. Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
@@ -135,10 +134,10 @@ X-Spam-Report: Spam detection software,
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.219.52 listed in wl.mailspike.net]
-X-Headers-End: 1wUnql-0008Hz-Hp
-Subject: [f2fs-dev] [PATCH] f2fs: validate inline dentry name lengths before
- conversion
+ [209.85.219.41 listed in wl.mailspike.net]
+X-Headers-End: 1wUoBw-0002K1-Qr
+Subject: [f2fs-dev] [PATCH] f2fs: validate dentry name length before lookup
+ compares it
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -164,26 +163,25 @@ X-Spamd-Result: default: False [-8.61 / 15.00];
 	WHITELIST_DMARC(-7.00)[sourceforge.net:D:+];
 	DMARC_POLICY_ALLOW_WITH_FAILURES(-0.50)[];
 	RWL_MAILSPIKE_EXCELLENT(-0.40)[216.105.38.7:from];
-	MAILLIST(-0.20)[mailman];
-	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7];
+	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7:c];
 	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
+	MAILLIST(-0.20)[mailman];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	TO_DN_ALL(0.00)[];
-	RCVD_TLS_LAST(0.00)[];
-	RECEIVED_HELO_LOCALHOST(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:jaegeuk@kernel.org,m:linux-kernel@vger.kernel.org,m:sam.moelius@trailofbits.com,m:linux-f2fs-devel@lists.sourceforge.net,s:lists@lfdr.de];
 	DKIM_MIXED(0.00)[];
+	TO_DN_ALL(0.00)[];
 	MIME_TRACE(0.00)[0:+];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	DMARC_POLICY_ALLOW(0.00)[lists.sourceforge.net,none];
+	RCVD_TLS_LAST(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
 	FORGED_SENDER(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
+	RECEIVED_HELO_LOCALHOST(0.00)[];
 	ARC_NA(0.00)[];
+	FORGED_RECIPIENTS(0.00)[m:jaegeuk@kernel.org,m:linux-kernel@vger.kernel.org,m:sam.moelius@trailofbits.com,m:linux-f2fs-devel@lists.sourceforge.net,s:lists@lfdr.de];
+	DMARC_POLICY_ALLOW(0.00)[lists.sourceforge.net,none];
 	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,trailofbits.com:s=google];
-	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,trailofbits.com:-];
 	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
+	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,trailofbits.com:-];
 	RCVD_COUNT_FIVE(0.00)[5];
 	PREVIOUSLY_DELIVERED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
 	FORGED_SENDER_FORWARDING(0.00)[];
@@ -192,45 +190,45 @@ X-Spamd-Result: default: False [-8.61 / 15.00];
 	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
 	ALIAS_RESOLVED(0.00)[];
 	TAGGED_RCPT(0.00)[linux-f2fs-devel];
-	HAS_REPLYTO(0.00)[sam.moelius@trailofbits.com];
+	FORGED_SENDER_MAILLIST(0.00)[];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	RCPT_COUNT_THREE(0.00)[4];
 	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.sourceforge.net:helo,lists.sourceforge.net:dkim,lists.sourceforge.net:rdns,lists.sourceforge.net:from_mime,lists.sourceforge.net:from_smtp,trailofbits.com:mid,trailofbits.com:email,trailofbits.com:replyto]
+	HAS_REPLYTO(0.00)[sam.moelius@trailofbits.com]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 55C9A63969D
+X-Rspamd-Queue-Id: 9202C639949
 
-Inline dentry conversion copies names out of the inline dentry area
-before checking that each recorded name length fits in the available
-filename slots.
+The f2fs dentry lookup path can use the on-disk name length before
+checking that the name fits in the dentry filename area.  A corrupted
+dentry can then make lookup read beyond the filename slots.
 
-A corrupted image can therefore make the conversion path read past
-the inline filename storage while building the regular dentry block.
+The bounds check needs to happen before any comparison that consumes
+the name length from disk.
 
-Validate each inline dentry name length against the inline filename
-area before copying it.
+Reject dentries with invalid name lengths before comparing their names.
 
 Assisted-by: Codex:gpt-5.5-cyber-preview
 Signed-off-by: Samuel Moelius <sam.moelius@trailofbits.com>
 ---
- fs/f2fs/inline.c | 4 ++++
- 1 file changed, 4 insertions(+)
+ fs/f2fs/dir.c | 5 +++++
+ 1 file changed, 5 insertions(+)
 
-diff --git a/fs/f2fs/inline.c b/fs/f2fs/inline.c
-index 7aabfc9b43cb..4584dfbe3fb8 100644
---- a/fs/f2fs/inline.c
-+++ b/fs/f2fs/inline.c
-@@ -507,6 +507,10 @@ static int f2fs_add_inline_entries(struct inode *dir, void *inline_dentry)
- 			bit_pos++;
+diff --git a/fs/f2fs/dir.c b/fs/f2fs/dir.c
+index 38802ee2e40d..14161d5a1af0 100644
+--- a/fs/f2fs/dir.c
++++ b/fs/f2fs/dir.c
+@@ -249,6 +249,11 @@ struct f2fs_dir_entry *f2fs_find_target_dentry(const struct f2fs_dentry_ptr *d,
  			continue;
  		}
+ 
 +		if (unlikely(le16_to_cpu(de->name_len) > F2FS_NAME_LEN ||
 +			     bit_pos + GET_DENTRY_SLOTS(le16_to_cpu(de->name_len)) >
-+			     d.max))
-+			return -EFSCORRUPTED;
- 
- 		/*
- 		 * We only need the disk_name and hash to move the dentry.
++			     d->max))
++			return ERR_PTR(-EFSCORRUPTED);
++
+ 		if (!use_hash || de->hash_code == fname->hash) {
+ 			res = f2fs_match_name(d->inode, fname,
+ 					      d->filename[bit_pos],
 -- 
 2.43.0
 
