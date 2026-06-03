@@ -2,18 +2,18 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id q5kTJpdRIGrP0wAAu9opvQ
+	id nAgNDERNIGqy0gAAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 03 Jun 2026 18:08:55 +0200
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 03 Jun 2026 17:50:28 +0200
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id DB871639916
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 03 Jun 2026 18:08:54 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 55C9A63969D
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 03 Jun 2026 17:50:27 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=lists.sourceforge.net header.s=beta header.b=W4flMAsO;
-	dkim=fail ("body hash did not verify") header.d=sourceforge.net header.s=x header.b=eCsSTiEp;
-	dkim=fail ("body hash did not verify") header.d=sf.net header.s=x header.b="D E//Pqa";
-	dkim=fail ("body hash did not verify") header.d=trailofbits.com header.s=google header.b="YAf9o1/h";
+	dkim=pass header.d=lists.sourceforge.net header.s=beta header.b=LhyISBvO;
+	dkim=fail ("body hash did not verify") header.d=sourceforge.net header.s=x header.b="Ck4M2/63";
+	dkim=fail ("body hash did not verify") header.d=sf.net header.s=x header.b="E IUoCZf";
+	dkim=fail ("body hash did not verify") header.d=trailofbits.com header.s=google header.b="NmaHN/wQ";
 	spf=pass (mail.lfdr.de: domain of linux-f2fs-devel-bounces@lists.sourceforge.net designates 216.105.38.7 as permitted sender) smtp.mailfrom=linux-f2fs-devel-bounces@lists.sourceforge.net;
 	dmarc=pass (policy=none) header.from=lists.sourceforge.net
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
@@ -22,95 +22,94 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	List-Unsubscribe:List-Id:Subject:MIME-Version:Message-ID:Date:To:Sender:
 	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
 	Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Owner;
-	bh=9r3L9fdlfpBO+dci//2Kq6DqCOCqgG+jRH/HSF+NxLU=; b=W4flMAsOAN6gnEgMERjp31B9Pt
-	pX8ZYfkZCzBI7hepGlOXRmOgmktyMYqhpP+MP95p8EOsQp0BuUqgemHazmjRYNF6CpgcLjty4mRX6
-	eksmOgpPsvA6GElkeiPSXa5Uz1z7g/UjRcxT6whlZThIBHOqLofd784vnKr+FmNxKie0=;
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=EUm9nsG0soJUMeWxhHGCrz+Uw6tl0yUyU1gKAVy1d78=; b=LhyISBvOXPS5Wd0R5kpDeOHEiE
+	SjUMF7jABp5pjRhyukpjjtKrPNt66BjGh/ZcQ64DQwqjlFcuv9kttyKPQMaOTFZmldbx7jBvB15SU
+	ZGM6eeMiRzyZUQ7XRilftCjCxZS/e9f1khTVfW1uilI/FFVWYDUGO4DPm1qvhxUxhLSI=;
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1wUo97-0006So-G3;
-	Wed, 03 Jun 2026 16:08:46 +0000
+	id 1wUnr5-0002by-VG;
+	Wed, 03 Jun 2026 15:50:05 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <sam.moelius@trailofbits.com>) id 1wUo96-0006Si-8q
+ (envelope-from <sam.moelius@trailofbits.com>) id 1wUnqq-0002ak-9t
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 03 Jun 2026 16:08:45 +0000
+ Wed, 03 Jun 2026 15:49:49 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
  Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=EKhAC5B5dhqPh618bXTUN+M7rgwoP9aBvOyQLY4L2Sc=; b=eCsSTiEp5T3sb4xR7guBSkUXou
- nWyEchn4SCruNk7vnzMMKWwVTgmRo9RD1srdOkSYKfSkRFajEsgjNz4J0aCl5ZsNaf9wiga55GICU
- O2jJYFg7zkBEx+yUKwxoVfWPe82V/x8QnlQLbRY5A0HztkuYkkNAD9XQOYBsww5RRVNo=;
+ bh=Q7Bnzm+zoUq1PmybAub5hEImADXF9AGqvVXRPxWBhyo=; b=Ck4M2/63npYyzr8QOP4rI+2DG7
+ bvXcv22Fg9U5BGgXPfzCpCJlZ2qWzAiFx8Q6VtMbq7PTmoh15OxdL80/BTbzitkZ7zTR+XbQ59vb+
+ UwrLomkWXgv1QgGP+VcaDslZzLoPcziILlXkHURZMBRPXXVm/N+sXhkUfKmXr68Z8suY=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
  :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
  Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=EKhAC5B5dhqPh618bXTUN+M7rgwoP9aBvOyQLY4L2Sc=; b=D
- E//Pqa6UzAiDGs4B4gUj6bgOvXIG/dmmkm4Gw/gbT0dOrfijzrdfZcwSBAxwUKXeh6FCGOYUk/ufk
- V3cxX7syCkGKVLmjR5hjA/KxeNuBsILX3CrIVJAcXuquswdxnPZN+eUVJ3v287iW6E/HZgqeHp9OA
- sBarZZbEfLpr+rY8=;
-Received: from mail-qk1-f177.google.com ([209.85.222.177])
+ List-Owner:List-Archive; bh=Q7Bnzm+zoUq1PmybAub5hEImADXF9AGqvVXRPxWBhyo=; b=E
+ IUoCZfbM+7RdASffIsJ4Vr7ThXhHLVC9j9gN76efzfFOhDw+AF/BWjRfE9W059y3HlzXDHu/7nFL7
+ m66UF8BFldhs+GRb9Cc2wtIxFi6+9Xkx/xrgX7QMQsZgMY4uWEochadspuxvp7vpfcnZKbN1vrrFN
+ ar/8daIZtNzB5XIY=;
+Received: from mail-qv1-f52.google.com ([209.85.219.52])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1wUo93-00024B-Ua for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 03 Jun 2026 16:08:44 +0000
-Received: by mail-qk1-f177.google.com with SMTP id
- af79cd13be357-91578c374ecso189871285a.3
+ id 1wUnql-0008Hz-Hp for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 03 Jun 2026 15:49:48 +0000
+Received: by mail-qv1-f52.google.com with SMTP id
+ 6a1803df08f44-8ccda0ac4fcso72559106d6.2
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Wed, 03 Jun 2026 09:08:42 -0700 (PDT)
+ Wed, 03 Jun 2026 08:49:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=trailofbits.com; s=google; t=1780502916; x=1781107716;
+ d=trailofbits.com; s=google; t=1780501776; x=1781106576;
  darn=lists.sourceforge.net; 
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=EKhAC5B5dhqPh618bXTUN+M7rgwoP9aBvOyQLY4L2Sc=;
- b=YAf9o1/hNW81HMyoIB8kCOYk+2opYcFRbc/vBDSF7m1nLeYelPtO82vZMu8wjEV6a9
- 2w1uCjnF+o9M2BXdpMfiO/J+fzWE3u+BYCkDUweHNQ7Tu3uFqy4oj52OOIO27IbTq1HI
- PghFHNrTXtWVcovSuLN4ObvBG8wk8V+9ufU76L+E/SN4yUMd+JWBLyX90oGSTcnq+nVz
- o1G9mqWNK49oz/lBtqdMWjq9x+qe+37Tb3xYu5I2D17m8q9zKjaLE3VZCjhkPJpF0yFe
- 0SB8VtZCewDmibuv4oyRfYL+sdgdNdvn1nOJJ51RmeFQGAwiUe+DMfgsLkwmhzjhKS+d
- wwdg==
+ bh=Q7Bnzm+zoUq1PmybAub5hEImADXF9AGqvVXRPxWBhyo=;
+ b=NmaHN/wQsrW/axvWVrAZtzp9opNkhvrkjrxiZDxmRcIC+jedEAgHlEymEg9GW5Hcvp
+ rUYDrpE7N2wKEOY9R8ncoKFvET+8ukR2D89vldjY2GtRzLO9fCIHDMIFj5MZO/SwCHfN
+ KZdFF4Q1FSpQVKpHZxckGKYStMtui2HTLBoHl97GTaIw5cAEE7L/0vHq3BqpWHCeEjtm
+ h5gDR+5IS5RZOWATntreCDEWY2+75y3Dz7ZzOoarbnzou7x2DawbPO4aZrapcZwwuEML
+ VPk1LoCyToq6FqE8nUsfyM74mjJg2BKXRZ+nGzB9lbYqlJv91CQ8WzkTsTh+NDEOtEEE
+ U1rw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1780502916; x=1781107716;
+ d=1e100.net; s=20251104; t=1780501776; x=1781106576;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=EKhAC5B5dhqPh618bXTUN+M7rgwoP9aBvOyQLY4L2Sc=;
- b=Y2xonuB7bHlDy3CRf8ikRfkbtYNu8nKmcHL6O97h2kiFjb5p1Qo7T0cLpZmFCcv01h
- gBNAKuTdaugAxmi4P17tu+ZJsAU9dlfTtR2wVSg1Bp3HmGRCLIcusc+2v/l/vUEe/kh3
- Bkt13Cb9vY36+VtXM+njdoNgE2+s1hDt45DrK/w0rhRZNKwzNLKsUIFzkRfbAiqZiV/g
- +tSe+TXAydD194SStffsMCjjbnuNJ0aXD3lwHXGd/mdz9j++MOKmrrWRc/GfjZRn0/0k
- aoRtBEnYnMsbMLsgIkrQcjC4Hwd6OHHrvugM6A4iiTngM5qAXodHQqWHJmONxZAMsRND
- 38XQ==
+ bh=Q7Bnzm+zoUq1PmybAub5hEImADXF9AGqvVXRPxWBhyo=;
+ b=Ag1umxKhs+menZl2LvZQjjQSLKE9Xndudlgnf6eKn0WZ4cG3A0raCwhG7HVXg3ahLR
+ GBimvHMYv674MdBIxyU0ZcMQYb4jsuqKZGivUDXi4zmZfkCHezWLkfj0gNoN42bEelgo
+ bQ/a0mVhvU/s1aEeCc02GeciNuDU85U/y3oShy4DAe52Zi41pdspOfxUsxvPBYes76kl
+ k48wC6z2AE99r9mIqnEqw+Jx3N1exbqoLFNwaZRq6WY+DqQ5BQqRDDCe7wlbbM3G4bH/
+ 1moL7/WH3FruNkTOyCIS8X9oDFXTYIxQ2X/VB1VTVwAzOt1VaIuEVQkq/TFPFCGlyVmn
+ Egbg==
 X-Forwarded-Encrypted: i=1;
- AFNElJ9HLtWgsd4RxiSMNS9ZI0lHp1w/2Gprnl6qSMbn93QUOtYvUnZbZny7l00lSKN7LCAxLXXC9Rx1hw4tqrhcOyFy@lists.sourceforge.net
-X-Gm-Message-State: AOJu0YyKOputRSbphVGmvX3mo4VQFuLICdc3tOdJ+yl3yed47ap4hr50
- azbwreDxDJoE1OtrE5mhSC2aLgKIVw6uLj0iV64fp6uoNnHncVlviel8FkVG5I+zDSW+Gd3kF9d
- iNhKDzwA=
-X-Gm-Gg: Acq92OF5zYMR1FuFLdJOXf6IJCH1geghLIezkoCb8OTReFH0wrrQh2Px06h5zvd55Vf
- sF9MthHz70N/lOt8Pol0hUOpJzh+kfiLlXxKkhm11HviPEjdrImX1ERq3waQLLJK3bGuRAbWkpp
- b1XVDh4cFUK5xGmZ2MLVy6F9M+F2fYXqB1PXeZ7KSHgrq8IkbZqD+kXXT3nyzc/oO9ITELHE3CK
- eSmjRlRVHZ6E4BqmRAUNnAkWAJ/YvPc/MRMiBvu/KU/ShEamcwq9sSaSjAkyyE+ZZP3fPQP0EJR
- hmFk/pQ9lt981asjjUhyTufEwMyKDWH7HlFTT3m0qjZlGzK75NSxALrszYOLaoCZOkh3C4WSlyQ
- BngBqjsr3/1b5jqlwdqwTRHYCd0g6QLox8q9me7kRinjoCMpx2XUAqhIsBo1gdpOQJ8vZfwEp/q
- NN/gm6XJ06wT1nQkMtSmS4KurxiuF8Qe7r6+wW2w==
-X-Received: by 2002:ac8:598a:0:b0:517:7277:9362 with SMTP id
- d75a77b69052e-51778751a59mr51776541cf.48.1780499506595; 
- Wed, 03 Jun 2026 08:11:46 -0700 (PDT)
+ AFNElJ81pXoNaNT4wLM+QlPxJccuQq0ajmD72n36aVLZ7lPEiWaPlK7e5TPRoVFjb6Ej8IxMGbX+Mcn8PShQYhY8CL7q@lists.sourceforge.net
+X-Gm-Message-State: AOJu0YwOspBMrtM+KCFyx0lAB4PlNdGnKU+dVzPebrM4PYnUCd/d4tPs
+ /u5DeG/GNf+ChoVTuoV7eB9v1XIMC4Vr1hro12d8QWydX5TfwH8qbF14QNcEcQn738lzsjT6rTG
+ LE7Ty2tc=
+X-Gm-Gg: Acq92OEHY3IMELzm+Jb4DNYF9yWWrqZxyF9kdmnPGI8vfJJs6l0IfDQakoLWVhDMwoY
+ ZPVzojuQzATAL3rtlrkWNt38weVVttMuP2tJcC510o+gAH5hnLidMjH7Ka+Yc5cIc7IEVEUuKj0
+ Rv9E3Q5kiZ/SS/GHQNl6NIxNVuE369N5gfxp/uunj7Cddx+LSAFee1XtW8OiE1GDJ8cLCbfOpMk
+ vu5p1U3KVnBZoCqbfT1VWPOkSjvhoTdRnTWEQUjF4q8gsIo3tSRTYLNpFGBqNj67q81pZgWWit8
+ c370swN6FBAyMWCRO8h5Bfq4QT3vq/SvJULHLqkGGfpdb+TtP8ejaGhtPB+R+cRF+lc5RbaKXSB
+ nce01i/9egbWAQfVgtSiNdNtq4706TZNEuJQCtTR5uzC74IyPzaMzSl5lZQuIdGjuigwGBDybQG
+ rqRsCXeGF856lxm6nPWGpEVCdGnMNl9RzeA99eZQ==
+X-Received: by 2002:a05:6214:4302:b0:8cc:f899:bb79 with SMTP id
+ 6a1803df08f44-8cece16246cmr54331596d6.46.1780501776353; 
+ Wed, 03 Jun 2026 08:49:36 -0700 (PDT)
 Received: from localhost ([161.35.96.86]) by smtp.gmail.com with UTF8SMTPSA id
- d75a77b69052e-51775dd2e53sm25387211cf.24.2026.06.03.08.11.45
+ 6a1803df08f44-8cecd055181sm23176366d6.30.2026.06.03.08.49.35
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 03 Jun 2026 08:11:46 -0700 (PDT)
-X-Google-Original-From: Samuel Moelius <samuel.moelius@trailofbits.com>
+ Wed, 03 Jun 2026 08:49:35 -0700 (PDT)
 To: Jaegeuk Kim <jaegeuk@kernel.org>
-Date: Wed,  3 Jun 2026 15:11:40 +0000
-Message-ID: <20260603151141.15635-1-samuel.moelius@trailofbits.com>
+Date: Wed,  3 Jun 2026 15:49:32 +0000
+Message-ID: <20260603154933.16368-1-sam.moelius@trailofbits.com>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 X-Spam-Score: -0.2 (/)
@@ -136,8 +135,8 @@ X-Spam-Report: Spam detection software,
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [209.85.222.177 listed in wl.mailspike.net]
-X-Headers-End: 1wUo93-00024B-Ua
+ [209.85.219.52 listed in wl.mailspike.net]
+X-Headers-End: 1wUnql-0008Hz-Hp
 Subject: [f2fs-dev] [PATCH] f2fs: validate inline dentry name lengths before
  conversion
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
@@ -154,8 +153,8 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>,
 From: Samuel Moelius via Linux-f2fs-devel
  <linux-f2fs-devel@lists.sourceforge.net>
 Reply-To: Samuel Moelius <sam.moelius@trailofbits.com>
-Cc: Samuel Moelius <samuel.moelius@trailofbits.com>,
- open list <linux-kernel@vger.kernel.org>,
+Cc: open list <linux-kernel@vger.kernel.org>,
+ Samuel Moelius <sam.moelius@trailofbits.com>,
  "open list:F2FS FILE SYSTEM" <linux-f2fs-devel@lists.sourceforge.net>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
@@ -165,22 +164,23 @@ X-Spamd-Result: default: False [-8.61 / 15.00];
 	WHITELIST_DMARC(-7.00)[sourceforge.net:D:+];
 	DMARC_POLICY_ALLOW_WITH_FAILURES(-0.50)[];
 	RWL_MAILSPIKE_EXCELLENT(-0.40)[216.105.38.7:from];
+	MAILLIST(-0.20)[mailman];
 	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7];
 	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
-	MAILLIST(-0.20)[mailman];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	DKIM_MIXED(0.00)[];
-	RCVD_TLS_LAST(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	TO_DN_ALL(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
-	ARC_NA(0.00)[];
-	FORGED_SENDER(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
+	TO_DN_ALL(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
 	RECEIVED_HELO_LOCALHOST(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:jaegeuk@kernel.org,m:samuel.moelius@trailofbits.com,m:linux-kernel@vger.kernel.org,m:linux-f2fs-devel@lists.sourceforge.net,s:lists@lfdr.de];
+	FORGED_RECIPIENTS(0.00)[m:jaegeuk@kernel.org,m:linux-kernel@vger.kernel.org,m:sam.moelius@trailofbits.com,m:linux-f2fs-devel@lists.sourceforge.net,s:lists@lfdr.de];
+	DKIM_MIXED(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_SENDER_MAILLIST(0.00)[];
 	DMARC_POLICY_ALLOW(0.00)[lists.sourceforge.net,none];
+	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
+	FORGED_SENDER(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
+	ARC_NA(0.00)[];
 	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,trailofbits.com:s=google];
 	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,trailofbits.com:-];
 	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
@@ -192,13 +192,13 @@ X-Spamd-Result: default: False [-8.61 / 15.00];
 	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
 	ALIAS_RESOLVED(0.00)[];
 	TAGGED_RCPT(0.00)[linux-f2fs-devel];
-	FORGED_SENDER_MAILLIST(0.00)[];
+	HAS_REPLYTO(0.00)[sam.moelius@trailofbits.com];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	RCPT_COUNT_THREE(0.00)[4];
 	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
-	HAS_REPLYTO(0.00)[sam.moelius@trailofbits.com]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.sourceforge.net:helo,lists.sourceforge.net:dkim,lists.sourceforge.net:rdns,lists.sourceforge.net:from_mime,lists.sourceforge.net:from_smtp,trailofbits.com:mid,trailofbits.com:email,trailofbits.com:replyto]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: DB871639916
+X-Rspamd-Queue-Id: 55C9A63969D
 
 Inline dentry conversion copies names out of the inline dentry area
 before checking that each recorded name length fits in the available
@@ -211,7 +211,7 @@ Validate each inline dentry name length against the inline filename
 area before copying it.
 
 Assisted-by: Codex:gpt-5.5-cyber-preview
-Signed-off-by: Samuel Moelius <samuel.moelius@trailofbits.com>
+Signed-off-by: Samuel Moelius <sam.moelius@trailofbits.com>
 ---
  fs/f2fs/inline.c | 4 ++++
  1 file changed, 4 insertions(+)
