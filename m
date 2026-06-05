@@ -2,161 +2,101 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id YBXJNkSjImpMbQEAu9opvQ
+	id nc6AAjirImpobwEAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 05 Jun 2026 12:21:56 +0200
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 05 Jun 2026 12:55:52 +0200
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0F57C647461
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 05 Jun 2026 12:21:56 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 332386478BD
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 05 Jun 2026 12:55:51 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=lists.sourceforge.net header.s=beta header.b=g1Pk3QFl;
-	dkim=fail ("body hash did not verify") header.d=sourceforge.net header.s=x header.b=NovcdZKG;
-	dkim=fail ("body hash did not verify") header.d=sf.net header.s=x header.b="R d6/K/8";
-	dkim=fail ("body hash did not verify") header.d=vivo.com header.s=selector2 header.b=RZChL2T0;
+	dkim=pass header.d=lists.sourceforge.net header.s=beta header.b=m8Nkdb5b;
+	dkim=fail ("body hash did not verify") header.d=sourceforge.net header.s=x header.b=ciwuGdMJ;
+	dkim=fail ("body hash did not verify") header.d=sf.net header.s=x header.b="A v9hnMQ";
+	dkim=fail ("body hash did not verify") header.d=rosa.ru header.s=mail header.b=knUqC+WD;
 	spf=pass (mail.lfdr.de: domain of linux-f2fs-devel-bounces@lists.sourceforge.net designates 216.105.38.7 as permitted sender) smtp.mailfrom=linux-f2fs-devel-bounces@lists.sourceforge.net;
-	dmarc=pass (policy=none) header.from=lists.sourceforge.net;
-	arc=reject ("signature check failed: fail, {[1] = sig:microsoft.com:reject}")
+	dmarc=pass (policy=none) header.from=lists.sourceforge.net
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
 	List-Unsubscribe:List-Id:Subject:MIME-Version:Message-Id:Date:To:Sender:
 	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
 	Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Owner;
-	bh=eFPmOx8zDCBsUpPq2zLQ1JbzmGIpy2VSQpvD2mCI47M=; b=g1Pk3QFled2VjjZVdIN7P3l7Nv
-	RdBeZC3nS3C5fGYFRzQUiGmXUzAoMcIxdb6PoSKOkO1NFnyMa8gOUuL7EPGXVVOpWvuxjVardBfkD
-	jK/Xt3+G5JAuoduplJzm5lY0aPZ3ULyDdl+wZOGEetkoYTqpo58rpevtHkQ0zVqHPyvg=;
+	bh=93885MYx3/9HiB3fRwGahvm6TMoOcQyqbgpBYdze+Pg=; b=m8Nkdb5b53RghRfsQ/NtPSYGiT
+	AZ5vfF5rZUh2LPhOpBy85pnDo7XbFKpmYVzn0RQeySMwrmvpKfGV0y/2JL2z1LylfW0FwWn3Vzrgv
+	H7jdIHrgji86GppCivlaxp2ed+hX8ytiLj691a5nZuJX7Vm0N/Glk/bk1R/5sxgDo3ko=;
 Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
 	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1wVRgP-0005dd-4i;
-	Fri, 05 Jun 2026 10:21:45 +0000
+	id 1wVSDG-0006KJ-K6;
+	Fri, 05 Jun 2026 10:55:43 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
  by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <guochunhai@vivo.com>) id 1wVRg8-0005dO-J9
+ (envelope-from <m.lobanov@rosa.ru>) id 1wVSCx-0006Jn-D1
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 05 Jun 2026 10:21:29 +0000
+ Fri, 05 Jun 2026 10:55:24 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=MIME-Version:Content-Type:Content-Transfer-Encoding
- :Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-ID:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=hDX9lLpZs7p/gdDOFYbOW+w6Thu2tlMWhrJ4Uxo+BFQ=; b=NovcdZKGb5/I0gEaso3wkI0DrX
- 7C7toAdXGBgrYmmYZ8xzIH0pE1TRQ1Hj2ii47Mqrc/garF/RCeY7j/JcJmNmToC9i+kZ9DT9GL04M
- ws8aphD4n7PZGetqMRex+skeE26ONfu67Fkt3SBwzPVb17Gcfd5zi9h+6ID0y/kJBdUk=;
+ bh=roqDwFCKSOfqoEvMH3HcV0q1plvbGQsfEEkLVszHKiA=; b=ciwuGdMJU19SsSU2i/oUe1Xpat
+ 2gL2MLYypLgquHlReAuvbXdOnRf8VG12M0fIKxpuYc6hYxTUz+tmfZWvk69hYLXBUEx9xS7MlMctS
+ hRLQcMAnWKAvOIxax/Fex1nIjhNIfcR+LRHCV8LZZQFIlrapopv22c+ldQOX/bho6Axs=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:Date:
- Subject:Cc:To:From:Sender:Reply-To:Content-ID:Content-Description:Resent-Date
- :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=hDX9lLpZs7p/gdDOFYbOW+w6Thu2tlMWhrJ4Uxo+BFQ=; b=R
- d6/K/88QdQYFwyosVKTB6Fyw55/300OtQ3kH1PYtX04fbKi7rKNA4h+tCriqsjbGKVjSfMVpd+Eet
- QPtbGhygNhb6uDk4Hw6v9kXJH2q0aWNKwZkyP9mlphPA2B8rX801HLaSk2asx8Msu4k+g6XEgJ1WX
- JzLrr9JFAxrqTrH4=;
-Received: from mail-japanwestazon11012026.outbound.protection.outlook.com
- ([40.107.75.26] helo=OS8PR02CU002.outbound.protection.outlook.com)
+ List-Owner:List-Archive; bh=roqDwFCKSOfqoEvMH3HcV0q1plvbGQsfEEkLVszHKiA=; b=A
+ v9hnMQyjsb67NRyKgbEknT/6oBCv/LjEsVYpdocTtUxI6+eTEA5/FjbnyOWBVe9MTC8ZVXCZpvwQV
+ 9NNWX1/g+e6dpucEyUb147eu96fLqTtwv3XWEKPkJ7M4Sx32eV9ayFxIdwZ9RbVi4cfVjIvmlQ18E
+ NcHUeT9J8I7opsn4=;
+Received: from forward200a.mail.yandex.net ([178.154.239.93])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1wVRg7-000642-Av for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 05 Jun 2026 10:21:29 +0000
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=NNQ4+74ejXjzl9V754QD0nGVBBmvDg2UGkGroXQ0xXcwR2NOWBTahQjw37bHCqbrXzRMUe2cBD7Cn/ITNHeaSzmd1+nSJzPaHPcFIOeatWj4OFkUjZZiogVmHbxBs4uOj92hnGiUiq2Eo0QOtxoWB6Z1V5AB/b94CGg8FZOlc8QpGtIXcLM/5JCrWGzdyY1EWTXg18VOQjgFCxhTmsirGqgGmkkmViQjEvbTKGwyoPJfWOjnhg1kPZPpZQGzM+7Wpr9TCUG9A+8tzFMnFfaf1BvpGbX6iTg0GHoJWXUHFTiYFoRg+G4I8YSz8OWunmO8O3GEt37GhoxXXMz3pkspPw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=hDX9lLpZs7p/gdDOFYbOW+w6Thu2tlMWhrJ4Uxo+BFQ=;
- b=gQmge1MkzQHSQtWShii17tQ9afGpM0ByN32Wv31Enhqwktgc/Bd/NlDBvZ4wvE7Dz+Yo3VtlV+7FGa8b0gZpNBL0ybqx6SKpeuK5nAmsKcFBcdZcYuujKUOKMLQwtJpJ6K2dA6u5LDk55PmdrjjmnVTYZb8yd1GhhZV0zZI3QTaue/auHj86JccI6gtyf2UYdVRj8+jTgago2QTjD7MnnPMnMdNFew/FeXXuD58ViOvUeRbQZe7uCqazB2Ws2DH4Y561uYzHzxlQBoYjsyRNyGO/yHyMcCqXeTuHoXzLTGKk1q70COEuz4RqqwU7cAD2kf547Qyuad5NWcvqxNoX8g==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=vivo.com; dmarc=pass action=none header.from=vivo.com;
- dkim=pass header.d=vivo.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vivo.com; s=selector2; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=hDX9lLpZs7p/gdDOFYbOW+w6Thu2tlMWhrJ4Uxo+BFQ=;
- b=RZChL2T0rOoa6JyGq8LHENsfahvuQol4DF8oU2xlSmeo6W2G8kfW94lE/Xc2vcsPlB57ggsPNtE5p+YSjYvDutICoL0O+H2sL43QyXB3ChXafHKqwf7D3dCTmMNxrEGrDbfOh5R+RxvgJtIM54tzpCUTcAyl17aKd/X+ArNtBYlh4KhjiLxgoI50MtuA49u3ZLQv89ZsnVu2UAHbFbmpHzucatJ3pVh5vp3brza2A4iUBpSAP8n9pTIg9rA1cT3TazCmpvbW+2P6f0e9tozx+NEvvVvJ2NdBYSq8KD5hxHipnX5icWn54gVD69DF6wbJb3RuP4kjjXeqIQplVCnv5g==
-Received: from SE3PR06MB8257.apcprd06.prod.outlook.com (2603:1096:101:2ee::17)
- by OSNPR06MB9147.apcprd06.prod.outlook.com (2603:1096:604:483::11)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.92.7; Fri, 5 Jun 2026
- 10:06:12 +0000
-Received: from SE3PR06MB8257.apcprd06.prod.outlook.com
- ([fe80::881c:180e:661d:eb93]) by SE3PR06MB8257.apcprd06.prod.outlook.com
- ([fe80::881c:180e:661d:eb93%4]) with mapi id 15.21.0092.007; Fri, 5 Jun 2026
- 10:06:12 +0000
-To: chao@kernel.org,
-	jaegeuk@kernel.org
-Date: Fri,  5 Jun 2026 18:05:59 +0800
-Message-Id: <20260605100559.94843-1-guochunhai@vivo.com>
-X-Mailer: git-send-email 2.34.1
-X-ClientProxiedBy: TP0P295CA0052.TWNP295.PROD.OUTLOOK.COM
- (2603:1096:910:3::14) To SE3PR06MB8257.apcprd06.prod.outlook.com
- (2603:1096:101:2ee::17)
+ id 1wVSCt-0003tq-SL for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 05 Jun 2026 10:55:24 +0000
+Received: from forward103a.mail.yandex.net (forward103a.mail.yandex.net
+ [IPv6:2a02:6b8:c0e:500:1:45:d181:d103])
+ by forward200a.mail.yandex.net (Yandex) with ESMTPS id C8CADC3E8B
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Fri, 05 Jun 2026 13:38:45 +0300 (MSK)
+Received: from mail-nwsmtp-smtp-production-main-60.vla.yp-c.yandex.net
+ (mail-nwsmtp-smtp-production-main-60.vla.yp-c.yandex.net
+ [IPv6:2a02:6b8:c0f:4c18:0:640:5600:0])
+ by forward103a.mail.yandex.net (Yandex) with ESMTPS id C1E9F804C0;
+ Fri, 05 Jun 2026 13:38:38 +0300 (MSK)
+Received: by mail-nwsmtp-smtp-production-main-60.vla.yp-c.yandex.net (smtp)
+ with ESMTPSA id ZcffmqLe7a60-kaRNz9XR; 
+ Fri, 05 Jun 2026 13:38:37 +0300
+X-Yandex-Fwd: 1
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=rosa.ru; s=mail;
+ t=1780655918; bh=roqDwFCKSOfqoEvMH3HcV0q1plvbGQsfEEkLVszHKiA=;
+ h=Message-Id:Date:Cc:Subject:To:From;
+ b=knUqC+WDUAgnqxDKtEh2dL3DL5dQWXYQLusjUQPo7MUozKS5ebwl+3MFZW/HGzuUp
+ mM+9j+8wjSbropEF3yhxkZ6LbDLvPa1kBwQhOa82kf0UcoCI+z3A33aL1bQ42RAUe1
+ m6Ona2oyCubeeWta9gejEwsVQTeY9p9AcgP0bT7U=
+To: jaegeuk@kernel.org,
+	Chao Yu <chao@kernel.org>
+Date: Fri,  5 Jun 2026 13:38:34 +0300
+Message-Id: <20260605103834.14894-1-m.lobanov@rosa.ru>
+X-Mailer: git-send-email 2.39.5 (Apple Git-154)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SE3PR06MB8257:EE_|OSNPR06MB9147:EE_
-X-MS-Office365-Filtering-Correlation-Id: 08bd7165-5017-45af-f5e1-08dec2ea1241
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|366016|1800799024|376014|52116014|18002099003|38350700014|11063799006|5023799004|56012099006;
-X-Microsoft-Antispam-Message-Info: yEVN2lje3JIlPT7YV4sCs7IkxdsICeUBKZ0K+GSt40eGoCqsWYtwcehQtq6NsxYMhm9xITg89PQFUBC8j6UjGH+a7wb2OYWGOiBpes9U8dOzZIIMZp+7lhQBw8w68kOcMXWnMAvZN5BrjglH5tecnPLu4bhZgiCZulkBgZerYDetcCaaEZbR1nsQOPGI6IZboX7X1eAb9x4/S24NEIPvD3W8uCI8vtBZ1dO1S1oUL2g4izMUy88C9GMnB/YPm+A16j8j3Vi2MmMjW5PTIhZa7/FA58JlcQV3dXOlG7hEvBdIZTcwih0YDgCkdJ6tgnutgNmyonTnvqdztlm9VYGsF4jBx6FUJ8YoLUUbGjjAF20DLEiuzhDvZzuyHoKpVhq0J5K+D8aMkCnHpjwkZaZxYy7pzhYg3TOyaY72sMpxcpb1ck+KmBZ7y7Z78NUR0qIUz5xgujbzXTVo1rDmELuNgYQtsk8ra9c9wB0kiR9XG6XAMVbNLr7lCoehN6mTVh31GvMGXSQhJIgqotxr96CuWUZyqMD+OUklQsn5D7ryCDE1l3XxDPaGe4FEkIm5O13B1lr2TcYVdC2wiI0Vzh7YBPTxW5b0AWVRHtGySEMW6nskKeSsRwaqEFQzdlpOeyqEvV4lB0G/w4NnUTRumdcWrqBgTJoR0GTw6PN7yCmP78gf5rTQIr/MA5gzqcS3oULytuSnyk6rHuoZLzvbrH6+EMx4h43WwZwsXLoaft/dlZS+z7MaK+bLE2V/tEdX1ViO
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:SE3PR06MB8257.apcprd06.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(1800799024)(376014)(52116014)(18002099003)(38350700014)(11063799006)(5023799004)(56012099006);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?yGgxo56tYRhW65g3trbXST7Lzag48B6jlARIyvJegpJ8ezzE8vUGihne31zR?=
- =?us-ascii?Q?eG1q5FMlKo2RFR0ED00Wt7SRtuL+sgCQOvx/vEZ/oYmvNFolVFqWkEVya2L1?=
- =?us-ascii?Q?mIvfLnfPlagjOTkOfMfwfEjdr0fGtgYATogsXzuBpHnA8VEmXRkPdWA51njx?=
- =?us-ascii?Q?5afmYnWpsEMnNKuadp19DqLHvmqW6sRMLQCaR2javBcbJQW2wAnLFNEa6Lte?=
- =?us-ascii?Q?azbFNgeGBEf5+2fBmnRkFmbV/RsfD2kNFo+d0zYXQemLbSpmmw0uXvBgSKcj?=
- =?us-ascii?Q?w9+hhsfhav85ocqZT4Vr7yCowSixX5dGE+pnBJ8irwV5j4U0f8AnYMCKqWZg?=
- =?us-ascii?Q?hbth1EHhqTCWEo2+PrFP/n7e/ggQ9g6bVvjB4ljoj5xB/86+7n+2vv58dwQe?=
- =?us-ascii?Q?nLaEC6//uED1WUuO9NHQLGVxnGFXLQcV6DQrAGcNx71PRAOfAZsoMWPaLN5M?=
- =?us-ascii?Q?WZN9UUkd4JDfMHkfOcuUi/E/5zbLuKgwcpfML1UGNAxGEKrZdkmX2y0X/nUD?=
- =?us-ascii?Q?yJxWL8qxqckipY6JArYINA5AkQ1dxESF8k1+f9+jryLkYLtoleQD6Ejn60eR?=
- =?us-ascii?Q?Gnc2WVcKrXA5tYNxwGAWVb2ZYe7jec0F2ytNfsZVWtLKRKNLebTSSUMmJUd4?=
- =?us-ascii?Q?jsQsfD3OWjZZGTlNTJ4OoYalVEflZ62sE7DCllPUJe/2nNY1fjyVE0PfWF9K?=
- =?us-ascii?Q?1ci58Fq4yO88FmGOOOKIA5pAprAhxWJId2qaEgk0jRhRy305yfJZxsjMGFGH?=
- =?us-ascii?Q?E3iWaAhPWtN6KQGEe0fPiqJ2flHmPKvFUaDvTU7k/CTaQbNg55q8IeBXMLST?=
- =?us-ascii?Q?VU52YVKRxtvSk/nfeO+m0JebfOljtPtW3SZW8CArCAaF5fIP+idLgXMhaRlS?=
- =?us-ascii?Q?+h+5QGCfyKLY+OqMaV0OE4Jy/dE59kRgLT/nEmi2mibC8RTtXXZyxV9caDuw?=
- =?us-ascii?Q?pzjsTlbAf6gkPFqbsCX61M81/6bi0sZ3Fd72h/5Eijs3I1umNUij0RxxKVEf?=
- =?us-ascii?Q?IJ+xEiMH0yR1029vonYrkA8hQtEy/jSd0dQkdDk0svKgQ4gQAg3ait+XxwoL?=
- =?us-ascii?Q?f136MrBCCYSFL9R8d3229gbX4jxe9BXC6KKnNr4+XjJ2b2a0/3MAIHd1p4xc?=
- =?us-ascii?Q?ksJZrU3q+2K0Ckqrg1dCy34nIzfpnZvg2FDInKt94tUofc6p4LaB9ufHklJN?=
- =?us-ascii?Q?wcjknJ2ZzBOdC4v2YyyyRiFtyKEmMDB2QZ7zcD1bBG1P2WmWuKDdzJZ4mciJ?=
- =?us-ascii?Q?T9QoSbtkDs0EKNaVIhn7NbabxkNtjnVmbAo0TkB8hPjmxLpXnpaBWEht7lwK?=
- =?us-ascii?Q?h3qZGs8gVuLBpIajvNvETXujUiOFOSyn/WAX8hGBkPq+z3JdX/E5lqbF8+Fn?=
- =?us-ascii?Q?JYCfWoIIM768jvyyIKsvu130gAgsG8WzUzOOBL3SYUtl2lXsCl6Hor2yclFM?=
- =?us-ascii?Q?b/ZdtM5qc7vyYhFWJAb2Wb96dxa4XMoTgzG6hFcp1Bn7IS29SXzOSl3q+SRE?=
- =?us-ascii?Q?HyjvF2reax6TWISJTvvi8w880OUdyrbgpuDFvTtznA7h+mZwMtkiYKg/v6ru?=
- =?us-ascii?Q?EMwOdpou3/7B34fxXsFEvWFEkWxyBmHPMDqm5DF21AcpOWOYEhkLDv3+zbh4?=
- =?us-ascii?Q?vCugFGYvu53S4lCakD0u9FKe2BsyJ+z1AYpfwSCqGodeVLhpTcKLkYdFlRR3?=
- =?us-ascii?Q?1ATZnVbrZvOMPaRWqaOTv/y2LTWUXGNAPrKsETk4V7eCOVOEtG5jt2SuV9/E?=
- =?us-ascii?Q?Sa8THeH2Qg=3D=3D?=
-X-OriginatorOrg: vivo.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 08bd7165-5017-45af-f5e1-08dec2ea1241
-X-MS-Exchange-CrossTenant-AuthSource: SE3PR06MB8257.apcprd06.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Jun 2026 10:06:11.9352 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 923e42dc-48d5-4cbe-b582-1a797a6412ed
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: Qwf4DWk3tA4PAXsEHcGq4a3uNO++EXdFbOKsLuU3MgskpWqwLnOO5HAXICvZy2HevCAD9IOviZRMz83DWwemug==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: OSNPR06MB9147
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Since commit 29c1e18a0bc5 ("fsck.f2fs: tune linear_lookup
- in f2fs_do_mount()"), fsck_update_sb_flags() writes the superblock directly
- and nothing sets c.invalid_sb with SB_ENCODE_FLAG anymore. Drop th [...] 
+ Content preview:  When updating an atomic-write file, f2fs_write_begin() may
+ read the previously written data back from the COW inode:
+ prepare_atomic_write_begin()
+ locates the block in the COW inode and sets use_cow, a [...] 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -166,10 +106,10 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain 0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [40.107.75.26 listed in wl.mailspike.net]
-X-Headers-End: 1wVRg7-000642-Av
-Subject: [f2fs-dev] [PATCH] fsck.f2fs: drop unused SB_ENCODE_FLAG
+ domain
+X-Headers-End: 1wVSCt-0003tq-SL
+Subject: [f2fs-dev] [PATCH] f2fs: read COW data with the original inode
+ during atomic write
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -181,97 +121,136 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Chunhai Guo via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Chunhai Guo <guochunhai@vivo.com>
-Cc: Chunhai Guo <guochunhai@vivo.com>, linux-kernel@vger.kernel.org,
+From: Mikhail Lobanov via Linux-f2fs-devel
+ <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Mikhail Lobanov <m.lobanov@rosa.ru>
+Cc: lvc-project@linuxtesting.org, linux-kernel@vger.kernel.org,
+ daehojeong@google.com, stable@vger.kernel.org,
  linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-7.61 / 15.00];
+X-Spamd-Result: default: False [-8.61 / 15.00];
 	WHITELIST_DMARC(-7.00)[sourceforge.net:D:+];
-	ARC_REJECT(1.00)[signature check failed: fail, {[1] = sig:microsoft.com:reject}];
 	DMARC_POLICY_ALLOW_WITH_FAILURES(-0.50)[];
 	RWL_MAILSPIKE_EXCELLENT(-0.40)[216.105.38.7:from];
+	MAILLIST(-0.20)[mailman];
 	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7];
 	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
-	MAILLIST(-0.20)[mailman];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	MIME_TRACE(0.00)[0:+];
-	RCVD_TLS_LAST(0.00)[];
-	TO_DN_SOME(0.00)[];
-	DKIM_MIXED(0.00)[];
-	FORGED_SENDER(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
-	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
-	RECEIVED_HELO_LOCALHOST(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
 	DMARC_POLICY_ALLOW(0.00)[lists.sourceforge.net,none];
-	FORGED_RECIPIENTS(0.00)[m:chao@kernel.org,m:jaegeuk@kernel.org,m:guochunhai@vivo.com,m:linux-kernel@vger.kernel.org,m:linux-f2fs-devel@lists.sourceforge.net,s:lists@lfdr.de];
-	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,vivo.com:s=selector2];
-	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
-	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,vivo.com:-];
-	RCVD_COUNT_FIVE(0.00)[5];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vivo.com:mid,vivo.com:email,vivo.com:replyto];
+	DKIM_MIXED(0.00)[];
+	RECEIVED_HELO_LOCALHOST(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	FORGED_RECIPIENTS(0.00)[m:jaegeuk@kernel.org,m:chao@kernel.org,m:lvc-project@linuxtesting.org,m:linux-kernel@vger.kernel.org,m:daehojeong@google.com,m:stable@vger.kernel.org,m:linux-f2fs-devel@lists.sourceforge.net,s:lists@lfdr.de];
+	FORGED_SENDER(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
+	TO_DN_SOME(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,rosa.ru:s=mail];
+	MIME_TRACE(0.00)[0:+];
+	ARC_NA(0.00)[];
+	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
+	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,rosa.ru:-];
+	RCVD_COUNT_FIVE(0.00)[6];
+	PREVIOUSLY_DELIVERED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
 	FORGED_SENDER_FORWARDING(0.00)[];
 	FROM_HAS_DN(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
-	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
+	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
 	ALIAS_RESOLVED(0.00)[];
-	TAGGED_RCPT(0.00)[linux-f2fs-devel];
-	HAS_REPLYTO(0.00)[guochunhai@vivo.com];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	HAS_REPLYTO(0.00)[m.lobanov@rosa.ru];
+	RCPT_COUNT_SEVEN(0.00)[7];
 	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
-	RCPT_COUNT_FIVE(0.00)[5]
+	TAGGED_RCPT(0.00)[linux-f2fs-devel];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[rosa.ru:mid,rosa.ru:email,rosa.ru:replyto]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 0F57C647461
+X-Rspamd-Queue-Id: 332386478BD
 
-Since commit 29c1e18a0bc5 ("fsck.f2fs: tune linear_lookup in
-f2fs_do_mount()"), fsck_update_sb_flags() writes the superblock directly
-and nothing sets c.invalid_sb with SB_ENCODE_FLAG anymore. Drop the dead
-flag and simplify the SB_NEED_FIX check.
+When updating an atomic-write file, f2fs_write_begin() may read the
+previously written data back from the COW inode:
+prepare_atomic_write_begin() locates the block in the COW inode and sets
+use_cow, and the read bio is then built with the COW inode:
 
-BTW, SB_ENCODE_FLAG should originally have been 0x10, not 0x16, since
-invalid_sb is a bitmask.
+	f2fs_submit_page_read(use_cow ? F2FS_I(inode)->cow_inode : inode,
+			      ...);
 
-Signed-off-by: Chunhai Guo <guochunhai@vivo.com>
+and f2fs_grab_read_bio() decides whether to schedule fs-layer decryption
+(STEP_DECRYPT) for the bio based on that inode via
+fscrypt_inode_uses_fs_layer_crypto().
+
+However, the folio being filled belongs to the original inode
+(folio->mapping->host == inode), and the data stored in the COW block was
+encrypted (or left as plaintext) using the original inode's context, not
+the COW inode's -- see f2fs_encrypt_one_page(), which keys off
+fio->page->mapping->host.  fscrypt_decrypt_pagecache_blocks() likewise
+operates on folio->mapping->host.
+
+The COW inode is created as a tmpfile in the parent directory and inherits
+its encryption policy from there.  With test_dummy_encryption the newly
+created COW inode gets the dummy policy and becomes encrypted, while a
+pre-existing regular file -- created before the policy applied, e.g.
+already present in the on-disk image -- stays unencrypted.  The read
+path then sets STEP_DECRYPT based on the encrypted COW inode and calls
+fscrypt_decrypt_pagecache_blocks() on a folio whose host (the unencrypted
+original inode) has a NULL ->i_crypt_info, dereferencing it:
+
+  Oops: general protection fault, probably for non-canonical address ...
+  KASAN: null-ptr-deref in range [0x0000000000000008-0x000000000000000f]
+  RIP: 0010:fscrypt_decrypt_pagecache_blocks+0xa0/0x310
+  Workqueue: f2fs_post_read_wq f2fs_post_read_work
+  Call Trace:
+   fscrypt_decrypt_bio+0x1eb/0x340
+   f2fs_post_read_work+0xba/0x140
+   process_one_work+0x91c/0x1a40
+   worker_thread+0x677/0xe90
+   kthread+0x2bc/0x3a0
+
+The COW inode is only needed to locate the on-disk block, and that block
+address is already resolved into @blkaddr; the data's crypto state belongs
+to the original inode.  Read with the original inode so the post-read
+decryption decision matches the folio's owner.  This also makes the inline
+crypto path use the correct (original inode's) key.
+
+Fixes: 591fc34e1f98 ("f2fs: use cow inode data when updating atomic write")
+Cc: stable@vger.kernel.org
+Signed-off-by: Mikhail Lobanov <m.lobanov@rosa.ru>
 ---
- fsck/fsck.c       | 2 +-
- include/f2fs_fs.h | 3 +--
- 2 files changed, 2 insertions(+), 3 deletions(-)
+ fs/f2fs/data.c | 14 ++++++++++++--
+ 1 file changed, 12 insertions(+), 2 deletions(-)
 
-diff --git a/fsck/fsck.c b/fsck/fsck.c
-index 4fca4dd7eb1b..85766118d04a 100644
---- a/fsck/fsck.c
-+++ b/fsck/fsck.c
-@@ -4001,7 +4001,7 @@ int fsck_verify(struct f2fs_sb_info *sbi)
- 		if (c.invalid_sb & SB_FS_ERRORS)
- 			memset(sb->s_errors, 0, MAX_F2FS_ERRORS);
- 
--		if (c.invalid_sb & (SB_NEED_FIX | SB_ENCODE_FLAG))
-+		if (c.invalid_sb & SB_NEED_FIX)
- 			update_superblock(sb, SB_MASK_ALL);
- 
- 		/* to return FSCK_ERROR_CORRECTED */
-diff --git a/include/f2fs_fs.h b/include/f2fs_fs.h
-index 21310fa6a1af..07772da6e67d 100644
---- a/include/f2fs_fs.h
-+++ b/include/f2fs_fs.h
-@@ -1477,9 +1477,8 @@ enum {
- #define SB_ABNORMAL_STOP	0x2	/* s_stop_reason is set except shutdown */
- #define SB_FS_ERRORS		0x4	/* s_erros is set */
- #define SB_INVALID		0x8	/* sb is invalid */
--#define SB_ENCODE_FLAG		0x16	/* encode_flag */
- #define SB_NEED_FIX		(SB_ABNORMAL_STOP | SB_FS_ERRORS |	\
--				SB_INVALID | SB_ENCODE_FLAG)
-+				SB_INVALID)
- 
- #define MAX_CACHE_SUMS			8
+diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
+index cf05014fa5e3..8f6c22537e9f 100644
+--- a/fs/f2fs/data.c
++++ b/fs/f2fs/data.c
+@@ -3961,8 +3961,18 @@ static int f2fs_write_begin(const struct kiocb *iocb,
+ 			err = -EFSCORRUPTED;
+ 			goto put_folio;
+ 		}
+-		f2fs_submit_page_read(use_cow ? F2FS_I(inode)->cow_inode :
+-						inode,
++		/*
++		 * Although the block is stored in the COW inode, the folio
++		 * belongs to @inode and its data was encrypted (or left as
++		 * plaintext) using @inode's context, not the COW inode's; see
++		 * f2fs_encrypt_one_page(), which keys off fio->page->mapping->
++		 * host.  fscrypt_decrypt_pagecache_blocks() likewise operates
++		 * on folio->mapping->host.  Read with @inode so the post-read
++		 * decryption decision matches the folio's owner; otherwise an
++		 * unencrypted @inode whose COW inode is encrypted would hit a
++		 * NULL ->i_crypt_info during decryption.
++		 */
++		f2fs_submit_page_read(inode,
+ 				      NULL, /* can't write to fsverity files */
+ 				      folio, blkaddr, 0, true);
  
 -- 
-2.34.1
+2.39.5 (Apple Git-154)
 
 
 
