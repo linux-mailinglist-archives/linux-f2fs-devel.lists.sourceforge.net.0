@@ -2,18 +2,18 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id PfwtKG+8KWogcgMAu9opvQ
+	id q3SDL2+8KWohcgMAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
 	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 10 Jun 2026 21:35:11 +0200
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9026D66C856
+	by mail.lfdr.de (Postfix) with ESMTPS id 0B9B966C853
 	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 10 Jun 2026 21:35:11 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=lists.sourceforge.net header.s=beta header.b=aSGp6d91;
-	dkim=fail ("body hash did not verify") header.d=sourceforge.net header.s=x header.b=ONMi9U6x;
-	dkim=fail ("body hash did not verify") header.d=sf.net header.s=x header.b=YRkF9+yM;
-	dkim=fail ("body hash did not verify") header.d=acm.org header.s=mr01 header.b=wrLw1nTm;
+	dkim=pass header.d=lists.sourceforge.net header.s=beta header.b=b9Xicees;
+	dkim=fail ("body hash did not verify") header.d=sourceforge.net header.s=x header.b=Z0O+mvZO;
+	dkim=fail ("body hash did not verify") header.d=sf.net header.s=x header.b=kFEEGbh3;
+	dkim=fail ("body hash did not verify") header.d=acm.org header.s=mr01 header.b=34SZQBgd;
 	spf=pass (mail.lfdr.de: domain of linux-f2fs-devel-bounces@lists.sourceforge.net designates 216.105.38.7 as permitted sender) smtp.mailfrom=linux-f2fs-devel-bounces@lists.sourceforge.net;
 	dmarc=pass (policy=none) header.from=lists.sourceforge.net
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
@@ -22,29 +22,29 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	List-Unsubscribe:List-Id:Subject:MIME-Version:References:In-Reply-To:
 	Message-ID:Date:To:Sender:Content-ID:Content-Description:Resent-Date:
 	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=6ofL911hzT5QIlOuDPjN2ImAXT6axR64uhpiVIGK6hw=; b=aSGp6d91W5RmhUS4gOOTjssHh+
-	Xo5TeWiDA0vNcy0mQ8aP5h/d1jhQLIgx1ntAZTad47vrWWzNhMa1gGPLwyOtM+JyFewTn1VIVxz8w
-	Skll+fFFoOq4j9soLlnkO8/uhfL+EyMLMvpitD7cqrpFAwcgnbl0WWLeEmsO0yklysUA=;
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=4vA/K+Z/MuoYWKO2vxdqObSI4n2po5jB8wfCl314DfY=; b=b9Xiceesr3bOUcholD3cB435BW
+	8jn108NqbLTL/FG2cRKRu+w7PRYNzr1ZM8wvcfDTG/oixRqfPev67x9xZfYyyh5myRlPsTjrde+Wl
+	G8DiwRRTP4WZJYVXDjOCkQoV8vhRwhjYh+w4nBg0Bbe65wVt6W6DjSD6Wi/KHkxAkMmM=;
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1wXOhY-0006U9-6p;
-	Wed, 10 Jun 2026 19:35:00 +0000
+	id 1wXOhh-0006yj-BB;
+	Wed, 10 Jun 2026 19:35:06 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <bvanassche@acm.org>) id 1wXOhS-0006Tx-T7
+ (envelope-from <bvanassche@acm.org>) id 1wXOhf-0006yc-HC
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 10 Jun 2026 19:34:55 +0000
+ Wed, 10 Jun 2026 19:35:05 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=T5zqlSQYoJLNe2EIlJEpXo+bYqvZDoC5oNl0kxVC2Tg=; b=ONMi9U6xhGY0vJ8E/kMDHsA3N+
- q3xpGHPoDg6aip9+CtEE3Aav8HwI/SgOQJeofgrZAKzk8+pAaGsgx+Y3bB+1s0tq1pAZiHhJn6cn3
- FHKa1NyWIq4Gk+1NPmMRS/r54WhegfoyqTuglfoTI3ToR6TATdaZquvcCT2wX5gd1glo=;
+ bh=XPsw0/K7hKg7V5u8LCalSQM3cy+Nljo38kHMgqijmQ8=; b=Z0O+mvZOZsgl+dIZCFV5rAGS6U
+ vw4ArcwpEov+TOLPdqma+zHpR+wiQjJ9jX/CxWFXQoXbSxEanr+b/kA+HuHb8FAgtM6EybUtnkhG2
+ JQi3uvTQnjQsAkS/OyQZF1hv3DFM+lW/I8o0qaxN2PreTPAYnAM91pRlMseCVTYPUSJU=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:
@@ -52,42 +52,42 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=T5zqlSQYoJLNe2EIlJEpXo+bYqvZDoC5oNl0kxVC2Tg=; b=YRkF9+yMaM3hG8bfkHZUSWuP/t
- SQI2wRQZWOrySoZB2k8pJFnsLsxb4cTRp21mFJly9TGrMtj8pTnpUL2PBNAttaLJ6pm7Dj2tKvNNc
- kKpsuJhR6NdMOWr4YzU3e78buMfoUIrUFBYQhDnZxHAbixBBE+6YKuA1cmufssDe7qmg=;
+ bh=XPsw0/K7hKg7V5u8LCalSQM3cy+Nljo38kHMgqijmQ8=; b=kFEEGbh3czuZ7OWrBeK3xpu8Dm
+ QGXSSmE8DXNp8W5jjM1k3kjd6fZAvvD7q2cQ9PfZqsl4AjIc0Bhf4cr7qFuPPLfgb6Grsvlm+8YSZ
+ ue21vvobZqf7w3TldE0GAKQZBRSkBQ8c4gu9tv7RU79PIJuYHe6xFzkkxH13eIQutThw=;
 Received: from 013.lax.mailroute.net ([199.89.1.16])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1wXOhR-0001X4-Jb for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 10 Jun 2026 19:34:55 +0000
+ id 1wXOhb-0001XV-Pa for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 10 Jun 2026 19:35:04 +0000
 Received: from localhost (localhost [127.0.0.1])
- by 013.lax.mailroute.net (Postfix) with ESMTP id 4gbGFJ083Rzlh1KZ;
- Wed, 10 Jun 2026 19:34:44 +0000 (UTC)
+ by 013.lax.mailroute.net (Postfix) with ESMTP id 4gbGFM0Dqgzlgr4B;
+ Wed, 10 Jun 2026 19:34:47 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=acm.org; h=
  content-transfer-encoding:mime-version:references:in-reply-to
  :x-mailer:message-id:date:date:subject:subject:from:from
- :received:received; s=mr01; t=1781120081; x=1783712082; bh=T5zql
- SQYoJLNe2EIlJEpXo+bYqvZDoC5oNl0kxVC2Tg=; b=wrLw1nTmY4g0DelaRoidL
- fTXqUq1YDnCj28cVpit6ebizNIryXnCmBCHHJcpiJqna5u9YHnU6FMX99obKUDkT
- Ctw7ylSSySR22nVv9/rpN2+L4Am9MqLF0NKd6RhJuhu2IlQpjiF+fJD9S4r9YrNX
- fWAk58glyjPfFPV7jSRMciM20uSilEQ0dIKNj3G9h/Ra/2rhc/K6XNIzQ6IIq0Lq
- lcamWIWIU6Sf6ZnhEZuaUyy5md9r1sAy060C8u5xdJLwLJSvnZV2ILp/3G/1ig2T
- 4P+tZWYr+0Zcl9l7oj3CTUzPtBB/Aw0RC85ogswnvm+5BBbOTdnjBh1JIqh3rCPa
- Q==
+ :received:received; s=mr01; t=1781120083; x=1783712084; bh=XPsw0
+ /K7hKg7V5u8LCalSQM3cy+Nljo38kHMgqijmQ8=; b=34SZQBgdG0WbbVXIEXIxu
+ 7luI+3y6RLgUMxaH5eLWMd9MRXC7fnywFTtR7U6Js2J7iJs0GbrwhgW1RrDD/bbD
+ kFVCugrAWDrjr42FBUvqw1Sgy3+RzUESICqlQGQog2HdDsZFKkKvIN1d4Zm8eH5L
+ Qn/F0Y4ESvfVSp+ANqPO1dPWhWoIa4qIsdsGOOwB7sJw/ti4MdbG8KuGGYxp3mYi
+ IkCyB50b0r+1jvq/r9ygQtddu2UeosnF6Nvr/XdbZEGqpnazZKsflWcyjQMXv7PL
+ AU3WDjkKB+kiH/XXnNm3PnBXg/tmZYGyw7jlbmTXxR1KnbZKaDtZRwOoQPnBWzSu
+ g==
 X-Virus-Scanned: by MailRoute
 Received: from 013.lax.mailroute.net ([127.0.0.1])
  by localhost (013.lax [127.0.0.1]) (mroute_mailscanner, port 10029) with LMTP
- id af2-jhUum_HL; Wed, 10 Jun 2026 19:34:41 +0000 (UTC)
+ id bS8zMjVVOHAN; Wed, 10 Jun 2026 19:34:43 +0000 (UTC)
 Received: from bvanassche.mtv.corp.google.com (unknown [104.135.180.219])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
  (Authenticated sender: bvanassche@acm.org)
- by 013.lax.mailroute.net (Postfix) with ESMTPSA id 4gbGFD4zMfzlfdfW;
- Wed, 10 Jun 2026 19:34:40 +0000 (UTC)
+ by 013.lax.mailroute.net (Postfix) with ESMTPSA id 4gbGFG43kZzlffvd;
+ Wed, 10 Jun 2026 19:34:42 +0000 (UTC)
 To: Jaegeuk Kim <jaegeuk@kernel.org>
-Date: Wed, 10 Jun 2026 12:34:17 -0700
-Message-ID: <c0b613f5ce1ba9ab43f798b294ddedd2c9b55565.1781119949.git.bvanassche@acm.org>
+Date: Wed, 10 Jun 2026 12:34:18 -0700
+Message-ID: <e19352ee328d76c26e629de55fb1e1570ed1fcbf.1781119949.git.bvanassche@acm.org>
 X-Mailer: git-send-email 2.54.0.1099.g489fc7bff1-goog
 In-Reply-To: <cover.1781119949.git.bvanassche@acm.org>
 References: <cover.1781119949.git.bvanassche@acm.org>
@@ -99,10 +99,12 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Use bio frontpadding to allocate memory for a work_struct
- when allocating a bio. Reviewed-by: Chao Yu <chao@kernel.org> Signed-off-by:
- Bart Van Assche <bvanassche@acm.org> --- fs/f2fs/data.c | 7 ++++++- 1 file
- changed, 6 insertions(+), 1 deletion(-) 
+ Content preview: Rename f2fs_post_read_wq into f2fs_wq. Create it
+ unconditionally.
+ Prepare for using this workqueue for completing write bios. Reviewed-by:
+ Chao Yu <chao@kernel.org> Signed-off-by: Bart Van Assche <bvanassche@acm.org>
+ --- fs/f2fs/compress.c | 2 +- fs/f2fs/data.c | 22 ++++++++ fs/f2fs/f2fs.h
+ | 6 +++--- fs/f2fs/su [...] 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -113,9 +115,9 @@ X-Spam-Report: Spam detection software,
  not necessarily valid
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
-X-Headers-End: 1wXOhR-0001X4-Jb
-Subject: [f2fs-dev] [PATCH v2 1/4] f2fs: Prepare for supporting delayed bio
- completion
+X-Headers-End: 1wXOhb-0001XV-Pa
+Subject: [f2fs-dev] [PATCH v2 2/4] f2fs: Rename f2fs_post_read_wq into
+ f2fs_wq
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -172,42 +174,137 @@ X-Spamd-Result: default: False [-8.61 / 15.00];
 	TAGGED_RCPT(0.00)[linux-f2fs-devel];
 	RCPT_COUNT_THREE(0.00)[3];
 	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.sourceforge.net:helo,lists.sourceforge.net:rdns,lists.sourceforge.net:from_mime,lists.sourceforge.net:dkim,lists.sourceforge.net:from_smtp,acm.org:replyto,acm.org:email,acm.org:mid]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[acm.org:replyto,acm.org:email,acm.org:mid,lists.sourceforge.net:helo,lists.sourceforge.net:rdns,lists.sourceforge.net:from_mime,lists.sourceforge.net:dkim,lists.sourceforge.net:from_smtp]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 9026D66C856
+X-Rspamd-Queue-Id: 0B9B966C853
 
-Use bio frontpadding to allocate memory for a work_struct when
-allocating a bio.
+Rename f2fs_post_read_wq into f2fs_wq. Create it unconditionally.
+Prepare for using this workqueue for completing write bios.
 
 Reviewed-by: Chao Yu <chao@kernel.org>
 Signed-off-by: Bart Van Assche <bvanassche@acm.org>
 ---
- fs/f2fs/data.c | 7 ++++++-
- 1 file changed, 6 insertions(+), 1 deletion(-)
+ fs/f2fs/compress.c |  2 +-
+ fs/f2fs/data.c     | 22 ++++++++--------------
+ fs/f2fs/f2fs.h     |  6 +++---
+ fs/f2fs/super.c    |  8 ++++----
+ 4 files changed, 16 insertions(+), 22 deletions(-)
 
+diff --git a/fs/f2fs/compress.c b/fs/f2fs/compress.c
+index 881e76158b96..b3c016c4094b 100644
+--- a/fs/f2fs/compress.c
++++ b/fs/f2fs/compress.c
+@@ -1807,7 +1807,7 @@ static void f2fs_put_dic(struct decompress_io_ctx *dic, bool in_task)
+ 			f2fs_free_dic(dic, false);
+ 		} else {
+ 			INIT_WORK(&dic->free_work, f2fs_late_free_dic);
+-			queue_work(dic->sbi->post_read_wq, &dic->free_work);
++			queue_work(dic->sbi->wq, &dic->free_work);
+ 		}
+ 	}
+ }
 diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
-index 8d4f1e75dee3..1659a57a6d5b 100644
+index 1659a57a6d5b..080d69fa8cd1 100644
 --- a/fs/f2fs/data.c
 +++ b/fs/f2fs/data.c
-@@ -40,12 +40,17 @@ struct f2fs_folio_state {
- 	unsigned int		read_pages_pending;
- };
- 
-+struct f2fs_bio {
-+	struct work_struct work;
-+	struct bio bio;
-+};
-+
- #define	F2FS_BIO_POOL_SIZE	NR_CURSEG_TYPE
- 
- int __init f2fs_init_bioset(void)
- {
- 	return bioset_init(&f2fs_bioset, F2FS_BIO_POOL_SIZE,
--					0, BIOSET_NEED_BVECS);
-+			   offsetof(struct f2fs_bio, bio), BIOSET_NEED_BVECS);
+@@ -341,7 +341,7 @@ static void f2fs_read_end_io(struct bio *bio)
+ 			f2fs_handle_step_decompress(ctx, intask);
+ 		} else if (enabled_steps) {
+ 			INIT_WORK(&ctx->work, f2fs_post_read_work);
+-			queue_work(ctx->sbi->post_read_wq, &ctx->work);
++			queue_work(ctx->sbi->wq, &ctx->work);
+ 			return;
+ 		}
+ 	}
+@@ -4477,23 +4477,17 @@ void f2fs_destroy_post_read_processing(void)
+ 	kmem_cache_destroy(bio_post_read_ctx_cache);
  }
  
- void f2fs_destroy_bioset(void)
+-int f2fs_init_post_read_wq(struct f2fs_sb_info *sbi)
++int f2fs_init_wq(struct f2fs_sb_info *sbi)
+ {
+-	if (!f2fs_sb_has_encrypt(sbi) &&
+-		!f2fs_sb_has_verity(sbi) &&
+-		!f2fs_sb_has_compression(sbi))
+-		return 0;
+-
+-	sbi->post_read_wq = alloc_workqueue("f2fs_post_read_wq",
+-						 WQ_UNBOUND | WQ_HIGHPRI,
+-						 num_online_cpus());
+-	return sbi->post_read_wq ? 0 : -ENOMEM;
++	sbi->wq = alloc_workqueue("f2fs_wq", WQ_UNBOUND | WQ_HIGHPRI,
++				  num_online_cpus());
++	return sbi->wq ? 0 : -ENOMEM;
+ }
+ 
+-void f2fs_destroy_post_read_wq(struct f2fs_sb_info *sbi)
++void f2fs_destroy_wq(struct f2fs_sb_info *sbi)
+ {
+-	if (sbi->post_read_wq)
+-		destroy_workqueue(sbi->post_read_wq);
++	if (sbi->wq)
++		destroy_workqueue(sbi->wq);
+ }
+ 
+ int __init f2fs_init_bio_entry_cache(void)
+diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+index 91f506e7c9cf..30353c439d3c 100644
+--- a/fs/f2fs/f2fs.h
++++ b/fs/f2fs/f2fs.h
+@@ -1969,7 +1969,7 @@ struct f2fs_sb_info {
+ 	/* Precomputed FS UUID checksum for seeding other checksums */
+ 	__u32 s_chksum_seed;
+ 
+-	struct workqueue_struct *post_read_wq;	/* post read workqueue */
++	struct workqueue_struct *wq;		/* bio completion workqueue */
+ 
+ 	/*
+ 	 * If we are in irq context, let's update error information into
+@@ -4193,8 +4193,8 @@ bool f2fs_overwrite_io(struct inode *inode, loff_t pos, size_t len);
+ void f2fs_clear_page_cache_dirty_tag(struct folio *folio);
+ int f2fs_init_post_read_processing(void);
+ void f2fs_destroy_post_read_processing(void);
+-int f2fs_init_post_read_wq(struct f2fs_sb_info *sbi);
+-void f2fs_destroy_post_read_wq(struct f2fs_sb_info *sbi);
++int f2fs_init_wq(struct f2fs_sb_info *sbi);
++void f2fs_destroy_wq(struct f2fs_sb_info *sbi);
+ extern const struct iomap_ops f2fs_iomap_ops;
+ 
+ /*
+diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
+index ccf806b676f5..5a100f740b3f 100644
+--- a/fs/f2fs/super.c
++++ b/fs/f2fs/super.c
+@@ -2074,7 +2074,7 @@ static void f2fs_put_super(struct super_block *sb)
+ 	/* flush s_error_work before sbi destroy */
+ 	flush_work(&sbi->s_error_work);
+ 
+-	f2fs_destroy_post_read_wq(sbi);
++	f2fs_destroy_wq(sbi);
+ 
+ 	kvfree(sbi->ckpt);
+ 
+@@ -5130,9 +5130,9 @@ static int f2fs_fill_super(struct super_block *sb, struct fs_context *fc)
+ 		goto free_devices;
+ 	}
+ 
+-	err = f2fs_init_post_read_wq(sbi);
++	err = f2fs_init_wq(sbi);
+ 	if (err) {
+-		f2fs_err(sbi, "Failed to initialize post read workqueue");
++		f2fs_err(sbi, "Failed to create workqueue");
+ 		goto free_devices;
+ 	}
+ 
+@@ -5419,7 +5419,7 @@ static int f2fs_fill_super(struct super_block *sb, struct fs_context *fc)
+ 	f2fs_stop_ckpt_thread(sbi);
+ 	/* flush s_error_work before sbi destroy */
+ 	flush_work(&sbi->s_error_work);
+-	f2fs_destroy_post_read_wq(sbi);
++	f2fs_destroy_wq(sbi);
+ free_devices:
+ 	destroy_device_list(sbi);
+ 	kvfree(sbi->ckpt);
 
 
 _______________________________________________
