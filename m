@@ -2,18 +2,18 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id eSbtDjNUKWolVAMAu9opvQ
+	id 7RooCGlUKWo7VAMAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 10 Jun 2026 14:10:27 +0200
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 10 Jun 2026 14:11:21 +0200
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4B62C6691A3
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 10 Jun 2026 14:10:26 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id BED1F6691D2
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 10 Jun 2026 14:11:20 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=lists.sourceforge.net header.s=beta header.b=RnMMNysA;
-	dkim=fail ("body hash did not verify") header.d=sourceforge.net header.s=x header.b=KQ3p7tIr;
-	dkim=fail ("body hash did not verify") header.d=sf.net header.s=x header.b=Rsl0NF1c;
-	dkim=fail ("body hash did not verify") header.d=kernel.org header.s=k20260515 header.b="JEdM7/f1";
+	dkim=pass header.d=lists.sourceforge.net header.s=beta header.b=AqutH6I9;
+	dkim=fail ("body hash did not verify") header.d=sourceforge.net header.s=x header.b=ZhEN44ag;
+	dkim=fail ("body hash did not verify") header.d=sf.net header.s=x header.b="Hi8zRxa/";
+	dkim=fail ("body hash did not verify") header.d=kernel.org header.s=k20260515 header.b=m5wgDIKF;
 	spf=pass (mail.lfdr.de: domain of linux-f2fs-devel-bounces@lists.sourceforge.net designates 216.105.38.7 as permitted sender) smtp.mailfrom=linux-f2fs-devel-bounces@lists.sourceforge.net;
 	dmarc=pass (policy=none) header.from=lists.sourceforge.net
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
@@ -22,29 +22,29 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	List-Unsubscribe:List-Id:Subject:In-Reply-To:References:To:MIME-Version:Date:
 	Message-ID:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
 	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=iV39tnuL+su6zqRatuPFW7gzAcKGMjYCX4WL5RZSIl0=; b=RnMMNysAho5rj/HPBaksK0cseC
-	nDw3eQLINLNVAmsk0W/0XAtU2M9dnZO2huuYHQiDd4QUe9pFTsBRouBAZarED4cgTyJkuFoXJJN5m
-	2K8wA1lMYzAgXNiaDyazPJl1ltwgRRhc3LdZqz2lf83eUaFhPDvSOeyxwE2O8Hlw2xyM=;
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=zjYRZDO/B+SPfvT42fY3LN77+Gluy7JThXiLyXUSq10=; b=AqutH6I9puxSZBklO0PKAbyVGK
+	WH/RXxgj3Sy5FpizE+DqhHH7ZcAm36fjWYI0/w0kn4K3vrM6yqKkeoysHY1/1y4JSpD+vZ3eYeiXs
+	Fj9GGo2O6tuUseF2oH7wNFa5oZ1O28rPtEYTWr+L3jGx39rgYf9+rzSRJvvjTC9P+dmw=;
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1wXHlG-0005NJ-Ps;
-	Wed, 10 Jun 2026 12:10:23 +0000
+	id 1wXHmB-0003kP-HX;
+	Wed, 10 Jun 2026 12:11:17 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1wXHlB-0005N4-2i
+ (envelope-from <chao@kernel.org>) id 1wXHm2-0003kD-Sn
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 10 Jun 2026 12:10:17 +0000
+ Wed, 10 Jun 2026 12:11:08 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  From:References:To:Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=/OH5+E8NuGLgpHG3Uwvo6VB+OMw2Wl6vqLZbLuDL42w=; b=KQ3p7tIrzjKGMLaZhJcgSLkFbI
- g81Epzcg3DX0MJRcDycx+rzMOO1OPhlZziTJIMCZcTNl1PbjaXCxWLHwM2EnwqFCgpgYIO8Bax5l9
- 6Z53KQRbRfuWxBowqnRp7DNI40Qe6zwrRvFITKS/LryWvrcZvf2a78ynXBHG9ZP6XwRs=;
+ bh=xFUNOmeXm0vZ2kd4BCuEER2uLa+UFlZyy1a2dD+3YOk=; b=ZhEN44agnY8nOtKsXP+6FbzqBn
+ 63/bupC5G156am1vui+doiPrKomPo7QJiJTSx0lnTU6c8/YNNm07DPpKTTCiEbSK/B/CNzMTrHMGI
+ Rugs+oXAMtGoOmr475WuTFbfOVXkNhZtZ3r3YUNkld9GlNjpRm3zlQT788ZhTl9jiA6s=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
@@ -52,38 +52,38 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=/OH5+E8NuGLgpHG3Uwvo6VB+OMw2Wl6vqLZbLuDL42w=; b=Rsl0NF1cdj/LkOPWMidx3CZrgO
- pBvLqlEAQ6UE8tE8zm6VORB9b7n13t2LA2QvH3tbtUdsQX45loz/hmCPgrhXEEB4jF0hopEz022Vy
- tIfauyInjrS4ay+XS5hMlTlD8lptdw+zMyilydwT293avn/h8tTvvIf5nzSLtpqr37sA=;
+ bh=xFUNOmeXm0vZ2kd4BCuEER2uLa+UFlZyy1a2dD+3YOk=; b=Hi8zRxa/Fra+IAZhBD8+p+TZVI
+ AeInrVfKzjxO7f5JfMZSk3HmzKtC2vcjd6oQHYyETsSp+An7Qt6ToAdXJ1P2gi/gSQLE6TnoEiMUg
+ TCswmbdk0WHVMKtyyUPeC6G4peUPqGbBnbcVdiGLnRWIBHNWNA59JRamFjtK8ceULshg=;
 Received: from tor.source.kernel.org ([172.105.4.254])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1wXHl8-0004Gt-MX for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 10 Jun 2026 12:10:17 +0000
+ id 1wXHlw-0004OB-95 for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 10 Jun 2026 12:11:08 +0000
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by tor.source.kernel.org (Postfix) with ESMTP id 873346020A;
- Wed, 10 Jun 2026 12:10:09 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 500C01F00893;
- Wed, 10 Jun 2026 12:10:08 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id 231946020A;
+ Wed, 10 Jun 2026 12:10:54 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id DFB371F00893;
+ Wed, 10 Jun 2026 12:10:52 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
- s=k20260515; t=1781093409;
- bh=/OH5+E8NuGLgpHG3Uwvo6VB+OMw2Wl6vqLZbLuDL42w=;
+ s=k20260515; t=1781093453;
+ bh=xFUNOmeXm0vZ2kd4BCuEER2uLa+UFlZyy1a2dD+3YOk=;
  h=Date:Cc:Subject:To:References:From:In-Reply-To;
- b=JEdM7/f1HcT1MidBDZr9/pAdkwRnQXYzNQARCaDL9LLOadmX3bNvKQ2K/+g514pXN
- f9qPjL2qBiwNOclHIGLGm1XoJ0jozTaFRtfCt1rHbBPd5cSMEWzH+am33w7fvqSYb2
- cU0nAN9xSnm51uhAfC6UmmomqAcdOpzJjfjpXoGegQ4QqhIQduxh3btddXWoyRMQPC
- DzHlM25FZJpIZ+dyGfbdjNrF66Ab+1GOhl7cx9hTJ8K2V2FIsM4sQ6DMgTSQH1BGGw
- 3xNuAZDQF9jEM6ida0v9y9w8cewJ6slRSs2n5uA/53uDWHf8Enqk2O+ZvdJzIxu78D
- EHzEGZj7fS8NQ==
-Message-ID: <326d8403-717d-4479-8ecc-d598de7c9000@kernel.org>
-Date: Wed, 10 Jun 2026 20:10:06 +0800
+ b=m5wgDIKF5CkY5wtZnVmjw1gF+sBBfF7uwQzaSOoSuaZOvHES1CzpSmpeNN0hYcZHv
+ Rb8eJuoP1GBvImEjnbYwl53WA5uoMmK2oPuMFC1c0bVQz40hTJYDSfs56LakqM4NiW
+ Vjv020KlQ87RIVGsjz8NY+gqNgtKBrMttQ2dNW5PYK3ON5RL/GQfGt8dYNK+89lEjB
+ l6j/lgcAtCgEz99brAGWCswETJ5iuZolKP9RkvlQx1pjWbUIHJ4oqECIDlCHs4sM/q
+ ZSOObS2l/fjgPwLSlF4owMP5Oms3WGQg7BauKw+DiNClCo9JyL0GB/UfNwFqczq4yr
+ FLg5d19dQqpBw==
+Message-ID: <a7f2d625-07f0-444f-b6a4-2c9cc86bac9e@kernel.org>
+Date: Wed, 10 Jun 2026 20:10:50 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 To: Bart Van Assche <bvanassche@acm.org>, Jaegeuk Kim <jaegeuk@kernel.org>
 References: <cover.1780003055.git.bvanassche@acm.org>
- <60ab44127999ea22ca05aa6c552f305bfaef9898.1780003055.git.bvanassche@acm.org>
+ <b2addb590d05b91a724382bdf94d2e4bc9797982.1780003055.git.bvanassche@acm.org>
 Content-Language: en-US
-In-Reply-To: <60ab44127999ea22ca05aa6c552f305bfaef9898.1780003055.git.bvanassche@acm.org>
+In-Reply-To: <b2addb590d05b91a724382bdf94d2e4bc9797982.1780003055.git.bvanassche@acm.org>
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
@@ -92,10 +92,9 @@ X-Spam-Report: Spam detection software,
  similar future email.  If you have any questions, see
  the administrator of that system for details.
  Content preview:  On 5/29/26 05:20,
- Bart Van Assche wrote: > Use bio frontpadding
- to allocate memory for a work_struct when > allocating a bio. > >
- Signed-off-by:
- Bart Van Assche <bvanassche@acm.org> Reviewed-by: Chao Yu <chao@kernel.org>
+ Bart Van Assche wrote: > Rename f2fs_post_read_wq
+ into f2fs_wq. Create it unconditionally. > Prepare for using this workqueue
+ for completing write bios. > > Signed-off-by: Bart Van A [...] 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -106,9 +105,9 @@ X-Spam-Report: Spam detection software,
  envelope-from domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
-X-Headers-End: 1wXHl8-0004Gt-MX
-Subject: Re: [f2fs-dev] [PATCH 1/4] f2fs: Prepare for supporting delayed bio
- completion
+X-Headers-End: 1wXHlw-0004OB-95
+Subject: Re: [f2fs-dev] [PATCH 2/4] f2fs: Rename f2fs_post_read_wq into
+ f2fs_wq
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -163,13 +162,13 @@ X-Spamd-Result: default: False [-8.61 / 15.00];
 	TAGGED_RCPT(0.00)[linux-f2fs-devel];
 	RCPT_COUNT_THREE(0.00)[3];
 	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.sourceforge.net:helo,lists.sourceforge.net:rdns,lists.sourceforge.net:from_mime,lists.sourceforge.net:dkim,lists.sourceforge.net:from_smtp]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.sourceforge.net:helo,lists.sourceforge.net:rdns,lists.sourceforge.net:from_mime,lists.sourceforge.net:dkim,lists.sourceforge.net:from_smtp,acm.org:email]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 4B62C6691A3
+X-Rspamd-Queue-Id: BED1F6691D2
 
 On 5/29/26 05:20, Bart Van Assche wrote:
-> Use bio frontpadding to allocate memory for a work_struct when
-> allocating a bio.
+> Rename f2fs_post_read_wq into f2fs_wq. Create it unconditionally.
+> Prepare for using this workqueue for completing write bios.
 > 
 > Signed-off-by: Bart Van Assche <bvanassche@acm.org>
 
