@@ -2,18 +2,18 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id 7RooCGlUKWo7VAMAu9opvQ
+	id +0uMK3FUKWo+VAMAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 10 Jun 2026 14:11:21 +0200
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 10 Jun 2026 14:11:29 +0200
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id BED1F6691D2
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 10 Jun 2026 14:11:20 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9B7A16691D5
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 10 Jun 2026 14:11:29 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=lists.sourceforge.net header.s=beta header.b=AqutH6I9;
-	dkim=fail ("body hash did not verify") header.d=sourceforge.net header.s=x header.b=ZhEN44ag;
-	dkim=fail ("body hash did not verify") header.d=sf.net header.s=x header.b="Hi8zRxa/";
-	dkim=fail ("body hash did not verify") header.d=kernel.org header.s=k20260515 header.b=m5wgDIKF;
+	dkim=pass header.d=lists.sourceforge.net header.s=beta header.b=D1SA9F+W;
+	dkim=fail ("body hash did not verify") header.d=sourceforge.net header.s=x header.b=I7F62Ls2;
+	dkim=fail ("body hash did not verify") header.d=sf.net header.s=x header.b=Jw7sKe4d;
+	dkim=fail ("body hash did not verify") header.d=kernel.org header.s=k20260515 header.b=Z8oiM+P5;
 	spf=pass (mail.lfdr.de: domain of linux-f2fs-devel-bounces@lists.sourceforge.net designates 216.105.38.7 as permitted sender) smtp.mailfrom=linux-f2fs-devel-bounces@lists.sourceforge.net;
 	dmarc=pass (policy=none) header.from=lists.sourceforge.net
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
@@ -22,29 +22,29 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	List-Unsubscribe:List-Id:Subject:In-Reply-To:References:To:MIME-Version:Date:
 	Message-ID:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
 	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=zjYRZDO/B+SPfvT42fY3LN77+Gluy7JThXiLyXUSq10=; b=AqutH6I9puxSZBklO0PKAbyVGK
-	WH/RXxgj3Sy5FpizE+DqhHH7ZcAm36fjWYI0/w0kn4K3vrM6yqKkeoysHY1/1y4JSpD+vZ3eYeiXs
-	Fj9GGo2O6tuUseF2oH7wNFa5oZ1O28rPtEYTWr+L3jGx39rgYf9+rzSRJvvjTC9P+dmw=;
+	bh=KcHK93c/pLLVKyyVX/TBcOHJI427CIKTNKH9dOsllh8=; b=D1SA9F+WnLXx0gGcQCK4S+S/Qa
+	lNPSQOS0PyRct5RIwcyLxVlu+14X/uQ5/V3H/vWOqWDw/KvIuntAUDdyrQajV1MRonJVYObqn79qD
+	GnBq4MHrONczaJ1SU8rd79rANg4Q/X/zvEspiBEE7y95wHA1gRaTah8LpkSMHAN+ushY=;
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1wXHmB-0003kP-HX;
-	Wed, 10 Jun 2026 12:11:17 +0000
+	id 1wXHmL-0003l6-SL;
+	Wed, 10 Jun 2026 12:11:27 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1wXHm2-0003kD-Sn
+ (envelope-from <chao@kernel.org>) id 1wXHmK-0003ky-Dn
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 10 Jun 2026 12:11:08 +0000
+ Wed, 10 Jun 2026 12:11:25 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  From:References:To:Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=xFUNOmeXm0vZ2kd4BCuEER2uLa+UFlZyy1a2dD+3YOk=; b=ZhEN44agnY8nOtKsXP+6FbzqBn
- 63/bupC5G156am1vui+doiPrKomPo7QJiJTSx0lnTU6c8/YNNm07DPpKTTCiEbSK/B/CNzMTrHMGI
- Rugs+oXAMtGoOmr475WuTFbfOVXkNhZtZ3r3YUNkld9GlNjpRm3zlQT788ZhTl9jiA6s=;
+ bh=hSNicDTYfl8U3UmvTaaeH8VyyQMvggeU829q0X18bno=; b=I7F62Ls2n/3usXF9tecPFi0qXn
+ DOWrBOOkmgcA/5yS/+JtDSQ3f1kWD9Q+/Ybx1U9SeW1P0Z8alH/Tn9Lfcqre6Stcn6roX/v6c9/kz
+ jVyi8k8mXQEaufuXYpXHsr/yKVhkYtpUHmOIa1MnNbgMZyVi0hKk8tgxP7RBMgOk7nLs=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
@@ -52,62 +52,65 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=xFUNOmeXm0vZ2kd4BCuEER2uLa+UFlZyy1a2dD+3YOk=; b=Hi8zRxa/Fra+IAZhBD8+p+TZVI
- AeInrVfKzjxO7f5JfMZSk3HmzKtC2vcjd6oQHYyETsSp+An7Qt6ToAdXJ1P2gi/gSQLE6TnoEiMUg
- TCswmbdk0WHVMKtyyUPeC6G4peUPqGbBnbcVdiGLnRWIBHNWNA59JRamFjtK8ceULshg=;
-Received: from tor.source.kernel.org ([172.105.4.254])
+ bh=hSNicDTYfl8U3UmvTaaeH8VyyQMvggeU829q0X18bno=; b=Jw7sKe4dQGHt5UBPSQnLsBXA4k
+ 7NE6g+2N9gj4QK8OtLE25p61iLSlYCPP3gl4OVIFOwGuHs/MKCujucZIGXz6/fX+bSeHoE8v/OpSM
+ SyrJu+dECQmIzvFT8KzoCYLNB8FaDLSRRWMATFA3ZsX7s9OaARYx1dDTC+8PlHLyBQAk=;
+Received: from sea.source.kernel.org ([172.234.252.31])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1wXHlw-0004OB-95 for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 10 Jun 2026 12:11:08 +0000
+ id 1wXHmG-0004Pn-WA for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 10 Jun 2026 12:11:25 +0000
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by tor.source.kernel.org (Postfix) with ESMTP id 231946020A;
- Wed, 10 Jun 2026 12:10:54 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id DFB371F00893;
- Wed, 10 Jun 2026 12:10:52 +0000 (UTC)
+ by sea.source.kernel.org (Postfix) with ESMTP id 1708143D58;
+ Wed, 10 Jun 2026 12:11:15 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 186631F00893;
+ Wed, 10 Jun 2026 12:11:13 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
- s=k20260515; t=1781093453;
- bh=xFUNOmeXm0vZ2kd4BCuEER2uLa+UFlZyy1a2dD+3YOk=;
+ s=k20260515; t=1781093474;
+ bh=hSNicDTYfl8U3UmvTaaeH8VyyQMvggeU829q0X18bno=;
  h=Date:Cc:Subject:To:References:From:In-Reply-To;
- b=m5wgDIKF5CkY5wtZnVmjw1gF+sBBfF7uwQzaSOoSuaZOvHES1CzpSmpeNN0hYcZHv
- Rb8eJuoP1GBvImEjnbYwl53WA5uoMmK2oPuMFC1c0bVQz40hTJYDSfs56LakqM4NiW
- Vjv020KlQ87RIVGsjz8NY+gqNgtKBrMttQ2dNW5PYK3ON5RL/GQfGt8dYNK+89lEjB
- l6j/lgcAtCgEz99brAGWCswETJ5iuZolKP9RkvlQx1pjWbUIHJ4oqECIDlCHs4sM/q
- ZSOObS2l/fjgPwLSlF4owMP5Oms3WGQg7BauKw+DiNClCo9JyL0GB/UfNwFqczq4yr
- FLg5d19dQqpBw==
-Message-ID: <a7f2d625-07f0-444f-b6a4-2c9cc86bac9e@kernel.org>
-Date: Wed, 10 Jun 2026 20:10:50 +0800
+ b=Z8oiM+P572x9zZ4Uo/O43RTwVLg/WcYJM2PZgXxFnyeQfMH6Rg6gRAO0MoEzHZp/+
+ eYGjP97qvkyCAVjyl4vmVAyscHFeBMpFf2M0fcRtHmG/jXZInMCy9W63TvpHc/jqNw
+ tojXLwnxScfc9nOprvVSifnF4Pz/FBx5aZM9qBgpOkLTGIOrhMv1dxf17Zw4ASUEL8
+ gSdrdttxd/xRxWQxMqdfHtp/3X+qL4Y7GcgRECxvPLwFJHxnPCYEIjvV7pk1CjNqa1
+ snHMdqddwOkmaBidTGTCJv83g0WLuoMRbQeWlqYHb/E61cYIvsS/gsJ091viCgGxjC
+ 1WJStbSRQ293Q==
+Message-ID: <4b337c7f-2fbd-47b6-9c8c-587e7b5513f1@kernel.org>
+Date: Wed, 10 Jun 2026 20:11:12 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 To: Bart Van Assche <bvanassche@acm.org>, Jaegeuk Kim <jaegeuk@kernel.org>
 References: <cover.1780003055.git.bvanassche@acm.org>
- <b2addb590d05b91a724382bdf94d2e4bc9797982.1780003055.git.bvanassche@acm.org>
+ <7e756908a2b43b403ae9006b260b4889f64ee42a.1780003055.git.bvanassche@acm.org>
 Content-Language: en-US
-In-Reply-To: <b2addb590d05b91a724382bdf94d2e4bc9797982.1780003055.git.bvanassche@acm.org>
+In-Reply-To: <7e756908a2b43b403ae9006b260b4889f64ee42a.1780003055.git.bvanassche@acm.org>
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
  Content preview:  On 5/29/26 05:20,
- Bart Van Assche wrote: > Rename f2fs_post_read_wq
- into f2fs_wq. Create it unconditionally. > Prepare for using this workqueue
- for completing write bios. > > Signed-off-by: Bart Van A [...] 
+ Bart Van Assche wrote: > Prepare for running
+ most of the write completion work asynchronously. > > Signed-off-by: Bart
+ Van Assche <bvanassche@acm.org> Reviewed-by: Chao Yu <chao@kernel.org> 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
-X-Headers-End: 1wXHlw-0004OB-95
-Subject: Re: [f2fs-dev] [PATCH 2/4] f2fs: Rename f2fs_post_read_wq into
- f2fs_wq
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ 0.0 RCVD_IN_DNSWL_BLOCKED  RBL: ADMINISTRATOR NOTICE: The query to DNSWL
+ was blocked.  See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#DnsBlocklists-dnsbl-block
+ for more information. [172.234.252.31 listed in list.dnswl.org]
+X-Headers-End: 1wXHmG-0004Pn-WA
+Subject: Re: [f2fs-dev] [PATCH 3/4] f2fs: Split f2fs_write_end_io()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -148,8 +151,8 @@ X-Spamd-Result: default: False [-8.61 / 15.00];
 	FORGED_SENDER(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
 	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
 	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,kernel.org:s=k20260515];
-	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
 	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,kernel.org:-];
+	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
 	RCVD_COUNT_FIVE(0.00)[5];
 	ALIAS_RESOLVED(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
@@ -162,13 +165,12 @@ X-Spamd-Result: default: False [-8.61 / 15.00];
 	TAGGED_RCPT(0.00)[linux-f2fs-devel];
 	RCPT_COUNT_THREE(0.00)[3];
 	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.sourceforge.net:helo,lists.sourceforge.net:rdns,lists.sourceforge.net:from_mime,lists.sourceforge.net:dkim,lists.sourceforge.net:from_smtp,acm.org:email]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[acm.org:email]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: BED1F6691D2
+X-Rspamd-Queue-Id: 9B7A16691D5
 
 On 5/29/26 05:20, Bart Van Assche wrote:
-> Rename f2fs_post_read_wq into f2fs_wq. Create it unconditionally.
-> Prepare for using this workqueue for completing write bios.
+> Prepare for running most of the write completion work asynchronously.
 > 
 > Signed-off-by: Bart Van Assche <bvanassche@acm.org>
 
