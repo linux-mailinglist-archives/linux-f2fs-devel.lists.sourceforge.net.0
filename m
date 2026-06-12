@@ -2,164 +2,97 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id zyz0GqC2KmquvgMAu9opvQ
+	id ulf9GLlZK2q17gMAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 11 Jun 2026 15:22:40 +0200
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 12 Jun 2026 02:58:33 +0200
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9520C6724D1
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 11 Jun 2026 15:22:39 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7CA5167606C
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 12 Jun 2026 02:58:32 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=lists.sourceforge.net header.s=beta header.b=efzT7b4m;
-	dkim=fail ("body hash did not verify") header.d=sourceforge.net header.s=x header.b=cY39Mur9;
-	dkim=fail ("body hash did not verify") header.d=sf.net header.s=x header.b=CXE8ju9D;
-	dkim=fail ("body hash did not verify") header.d=vivo.com header.s=selector2 header.b=EWCIR7jE;
+	dkim=pass header.d=lists.sourceforge.net header.s=beta header.b=W++vHsaf;
+	dkim=fail ("body hash did not verify") header.d=sourceforge.net header.s=x header.b=A9HbtA2A;
+	dkim=fail ("body hash did not verify") header.d=sf.net header.s=x header.b="L huSdZ/";
+	dkim=fail ("body hash did not verify") header.d=kernel.org header.s=k20260515 header.b=Ow1Qfz75;
 	spf=pass (mail.lfdr.de: domain of linux-f2fs-devel-bounces@lists.sourceforge.net designates 216.105.38.7 as permitted sender) smtp.mailfrom=linux-f2fs-devel-bounces@lists.sourceforge.net;
-	dmarc=pass (policy=none) header.from=lists.sourceforge.net;
-	arc=reject ("signature check failed: fail, {[1] = sig:microsoft.com:reject}")
+	dmarc=pass (policy=none) header.from=lists.sourceforge.net
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:MIME-Version:References:In-Reply-To:
-	Message-Id:Date:To:Sender:Content-ID:Content-Description:Resent-Date:
-	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=tdT9OiGtyMUNw/iCzU8RuG1ZnxpxaILg/51SMROrTBQ=; b=efzT7b4maZhraseluxJHcQHLG7
-	oK4i/wvNQzQIX3/+YpiXfAlAydc9/mZmbov7pDR77bXgnRtZKCeoicq4VW6wD4AjQbsVrDeWiNtWC
-	IDtcFDHioePru1SgNT+6z3D8V7V24YJwZL7dXcCZIbnjCGCEuYzTJVzXdvdXsq1klCLo=;
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	List-Unsubscribe:List-Id:Subject:MIME-Version:Message-ID:Date:To:Sender:
+	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+	Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Owner;
+	bh=LNJkIasd5n47hz4/Nor4Me1w5Y4dcnDmYUPizbgRL4M=; b=W++vHsafk4y1vRt9z8KIABuBzN
+	IRZXLOqjZBPRQTv9sp6h6dGChzfl6Cg86J9kpUBlOP2+ICRaLIZR2fRJz0OP6xlwAgQHlgzBWiKl/
+	qHlsKeM3pB22shtw9eGMXpNB5SMJT5Oxp7ALh4UZEdQfL0ZV8T/w0E4OYErZ5hJ6UNS8=;
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1wXfMZ-0002aV-QS;
-	Thu, 11 Jun 2026 13:22:28 +0000
+	id 1wXqE4-0004GG-D2;
+	Fri, 12 Jun 2026 00:58:21 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <liaoyuanhong@vivo.com>) id 1wXfMX-0002aM-K3
+ (envelope-from <chao@kernel.org>) id 1wXqE3-0004G9-JY
  for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 11 Jun 2026 13:22:26 +0000
+ Fri, 12 Jun 2026 00:58:21 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=MIME-Version:Content-Type:Content-Transfer-Encoding
- :References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=mK1HjNIxps7HHVkgliVXwznfjZ+UdIpBjFtUTG9/ZS0=; b=cY39Mur90EGuIhZrYJYnAEqUTq
- P9bNIY4aZ4HBbAHck0Uabah+AO8lqmlxmNOx/W/pWb6SgXG2IXawxMapv2J/15sRdVCi65aSE4/s8
- BpG84bkbgNX23IEqbUHtwoXp/pkGa9rWBfGSA66fenV0lYBANQVD9B4O6oa/DsZKo3p4=;
+ bh=dfDy9y8MBcN9aGZ/09GVmidJB5V72Rd2TakHFbjxYVY=; b=A9HbtA2A9zbXD4IC0sfO1jXeIp
+ 1rCayfJJXk4LvawrGrhbYJO9ZvVRM4HtNJ0hD7JHAEU54FS/nUfGEBITkPDUeYY3IYuaMYc9LMebF
+ 5NkrKwgc9hLrpD3FEA5MjbwEPNRiqOtFwuszsHIK+Ol2pap3Hrwbdu/Ze1PYIghuv6RI=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=MIME-Version:Content-Type:Content-Transfer-Encoding:References:
- In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=mK1HjNIxps7HHVkgliVXwznfjZ+UdIpBjFtUTG9/ZS0=; b=CXE8ju9DC1SOTQeki1YE7lkpVw
- Z3OhPtFZMVxriua2NfRX7WRndD0x6CZO7sGHusOm8I0ogYWY3B6jyZfBNnGt2T6wN/ZwA1KPBwOC7
- ieWlBHbRUriyKAhpLnIPs9ENYKzWTSIBe3Uub1eoiQ5/gtIBemBZ8JCzYlp5gxCaFhL8=;
-Received: from mail-japanwestazon11012054.outbound.protection.outlook.com
- ([40.107.75.54] helo=OS8PR02CU002.outbound.protection.outlook.com)
+ h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=dfDy9y8MBcN9aGZ/09GVmidJB5V72Rd2TakHFbjxYVY=; b=L
+ huSdZ/PXgN30e/qhAeJqm7Ek61LlR2+2ppUPO4hhx0vW0Kwsve48KdyrdUQZ1819ODaa36Or3tbjN
+ +crCow2tKBShB4Ubc+vBqs8wNgqaSp7TQu5Icdk+ZCyrIHuSsVrBFcbwlRtEu8P1L5yfseIefFxts
+ S8HbkJ62UBXaesZ0=;
+Received: from sea.source.kernel.org ([172.234.252.31])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1wXfMX-0006Ey-5V for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 11 Jun 2026 13:22:26 +0000
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=M7YX5dRQOVuMHekpJSuYOVnRDQYMS4si9r+T3nkS3RUMurj0lEEO+jtekiPoC5nd0tD+6qobf0DR2+PPZ+P34AE/LK0AZfyjuQzLXu+m+P8d1iwPAp96g/1LJ0jpBvb6FvkzUdDxAN6zwj5POC1TFVuhLXz5UVZRPLMJ0j+qvMYdtCq0pxEdURck03ZGY05YkiOJoH7hyRywzPNuBMBncTRDODJyOumpo1QBUyWOjGCxW28cmscxG8zeKq2tnPWYGkIgIGjOkm5dq4dxVw74PMU07HZzbZ/gmTfebOVl9O1CrIQGCB7OtWX/WgTzMWKZXEKaVZ4kGsMojAVSaeltkw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=mK1HjNIxps7HHVkgliVXwznfjZ+UdIpBjFtUTG9/ZS0=;
- b=G5qDucPpW9alSDr78qSBEo+r/i/M5Kf2lICWCszyReQru6h6IuP5QMdkJTZaE8YpCvEFWEPemBcWvpLtRt3LUcYMKMg5vKltny2ntJcinNs4XeCzC5RJeksv/EqsA7QAb05IKMoAMO8GfNpQRausSjzWKIBrMvz5sd/zzUdBKniQ3nYdLpyiW+RUX/2hX7/MYFuXAqB6/trkSfcDHopoea+k3koFich/KI7Ul1cVWOFEiIvWjAfW4UqcxRgT5HZ6L+OK5x3hvIcPgR+yHv5hHXPMbckuy511Nh91SWc2fkX3lbn8wCqsESdVxN3/35ijCcBHemlyDKT4UKhMGPA42Q==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=vivo.com; dmarc=pass action=none header.from=vivo.com;
- dkim=pass header.d=vivo.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vivo.com; s=selector2; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=mK1HjNIxps7HHVkgliVXwznfjZ+UdIpBjFtUTG9/ZS0=;
- b=EWCIR7jEu15AEefQODYBuxfCNMFrid9xiOgvdEWiR3Q/ozuIwKManJ20B8hPF8tgWAPiCCoHyr70bWuJTwoCNL0P9SSZmhc5A9YOAbHGkyKkixAtwKzpfIohZibFVEZZUKbY7wvaPVz146UHzbp4KY/1W32CD1aLhwVPAO9h4MX5G2fJTQ1m1ZnpALqttBwfHbxxB8MnqguUjUFWuc3QwSZ59bK98BEbC7pPOdFWVaG/XVdHJaHB50puXv+A1EJDMPyTkelW6NaLZwoJJZ9yU0314MPXVBgfcvG5efd3SBh2NO2wSYt1SWz16EgMOOltJbTe3j1lflCh7S6CD1GNpg==
-Received: from SEZPR06MB5576.apcprd06.prod.outlook.com (2603:1096:101:c9::14)
- by TYPPR06MB8236.apcprd06.prod.outlook.com (2603:1096:405:385::6)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.113.13; Thu, 11 Jun
- 2026 12:50:16 +0000
-Received: from SEZPR06MB5576.apcprd06.prod.outlook.com
- ([fe80::24bc:5613:3ffa:cb96]) by SEZPR06MB5576.apcprd06.prod.outlook.com
- ([fe80::24bc:5613:3ffa:cb96%6]) with mapi id 15.21.0113.013; Thu, 11 Jun 2026
- 12:50:15 +0000
-To: ebiggers@kernel.org
-Date: Thu, 11 Jun 2026 20:50:06 +0800
-Message-Id: <20260611125006.508734-1-liaoyuanhong@vivo.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20260602134104.348655-1-liaoyuanhong@vivo.com>
-References: <20260602134104.348655-1-liaoyuanhong@vivo.com>
-X-ClientProxiedBy: TYWPR01CA0022.jpnprd01.prod.outlook.com
- (2603:1096:400:aa::9) To SEZPR06MB5576.apcprd06.prod.outlook.com
- (2603:1096:101:c9::14)
+ id 1wXqDz-00016p-6l for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 12 Jun 2026 00:58:21 +0000
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+ by sea.source.kernel.org (Postfix) with ESMTP id 5797743238
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Fri, 12 Jun 2026 00:58:14 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4CF5F1F000E9;
+ Fri, 12 Jun 2026 00:58:13 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+ s=k20260515; t=1781225894;
+ bh=dfDy9y8MBcN9aGZ/09GVmidJB5V72Rd2TakHFbjxYVY=;
+ h=From:To:Cc:Subject:Date;
+ b=Ow1Qfz75tjysrFCLg+o1ySUv653ohSHYqixOQmVd4/6dlpLjxf6bBSB65grSS+NM8
+ VfjgaZHH7rzwEOxRsqwmJnoPr6unS+qAQSHWDT54hLczUOaPmH50dWQKurelYxo6ei
+ pyUjVkhylwTKR2O+f3WoGvqr8UPmbcryn6vhyxsCYxEMYUmEV8GEidSzFGGmHouonR
+ hts6gmLdaYKUcYCd+3dvzRuUsjvefgxYzcYcTCfsxjMt9d/jnYK1NpTaay7Sh+Vzi1
+ Ap0KzyGtB4mbSKaeq5WcCcPyDMKklQj9BfDXcL1BPfSB6zW1UNz7EoDmgCdd356ZJC
+ BOZFRXT2LiUwg==
+To: Zorro Lang <zlang@kernel.org>,
+	fstests@vger.kernel.org
+Date: Fri, 12 Jun 2026 00:58:02 +0000
+Message-ID: <20260612005802.3017709-1-chao@kernel.org>
+X-Mailer: git-send-email 2.54.0.1136.gdb2ca164c4-goog
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SEZPR06MB5576:EE_|TYPPR06MB8236:EE_
-X-MS-Office365-Filtering-Correlation-Id: 04850615-e8ed-4281-622d-08dec7b7fbef
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|366016|1800799024|23010399003|52116014|7416014|376014|22082099003|18002099003|38350700014|11063799006|56012099006;
-X-Microsoft-Antispam-Message-Info: miL2lU6UmOKAbzIdWUfLkzn1D5bqhK1XSaY+s0Dh4UhRZE6oyUExeRVcBncDlf4UGiJW8nV44nCxRcX9+eFVtDIQYfBlhcIDexuDRWTrah/PTUqvhk6O2j+11SVbpaT21E6jb4pH+ZG5IjFkEiTBws3Dd/ADj/VdMyM9g0RWCHd+q3FSRXCwSjLBDTKL8AB4Fas7UnDyBQAigVKb6zWqMkAF91ypaxDv82KgmbX4g5ywFXrUQl4SZyb008QnezydGk09GZNctJhecupM+TBuFykGHaQYv4lFnjHjbpXoPHWrjO081NmN4OV45cprlPJd/VtW2UHb2OpVPIoY3qTLngo+x4quLWFMvZJepiBWhSvOMbpHpywFN4f+1TcgpIcxh9BEzdFxz0Gz22WClUHXrczx67vpnHwL+uu0Uv85/SQQ71MZKFwjMA/tTE+UZtVe92BlDhabczjHWCEXfmq2Fi+NlY7P0urXBFlqIuw4PsWXXvLzEpaIsYd6ngUqpi7oWrnsE7sDQzbd59GgRlLnkq3Bbk3krGLfJgLg7o874NB7lyuUr2BpauT7P27CJTu8gw+Fm9vL83GyU7H9A1L2rMS0DQc/T5GrvfShLQ6nj2/kjGoI6vHXEP0BlFN8JXg2TYV/fI20/qqZxNSA4lH1WuAo55BflabUyu8zXeio5584Pr1settjSqzt1o8H+/heOXtKGVcpw4xmsB50b+Q3gcS1WwZHXCsAs6mUaeJiQfbUUs60mw39J/wzK4DelSkD
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:SEZPR06MB5576.apcprd06.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(1800799024)(23010399003)(52116014)(7416014)(376014)(22082099003)(18002099003)(38350700014)(11063799006)(56012099006);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?oB+6P2K+kwD/Cvom3nHHQ7ZKrCuiDtCz/+Jd092+HfB//Zft8MrNnDrAm2Cl?=
- =?us-ascii?Q?+NDN+uEOKZZYGTZL0HMplg/Tw6ZIAVT96f+cU+KFzdQoZceVvcOdWEgEo7m9?=
- =?us-ascii?Q?pkojfrJ+1K4b5Sk7u7dOCzjn8cInd9TNZB7SHRYOkIlbhfBTHo1aMrH4Mexb?=
- =?us-ascii?Q?dZUh0dCGiarcJxIu4vKZAdY81vWpT4rs2IUWrTVUK6VxoiBmCVkn/9RmfYnt?=
- =?us-ascii?Q?kkte8lM2+cWpTzS3wdqk0hHZFIrGhyqb4lDEAe4hy/RxHZJPOYS9lJmYLu7m?=
- =?us-ascii?Q?/QPhVEe9gQbmzwb4J5IEeFZI9EPiCO0LU7WUY8Pys7jUJlF4UJLaJ2DRQWZc?=
- =?us-ascii?Q?uFc8LWNv2pQXEN2chsTpK28rCmMEYqzdl7cW2+Di9EfpdM3m8UOrSzbXN5zN?=
- =?us-ascii?Q?QYRErCbHY3XbBG7HtzU1vvrdy27xKrh2bY5nFceMYIMtcKwr/Qn2HLZmFgzG?=
- =?us-ascii?Q?xgxWk2J8EkGcIsxsgVm8IMQS7wMEidl/xHkgfJ8IIbp3dZ85MZMUW3U9CjId?=
- =?us-ascii?Q?vDa41kXRXkxlrPmSD+ehOdc0WZyi1kkAzpYj8D+VkHw9X4rVhABsQHbQABEW?=
- =?us-ascii?Q?qk4C4ghnrA1Lsou4RP+5K/Dtl9KXm2lOupS/DoZzyzkQHwd5P/L3tciZw1px?=
- =?us-ascii?Q?RFirJZyYzMh9Zf7h8s0mthhtx1BHPKJ2r/sn+q1wlW0AfNTtJKzYhBpQ4VFU?=
- =?us-ascii?Q?juCf6295fZWBh2o211CS/FOFtsEybTPg0wOxaOWffusf5NNP9nysSQU1ya1t?=
- =?us-ascii?Q?aKwbmz6oPnVXWtQz4PLCCV8uEcxwBV1lFcQXVbcLMAWeD6nSmV/KaS76Z37q?=
- =?us-ascii?Q?5YcjlJ0g4C7q8k65tsCaoai83ggtEbYbaqSTQA4euqhFR0Tw3QXMNnxLTCvM?=
- =?us-ascii?Q?7nPAKQ7aI2iheraQW0J59KLLabQc8d6lnma87/ljDs6TF5lQ30dQWbv0RN+4?=
- =?us-ascii?Q?/ooMTV4Xtaz33KaGqeKoo8HtQdlAPgLLGtyNisGphBrFIqLCrxtsPGwz/oD1?=
- =?us-ascii?Q?1AMdpfYPLB3GSuxZA5mzTLqrhx/HCpFSRejZiOBsuyPzkR2QiKQ6Trm9qqAz?=
- =?us-ascii?Q?LCCoBkzb1Vz1qhkMEW397r7c8J67QNQ1pOtKk919fqau7MALVThpV+EyWVci?=
- =?us-ascii?Q?gkQNWUYXeDWc6T66Y62jnYESFx5CekI9Gq3Uhh+ypZMyWOfNlVV736VRM4fw?=
- =?us-ascii?Q?nPWbnuX/F3th3yeVIdpwYkL/pAVT0L7AkDIErPhCV9Xo7XolfZMvoreVu1FC?=
- =?us-ascii?Q?soMd4ru8kpDyj0NEJZPleQk/zsq8LWxpFfFOyc/brML8Eqq7zkRCHskjsuNG?=
- =?us-ascii?Q?uSfmcGXy2Wq/evEntdj9MQteM8YDe8IFr7AX3EOWZjWrBvqSZajQh0kjb0p6?=
- =?us-ascii?Q?ocHs2txOKEfLTMYKfiw2zBhPNSSOd+POiGdFtXqSojlw4AszvATL5YuawQz4?=
- =?us-ascii?Q?+sefI+jKip8POnR9qBhrjWMEZdj7S8/hNxZKlfNPDFjuCOvTXxeAc/ofo40I?=
- =?us-ascii?Q?i6mHCfwZp/RSsf8MeZ8pFVJ//Bot8dAc02vQjMZZyhZ77qCpEk5k0nhl2uuf?=
- =?us-ascii?Q?hTh388+flvXtbr4fgLoIDbg4V8lXS/ZS8eldY+OROtjx3XhmRMlpzNy8q1aJ?=
- =?us-ascii?Q?tzeKZpxNq5XhO4yTKHgJGSNb2U4dm90WJzKivwaX+EY0RMXX6lzeY21zbd00?=
- =?us-ascii?Q?TMuvkW4pVXJ0e7nX6rPPUg0cyZusAKX9iL+PWFz7DzT6kqBnxcCeJBAyVG6Y?=
- =?us-ascii?Q?GtvuDxcRFQ=3D=3D?=
-X-OriginatorOrg: vivo.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 04850615-e8ed-4281-622d-08dec7b7fbef
-X-MS-Exchange-CrossTenant-AuthSource: SEZPR06MB5576.apcprd06.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Jun 2026 12:50:15.5313 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 923e42dc-48d5-4cbe-b582-1a797a6412ed
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 0/RJu8oZvxTLY2vFydRdOHujsjOXYw+nKMhtVF8DqAh7IDX4STbMjUP8/vFoi1T0i32+/gBUnu6phV6OMz6/KA==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: TYPPR06MB8236
-X-Spam-Score: 1.8 (+)
+X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Hi,
- Gentle ping on this series. v2 tries to address the previous
- concerns by avoiding per-file software tfm growth, preparing the software
- transform lazily, and explicitly disabling unsupported key combinations. 
- Content analysis details:   (1.8 points, 5.0 required)
+ Content preview: Without commit 520760b9f915 ("f2fs: optimize representative
+ type determination in GC"), f2fs GC will report inconsistent segment type
+ in large section issue, and then it will force to shutdown filesys [...] 
+ Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
@@ -169,12 +102,9 @@ X-Spam-Report: Spam detection software,
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 1.0 HK_RANDOM_ENVFROM      Envelope sender username looks random
- 1.0 HK_RANDOM_FROM         From username looks random
- 0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [40.107.75.54 listed in wl.mailspike.net]
-X-Headers-End: 1wXfMX-0006Ey-5V
-Subject: Re: [f2fs-dev] [PATCH v2 0/3] f2fs: support encrypted inline data
+X-Headers-End: 1wXqDz-00016p-6l
+Subject: [f2fs-dev] [PATCH] f2fs/025: test to do sanity check section type
+ correctly in f2fs GC
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -186,73 +116,190 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: LiaoYuanhong-vivo via Linux-f2fs-devel
- <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: LiaoYuanhong-vivo <liaoyuanhong@vivo.com>
-Cc: corbet@lwn.net, tytso@mit.edu, liaoyuanhong@vivo.com,
- linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net, linux-fscrypt@vger.kernel.org,
- skhan@linuxfoundation.org, jaegeuk@kernel.org
+From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Chao Yu <chao@kernel.org>
+Cc: jaegeuk@kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 X-Rspamd-Action: no action
 X-Spamd-Result: default: False [-7.61 / 15.00];
 	WHITELIST_DMARC(-7.00)[sourceforge.net:D:+];
-	ARC_REJECT(1.00)[signature check failed: fail, {[1] = sig:microsoft.com:reject}];
+	MID_RHS_MATCH_TO(1.00)[];
 	DMARC_POLICY_ALLOW_WITH_FAILURES(-0.50)[];
 	RWL_MAILSPIKE_EXCELLENT(-0.40)[216.105.38.7:from];
 	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7];
-	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
 	MAILLIST(-0.20)[mailman];
+	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
-	DMARC_POLICY_ALLOW(0.00)[lists.sourceforge.net,none];
-	DKIM_MIXED(0.00)[];
-	MIME_TRACE(0.00)[0:+];
+	TO_DN_SOME(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
+	DKIM_MIXED(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:ebiggers@kernel.org,m:corbet@lwn.net,m:tytso@mit.edu,m:liaoyuanhong@vivo.com,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:linux-f2fs-devel@lists.sourceforge.net,m:linux-fscrypt@vger.kernel.org,m:skhan@linuxfoundation.org,m:jaegeuk@kernel.org,s:lists@lfdr.de];
-	FORGED_SENDER(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
-	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,vivo.com:s=selector2];
 	RECEIVED_HELO_LOCALHOST(0.00)[];
-	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
+	ARC_NA(0.00)[];
+	REPLYTO_DOM_EQ_TO_DOM(0.00)[];
+	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
+	FORGED_SENDER(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
+	MIME_TRACE(0.00)[0:+];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,vivo.com:-];
+	FORGED_RECIPIENTS(0.00)[m:zlang@kernel.org,m:fstests@vger.kernel.org,m:jaegeuk@kernel.org,m:linux-f2fs-devel@lists.sourceforge.net,s:lists@lfdr.de];
+	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,kernel.org:s=k20260515];
+	RCPT_COUNT_THREE(0.00)[4];
+	DMARC_POLICY_ALLOW(0.00)[lists.sourceforge.net,none];
 	RCVD_COUNT_FIVE(0.00)[5];
-	TO_DN_NONE(0.00)[];
+	PREVIOUSLY_DELIVERED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
 	FORGED_SENDER_FORWARDING(0.00)[];
 	FROM_HAS_DN(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
-	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
+	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
 	ALIAS_RESOLVED(0.00)[];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	HAS_REPLYTO(0.00)[liaoyuanhong@vivo.com];
-	RCPT_COUNT_SEVEN(0.00)[10];
-	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
 	TAGGED_RCPT(0.00)[linux-f2fs-devel];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[vivo.com:replyto,vivo.com:mid]
+	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,kernel.org:-];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	HAS_REPLYTO(0.00)[chao@kernel.org];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.sourceforge.net:helo,lists.sourceforge.net:rdns,lists.sourceforge.net:from_mime,lists.sourceforge.net:dkim,lists.sourceforge.net:from_smtp]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 9520C6724D1
+X-Rspamd-Queue-Id: 7CA5167606C
 
-Hi,
+Without commit 520760b9f915 ("f2fs: optimize representative type determination
+in GC"), f2fs GC will report inconsistent segment type in large section issue,
+and then it will force to shutdown filesystem.
 
-Gentle ping on this series.
+[  768.190903] F2FS-fs (loop51): Inconsistent segment (3) type [1, 0] in SIT and SSA
 
-v2 tries to address the previous concerns by avoiding per-file software
-tfm growth, preparing the software transform lazily, and explicitly
-disabling unsupported key combinations.
+The reason is f2fs kernel will assume all segment type inside large section is
+the same, during GC it loads type from one segment and compare it to other
+segments' type, however due to recovery flow, the chosen segment may has zero
+valid blocks w/ different segment type, since the segment is invalid(free) one,
+it will never be migrated, so that we should not treat such state as abnormal
+condition.
 
-The main remaining limitation is hardware-wrapped keys. If this makes
-the feature unlikely to be accepted, please let me know. Otherwise, I
-would appreciate any review comments on the current direction.
+This testcase is created to simulate above condition to see whether f2fs kernel
+module can handle it correctly
 
-If maintainers have any feasible direction in mind, I would also
-appreciate hearing it.
+Signed-off-by: Chao Yu <chao@kernel.org>
+---
+v2:
+- clear MKFS_OPTIONS and MOUNT_OPTIONS to guarantee block allocation is as expected.
+ tests/f2fs/025     | 92 ++++++++++++++++++++++++++++++++++++++++++++++
+ tests/f2fs/025.out |  2 +
+ 2 files changed, 94 insertions(+)
+ create mode 100644 tests/f2fs/025
+ create mode 100644 tests/f2fs/025.out
 
-Thanks,
-Liao Yuanhong
+diff --git a/tests/f2fs/025 b/tests/f2fs/025
+new file mode 100644
+index 000000000..397e5439a
+--- /dev/null
++++ b/tests/f2fs/025
+@@ -0,0 +1,92 @@
++#! /bin/bash
++# SPDX-License-Identifier: GPL-2.0
++# Copyright (c) 2026 Chao Yu <chao@kernel.org>
++#
++# FS QA Test No. f2fs/025
++#
++# Check whether f2fs will encounter cp_error (Inconsistent segment type)
++# when doing sanity check on type of segments inside large section during
++# garbage collection.
++#
++. ./common/preamble
++_begin_fstest auto quick
++
++_fixed_by_kernel_commit 520760b9f915 \
++	"f2fs: optimize representative type determination in GC"
++
++. ./common/filter
++
++_cleanup()
++{
++	cd /
++	rm -r -f $tmp.*
++}
++
++_require_scratch
++_require_xfs_io_command "pwrite"
++_require_xfs_io_command "truncate"
++_require_command "$F2FS_IO_PROG" f2fs_io
++_require_check_dmesg
++
++# Clear options to avoid interference from external configurations
++export MKFS_OPTIONS=""
++export MOUNT_OPTIONS=""
++
++# Format with 96MB size and 2 segments per section
++_scratch_mkfs_sized $((96 * 1024 * 1024)) "" "-s 2" >> $seqres.full 2>&1
++
++# Mount with mode=lfs
++_scratch_mount -o mode=lfs >> $seqres.full 2>&1
++
++# Create files to fill whole filesystem, then segment type will be changed to node type
++for ((i=0;i<5120;i++)) do
++	touch $SCRATCH_MNT/$i >> $seqres.full 2>&1
++done
++sync
++
++# Remove all files to create free(empty) node segments
++rm -f $SCRATCH_MNT/*
++sync
++
++# Allocate free space so that we have chance to reuse free(empty) node segments
++$XFS_IO_PROG -f -c "pwrite -b 4k 0 1928k" $SCRATCH_MNT/file >> $seqres.full 2>&1
++sync
++
++$XFS_IO_PROG -c "truncate 0" $SCRATCH_MNT/file >> $seqres.full 2>&1
++$XFS_IO_PROG -d -c "pwrite -b 4k 0 16M" $SCRATCH_MNT/file >> $seqres.full 2>&1
++$XFS_IO_PROG -c "truncate 0" $SCRATCH_MNT/file >> $seqres.full 2>&1
++$XFS_IO_PROG -d -c "pwrite -b 4k 0 16M" $SCRATCH_MNT/file >> $seqres.full 2>&1
++$XFS_IO_PROG -c "truncate 0" $SCRATCH_MNT/file >> $seqres.full 2>&1
++sync
++
++$XFS_IO_PROG -d -c "pwrite -b 4k 0 8M" $SCRATCH_MNT/file >> $seqres.full 2>&1
++$XFS_IO_PROG -c "truncate 0" $SCRATCH_MNT/file >> $seqres.full 2>&1
++$XFS_IO_PROG -d -c "pwrite -b 4k 0 32K" $SCRATCH_MNT/file >> $seqres.full 2>&1
++$XFS_IO_PROG -c "truncate 0" $SCRATCH_MNT/file >> $seqres.full 2>&1
++$XFS_IO_PROG -d -c "pwrite -b 4k 0 2M" -c "fsync" $SCRATCH_MNT/file >> $seqres.full 2>&1
++
++# Shutdown the filesystem without checkpoint
++$F2FS_IO_PROG shutdown 2 $SCRATCH_MNT >> $seqres.full 2>&1
++
++_scratch_unmount >> $seqres.full 2>&1
++
++_scratch_mount -o mode=lfs >> $seqres.full 2>&1
++
++# Run urgent_gc mode to trigger garbage collection
++dev_name=$(_short_dev $SCRATCH_DEV)
++if [ -f /sys/fs/f2fs/$dev_name/gc_urgent ]; then
++	echo 1 > /sys/fs/f2fs/$dev_name/gc_urgent
++fi
++
++# Wait background GC thread to wake up to run and potentially encounter the inconsistency
++sleep 5
++
++_scratch_unmount >> $seqres.full 2>&1
++
++# Check whether the dmesg has the warning indicating the bug
++_check_dmesg_for "F2FS-fs \($dev_name\): Inconsistent segment" && \
++	_fail "F2FS-fs ($dev_name): Inconsistent segment type detected in dmesg!"
++
++echo "Silence is golden"
++status=0
++exit
+diff --git a/tests/f2fs/025.out b/tests/f2fs/025.out
+new file mode 100644
+index 000000000..3d70951ef
+--- /dev/null
++++ b/tests/f2fs/025.out
+@@ -0,0 +1,2 @@
++QA output created by 025
++Silence is golden
+-- 
+2.49.0
+
 
 
 _______________________________________________
