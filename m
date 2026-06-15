@@ -2,18 +2,18 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id 8Q20JrAfMGpIOQUAu9opvQ
+	id kS+hJlAiMGqIOgUAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 15 Jun 2026 17:52:16 +0200
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 15 Jun 2026 18:03:28 +0200
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id C8154687E9E
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 15 Jun 2026 17:52:15 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id DD00D6880FC
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 15 Jun 2026 18:03:27 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=lists.sourceforge.net header.s=beta header.b=Pg8ZY2F1;
-	dkim=fail ("body hash did not verify") header.d=sourceforge.net header.s=x header.b=fsMVraIr;
-	dkim=fail ("body hash did not verify") header.d=sf.net header.s=x header.b=k5EO5gVz;
-	dkim=fail ("body hash did not verify") header.d=kernel.org header.s=k20260515 header.b=gnH8q6Jq;
+	dkim=pass header.d=lists.sourceforge.net header.s=beta header.b=go+QDNgY;
+	dkim=fail ("body hash did not verify") header.d=sourceforge.net header.s=x header.b="H/+5sY7m";
+	dkim=fail ("body hash did not verify") header.d=sf.net header.s=x header.b="ZP5/wECn";
+	dkim=fail ("body hash did not verify") header.d=kernel.org header.s=k20260515 header.b=n4CERkz1;
 	spf=pass (mail.lfdr.de: domain of linux-f2fs-devel-bounces@lists.sourceforge.net designates 216.105.38.7 as permitted sender) smtp.mailfrom=linux-f2fs-devel-bounces@lists.sourceforge.net;
 	dmarc=pass (policy=none) header.from=lists.sourceforge.net
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
@@ -22,29 +22,29 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	List-Unsubscribe:List-Id:Subject:In-Reply-To:MIME-Version:References:
 	Message-ID:To:Date:Sender:Content-ID:Content-Description:Resent-Date:
 	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=4EkBQUqhbaIx2lNE9DmG1srXo6YOIrpxLyIXNOfFkXk=; b=Pg8ZY2F1DYOb77cE5EPCTnv6l5
-	B3wclztrM6jhNQG4rituy7VtdFJdG7BG7V2oxP0s0/wangG09Grc0SIc9NPADvuKlpIzcFKf9F8d+
-	2hNduvSoXSHA8Z85pf+3jQzccMt+LrEQbHsBYBPAZnrovWFT3zTyTFBIzqViDyJAwClI=;
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=dKTUu+8KeAWBaY+pyhYWKiuQt+z5bM80Kk6hwyhZnFc=; b=go+QDNgYzwZwpLFyGaoPEM2c84
+	C7wOENbB1OVkqgiDjb3q6myKIaLhAXWQP/tH2sBnDSUFb0ggqEi5hn5vc98c4aOHCqHSTSQy4bC/O
+	qvXJzOMyyAJsSn6efv+04QU2gSKeHfD8Lv295IBaiZ7rFxv9zdC/AwF/OXiiBHT4d6as=;
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1wZ9bb-00063t-Hx;
-	Mon, 15 Jun 2026 15:52:08 +0000
+	id 1wZ9mQ-0000U4-Jo;
+	Mon, 15 Jun 2026 16:03:19 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jaegeuk@kernel.org>) id 1wZ9bZ-00063g-NP
+ (envelope-from <jaegeuk@kernel.org>) id 1wZ9mO-0000Ty-Du
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 15 Jun 2026 15:52:06 +0000
+ Mon, 15 Jun 2026 16:03:17 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=i3PHX3YhmYx5IUXzivGPU0J+kzZvhb/igWU6Z27SlGk=; b=fsMVraIrPt+Z6wEEHo1d6RepWk
- 0FF3SSkWolB6SocSjZXbrYPDPqv9UAxG+NIK3rK2DDvusE+18eBBzFJBha26nyDMQUsaoXuc5R/wf
- Xrl+2KajUAwHKeikHAiTuYW/TaJMUCtDOWRv1IlT01fplVLm18ayrq7bjwvNig6wrEeE=;
+ bh=zM2UIEqZ+ogIfPXei1CZrjqkGFh+JkeK3mPI+hoVzPI=; b=H/+5sY7m0K1UG5ABt+TiFboal3
+ fb6QDPy3N1mP4UrlNrSvJxTV/YzA58RUZ0ktMVRsZwKLpAn8BesC7SKAb2ZsylIE3QTl7YWFnD6Oq
+ b3RbCaTUnClBUAUXP9G3zte8TfP3O9JbVNf/g0FDxYZo0oPBJd6h9JQS1aaIIduYGSDM=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -52,61 +52,62 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=i3PHX3YhmYx5IUXzivGPU0J+kzZvhb/igWU6Z27SlGk=; b=k5EO5gVzNCP2AwdlZpzIcKZzKi
- J/cMsQkf0IELuuv4L9M6S66RISdznxPHjLSmzQiW/OZeUabNSDNV/PHsspymtpZYmbs+JnjglQaSL
- sdg4pTvA0R48NjsaLTd8ZIU2poq6b8ZKzCq/fH/L+hPFuhcyK5AyqFVuxVYXw+pb+gRE=;
-Received: from sea.source.kernel.org ([172.234.252.31])
+ bh=zM2UIEqZ+ogIfPXei1CZrjqkGFh+JkeK3mPI+hoVzPI=; b=ZP5/wECnEHfFloIrZBt9DsMlsk
+ W/JqD8LPuC9MNaV7oVN6F1NI2c1OscwRtCgrLDaFK+jcpdb/GlWRrvvhk32KEcaFI4H/DMX/40ON8
+ vUuTrYG2cKh3V82PtUAeylpKvYIAW5/fiK5j7LYs/2kRnQRSw/Z55DbJXWgLHnzVUDXo=;
+Received: from tor.source.kernel.org ([172.105.4.254])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1wZ9bY-0007Wq-If for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 15 Jun 2026 15:52:06 +0000
+ id 1wZ9mN-0001wW-LO for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 15 Jun 2026 16:03:17 +0000
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by sea.source.kernel.org (Postfix) with ESMTP id AB9DE43526;
- Mon, 15 Jun 2026 15:51:54 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 64A1A1F000E9;
- Mon, 15 Jun 2026 15:51:54 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id 39B67601E4;
+ Mon, 15 Jun 2026 16:03:05 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id B06421F00A3A;
+ Mon, 15 Jun 2026 16:03:04 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
- s=k20260515; t=1781538714;
- bh=i3PHX3YhmYx5IUXzivGPU0J+kzZvhb/igWU6Z27SlGk=;
+ s=k20260515; t=1781539384;
+ bh=zM2UIEqZ+ogIfPXei1CZrjqkGFh+JkeK3mPI+hoVzPI=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To;
- b=gnH8q6JqE9JCINpAeMSoUIVTaWwV5zCu6FI05Oslwn6cldzgr0/Te6Na3JuHl65nn
- RxdFauUhwtxadpq6yPKvgLhiyN3HaeAukGw1jaRmlNT0syR8TTh1ND6xjH7vrikLIW
- TE9pgBzAzxbllaOC4dAlgnPsFxycOgmK4nhdo1mLwvJ72Rt6tvPbblE1UEbwuZBDRM
- 4gZfJH0+NhdkgPDEFBUq7UEa2PAB8/6Ypr4UXRxvgRrfoav3K0r/PN3IGBVzE+0piP
- fK8BseOCGDw0QWxmBzlZeo7wMnZASKMO8Ww3dvX/cXeG2DehBF65CesArt4EC0hvFJ
- MCRnZvys+4GhQ==
-Date: Mon, 15 Jun 2026 15:51:52 +0000
-To: Chao Yu <chao@kernel.org>
-Message-ID: <ajAfmEHCgHAh1E0I@google.com>
-References: <20260612115839.2065903-2-yangyongpeng.storage@gmail.com>
- <20260612115839.2065903-6-yangyongpeng.storage@gmail.com>
- <8738e84f-6fef-479d-a100-7df0e130f75a@kernel.org>
+ b=n4CERkz1CpuanHeKAjgIdUXgAePNqSYVbTyDtdg5xLjOKo/b3EJW27olylYYkv8y0
+ Tr7NeYygSQ41z1oNxtAyqBOSAVtWObM58L3+iDB7fDh6or53ogLUgAkw7Pcul4EpfH
+ M6ZSAuNpBIWsYckYedseLP3DdCcN0krMTax6Z0tOcD1NbdpLRxev3ezA49N92Z+om7
+ iJfpUvGADf7OyJIt/Adch9ojYrPFQ9UkpOnFv8nENCM7xXqDhNVEAy0jmF61TYZ54X
+ mf5J3+PiBPQSIxnaRXHTh4Z2KzqYkDJg4chOZ/iVgEo+lNdQn2ohnyDR5CRK2kpKTC
+ VjBZvpp8Bj6Ig==
+Date: Mon, 15 Jun 2026 16:03:03 +0000
+To: Mikhail Lobanov <m.lobanov@rosa.ru>
+Message-ID: <ajAiNyPcqd4Blujr@google.com>
+References: <20260615113613.20762-1-m.lobanov@rosa.ru>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <8738e84f-6fef-479d-a100-7df0e130f75a@kernel.org>
+In-Reply-To: <20260615113613.20762-1-m.lobanov@rosa.ru>
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 06/15, Chao Yu via Linux-f2fs-devel wrote: > On 6/12/26
- 19:58, Yongpeng Yang wrote: > > From: Yongpeng Yang <yangyongpeng@xiaomi.com>
- > > > > Add F2FS_IOC_GET_READ_CACHE_EXTENTS ioctl that allows u [...] 
+ Content preview:  Thanks, I have made further clean-ups. Could you please check
+ this?
+ https://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs.git/commit/?h=dev
+ On 06/15, Mikhail Lobanov via Linux-f2fs-devel wrote: > When updating an
+ atomic-write file, f2fs_write_begin() may read the > previously written data
+ back from the COW inode: > prepare_atomic_write_be [...] 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-X-Headers-End: 1wZ9bY-0007Wq-If
-Subject: Re: [f2fs-dev] [PATCH RESEND 5/5] f2fs: add ioctl to export read
- extent cache to userspace for debug
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+X-Headers-End: 1wZ9mN-0001wW-LO
+Subject: Re: [f2fs-dev] [PATCH v2] f2fs: read COW data with the original
+ inode during atomic write
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -120,270 +121,183 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>,
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
 From: Jaegeuk Kim via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
 Reply-To: Jaegeuk Kim <jaegeuk@kernel.org>
-Cc: Yongpeng Yang <yangyongpeng@xiaomi.com>,
- Yongpeng Yang <monty_pavel@sina.com>,
- Yongpeng Yang <yangyongpeng.storage@gmail.com>,
- linux-f2fs-devel@lists.sourceforge.net
+Cc: daehojeong@google.com, linux-f2fs-devel@lists.sourceforge.net,
+ lvc-project@linuxtesting.org, linux-kernel@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-7.11 / 15.00];
+X-Spamd-Result: default: False [-8.61 / 15.00];
 	WHITELIST_DMARC(-7.00)[sourceforge.net:D:+];
-	SUSPICIOUS_RECIPS(1.50)[];
 	DMARC_POLICY_ALLOW_WITH_FAILURES(-0.50)[];
 	RWL_MAILSPIKE_EXCELLENT(-0.40)[216.105.38.7:from];
-	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7];
 	MAILLIST(-0.20)[mailman];
+	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7];
 	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	DKIM_MIXED(0.00)[];
-	TO_DN_SOME(0.00)[];
-	RCVD_TLS_LAST(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	RECEIVED_HELO_LOCALHOST(0.00)[];
-	ARC_NA(0.00)[];
-	REPLYTO_DOM_EQ_TO_DOM(0.00)[];
-	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
-	FORGED_SENDER(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
-	MIME_TRACE(0.00)[0:+];
-	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,kernel.org:s=k20260515];
-	FORGED_RECIPIENTS(0.00)[m:chao@kernel.org,m:yangyongpeng@xiaomi.com,m:monty_pavel@sina.com,m:yangyongpeng.storage@gmail.com,m:linux-f2fs-devel@lists.sourceforge.net,m:yangyongpengstorage@gmail.com,s:lists@lfdr.de];
-	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
-	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,kernel.org:-];
 	DMARC_POLICY_ALLOW(0.00)[lists.sourceforge.net,none];
+	DKIM_MIXED(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	RECEIVED_HELO_LOCALHOST(0.00)[];
+	FORGED_RECIPIENTS(0.00)[m:m.lobanov@rosa.ru,m:daehojeong@google.com,m:linux-f2fs-devel@lists.sourceforge.net,m:lvc-project@linuxtesting.org,m:linux-kernel@vger.kernel.org,s:lists@lfdr.de];
+	FORGED_SENDER(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
+	TO_DN_SOME(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,kernel.org:s=k20260515];
+	MIME_TRACE(0.00)[0:+];
+	ARC_NA(0.00)[];
+	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
+	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,kernel.org:-];
 	RCVD_COUNT_FIVE(0.00)[5];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.sourceforge.net:helo,lists.sourceforge.net:rdns,lists.sourceforge.net:from_mime,lists.sourceforge.net:dkim,lists.sourceforge.net:from_smtp];
-	ALIAS_RESOLVED(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.sourceforge.net:helo,lists.sourceforge.net:rdns,lists.sourceforge.net:from_mime,lists.sourceforge.net:dkim,lists.sourceforge.net:from_smtp,rosa.ru:email];
 	FORGED_SENDER_FORWARDING(0.00)[];
 	FROM_HAS_DN(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
-	FREEMAIL_CC(0.00)[xiaomi.com,sina.com,gmail.com,lists.sourceforge.net];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	RCPT_COUNT_FIVE(0.00)[5];
+	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
+	ALIAS_RESOLVED(0.00)[];
 	TAGGED_RCPT(0.00)[linux-f2fs-devel];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
+	RCPT_COUNT_FIVE(0.00)[5];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	MISSING_XM_UA(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
 	HAS_REPLYTO(0.00)[jaegeuk@kernel.org]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: C8154687E9E
+X-Rspamd-Queue-Id: DD00D6880FC
 
-On 06/15, Chao Yu via Linux-f2fs-devel wrote:
-> On 6/12/26 19:58, Yongpeng Yang wrote:
-> > From: Yongpeng Yang <yangyongpeng@xiaomi.com>
-> > 
-> > Add F2FS_IOC_GET_READ_CACHE_EXTENTS ioctl that allows userspace to
-> > retrieve all cached read extents for a given file. This uses a two-call
-> > pattern similar to fiemap: the first call with ext_count=0 queries the
-> > node_count, and the second call fetches the actual extent entries.
-> 
-> It looks a little bit heavy to maintain a debug purpose ioctl interface.
-> 
-> Maybe set ino via sysfs and dump extent cache via procfs? only enabled
-> if F2FS_CHECK_FS=y?
-> 
-> Jaegeuk, do you have any suggestion?
+Thanks, I have made further clean-ups. Could you please check this?
 
-Agreed, and even not sure we need sysfs or procfs. Can we dump the extents
-via fsck?
+https://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs.git/commit/?h=dev
 
+On 06/15, Mikhail Lobanov via Linux-f2fs-devel wrote:
+> When updating an atomic-write file, f2fs_write_begin() may read the
+> previously written data back from the COW inode:
+> prepare_atomic_write_begin() locates the block in the COW inode and sets
+> use_cow, and the read bio is then built with the COW inode:
 > 
-> Thanks,
+> 	f2fs_submit_page_read(use_cow ? F2FS_I(inode)->cow_inode : inode,
+> 			      ...);
 > 
-> > 
-> > Signed-off-by: Yongpeng Yang <yangyongpeng@xiaomi.com>
-> > ---
-> >  fs/f2fs/extent_cache.c    | 70 +++++++++++++++++++++++++++++++++++++++
-> >  fs/f2fs/f2fs.h            |  3 ++
-> >  fs/f2fs/file.c            | 11 ++++++
-> >  include/uapi/linux/f2fs.h | 21 ++++++++++++
-> >  4 files changed, 105 insertions(+)
-> > 
-> > diff --git a/fs/f2fs/extent_cache.c b/fs/f2fs/extent_cache.c
-> > index e141ffb64e5f..0c10d5639d68 100644
-> > --- a/fs/f2fs/extent_cache.c
-> > +++ b/fs/f2fs/extent_cache.c
-> > @@ -14,6 +14,7 @@
-> >  
-> >  #include <linux/fs.h>
-> >  #include <linux/f2fs_fs.h>
-> > +#include <uapi/linux/f2fs.h>
-> >  
-> >  #include "f2fs.h"
-> >  #include "node.h"
-> > @@ -1267,6 +1268,75 @@ static void __init_extent_tree_info(struct extent_tree_info *eti)
-> >  	atomic_set(&eti->total_ext_node, 0);
-> >  }
-> >  
-> > +int f2fs_get_read_cache_extents(struct inode *inode,
-> > +			struct f2fs_read_cache_extent __user *uarg)
-> > +{
-> > +	struct extent_tree *et = F2FS_I(inode)->extent_tree[EX_READ];
-> > +	struct f2fs_cache_extent_info *kbuf = NULL;
-> > +	struct f2fs_cache_extent_info largest = {};
-> > +	struct rb_node *node;
-> > +	struct extent_node *en;
-> > +	unsigned int capacity, count = 0;
-> > +	__u32 flags = 0;
-> > +	int ret = 0;
-> > +
-> > +	if (get_user(capacity, &uarg->ext_count))
-> > +		return -EFAULT;
-> > +
-> > +	if (is_inode_flag_set(inode, FI_NO_EXTENT))
-> > +		flags |= F2FS_EXT_FL_NO_EXTENT;
-> > +
-> > +	if (!et || (flags & F2FS_EXT_FL_NO_EXTENT)) {
-> > +		if (put_user(0U, &uarg->ext_count) ||
-> > +		    put_user(flags, &uarg->flags) ||
-> > +		    put_user(0U, &uarg->node_count))
-> > +			return -EFAULT;
-> > +		return 0;
-> > +	}
-> > +
-> > +	if (capacity) {
-> > +		kbuf = f2fs_kvmalloc(F2FS_I_SB(inode), capacity * sizeof(*kbuf), GFP_KERNEL);
-> > +		if (!kbuf)
-> > +			return -ENOMEM;
-> > +	}
-> > +
-> > +	read_lock(&et->lock);
-> > +
-> > +	largest.fofs = et->largest.fofs;
-> > +	largest.blk = et->largest.blk;
-> > +	largest.len = et->largest.len;
-> > +	largest.last_access_mode = et->largest.last_access_mode;
-> > +
-> > +	for (node = rb_first_cached(&et->root); node; node = rb_next(node)) {
-> > +		if (count >= capacity)
-> > +			break;
-> > +		en = rb_entry(node, struct extent_node, rb_node);
-> > +
-> > +		kbuf[count].fofs = en->ei.fofs;
-> > +		kbuf[count].blk = en->ei.blk;
-> > +		kbuf[count].len = en->ei.len;
-> > +		kbuf[count].last_access_mode = en->ei.last_access_mode;
-> > +		count++;
-> > +	}
-> > +
-> > +	read_unlock(&et->lock);
-> > +
-> > +	if (count && copy_to_user(uarg->extents, kbuf,
-> > +				  count * sizeof(*kbuf))) {
-> > +		ret = -EFAULT;
-> > +		goto out;
-> > +	}
-> > +
-> > +	if (put_user(count, &uarg->ext_count) ||
-> > +	    put_user(flags, &uarg->flags) ||
-> > +	    put_user((u32)atomic_read(&et->node_cnt), &uarg->node_count) ||
-> > +	    copy_to_user(&uarg->largest, &largest, sizeof(largest)))
-> > +		ret = -EFAULT;
-> > +out:
-> > +	kvfree(kbuf);
-> > +	return ret;
-> > +}
-> > +
-> >  void f2fs_init_extent_cache_info(struct f2fs_sb_info *sbi)
-> >  {
-> >  	__init_extent_tree_info(&sbi->extent_tree[EX_READ]);
-> > diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-> > index 1588b64d04a3..69641fc31c51 100644
-> > --- a/fs/f2fs/f2fs.h
-> > +++ b/fs/f2fs/f2fs.h
-> > @@ -26,6 +26,7 @@
-> >  #include <linux/part_stat.h>
-> >  #include <linux/rw_hint.h>
-> >  
-> > +#include <uapi/linux/f2fs.h>
-> >  #include <linux/fscrypt.h>
-> >  #include <linux/fsverity.h>
-> >  
-> > @@ -4590,6 +4591,8 @@ void f2fs_update_read_extent_cache(struct dnode_of_data *dn);
-> >  void f2fs_update_read_extent_cache_range(struct dnode_of_data *dn,
-> >  				pgoff_t fofs, block_t blkaddr, unsigned int len,
-> >  				enum extent_access_mode access_mode);
-> > +int f2fs_get_read_cache_extents(struct inode *inode,
-> > +			struct f2fs_read_cache_extent __user *uarg);
-> >  unsigned int f2fs_shrink_read_extent_tree(struct f2fs_sb_info *sbi,
-> >  			int nr_shrink);
-> >  
-> > diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
-> > index a3a5d499eadf..66ec9927d667 100644
-> > --- a/fs/f2fs/file.c
-> > +++ b/fs/f2fs/file.c
-> > @@ -3672,6 +3672,14 @@ static int f2fs_ioc_precache_extents(struct file *filp)
-> >  	return f2fs_precache_extents(file_inode(filp));
-> >  }
-> >  
-> > +static int f2fs_ioc_get_read_cache_extents(struct file *filp, unsigned long arg)
-> > +{
-> > +	struct inode *inode = file_inode(filp);
-> > +
-> > +	return f2fs_get_read_cache_extents(inode,
-> > +			(struct f2fs_read_cache_extent __user *)arg);
-> > +}
-> > +
-> >  static int f2fs_ioc_resize_fs(struct file *filp, unsigned long arg)
-> >  {
-> >  	struct f2fs_sb_info *sbi = F2FS_I_SB(file_inode(filp));
-> > @@ -4744,6 +4752,8 @@ static long __f2fs_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
-> >  		return f2fs_ioc_get_dev_alias_file(filp, arg);
-> >  	case F2FS_IOC_IO_PRIO:
-> >  		return f2fs_ioc_io_prio(filp, arg);
-> > +	case F2FS_IOC_GET_READ_CACHE_EXTENTS:
-> > +		return f2fs_ioc_get_read_cache_extents(filp, arg);
-> >  	default:
-> >  		return -ENOTTY;
-> >  	}
-> > @@ -5506,6 +5516,7 @@ long f2fs_compat_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
-> >  	case F2FS_IOC_COMPRESS_FILE:
-> >  	case F2FS_IOC_GET_DEV_ALIAS_FILE:
-> >  	case F2FS_IOC_IO_PRIO:
-> > +	case F2FS_IOC_GET_READ_CACHE_EXTENTS:
-> >  		break;
-> >  	default:
-> >  		return -ENOIOCTLCMD;
-> > diff --git a/include/uapi/linux/f2fs.h b/include/uapi/linux/f2fs.h
-> > index 795e26258355..6ff9003bc030 100644
-> > --- a/include/uapi/linux/f2fs.h
-> > +++ b/include/uapi/linux/f2fs.h
-> > @@ -45,6 +45,8 @@
-> >  #define F2FS_IOC_START_ATOMIC_REPLACE	_IO(F2FS_IOCTL_MAGIC, 25)
-> >  #define F2FS_IOC_GET_DEV_ALIAS_FILE	_IOR(F2FS_IOCTL_MAGIC, 26, __u32)
-> >  #define F2FS_IOC_IO_PRIO		_IOW(F2FS_IOCTL_MAGIC, 27, __u32)
-> > +#define F2FS_IOC_GET_READ_CACHE_EXTENTS	_IOWR(F2FS_IOCTL_MAGIC, 28,	\
-> > +						struct f2fs_read_cache_extent)
-> >  
-> >  /*
-> >   * should be same as XFS_IOC_GOINGDOWN.
-> > @@ -104,4 +106,23 @@ struct f2fs_comp_option {
-> >  	__u8 log_cluster_size;
-> >  };
-> >  
-> > +struct f2fs_cache_extent_info {
-> > +	__u32 fofs;		/* start file offset in blocks */
-> > +	__u32 blk;		/* start block address */
-> > +	__u32 len;		/* length in blocks */
-> > +	__u32 last_access_mode; /* last access mode of extent_node */
-> > +};
-> > +
-> > +/* flags for f2fs_read_cache_extent */
-> > +#define F2FS_EXT_FL_NO_EXTENT	0x1	/* extent cache disabled for this inode */
-> > +
-> > +struct f2fs_read_cache_extent {
-> > +	__u32 ext_count;	/* in: array capacity; out: mapped extent count */
-> > +	__u32 flags;		/* out: status flags */
-> > +	__u32 node_count;	/* out: total extent nodes in tree */
-> > +	__u32 reserved;
-> > +	struct f2fs_cache_extent_info largest;		/* out: largest extent */
-> > +	struct f2fs_cache_extent_info extents[];	/* out: extent array */
-> > +};
-> > +
-> >  #endif /* _UAPI_LINUX_F2FS_H */
+> and f2fs_grab_read_bio() decides whether to schedule fs-layer decryption
+> (STEP_DECRYPT) for the bio based on that inode via
+> fscrypt_inode_uses_fs_layer_crypto().
+> 
+> However, the folio being filled belongs to the original inode
+> (folio->mapping->host == inode), and the data stored in the COW block was
+> encrypted (or left as plaintext) using the original inode's context, not
+> the COW inode's -- see f2fs_encrypt_one_page(), which keys off
+> fio->page->mapping->host.  fscrypt_decrypt_pagecache_blocks() likewise
+> operates on folio->mapping->host.
+> 
+> The COW inode is created as a tmpfile in the parent directory and inherits
+> its encryption policy from there.  With test_dummy_encryption the newly
+> created COW inode gets the dummy policy and becomes encrypted, while a
+> pre-existing regular file -- created before the policy applied, e.g.
+> already present in the on-disk image -- stays unencrypted.  The read
+> path then sets STEP_DECRYPT based on the encrypted COW inode and calls
+> fscrypt_decrypt_pagecache_blocks() on a folio whose host (the unencrypted
+> original inode) has a NULL ->i_crypt_info, dereferencing it:
+> 
+>   Oops: general protection fault, probably for non-canonical address ...
+>   KASAN: null-ptr-deref in range [0x0000000000000008-0x000000000000000f]
+>   RIP: 0010:fscrypt_decrypt_pagecache_blocks+0xa0/0x310
+>   Workqueue: f2fs_post_read_wq f2fs_post_read_work
+>   Call Trace:
+>    fscrypt_decrypt_bio+0x1eb/0x340
+>    f2fs_post_read_work+0xba/0x140
+>    process_one_work+0x91c/0x1a40
+>    worker_thread+0x677/0xe90
+>    kthread+0x2bc/0x3a0
+> 
+> The COW inode is only needed to locate the on-disk block, and that block
+> address is already resolved into @blkaddr by prepare_atomic_write_begin()
+> via __find_data_block(cow_inode, ...); f2fs_submit_page_read() then reads
+> from that physical @blkaddr directly, so the inode argument only selects
+> the post-read crypto context, not which block is fetched.  Reading with
+> @inode therefore returns the same (latest, not-yet-committed) COW data,
+> while making both the fs-layer decryption decision and the inline crypto
+> path use the correct (original inode's) key.
+> 
+> With the COW inode no longer used at the read site, the use_cow flag has no
+> remaining consumer; drop it from f2fs_write_begin() and
+> prepare_atomic_write_begin().
+> 
+> Fixes: 591fc34e1f98 ("f2fs: use cow inode data when updating atomic write")
+> Cc: stable@vger.kernel.org
+> Signed-off-by: Mikhail Lobanov <m.lobanov@rosa.ru>
+> Reviewed-by: Chao Yu <chao@kernel.org>
+> ---
+> v2: drop the now-unused use_cow flag from f2fs_write_begin() and
+>     prepare_atomic_write_begin() (Chao Yu); no functional change beyond
+>     v1.  Carried Chao's Reviewed-by as the cleanup was his request.
+>     Rebased on current mainline (f2fs_submit_page_read() now takes a
+>     fsverity_info argument and returns void).
+> 
+>  fs/f2fs/data.c | 17 ++++++++++++-----
+>  1 file changed, 11 insertions(+), 6 deletions(-)
+> 
+> diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
+> index 8d4f1e75dee3..9016272b68c7 100644
+> --- a/fs/f2fs/data.c
+> +++ b/fs/f2fs/data.c
+> @@ -3822,7 +3822,7 @@ static int __reserve_data_block(struct inode *inode, pgoff_t index,
+>  
+>  static int prepare_atomic_write_begin(struct f2fs_sb_info *sbi,
+>  			struct folio *folio, loff_t pos, unsigned int len,
+> -			block_t *blk_addr, bool *node_changed, bool *use_cow)
+> +			block_t *blk_addr, bool *node_changed)
+>  {
+>  	struct inode *inode = folio->mapping->host;
+>  	struct inode *cow_inode = F2FS_I(inode)->cow_inode;
+> @@ -3839,7 +3839,6 @@ static int prepare_atomic_write_begin(struct f2fs_sb_info *sbi,
+>  	if (err) {
+>  		return err;
+>  	} else if (*blk_addr != NULL_ADDR) {
+> -		*use_cow = true;
+>  		return 0;
+>  	}
+>  
+> @@ -3873,7 +3872,6 @@ static int f2fs_write_begin(const struct kiocb *iocb,
+>  	struct folio *folio;
+>  	pgoff_t index = pos >> PAGE_SHIFT;
+>  	bool need_balance = false;
+> -	bool use_cow = false;
+>  	block_t blkaddr = NULL_ADDR;
+>  	int err = 0;
+>  
+> @@ -3936,7 +3934,7 @@ static int f2fs_write_begin(const struct kiocb *iocb,
+>  
+>  	if (f2fs_is_atomic_file(inode))
+>  		err = prepare_atomic_write_begin(sbi, folio, pos, len,
+> -					&blkaddr, &need_balance, &use_cow);
+> +					&blkaddr, &need_balance);
+>  	else
+>  		err = prepare_write_begin(sbi, folio, pos, len,
+>  					&blkaddr, &need_balance);
+> @@ -3976,8 +3974,15 @@ static int f2fs_write_begin(const struct kiocb *iocb,
+>  			err = -EFSCORRUPTED;
+>  			goto put_folio;
+>  		}
+> -		f2fs_submit_page_read(use_cow ? F2FS_I(inode)->cow_inode :
+> -						inode,
+> +		/*
+> +		 * Although the block may be stored in the COW inode, the folio
+> +		 * belongs to @inode and its data was encrypted (or not) using
+> +		 * @inode's context (see f2fs_encrypt_one_page()).  Read with
+> +		 * @inode so the post-read decryption decision matches the
+> +		 * folio's owner; otherwise an unencrypted @inode whose COW inode
+> +		 * is encrypted hits a NULL ->i_crypt_info on decryption.
+> +		 */
+> +		f2fs_submit_page_read(inode,
+>  				      NULL, /* can't write to fsverity files */
+>  				      folio, blkaddr, 0, true);
+>  
+> 
+> -- 
+> 2.34.1
 > 
 > 
 > 
