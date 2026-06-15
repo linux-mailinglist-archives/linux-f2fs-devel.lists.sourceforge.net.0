@@ -2,87 +2,89 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id D5VVLDwZMGobNgUAu9opvQ
+	id NORnKJoaMGqpNgUAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 15 Jun 2026 17:24:44 +0200
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 15 Jun 2026 17:30:34 +0200
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5CCCE687A36
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 15 Jun 2026 17:24:44 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 20FF1687B23
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 15 Jun 2026 17:30:34 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=lists.sourceforge.net header.s=beta header.b=Qqdaitux;
-	dkim=fail ("body hash did not verify") header.d=sourceforge.net header.s=x header.b=PVerCcxY;
-	dkim=fail ("body hash did not verify") header.d=sf.net header.s=x header.b=Ce7cCX03;
-	dkim=fail ("body hash did not verify") header.d=kernel.org header.s=k20260515 header.b=T51GH1SA;
+	dkim=pass header.d=lists.sourceforge.net header.s=beta header.b=bxYzzzVi;
+	dkim=fail ("body hash did not verify") header.d=sourceforge.net header.s=x header.b=bYDson9p;
+	dkim=fail ("body hash did not verify") header.d=sf.net header.s=x header.b="g ViIsRK";
+	dkim=fail ("body hash did not verify") header.d=kernel.org header.s=k20260515 header.b=YH6AUJV5;
 	spf=pass (mail.lfdr.de: domain of linux-f2fs-devel-bounces@lists.sourceforge.net designates 216.105.38.7 as permitted sender) smtp.mailfrom=linux-f2fs-devel-bounces@lists.sourceforge.net;
 	dmarc=pass (policy=none) header.from=lists.sourceforge.net
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
+	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:In-Reply-To:MIME-Version:References:
-	Message-ID:To:Date:Sender:Content-ID:Content-Description:Resent-Date:
-	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=C98mCMVD9o1eKXGnEYVjTIsWnXaS7ZXyB+toXQ20+nk=; b=QqdaituxLga/9G1kQ6lt8qPffc
-	2BnX2bpX6+ID1vDQ7it6EusLZMkmUaG758BnvE1gzm7SD5AlbhY3Ii5feY4ZsgnJLY2l1e+/xmYAZ
-	olYzlvQhny+mswaTPdziN7IBvn0P4WS7yPYgV92LnEhzMaH32JTrrqwNCX0sW5wK7zDE=;
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	List-Unsubscribe:List-Id:Subject:To:Date:Message-Id:MIME-Version:Sender:Cc:
+	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+	Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Owner;
+	bh=oFIcc2ICHImQ/TkMMyap7mRley6/LYI4N1Bw32fXtWo=; b=bxYzzzVi2GvQ3C46ZOIwdBQZxt
+	qCneJU1+0hMRoO+0yZeRhmoCxKO1jN6ToVVEGpbnuDzWcYssQLPscTzkIxBzCzU9nT9UfBf3fNAhf
+	cET16KcyW/a2ENZoZpCWXTMI70khJTU/vb2bY2a4LyZwRhl0/KL48QKsbsX3dxJSLF/k=;
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1wZ9Az-0000FL-HK;
-	Mon, 15 Jun 2026 15:24:37 +0000
+	id 1wZ9Gd-0004MF-SA;
+	Mon, 15 Jun 2026 15:30:28 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jaegeuk@kernel.org>) id 1wZ9Ay-0000FC-E8
+ (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1wZ9GW-0004LZ-Oq
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 15 Jun 2026 15:24:36 +0000
+ Mon, 15 Jun 2026 15:30:21 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
- Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
+ d=sourceforge.net; s=x; h=To:Date:Message-Id:From:Subject:
+ Content-Transfer-Encoding:MIME-Version:Content-Type:Sender:Reply-To:Cc:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=sUw57hAfo3ctu0mbRih9ftVfYzKpjB8gtMJX9LZvgwM=; b=PVerCcxYUlQMmnoabSeD5dIg0/
- 8xPA+m7OXHoCtUUlM4P7a7z1INJJgKt8vXsDgsf/ZH3RArAVADlP5icPnTozug/o0YYPQfhqdecpL
- bPkQfk26SeLAioVeWxS1AbTalXot50KbqApFN0oGDUgDtayNYTrqZFERvf7GpmdiwwY0=;
+ Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
+ List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=vHhA7MKdQh8rAtcegREfrfOuoxjtLSfqv3iYhxyv/Oo=; b=bYDson9pHmZRYxEjUDfKlBWPRk
+ HmjbzYpWtZlA1SvISAhnE/38ZYaEZ6F/JbVV5h6T96kOPM5Axf5si903+tG343793rXmXADfS2GyV
+ zJWZ18wFrS7ow1rPA3/uOESVRXU4pl25krTa9Qt/77mwYh9TtNIYFwvfd0GxyGZWBxfA=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
- :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=sUw57hAfo3ctu0mbRih9ftVfYzKpjB8gtMJX9LZvgwM=; b=Ce7cCX03tfF+BgQQqFKE0iE62r
- UwrANrDMtUWGk42xToLCMMlnwvO+6PGLvgw0Cdbb0jal5bK3dk0UPUKRBQ5mLm583OBEXnIWLnoiO
- 3mRwhY+lkMTTNE/UDO2hndhU8Md0B3x289sYl4W3t1/hbNcNFz50J59w2cBLm85N9hKk=;
+ h=To:Date:Message-Id:From:Subject:Content-Transfer-Encoding:MIME-Version:
+ Content-Type:Sender:Reply-To:Cc:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=vHhA7MKdQh8rAtcegREfrfOuoxjtLSfqv3iYhxyv/Oo=; b=g
+ ViIsRKbNLMsEkH2MXFcxFAAz16XeXZIDr3ocKy8dEq4QP8ObTszV8uFec9fqlLt/Rl3O/Y+ICWevV
+ 7kkEVM6cCYEOYGbzBrygSkDJ+m1/cFb/h97Y0FBWc4gswO4ohJPvSrGEzrEGXaLYQROupAn3WK0gJ
+ DnvT2U6mAp8NmdH4=;
 Received: from tor.source.kernel.org ([172.105.4.254])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1wZ9Aw-0001au-B8 for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 15 Jun 2026 15:24:36 +0000
+ id 1wZ9GV-0002uF-TI for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 15 Jun 2026 15:30:21 +0000
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by tor.source.kernel.org (Postfix) with ESMTP id 219B5600AB;
- Mon, 15 Jun 2026 15:24:29 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id A90261F000E9;
- Mon, 15 Jun 2026 15:24:28 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id 8324D601E4
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Mon, 15 Jun 2026 15:30:09 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 39DD71F000E9
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Mon, 15 Jun 2026 15:30:09 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
- s=k20260515; t=1781537068;
- bh=sUw57hAfo3ctu0mbRih9ftVfYzKpjB8gtMJX9LZvgwM=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To;
- b=T51GH1SAMjYKFFr66UnuIyZMPmKULXYB8bXqBnCl17LijeUxinND6xoXUVsgEW+0E
- YnxW0UB81bOXT64Ms0I0Ieo4ftxxi6D3gXPnw3L1czNlxg04Mkww1R+6wDXH+r0trr
- uHDhbAKE03cuNT626S0I91oR/tySYjWYJMsXON+PV+nMHTzco2cctzlG7b3wz/1VGz
- ev1f7FpYgoQfXxcYzCgXqJIX9n3T91PYEwN1RX6RG/ZnoUc/dvHy3dHsD6j2XgjoLi
- Nktyvc5zTZleZ0FlmEeeOrYKOkNVZR7D9exz8knt0NBddebybfAjPi+A2K6o6tQhvc
- UzkpnBeyBxfUw==
-Date: Mon, 15 Jun 2026 15:24:27 +0000
-To: Chao Yu <chao@kernel.org>
-Message-ID: <ajAZK_e2Em415hME@google.com>
-References: <20260603154933.16368-1-sam.moelius@trailofbits.com>
- <e7ff2e57-b81f-4195-8e33-062e77b080fe@kernel.org>
+ s=k20260515; t=1781537409;
+ bh=vHhA7MKdQh8rAtcegREfrfOuoxjtLSfqv3iYhxyv/Oo=;
+ h=Subject:From:Date:To;
+ b=YH6AUJV5cKLc624BZoFB5Ty9zVjGjLaRgM6q9pJxGgRzeIvn4gslVpj3KZBux7Nsf
+ NZFpwn68TWh+W+APA7mMSOUq84JWnA2YryizE9kTDYqfuj7hL5CIyWtDWos4GeTtHQ
+ eK7unAX80IjHO4oBTeO6FioDspwU52TPzoAprsM6KeXf91Kcutxhd9Nk7ydHaEJRD7
+ cwjjsdbHu8FTW525d2OAj72LL0dOI1svQUK+tG86v52KJgpE/jBY1C0Y/3lW2eRq1v
+ d0wEQymMZdIpXgdAocIUSDcXJf7BqtxayzEXhlL8b9pB7T89wDJk9sEwrgtI7eRwxO
+ /ykikmlH8kLWg==
+Received: from [10.30.226.235] (localhost [IPv6:::1])
+ by aws-us-west-2-korg-oddjob-rhel9-1.codeaurora.org (Postfix) with ESMTP id
+ 963093811A64 for <linux-f2fs-devel@lists.sourceforge.net>;
+ Mon, 15 Jun 2026 15:30:05 +0000 (UTC)
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <e7ff2e57-b81f-4195-8e33-062e77b080fe@kernel.org>
+Message-Id: <178153740421.3946007.14916118422158982423.git-patchwork-summary@kernel.org>
+Date: Mon, 15 Jun 2026 15:30:04 +0000
+To: linux-f2fs-devel@lists.sourceforge.net
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
@@ -90,9 +92,12 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 06/15, Chao Yu wrote: > On 6/3/26 23:49, Samuel Moelius
- wrote: > > Inline dentry conversion copies names out of the inline dentry
- area > > before checking that each recorded name length fits in the [...]
+ Content preview:  Hello: The following patches were marked "accepted", because
+ they were applied to jaegeuk/f2fs.git (dev): Patch: [f2fs-dev,
+ v2] f2fs: validate
+ orphan inode entry count Submitter: Wenjie Qi <qwjhust@gmail.com> Committer:
+ Jaegeuk Kim <jaegeuk@kernel.org> Patchwork:
+ https://patchwork.kernel.org/project/f2fs/l [...] 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -103,9 +108,8 @@ X-Spam-Report: Spam detection software,
  domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
-X-Headers-End: 1wZ9Aw-0001au-B8
-Subject: Re: [f2fs-dev] [PATCH] f2fs: validate inline dentry name lengths
- before conversion
+X-Headers-End: 1wZ9GV-0002uF-TI
+Subject: [f2fs-dev] Patchwork summary for: f2fs
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -117,11 +121,9 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Jaegeuk Kim via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Jaegeuk Kim <jaegeuk@kernel.org>
-Cc: open list <linux-kernel@vger.kernel.org>,
- Samuel Moelius <sam.moelius@trailofbits.com>,
- "open list:F2FS FILE SYSTEM" <linux-f2fs-devel@lists.sourceforge.net>
+From: patchwork-bot+f2fs--- via Linux-f2fs-devel
+ <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: patchwork-bot+f2fs@kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
@@ -130,86 +132,91 @@ X-Spamd-Result: default: False [-8.61 / 15.00];
 	WHITELIST_DMARC(-7.00)[sourceforge.net:D:+];
 	DMARC_POLICY_ALLOW_WITH_FAILURES(-0.50)[];
 	RWL_MAILSPIKE_EXCELLENT(-0.40)[216.105.38.7:from];
-	MAILLIST(-0.20)[mailman];
-	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
 	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7:c];
+	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
+	MAILLIST(-0.20)[mailman];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORGED_RECIPIENTS(0.00)[m:chao@kernel.org,m:linux-kernel@vger.kernel.org,m:sam.moelius@trailofbits.com,m:linux-f2fs-devel@lists.sourceforge.net,s:lists@lfdr.de];
-	REPLYTO_DOM_EQ_TO_DOM(0.00)[];
-	TO_DN_ALL(0.00)[];
-	RCVD_TLS_LAST(0.00)[];
-	RECEIVED_HELO_LOCALHOST(0.00)[];
+	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,kernel.org:s=k20260515];
+	DMARC_POLICY_ALLOW(0.00)[lists.sourceforge.net,none];
+	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
+	TO_EQ_FROM(0.00)[];
 	DKIM_MIXED(0.00)[];
 	MIME_TRACE(0.00)[0:+];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
+	RCPT_COUNT_ONE(0.00)[1];
 	ARC_NA(0.00)[];
-	FORGED_SENDER(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
-	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,kernel.org:s=k20260515];
+	RECEIVED_HELO_LOCALHOST(0.00)[];
+	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
 	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,kernel.org:-];
-	DMARC_POLICY_ALLOW(0.00)[lists.sourceforge.net,none];
-	RCVD_COUNT_FIVE(0.00)[5];
-	ALIAS_RESOLVED(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	FROM_HAS_DN(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	HAS_REPLYTO(0.00)[patchwork-bot+f2fs@kernel.org];
+	RCVD_COUNT_FIVE(0.00)[6];
+	TO_DN_NONE(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
-	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	HAS_REPLYTO(0.00)[jaegeuk@kernel.org];
+	FROM_HAS_DN(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	PREVIOUSLY_DELIVERED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
 	TAGGED_RCPT(0.00)[linux-f2fs-devel];
-	RCPT_COUNT_THREE(0.00)[4];
-	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
 	MISSING_XM_UA(0.00)[];
+	ALIAS_RESOLVED(0.00)[];
+	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.sourceforge.net:helo,lists.sourceforge.net:rdns,lists.sourceforge.net:from_mime,lists.sourceforge.net:dkim,lists.sourceforge.net:from_smtp]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 5CCCE687A36
+X-Rspamd-Queue-Id: 20FF1687B23
 
-On 06/15, Chao Yu wrote:
-> On 6/3/26 23:49, Samuel Moelius wrote:
-> > Inline dentry conversion copies names out of the inline dentry area
-> > before checking that each recorded name length fits in the available
-> > filename slots.
-> > 
-> > A corrupted image can therefore make the conversion path read past
-> > the inline filename storage while building the regular dentry block.
-> > 
-> > Validate each inline dentry name length against the inline filename
-> > area before copying it.
-> > 
-> > Assisted-by: Codex:gpt-5.5-cyber-preview
-> > Signed-off-by: Samuel Moelius <sam.moelius@trailofbits.com>
-> > ---
-> >  fs/f2fs/inline.c | 4 ++++
-> >  1 file changed, 4 insertions(+)
-> > 
-> > diff --git a/fs/f2fs/inline.c b/fs/f2fs/inline.c
-> > index 7aabfc9b43cb..4584dfbe3fb8 100644
-> > --- a/fs/f2fs/inline.c
-> > +++ b/fs/f2fs/inline.c
-> > @@ -507,6 +507,10 @@ static int f2fs_add_inline_entries(struct inode *dir, void *inline_dentry)
-> >  			bit_pos++;
-> >  			continue;
-> >  		}
-> > +		if (unlikely(le16_to_cpu(de->name_len) > F2FS_NAME_LEN ||
-> > +			     bit_pos + GET_DENTRY_SLOTS(le16_to_cpu(de->name_len)) >
-> > +			     d.max))
-> > +			return -EFSCORRUPTED;
-> 
-> 	err = -EFSCORRUPTED;
-> 	goto punch_dentry_pages;
+Hello:
 
-Applied with it.
+The following patches were marked "accepted", because they were applied to
+jaegeuk/f2fs.git (dev):
 
-> 
-> Thanks,
-> 
-> >  
-> >  		/*
-> >  		 * We only need the disk_name and hash to move the dentry.
-> 
+Patch: [f2fs-dev,v2] f2fs: validate orphan inode entry count
+  Submitter: Wenjie Qi <qwjhust@gmail.com>
+  Committer: Jaegeuk Kim <jaegeuk@kernel.org>
+  Patchwork: https://patchwork.kernel.org/project/f2fs/list/?series=1100717
+  Lore link: https://lore.kernel.org/r/20260526053557.1096229-1-qiwenjie@xiaomi.com
+
+Series: [f2fs-dev,1/2] Revert: "f2fs: check in-memory block bitmap"
+  Submitter: Chao Yu <chao@kernel.org>
+  Committer: Jaegeuk Kim <jaegeuk@kernel.org>
+  Patchwork: https://patchwork.kernel.org/project/f2fs/list/?series=1099170
+  Lore link: https://lore.kernel.org/r/20260522065912.1756240-1-chao@kernel.org
+    Patches: [f2fs-dev,1/2] Revert: "f2fs: check in-memory block bitmap"
+             [f2fs-dev,2/2] Revert: "f2fs: check in-memory sit version bitmap"
+
+Patch: [f2fs-dev] f2fs: skip inode folio lookup for cached overwrite
+  Submitter: Wenjie Qi <qwjhust@gmail.com>
+  Committer: Jaegeuk Kim <jaegeuk@kernel.org>
+  Patchwork: https://patchwork.kernel.org/project/f2fs/list/?series=1102575
+  Lore link: https://lore.kernel.org/r/20260529022924.3655519-1-qiwenjie@xiaomi.com
+
+Patch: [f2fs-dev] f2fs: keep atomic write retry from zeroing original data
+  Submitter: Wenjie Qi <qwjhust@gmail.com>
+  Committer: Jaegeuk Kim <jaegeuk@kernel.org>
+  Patchwork: https://patchwork.kernel.org/project/f2fs/list/?series=1101617
+  Lore link: https://lore.kernel.org/r/20260527120628.2255597-1-qiwenjie@xiaomi.com
+
+Patch: [f2fs-dev] f2fs: stop checkpoint on compressed write IO error
+  Submitter: Wenjie Qi <qwjhust@gmail.com>
+  Committer: Jaegeuk Kim <jaegeuk@kernel.org>
+  Patchwork: https://patchwork.kernel.org/project/f2fs/list/?series=1100206
+  Lore link: https://lore.kernel.org/r/20260525061456.231710-1-qiwenjie@xiaomi.com
+
+Patch: [f2fs-dev] f2fs: fix to do sanity check on f2fs_get_node_folio_ra()
+  Submitter: Chao Yu <chao@kernel.org>
+  Committer: Jaegeuk Kim <jaegeuk@kernel.org>
+  Patchwork: https://patchwork.kernel.org/project/f2fs/list/?series=1099196
+  Lore link: https://lore.kernel.org/r/20260522075329.12079-1-chao@kernel.org
+
+
+Total patches: 7
+
+-- 
+Deet-doot-dot, I am a bot.
+https://korg.docs.kernel.org/patchwork/pwbot.html
+
+
 
 
 _______________________________________________
