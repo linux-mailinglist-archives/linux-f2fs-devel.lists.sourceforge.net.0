@@ -2,108 +2,113 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id Keb/Amf5L2pBKwUAu9opvQ
+	id SbiWO2b5L2o9KwUAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
 	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 15 Jun 2026 15:08:55 +0200
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 85EA36868CB
+	by mail.lfdr.de (Postfix) with ESMTPS id 7F2A86868CA
 	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 15 Jun 2026 15:08:54 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=lists.sourceforge.net header.s=beta header.b=MHmlYR77;
-	dkim=fail ("body hash did not verify") header.d=sourceforge.net header.s=x header.b=ROzqckSZ;
-	dkim=fail ("body hash did not verify") header.d=sf.net header.s=x header.b="V G/GkSV";
-	dkim=fail ("body hash did not verify") header.d=kernel.org header.s=k20260515 header.b=fBUOLKXL;
+	dkim=pass header.d=lists.sourceforge.net header.s=beta header.b=YRBHGF0X;
+	dkim=fail ("body hash did not verify") header.d=sourceforge.net header.s=x header.b=iethMdBL;
+	dkim=fail ("body hash did not verify") header.d=sf.net header.s=x header.b=nKV+Q8uN;
+	dkim=fail ("body hash did not verify") header.d=kernel.org header.s=k20260515 header.b=G+G0HOCA;
 	spf=pass (mail.lfdr.de: domain of linux-f2fs-devel-bounces@lists.sourceforge.net designates 216.105.38.7 as permitted sender) smtp.mailfrom=linux-f2fs-devel-bounces@lists.sourceforge.net;
 	dmarc=pass (policy=none) header.from=lists.sourceforge.net
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:MIME-Version:Message-ID:Date:To:Sender:
-	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
-	Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Owner;
-	bh=1jHgkvUW5Ksf1RqDmqYyzSANuRFhUfXDwf0Gs7jbEVU=; b=MHmlYR772JVgzuhrw1gEERFt68
-	HsugCeolHeITeucaUZEMLIee2HtLPDXcFXCNdONLsByxrGGj5ifSASv0YH8RdJY/9a9sezF+GVo1D
-	wse5bFaF2/9sCxuVdH0Q1vxJk2do7sxprDLxzTeTJfYdsfBEx/XrbetZzgsTstJXRlGU=;
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	List-Unsubscribe:List-Id:Subject:MIME-Version:References:In-Reply-To:
+	Message-ID:Date:To:Sender:Content-ID:Content-Description:Resent-Date:
+	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
+	bh=Tz37O8aGtUQujs8s2v+V2jAesFQOZ1jqESiHnF63VgE=; b=YRBHGF0XmSuFfHQ6d+g68AV1g3
+	1zhWVrOjU/J9XpFRUxaTr7lLrizKV0V4QuZyvGFByRDXawKvL9il4UsES5MHarzjNwaEiuPl23agk
+	SYXAhD5jnvpIdANC+cCBT01yFyd3cXEbBrc72+NHQY24gLzJtmZ8DfJyduSypH4C+cII=;
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1wZ73V-0004NB-Lo;
-	Mon, 15 Jun 2026 13:08:46 +0000
+	id 1wZ73X-0005R4-J3;
+	Mon, 15 Jun 2026 13:08:48 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1wZ73T-0004Mv-Ta
+ (envelope-from <chao@kernel.org>) id 1wZ73V-0005Qy-B8
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 15 Jun 2026 13:08:44 +0000
+ Mon, 15 Jun 2026 13:08:46 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
+ In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Raq7VNbdBNt9d4hB9e6oc4gfaUfydpebI3wex4IWKUI=; b=ROzqckSZhvQBgvgi619JS6uWrd
- Cuy9ZKPWuvKaZWIPqRIOrn6fCah/TYmoTYvpDbx3v1wkvmBOMpVoAJg2tuzkXZpPFN2azWAkMu6FY
- XstSU9c2u+uHNPwAGHTYNVBpMqQ8Fk9vGki+s+xsMQDmCSfWrVsvuH7+PpPj9rVtqOMI=;
+ bh=9Oz7Ewg6inmmIK16kmMwM0XHCI9POd9+GxmqienRZwc=; b=iethMdBLL6c3JsQWd8jOmcsTWh
+ +CI/sPVEmmc/uAGabL9GJJqvY673dQPDTnP3IqLT5EyuvLuLNYcc9DSvhUtO+reOaElcT68CEVNST
+ YZa25/XF9PmvOODlqIxHiEuJktTjF/QqQmN99cyrRIQ/CpYiIc7SMYhLtH6WnMceAXf4=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=Raq7VNbdBNt9d4hB9e6oc4gfaUfydpebI3wex4IWKUI=; b=V
- G/GkSV4zg7aW9Z23UUZeuAlylZ31+vc1YLqCGkQ5J81EvSX2tsYJpndqx7KWtto3P184rWhfNC2UD
- zo/rxHChIvtDKC7cQKKeg34nZgyVCy3F0dHnNOV1NKKRuyp/ltvspVkVpLJlFmvahiGmQreq4CDfy
- Bz0sANI7VKYwARso=;
-Received: from tor.source.kernel.org ([172.105.4.254])
+ h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=9Oz7Ewg6inmmIK16kmMwM0XHCI9POd9+GxmqienRZwc=; b=nKV+Q8uNLtsDwmMOXKoj/GLYU8
+ tvTE1GXVgggFWCez1gJTP9j1/+0/lVlF3RNfPhMFbEPGCZSTLzMa+6OfRLOHWERkCqQlkQh8pyLVZ
+ 82srMOpbp4WtHwVakB33Hnqvx6wjE9Ud6h3gZU42Z7kbjb9ApNxX3u5Xxud7YI+9yL5E=;
+Received: from sea.source.kernel.org ([172.234.252.31])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1wZ73S-0005wc-FF for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 15 Jun 2026 13:08:43 +0000
+ id 1wZ73T-0005wm-FF for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 15 Jun 2026 13:08:45 +0000
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by tor.source.kernel.org (Postfix) with ESMTP id 351BE6008A
+ by sea.source.kernel.org (Postfix) with ESMTP id 7C08B406F8
  for <linux-f2fs-devel@lists.sourceforge.net>;
+ Mon, 15 Jun 2026 13:08:33 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5826D1F00A3A;
  Mon, 15 Jun 2026 13:08:32 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id D9F941F000E9;
- Mon, 15 Jun 2026 13:08:30 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
- s=k20260515; t=1781528911;
- bh=Raq7VNbdBNt9d4hB9e6oc4gfaUfydpebI3wex4IWKUI=;
- h=From:To:Cc:Subject:Date;
- b=fBUOLKXLl3qHlydK12wL105ju8FAnoFrKX1QA59SVgctTxQKHV80VxMfo+pnnxsjM
- mKrI+23yVF1JyJ46py+lAQmyj1XKj7OZl04AYptyrBdAywqQg4NmgTUGUhz7LkxwHD
- 8ppfmrMl2rb0uXYNfr+pLQFELtvvG/HM8i3yQhDvhCJQUA22Ixm/dB08p9L2m4uXrf
- a+aC+PxK/lCGz/gO/WwgM4eWlc6V3wZH+jI0KRxKy/NlacHElCaJuXX7bIq/h4byA2
- uqV94yQvW+oRba5GZDmfqXYI3Avlh5FQ7tWv6Jc3CCNRfcXgN9N+rIMW+hsm5cX5z/
- 5DiGgCI/PzUNg==
+ s=k20260515; t=1781528913;
+ bh=9Oz7Ewg6inmmIK16kmMwM0XHCI9POd9+GxmqienRZwc=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References;
+ b=G+G0HOCABudmRmbX9QsOezQd1E3Vujva77nBsA/mIZGjbdW0yFlqWS0ogqY53ZTbd
+ 6NEJp4AaV6SMTtLjuuDeS1o9CjLU6HGILG+FI4BAb7RVwpHmec0QHmHgHeScrxzkin
+ zo9qZYWpQDKLnA2bBAO68NR8FN9V93loYgtalizpsWMecDoD5gXDLJnBOksjxh7h4B
+ go2OX7xAmmPMHDTCD8cL6bkahz8es/jyTDl7fJAjIdWrOSg7TNukvsbLPtIzzcA/CQ
+ bc+IJKwmgcFidgm8+jAusOGsMJm7xqC+Bi6rLJDlro3HKMth3dtHNMNI9Ozbz9+yJE
+ 4CnZB3Hhq0yrA==
 To: jaegeuk@kernel.org
-Date: Mon, 15 Jun 2026 21:08:17 +0800
-Message-ID: <20260615130822.2576088-1-chao@kernel.org>
+Date: Mon, 15 Jun 2026 21:08:18 +0800
+Message-ID: <20260615130822.2576088-2-chao@kernel.org>
 X-Mailer: git-send-email 2.54.0.1136.gdb2ca164c4-goog
+In-Reply-To: <20260615130822.2576088-1-chao@kernel.org>
+References: <20260615130822.2576088-1-chao@kernel.org>
 MIME-Version: 1.0
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: This patch fixes wrong description in printed log: "SSA and
- SIT" -> "SIT and SSA" Signed-off-by: Chao Yu <chao@kernel.org> ---
- fs/f2fs/gc.c
- | 2 +- 1 file changed, 1 insertion(+), 1 deletion(-) 
+ Content preview: Signed-off-by: Chao Yu <chao@kernel.org> --- fs/f2fs/super.c
+ | 3 +-- 1 file changed, 1 insertion(+),
+ 2 deletions(-) diff --git a/fs/f2fs/super.c
+ b/fs/f2fs/super.c index 20577e33ee2a..ff2b9c6e8c32 100644 ---
+ a/fs/f2fs/super.c +++ b/fs/f2fs/super.c @@ -4648, 8 +4648,
+ 7 @@ static void f2fs_record_stop_reason(struct f2fs [...] 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
-X-Headers-End: 1wZ73S-0005wc-FF
-Subject: [f2fs-dev] [PATCH 1/6] f2fs: fix wrong description in printed log
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+X-Headers-End: 1wZ73T-0005wm-FF
+Subject: [f2fs-dev] [PATCH 2/6] f2fs: misc cleanup in
+ f2fs_record_stop_reason()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -162,30 +167,27 @@ X-Spamd-Result: default: False [-7.61 / 15.00];
 	FROM_HAS_DN(0.00)[];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.sourceforge.net:helo,lists.sourceforge.net:rdns,lists.sourceforge.net:from_mime,lists.sourceforge.net:dkim,lists.sourceforge.net:from_smtp]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 85EA36868CB
-
-This patch fixes wrong description in printed log:
-
-"SSA and SIT" -> "SIT and SSA"
+X-Rspamd-Queue-Id: 7F2A86868CA
 
 Signed-off-by: Chao Yu <chao@kernel.org>
 ---
- fs/f2fs/gc.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ fs/f2fs/super.c | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
 
-diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
-index 69e0a867219d..0e537508df20 100644
---- a/fs/f2fs/gc.c
-+++ b/fs/f2fs/gc.c
-@@ -1897,7 +1897,7 @@ static int do_garbage_collect(struct f2fs_sb_info *sbi,
- 			sum = SUM_BLK_PAGE_ADDR(sbi, sum_folio, cur_segno);
- 			if (type != GET_SUM_TYPE(sum_footer(sbi, sum))) {
- 				f2fs_err(sbi, "Inconsistent segment (%u) type "
--						"[%d, %d] in SSA and SIT",
-+						"[%d, %d] in SIT and SSA",
- 						cur_segno, type,
- 						GET_SUM_TYPE(
- 						sum_footer(sbi, sum)));
+diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
+index 20577e33ee2a..ff2b9c6e8c32 100644
+--- a/fs/f2fs/super.c
++++ b/fs/f2fs/super.c
+@@ -4648,8 +4648,7 @@ static void f2fs_record_stop_reason(struct f2fs_sb_info *sbi)
+ 
+ 	spin_lock_irqsave(&sbi->error_lock, flags);
+ 	if (sbi->error_dirty) {
+-		memcpy(F2FS_RAW_SUPER(sbi)->s_errors, sbi->errors,
+-							MAX_F2FS_ERRORS);
++		memcpy(raw_super->s_errors, sbi->errors, MAX_F2FS_ERRORS);
+ 		sbi->error_dirty = false;
+ 	}
+ 	memcpy(raw_super->s_stop_reason, sbi->stop_reason, MAX_STOP_REASON);
 -- 
 2.49.0
 
