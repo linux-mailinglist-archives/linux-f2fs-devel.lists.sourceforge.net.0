@@ -2,87 +2,86 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id vDwtA2f5L2pCKwUAu9opvQ
+	id aMUJOgL6L2qwKwUAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 15 Jun 2026 15:08:55 +0200
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 15 Jun 2026 15:11:30 +0200
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id C9F756868CC
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 15 Jun 2026 15:08:54 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9A8FE68690F
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 15 Jun 2026 15:11:30 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=lists.sourceforge.net header.s=beta header.b="hy8bBd/m";
-	dkim=fail ("body hash did not verify") header.d=sourceforge.net header.s=x header.b=e2AZUrFH;
-	dkim=fail ("body hash did not verify") header.d=sf.net header.s=x header.b=EWeEDbTp;
-	dkim=fail ("body hash did not verify") header.d=kernel.org header.s=k20260515 header.b=DIlYjuIJ;
+	dkim=pass header.d=lists.sourceforge.net header.s=beta header.b=Fxxz7cLl;
+	dkim=fail ("body hash did not verify") header.d=sourceforge.net header.s=x header.b=ZkdmX3FY;
+	dkim=fail ("body hash did not verify") header.d=sf.net header.s=x header.b=QYM4fIqV;
+	dkim=fail ("body hash did not verify") header.d=infradead.org header.s=casper.20170209 header.b=t0Rl33Ng;
 	spf=pass (mail.lfdr.de: domain of linux-f2fs-devel-bounces@lists.sourceforge.net designates 216.105.38.7 as permitted sender) smtp.mailfrom=linux-f2fs-devel-bounces@lists.sourceforge.net;
-	dmarc=pass (policy=none) header.from=lists.sourceforge.net
+	dmarc=fail reason="SPF not aligned (relaxed), DKIM not aligned (relaxed)" header.from=infradead.org (policy=none)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
-	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:MIME-Version:References:In-Reply-To:
-	Message-ID:Date:To:Sender:Content-ID:Content-Description:Resent-Date:
-	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=XkqckMSdzDV+3lMDDvurayuFFYi6guf7t/7ba3yIqvY=; b=hy8bBd/mRfSguNcDLTiOmCOOcb
-	krCtBU1gLB3l9YoTpGoMYniqwgquaUf870VY59yezLrziMywcgK5UKC6nFFPSm/+KNczgg8FOtuPi
-	ow0CFlRY7P4vPr8hRjG3qG3n9VfKCvjgCQmTVyDz9/6hNZqy6KD5IFSEF6MrywEBgb5Y=;
+	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
+	Subject:In-Reply-To:MIME-Version:References:Message-ID:To:From:Date:Sender:
+	Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
+	:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
+	bh=0dZWrImqu+YNskFQAKyK6dvVd5WQ1GUGeI1DvGSsqew=; b=Fxxz7cLl575FpSVGq9G0+KRxL+
+	BTPluPtvSp/5XeblQSHwFH/d7bXOmK0ehwg/ok8lUvMZEe3rnk/zzyVU3qryTTg6U6QpHfhM/OLKc
+	lo65+kuP8fS8Sy6B51WnhPn5DJMLvvqIUuUN9V7ZP633ZQDTe78314Tgt2grwkCwqpCY=;
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1wZ73c-0004OK-0B;
-	Mon, 15 Jun 2026 13:08:52 +0000
+	id 1wZ766-0004hq-B4;
+	Mon, 15 Jun 2026 13:11:27 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1wZ73Z-0004Nw-Vi
+ (envelope-from <willy@infradead.org>) id 1wZ764-0004hX-8h
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 15 Jun 2026 13:08:50 +0000
+ Mon, 15 Jun 2026 13:11:25 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
- In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=M6uLn6HKNb/6qJKD+yHjmrb8H0jz7uHTJGfjPCDkAmk=; b=e2AZUrFHI90cpbDEmY9HhDue/t
- 8q5rldOmXl5WLI1ztFlMMZLGN9vruo93lzZbzxQTaUymMmIOsTrtQ67drVYyb8CT0Co6qviqmvT0s
- HdvqXUQZFViFGhgrNPPXGkKtySd3qaQLq420mlSEFoJLXq3jgLaNLkOzsEfH59gTx+uo=;
+ bh=22OPDW7KhThB14/q+lFGtgMht0sHtu3wYiNykt/72lE=; b=ZkdmX3FY381sqOeuWdAvcn4SLe
+ QNXLAUKHGoTdbAqZonQ18tzV76YbXxwSro2ire+j3S4XUsoAkmLUUnYh/AUXVXNjtYbBafGT8qj6l
+ ecEyvlBNF1HIZ7u5ENYivkO9BxoOjqtJdhuLSqJwYwSSQpvqbQF33Ys9FURYbaFoUN40=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=M6uLn6HKNb/6qJKD+yHjmrb8H0jz7uHTJGfjPCDkAmk=; b=EWeEDbTpJyhL5nE1VlycQvN9Kt
- 6S4Eky4yNJWig5Q0Nj3JZeAcjfr8fUQKFxK65LJg91a4xsuxf/cXLuuf23pg/Xjm7GQqvGIU1OJJK
- MFwkCGOIFAKF0s9NnBetlDzja3nD7ZURpofvpu4aAT/2utEFWESRNAWSmFJnFTxWFqxs=;
-Received: from sea.source.kernel.org ([172.234.252.31])
+ bh=22OPDW7KhThB14/q+lFGtgMht0sHtu3wYiNykt/72lE=; b=QYM4fIqV3NJmGpT/NIlUzp+D9L
+ 83PyVI7Vceox8VIrOLHHSiL3La1Od8W3jx9aHWpBjfgo5Jb/rruf2xURF/sOMhyCEyxYvudyJ0yAY
+ 60CxZlW780JDdKFg6wCYuMI5yrSv5ZBK6AzFbANJXCdmXETYaLdP8YksbOh09fWr/NCI=;
+Received: from casper.infradead.org ([90.155.50.34])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1wZ73Z-0005xn-Be for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 15 Jun 2026 13:08:50 +0000
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by sea.source.kernel.org (Postfix) with ESMTP id 9390A40168
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Mon, 15 Jun 2026 13:08:39 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 700E11F000E9;
- Mon, 15 Jun 2026 13:08:38 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
- s=k20260515; t=1781528919;
- bh=M6uLn6HKNb/6qJKD+yHjmrb8H0jz7uHTJGfjPCDkAmk=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References;
- b=DIlYjuIJeEO23aC3SkqKcE0mLUAIeQoGJ/A495H/sekIuPNjMvyVycXbiWsV1HhBQ
- 2CgAr1v2+vd7v4JcioveJ+YxU1C/fihnH36FR9kQI3esR+J9LsOrCh+oRSpiKwMOQn
- AtfwO8P8llV6qgAhaIqcch1aqjK2MtwsVvNqHu2PA9uq7/JKU/eSkjTXoLKn1v1KTF
- 5HA+rKRMNHvmv1IxuH7r35lpqTvM8ox/3/3UT3f/KYNexqn3uWvXhx071I1XN12tTV
- ictDaVe1b1OjIkv2ZW/HtL29NrBHdJZM3+0TKv0e/PVW1GZZsZm1zDlCzRwqtrbQ/g
- xFiV5IKsy1BNw==
-To: jaegeuk@kernel.org
-Date: Mon, 15 Jun 2026 21:08:22 +0800
-Message-ID: <20260615130822.2576088-6-chao@kernel.org>
-X-Mailer: git-send-email 2.54.0.1136.gdb2ca164c4-goog
-In-Reply-To: <20260615130822.2576088-1-chao@kernel.org>
+ id 1wZ762-0006Y3-Vx for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 15 Jun 2026 13:11:24 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=infradead.org; s=casper.20170209; h=In-Reply-To:Content-Type:MIME-Version:
+ References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+ Content-Transfer-Encoding:Content-ID:Content-Description;
+ bh=22OPDW7KhThB14/q+lFGtgMht0sHtu3wYiNykt/72lE=; b=t0Rl33Ng8c6venO86OcqjUGCt5
+ BylC6s8LtwUX+FLEm3XpGJ3ofTvcEkOS+pcKntZyDQ7eqhIAFMRd18ZJgNmcqBuMvMZ9CHMSrq+m1
+ 0HwvjnrSZG98SGNy/sJdBFHdrjeNCXWhPd/2cxH3S4CfcePNRZ1TCoSmgTVXeK3tbbAsmuoLtIcQE
+ p3WLz9Nr5znkd74ir87ge7muf9Ltb+VMsTdImfDEthtqrr5r+Qvt04j1XjYtbv3EIFXEMbPIP7IQ0
+ alEZgPoHnv1RPMMgtmdsDVw0lzP2icMBgBbIifvinCnN5catvSrAO81s58b4gRJdTK+ugD+AkSvlL
+ ZYwivFQw==;
+Received: from willy by casper.infradead.org with local (Exim 4.99.1 #2 (Red
+ Hat Linux)) id 1wZ75r-00000008qMG-0kAC;
+ Mon, 15 Jun 2026 13:11:11 +0000
+Date: Mon, 15 Jun 2026 14:11:11 +0100
+From: Matthew Wilcox <willy@infradead.org>
+To: Chao Yu <chao@kernel.org>
+Message-ID: <ai_57zkSdVklsPuw@casper.infradead.org>
 References: <20260615130822.2576088-1-chao@kernel.org>
+ <20260615130822.2576088-5-chao@kernel.org>
 MIME-Version: 1.0
+Content-Disposition: inline
+In-Reply-To: <20260615130822.2576088-5-chao@kernel.org>
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
@@ -90,11 +89,9 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: We have checked f2fs_is_compressed_page() before
- f2fs_compress_write_end_io(), 
- so we don't need to check the status again, remove it. Signed-off-by: Chao
- Yu <chao@kernel.org> --- fs/f2fs/compress.c | 3 +-- 1 file changed,
- 1 insertion(+), 2 deletions(-) 
+ Content preview:  On Mon, Jun 15, 2026 at 09:08:21PM +0800, Chao Yu wrote: >
+ No logic changes. This seems like a step backwards. We should be looking
+ to convert to a future fscrypt_finalize_bounce_folio(), if anything. 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -105,9 +102,9 @@ X-Spam-Report: Spam detection software,
  domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
-X-Headers-End: 1wZ73Z-0005xn-Be
-Subject: [f2fs-dev] [PATCH 6/6] f2fs: remove unneeded
- f2fs_is_compressed_page()
+X-Headers-End: 1wZ762-0006Y3-Vx
+Subject: Re: [f2fs-dev] [PATCH 5/6] f2fs: use fscrypt_finalize_bounce_page()
+ for cleanup
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -119,79 +116,53 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Chao Yu <chao@kernel.org>
-Cc: linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+Cc: Eric Biggers <ebiggers@kernel.org>, jaegeuk@kernel.org,
+ linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-7.61 / 15.00];
-	WHITELIST_DMARC(-7.00)[sourceforge.net:D:+];
-	MID_RHS_MATCH_TO(1.00)[];
-	DMARC_POLICY_ALLOW_WITH_FAILURES(-0.50)[];
+X-Spamd-Result: default: False [-1.01 / 15.00];
 	RWL_MAILSPIKE_EXCELLENT(-0.40)[216.105.38.7:from];
-	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7:c];
 	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
+	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7:c];
 	MAILLIST(-0.20)[mailman];
+	DMARC_POLICY_SOFTFAIL(0.10)[infradead.org : SPF not aligned (relaxed), DKIM not aligned (relaxed),none];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	REPLYTO_DOM_EQ_TO_DOM(0.00)[];
-	DKIM_MIXED(0.00)[];
-	RCVD_TLS_LAST(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:jaegeuk@kernel.org,m:linux-kernel@vger.kernel.org,m:linux-f2fs-devel@lists.sourceforge.net,s:lists@lfdr.de];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
-	RECEIVED_HELO_LOCALHOST(0.00)[];
-	ARC_NA(0.00)[];
+	FORGED_SENDER(0.00)[willy@infradead.org,linux-f2fs-devel-bounces@lists.sourceforge.net];
+	RCVD_COUNT_THREE(0.00)[4];
+	FORGED_RECIPIENTS(0.00)[m:chao@kernel.org,m:ebiggers@kernel.org,m:jaegeuk@kernel.org,m:linux-kernel@vger.kernel.org,m:linux-f2fs-devel@lists.sourceforge.net,s:lists@lfdr.de];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,kernel.org:s=k20260515];
-	MIME_TRACE(0.00)[0:+];
-	FORGED_SENDER(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
 	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
-	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
-	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,kernel.org:-];
+	RECEIVED_HELO_LOCALHOST(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	TO_DN_SOME(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	ARC_NA(0.00)[];
+	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,infradead.org:s=casper.20170209];
+	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,infradead.org:-];
+	RCPT_COUNT_FIVE(0.00)[5];
 	FORGED_SENDER_FORWARDING(0.00)[];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	TAGGED_RCPT(0.00)[linux-f2fs-devel];
-	ALIAS_RESOLVED(0.00)[];
-	TO_DN_NONE(0.00)[];
-	PREVIOUSLY_DELIVERED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
-	DMARC_POLICY_ALLOW(0.00)[lists.sourceforge.net,none];
-	FROM_NEQ_ENVFROM(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
-	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
-	RCPT_COUNT_THREE(0.00)[3];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	HAS_REPLYTO(0.00)[chao@kernel.org];
+	MID_RHS_MATCH_FROMTLD(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[willy@infradead.org,linux-f2fs-devel-bounces@lists.sourceforge.net];
 	FROM_HAS_DN(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.sourceforge.net:helo,lists.sourceforge.net:rdns,lists.sourceforge.net:from_mime,lists.sourceforge.net:dkim,lists.sourceforge.net:from_smtp]
+	DKIM_MIXED(0.00)[];
+	ALIAS_RESOLVED(0.00)[];
+	TAGGED_RCPT(0.00)[linux-f2fs-devel];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	MISSING_XM_UA(0.00)[];
+	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.sourceforge.net:dkim,lists.sourceforge.net:helo,lists.sourceforge.net:rdns,lists.sourceforge.net:from_smtp,infradead.org:from_mime]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: C9F756868CC
+X-Rspamd-Queue-Id: 9A8FE68690F
 
-We have checked f2fs_is_compressed_page() before f2fs_compress_write_end_io(),
-so we don't need to check the status again, remove it.
+On Mon, Jun 15, 2026 at 09:08:21PM +0800, Chao Yu wrote:
+> No logic changes.
 
-Signed-off-by: Chao Yu <chao@kernel.org>
----
- fs/f2fs/compress.c | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
-
-diff --git a/fs/f2fs/compress.c b/fs/f2fs/compress.c
-index aaa0813eabcd..b1209619bb64 100644
---- a/fs/f2fs/compress.c
-+++ b/fs/f2fs/compress.c
-@@ -1486,8 +1486,7 @@ void f2fs_compress_write_end_io(struct bio *bio, struct folio *folio)
- 	struct page *page = &folio->page;
- 	struct f2fs_sb_info *sbi = bio->bi_private;
- 	struct compress_io_ctx *cic = folio->private;
--	enum count_type type = WB_DATA_TYPE(folio,
--				f2fs_is_compressed_page(folio));
-+	enum count_type type = WB_DATA_TYPE(folio, true);
- 	int i;
- 
- 	if (unlikely(bio->bi_status != BLK_STS_OK))
--- 
-2.49.0
+This seems like a step backwards.  We should be looking to convert to
+a future fscrypt_finalize_bounce_folio(), if anything.
 
 
 
