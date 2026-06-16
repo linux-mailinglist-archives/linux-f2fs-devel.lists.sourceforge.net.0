@@ -2,88 +2,116 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id CCJ+LqS8MGoyWwUAu9opvQ
+	id sBtXNBG+MGqTWwUAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 16 Jun 2026 05:01:56 +0200
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 16 Jun 2026 05:08:01 +0200
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0DC7168B97C
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 16 Jun 2026 05:01:56 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2AB7768B9DE
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 16 Jun 2026 05:08:01 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=lists.sourceforge.net header.s=beta header.b="gfDg/jAt";
-	dkim=fail ("body hash did not verify") header.d=sourceforge.net header.s=x header.b=ifs5q8dm;
-	dkim=fail ("body hash did not verify") header.d=sf.net header.s=x header.b=TtfOGvCm;
-	dkim=fail ("body hash did not verify") header.d=kernel.org header.s=k20260515 header.b=GgVqetBn;
+	dkim=pass header.d=lists.sourceforge.net header.s=beta header.b=ihNTZPAj;
+	dkim=fail ("body hash did not verify") header.d=sourceforge.net header.s=x header.b=YWfUtlzS;
+	dkim=fail ("body hash did not verify") header.d=sf.net header.s=x header.b="Z ImhbVi";
+	dkim=fail ("body hash did not verify") header.d=gmail.com header.s=20251104 header.b=HPEZDnAK;
 	spf=pass (mail.lfdr.de: domain of linux-f2fs-devel-bounces@lists.sourceforge.net designates 216.105.38.7 as permitted sender) smtp.mailfrom=linux-f2fs-devel-bounces@lists.sourceforge.net;
-	dmarc=pass (policy=none) header.from=lists.sourceforge.net
+	dmarc=fail reason="SPF not aligned (relaxed), DKIM not aligned (relaxed)" header.from=gmail.com (policy=none)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
-	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:In-Reply-To:References:To:MIME-Version:Date:
-	Message-ID:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
-	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=jqh6eGF33Fkv1mHiAhPkV4uaDH6gzS3n6FcHLHJ0LeY=; b=gfDg/jAtbqFiAMxf4abWD4j1T1
-	s9VyQq5Kmvwinkxazopho8A2bJNpNNaqb6zPVcUyBsMH1jkrjSaEYx1yfNQ24qBrl4ahuWfhn+gta
-	OCRBbbcLuXG7LAI7E/sss8OAHEZsJ8q09gWk+WJoWPIl642GqE4OkhaFbcCf74s/E1RQ=;
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
+	Subject:MIME-Version:Message-ID:Date:To:From:Sender:Reply-To:Content-ID:
+	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+	:Resent-Message-ID:In-Reply-To:References:List-Owner;
+	bh=wWSh0AmbXRTTD+7VWBG58iuo0t8rEbwjSztF8IeG6Qo=; b=ihNTZPAjQAK0gRU/rgI2tYQd6M
+	OO6bTXM5tyQTo4X8/EUZx7qmHak9k29ydSFWVvXlYRPdUEvwGkiTtFgGZWVGzKml0mRp7QI6NP4Lk
+	kO0dlaBG5o1rsGyr4CwXNrOPU9FiCNjTZw8eC57Vc0jfPi4jHOyIbrIEJ4OdjgZzDL+s=;
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1wZK3e-0005A9-Nj;
-	Tue, 16 Jun 2026 03:01:47 +0000
+	id 1wZK9a-0004aA-Ns;
+	Tue, 16 Jun 2026 03:07:55 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1wZK3K-00058U-H5
+ (envelope-from <qwjhust@gmail.com>) id 1wZK9Y-0004a3-Tg
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 16 Jun 2026 03:01:27 +0000
+ Tue, 16 Jun 2026 03:07:53 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- From:References:To:Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=B/RZnSljipJOZquW04rJPGF1VzGqqFUxaQmLb32LuJk=; b=ifs5q8dmIZ5accddMXSaV0hsu0
- x8MOa3dh9eXMtuK9PU1LTA4n9/g7sqXTWLarYTARqYk/HTBFW7RNt6FA8ykiSV4XwX6XYM0FO0Kum
- 1Md/QaiYwPmp4vcZixG4oAy83lIB8sHzr2zmIG4H97q6vSCkqgmy4NDYxa6mP2L4/Xio=;
+ bh=AjRN7pGql3/0sl5ul3djqlQ5ytyJ1WICP/I+lVMXzt8=; b=YWfUtlzSUE/Qp2rc/33wRpuDtN
+ pTU+wwaco5DwI+CHx8HW06Ufa9x3KRanEVZFSmgwpxKP2s1NGK0V81DZ6z0olvB8AERW7Ef3sthLR
+ 2+EsTSskGcnQ5HWF6eoK2Tx5WiSSqJ+nsc38SGtS/UBvfjIv3INfa/fN5ZtUyGkcs5JY=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
- Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=B/RZnSljipJOZquW04rJPGF1VzGqqFUxaQmLb32LuJk=; b=TtfOGvCmg0bgQpTdKUM5F/N5rs
- N1JhUks+0wFWkStFa3WKLP1bvhr/+iB03iaQoBmdOhRS7yQqeS9fFZ1FpuiQ17jikgxYAj99QZQeL
- x99jCxWhsWmloQtFIcsctyDYddRYRKoysPYGLP0JMhwoJZOU/g8Jt9N39JGxCGEg8V8o=;
-Received: from tor.source.kernel.org ([172.105.4.254])
+ h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=AjRN7pGql3/0sl5ul3djqlQ5ytyJ1WICP/I+lVMXzt8=; b=Z
+ ImhbVij4t+9zZBcpvuPsUCRCvkUgzkBoaxBbCy89BenhhxltBW57VsxwYHymEcbDqJukghpojzjOT
+ MG0zBiw2eNHqariwAK9CUPmKeDQCFGINPXR3kg3Q93t5h2+k8HGX8vpvqOwKfgO5CQ0LtSaJGfLun
+ klinnPDje9NmRgng=;
+Received: from mail-dy1-f172.google.com ([74.125.82.172])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1wZK3J-0001bC-KU for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 16 Jun 2026 03:01:27 +0000
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by tor.source.kernel.org (Postfix) with ESMTP id 820616008A;
- Tue, 16 Jun 2026 03:01:20 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id D7F131F000E9;
- Tue, 16 Jun 2026 03:01:18 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
- s=k20260515; t=1781578880;
- bh=B/RZnSljipJOZquW04rJPGF1VzGqqFUxaQmLb32LuJk=;
- h=Date:Cc:Subject:To:References:From:In-Reply-To;
- b=GgVqetBnaGkkZSvhQkn1D4n6wZH/IVW8VaFBiHpCnp650kgVd5no2HHzeC0ytO/qW
- 9gNmHisgLQn+WdbcvUBPkeYUIpxHTJUb/dJK3kI8yjywsyFulCUAqxdXwIRcoDJYTx
- GwsqFp3s2Sf9iB6bLWLrrnpSbS759bxyC96dxxKvS98JrUUhDbTpxVt/PWpJm02sHz
- G0QshpQXgxVkeps9/xawQy3dbbI6nhU1ml7JrZi2Za/FEXb16gM/ZZok7EwyLW8uph
- YCAwSToulq7qdfBZXZjjIVU3wxvmnxUHS4nkLYcA7Lsi8OXKudMD1p5ArDRYqn7zjH
- untzXy5LmlGbA==
-Message-ID: <ea312e9d-06e6-4575-b998-1788a688a74d@kernel.org>
-Date: Tue, 16 Jun 2026 11:01:16 +0800
+ (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
+ id 1wZK9U-0002RM-Ug for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 16 Jun 2026 03:07:53 +0000
+Received: by mail-dy1-f172.google.com with SMTP id
+ 5a478bee46e88-304f590dd91so4660924eec.0
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Mon, 15 Jun 2026 20:07:49 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20251104; t=1781579259; x=1782184059; darn=lists.sourceforge.net;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=AjRN7pGql3/0sl5ul3djqlQ5ytyJ1WICP/I+lVMXzt8=;
+ b=HPEZDnAKMTz+0ddI3bKqE8Mnr99+PudpK3k4MXSYSibHKEWvT1uFVMfQ9w1I7lBzC9
+ w0AchmXfZUl38ME2aADTKKKCHfULudgQM2eXPfhw8aglOd2TD8A8CJBiDp6EnSWI+cWX
+ svgnnDR7RlYnyaTz0R1pRqwvOoaICS1qRIVHdxLaK2+gSFYB+pyYEslzDJn7zlECNifo
+ aXJQQSiF5ZUsRhUPYdvxeuBZLjnC9RXbts6AOrAt4WIK8fz97ga4DmRaOJPTwZ9TeaYK
+ pP58uqrRlr7eGS1h2e4nLcjqr9Wj/eAmzJlaq4vPIiux6TUd4HlugWFZab0YQFPkHXay
+ i6JQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1781579259; x=1782184059;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=AjRN7pGql3/0sl5ul3djqlQ5ytyJ1WICP/I+lVMXzt8=;
+ b=IDW2HXpc+Id00oxHXSoUeYJTfU/+2rDKUaPMND6T6wDryqN3LYb7DmSlLdo5DlTPms
+ /aEAtLCXMEVXZviqapzmSfIhY4JeaaJvcEVjuGMZiPxKF/+OaNkmlmx/d6aIpuEvaxKi
+ 1UiCtB0j2ztDXgKimcyjnqz/iIdXPyxR6qjKJ1EU1Bc2sQ9dEn4nF7gPKDlF3uoXt6es
+ WHpyGsdAkruhzdxFIkbiXjsSJ2GXzakU8TF1zNI29gGpoEhQjHjfsmdtrBcyiTLYR8yH
+ bl1Zb6EVXA9BdkEcpvrZzmVb5h5zugkqT3f9ofq9KF3Q+jogjjNnO09FK3DTL/QxPrfn
+ FHbQ==
+X-Gm-Message-State: AOJu0YyHPIIiPLjyuz4ThBd9GQ0J1WfQnv3ElepUiJyqLB2QPSts28+H
+ 2MydmZcDRxpCXGpXV92aPJhchwIOwAnkDyyi3dgKNIiTJnG7Hn+obDy2eQ8xK5v4
+X-Gm-Gg: Acq92OHNZFUuPdRgnLlqzCbo8tlAFqUz6Uda/K+O/XCt6BTWC2VlRZ0avN02vK3x/38
+ Vu+uNL+RMtcKnKE36ZC35ktpdwePVPUV1mFlB/YVg80MX/oDb+LDGylyTM/mPOEwAO2EeiepNs8
+ FzGaTV9SN24F5Pp7pRCipqA9aqFvZyZD2II9gJEo9QRvmIdoxCq/ChoQqG5CWTiS3wIPbYZ5WJX
+ wrATKA1fowHnQvYAq3OSXGUU8uPQj2RaMlgco5TzAyGSAmDPhr1yKwEfHulqgqHTAldOpJHsd6X
+ fzCpv8K2nYX4aykHrYsHmI6O2nG5ivMF82pTT25MwU/7JFRGJoNuZDxy8xWs84tKmQw4JHXkwN8
+ 5AEf/p5cb+mXqEJQEAJiJ4BOWdTpzo97WOZjTz87aFwb9ckonVQdMxmwvik+G+iHkzYlBKpTjAr
+ 35FCx399kWd6qBeEBUWw3JL0W0noT2z0pl33DvAkumYlkyOzN4YSPH1/pXNtcWr4hgczEWKA==
+X-Received: by 2002:a05:7300:1827:b0:2da:2ec2:64fe with SMTP id
+ 5a478bee46e88-30ba5f6fbbfmr1111187eec.24.1781579258759; 
+ Mon, 15 Jun 2026 20:07:38 -0700 (PDT)
+Received: from qiwenjie-ThinkCentre-M760t.mioffice.cn ([43.224.245.241])
+ by smtp.gmail.com with ESMTPSA id
+ 5a478bee46e88-3081e5d0849sm19083116eec.7.2026.06.15.20.07.36
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 15 Jun 2026 20:07:38 -0700 (PDT)
+From: Wenjie Qi <qwjhust@gmail.com>
+X-Google-Original-From: Wenjie Qi <qiwenjie@xiaomi.com>
+To: jaegeuk@kernel.org,
+	chao@kernel.org
+Date: Tue, 16 Jun 2026 11:06:55 +0800
+Message-ID: <20260616030655.111933-1-qiwenjie@xiaomi.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-To: Jaegeuk Kim <jaegeuk@kernel.org>, Mikhail Lobanov <m.lobanov@rosa.ru>
-References: <20260615113613.20762-1-m.lobanov@rosa.ru>
- <ajAiNyPcqd4Blujr@google.com>
-Content-Language: en-US
-In-Reply-To: <ajAiNyPcqd4Blujr@google.com>
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
@@ -91,10 +119,9 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 6/16/26 00:03, Jaegeuk Kim wrote: > Thanks, I have made
- further clean-ups. Could you please check this? > >
- https://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs.git/commit/?h=dev
- The merged one looks good to me. 
+ Content preview:  F2FS iostat is optional and is disabled by default. Direct
+ I/O still allocates and binds a bio_iostat_ctx, updates the submit timestamp, 
+ and replaces bi_end_io for every DIO bio even when sbi->iostat_ [...] 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -105,9 +132,11 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-X-Headers-End: 1wZK3J-0001bC-KU
-Subject: Re: [f2fs-dev] [PATCH v2] f2fs: read COW data with the original
- inode during atomic write
+ 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
+ [qwjhust(at)gmail.com]
+X-Headers-End: 1wZK9U-0002RM-Ug
+Subject: [f2fs-dev] [PATCH v2] f2fs: skip direct I/O iostat context when
+ disabled
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -119,201 +148,96 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Chao Yu <chao@kernel.org>
-Cc: daehojeong@google.com, linux-f2fs-devel@lists.sourceforge.net,
- lvc-project@linuxtesting.org, linux-kernel@vger.kernel.org
+Cc: qwjhust@gmail.com, qiwenjie@xiaomi.com, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-7.61 / 15.00];
-	WHITELIST_DMARC(-7.00)[sourceforge.net:D:+];
-	MID_RHS_MATCH_TO(1.00)[];
-	DMARC_POLICY_ALLOW_WITH_FAILURES(-0.50)[];
+X-Spamd-Result: default: False [-1.01 / 15.00];
 	RWL_MAILSPIKE_EXCELLENT(-0.40)[216.105.38.7:from];
 	MAILLIST(-0.20)[mailman];
 	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
-	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7:c];
+	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7];
 	MIME_GOOD(-0.10)[text/plain];
+	DMARC_POLICY_SOFTFAIL(0.10)[gmail.com : SPF not aligned (relaxed), DKIM not aligned (relaxed),none];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_TLS_LAST(0.00)[];
-	REPLYTO_DOM_EQ_TO_DOM(0.00)[];
-	DKIM_MIXED(0.00)[];
 	RECEIVED_HELO_LOCALHOST(0.00)[];
-	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,kernel.org:s=k20260515];
-	TO_DN_SOME(0.00)[];
+	FORGED_SENDER(0.00)[qwjhust@gmail.com,linux-f2fs-devel-bounces@lists.sourceforge.net];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:jaegeuk@kernel.org,m:m.lobanov@rosa.ru,m:daehojeong@google.com,m:linux-f2fs-devel@lists.sourceforge.net,m:lvc-project@linuxtesting.org,m:linux-kernel@vger.kernel.org,s:lists@lfdr.de];
-	MIME_TRACE(0.00)[0:+];
-	FORGED_SENDER(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
-	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
+	RCVD_TLS_LAST(0.00)[];
+	DKIM_MIXED(0.00)[];
 	ARC_NA(0.00)[];
-	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
+	FREEMAIL_FROM(0.00)[gmail.com];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_RECIPIENTS(0.00)[m:jaegeuk@kernel.org,m:chao@kernel.org,m:qwjhust@gmail.com,m:qiwenjie@xiaomi.com,m:linux-kernel@vger.kernel.org,m:linux-f2fs-devel@lists.sourceforge.net,s:lists@lfdr.de];
+	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
+	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,gmail.com:s=20251104];
+	FREEMAIL_CC(0.00)[gmail.com,xiaomi.com,vger.kernel.org,lists.sourceforge.net];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,kernel.org:-];
+	RCPT_COUNT_FIVE(0.00)[6];
 	RCVD_COUNT_FIVE(0.00)[5];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[rosa.ru:email];
+	TO_DN_NONE(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
-	DMARC_POLICY_ALLOW(0.00)[lists.sourceforge.net,none];
-	ALIAS_RESOLVED(0.00)[];
-	TAGGED_RCPT(0.00)[linux-f2fs-devel];
-	RCPT_COUNT_FIVE(0.00)[6];
+	FROM_NEQ_ENVFROM(0.00)[qwjhust@gmail.com,linux-f2fs-devel-bounces@lists.sourceforge.net];
+	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,gmail.com:-];
+	PREVIOUSLY_DELIVERED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
+	ALIAS_RESOLVED(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	HAS_REPLYTO(0.00)[chao@kernel.org]
+	TAGGED_RCPT(0.00)[linux-f2fs-devel];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[xiaomi.com:mid,xiaomi.com:email]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 0DC7168B97C
+X-Rspamd-Queue-Id: 2AB7768B9DE
 
-On 6/16/26 00:03, Jaegeuk Kim wrote:
-> Thanks, I have made further clean-ups. Could you please check this?
-> 
-> https://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs.git/commit/?h=dev
+F2FS iostat is optional and is disabled by default.  Direct I/O still
+allocates and binds a bio_iostat_ctx, updates the submit timestamp, and
+replaces bi_end_io for every DIO bio even when sbi->iostat_enable is
+false.
 
-The merged one looks good to me.
+The byte accounting calls do not need an extra guard because
+f2fs_update_iostat() already checks sbi->iostat_enable.  Only skip the
+DIO bio context setup when iostat is disabled.  If iostat is enabled
+through sysfs before submission, the existing context allocation and
+latency accounting path is still used.
 
-Reviewed-by: Chao Yu <chao@kernel.org>
+QEMU benchmark on a 1GiB F2FS virtio-blk image, with iostat_enable=0,
+4KiB O_DIRECT I/O over a 64MiB file, 50000 iterations per run:
 
-Thanks,
+                         baseline     patched
+  direct_read median    65264.50 ns  55470.95 ns
+  direct_read recheck   65553.75 ns  55470.95 ns
+  direct_write median   68054.62 ns  56309.44 ns
+  direct_write recheck  66873.51 ns  56309.44 ns
 
-> 
-> On 06/15, Mikhail Lobanov via Linux-f2fs-devel wrote:
->> When updating an atomic-write file, f2fs_write_begin() may read the
->> previously written data back from the COW inode:
->> prepare_atomic_write_begin() locates the block in the COW inode and sets
->> use_cow, and the read bio is then built with the COW inode:
->>
->> 	f2fs_submit_page_read(use_cow ? F2FS_I(inode)->cow_inode : inode,
->> 			      ...);
->>
->> and f2fs_grab_read_bio() decides whether to schedule fs-layer decryption
->> (STEP_DECRYPT) for the bio based on that inode via
->> fscrypt_inode_uses_fs_layer_crypto().
->>
->> However, the folio being filled belongs to the original inode
->> (folio->mapping->host == inode), and the data stored in the COW block was
->> encrypted (or left as plaintext) using the original inode's context, not
->> the COW inode's -- see f2fs_encrypt_one_page(), which keys off
->> fio->page->mapping->host.  fscrypt_decrypt_pagecache_blocks() likewise
->> operates on folio->mapping->host.
->>
->> The COW inode is created as a tmpfile in the parent directory and inherits
->> its encryption policy from there.  With test_dummy_encryption the newly
->> created COW inode gets the dummy policy and becomes encrypted, while a
->> pre-existing regular file -- created before the policy applied, e.g.
->> already present in the on-disk image -- stays unencrypted.  The read
->> path then sets STEP_DECRYPT based on the encrypted COW inode and calls
->> fscrypt_decrypt_pagecache_blocks() on a folio whose host (the unencrypted
->> original inode) has a NULL ->i_crypt_info, dereferencing it:
->>
->>   Oops: general protection fault, probably for non-canonical address ...
->>   KASAN: null-ptr-deref in range [0x0000000000000008-0x000000000000000f]
->>   RIP: 0010:fscrypt_decrypt_pagecache_blocks+0xa0/0x310
->>   Workqueue: f2fs_post_read_wq f2fs_post_read_work
->>   Call Trace:
->>    fscrypt_decrypt_bio+0x1eb/0x340
->>    f2fs_post_read_work+0xba/0x140
->>    process_one_work+0x91c/0x1a40
->>    worker_thread+0x677/0xe90
->>    kthread+0x2bc/0x3a0
->>
->> The COW inode is only needed to locate the on-disk block, and that block
->> address is already resolved into @blkaddr by prepare_atomic_write_begin()
->> via __find_data_block(cow_inode, ...); f2fs_submit_page_read() then reads
->> from that physical @blkaddr directly, so the inode argument only selects
->> the post-read crypto context, not which block is fetched.  Reading with
->> @inode therefore returns the same (latest, not-yet-committed) COW data,
->> while making both the fs-layer decryption decision and the inline crypto
->> path use the correct (original inode's) key.
->>
->> With the COW inode no longer used at the read site, the use_cow flag has no
->> remaining consumer; drop it from f2fs_write_begin() and
->> prepare_atomic_write_begin().
->>
->> Fixes: 591fc34e1f98 ("f2fs: use cow inode data when updating atomic write")
->> Cc: stable@vger.kernel.org
->> Signed-off-by: Mikhail Lobanov <m.lobanov@rosa.ru>
->> Reviewed-by: Chao Yu <chao@kernel.org>
->> ---
->> v2: drop the now-unused use_cow flag from f2fs_write_begin() and
->>     prepare_atomic_write_begin() (Chao Yu); no functional change beyond
->>     v1.  Carried Chao's Reviewed-by as the cleanup was his request.
->>     Rebased on current mainline (f2fs_submit_page_read() now takes a
->>     fsverity_info argument and returns void).
->>
->>  fs/f2fs/data.c | 17 ++++++++++++-----
->>  1 file changed, 11 insertions(+), 6 deletions(-)
->>
->> diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
->> index 8d4f1e75dee3..9016272b68c7 100644
->> --- a/fs/f2fs/data.c
->> +++ b/fs/f2fs/data.c
->> @@ -3822,7 +3822,7 @@ static int __reserve_data_block(struct inode *inode, pgoff_t index,
->>  
->>  static int prepare_atomic_write_begin(struct f2fs_sb_info *sbi,
->>  			struct folio *folio, loff_t pos, unsigned int len,
->> -			block_t *blk_addr, bool *node_changed, bool *use_cow)
->> +			block_t *blk_addr, bool *node_changed)
->>  {
->>  	struct inode *inode = folio->mapping->host;
->>  	struct inode *cow_inode = F2FS_I(inode)->cow_inode;
->> @@ -3839,7 +3839,6 @@ static int prepare_atomic_write_begin(struct f2fs_sb_info *sbi,
->>  	if (err) {
->>  		return err;
->>  	} else if (*blk_addr != NULL_ADDR) {
->> -		*use_cow = true;
->>  		return 0;
->>  	}
->>  
->> @@ -3873,7 +3872,6 @@ static int f2fs_write_begin(const struct kiocb *iocb,
->>  	struct folio *folio;
->>  	pgoff_t index = pos >> PAGE_SHIFT;
->>  	bool need_balance = false;
->> -	bool use_cow = false;
->>  	block_t blkaddr = NULL_ADDR;
->>  	int err = 0;
->>  
->> @@ -3936,7 +3934,7 @@ static int f2fs_write_begin(const struct kiocb *iocb,
->>  
->>  	if (f2fs_is_atomic_file(inode))
->>  		err = prepare_atomic_write_begin(sbi, folio, pos, len,
->> -					&blkaddr, &need_balance, &use_cow);
->> +					&blkaddr, &need_balance);
->>  	else
->>  		err = prepare_write_begin(sbi, folio, pos, len,
->>  					&blkaddr, &need_balance);
->> @@ -3976,8 +3974,15 @@ static int f2fs_write_begin(const struct kiocb *iocb,
->>  			err = -EFSCORRUPTED;
->>  			goto put_folio;
->>  		}
->> -		f2fs_submit_page_read(use_cow ? F2FS_I(inode)->cow_inode :
->> -						inode,
->> +		/*
->> +		 * Although the block may be stored in the COW inode, the folio
->> +		 * belongs to @inode and its data was encrypted (or not) using
->> +		 * @inode's context (see f2fs_encrypt_one_page()).  Read with
->> +		 * @inode so the post-read decryption decision matches the
->> +		 * folio's owner; otherwise an unencrypted @inode whose COW inode
->> +		 * is encrypted hits a NULL ->i_crypt_info on decryption.
->> +		 */
->> +		f2fs_submit_page_read(inode,
->>  				      NULL, /* can't write to fsverity files */
->>  				      folio, blkaddr, 0, true);
->>  
->>
->> -- 
->> 2.34.1
->>
->>
->>
->> _______________________________________________
->> Linux-f2fs-devel mailing list
->> Linux-f2fs-devel@lists.sourceforge.net
->> https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
+Signed-off-by: Wenjie Qi <qiwenjie@xiaomi.com>
+---
+Changes in v2:
+- Drop the extra guards around f2fs_update_iostat(), since it already checks
+  sbi->iostat_enable.
+- Limit the change to skipping DIO bio iostat context setup.
 
+ fs/f2fs/file.c | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
+index 6edf0105dbc8..d8d895c27026 100644
+--- a/fs/f2fs/file.c
++++ b/fs/f2fs/file.c
+@@ -4799,6 +4799,9 @@ static void f2fs_dio_iostat_start(struct f2fs_sb_info *sbi, struct bio *bio)
+ {
+ 	void *bi_private = bio->bi_private;
+ 
++	if (!sbi->iostat_enable)
++		return;
++
+ 	iostat_alloc_and_bind_ctx(sbi, bio, bi_private);
+ 	iostat_update_submit_ctx(bio, DATA);
+ 	bio->bi_end_io = f2fs_dio_end_bio;
+-- 
+2.43.0
 
 
 _______________________________________________
