@@ -2,109 +2,110 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id /B5/IusbMWr0bgUAu9opvQ
+	id uBz6M+0bMWr1bgUAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 16 Jun 2026 11:48:27 +0200
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 16 Jun 2026 11:48:29 +0200
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id CE1F568DAF2
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 16 Jun 2026 11:48:26 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C2E4F68DAF7
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 16 Jun 2026 11:48:29 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=lists.sourceforge.net header.s=beta header.b="k1OpVU/c";
-	dkim=fail ("body hash did not verify") header.d=sourceforge.net header.s=x header.b=TPQsok0S;
-	dkim=fail ("body hash did not verify") header.d=sf.net header.s=x header.b="Y ZK+9Xn";
-	dkim=fail ("body hash did not verify") header.d=kernel.org header.s=k20260515 header.b=V+CdXCwq;
+	dkim=pass header.d=lists.sourceforge.net header.s=beta header.b=VfZM1pl7;
+	dkim=fail ("body hash did not verify") header.d=sourceforge.net header.s=x header.b="m69uYa/v";
+	dkim=fail ("body hash did not verify") header.d=sf.net header.s=x header.b=GFwUbL77;
+	dkim=fail ("body hash did not verify") header.d=kernel.org header.s=k20260515 header.b=cZN9NMOQ;
 	spf=pass (mail.lfdr.de: domain of linux-f2fs-devel-bounces@lists.sourceforge.net designates 216.105.38.7 as permitted sender) smtp.mailfrom=linux-f2fs-devel-bounces@lists.sourceforge.net;
 	dmarc=pass (policy=none) header.from=lists.sourceforge.net
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:MIME-Version:Message-ID:Date:To:Sender:
-	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
-	Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Owner;
-	bh=Vka9kKcWrezxI8ZJktnJVSitrlO+ixzvVPVTRgf8YPk=; b=k1OpVU/c0ZkYS5IJRVWwfcoxCe
-	mBlwJbaq0e2jod6jvyXW3vR+nhVTYTsJ0eOgq5VkLjD40BaN537OUN8N/fISePCzukUoMSv6ffAUO
-	HXf24atWllXGFvLd1IfL2b75LNNjqugnzBLZxwkGj1xyH8ZiCSHjBnJ95nrdjVxlI/Cw=;
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	List-Unsubscribe:List-Id:Subject:MIME-Version:References:In-Reply-To:
+	Message-ID:Date:To:Sender:Content-ID:Content-Description:Resent-Date:
+	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
+	bh=W3bHbJotzyOXhmGwyAiQ8oGO9X2BSu6+60A1quYPliQ=; b=VfZM1pl7U/Tp3N+/VI7VtesBOz
+	pP6CttS/0Tj0HXV5S4gwLhA/R3NgF0fUj/EmaF1d22IPnbrzdJdrAeOtIMwLwSMG7DeDgPvS0dA4o
+	hltfUumY2cNnw59Xrspr/W+yBwJ2MUqB2CD9BYHWhJWS3Aq7SBJp3wReBqD+6QEGZhkU=;
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1wZQP8-0000Cd-Kh;
-	Tue, 16 Jun 2026 09:48:20 +0000
+	id 1wZQPB-0008Mh-Dz;
+	Tue, 16 Jun 2026 09:48:26 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1wZQP6-0000CT-FA
+ (envelope-from <chao@kernel.org>) id 1wZQP9-0008Mb-Pl
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 16 Jun 2026 09:48:18 +0000
+ Tue, 16 Jun 2026 09:48:24 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
+ In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=4ZKIURw6///QPxQmXAX/ECabeUi0gfUq9M6G3uueIaU=; b=TPQsok0SQFF3q2G++Af1nQgoOu
- BbWcTGJyb5usenNW/T60LUqxYo0tf77NSJexyh5di6V7C6/0xKJFuJqu5IgdQVymSqWQCrNRopAxT
- WF/jicQH8cepiriKDMJeeDq3wTioJLlxczNvsGljxmCzBMq63sbLHm+tQaVm2HgllUXo=;
+ bh=b5AeoaNVGfAdnEbBqArUeJ2Koo25N1m9xuuEF8E6Vyc=; b=m69uYa/vvsRVbRss/URV45ksE1
+ SPg5rhgK9l/sC2RCJqvzm4ji7ngzvlZ9E3acEcNmDFC97kkgq/IzIfVe517vjG5Z7xTB1pXVo+aW2
+ HtCAvdB0ZCX6HQ4PefYQxvb0/Gcj/sCZREgpb9FOVKxobEPGhmRfzPJyzxAzhTkUbpZU=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=4ZKIURw6///QPxQmXAX/ECabeUi0gfUq9M6G3uueIaU=; b=Y
- ZK+9Xns1sJpvXUrePekCJQOUmRWe/Y4+7eF97R9evzVsxJ3Ley/gugvTFK1An80eh0D0MOySfFPMQ
- 4ZwbLSSFmB/TItHzTsIzcQy+yYXeoMfT54wWQapJ/MdSnKOddj8+pEPPIIWp4NbLXo3ExLu5zT4oQ
- MfNobSZopkupEgjA=;
-Received: from sea.source.kernel.org ([172.234.252.31])
+ h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=b5AeoaNVGfAdnEbBqArUeJ2Koo25N1m9xuuEF8E6Vyc=; b=GFwUbL77MfeqY6MbeF9DxwTeX+
+ CUGzgabq4lfwE+Ph8J1oeNNIC0yfdZLvsid2aMfGQnYSqMCPGIWDUWmiQaWvDwS2F/wRE9/NgcEA6
+ 0+AgJXS7TXabnujRvhHHNO26rNXsP3YQOJHni5cEe/FvzVHMS1+5u88qDSuuUQGu7Isk=;
+Received: from tor.source.kernel.org ([172.105.4.254])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1wZQP2-00051W-5M for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 16 Jun 2026 09:48:17 +0000
+ id 1wZQP8-000520-MX for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 16 Jun 2026 09:48:24 +0000
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by sea.source.kernel.org (Postfix) with ESMTP id 5040B43250
+ by tor.source.kernel.org (Postfix) with ESMTP id 78D6F60132
  for <linux-f2fs-devel@lists.sourceforge.net>;
+ Tue, 16 Jun 2026 09:48:12 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8C9831F000E9;
  Tue, 16 Jun 2026 09:48:11 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8FD141F000E9;
- Tue, 16 Jun 2026 09:48:10 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
- s=k20260515; t=1781603291;
- bh=4ZKIURw6///QPxQmXAX/ECabeUi0gfUq9M6G3uueIaU=;
- h=From:To:Cc:Subject:Date;
- b=V+CdXCwqzzaF6UQe63RQcZOtNS/7JSJ0p8HZ/zb498SQe9/ii4CQWlOyWK2nfJ9Fe
- kEiowNQxL/dbZ7B4eWe6u1sFvQx1SjVKvOe60DWqOhE3/23HteBAlVJEeaInk0oApT
- 2JCR3kGvnNJ0Vmc3UVtpPmBBwxV8Lc1ASjyh8qSmK8mgizcWHefjTsOMCZMqc1st14
- kQODgMbHlNmQaMLajQyCC1v+kJp5MgULnsAUSrbeUaMwkVKQ7tE1CNmfOTmTdT7MqA
- gGJcjA4xnwP/9pPqvKyziZafphf7tLC9qF/jQxr4PUdX0vb85uIomsucshFQyzg989
- mrtuZ1Mtaslng==
+ s=k20260515; t=1781603292;
+ bh=b5AeoaNVGfAdnEbBqArUeJ2Koo25N1m9xuuEF8E6Vyc=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References;
+ b=cZN9NMOQY8zoDZ/MUkBUxdww88fDwMwIX1sxhWp1htp7jhUrjsqZwSLgmWsGf+Tz3
+ FZMHHXrtSeoFkvH4/ivzqvTvVz00OfyxaFS3RVKxCPUt72YxmDCTlAdB5DqTW3fkPK
+ vGjeTM8uEILPIioUJApYLIARcuiYaaz6/v9Vm0NS6RkKwMGh8e32KchGu70Mi2N/QN
+ u6BQgVOROpXenvwYXNFTqItqTEQP2nC5b88r6Q27QnEYK1zJkeCsDlphQO3PxXZG/E
+ 068ufapSXL4UN8kJ/Am70DHOQtUbaGp2tHy0OGJ8rZ64nGNqGkRZBbhwxoN5EysQ89
+ mYTQj9dlOAc+Q==
 To: jaegeuk@kernel.org
-Date: Tue, 16 Jun 2026 09:48:01 +0000
-Message-ID: <20260616094802.3107281-1-chao@kernel.org>
+Date: Tue, 16 Jun 2026 09:48:02 +0000
+Message-ID: <20260616094802.3107281-2-chao@kernel.org>
 X-Mailer: git-send-email 2.54.0.1136.gdb2ca164c4-goog
+In-Reply-To: <20260616094802.3107281-1-chao@kernel.org>
+References: <20260616094802.3107281-1-chao@kernel.org>
 MIME-Version: 1.0
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: Corrupted inode may contain invalid i_inline_xattr_size field,
- when F2FS_FEATURE_FLEXIBLE_INLINE_XATTR is enabled,
- and inode has not F2FS_INLINE_XATTR
- flag, fsck.f2fs won't check its validation, howev [...] 
+ Content preview:  In fsck_chk_orphan_node(), entry_count is read directly from
+ the on-disk orphan block footer. If an attacker or corrupted filesystem sets
+ this to an excessive value (e.g., 0xFFFFFFFF), it can cause a [...] 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
-X-Headers-End: 1wZQP2-00051W-5M
-Subject: [f2fs-dev] [PATCH 1/2] fsck.f2fs: sanity check i_inline_xattr_size
- correctly
+X-Headers-End: 1wZQP8-000520-MX
+Subject: [f2fs-dev] [PATCH 2/2] fsck.f2fs: add bounds checking for orphan
+ entry_count
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -163,61 +164,45 @@ X-Spamd-Result: default: False [-7.61 / 15.00];
 	FROM_HAS_DN(0.00)[];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.sourceforge.net:helo,lists.sourceforge.net:rdns,lists.sourceforge.net:from_mime,lists.sourceforge.net:dkim,lists.sourceforge.net:from_smtp]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: CE1F568DAF2
+X-Rspamd-Queue-Id: C2E4F68DAF7
 
-Corrupted inode may contain invalid i_inline_xattr_size field, when
-F2FS_FEATURE_FLEXIBLE_INLINE_XATTR is enabled, and inode has not
-F2FS_INLINE_XATTR flag, fsck.f2fs won't check its validation, however
-we will still use i_inline_xattr_size field via get_inline_xattr_addrs(),
-it may cause potential heap buffer underflows and out-of-bound read/write.
+In fsck_chk_orphan_node(), entry_count is read directly from the on-disk
+orphan block footer. If an attacker or corrupted filesystem sets this to an
+excessive value (e.g., 0xFFFFFFFF), it can cause a massive loop leading to
+out-of-bounds memory reads and out-of-bounds writes into the newly allocated
+orphan repair block.
 
-In addition, we missed to check i_inline_xattr_size w/ lower boundary
-MIN_INLINE_XATTR_SIZE like we did in kernel side.
-
-This patch fixes above two issues.
+Fix this by ensuring entry_count does not exceed F2FS_ORPHANS_PER_BLOCK. If
+an invalid entry_count is encountered, safely reset it to 0 and write the
+repaired orphan block to disk when running with auto-fix enabled.
 
 Signed-off-by: Chao Yu <chao@kernel.org>
 ---
- fsck/fsck.c  | 10 ++++++----
- fsck/xattr.h |  2 ++
- 2 files changed, 8 insertions(+), 4 deletions(-)
+ fsck/fsck.c | 11 +++++++++++
+ 1 file changed, 11 insertions(+)
 
 diff --git a/fsck/fsck.c b/fsck/fsck.c
-index 4fca4dd..e679357 100644
+index e679357..66cc1c5 100644
 --- a/fsck/fsck.c
 +++ b/fsck/fsck.c
-@@ -1063,14 +1063,16 @@ check_next:
- 			}
- 		}
+@@ -2275,6 +2275,17 @@ int fsck_chk_orphan_node(struct f2fs_sb_info *sbi)
  
--		if ((c.feature & F2FS_FEATURE_FLEXIBLE_INLINE_XATTR) &&
--			(node_blk->i.i_inline & F2FS_INLINE_XATTR)) {
-+		if (c.feature & F2FS_FEATURE_FLEXIBLE_INLINE_XATTR) {
- 			unsigned int inline_size =
- 				le16_to_cpu(node_blk->i.i_inline_xattr_size);
+ 		ASSERT(ret >= 0);
+ 		entry_count = le32_to_cpu(F2FS_ORPHAN_BLOCK_FOOTER(orphan_blk)->entry_count);
++		if (entry_count > F2FS_ORPHANS_PER_BLOCK) {
++			ASSERT_MSG("wrong orphan entry_count: %u", entry_count);
++			entry_count = 0;
++			if (f2fs_dev_is_writable() && c.fix_on) {
++				FIX_MSG("reset orphan entry_count to 0");
++				F2FS_ORPHAN_BLOCK_FOOTER(new_blk)->entry_count = 0;
++				ret = dev_write_block(new_blk, start_blk + i,
++						      WRITE_LIFE_NONE);
++				ASSERT(ret >= 0);
++			}
++		}
  
- 			if (time_to_inject(FAULT_INODE) ||
--					(!inline_size ||
--					inline_size > MAX_INLINE_XATTR_SIZE)) {
-+					inline_size > MAX_INLINE_XATTR_SIZE ||
-+					(inline_size != 0 &&
-+					 inline_size < MIN_INLINE_XATTR_SIZE) ||
-+					((node_blk->i.i_inline & F2FS_INLINE_XATTR) &&
-+					 !inline_size)) {
- 				ASSERT_MSG("[0x%x] wrong inline_xattr_size:%u",
- 						nid, inline_size);
- 				if (c.fix_on) {
-diff --git a/fsck/xattr.h b/fsck/xattr.h
-index 867349c..5f59e8e 100644
---- a/fsck/xattr.h
-+++ b/fsck/xattr.h
-@@ -200,4 +200,6 @@ static inline int f2fs_acl_count(int size)
- 			F2FS_TOTAL_EXTRA_ATTR_SIZE / sizeof(__le32) -	\
- 			DEF_INLINE_RESERVED_SIZE -			\
- 			MIN_INLINE_DENTRY_SIZE / sizeof(__le32))
-+#define MIN_INLINE_XATTR_SIZE						\
-+			(sizeof(struct f2fs_xattr_header) / sizeof(__le32))
- #endif
+ 		for (j = 0; j < entry_count; j++) {
+ 			nid_t ino = le32_to_cpu(orphan_blk->ino[j]);
 -- 
 2.49.0
 
