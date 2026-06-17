@@ -2,18 +2,18 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id ZxHNGyaDMmoC1QUAu9opvQ
+	id 3mDpGyiDMmoF1QUAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 17 Jun 2026 13:21:10 +0200
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 17 Jun 2026 13:21:12 +0200
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id F3645698FC9
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 17 Jun 2026 13:21:09 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E8D1F698FD6
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 17 Jun 2026 13:21:11 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=lists.sourceforge.net header.s=beta header.b=m8nVPgtk;
-	dkim=fail ("body hash did not verify") header.d=sourceforge.net header.s=x header.b=at7tZyDo;
-	dkim=fail ("body hash did not verify") header.d=sf.net header.s=x header.b=GhyAHY8S;
-	dkim=fail ("body hash did not verify") header.d=kernel.org header.s=k20260515 header.b=Lv26D56m;
+	dkim=pass header.d=lists.sourceforge.net header.s=beta header.b=TgsYKOBa;
+	dkim=fail ("body hash did not verify") header.d=sourceforge.net header.s=x header.b=mquohbaj;
+	dkim=fail ("body hash did not verify") header.d=sf.net header.s=x header.b=QyAOWCP6;
+	dkim=fail ("body hash did not verify") header.d=kernel.org header.s=k20260515 header.b=U8Mj6K11;
 	spf=pass (mail.lfdr.de: domain of linux-f2fs-devel-bounces@lists.sourceforge.net designates 216.105.38.7 as permitted sender) smtp.mailfrom=linux-f2fs-devel-bounces@lists.sourceforge.net;
 	dmarc=pass (policy=none) header.from=lists.sourceforge.net
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
@@ -22,29 +22,29 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	List-Unsubscribe:List-Id:Subject:MIME-Version:References:In-Reply-To:
 	Message-ID:Date:To:Sender:Content-ID:Content-Description:Resent-Date:
 	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=19RTRE05Lv3DKKLo4o2b4EkGEDeE8r8q+B4pv7bLkMs=; b=m8nVPgtk4ABnTKUZ+PLFxlS6ad
-	7LCz87rXVF77qVHfF41daOAY1IGSUIS3MLXLLQwIXEApl167VrOEO1MHpZNK0lGBAHna0RcCOuPP1
-	L1TX+lBxhXMvSmc5PYnN1J4lXWhLgaqdTdJ0aPxj7wlHbURYyTKa7psJUpGv82reKRBc=;
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=AIuh3s76Keigdm6dW0VNBMnx7FvOY7wtsVnljajldcg=; b=TgsYKOBab4XJksJJFpyGlnLE9w
+	LuaHijyR222uYK4BNKPu1rr07kdrWJYvsPASMNHOtB3slQlSrd4pt1FarPG3VCK1Xhuc3z8jj7rui
+	BSZU+ty+jLnILncT6gzLc/tkdx1hIInMH0bdFzJX8cusPG5IJBSK0yrnl6Cf4/Gp8ApA=;
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1wZoKP-0002fE-7c;
-	Wed, 17 Jun 2026 11:21:06 +0000
+	id 1wZoKS-0008Dy-96;
+	Wed, 17 Jun 2026 11:21:09 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <asj@kernel.org>) id 1wZoKN-0002ey-8p
+ (envelope-from <asj@kernel.org>) id 1wZoKQ-0008Dl-Ug
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 17 Jun 2026 11:21:04 +0000
+ Wed, 17 Jun 2026 11:21:07 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=H/ifHRev1KZt7zJcATaDa76vriuxBeCWHVdvTL8hqTg=; b=at7tZyDoPsMgZ+f3XrHntR7JZu
- mZ6Be4Yz/9h38jPVCoJP0GvlcDGzDuP1lqTzK8yJn1tLWxXslVY+O4t1BpevX9IEx8YHyr9/jI35I
- LZ3mIABMx1o86MIvoW0VGW66TYciKBOGPZmBcCrq5rQpjFFn2t9TbTxQ+gKiLT4a6qz8=;
+ bh=t44VYnkqYUcNne6L8i6KxniT652yq2VD+rASCJVNRN4=; b=mquohbajcRk1AfT1chcDhWCjtq
+ DZTr0alXga1BwHSqewxSvchOUtK1hbEH6tIzTBun/uGhoV4/W5fCc2vo24iYbrHyiwJO5beYMSPwG
+ mHDecejA0NSrDZEJgsg8sROTmlViGFF1uTU/470OAFxj3pAkqOcDzvh1QnaEVQfo3Ie4=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:
@@ -52,32 +52,32 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=H/ifHRev1KZt7zJcATaDa76vriuxBeCWHVdvTL8hqTg=; b=GhyAHY8SpQpagyvEu5j5eKe4DD
- yb0v6Ds7zcl8eq6JSu/6Oy33XL1YxBMWrJiPYUtTs2zGKiTvZVdLHQTMaKX91sG9enuqWHM6LUmne
- D5VNMR7kssH9yRLpHc+fZygvSt1Q/Ha0Xh8KlOx4Kq2lqsjFc2B1VJdDGESyjm35X4RQ=;
+ bh=t44VYnkqYUcNne6L8i6KxniT652yq2VD+rASCJVNRN4=; b=QyAOWCP6ZXtghoqtyPnTVM9l+E
+ VzLlQza94mUB/jmiNCd59GvIU6ZG6UyVMDmnx1X0d4dFkWE2L8yWT99X6L40BN+r1xljrPujTNren
+ 51FlryGkqPzfvRZ3a9wkDd66cDXnMw4YL9dPYMp1P/CeBUqzRIQeGbPCbCu4bgfnQ6F4=;
 Received: from tor.source.kernel.org ([172.105.4.254])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1wZoKL-0002NG-V8 for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 17 Jun 2026 11:21:03 +0000
+ id 1wZoKO-0002NP-G6 for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 17 Jun 2026 11:21:07 +0000
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by tor.source.kernel.org (Postfix) with ESMTP id DBAD760121;
+ by tor.source.kernel.org (Postfix) with ESMTP id 6B06860137;
+ Wed, 17 Jun 2026 11:20:59 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 121F31F00A3A;
  Wed, 17 Jun 2026 11:20:56 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 90BE01F000E9;
- Wed, 17 Jun 2026 11:20:54 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
- s=k20260515; t=1781695256;
- bh=H/ifHRev1KZt7zJcATaDa76vriuxBeCWHVdvTL8hqTg=;
+ s=k20260515; t=1781695259;
+ bh=t44VYnkqYUcNne6L8i6KxniT652yq2VD+rASCJVNRN4=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References;
- b=Lv26D56moyfzDjRSXP1h969cV8AgvYZ9N6st5AgvVoCbI7grJ+nuu2E96cZpLkujJ
- fCfjAoeLGwcg2Up76V7nMIxDz8uXtv1f+uvfbgEFI4NiZBJRpKSCXB+691y1wO+/he
- IlpoZKSO7qQSouDyMJev/ycppfktDcR34RxiPRQ/sahCYrYZIs2gYs6aao44sMmeFR
- D3MaO1JSIGWwZ2/0wiSf0M2PUx7tpXGw2a7r7bGmA+bxRiexde2llQri+ukVrmGiks
- /CMxwH+duzWuwQ4e2YqAJh32OFRp1KYM3egdns98DgBG84DsIChKcmPKSGsyTJgIaZ
- 6pYRzqZ7vt8mg==
+ b=U8Mj6K11sKGneKpuvwkdoFpeKVOYKDrMMNCV3dgXgBP4Xus8Y/+ThPr9sb2WhuDph
+ h5c6WfbuSqMmZj/DHVCu1j0Kzow0vUK8j9rJX5BNm2rygH5q9MPIGJWAsIs4b0F2g2
+ Vnr9wv0wOoVfmHW3LNxnEFmEXw3tJ3uoPzVA8fPmMg1+BZevKh2FgcDn2bsfASGNAU
+ XvsnTTroUr98HXLbYs9egxgdrpGifExPLlPz8+sa49dXwhqnKe9OwhO75cFUQ0yYBb
+ wKKGbxQN1wGireUOIXDH8EPKcxIFn/koxtY6MaboyIwsnv/Ejv1GBx3vDEEcCMykYL
+ 7mqopCQ9BdWzA==
 To: fstests@vger.kernel.org
-Date: Wed, 17 Jun 2026 19:20:30 +0800
-Message-ID: <4cfac83869d90a41ab6a1c01ad2b13ad95430f4c.1781694879.git.asj@kernel.org>
+Date: Wed, 17 Jun 2026 19:20:31 +0800
+Message-ID: <f556db45f1ffc93508a69ce9f9e567b74384210f.1781694879.git.asj@kernel.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1781694879.git.asj@kernel.org>
 References: <cover.1781694879.git.asj@kernel.org>
@@ -89,10 +89,12 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Define `FSNOTIFYWAIT_PROG` for an upcoming test case that
- uses `fsnotifywait`. Signed-off-by: Anand Jain <asj@kernel.org> Reviewed-by:
- "Darrick J. Wong" <djwong@kernel.org> --- common/config | 1 + 1 file changed, 
- 1 insertion(+) 
+ Content preview: Add a helper to check if the target filesystem supports
+ unique
+ f_fsid tracking across cloned or snapshot instances. Certain filesystems
+ like XFS, Btrfs, and F2FS ensure unique f_fsid identifiers per filesystem
+ instance. However, Ext4 derives its f_fsid directly from its superblock UUID, 
+ which leads to identical f_f [...] 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -103,12 +105,9 @@ X-Spam-Report: Spam detection software,
  envelope-from domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
- 0.0 RCVD_IN_DNSWL_BLOCKED  RBL: ADMINISTRATOR NOTICE: The query to DNSWL
- was blocked.  See
- http://wiki.apache.org/spamassassin/DnsBlocklists#DnsBlocklists-dnsbl-block
- for more information. [172.105.4.254 listed in list.dnswl.org]
-X-Headers-End: 1wZoKL-0002NG-V8
-Subject: [f2fs-dev] [PATCH v7 03/11] fstests: add FSNOTIFYWAIT_PROG
+X-Headers-End: 1wZoKO-0002NP-G6
+Subject: [f2fs-dev] [PATCH v7 04/11] fstests: add _require_unique_f_fsid()
+ helper
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -135,29 +134,29 @@ X-Spamd-Result: default: False [-8.61 / 15.00];
 	RWL_MAILSPIKE_EXCELLENT(-0.40)[216.105.38.7:from];
 	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
 	MAILLIST(-0.20)[mailman];
-	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7];
+	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7:c];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
 	DMARC_POLICY_ALLOW(0.00)[lists.sourceforge.net,none];
 	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,kernel.org:s=k20260515];
 	DKIM_MIXED(0.00)[];
-	RECEIVED_HELO_LOCALHOST(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
+	FORGED_RECIPIENTS(0.00)[m:fstests@vger.kernel.org,m:hch@infradead.org,m:djwong@kernel.org,m:zlang@redhat.com,m:linux-f2fs-devel@lists.sourceforge.net,m:linux-xfs@vger.kernel.org,m:linux-ext4@vger.kernel.org,m:linux-btrfs@vger.kernel.org,s:lists@lfdr.de];
 	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
 	MIME_TRACE(0.00)[0:+];
-	FORGED_RECIPIENTS(0.00)[m:fstests@vger.kernel.org,m:hch@infradead.org,m:djwong@kernel.org,m:zlang@redhat.com,m:linux-f2fs-devel@lists.sourceforge.net,m:linux-xfs@vger.kernel.org,m:linux-ext4@vger.kernel.org,m:linux-btrfs@vger.kernel.org,s:lists@lfdr.de];
+	RECEIVED_HELO_LOCALHOST(0.00)[];
 	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
-	FORGED_SENDER(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
 	ARC_NA(0.00)[];
-	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,kernel.org:-];
+	FORGED_SENDER(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
+	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
 	ALIAS_RESOLVED(0.00)[];
 	RCPT_COUNT_SEVEN(0.00)[8];
 	TO_DN_NONE(0.00)[];
 	RCVD_COUNT_FIVE(0.00)[5];
-	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
+	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,kernel.org:-];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	FROM_HAS_DN(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
@@ -166,28 +165,56 @@ X-Spamd-Result: default: False [-8.61 / 15.00];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	HAS_REPLYTO(0.00)[asj@kernel.org]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: F3645698FC9
+X-Rspamd-Queue-Id: E8D1F698FD6
 
-Define `FSNOTIFYWAIT_PROG` for an upcoming test case that uses `fsnotifywait`.
+Add a helper to check if the target filesystem supports unique f_fsid
+tracking across cloned or snapshot instances.
+
+Certain filesystems like XFS, Btrfs, and F2FS ensure unique f_fsid
+identifiers per filesystem instance. However, Ext4 derives its f_fsid
+directly from its superblock UUID, which leads to identical f_fsid
+values on cloned images until the UUID is manually modified by userspace.
+
+Introduce _require_unique_f_fsid() to allow test cases requiring strict
+f_fsid uniqueness to skip gracefully on unsupported filesystems.
 
 Signed-off-by: Anand Jain <asj@kernel.org>
-Reviewed-by: "Darrick J. Wong" <djwong@kernel.org>
 ---
- common/config | 1 +
- 1 file changed, 1 insertion(+)
+ common/rc | 21 +++++++++++++++++++++
+ 1 file changed, 21 insertions(+)
 
-diff --git a/common/config b/common/config
-index d5299d5b926f..5661fa0ec310 100644
---- a/common/config
-+++ b/common/config
-@@ -242,6 +242,7 @@ export BTRFS_MAP_LOGICAL_PROG=$(type -P btrfs-map-logical)
- export PARTED_PROG="$(type -P parted)"
- export XFS_PROPERTY_PROG="$(type -P xfs_property)"
- export FSCRYPTCTL_PROG="$(type -P fscryptctl)"
-+export FSNOTIFYWAIT_PROG="$(type -P fsnotifywait)"
+diff --git a/common/rc b/common/rc
+index 968ba33686f3..d95eec94f7b7 100644
+--- a/common/rc
++++ b/common/rc
+@@ -6310,6 +6310,27 @@ _require_fanotify_ioerrors()
+ 	_notrun "$FSTYP does not support fanotify ioerrors"
+ }
  
- # udev wait functions.
- #
++# Ext4 derives f_fsid from the superblock UUID, meaning clones share the
++# same f_fsid until their UUIDs diverge. Conversely, XFS, Btrfs,
++# and F2FS ensure f_fsid remains unique per filesystem instance (often by
++# deriving it from the UUID and underlying block device.)
++#
++# Across all filesystems, a UUID collision causes libblkid tools to return
++# non-deterministic device mappings. It is ultimately the responsibility
++# of the userspace utility or use-case to enforce uniqueness when a clone
++# diverges. For details, see mailing list thread discussions:
++#   Link: https://lore.kernel.org/linux-ext4/20260409131238.GC18443@macsyma-wired.lan/
++_require_unique_f_fsid()
++{
++	# Skip the test if the filesystem does not enforce unique f_fsids
++	# natively. Checking this dynamically requires recreating a clone
++	# layout, so we use a static lookup based on FSTYP.
++	if [ "$FSTYP" == "ext4" ]; then
++		_notrun "Target filesystem ($FSTYP) does not guarantee unique f_fsid on clones."
++	fi
++}
++
++
+ # Computes a percentage of the available space in a filesystem and
+ # returns that quantity in MB. The percentage must not contain a percent
+ # sign ("%").
 -- 
 2.43.0
 
