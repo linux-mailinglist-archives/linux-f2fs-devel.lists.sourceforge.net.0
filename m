@@ -2,18 +2,18 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id WXKHCQETMmqruQUAu9opvQ
+	id dRRiGEQvMmpIwQUAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 17 Jun 2026 05:22:41 +0200
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 17 Jun 2026 07:23:16 +0200
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 695CE696491
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 17 Jun 2026 05:22:40 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6F67D696953
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 17 Jun 2026 07:23:15 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=lists.sourceforge.net header.s=beta header.b="OD9F/EP6";
-	dkim=fail ("body hash did not verify") header.d=sourceforge.net header.s=x header.b=YPPkDIrj;
-	dkim=fail ("body hash did not verify") header.d=sf.net header.s=x header.b=F+YaeSh6;
-	dkim=fail ("body hash did not verify") header.d=kernel.org header.s=k20260515 header.b=asfp+Bjp;
+	dkim=pass header.d=lists.sourceforge.net header.s=beta header.b=Ki7wfJ7e;
+	dkim=fail ("body hash did not verify") header.d=sourceforge.net header.s=x header.b="PaK7O/9s";
+	dkim=fail ("body hash did not verify") header.d=sf.net header.s=x header.b=BoqtHs3J;
+	dkim=fail ("body hash did not verify") header.d=kernel.org header.s=k20260515 header.b=Zj0w6Wty;
 	spf=pass (mail.lfdr.de: domain of linux-f2fs-devel-bounces@lists.sourceforge.net designates 216.105.38.7 as permitted sender) smtp.mailfrom=linux-f2fs-devel-bounces@lists.sourceforge.net;
 	dmarc=pass (policy=none) header.from=lists.sourceforge.net
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
@@ -22,29 +22,29 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	List-Unsubscribe:List-Id:Subject:In-Reply-To:References:To:MIME-Version:Date:
 	Message-ID:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
 	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=eZ1OCkCHtc9Yi4yKbIaLE4owWO9ldbogg7DVIGtAlRQ=; b=OD9F/EP65t1D39cYDLKaSxnCqw
-	Wg49gaj1KlpYAvDkBzDdtIB2TD0BCDGvwoSzSZZ4dOqPdVk0Z6Y+OOvvEnHVjSTEaqC3PtAyrYVRe
-	CjDvm9Xd86c9Z1saXSBV0jXZLKpw1ZyfbUhl8di2yr6Fvlw809ry+ygSAlU7kMurInpw=;
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=5LocYomKTTcNSJXqdzoMcmz4PY840PtkZUcehkDQbfo=; b=Ki7wfJ7eOEGKE9ZDcEKQgg7GXB
+	VQkfEq5uluEdV3Auiu09TTC0lSNIn3aNhSz/gxoKC6JCmW7D+63UdwJjPRNQBL9hcjwFIeWVBXrfs
+	QKzTzOQagN1Kj10rLsJoW8MSPUp0UQJSZHSh/SACNyLfuxcOAbZU6lyZ2m7Y57vT5jOE=;
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1wZgrF-0007Nv-5L;
-	Wed, 17 Jun 2026 03:22:29 +0000
+	id 1wZijt-0004PR-2B;
+	Wed, 17 Jun 2026 05:22:58 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1wZgrD-0007No-Ll
+ (envelope-from <chao@kernel.org>) id 1wZijs-0004PK-1Q
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 17 Jun 2026 03:22:27 +0000
+ Wed, 17 Jun 2026 05:22:57 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  From:References:To:Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=JpRXXFWr+OUkXVLiDRgd6O5mu6GiCtn/fAK63lo6dug=; b=YPPkDIrjWJk+vm+wNRhz0S8StU
- cGYTGgHofc0pUJnhfLctvRfTunhdnzSlwdKVbQ6F6YEBtCEb9auumCTlO5V9ZIcLJff8mn7n94ZY7
- 8Xj0bmG1S9mdcCaVqEZDVo1GxByfSos43eCitqP3ksEpzItzxUISs2S0pxH0AdGGGXxM=;
+ bh=Z+OA3waGxaVxEATQoThfZWIQIqeld9mK2pk+OOr1/YM=; b=PaK7O/9sflE50FxekgkiyIq/dj
+ A+N7lkp0ecP7G9RSlKoJfE6RwZt6/gLCs07Lm+SldywSLPhD93O4S14cuaf4tCpuYLIdKDihUDwKF
+ RxNIPagxT0zTNrzn5WFs85pm6PmS5/WlYIU5C+JJ9HCJ7b0QLyb+uIGY9eeqQUg/x1VM=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
@@ -52,62 +52,62 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=JpRXXFWr+OUkXVLiDRgd6O5mu6GiCtn/fAK63lo6dug=; b=F+YaeSh68WGctZ9aLujAM6VuHk
- /X36QxH0aMhL96tJvW3l9D56yH0R/ySCBzTUXA6i+qEV/6Fzi6TETKPg6nDlgUxso4G+FLWgn3YjJ
- d5nUlCqjsMNPMSkarqXZOa+91CEsjRCFudSwqE2h+zzu3T2CsMToSNt0Ds2nGpbv2PP4=;
+ bh=Z+OA3waGxaVxEATQoThfZWIQIqeld9mK2pk+OOr1/YM=; b=BoqtHs3J5O+JuqUU3dSx9B2GSq
+ +QmWDjVjT8uTwndnT4OV7uauJoRQD9L57sXtK4Eu02d19V3BphaQbCJVaIVij/nK1hOoU4X4VPCGQ
+ VaJlb6Oo/fZHMoGMJDpe5MzMdRsrZbW+QmhnLx1VJkdNd01z3rQgkgRktsyjogYaWFWs=;
 Received: from sea.source.kernel.org ([172.234.252.31])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1wZgrC-0007Bj-HT for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 17 Jun 2026 03:22:27 +0000
+ id 1wZijo-0002eW-Az for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 17 Jun 2026 05:22:57 +0000
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by sea.source.kernel.org (Postfix) with ESMTP id A46B64179B;
- Wed, 17 Jun 2026 03:22:16 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9DE341F000E9;
- Wed, 17 Jun 2026 03:22:15 +0000 (UTC)
+ by sea.source.kernel.org (Postfix) with ESMTP id 6EF8C43764;
+ Wed, 17 Jun 2026 05:22:46 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7BF091F00A3D;
+ Wed, 17 Jun 2026 05:22:45 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
- s=k20260515; t=1781666536;
- bh=JpRXXFWr+OUkXVLiDRgd6O5mu6GiCtn/fAK63lo6dug=;
+ s=k20260515; t=1781673766;
+ bh=Z+OA3waGxaVxEATQoThfZWIQIqeld9mK2pk+OOr1/YM=;
  h=Date:Cc:Subject:To:References:From:In-Reply-To;
- b=asfp+Bjp7bHtFmI9k2Qx3VjRR/D9DnTV0MMx+UczlDi2ijeERKsRyMVlpYtvimpNn
- IIIH/aunphG8/IOk+PRrcZUEwjwzV+9hxU+h3AnM2zz/bETY1saire7xr1I3B+OGJv
- g8F34updbZIhT8fsMccPL8AxomgMdNUJriaWbc7+urt0OB91qowHtfnBgaWWj3Boh1
- tzdjVPNyyg1QDJOFqYaXA0DC4NF+NTgVCc9V0ro9S4kxFt53Z577dpD4KxLgf3rALQ
- cXAsN/sRQET5MzeQEG/D2Uf8l97kyAY4qebiVQ7uco687U+We/z838Y3CWyRGItprV
- QFCANFEDq4YeQ==
-Message-ID: <2d5fa8e8-a1f5-4213-b3d3-fc3526057dfd@kernel.org>
-Date: Wed, 17 Jun 2026 11:22:13 +0800
+ b=Zj0w6Wty8TL8uJgUkjrvdBNOWmBygtsJRx9PZVmXJTsRj/ncSqEbUXVIqJMflqfjT
+ P9GLhatU+MGUR0oKhpCSeUods7YX74NvhxMnx2LvvW5yd/NKsqD8b0+/W9xDyHuVzF
+ KiOSZlri5IIbYaHb84VvdpUo0p3Ic0BtsZw9e7Ik0LkRAcQ+YxX9DuI7RQfhrVuOKT
+ 0vpaufLlh11Nmxhj/ToRQbJ0Z0bYtI3rqHGIapX9h6qd10urD4v0NBDL4CDYucZGkA
+ qkeQUQaJPKC6uiHQjZJJWFOdb83A0/+g8ZsUj4nxCMkItOiiR5FcVAIZvs5/ZwTFb1
+ eAlTGTRq3HJUQ==
+Message-ID: <fa5ff666-cb28-4766-90b0-a01354c57fc3@kernel.org>
+Date: Wed, 17 Jun 2026 13:22:43 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-To: Zhiguo Niu <niuzhiguo84@gmail.com>
-References: <20260616123625.3300340-1-chao@kernel.org>
- <CAHJ8P3JYKnQfd7PwQ0DQShy2UnsNfNZKeyDn7dyyyVkB3rKSww@mail.gmail.com>
+To: Jaegeuk Kim <jaegeuk@kernel.org>
+References: <20260521012942.1345592-1-chao@kernel.org>
+ <ajHssW9HsKIXJKVJ@google.com>
 Content-Language: en-US
-In-Reply-To: <CAHJ8P3JYKnQfd7PwQ0DQShy2UnsNfNZKeyDn7dyyyVkB3rKSww@mail.gmail.com>
+In-Reply-To: <ajHssW9HsKIXJKVJ@google.com>
 X-Spam-Score: -0.2 (/)
-X-Spam-Report: Spam detection software, running on the system "sfi-spamd-1.hosts.colo.sdot.me",
+X-Spam-Report: Spam detection software,
+ running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- 
- Content preview:  On 6/17/26 10:53, Zhiguo Niu wrote: > Chao Yu via Linux-f2fs-devel
-    <linux-f2fs-devel@lists.sourceforge.net> > 于2026年6月16日周二 20:39写道：
-    >> >> When allocating memory in aligned_xalloc(), [...] 
- 
+ Content preview:  On 6/17/26 08:39, Jaegeuk Kim wrote: > On 05/21, Chao Yu via
+ Linux-f2fs-devel wrote: >> fsck.f2fs -d1 <device> >> >>
+ [fix_section_type:3036]
+ wrong sit->type (4) in DATA secno:1 segno:2 >> [fix_section [...] 
  Content analysis details:   (-0.2 points, 5.0 required)
- 
-  pts rule name              description
+ pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from author's
-                             domain
- -0.1 DKIM_VALID             Message has at least one valid DKIM or DK signature
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
-                             envelope-from domain
-  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily valid
-X-Headers-End: 1wZgrC-0007Bj-HT
-Subject: Re: [f2fs-dev] [PATCH] f2fs_io: adapt w/ page_size in
- aligned_xalloc()
+ envelope-from domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+X-Headers-End: 1wZijo-0002eW-Az
+Subject: Re: [f2fs-dev] [PATCH v2] fsck.f2fs: support to fix inconsistent
+ sit->type of segments in large section
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -121,103 +121,252 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>,
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
 From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
 Reply-To: Chao Yu <chao@kernel.org>
-Cc: jaegeuk@kernel.org, linux-f2fs-devel@lists.sourceforge.net
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Cc: Daeho Jeong <daehojeong@google.com>, linux-f2fs-devel@lists.sourceforge.net
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-8.51 / 15.00];
+X-Spamd-Result: default: False [-7.61 / 15.00];
 	WHITELIST_DMARC(-7.00)[sourceforge.net:D:+];
+	MID_RHS_MATCH_TO(1.00)[];
 	DMARC_POLICY_ALLOW_WITH_FAILURES(-0.50)[];
 	RWL_MAILSPIKE_EXCELLENT(-0.40)[216.105.38.7:from];
-	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7];
 	MAILLIST(-0.20)[mailman];
 	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
+	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7];
 	MIME_GOOD(-0.10)[text/plain];
-	MIME_BASE64_TEXT(0.10)[];
 	HAS_LIST_UNSUB(-0.01)[];
-	TO_DN_SOME(0.00)[];
-	ARC_NA(0.00)[];
+	URIBL_MULTI_FAIL(0.00)[lists.sourceforge.net:server fail];
+	DKIM_MIXED(0.00)[];
 	RECEIVED_HELO_LOCALHOST(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
-	DKIM_MIXED(0.00)[];
+	REPLYTO_DOM_EQ_TO_DOM(0.00)[];
+	FORGED_RECIPIENTS(0.00)[m:jaegeuk@kernel.org,m:daehojeong@google.com,m:linux-f2fs-devel@lists.sourceforge.net,s:lists@lfdr.de];
 	FORGED_SENDER(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
-	FORGED_RECIPIENTS(0.00)[m:niuzhiguo84@gmail.com,m:jaegeuk@kernel.org,m:linux-f2fs-devel@lists.sourceforge.net,s:lists@lfdr.de];
-	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
-	MIME_TRACE(0.00)[0:+];
-	FREEMAIL_TO(0.00)[gmail.com];
+	TO_DN_SOME(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	ARC_NA(0.00)[];
+	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
+	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,kernel.org:s=k20260515];
+	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,kernel.org:-];
 	DMARC_POLICY_ALLOW(0.00)[lists.sourceforge.net,none];
-	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
-	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
 	RCVD_COUNT_FIVE(0.00)[5];
 	ALIAS_RESOLVED(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
 	FROM_HAS_DN(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
-	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,kernel.org:s=k20260515];
+	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	TAGGED_RCPT(0.00)[linux-f2fs-devel];
-	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,kernel.org:-];
-	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
 	RCPT_COUNT_THREE(0.00)[3];
+	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
 	HAS_REPLYTO(0.00)[chao@kernel.org]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 695CE696491
+X-Rspamd-Queue-Id: 6F67D696953
 
-T24gNi8xNy8yNiAxMDo1MywgWmhpZ3VvIE5pdSB3cm90ZToKPiBDaGFvIFl1IHZpYSBMaW51eC1m
-MmZzLWRldmVsIDxsaW51eC1mMmZzLWRldmVsQGxpc3RzLnNvdXJjZWZvcmdlLm5ldD4KPiDkuo4y
-MDI25bm0NuaciDE25pel5ZGo5LqMIDIwOjM55YaZ6YGT77yaCj4+Cj4+IFdoZW4gYWxsb2NhdGlu
-ZyBtZW1vcnkgaW4gYWxpZ25lZF94YWxsb2MoKSwgaWYgdGhlIHJlcXVlc3RlZCBhbGlnbm1lbnQK
-Pj4gKGUuZy4sIEYyRlNfREVGQVVMVF9CTEtTSVpFKSBpcyBzbWFsbGVyIHRoYW4gdGhlIHN5c3Rl
-bSdzIHBhZ2Ugc2l6ZSwKPj4gYWxpZ25lZF9hbGxvYygpIHdpbGwgYWxsb2NhdGUgbWVtb3J5IHRo
-YXQgaXMgbm90IHBhZ2UtYWxpZ25lZCBvbiBzeXN0ZW1zCj4+IHdpdGggMTZLQiBvciA2NEtCIHBh
-Z2Ugc2l6ZXMuCj4+Cj4+IEFzIGEgcmVzdWx0LCBzdWJzZXF1ZW50IGNhbGxzIHRvIG1hZHZpc2Uo
-Li4uLCBNQURWX0hVR0VQQUdFKSB3aWxsIGZhaWwKPj4gYmVjYXVzZSBtYWR2aXNlKCkgcmVxdWly
-ZXMgdGhlIG1lbW9yeSBhZGRyZXNzIGFuZCBsZW5ndGggdG8gYmUgcGFnZS1hbGlnbmVkLgo+Pgo+
-PiBGaXggdGhpcyBieSBkeW5hbWljYWxseSBhZGp1c3RpbmcgdGhlIGFsaWdubWVudCBhbmQgcm91
-bmRpbmcgdXAgdGhlIHJlcXVlc3RlZAo+PiBhbGxvY2F0aW9uIHNpemUgKHZpYSByb3VuZHVwKCkp
-IHRvIHRoZSBzeXN0ZW0ncyBwYWdlIHNpemUsIGVuc3VyaW5nIHRoYXQKPj4gbWVtb3J5IGlzIGNv
-cnJlY3RseSBwYWdlLWFsaWduZWQgZm9yIG1hZHZpc2UoKS4gQWxzbyB1cGRhdGUgbWFkdmlzZSgp
-IGZhaWx1cmUKPj4gdG8gY2FsbCBkaWUoKSBmb3IgYmV0dGVyIGVycm9yIHJlcG9ydGluZy4KPiBI
-aSBDaGFvLAo+IGRvbid0IHNlZSB0aGlzIHBhcnQgaW4gY3VycmVudCBwYXRjaD8gInVwZGF0ZSBt
-YWR2aXNlKCkgZmFpbHVyZQo+IHRvIGNhbGwgZGllKCkgZm9yIGJldHRlciBlcnJvciByZXBvcnRp
-bmciCgpPaCwgSSBtaXNzZWQgdG8gdXBkYXRlIHRoZSBjb21taXQgbWVzc2FnZSB3aGVuIHNxdWFz
-aGluZyB0d28gc2VwYXJhdGVkIHBhdGNoZXMuLi4KcGxlYXNlIGlnbm9yZSB0aGlzIGNvbW1lbnQs
-IHNvcnJ5LgoKVGhhbmtzLAoKPiB0aGFua3MhCj4gCj4+Cj4+IFNpZ25lZC1vZmYtYnk6IENoYW8g
-WXUgPGNoYW9Aa2VybmVsLm9yZz4KPj4gLS0tCj4+ICB0b29scy9mMmZzX2lvL2YyZnNfaW8uYyB8
-IDE3ICsrKysrKysrKysrKysrKysrCj4+ICB0b29scy9mMmZzX2lvL2YyZnNfaW8uaCB8ICAzICsr
-Kwo+PiAgMiBmaWxlcyBjaGFuZ2VkLCAyMCBpbnNlcnRpb25zKCspCj4+Cj4+IGRpZmYgLS1naXQg
-YS90b29scy9mMmZzX2lvL2YyZnNfaW8uYyBiL3Rvb2xzL2YyZnNfaW8vZjJmc19pby5jCj4+IGlu
-ZGV4IDk0ZTYxYjguLjlhODY2Y2MgMTAwNjQ0Cj4+IC0tLSBhL3Rvb2xzL2YyZnNfaW8vZjJmc19p
-by5jCj4+ICsrKyBiL3Rvb2xzL2YyZnNfaW8vZjJmc19pby5jCj4+IEBAIC05Nyw2ICs5NywyMyBA
-QCBzdGF0aWMgdm9pZCAqeG1hbGxvYyhzaXplX3Qgc2l6ZSkKPj4KPj4gIHN0YXRpYyB2b2lkICph
-bGlnbmVkX3hhbGxvYyhzaXplX3QgYWxpZ25tZW50LCBzaXplX3Qgc2l6ZSkKPj4gIHsKPj4gKyAg
-ICAgICBsb25nIHBhZ2Vfc2l6ZSA9IEYyRlNfREVGQVVMVF9CTEtTSVpFOwo+PiArCj4+ICsjaWZk
-ZWYgX1NDX1BBR0VTSVpFCj4+ICsgICAgICAgcGFnZV9zaXplID0gc3lzY29uZihfU0NfUEFHRVNJ
-WkUpOwo+PiArICAgICAgIGlmIChwYWdlX3NpemUgPCAwKQo+PiArICAgICAgICAgICAgICAgcGFn
-ZV9zaXplID0gRjJGU19ERUZBVUxUX0JMS1NJWkU7Cj4+ICsjZW5kaWYKPj4gKwo+PiArICAgICAg
-IC8qCj4+ICsgICAgICAgICogT24gc3lzdGVtcyB3aXRoIGxhcmdlIHBhZ2Ugc2l6ZXMgKGUuZy4s
-IDE2S0IvNjRLQiksIGFsaWdubWVudCBhbmQKPj4gKyAgICAgICAgKiBhbGxvY2F0aW9uIHNpemUg
-bXVzdCBiZSBwYWdlLWFsaWduZWQgdG8gc2F0aXNmeSBtYWR2aXNlKCkuCj4+ICsgICAgICAgICov
-Cj4+ICsgICAgICAgaWYgKGFsaWdubWVudCA8IChzaXplX3QpcGFnZV9zaXplKQo+PiArICAgICAg
-ICAgICAgICAgYWxpZ25tZW50ID0gcGFnZV9zaXplOwo+PiArCj4+ICsgICAgICAgc2l6ZSA9IHJv
-dW5kdXAoc2l6ZSwgYWxpZ25tZW50KTsKPj4gKwo+PiAgICAgICAgIHZvaWQgKnAgPSBhbGlnbmVk
-X2FsbG9jKGFsaWdubWVudCwgc2l6ZSk7Cj4+Cj4+ICAgICAgICAgaWYgKCFwKQo+PiBkaWZmIC0t
-Z2l0IGEvdG9vbHMvZjJmc19pby9mMmZzX2lvLmggYi90b29scy9mMmZzX2lvL2YyZnNfaW8uaAo+
-PiBpbmRleCA1Mzk5NjRmLi5jZjFjMzM0IDEwMDY0NAo+PiAtLS0gYS90b29scy9mMmZzX2lvL2Yy
-ZnNfaW8uaAo+PiArKysgYi90b29scy9mMmZzX2lvL2YyZnNfaW8uaAo+PiBAQCAtNDksNiArNDks
-OSBAQCB0eXBlZGVmIHUzMiAgIF9fYmUzMjsKPj4gICNlbmRpZgo+Pgo+PiAgI2RlZmluZSBGMkZT
-X0RFRkFVTFRfQkxLU0laRSAgIDQwOTYKPj4gKyNpZm5kZWYgcm91bmR1cAo+PiArI2RlZmluZSBy
-b3VuZHVwKHgsIHkpICAgICAgICAgICgoKCh4KSArICgoeSkgLSAxKSkgLyAoeSkpICogKHkpKQo+
-PiArI2VuZGlmCj4+ICAjZGVmaW5lIE5FV19BRERSICAgICAgIDB4RkZGRkZGRkYKPj4KPj4gICNp
-Zm5kZWYgRlNfSU9DX0dFVEZMQUdTCj4+IC0tCj4+IDIuNDkuMAo+Pgo+Pgo+Pgo+PiBfX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwo+PiBMaW51eC1mMmZzLWRl
-dmVsIG1haWxpbmcgbGlzdAo+PiBMaW51eC1mMmZzLWRldmVsQGxpc3RzLnNvdXJjZWZvcmdlLm5l
-dAo+PiBodHRwczovL2xpc3RzLnNvdXJjZWZvcmdlLm5ldC9saXN0cy9saXN0aW5mby9saW51eC1m
-MmZzLWRldmVsCgoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fCkxpbnV4LWYyZnMtZGV2ZWwgbWFpbGluZyBsaXN0CkxpbnV4LWYyZnMtZGV2ZWxAbGlzdHMu
-c291cmNlZm9yZ2UubmV0Cmh0dHBzOi8vbGlzdHMuc291cmNlZm9yZ2UubmV0L2xpc3RzL2xpc3Rp
-bmZvL2xpbnV4LWYyZnMtZGV2ZWwK
+On 6/17/26 08:39, Jaegeuk Kim wrote:
+> On 05/21, Chao Yu via Linux-f2fs-devel wrote:
+>> fsck.f2fs -d1 <device>
+>>
+>> [fix_section_type:3036] wrong sit->type (4) in DATA secno:1 segno:2
+>> [fix_section_type:3036] wrong sit->type (4) in DATA secno:5 segno:11
+>>
+>> fsck.f2fs -f <device>
+>>
+>> [FIX] (fix_section_type:3040)  --> Fix wrong sit->type (4 -> 2) in DATA secno (1), segno (2)
+>> [FIX] (fix_section_type:3050)  --> Fix wrong sit->type in DATA secno (1), totally 1 empty segment(s)
+>> [FIX] (fix_section_type:3040)  --> Fix wrong sit->type (4 -> 2) in DATA secno (5), segno (11)
+>> [FIX] (fix_section_type:3050)  --> Fix wrong sit->type in DATA secno (5), totally 1 empty segment(s)
+>>
+>> Now it can only fix wrong sit->type of segment from NODE to DATA in a DATA
+>> section, such inconsistent image can be generated by recovery.
+>>
+>> For fuzzed image which contains below inconsistent sit->type, we can support
+>> to detect and repair later:
+>> 1) empty NODE segment in DATA section (FIXED w/ current patch)
+>> 2) empty DATA segment in NODE section
+>> 3) valid segments w/ different temperature in DATA section
+>> 4) valid segments w/ different temperature in NODE section
+>> 5) valid segments w/ different sit->type in section
+>>
+>> Cc: Daeho Jeong <daehojeong@google.com>
+>> Signed-off-by: Chao Yu <chao@kernel.org>
+>> ---
+>> v2:
+>> - fix printed log
+>>  fsck/f2fs.h | 13 ++++++++
+>>  fsck/fsck.c | 94 +++++++++++++++++++++++++++++++++++++++++++++++++++++
+>>  2 files changed, 107 insertions(+)
+>>
+>> diff --git a/fsck/f2fs.h b/fsck/f2fs.h
+>> index 5e7eb63..e4e5d0c 100644
+>> --- a/fsck/f2fs.h
+>> +++ b/fsck/f2fs.h
+>> @@ -572,6 +572,19 @@ static inline int IS_CUR_SEGNO(struct f2fs_sb_info *sbi, u32 segno)
+>>  	return 0;
+>>  }
+>>  
+>> +static inline int IS_CUR_SECNO(struct f2fs_sb_info *sbi, u32 secno)
+>> +{
+>> +	int i;
+>> +
+>> +	for (i = 0; i < NO_CHECK_TYPE; i++) {
+>> +		struct curseg_info *curseg = CURSEG_I(sbi, i);
+>> +
+>> +		if (secno == GET_SEC_FROM_SEG(sbi, curseg->segno))
+>> +			return 1;
+>> +	}
+>> +	return 0;
+>> +}
+>> +
+>>  static inline u64 BLKOFF_FROM_MAIN(struct f2fs_sb_info *sbi, u64 blk_addr)
+>>  {
+>>  	ASSERT(blk_addr >= SM_I(sbi)->main_blkaddr);
+>> diff --git a/fsck/fsck.c b/fsck/fsck.c
+>> index 1230d7b..4fca4dd 100644
+>> --- a/fsck/fsck.c
+>> +++ b/fsck/fsck.c
+>> @@ -3012,6 +3012,97 @@ int check_sit_types(struct f2fs_sb_info *sbi)
+>>  	}
+>>  	return err;
+>>  }
+>> +enum type_fix   {
+>> +	TYPE_DATA,		/* fix sit->type of empty node segment to data */
+>> +	TYPE_NODE,		/* fix sit->type of empty data segment to node */
+>> +	TYPE_DATA_TEMP,		/* fix inconsistent sit->type temperature of data segment */
+>> +	TYPE_NODE_TEMP,		/* fix inconsistent sit->type temperature of node segment */
+>> +	TYPE_MIGRATE,		/* migrate node segments in mixed section */
+>> +};
+>> +static bool fix_section_type(struct f2fs_sb_info *sbi, unsigned int secno,
+>> +				unsigned char type, enum type_fix type_fix)
+>> +{
+>> +	unsigned int segno = secno * sbi->segs_per_sec;
+>> +	unsigned int end_segno = segno + sbi->segs_per_sec;
+>> +	unsigned int empty = 0;
+>> +	bool fixed = false;
+>> +
+>> +	for (; segno < end_segno; segno++) {
+>> +		struct seg_entry *se = get_seg_entry(sbi, segno);
+>> +
+>> +		if (type_fix == TYPE_DATA) {
+>> +			if (se->valid_blocks)
+>> +				continue;
+>> +			DBG(1, "wrong sit->type (%d) in DATA secno:%d segno:%d\n",
+>> +				se->type, secno, segno);
+>> +			if (!c.fix_on)
+>> +				continue;
+>> +			FIX_MSG("Fix wrong sit->type (%d -> %d) in DATA secno (%u), segno (%d)",
+>> +				se->type, type, secno, segno);
+>> +			se->type = type;
+>> +			empty++;
+>> +			fixed = true;
+>> +			continue;
+>> +		}
+>> +	}
+>> +
+>> +	if (fixed && type_fix == TYPE_DATA)
+>> +		FIX_MSG("Fix wrong sit->type in DATA secno (%u), totally %d empty segment(s)",
+>> +			secno, empty);
+>> +
+>> +	return fixed;
+>> +}
+>> +
+>> +static bool check_large_section_types(struct f2fs_sb_info *sbi)
+>> +{
+>> +	unsigned int secno;
+>> +	bool fixed = false;
+>> +
+>> +	if (sbi->segs_per_sec <= 1)
+>> +		return 0;
+>> +
+>> +	for (secno = 0; secno < sbi->total_sections; secno++) {
+>> +		struct seg_entry *se;
+>> +		unsigned int segno = secno * sbi->segs_per_sec;
+>> +		unsigned int end_segno = segno + sbi->segs_per_sec;
+>> +		unsigned short data_seg = 0;
+>> +		unsigned short node_seg = 0;
+>> +		unsigned short empty_data_seg = 0;
+>> +		unsigned short empty_node_seg = 0;
+>> +		unsigned char data_type = NO_CHECK_TYPE;
+>> +
+>> +		if (IS_CUR_SECNO(sbi, secno))
+>> +			continue;
+>> +
+>> +		for (; segno < end_segno; segno++) {
+>> +			se = get_seg_entry(sbi, segno);
+>> +			if (IS_DATASEG(se->type)) {
+>> +				if (se->valid_blocks) {
+>> +					data_seg++;
+>> +					data_type = se->type;
+>> +				} else {
+>> +					empty_data_seg++;
+> 
+> Don't we need to check empty_data_seg below?
+
+I guess we need to check empty_data_seg when we start to sanity check & fix
+inconsistent case 2) below, now we don't need.
+
+1) empty NODE segment in DATA section (FIXED w/ current patch)
+2) empty DATA segment in NODE section
+3) valid segments w/ different temperature in DATA section
+4) valid segments w/ different temperature in NODE section
+5) valid segments w/ different sit->type in section
+
+Let me remove this variable if it causes confusing or compile warning.
+
+Thanks,
+
+> 
+>> +				}
+>> +			} else {
+>> +				if (se->valid_blocks)
+>> +					node_seg++;
+>> +				else
+>> +					empty_node_seg++;
+>> +			}
+>> +		}
+>> +
+>> +		/* skip free section */
+>> +		if (!data_seg && !node_seg)
+>> +			continue;
+>> +
+>> +		/* data section, fix sit->type of empty node segment to data */
+>> +		if (data_seg && !node_seg && empty_node_seg) {
+>> +			if (fix_section_type(sbi, secno, data_type, TYPE_DATA))
+>> +				fixed = true;
+>> +		}
+>> +	}
+>> +	return fixed;
+>> +}
+>>  
+>>  static struct f2fs_node *fsck_get_lpf(struct f2fs_sb_info *sbi)
+>>  {
+>> @@ -3834,6 +3925,9 @@ int fsck_verify(struct f2fs_sb_info *sbi)
+>>  	if (check_sit_types(sbi) != 0)
+>>  		force = 1;
+>>  
+>> +	if (check_large_section_types(sbi))
+>> +		force = 1;
+>> +
+>>  	printf("[FSCK] other corrupted bugs                          ");
+>>  	if (c.bug_on == 0) {
+>>  		printf(" [Ok..]\n");
+>> -- 
+>> 2.49.0
+>>
+>>
+>>
+>> _______________________________________________
+>> Linux-f2fs-devel mailing list
+>> Linux-f2fs-devel@lists.sourceforge.net
+>> https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
+
+
+
+_______________________________________________
+Linux-f2fs-devel mailing list
+Linux-f2fs-devel@lists.sourceforge.net
+https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
