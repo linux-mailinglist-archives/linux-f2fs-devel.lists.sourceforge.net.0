@@ -2,18 +2,18 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id My06C1KDMmoU1QUAu9opvQ
+	id 8YpFAFKDMmoT1QUAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
 	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 17 Jun 2026 13:21:54 +0200
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id B7A9469900B
+	by mail.lfdr.de (Postfix) with ESMTPS id 89B9969900A
 	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 17 Jun 2026 13:21:53 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=lists.sourceforge.net header.s=beta header.b=PfjkqhF3;
-	dkim=fail ("body hash did not verify") header.d=sourceforge.net header.s=x header.b=UvN9ebXu;
-	dkim=fail ("body hash did not verify") header.d=sf.net header.s=x header.b=Gqs50lin;
-	dkim=fail ("body hash did not verify") header.d=kernel.org header.s=k20260515 header.b=Sx8LeEVq;
+	dkim=pass header.d=lists.sourceforge.net header.s=beta header.b=cvqpytgP;
+	dkim=fail ("body hash did not verify") header.d=sourceforge.net header.s=x header.b=YSJBEnvX;
+	dkim=fail ("body hash did not verify") header.d=sf.net header.s=x header.b=JpM7J+Ar;
+	dkim=fail ("body hash did not verify") header.d=kernel.org header.s=k20260515 header.b="F/7ckATK";
 	spf=pass (mail.lfdr.de: domain of linux-f2fs-devel-bounces@lists.sourceforge.net designates 216.105.38.7 as permitted sender) smtp.mailfrom=linux-f2fs-devel-bounces@lists.sourceforge.net;
 	dmarc=pass (policy=none) header.from=lists.sourceforge.net
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
@@ -22,18 +22,18 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	List-Unsubscribe:List-Id:Subject:MIME-Version:References:In-Reply-To:
 	Message-ID:Date:To:Sender:Content-ID:Content-Description:Resent-Date:
 	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=pz2FiiridfLH7WNz0hfj8PNZ6VcnoTlMpeiJpkkyi1Y=; b=PfjkqhF3jNa6HDPZuQOaYgMvUs
-	JmtKHS1KmMA4EWeiDOTvXDWKAd62w2yEceMYF2Zy35RCLNggVWgZq5XRU8nLU1Ql0cjGLwjqoSsEN
-	+WJUo3VuDuTrmRwkOShqC2kntHvHqezRh3eybOXjuJHukc7COepxLWMGmvbb6AjYLRlI=;
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=X9N6Cd29yJ2F7mpLH9ISMXdgPsntEmFAMveN9I/n7Bc=; b=cvqpytgPCinZB32VNj9ASuvO5l
+	EF/3SIst3sQx9QyMVO3BDJ9CzPBH0sKPcsBgzOdSgbKPQcctH6tpz59BJ+FOVl15IpFPZOXiz83W6
+	acBfXlsjrItXf8Oiko0KwD7Razrkn6gU7oq3FCHl6z4N76UGtKhxExuJzdzJRXRlEbUg=;
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1wZoL8-0002jj-LX;
+	id 1wZoL8-0008Ho-HA;
 	Wed, 17 Jun 2026 11:21:51 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <asj@kernel.org>) id 1wZoKn-0002hN-PS
+ (envelope-from <asj@kernel.org>) id 1wZoKn-0008Fu-SS
  for linux-f2fs-devel@lists.sourceforge.net;
  Wed, 17 Jun 2026 11:21:30 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
@@ -42,9 +42,9 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=FlMooRTilgvQvegAyzunPUeluQcmMfXOWpgMO7eWB0Y=; b=UvN9ebXu9EZE3ulP9af+68zTjl
- FIMP/KkYLumf1c0FEXz1FiifiU7dnpQmLUmwbYuwy4sQbwz5wbmIYe5lNk7VRN2veywwjvTnF8kti
- aklm4pr5eNLr2zbItrW+2XUjHVcFsdGp2zuSvb4UrHXPqxnzbXqQkcXbmO7wZjpJ8YkE=;
+ bh=cA76/PYw1pPj8n2hc9fHEPPWqFsIP0EVym6yQnBFCxU=; b=YSJBEnvXZxh8PhFMI0xb+Xch6r
+ P9+m3swIW2l5vT4ClQp45A8esEAxO9UNVCqmBhR6u3BWt36e0XSjwoM8KegqVu1WCkDHI2S5Vv0zP
+ HMqzhaV6ptNi0j/FkIF6Gw0un+3oSPfiqdFkJog9HbB15GE9NEplTsLnTjcPPvcvk/KU=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:
@@ -52,62 +52,63 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=FlMooRTilgvQvegAyzunPUeluQcmMfXOWpgMO7eWB0Y=; b=Gqs50lin+N0tq2AGZxIEyS4yvs
- PVpomVAIt2A8IrxU0hG5mA3hIGLguaqvMDODzA1oMZ/z3kupQPsnhmGoFOf0B80W+EWaQs2HPLYWY
- /RaBCCXkoYF0MpRukdrLKDfeTxf4IlUqZX8u6vjS8o2LOCN+TBBw2OkY7BSxvvmyytVE=;
+ bh=cA76/PYw1pPj8n2hc9fHEPPWqFsIP0EVym6yQnBFCxU=; b=JpM7J+ArD1RptJQNPGGpuIl1xh
+ UP1T1NyoHCl8hLgTxPuzSPVbwo1pOfPkS9UoGJrI7SL3FCbZeR2iGZa7953uZY51PMYC/4qsWAPx/
+ haApOwtNSAH1xMIyxsgGxu7pr1ijH6lNxSkPoKWvNbPlTXenJcFmkZ5uTjxfY9Zx6p7I=;
 Received: from tor.source.kernel.org ([172.105.4.254])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1wZoKd-0002OS-FS for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 17 Jun 2026 11:21:22 +0000
+ id 1wZoKf-0002Oc-Tb for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 17 Jun 2026 11:21:23 +0000
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by tor.source.kernel.org (Postfix) with ESMTP id 6788F60103;
+ by tor.source.kernel.org (Postfix) with ESMTP id D2C6460122;
+ Wed, 17 Jun 2026 11:21:11 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9951F1F00A3D;
  Wed, 17 Jun 2026 11:21:09 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2A4111F000E9;
- Wed, 17 Jun 2026 11:21:06 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
- s=k20260515; t=1781695269;
- bh=FlMooRTilgvQvegAyzunPUeluQcmMfXOWpgMO7eWB0Y=;
+ s=k20260515; t=1781695271;
+ bh=cA76/PYw1pPj8n2hc9fHEPPWqFsIP0EVym6yQnBFCxU=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References;
- b=Sx8LeEVqmupxMrWGET07LrDPhRDEwUtHPFIC6J5LHFL+yJzWqjd6IzYZ0BzsScqXt
- LTgGCchnlrtioDBeLV4Bt6AmHG14bKR5WwPXL+GXEq0gKVxYd9ZZoaUm5wUAYclhak
- hBU/7PPE891mxC2CCpvoeCrEHr9hQluI3mF1Pf627GVJofzIdZBSRIzheB+WFltLnz
- jiv5mwvntLEMF1hF5C4HqnFrizjBu0uZmu3JiG7Z2fKYpVnnQ4U6lN3DCl/I6eF5vl
- EvNEAiwa6O/0RkRg1Q5kk99fru5cr/VjPrkiymE9E+HyyBCnr66hZZoE8gNJRRBv+2
- +Wks6vitUTQsA==
+ b=F/7ckATKv7QE4aRclCk1Ao7sRA7r88tPPYD8YDcBt8X5oe/INNawxbzgrwGwu4Z0O
+ NPMA66QDTJC0qygW31mUOUEW7nSjtBLvrDsW7PDfRTa06yParXgDqRrTN2dAWtSrx9
+ lPbQc638oHoy8RnCazLmx1+rO7H4LoxnyIhJj26awoe5JEulpZn9QI/lBqcMafTKLS
+ +KqZudG2Wwz6E78gDjJu3VIns42S2YRN4JApIG5HGTc5CdQdGk/mTDGlRycFw3rmEU
+ nC+0RIoRpoyd+DJhCKX+NVxDHhZDbOFO4rvzWZ3NLTMqK5Q/au7kx7ji/jMVt18KfW
+ 0ptQxX2wtBl+g==
 To: fstests@vger.kernel.org
-Date: Wed, 17 Jun 2026 19:20:35 +0800
-Message-ID: <14beb121638f0cb65a507e064b30afb69f94bbd8.1781694879.git.asj@kernel.org>
+Date: Wed, 17 Jun 2026 19:20:36 +0800
+Message-ID: <f278645e63afe15c26950fa6bd59cb0a69b51ac4.1781694879.git.asj@kernel.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1781694879.git.asj@kernel.org>
 References: <cover.1781694879.git.asj@kernel.org>
 MIME-Version: 1.0
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: Add testcase to verify IMA measurement isolation when
- multiple
- devices share the same FSUUID. Signed-off-by: Anand Jain <asj@kernel.org>
- --- tests/generic/804 | 108 ++++++++++++++++++++++++++++++++++++++++++
- tests/generic/804.out
- | 10 ++++ 2 files changed, 118 insertions(+) create mode 100644 [...] 
+ Content preview:  Ensure that exportfs can correctly decode file handles on
+ a cloned filesystem across a mount cycle, by file handles generated on a cloned
+ device remain valid after mount cycle. Signed-off-by: Anand Jain
+ <asj@kernel.org>
+ --- tests/generic/805 | 80 +++++++++++++++++++++++++++++++++++++++++++
+ tests/generic/805.out
+ | 2 ++ 2 files changed, 82 insertions(+) create mode 100644 test [...] 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
-X-Headers-End: 1wZoKd-0002OS-FS
-Subject: [f2fs-dev] [PATCH v7 08/11] fstests: verify IMA isolation on cloned
- filesystems
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+X-Headers-End: 1wZoKf-0002Oc-Tb
+Subject: [f2fs-dev] [PATCH v7 09/11] fstests: verify exportfs file handles
+ on cloned filesystems
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -165,49 +166,43 @@ X-Spamd-Result: default: False [-8.61 / 15.00];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	HAS_REPLYTO(0.00)[asj@kernel.org]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: B7A9469900B
+X-Rspamd-Queue-Id: 89B9969900A
 
-Add testcase to verify IMA measurement isolation when multiple devices
-share the same FSUUID.
+Ensure that exportfs can correctly decode file handles on a cloned
+filesystem across a mount cycle, by file handles generated on a
+cloned device remain valid after mount cycle.
 
 Signed-off-by: Anand Jain <asj@kernel.org>
 ---
- tests/generic/804     | 108 ++++++++++++++++++++++++++++++++++++++++++
- tests/generic/804.out |  10 ++++
- 2 files changed, 118 insertions(+)
- create mode 100644 tests/generic/804
- create mode 100644 tests/generic/804.out
+ tests/generic/805     | 80 +++++++++++++++++++++++++++++++++++++++++++
+ tests/generic/805.out |  2 ++
+ 2 files changed, 82 insertions(+)
+ create mode 100644 tests/generic/805
+ create mode 100644 tests/generic/805.out
 
-diff --git a/tests/generic/804 b/tests/generic/804
+diff --git a/tests/generic/805 b/tests/generic/805
 new file mode 100644
-index 000000000000..ced32e6d79dd
+index 000000000000..5827eee039df
 --- /dev/null
-+++ b/tests/generic/804
-@@ -0,0 +1,108 @@
++++ b/tests/generic/805
+@@ -0,0 +1,80 @@
 +#! /bin/bash
 +# SPDX-License-Identifier: GPL-2.0
 +# Copyright (c) 2026 Anand Jain <asj@kernel.org>.  All Rights Reserved.
 +#
-+# FS QA Test 804
-+# Verify IMA isolation on cloned filesystems:
-+# . Mount two devices sharing the same FSUUID (cloned).
-+# . Apply an IMA policy to measure files based on that FSUUID.
-+# . Create unique files on each mount point to trigger measurements.
-+# . Confirm the IMA log correctly attributes events to the respective mounts.
++# FS QA Test No. 805
++# Verify that file handles encoded on a cloned filesystem remain valid and
++# resolvable via open_by_handle across a mount cycle and mount order swap.
 +
 +. ./common/preamble
-+. ./common/filter
 +
-+_begin_fstest auto quick clone
++_begin_fstest auto quick exportfs clone
 +
 +_require_test
 +_require_block_device $TEST_DEV
++_require_exportfs
 +_require_loop
-+
-+_fixed_by_fs_commit btrfs xxxxxxxxxxxx \
-+	"btrfs: use on-disk uuid for s_uuid in temp_fsid mounts"
-+_fixed_by_fs_commit btrfs xxxxxxxxxxxx \
-+	"btrfs: derive f_fsid from on-disk fsuuid and dev_t"
++_require_test_program "open_by_handle"
 +
 +_cleanup()
 +{
@@ -218,96 +213,67 @@ index 000000000000..ced32e6d79dd
 +	_loop_image_destroy "${devs[@]}" 2> /dev/null
 +}
 +
-+# Normalize device names and mount points
-+filter_pool()
++# Create test dir and test files, encode file handles and store to tmp file
++create_test_files()
 +{
-+	sed -e "s|${devs[0]}|DEV1|g" -e "s|$mnt1|MNT1|g" \
-+	    -e "s|${devs[1]}|DEV2|g" -e "s|$mnt2|MNT2|g" | _filter_spaces
++	rm -rf $testdir
++	mkdir -p $testdir
++	$here/src/open_by_handle -cwp -o $tmp.handles_file $testdir $NUMFILES
 +}
 +
-+# Core helper to set IMA policy and check measurement logs
-+do_ima()
++# Attempt to read and decode the saved file handles on the targeted mount point.
++test_file_handles()
 +{
-+	local ima_policy="/sys/kernel/security/ima/policy"
-+	local ima_log="/sys/kernel/security/ima/ascii_runtime_measurements"
-+	local fsuuid
-+	local mnt=$1
-+	local enable=$2
++	local opt=$1
++	local when=$2
 +
-+	# Since the in-memory IMA audit log is only cleared upon reboot,
-+	# use unique random filenames to avoid log collisions.
-+	local foofile=$(mktemp --dry-run foobar_XXXXX)
-+
-+	echo $mnt $enable | filter_pool
-+
-+	[ -w "$ima_policy" ] || _notrun "IMA policy not writable"
-+
-+	fsuuid=$(blkid -s UUID -o value ${devs[0]})
-+
-+	# Load IMA policy to measure file access specifically for this
-+	# filesystem UUID.
-+	if [[ $enable -eq 1 ]]; then
-+		echo "measure func=FILE_CHECK fsuuid=$fsuuid" > "$ima_policy" || \
-+			_notrun "Policy rejected"
-+	fi
-+
-+	# Create a file to trigger measurement and verify its entry in
-+	# the IMA log.
-+	echo "test_data" > $mnt/$foofile
-+
-+	# IMA log extract
-+	grep $foofile "$ima_log" | awk '{ print $5 }' | filter_pool | \
-+						sed "s/$foofile/FOOBAR_FILE/"
-+
-+	echo "dbg: $mnt $fsuuid $foofile" >> $seqres.full
-+	cat $ima_log | tail -1 >> $seqres.full
-+	echo >> $seqres.full
++	echo test_file_handles after $when
++	$here/src/open_by_handle $opt -i $tmp.handles_file $mnt2 $NUMFILES
 +}
 +
-+# Initialize loop base and cloned instances
++# Setup base loop device and its clone
 +devs=()
 +_loop_image_create_clone devs
++mkdir -p $TEST_DIR/$seq
 +mnt1=$TEST_DIR/$seq/mnt1
 +mnt2=$TEST_DIR/$seq/mnt2
 +mkdir -p $mnt1
 +mkdir -p $mnt2
 +
-+# Concurrently mount both clones
++# Mount both identical UUID filesystems simultaneously
 +_mount $(_common_dev_mount_options) $(_clone_mount_option) ${devs[0]} $mnt1 || \
 +						_fail "Failed to mount dev1"
 +_mount $(_common_dev_mount_options) $(_clone_mount_option) ${devs[1]} $mnt2 || \
 +						_fail "Failed to mount dev2"
 +
-+#  IMA response on baseline and clone configuration
-+do_ima $mnt1 1
-+do_ima $mnt2 0
++NUMFILES=1
++testdir=$mnt2/testdir
 +
-+# Cycle mount on the second device.
-+echo mount cycle
++# Decode file handles of files/dir after cycle mount
++create_test_files
++
++# Cycle mounts and reverse initialization sequence to check if
++# file handle lookups are okay
++_unmount $mnt1
 +_unmount $mnt2
-+_mount $mount_opts ${devs[1]} $mnt2 || _fail "Failed to mount dev2"
++_mount $(_common_dev_mount_options) $(_clone_mount_option) ${devs[1]} $mnt2 || \
++						_fail "Failed to mount dev2"
++_mount $(_common_dev_mount_options) $(_clone_mount_option) ${devs[0]} $mnt1 || \
++						_fail "Failed to mount dev1"
 +
-+do_ima $mnt1 0
-+do_ima $mnt2 0
++# Verify file handles can still be resolved post-mount-cycle
++test_file_handles -rp "cycle mount"
 +
 +status=0
 +exit
-diff --git a/tests/generic/804.out b/tests/generic/804.out
+diff --git a/tests/generic/805.out b/tests/generic/805.out
 new file mode 100644
-index 000000000000..9804181d6c17
+index 000000000000..29b11ec77ffb
 --- /dev/null
-+++ b/tests/generic/804.out
-@@ -0,0 +1,10 @@
-+QA output created by 804
-+MNT1 1
-+MNT1/FOOBAR_FILE
-+MNT2 0
-+MNT2/FOOBAR_FILE
-+mount cycle
-+MNT1 0
-+MNT1/FOOBAR_FILE
-+MNT2 0
-+MNT2/FOOBAR_FILE
++++ b/tests/generic/805.out
+@@ -0,0 +1,2 @@
++QA output created by 805
++test_file_handles after cycle mount
 -- 
 2.43.0
 
