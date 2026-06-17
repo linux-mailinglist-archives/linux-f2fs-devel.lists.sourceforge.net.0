@@ -2,18 +2,18 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id +WQ6GiaDMmoB1QUAu9opvQ
+	id ZxHNGyaDMmoC1QUAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
 	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 17 Jun 2026 13:21:10 +0200
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id ED54C698FC8
+	by mail.lfdr.de (Postfix) with ESMTPS id F3645698FC9
 	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 17 Jun 2026 13:21:09 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=lists.sourceforge.net header.s=beta header.b=CIj0caIU;
-	dkim=fail ("body hash did not verify") header.d=sourceforge.net header.s=x header.b=TXWWXOTZ;
-	dkim=fail ("body hash did not verify") header.d=sf.net header.s=x header.b="Ee2/evLh";
-	dkim=fail ("body hash did not verify") header.d=kernel.org header.s=k20260515 header.b=X6d5l7vm;
+	dkim=pass header.d=lists.sourceforge.net header.s=beta header.b=m8nVPgtk;
+	dkim=fail ("body hash did not verify") header.d=sourceforge.net header.s=x header.b=at7tZyDo;
+	dkim=fail ("body hash did not verify") header.d=sf.net header.s=x header.b=GhyAHY8S;
+	dkim=fail ("body hash did not verify") header.d=kernel.org header.s=k20260515 header.b=Lv26D56m;
 	spf=pass (mail.lfdr.de: domain of linux-f2fs-devel-bounces@lists.sourceforge.net designates 216.105.38.7 as permitted sender) smtp.mailfrom=linux-f2fs-devel-bounces@lists.sourceforge.net;
 	dmarc=pass (policy=none) header.from=lists.sourceforge.net
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
@@ -22,29 +22,29 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	List-Unsubscribe:List-Id:Subject:MIME-Version:References:In-Reply-To:
 	Message-ID:Date:To:Sender:Content-ID:Content-Description:Resent-Date:
 	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=CUF9nHboui8xwRb0GeTWLhe/D2VIsJgxTNNrrS1MnKU=; b=CIj0caIUeT7wl9P7GtK83z/g1Q
-	ZFEqaNILXtwEwyD0aVx2cXq3d0Kuh0EURMWiGtjA8vJJ+UC0lB6ac8Y6ET3KiRKrjMRE+0kYhbPP/
-	oblnmYT+KHbSZhMuNpgrA7UkWtofNgUIMJN1gs8SeHWDWgaRRLhIYraqKUskpvOLNVZk=;
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=19RTRE05Lv3DKKLo4o2b4EkGEDeE8r8q+B4pv7bLkMs=; b=m8nVPgtk4ABnTKUZ+PLFxlS6ad
+	7LCz87rXVF77qVHfF41daOAY1IGSUIS3MLXLLQwIXEApl167VrOEO1MHpZNK0lGBAHna0RcCOuPP1
+	L1TX+lBxhXMvSmc5PYnN1J4lXWhLgaqdTdJ0aPxj7wlHbURYyTKa7psJUpGv82reKRBc=;
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1wZoKM-0008V2-Ne;
-	Wed, 17 Jun 2026 11:21:02 +0000
+	id 1wZoKP-0002fE-7c;
+	Wed, 17 Jun 2026 11:21:06 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <asj@kernel.org>) id 1wZoKK-0008Un-RP
+ (envelope-from <asj@kernel.org>) id 1wZoKN-0002ey-8p
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 17 Jun 2026 11:21:00 +0000
+ Wed, 17 Jun 2026 11:21:04 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=KaGzvlAFuLvfNXX7hkCbgPcxpzUYNoQuvBwpwaOK3Hc=; b=TXWWXOTZ8rwr3x9JxMnH2Ehi+r
- 7NLtWE0XA3XPNmM0gqYp4p5hFYEZdCPQFRzZZyopEr9FzywgIo6B91Gd27gHIEsYn65Pk5ZsdOqnA
- f3PXJniCml5MwKsciQJzcA2uW0OCIVAKgD0zSyH0KJQT2ZzFvcG/CQa/Yt0XOk1uohh8=;
+ bh=H/ifHRev1KZt7zJcATaDa76vriuxBeCWHVdvTL8hqTg=; b=at7tZyDoPsMgZ+f3XrHntR7JZu
+ mZ6Be4Yz/9h38jPVCoJP0GvlcDGzDuP1lqTzK8yJn1tLWxXslVY+O4t1BpevX9IEx8YHyr9/jI35I
+ LZ3mIABMx1o86MIvoW0VGW66TYciKBOGPZmBcCrq5rQpjFFn2t9TbTxQ+gKiLT4a6qz8=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:
@@ -52,62 +52,63 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=KaGzvlAFuLvfNXX7hkCbgPcxpzUYNoQuvBwpwaOK3Hc=; b=Ee2/evLhkKjtUX0FTVW9Id+jp9
- Guwx2aHICHb016W7yn3gOViZ+6oK1Md0xahrkuWbxkDuagnafVBCg860pxOkNn+Pt7HysaEdND1JY
- weRqgqr22dqc2A0wG8RXz4ge77R4t4IdzFkLrN7aAfklhx70BxCIaB3Fm+b8Y1hEL2es=;
-Received: from sea.source.kernel.org ([172.234.252.31])
+ bh=H/ifHRev1KZt7zJcATaDa76vriuxBeCWHVdvTL8hqTg=; b=GhyAHY8SpQpagyvEu5j5eKe4DD
+ yb0v6Ds7zcl8eq6JSu/6Oy33XL1YxBMWrJiPYUtTs2zGKiTvZVdLHQTMaKX91sG9enuqWHM6LUmne
+ D5VNMR7kssH9yRLpHc+fZygvSt1Q/Ha0Xh8KlOx4Kq2lqsjFc2B1VJdDGESyjm35X4RQ=;
+Received: from tor.source.kernel.org ([172.105.4.254])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1wZoKJ-0002NC-05 for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 17 Jun 2026 11:21:00 +0000
+ id 1wZoKL-0002NG-V8 for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 17 Jun 2026 11:21:03 +0000
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by sea.source.kernel.org (Postfix) with ESMTP id 3A3F244394;
+ by tor.source.kernel.org (Postfix) with ESMTP id DBAD760121;
+ Wed, 17 Jun 2026 11:20:56 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 90BE01F000E9;
  Wed, 17 Jun 2026 11:20:54 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1D5BF1F00A3D;
- Wed, 17 Jun 2026 11:20:51 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
- s=k20260515; t=1781695254;
- bh=KaGzvlAFuLvfNXX7hkCbgPcxpzUYNoQuvBwpwaOK3Hc=;
+ s=k20260515; t=1781695256;
+ bh=H/ifHRev1KZt7zJcATaDa76vriuxBeCWHVdvTL8hqTg=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References;
- b=X6d5l7vmxUw9p7rL2GJTP9ljnnIua9w9nhHSTMdXOAniQhpgGQDMLbDj+U1RVnN3y
- ho9xywoFmsInya0CoQE5jZJf0Op8xb4evzxXrHwV+toj9Rk0f7wbqij+0v2atZIYyp
- LpGl/8YzQYXh3FIXB8mMvFcDvUNV/uQLuJQJz3XP0QXHoH4vCvMDS28Vsx5GSnun6H
- bsXA4ag/T7Gy6YWrht1uwVl8l+YfoG3U++0mxjeuU8vOLnhfSbV4sWyhl/LzL+tMBm
- vzHrbpLqnJOImnaN4q9DYKtM+lz4JMVozrB395RVUiqjQHNTlf+fqW8jLend4Ji4nq
- 4oixQFp8eac6Q==
+ b=Lv26D56moyfzDjRSXP1h969cV8AgvYZ9N6st5AgvVoCbI7grJ+nuu2E96cZpLkujJ
+ fCfjAoeLGwcg2Up76V7nMIxDz8uXtv1f+uvfbgEFI4NiZBJRpKSCXB+691y1wO+/he
+ IlpoZKSO7qQSouDyMJev/ycppfktDcR34RxiPRQ/sahCYrYZIs2gYs6aao44sMmeFR
+ D3MaO1JSIGWwZ2/0wiSf0M2PUx7tpXGw2a7r7bGmA+bxRiexde2llQri+ukVrmGiks
+ /CMxwH+duzWuwQ4e2YqAJh32OFRp1KYM3egdns98DgBG84DsIChKcmPKSGsyTJgIaZ
+ 6pYRzqZ7vt8mg==
 To: fstests@vger.kernel.org
-Date: Wed, 17 Jun 2026 19:20:29 +0800
-Message-ID: <0237f38f9bd3115171e84d15444e00e00898a0e8.1781694879.git.asj@kernel.org>
+Date: Wed, 17 Jun 2026 19:20:30 +0800
+Message-ID: <4cfac83869d90a41ab6a1c01ad2b13ad95430f4c.1781694879.git.asj@kernel.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1781694879.git.asj@kernel.org>
 References: <cover.1781694879.git.asj@kernel.org>
 MIME-Version: 1.0
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: Adds _clone_mount_option() helper function to handle
- filesystem-specific
- requirements for mounting cloned devices. Abstract the need for -o nouuid
- on XFS. Signed-off-by: Anand Jain <asj@kernel.org> Reviewed-by: "Darrick
- J. Wong" <djwong@kernel.org> --- common/rc | 13 +++++++++++++ 1 file changed, 
- 13 insertions(+) 
+ Content preview:  Define `FSNOTIFYWAIT_PROG` for an upcoming test case that
+ uses `fsnotifywait`. Signed-off-by: Anand Jain <asj@kernel.org> Reviewed-by:
+ "Darrick J. Wong" <djwong@kernel.org> --- common/config | 1 + 1 file changed, 
+ 1 insertion(+) 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-X-Headers-End: 1wZoKJ-0002NC-05
-Subject: [f2fs-dev] [PATCH v7 02/11] fstests: add _clone_mount_option()
- helper
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+ 0.0 RCVD_IN_DNSWL_BLOCKED  RBL: ADMINISTRATOR NOTICE: The query to DNSWL
+ was blocked.  See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#DnsBlocklists-dnsbl-block
+ for more information. [172.105.4.254 listed in list.dnswl.org]
+X-Headers-End: 1wZoKL-0002NG-V8
+Subject: [f2fs-dev] [PATCH v7 03/11] fstests: add FSNOTIFYWAIT_PROG
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -165,42 +166,28 @@ X-Spamd-Result: default: False [-8.61 / 15.00];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	HAS_REPLYTO(0.00)[asj@kernel.org]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: ED54C698FC8
+X-Rspamd-Queue-Id: F3645698FC9
 
-Adds _clone_mount_option() helper function to handle filesystem-specific
-requirements for mounting cloned devices. Abstract the need for -o nouuid
-on XFS.
+Define `FSNOTIFYWAIT_PROG` for an upcoming test case that uses `fsnotifywait`.
 
 Signed-off-by: Anand Jain <asj@kernel.org>
 Reviewed-by: "Darrick J. Wong" <djwong@kernel.org>
 ---
- common/rc | 13 +++++++++++++
- 1 file changed, 13 insertions(+)
+ common/config | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/common/rc b/common/rc
-index d7e3e0bdfb1e..968ba33686f3 100644
---- a/common/rc
-+++ b/common/rc
-@@ -414,6 +414,19 @@ _scratch_mount_options()
- 					$SCRATCH_DEV $SCRATCH_MNT
- }
+diff --git a/common/config b/common/config
+index d5299d5b926f..5661fa0ec310 100644
+--- a/common/config
++++ b/common/config
+@@ -242,6 +242,7 @@ export BTRFS_MAP_LOGICAL_PROG=$(type -P btrfs-map-logical)
+ export PARTED_PROG="$(type -P parted)"
+ export XFS_PROPERTY_PROG="$(type -P xfs_property)"
+ export FSCRYPTCTL_PROG="$(type -P fscryptctl)"
++export FSNOTIFYWAIT_PROG="$(type -P fsnotifywait)"
  
-+# Return filesystem-specific mount options required for mounting clone/snapshot
-+# devices.
-+_clone_mount_option()
-+{
-+	case "$FSTYP" in
-+	xfs)
-+		# Allow mounting a duplicate filesystem on the same host
-+		echo "-o nouuid"
-+		;;
-+	*)
-+	esac
-+}
-+
- _supports_filetype()
- {
- 	local dir=$1
+ # udev wait functions.
+ #
 -- 
 2.43.0
 
