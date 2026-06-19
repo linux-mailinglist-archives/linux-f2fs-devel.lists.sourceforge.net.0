@@ -2,18 +2,18 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id kvNhLKBTNWpetAYAu9opvQ
+	id TqbtJYNUNWrLtAYAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 19 Jun 2026 16:35:12 +0200
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 19 Jun 2026 16:38:59 +0200
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id C8FFB6A66FC
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 19 Jun 2026 16:35:11 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id BE39C6A6750
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 19 Jun 2026 16:38:58 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=lists.sourceforge.net header.s=beta header.b=M7zqdRsx;
-	dkim=fail ("body hash did not verify") header.d=sourceforge.net header.s=x header.b=PWaJEiof;
-	dkim=fail ("body hash did not verify") header.d=sf.net header.s=x header.b=mxYjtbPc;
-	dkim=fail ("body hash did not verify") header.d=outlook.com header.s=selector1 header.b=nrs+dY02;
+	dkim=pass header.d=lists.sourceforge.net header.s=beta header.b="l2w/OoJZ";
+	dkim=fail ("body hash did not verify") header.d=sourceforge.net header.s=x header.b=OIGB73Aa;
+	dkim=fail ("body hash did not verify") header.d=sf.net header.s=x header.b=OtkNT+c1;
+	dkim=fail ("body hash did not verify") header.d=outlook.com header.s=selector1 header.b=PbZlBwfZ;
 	spf=pass (mail.lfdr.de: domain of linux-f2fs-devel-bounces@lists.sourceforge.net designates 216.105.38.7 as permitted sender) smtp.mailfrom=linux-f2fs-devel-bounces@lists.sourceforge.net;
 	dmarc=fail reason="SPF not aligned (relaxed), DKIM not aligned (relaxed)" header.from=outlook.com (policy=none);
 	arc=reject ("signature check failed: fail, {[1] = sig:microsoft.com:reject}")
@@ -23,29 +23,29 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	Subject:MIME-Version:In-Reply-To:From:References:To:Date:Message-ID:Sender:
 	Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
 	:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=HRo33bma0A2t8NGsa80LZk4iaDbq55oJy9w6b1JVET0=; b=M7zqdRsxv6zIGegtNNlm787are
-	q6/aZYAhQLUaF8ag2MJxMd6HTY7jcxiiIrEy7OOQW7M1FjSMiLhcpIYejFkUW4Hnx80V+6u6jwgU5
-	FTcbO/e9oNwjdoHKCUtkPxni0V30nLrcd+pJuK/a07tH8gJ6kndRKAulfhpTZKE/kF4M=;
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=mdIwHXy1j4Sbxs1/G/UEarDcqu4Y668qLW77Pqk+6qI=; b=l2w/OoJZ5KvNmKEdpQzBV7pHBw
+	JPy5j6tTJn3p+2ltkSHpD2kyiH2nap+RGM6WOSybqIeX3ZX1PBm2aGa0QthXJMb4uqcxmIc5r5t98
+	9G0mhTQwunAjtDjNDjlP1L0RjpFicCCI+fvswE6X5qTPS9W40Qwq+jJCcLZBHrutUCtE=;
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1waaJB-0000hU-Hu;
-	Fri, 19 Jun 2026 14:35:02 +0000
+	id 1waaMu-0000JZ-5O;
+	Fri, 19 Jun 2026 14:38:52 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
  (envelope-from <yangyongpeng.storage@outlook.com>)
- id 1waaJ9-0000gm-1E for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 19 Jun 2026 14:34:59 +0000
+ id 1waaMs-0000JR-Qu for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 19 Jun 2026 14:38:50 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=MIME-Version:Content-Transfer-Encoding:Content-Type
  :In-Reply-To:From:References:Cc:To:Subject:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=EI6AQrorlsQzgxLI1QVXjpKK0FhE6GeTxZmAEueSIiI=; b=PWaJEiofG3OlgB2tlDJx5cLOH/
- +6NAgadGN8Q9ddGEiaNxQyR01h4zfLD1Ekm095aGwm0V4u0ygcsNoC9HJ+2F33zdMvIa1Yc+2oJTm
- DmKR0EJbF7gL77ByVbPPXqtv1Bo2IJoVpntKMlF0p7yAtLVOjiuBlZu7vP4AjVrMv04Y=;
+ bh=/iStCWT7ykggCd4C/1TzNfu+068x4hkZv3tif9g/1bk=; b=OIGB73AaLjtN3VCXzGbKybivLL
+ 8PtzZUPvQ5VNA8gSe3oz31YlKi4Uighzxdl9jBK4BAWIIf2HCX5ZCpC4Jux24vCsv8gJ/+iDdG+6E
+ CXD19b8II0s8U6DM5vkWgY6rLcl2W109McZ9rBgrrjb/Tggh4P7aljSH4ww1M8WbOz+I=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=MIME-Version:Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
@@ -53,125 +53,126 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=EI6AQrorlsQzgxLI1QVXjpKK0FhE6GeTxZmAEueSIiI=; b=mxYjtbPcIZBa9YyUlmOKYKiho7
- j/fRnLZBsh35H32gDcCUlBUUT/oYYuboXwFx08/C7P3WRQXCawyyxKpT5A9xEC9frns71HIbYGSyD
- YIYID7KL+Xp4Wt1shWJIGsdoA9ATEjO4kNoiic4zHuYIZK2F5c1+pGo4TaSNlTvPoYNo=;
-Received: from mail-japaneastazolkn19012053.outbound.protection.outlook.com
- ([52.103.43.53] helo=TYPPR03CU001.outbound.protection.outlook.com)
+ bh=/iStCWT7ykggCd4C/1TzNfu+068x4hkZv3tif9g/1bk=; b=OtkNT+c1jlFjSSQ61WExkS/FcO
+ /OO+vohuTK8aFR8iHXXxbESr2GdDtKiBVCAI3okL0fH9CEfL2qSCynNI/8CSYucUFfuc7UhHVf7U/
+ PS9fJGxiAIcF8Whe/tcFLtNxiGothFqS9aqNq0qcBeyP93z0TM3+PXPoPBsbrBrt7d+Q=;
+Received: from mail-koreacentralazolkn19013078.outbound.protection.outlook.com
+ ([52.103.74.78] helo=SEYPR02CU001.outbound.protection.outlook.com)
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1waaJ7-0003rs-Ib for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 19 Jun 2026 14:34:59 +0000
+ id 1waaMq-0004mI-VT for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 19 Jun 2026 14:38:50 +0000
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=RrmsQkBk6Eav5zFmu1OMkmVcArCIVVuXpx5ZZmOE+OGz3oHqRTRekPh61wSRznqujj7u/dX99G42nSW6mVKnqjBTjvy1bKRFKd2zaZqeIWcXpNcoXVRxfiTZ1A00AUOVrTZv8AkqVA6oSF+/medihECBrap6yLDJRRbhUPAklvetqESPKJ1sbsIXQZK9KqBh9LShJoM6xUpsQgFmgfcrzVLjjfTSSHnmnALxN5hT5dDpzPgwqzl8q0VkDYYFWKI5h8epQ2qcWhpRe8m+4CGDfcl8+i6qi78eSXfCSyU/mDklCBvyfvOT0LSAA3Dqcvo8j5LC6cxO4W8NLvGv3yWEpA==
+ b=dJnCIk/dQXtCaGuiIQc7cWVNqMw429oog9uSQ1i1Yznvl8t+NpI9Hsq25Xqxfbs5N/4hh4t97kdXCGCGlS5ffqWnBkglcjXi0YAPyUBjlUWrs1LF4eFzmzt3mm/vsYJYIBEkXdUGv8VhRdQR41ExfiQzIkQ303dY7nA5TFHfDYVG5ITJ/meZpNVgNxPLU4M5lTYv0RCHeTUT42WCV+bNn5TDR/CaWpf2Hcn4xME44RnsFp830M4PuHCCsM0PXAAj3D61npe8/BuPZiTwXrWVEmqgMsnQkj8OMqv8TE0Lx2Gc7ETMsbryllUREMufRqzhZqDnKv0ON+SZqVjjEhrLkA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=EI6AQrorlsQzgxLI1QVXjpKK0FhE6GeTxZmAEueSIiI=;
- b=jymtPkqLIVfiLnWTnjLWF2AnHlonyfwDhdFYAbaVtZwJ0JIoVy/OQUNMWRee/6655BNnpJfEu8WBGTQuQXWGVp3iyJSPtPkicGCfZUCO3R2kdqOHEE2DoAVnv8UsvFe5WhrNXgHTTOD/2KFCbx4FJJ5AM9bJUNE+JHgKiqsx85ZYIG2O6mkr3shWi12/Z4CAg1o9A4mu8BiZmBp42eFMDC26wTGa1xNn+dnUaX/0IrPDOnzDEoJm5/60kEAuRcmOuW6NkPgYVuISXg7e6ZFLKDkSUIsNhicbQIwjsdBy4uYwMdTvF6bYDw+7LpqyWV3xzlH5pp+rA57svv/Ft3KEhw==
+ bh=/iStCWT7ykggCd4C/1TzNfu+068x4hkZv3tif9g/1bk=;
+ b=lsP93AkfKZ/9PPQfzjNyi++/rK+rWdnwGCTzBjWV++LUGAnzm16Q4zibEubMSJMofg8an9PfV6n4a/D5aG+KBCErrDs4WnYPQwTJa1PL0lYSuGKYo/F0zukJ3z/xsvmbdmGGVw3oB9WO0kXbiOOR6CAxAJORhUHBGOr8JeeSs9eK0TrSiRTSMYXqSlAe8P8js9O7v8evNtprnaaEvLvwfidyBztK1ou62UyOzhuCXwYLgho4x/u+4TixmNEzQraGRH4jEwJeDCLvnO2Aj0a0EzZoww+01hOO/P4hijgoPkvKtGDIkhByzJJjjGq+4Dwerq2qmo4C2YQBQB/6B29huQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
  dkim=none; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=outlook.com;
  s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=EI6AQrorlsQzgxLI1QVXjpKK0FhE6GeTxZmAEueSIiI=;
- b=nrs+dY02Z7Se3mTfOWIFMXB1LAdIF7pLB/DRI9HuLV1QkbyvKJ10Z9KMCJbnqKMXYgeKxdrbHR9mlUh5XHAWIHGw4lHuqsLciminSxmco1PihTtExwdz2zCICaW/hD0kXnMShO9KmkyOnbEwpDGfTvpyBuDlCWjo/mYzFDUCm/J1b5vN3q3NDvEt28zO0b2l36fg6jAP05JhSMFsBIlao6GvcFIoynrSA7NpccagTDUga+uqAAPXe0SVmBhBqRHpArXY/2Wth6q8Kirsub4E26Jqm/Ob0yTzzcgfue2qa16Dhi7lThywe5nqXw23DWl37zG4NbmOEn+sDLGKl4RoIw==
+ bh=/iStCWT7ykggCd4C/1TzNfu+068x4hkZv3tif9g/1bk=;
+ b=PbZlBwfZ07/bKUHiXtkRO9vtThXYefDEudxTgcEFxBePv8wThT/aUv7LGpF5AX2yfXM7Ed0HOg7qp5UJ5yYNOMFuaza5WDPcmtx6rwzPd58V19TuszM0sYInc599NV+2kcsC56sNI30lDqa/qox4vtfamLRqOrjOgESSlBlumlHVbEhorgL0eTLVVMdXOQcEb64rQ/S+DSb4IfYU+HOr7841WB4ttzK0uIbWvGoBXfKIAEWJIf64H3gFyVzY6Ix1On1scRyk1ncVHwbWJyeHPmxBQHHUj2bLECBSq+KSUAL7ZH9fTbi6k3n+lt/N7xyDF9sNNr9lcA9Is/AhlcYlKQ==
 Received: from SEZPR02MB5662.apcprd02.prod.outlook.com (2603:1096:101:4e::13)
  by SI3PR02MB9388.apcprd02.prod.outlook.com (2603:1096:4:2a6::8) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.139.11; Fri, 19 Jun
- 2026 14:34:42 +0000
+ 2026 14:38:39 +0000
 Received: from SEZPR02MB5662.apcprd02.prod.outlook.com
  ([fe80::e4bc:d995:70f6:5b72]) by SEZPR02MB5662.apcprd02.prod.outlook.com
  ([fe80::e4bc:d995:70f6:5b72%6]) with mapi id 15.21.0139.011; Fri, 19 Jun 2026
- 14:34:42 +0000
-Message-ID: <SEZPR02MB5662A85B218D3EF7B2FA8C6599E22@SEZPR02MB5662.apcprd02.prod.outlook.com>
-Date: Fri, 19 Jun 2026 22:34:33 +0800
+ 14:38:39 +0000
+Message-ID: <SEZPR02MB566231EECF99FCD70B8E410F99E22@SEZPR02MB5662.apcprd02.prod.outlook.com>
+Date: Fri, 19 Jun 2026 22:38:31 +0800
 User-Agent: Mozilla Thunderbird
 To: Chao Yu <chao@kernel.org>, Jaegeuk Kim <jaegeuk@kernel.org>
 References: <20260612115839.2065903-2-yangyongpeng.storage@gmail.com>
- <20260612115839.2065903-3-yangyongpeng.storage@gmail.com>
- <7ffe0789-1024-4dc7-9089-2dcf856a1bd1@kernel.org>
+ <20260612115839.2065903-4-yangyongpeng.storage@gmail.com>
+ <b380cd69-66db-4ef1-8d33-92ed6c34d263@kernel.org>
 From: Yongpeng Yang <yangyongpeng.storage@outlook.com>
-In-Reply-To: <7ffe0789-1024-4dc7-9089-2dcf856a1bd1@kernel.org>
-X-ClientProxiedBy: TP0P295CA0022.TWNP295.PROD.OUTLOOK.COM
- (2603:1096:910:5::18) To SEZPR02MB5662.apcprd02.prod.outlook.com
+In-Reply-To: <b380cd69-66db-4ef1-8d33-92ed6c34d263@kernel.org>
+X-ClientProxiedBy: TP0P295CA0019.TWNP295.PROD.OUTLOOK.COM
+ (2603:1096:910:5::13) To SEZPR02MB5662.apcprd02.prod.outlook.com
  (2603:1096:101:4e::13)
-X-Microsoft-Original-Message-ID: <8a7ad1bd-5a09-4c85-a734-f8eb8394e25e@outlook.com>
+X-Microsoft-Original-Message-ID: <717bf00c-fa1e-48dc-a748-e7e635b73ded@outlook.com>
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: SEZPR02MB5662:EE_|SI3PR02MB9388:EE_
-X-MS-Office365-Filtering-Correlation-Id: c73b8d70-0e40-4662-ff6e-08dece0fe6b2
-X-MS-Exchange-SLBlob-MailProps: laRBL560oLSPhlJ95/U7v6W/AahuugGazLt8CwdcjzbIU5tc8bOqcSuUHMRE4Zu515mGsreMn78Fvq7dY/g2BQb8Rcum28Ef/3NzCoURcKjzHRkdDqaLYZQAwdaM32q/TICVQSTL9trv4GRc4b6MxDI79Z7OsSZXP5sAsG45xRlhv5s2xugrvK+oKt+L9pVkGEmsiCzdMd9i+dU/xi/9XZDjm3QgQCuyEEx2zFoLZ6BfvuC6gDFtXGuyvO84gvpgfPj+DW3whBfTDWbPeluclnmzATRarPXT+QH6KNu/EfvmTPj94rTNGztV08OklWKOEnA307038ajk6mqo8iafeJuOKlm7uVIpoRAaSojH2vfZNdomOUWok8McKSVcJfzrFmvQq8td49EDShtP+5RKhGHQrsSBGKlbJ7n5y0vtrAolJBLYkjAoiEqdRi6TUBV+bfjBQl1wNMUDMjNmc6AKb8Tdwv8kZM5x6hg2+NZZY86zkkKa/ZtHQBf9VQQq+HMwlltuJ6HYae88cU/fLg+OSr3+cNblnZI6w/kNVJvy8r7GRxI0CiLHnDEuZTDhhZ47xANpmaVT+F4RJPgpHr10swdOvTDm1zixQWHjtZgD9j+4z+9QJPwGnZJ/1RoopDrAAqIYOsy5eqJICl3myXhC4Irb3BXqtQljlWYcJ9IyLdOavPyKFm6voMzSksTbn8yP60IJuNQ/4uQx3aOufc0cyrt3q0Lq0RbGrk6S8hEz33oda6r5r3jy8J5xt24ceWgEPU6C9oWWgCOY60Niw1xi8Jer7jaByAcO
+X-MS-Office365-Filtering-Correlation-Id: c23a700b-35d4-4cdd-ac3c-08dece10739b
+X-MS-Exchange-SLBlob-MailProps: vuaKsetfIZn9IFDOZRHBr3PkJ6iE+FIksnX2zd4X+CZuzA2WICBfo4mP2of8PKR9IxENK+qvzPkidkYD5LOMiG7IDkTYFJJjnBLqoYAKB9cDJx1ppOMEWIxmKoH3QnXP61MiNvjNLdPnm2Rv6iA8/fIixGOKVmq+D0KPSLhz1WCAScOMPr8O18o3zQxzULJ6hsdjOUyyLe+z0OBoj2HGYEcne9RXmCtmXzQ73W2tsMfAL2M+TatLbocucIBLvWZGZb900utMVd6TauXcGlMtaO14hv0M1w6NT37/VCWWqSt58klUq3q+cfTxO1y8RQH5gsoXDsu5EaK49NRy5/gquxcvVyDFOVkXCMdAWDKz6gaKW2H3GAQI0wVaruWAJ9JZUeqYtJXmmnd5winZW2dyLYrzSImtm64a0ZoEDkUGRfXahcxG+ZV8kz9J7ZY8CvlY1aUb7Mq5vGua3kOVVRDeR8Ox61Ei7RjdmGRysKrSgcyuvZFqmjDhjPLcOTTX4Fej4GLpEwSgtC3I5yjqunn0dFY86WN9rYlJyPqO1mEWNTVQeLE0Uc8uScyqTdSU9KRwMv4FeFeB5D6YCLo/ln8hFWbiqrYQ2jLJOGBeyBy9pUj44A3OLFt7Ue/lV8k47DkWKtUvc8TFU5I5/GG6AQqf7V4Qxr+pC+tq0UK1odDEzcoEGmEpBKPmbnL5+/waY3VDBEqJkWqUqTKXZA2Aj9YEvKWOFPS4D8YrIIFvytSvL+TE0mN+7AeuoS0H2PYYe8gjZg0FvZFAVWTHYVAj0vHYcc+oMG7EmWMa6va7+BfT3llQHgaPfVfNb/wuiQ1X5zC3
 X-Microsoft-Antispam: BCL:0;
- ARA:14566002|24121999003|22091999003|15080799012|5072599009|8060799015|51005399006|23021999003|7042599007|19110799012|6090799003|45011099003|25010399006|40105399003|3412199025|10035399007|440099028;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?VExUTjc2Y2RQbnZHVnRnZ1FTYXVyUG9VeEo4OGZZZzByNkxjQzF1L2hQVDM3?=
- =?utf-8?B?LzRmbXdJczhPc2ZkcFJLM3ZTV2hWQWZDM2kzMWQ1RFBpTXVQVHg5KzRJOUV4?=
- =?utf-8?B?dXJiaW10M1hXMTNEMExVMzdXSDcrblR1Y2RUMVcwUnZ1TTE1dVc5Qm1rbWtI?=
- =?utf-8?B?ZXhEM3ZSL0R2Y0pTbTVCdTdQQWl1V09mMnNiTUJDd3ZHbTlHOWVHZHJrckNs?=
- =?utf-8?B?eERGQkIyc1hnbmlvVENGWmRDOVAyQmxpQ21lcDJnK0NWSHBwaEhZK0dEK1ls?=
- =?utf-8?B?QzdtWllKSDdYcmVWNTI5N1U0ZWFoYmlFbU5LUk9XUHRkZFlNa3pCdTF4MXdF?=
- =?utf-8?B?VEVBS2FVVyt5UmpxWTJBRSszaTg4RGhIMVE5YytBRjFrenpWS2wvOUNKeXJF?=
- =?utf-8?B?WkEraktBRXFVbnBHaU52NUl5eWw0VFZhVjJndlgvdURkUXNDd2F1TjhtVGFT?=
- =?utf-8?B?RDByYUhGeHo2WU9OeEpEVHBIUUxxSVl3YW00SVpHM2JyWW5TTzRPT29WUXB0?=
- =?utf-8?B?TWJHSHovTTVyV3dGQVFBY2swMDJwK1FZV3pBMko0R3NhajJnNnd4RllEd0dq?=
- =?utf-8?B?WVBCQmRMTzI0d2VyQ1JEMDdRTUhkblFaQ3N2WHpNaWN4cjhXRE15YzB1Nm1H?=
- =?utf-8?B?NGc3UytGd0N1b3NUdVR0dUx4UlVjRDVsbkRDcjhXWXZrdnpoYWx6S1RFOU5C?=
- =?utf-8?B?UTNrVmVDSXJSNjR5V0dZWTk4eVkxQVpoby8ybmZBVlZRY2RXazN0K2pLOCto?=
- =?utf-8?B?Qkd4S1RjSGtyOFpSY0liQklvaWZoUDNvVVBLb1AwdzJqaHlZV1R3RzlSQVRF?=
- =?utf-8?B?dkFUTTdXSFEveERrL0xaWU5MeUQ1eW9OUXl5M1B2aWI4MHJRNGk0OGFuc01t?=
- =?utf-8?B?THJZdFZRMDEvY2tLNndCQUhzU0NOcUFtMkJ0MzlhczdZM2Fja0lJV3NqUlFt?=
- =?utf-8?B?emt5TXpTZXNKYnpPU0JXMzFIa3c0QXhSM2t4R01GMmQ0aUMvc205MWJlOTZt?=
- =?utf-8?B?NjVaTzUvbk44SjNjbitTSWVWZ3hHQXJYdm1JTDAwWU5xclBKdktjYWZxZDN5?=
- =?utf-8?B?RFFxVGJxTjczdHQ5dWViZFZrd0pVK1VseW1iZ3llL2NhUFVzenl3MytQN3Y4?=
- =?utf-8?B?VWE3RzBqTmkyajVCUjF0ZkZaZHFZVmRoZlRmQmcxZWFlWU1CcTdKNGFaK0lF?=
- =?utf-8?B?TzZMMXk4ekxGTkZMYW9CZDJnY0Zud0FIVXBKSHZnRmdzQ1NuMy82S1JKcVdT?=
- =?utf-8?B?NTJTZGppU2hlV1pPYjZQbTA1T0E2VFp5eWVlQVhmUFlFaTQva1ZQcmp0Rno0?=
- =?utf-8?B?dm9KT013ZGxENVhDL2F4OHZhWHhnaVE2QTduOXd0RVJUK3d2QkMxU1luNlo4?=
- =?utf-8?B?V0tUYmtzbTdJVGhDMDM2TzN6c0IrN0pYa096aWpaL3hXZGhzQkVuSDl2ckNT?=
- =?utf-8?B?UWw2eDd0WEVqYmVucGFLeWpCckpuc0V1dVBabmVVSjNwd1lZaEtyMEhEcCt4?=
- =?utf-8?Q?1z7iMc=3D?=
+ ARA:14566002|24121999003|22091999003|15080799012|5072599009|8060799015|41001999006|51005399006|23021999003|7042599007|19110799012|6090799003|45011099003|25010399006|40105399003|3412199025|10035399007|12091999003|440099028;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?N29kVzZJLzE0Ync4Zm0xUEJrd2pkL3luNEdFN0Q4VVBnMmkxQk83WGliNGE1?=
+ =?utf-8?B?SVlrRWMwQzZkd2hTNW42TExwWTZVaDB3U0FXbHlmb0ZHWG9iaEI2TWNyUUpk?=
+ =?utf-8?B?d2lTdy92WXN5U1hkS0RQL0xVUE9CSVlnQ1dFbTU4aVpNcFdaVXQrUS8vakRo?=
+ =?utf-8?B?OTBVZ0ZoYzNKdzE5NU9nTGtoc3gyWGVoK210cE9Edm4zR2VvN0Q2NkJIVW9T?=
+ =?utf-8?B?bTJSZ3BTaENtZGJBU2tWcDZjd21ONCs5cjM3YUs4aXpaZ3ZOZm5lM2FKS2R1?=
+ =?utf-8?B?K3hBSlNKd1hTeXFRZHlUeldpQi9VdjZCdVJ1Y1pZYnAxWklLQzRaSEVaVFdr?=
+ =?utf-8?B?aU9ZRzE0OVUvQUtqcWd0bSticVladHZQSGQxTzA1TE96Vmg2MmlsWlVXYjhu?=
+ =?utf-8?B?R2VoSGhtcW45OVRwWVk0bDhrMk42RnZUZTg1RitTaTlwMnFSRUROVWZyM3Jn?=
+ =?utf-8?B?YWRNVk5rUWxueFFkN1dxc0crbE4wNjJvb2JJdmFkU0xVWVllUEphNWpESlRj?=
+ =?utf-8?B?OXBMdDF6bkltSFRzYkpuSXdDSWE3NG1qWmtUQ2NTZ3NxOENwK1J5d2s4Nlk1?=
+ =?utf-8?B?L0tJczBxZXQ1U2FXcTlUb1R1VWxld3kvZkUyWkFyOHlBWlhBOGU0bnlGV2ND?=
+ =?utf-8?B?QjhPcSt5MW9pbis2cWNvTThpT24rRGNWREQ5YUkzN21hYjVpbytGT2xjUWY3?=
+ =?utf-8?B?amZiU1lwaXRldmphZjBTbi9rOTRQTTRpaC84R3UxblA3TzV4TlhaaS9wNDNL?=
+ =?utf-8?B?M0hwMnhsb3ZRdzlEQXR5WUdYQTJhb3VJSk5BRkRlM1JCc3ZhSS9QdUZDY3l2?=
+ =?utf-8?B?bFk0T3diOXRKS0ZwT1V2STNnWU1kQXRSYkk0alpONUZrUE9LMFljNHhhcDdX?=
+ =?utf-8?B?S2xxTlExNjNYRldDZWdRaXFlZjZ6UWpuQ2doYVJoQ292MG1RZFBKQzltSGNa?=
+ =?utf-8?B?VVpHZE5QeDFBZjZiMG82NkRCb0pWTVlLRFFPSXFXSkZ4MGQ1Q2phZm1Jc2U2?=
+ =?utf-8?B?Mm42QVJheUlVK2tzYzIyaGE1eUg4YkwxOThCTGZCa1Z2dUVubVZXUG93eDBC?=
+ =?utf-8?B?cGd3azNFc3lBV0RiR29PT1E3MmVoOTViNlhSQWpYdytUZlladlhxZkp3UzdW?=
+ =?utf-8?B?Z0JvcVRZTXNCYkxrTHpvV3dWSlhQdWsrZ1NWOCtZVm1sc3dhaHhLZ2RPZHVN?=
+ =?utf-8?B?NHErQWVWOEw5em1UUnhjV1B4YXVWaVhsUkFVYVBZRFJaQlVYbkMxYi9CeWdN?=
+ =?utf-8?B?WWxUcXdpNjE1bnpLYTJBQUs3WmlFb0RMdWhMZ2xvYVBybG1LRkJYV0h1QW9h?=
+ =?utf-8?B?ZjR3TjlTSnJtT2FzUkJUR2tqbGNzUUFLOTBLWENGTFF1T2RvNnFaemJNNGxi?=
+ =?utf-8?B?M2NqVmRycHA3Z0NBVDVxdzVMMTQ4cC90SHdvSUt4V2FtbmlidXB3QjlhTFlB?=
+ =?utf-8?B?V09GVFBudlkxQ3Y0SHpkd2d1V0l3cmVuRUdZWlVzSEJQNWFNQ0FOZDJ6OWlq?=
+ =?utf-8?B?Z2RGbTBDV2NkZVFZdFlEam9sNnErazdXNVdyeTUwTDQ5eVl2d3NGQXhPa3RD?=
+ =?utf-8?Q?D5ku4/H/SIxVSmxHYsvdr5yTs=3D?=
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?aWRJOE9tQ1lmVHhWN1UxM2RmeFpycHJ3ZVlPckUzOE5yUElMY0dZT0JRTUhH?=
- =?utf-8?B?NkZhak8rdmNhSDlGMXpoTVNvWVBRSDRvMG1DM1B0M0h0SDdEWDVqTC9XbEdU?=
- =?utf-8?B?SHNGOXErWWZDMFJDdndqMytVeXRNRmFxTGk5b0VmZGZYVHMxYjhJZG5nNEo1?=
- =?utf-8?B?aWdDYjMyT0xrLzRJQkdESG5mbUw1cExPcGV6czNTQm42OHdBcjRDaHBwUVJa?=
- =?utf-8?B?UXZTbmVoZkhReUdNdDlKYk40Zlg3SmlKSlRlMHpDRGwyQlJIUjd5engySEVt?=
- =?utf-8?B?MDhpaUtMU29wcmU0aHJDcnQwa0tPVGdHYzBCci8va25kM0NJSGMyZ0g1YW0y?=
- =?utf-8?B?Ym5NYXJURnRSYktIMFBuaTh0R1FQeDZLQnNnQUZJNkZBVVViU0h6Z2QvVGFw?=
- =?utf-8?B?S3RaSFB0QTVRV25NSW1oLzRRZ2xqeDVYZlZOT2FLNUVxR1RZeHQraWRHUmVr?=
- =?utf-8?B?dHlvczNFbGJSN0tnS0xKNG03UGRqKzJ3czl1a1V3anY2SXVwVmRPdHdrMnBK?=
- =?utf-8?B?UnNIKy9ma3pYSGwydXkvWEVXNTlGelF6bWxaM1VRekRTaGVrWXlhMTRCUnVK?=
- =?utf-8?B?SW1hOFFlQVRsdnJZdmpCanlWeGcyTTljZVV3ZDBWMW15bHUxdVZFUmdQWjVK?=
- =?utf-8?B?NDUzTi9CK1VWMjJBV2FKRlhMdm5ySElFMHEzWTZBb21sSXM5b3F5SUxRZVIr?=
- =?utf-8?B?QTlhdjZJeGZmN1NPS21waEVHOEFDSnNBYkFUUUZSZDJmMmRTSG9RUXNCTHBj?=
- =?utf-8?B?VGdJakRyQkZHU1FuVGtCdkZHcjRzVkcvWHdKaUJMRmJ1VjNwYUZTVHdtRlpZ?=
- =?utf-8?B?ZnlqdUZmSVlnUTlKbzdlSksvLzVKTzlqc1dOYkUyNjIwUExSdGZ0RUhKRklP?=
- =?utf-8?B?amRMb3J1c1ZZOG5mYW9pZHpadnFoclhwdlR6N1FwTnVybVoyWDN0bUdIMGl2?=
- =?utf-8?B?R2ltK0VRZ0c3ZlJCdEM0LzFPdDM2bHJ4V2JSMVMwRVc4R3VSMG5udFpaS2N2?=
- =?utf-8?B?ZGVqcjd2WXh0d3F6SVBKOVgvTlVFdTZZRGg4enFLRFNuYUpIWEtYQzBOVUZo?=
- =?utf-8?B?YStmdEY5WGV6ZkVHVEZid2J2ZHNNejZobnFKYno2bFQrUGtUMDJMaVBuZGwz?=
- =?utf-8?B?UXJja1hjWmRXYXFydi9NUkFnK3pyMHF4K1RmVlJHSnZ3dWxUdDVBWWtJdFFu?=
- =?utf-8?B?UU9LOGltUFFTdTZ0NENOZkJkK05yaHhOU0dPbXkwTzFOdC9TOThLS0YyaWFM?=
- =?utf-8?B?Zkxrbk5qVUh6eXRiN1pjNzF6RSt4ZitOdEtjYUlqSDR1L2VUeXFvOVROUTFW?=
- =?utf-8?B?YkpiM2wxdHhvMHRHOTVDVG9vVU9jM25TYU0rekVvbm5WdVFpZDN5SDZ6MzFz?=
- =?utf-8?B?bDNTSmxhQjVqYUZPRmVpREtWSVVPZ2FuQWtZQW5iYzEyRFdsY2s0VkJ1eGtw?=
- =?utf-8?B?S3ZubzQrU2pvbDdOWFR0aVNiS0dESmI2dTNudjV3MWk1MDM4elBEaUdpNmt2?=
- =?utf-8?B?YXF6K2FCQ0FNOWNoWndwNExqNy9VVHpEcWMwNkdUK0NWSFhyZjk3aTE5KzNQ?=
- =?utf-8?B?bE9yUTQ3U2FqQm1TdjJGZnM3ekw5cVVxcDBUVHdTMC9mNGNiV0lrMmNpOWpq?=
- =?utf-8?B?Wjk3MnIzUSt2WDJBUEtaMkh2aGdoK1YyYkNMQmp3ek9kVG1ZcDNLeDNlbGdx?=
- =?utf-8?B?TE5JMXc1Z1dmemhrN3QwVHM1UndDMldNSWk1YXBzZFRYdHQ2eld3Q3FBRFJF?=
- =?utf-8?B?Y296N0JReDE5WDlsWE5seVByc0Z2d056a0ZkZnQvUzZzWVJsV2hGb3I1eEht?=
- =?utf-8?B?U2ZybXZhSHgyZmF0Vk81TDhFUGM4eldITDdmelNOVTdxSG4yYStYZlUzZFZX?=
- =?utf-8?B?clJrSHVMeTBYQ0RyWDRqSExad1NUdDNFeFJTazN2Vlg5b0NnNGYvejNZUjBn?=
- =?utf-8?B?QVRyWlg3dExnaEJHcSs4eWhxdWUrK1o2eUFLWTVmdCtjczhPb3lmcXVvY2N2?=
- =?utf-8?B?bUMyUDNhNG5RPT0=?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?YmZlUTFXakYzN200SWVMaFp0TGhFUy9NYmEzbDhFOGs3eWlKdUtUOGJBdGRN?=
+ =?utf-8?B?V1Q4SUJFKzNYdmZYZmFnOGl4MWpwNm5MY2ZXNVNtTGJMNmdkVU15bHpXaFNV?=
+ =?utf-8?B?TzdPMWR6TUFEMnUxL2Z2RVBTZDYxNFZlTlpFa3dTWlI3UkNjc0dyNTRHOFo0?=
+ =?utf-8?B?WTRiMXBrdzEzM2k1VEwvMVNNelQydHNNcmJuU1kxb3B1Z3lzTUlvVnZadTdE?=
+ =?utf-8?B?N2l3Tzd0YlFoaGVnOWxpM202M0poVnc0NjI1c1pnd21DTSsrdW56d2xCQnhs?=
+ =?utf-8?B?bUFQS1FkQzFpTjBWeTkvZHZDOWlzSGFlNERJdTY4cXVqanRJSU5aOTBnYm9z?=
+ =?utf-8?B?TTdCaytmMWJLTmt4SW5kTHhhcm82MnRFTVlVNW9XNlZ0dkFsWC9mVHk5UHNp?=
+ =?utf-8?B?elFOaitoM2pZc2pEUjlGT0hPSnBKRVhXNnZJZjNGT1grSENqTS9FYUZMQjlI?=
+ =?utf-8?B?RnpxcnBjbzNaNm9BUXZEbitVK3FvZjlDVXdYeG5VY2RnQXRMREtoQXZqZVVN?=
+ =?utf-8?B?MUM0QUo4MlZ6eUNybUx4L1pCQitQYlpiOHFiT2V5b3ZiZ1VnY2pZOTNKeFlM?=
+ =?utf-8?B?MHB1SXZxQjFRcWExemtjekw0aWl4L3NGRldwczZ6NmE2QzJGY1h3bXpZcjVU?=
+ =?utf-8?B?SjRwdVFMT1VIV0tFOTduZnprMWxRRFNQTVBHVkxHOUR1NmpleTh0MmJoZ0ln?=
+ =?utf-8?B?cWdzcXF3Sm02YUpmb2FMUk5qc3d6U3YwL0UzU3VHRlE5VXcvWDkrSzlJUnZG?=
+ =?utf-8?B?ZmxIZUt3Ylo4clFGVlpIcGtUK1U1VDJYZUJPaVg0MmtyR0ZsRFdxYm5sRTgw?=
+ =?utf-8?B?bDZKcHNGTzB1dmFsVUFhcE5tenlGM0tkd0Q1S3NVSWsrTVh4bXZqZlJ4NWxu?=
+ =?utf-8?B?SkpOUFhacXpJUHdiWUovK21YdjVCSm5VQ0RaaTdTbFhUb0ZWY053K3BVQUIr?=
+ =?utf-8?B?eExNK1pObUFQNHV2MFBjRUw3NlE0UHFCY2ZuMGQvdzFaM1BKTWdNc1hDQmg5?=
+ =?utf-8?B?M0NZQTg4dXIzbmlINW00KzFBYysybGZKK2RCZEs3SFRUMm1mTSs1c3RReW9E?=
+ =?utf-8?B?K3p6NUxuMWhnNlR2T05ZVGZWYzZHSTYwcERieUExMldEOVhOTGo5S2w0SHBP?=
+ =?utf-8?B?OHY5dHRlR1QzYkQ5SmJLVjE1aG5ydFZzaWlvNnZKVnZYM2VtMHBpMzJCejZP?=
+ =?utf-8?B?ZE00cHBZdjJUQmt1cnFNOGlDZnlGcmVPdytORnhwVC9rSklNamgwZGh4ckc2?=
+ =?utf-8?B?TjM1UWRoaGFnaURJRzZkblBHcDg3VWVYYnMyUnREUkd5V1Y5OC9nQ1BVMFZE?=
+ =?utf-8?B?RExKNno0ZVFtU01VeFZkN3BMN0xEK09PTHEyLzhUUGMyMHRYOTZrdTVSZm9K?=
+ =?utf-8?B?eDBOU1BsUlU3OS9uTm01K1FPYm1LL25sT25hc2NUTTQ2Q3VVVmcxeGh4ajhM?=
+ =?utf-8?B?bk1zR0NYZjhOQmhtemk4M24xcFZDelI1NzBDSHNObkk3My8vWnZaV2lCcEZ2?=
+ =?utf-8?B?MXdML3ZrcXlpNXVhSE5Bc2FzUzNqWWdlVnZHdElERllhVzhPQStiRjZxQ1pq?=
+ =?utf-8?B?QTlGZW9VL3gvSWk4d0JNUUthN3pXK0FMKzR0YnI0SEdGcC95NENYQjJlb3R2?=
+ =?utf-8?B?VktLNFBhUVVRS1EwZFkrWW5USXRlMjZSSVF4R3MzcVQxRGcvOVV6TE9iYlNY?=
+ =?utf-8?B?YWxMdE5BZjRTdkdid2ZiU1RtdjNON3dOTDNVU00rLzRhZC94TEwrS1JHTlVT?=
+ =?utf-8?B?bmlhNFhWaldpalNSRkFtT2dqTGR1OGRESXY1UnlXKzhwSXNIMS9LMnMxSEdo?=
+ =?utf-8?B?b0J1MVlmQjlURVlLdVFLVklKSWtVWE5VOU8wbGlWa0ZDUEp0cHI0dWhJemho?=
+ =?utf-8?B?RmVlT1Z1Y2wweEdvU1ZuUzNjdnV0TTB5bEJrY0FvUzYzdE45ME1nTUkxOXpD?=
+ =?utf-8?B?c1JRS1h5VDdyV2tLbDJnUHBQbGZUakNQb0FHNmo3WTY4QVdpaWl6YWRGVyty?=
+ =?utf-8?B?TkdDd2dzUkt3PT0=?=
 X-OriginatorOrg: outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: c73b8d70-0e40-4662-ff6e-08dece0fe6b2
+X-MS-Exchange-CrossTenant-Network-Message-Id: c23a700b-35d4-4cdd-ac3c-08dece10739b
 X-MS-Exchange-CrossTenant-AuthSource: SEZPR02MB5662.apcprd02.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Jun 2026 14:34:42.5627 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Jun 2026 14:38:38.9094 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
 X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg: 00000000-0000-0000-0000-000000000000
@@ -183,9 +184,9 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 6/15/26 7:55 PM, Chao Yu via Linux-f2fs-devel wrote: >
- On 6/12/26 19:58, Yongpeng Yang wrote: >> From: Yongpeng Yang >> >> The largest
- extent takes effect during both read mapping and write >> m [...] 
+ Content preview:  On 6/15/26 8:05 PM, Chao Yu via Linux-f2fs-devel wrote: >
+ On 6/12/26 19:58, Yongpeng Yang wrote: >> From: Yongpeng Yang >> >> Previously,
+ when an extent being inserted overlaps with the largest >> [...] 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -199,10 +200,10 @@ X-Spam-Report: Spam detection software,
  0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
  [yangyongpeng.storage(at)outlook.com]
  0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
- [52.103.43.53 listed in wl.mailspike.net]
-X-Headers-End: 1waaJ7-0003rs-Ib
-Subject: Re: [f2fs-dev] [PATCH RESEND 2/5] f2fs: only initialize largest
- extent without extent_node at inode init
+ [52.103.74.78 listed in wl.mailspike.net]
+X-Headers-End: 1waaMq-0004mI-VT
+Subject: Re: [f2fs-dev] [PATCH RESEND 3/5] f2fs: punch largest extent
+ instead of dropping it entirely on overlap
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -223,7 +224,7 @@ X-Rspamd-Action: no action
 X-Spamd-Result: default: False [-0.01 / 15.00];
 	ARC_REJECT(1.00)[signature check failed: fail, {[1] = sig:microsoft.com:reject}];
 	RWL_MAILSPIKE_EXCELLENT(-0.40)[216.105.38.7:from];
-	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7];
+	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7:c];
 	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
 	MAILLIST(-0.20)[mailman];
 	MIME_GOOD(-0.10)[text/plain];
@@ -254,91 +255,108 @@ X-Spamd-Result: default: False [-0.01 / 15.00];
 	TAGGED_RCPT(0.00)[linux-f2fs-devel];
 	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,outlook.com:-];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[outlook.com:from_mime]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[outlook.com:from_mime,xiaomi.com:email,lists.sourceforge.net:dkim,lists.sourceforge.net:helo,lists.sourceforge.net:rdns,lists.sourceforge.net:from_smtp]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: C8FFB6A66FC
+X-Rspamd-Queue-Id: BE39C6A6750
 
 
-On 6/15/26 7:55 PM, Chao Yu via Linux-f2fs-devel wrote:
+On 6/15/26 8:05 PM, Chao Yu via Linux-f2fs-devel wrote:
 > On 6/12/26 19:58, Yongpeng Yang wrote:
 >> From: Yongpeng Yang <yangyongpeng@xiaomi.com>
 >>
->> The largest extent takes effect during both read mapping and write
->> mapping lookups, while read mapping does not need to access the
->> extent_node. For write mapping, the case where the largest extent is
->> not in the extent tree can already be handled by the merge logic, and
->> cases that cannot be merged do not require the largest extent to
->> participate either.
->>
->> Therefore, the largest extent does not need to initialize a
->> corresponding extent_node, reducing memory footprint.
->>
->> Signed-off-by: Yongpeng Yang <yangyongpeng@xiaomi.com>
->> ---
->>   fs/f2fs/extent_cache.c | 18 +-----------------
->>   1 file changed, 1 insertion(+), 17 deletions(-)
->>
->> diff --git a/fs/f2fs/extent_cache.c b/fs/f2fs/extent_cache.c
->> index aa368a01b035..f8d94db60dc6 100644
->> --- a/fs/f2fs/extent_cache.c
->> +++ b/fs/f2fs/extent_cache.c
->> @@ -410,10 +410,8 @@ static void __drop_largest_extent(struct extent_tree *et,
->>   void f2fs_init_read_extent_tree(struct inode *inode, struct folio *ifolio)
->>   {
->>   	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
->> -	struct extent_tree_info *eti = &sbi->extent_tree[EX_READ];
->>   	struct f2fs_extent *i_ext = &F2FS_INODE(ifolio)->i_ext;
->>   	struct extent_tree *et;
->> -	struct extent_node *en;
->>   	struct extent_info ei = {0};
->>   
->>   	if (!__may_extent_tree(inode, EX_READ)) {
->> @@ -435,21 +433,7 @@ void f2fs_init_read_extent_tree(struct inode *inode, struct folio *ifolio)
->>   	if (atomic_read(&et->node_cnt) || !ei.len)
->>   		goto skip;
->>   
->> -	if (IS_DEVICE_ALIASING(inode)) {
->> -		et->largest = ei;
->> -		goto skip;
->> -	}
->> -
->> -	en = __attach_extent_node(sbi, et, &ei, NULL,
->> -				&et->root.rb_root.rb_node, true);
->> -	if (en) {
->> -		et->largest = en->ei;
->> -		et->cached_en = en;
->> -
->> -		spin_lock(&eti->extent_lock);
->> -		list_add_tail(&en->list, &eti->extent_list);
->> -		spin_unlock(&eti->extent_lock);
->> -	}
->> +	et->largest = ei;
+>> Previously, when an extent being inserted overlaps with the largest
+>> extent, the largest extent is dropped entirely. This was done to handle
 > 
-> Previously, we can split largest extent node to two if we punched it, now
-> we can not? IIUC.
+> Please correct me if I missed anything, I remember that we will add largest
+> extent in below path?
+> 
+> - __update_extent_tree_range
+>   - __insert_extent_tree
+>    - __try_update_largest_extent : update largest w/ right extent
+>   - __try_update_largest_extent : update largest w/ left extent
 
-Prior to this change, the largest extent could also be shrunk, so the
-set of scenarios that need handling during punch remains identical
-before and after the modification.
-
-For the largest extent, it only needs to guarantee that the mapping
-information it records stays consistent with the mappings tracked in the
-extent tree and multi-level indirect indices. The punch operation does
-not break this consistency. Moreover, the largest extent is not required
-to be the longest extent among all entries in the extent tree. It merely
-needs to match the mappings stored in multi-level indirect indices and
-be no smaller than the maximum extent present in the extent tree.
+The largest extent might not reside in the extent tree. If
+__update_extent_tree_range invokes __drop_largest_extent, the length of
+the largest extent will have been set to zero. As a result, the largest
+extent updated inside __try_update_largest_extent can end up smaller
+than the largest extent obtained after __punch_largest_extent completes
+its punch operation.
 
 Thanks
 Yongpeng,
 
-
 > 
 > Thanks,
 > 
->>   skip:
->>   	/* Let's drop, if checkpoint got corrupted. */
->>   	if (f2fs_cp_error(sbi)) {
+>> the case where the largest extent is not in memory, avoiding
+>> inconsistency between the largest extent and the extent tree.
+>>
+>> This patch changes the semantics of __drop_largest_extent (renamed to
+>> __punch_largest_extent): instead of discarding the entire largest
+>> extent when any overlap is detected, keep the larger remaining portion
+>> (left or right) after the punch. This preserves extent cache coverage
+>> for truncate and overwrite operations that only partially overlap the
+>> largest extent.
+>>
+>> Signed-off-by: Yongpeng Yang <yangyongpeng@xiaomi.com>
+>> ---
+>>   fs/f2fs/extent_cache.c | 31 ++++++++++++++++++++++++-------
+>>   1 file changed, 24 insertions(+), 7 deletions(-)
+>>
+>> diff --git a/fs/f2fs/extent_cache.c b/fs/f2fs/extent_cache.c
+>> index f8d94db60dc6..82d84c4e98b2 100644
+>> --- a/fs/f2fs/extent_cache.c
+>> +++ b/fs/f2fs/extent_cache.c
+>> @@ -397,14 +397,31 @@ static unsigned int __free_extent_tree(struct f2fs_sb_info *sbi,
+>>   	return count;
+>>   }
+>>   
+>> -static void __drop_largest_extent(struct extent_tree *et,
+>> +static void __punch_largest_extent(struct extent_tree *et,
+>>   					pgoff_t fofs, unsigned int len)
+>>   {
+>> -	if (fofs < (pgoff_t)et->largest.fofs + et->largest.len &&
+>> -			fofs + len > et->largest.fofs) {
+>> -		et->largest.len = 0;
+>> -		et->largest_updated = true;
+>> +	unsigned int largest_end, punch_end;
+>> +	unsigned int left_len, right_len;
+>> +
+>> +	if (fofs >= (pgoff_t)et->largest.fofs + et->largest.len ||
+>> +			fofs + len <= et->largest.fofs)
+>> +		return;
+>> +
+>> +	/* Punch [fofs, fofs + len) from largest extent. */
+>> +	largest_end = et->largest.fofs + et->largest.len;
+>> +	punch_end = fofs + len;
+>> +
+>> +	left_len = fofs > et->largest.fofs ? fofs - et->largest.fofs : 0;
+>> +	right_len = largest_end > punch_end ? largest_end - punch_end : 0;
+>> +
+>> +	if (left_len >= right_len) {
+>> +		et->largest.len = left_len;
+>> +	} else {
+>> +		et->largest.blk += punch_end - et->largest.fofs;
+>> +		et->largest.fofs = punch_end;
+>> +		et->largest.len = right_len;
+>>   	}
+>> +	et->largest_updated = true;
+>>   }
+>>   
+>>   void f2fs_init_read_extent_tree(struct inode *inode, struct folio *ifolio)
+>> @@ -680,10 +697,10 @@ static void __update_extent_tree_range(struct inode *inode,
+>>   		dei.len = 0;
+>>   
+>>   		/*
+>> -		 * drop largest extent before lookup, in case it's already
+>> +		 * punch largest extent before lookup, in case it's already
+>>   		 * been shrunk from extent tree
+>>   		 */
+>> -		__drop_largest_extent(et, fofs, len);
+>> +		__punch_largest_extent(et, fofs, len);
+>>   	}
+>>   
+>>   	if (et->largest.len != 0 &&
 > 
 > 
 > 
