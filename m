@@ -2,18 +2,18 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id rELTCveWOGq2eAcAu9opvQ
+	id ONeyOn2YOGoNeQcAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 22 Jun 2026 03:59:19 +0200
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 22 Jun 2026 04:05:49 +0200
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5C0706AC016
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 22 Jun 2026 03:59:18 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 32BBE6AC022
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 22 Jun 2026 04:05:49 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=lists.sourceforge.net header.s=beta header.b=l5NN5MHx;
-	dkim=fail ("body hash did not verify") header.d=sourceforge.net header.s=x header.b=iVBNyxdP;
-	dkim=fail ("body hash did not verify") header.d=sf.net header.s=x header.b="X aU/Q8j";
-	dkim=fail ("body hash did not verify") header.d=kernel.org header.s=k20260515 header.b=c2gjm5hI;
+	dkim=pass header.d=lists.sourceforge.net header.s=beta header.b=JI3Sznz1;
+	dkim=fail ("body hash did not verify") header.d=sourceforge.net header.s=x header.b=LKw2o7f7;
+	dkim=fail ("body hash did not verify") header.d=sf.net header.s=x header.b="f Bq45Ra";
+	dkim=fail ("body hash did not verify") header.d=kernel.org header.s=k20260515 header.b=LR8Y8W7z;
 	spf=pass (mail.lfdr.de: domain of linux-f2fs-devel-bounces@lists.sourceforge.net designates 216.105.38.7 as permitted sender) smtp.mailfrom=linux-f2fs-devel-bounces@lists.sourceforge.net;
 	dmarc=pass (policy=none) header.from=lists.sourceforge.net
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
@@ -22,64 +22,64 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	List-Unsubscribe:List-Id:Subject:MIME-Version:Message-ID:Date:To:Sender:
 	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
 	Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Owner;
-	bh=dOlQj6Dcumq1zJcBsyq1s+JFR2Faon/y2AiwgPjvpjU=; b=l5NN5MHxf+Sl+7xaktd5HgVInQ
-	gzs6L7yxaq3HkUxzwyDAkExGxOwGK8/ahrHe/m24RsCP59xqdC9EkqQGgxJ4ogdP8+DN/T003m0U5
-	c6I6Ki91ZrZbzjrt4vJvoaBvPO7ah83MX0kps8FHcqqnBlW0Dv2P8JX8ATys6eWh8K0U=;
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=YEn/Kzdxt0oSOlC592L3CbcIEW1vBII5yVYwWCiWCY0=; b=JI3Sznz10bUbKegNoK+3ZAUZzr
+	GehJ4bMr3MjKaZ0gpNT1xRk59cEe/sgqgzO3bdBtvaWf9kyyWqDouPH1D29A5GV8bkkAfO5wDLq17
+	XerWDySm8Wlc0PfhcAFOrM6R6VVkN0W1Gd8MYhVbf7nS77RL/ujPdjRXWhjlbJFTOT5s=;
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1wbTwL-00006k-RK;
-	Mon, 22 Jun 2026 01:59:10 +0000
+	id 1wbU2h-0003Uq-Gi;
+	Mon, 22 Jun 2026 02:05:44 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1wbTvw-00006F-PK
+ (envelope-from <chao@kernel.org>) id 1wbU2Z-0003S1-2n
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 22 Jun 2026 01:58:45 +0000
+ Mon, 22 Jun 2026 02:05:35 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
  Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Dtf5/pJLwpCVA1mBxYREJNiC2NC0806gE2r8IszMhpw=; b=iVBNyxdPDr+3Zf1UkmApzi+QR3
- tL1JkDNYC0DoX+NpEzXHW+nIiwZ6DvkTPypglwCKaMcqTDizw9IXINeOg7b58Vj/NmM9zk7Iq4dt0
- Gde3DAk6RFXVU3JOCP7n+7+a6OWeV6WT1nVwJtcbqUmEWTlm1cA84OKZXzUpYAZHVYNY=;
+ bh=Lu5iU7fBtv4Chc3ojEDmb6o6SqWI3VKMJzPc8hK6LqQ=; b=LKw2o7f73aXjbGuH1wweas/tv9
+ 3fSt6Gja3eetpuB0KEZNYFiV1FS6yyGEYyoPVVDWRrLr3KOgKd48xOt4H1C+xnqZ4txB5UzznPgwG
+ kShRqwJAqht9/1dhCYWYrzcpTf8h5ow3Hjw1KT+Ygugwp5V0PzyxOB9UKWHFb67LDE5k=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
  :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
  Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
  References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=Dtf5/pJLwpCVA1mBxYREJNiC2NC0806gE2r8IszMhpw=; b=X
- aU/Q8jQY+f6/iIioSxog8HIdIu16VF9K3a2t/wcVNfQxzENX96YtVOsBy4a+/CAGH2vvsFdhzzKdL
- LDmbvlp9Slld6as2xCwhWIQruNcpE9ZOtT5vD5Iyp9szvqiRUTyJVcwnqn1p6vQV56juRqQ/qq/ks
- 3AYNd3BMejWj1/OY=;
+ List-Owner:List-Archive; bh=Lu5iU7fBtv4Chc3ojEDmb6o6SqWI3VKMJzPc8hK6LqQ=; b=f
+ Bq45Ral4bl/vFVM6kfwdoLL5Pm3FU1p41QsE5Kk+gnfOnqx87gIOzxRzYmEH//i+OiTA2WAsnofNW
+ +jfOcVkElYYMQ6u1eP03+zOMpIICZOi2roAyN7ezI38j9V1kjSqu/fXTj23KhRLniSEMh+yLdjRMh
+ yRe+o+7ZB9YfAw0A=;
 Received: from sea.source.kernel.org ([172.234.252.31])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1wbTvw-0003xl-Cy for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 22 Jun 2026 01:58:45 +0000
+ id 1wbU2Y-0004bZ-M5 for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 22 Jun 2026 02:05:35 +0000
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by sea.source.kernel.org (Postfix) with ESMTP id 8BE64408FC
+ by sea.source.kernel.org (Postfix) with ESMTP id CFBC64172E
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Mon, 22 Jun 2026 01:58:34 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 87F911F000E9;
- Mon, 22 Jun 2026 01:58:33 +0000 (UTC)
+ Mon, 22 Jun 2026 02:05:24 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id CEE8A1F000E9;
+ Mon, 22 Jun 2026 02:05:23 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
- s=k20260515; t=1782093514;
- bh=Dtf5/pJLwpCVA1mBxYREJNiC2NC0806gE2r8IszMhpw=;
+ s=k20260515; t=1782093924;
+ bh=Lu5iU7fBtv4Chc3ojEDmb6o6SqWI3VKMJzPc8hK6LqQ=;
  h=From:To:Cc:Subject:Date;
- b=c2gjm5hIWPXYwq8yzjQBnE1OF/jcg2/YR1rbsrPtaHmHDjbJc5scjBnOL0d2MzOG+
- cuBs4k5av9eDULrRA2QsH4MRqfOuTSMmLiXuSQEUIFf8D4VpTNe7BZ0b5A48bvDjYp
- E8mXRsjLdKv5YjTLoJiHLVRZ4j1/8k8dbvFJVJFc9I4SBultXgqSpgQg/0vkxHqUKK
- p7iHsbvj1IZYnDHuJtJQjkYBuy4jechs1xC2wqrhL9IWVEE63GYbbKmQsCYyYaiv2i
- xQW/aBWynuMWqwxQpemJJVlidajuBhBgQTQwOYI8kCCsqgGE/D8Pqr07B701FCFVxX
- 8k7sqrNtZ8QcA==
+ b=LR8Y8W7zFK6TydC2zO+xSIFnWFpzqSY3NZMRh4jT2TxVMn7+CeeSBijiFkjomLgsU
+ jfD2Y5smk22rkUClGwQ1fNlj2J+oe+e58WhFP7hcwZLkFX04SjyCUG+Tdom7GlKSYB
+ +octpONMW4v4NQy6flDiL4tFGgMQDhKY8LwlHWfKsgLPJYldim5zkf5pvZl3tn1Bel
+ KdqpqBL21dxGXQHidvkercGf4uYT6SkX2dJqa+ExIxh0E0nuaOhaCDPxweLHFGBY9H
+ hq2iQMizIg8fykZaJptiikBVegwJQ6ivopLs6Kv1lzE2+3qsUC2NS+CE6HX75xXt4T
+ VIw0u1eB182yg==
 To: Zorro Lang <zlang@kernel.org>,
 	fstests@vger.kernel.org
-Date: Mon, 22 Jun 2026 01:58:23 +0000
-Message-ID: <20260622015823.2361449-1-chao@kernel.org>
+Date: Mon, 22 Jun 2026 02:05:16 +0000
+Message-ID: <20260622020516.2372277-1-chao@kernel.org>
 X-Mailer: git-send-email 2.55.0.rc0.738.g0c8ab3ebcc-goog
 MIME-Version: 1.0
 X-Spam-Score: -0.2 (/)
@@ -92,10 +92,10 @@ X-Spam-Report: Spam detection software,
  Content preview: Update existing f2fs testcases to utilize the new
  _require_f2fs_io_command()
  helper for verifying required f2fs_io subcommands instead of basic executable
- checks or open coding. Signed-off-by: Chao Yu <chao@kernel.org> ---
- common/f2fs
- | 16 ++++++++++++++++ tests/f2fs/003 | 1 + tests/f2fs/004 | 1 + tests/f2fs/007
- | 1 + tests/f2fs/009 | 1 + tests/f2fs/010 | 2 +- tests/f2fs/011 [...] 
+ checks or open coding. Suggested-by: Zorro Lang <zlang@kernel.org>
+ Signed-off-by:
+ Chao Yu <chao@kernel.org> --- v2: add Suggested-by tag of Zorro common/f2fs
+ | 16 ++++++++++++++++ tests/f2fs/003 | 1 + tests/f2fs/004 | 1 + t [...] 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -106,8 +106,9 @@ X-Spam-Report: Spam detection software,
  envelope-from domain
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
-X-Headers-End: 1wbTvw-0003xl-Cy
-Subject: [f2fs-dev] [PATCH] common/f2fs: introduce _require_f2fs_io_command
+X-Headers-End: 1wbU2Y-0004bZ-M5
+Subject: [f2fs-dev] [PATCH v2] common/f2fs: introduce
+ _require_f2fs_io_command
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -166,14 +167,16 @@ X-Spamd-Result: default: False [-7.61 / 15.00];
 	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.sourceforge.net:helo,lists.sourceforge.net:rdns,lists.sourceforge.net:from_mime,lists.sourceforge.net:dkim,lists.sourceforge.net:from_smtp]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 5C0706AC016
+X-Rspamd-Queue-Id: 32BBE6AC022
 
 Update existing f2fs testcases to utilize the new
 _require_f2fs_io_command() helper for verifying required f2fs_io
 subcommands instead of basic executable checks or open coding.
 
+Suggested-by: Zorro Lang <zlang@kernel.org>
 Signed-off-by: Chao Yu <chao@kernel.org>
 ---
+v2: add Suggested-by tag of Zorro
  common/f2fs    | 16 ++++++++++++++++
  tests/f2fs/003 |  1 +
  tests/f2fs/004 |  1 +
