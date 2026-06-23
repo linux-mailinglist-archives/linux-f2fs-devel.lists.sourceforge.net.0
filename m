@@ -2,113 +2,88 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id 5vW3DGVYOmqI6gcAu9opvQ
+	id c0KiGkR9OmqW+AcAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 23 Jun 2026 11:56:53 +0200
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 23 Jun 2026 14:34:12 +0200
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6863B6B5FB5
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 23 Jun 2026 11:56:52 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6C0156B71B8
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 23 Jun 2026 14:34:11 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=lists.sourceforge.net header.s=beta header.b=RJrkk6nH;
-	dkim=fail ("body hash did not verify") header.d=sourceforge.net header.s=x header.b=KlLgdHpj;
-	dkim=fail ("body hash did not verify") header.d=sf.net header.s=x header.b="A VGSzy4";
-	dkim=fail ("body hash did not verify") header.d=astralinux.ru header.s=mail header.b=R3bclCMi;
+	dkim=pass header.d=lists.sourceforge.net header.s=beta header.b=jch8p6Zh;
+	dkim=fail ("body hash did not verify") header.d=sourceforge.net header.s=x header.b=IZClbVpI;
+	dkim=fail ("body hash did not verify") header.d=sf.net header.s=x header.b="jW7v/u70";
+	dkim=fail ("body hash did not verify") header.d=kernel.org header.s=k20260515 header.b=JSrGqXLK;
 	spf=pass (mail.lfdr.de: domain of linux-f2fs-devel-bounces@lists.sourceforge.net designates 216.105.38.7 as permitted sender) smtp.mailfrom=linux-f2fs-devel-bounces@lists.sourceforge.net;
 	dmarc=pass (policy=none) header.from=lists.sourceforge.net
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:MIME-Version:Message-Id:Date:To:Sender:
-	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
-	Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Owner;
-	bh=VhPWh84dSEAmuRDxy/QA+Pg+TPsvLQpo916hKJK/lmw=; b=RJrkk6nH8Ctg7Tum15xfR4Mn0l
-	P3A3wbHrOXReSa+Vl1CxBauuwg10kMY5zut60yjbM9OGHRFX5nPglFEZD5xxXkJHivVjihsIHSPWh
-	KwRiiL+oY9cvwDkM/xgKa0kfs/Q8m7r9PO+EijoLj+jfdTOngOguynNw6obIZnq60t7M=;
+	List-Unsubscribe:List-Id:Subject:In-Reply-To:References:To:MIME-Version:Date:
+	Message-ID:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
+	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
+	bh=9lOvJGakDD8+c4OheSTxHb1Vnk7KnTzizpbZ+6IZ8Zc=; b=jch8p6ZhPiNqnOsk7j5LqVu2Fy
+	qGnD/n3xHNU8iyE7Q6Pn/tDlC72POMzBwVfj6F/vlK54K1wliTVCX/4Sr9SmoPdqvJ2EkUI1dAGy8
+	kmgO4zHx3J/nLNsuW4/3wosnlPbc3ZBw64KhqNuKiot5xioJDIA6Am0KQS679kPSwZRw=;
 Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
 	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1wbxs0-0004ZQ-M2;
-	Tue, 23 Jun 2026 09:56:41 +0000
+	id 1wc0KD-0007an-8Q;
+	Tue, 23 Jun 2026 12:33:57 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
  by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <adiupina@astralinux.ru>) id 1wbxrX-0004Yj-PK
+ (envelope-from <chao@kernel.org>) id 1wc0KC-0007ah-7w
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 23 Jun 2026 09:56:13 +0000
+ Tue, 23 Jun 2026 12:33:57 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-Id:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ From:References:To:Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=O1xwAWkEKwWbJd6jrQ/wZSEgkRCRHBolaoO1XDqo9Bk=; b=KlLgdHpj5qKUviC8zNOdkPN5ST
- HHgf68525asoaWeZ7XXhH5BOBERlZfbOVFcYwRLXUvsg0BSPym+kjpyiZEdhuyDMRqfMKolCpUjgt
- fvHs/nyVKL4sfEe1EpZf8nIVTkxVgkNsh+2k7mj7hLOVQpl2fClEbXHekN8G57MaW6PM=;
+ bh=/aGgBfPyMzszIzymvupBP0xmSdeKVB6i92p170gFjGU=; b=IZClbVpIE6hthkYydCqZ1R9+U9
+ WuPB5toyYNA2Z/lBo9MqhCIHl4NdoBMpEaborgKfkaEDA2x5pjAZABSQQobSuvajZDIMUqtbP/xQz
+ GLaItYklyHOC/s4O9keD65RRX6XIB1YfWSmF9LxP/QmAV6LsaeuFE+MABMZEtFR8GHH8=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=O1xwAWkEKwWbJd6jrQ/wZSEgkRCRHBolaoO1XDqo9Bk=; b=A
- VGSzy4jS3JjvTKHcvrCksFPVqWlkYy/AXLNIOyBVdJFCSXNvRJ5tioTSwrPjUYTGhrRufYwDpWXiR
- xUm14/cAipSEb8XzxH1LAZ25FJskkkDGR7YexRtF0snutXKF2EoA8GoC/3Wu19nfUlBGgwsbcop8Z
- njEWhEi89lB2bOiQ=;
-Received: from mail-gw02.astralinux.ru ([93.188.205.243])
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
+ Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=/aGgBfPyMzszIzymvupBP0xmSdeKVB6i92p170gFjGU=; b=jW7v/u70ZAL60obGrRmTZeQj5m
+ rL8sUHa4DWaiR1T0tQaQ9QUnp7mPCb8pUN6EyrxsID0jmwt8JsdSBifxv9pWK8bFQj4KndcXdnuxB
+ s89eUT5IjJoi7VMaYRt/oFjleKjVVF6stpLYFiSVZh9xVrAd5yx9aXqq99a+Xr2vtyVI=;
+Received: from sea.source.kernel.org ([172.234.252.31])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1wbxrS-0002TK-2e for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 23 Jun 2026 09:56:12 +0000
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=astralinux.ru;
- s=mail; t=1782207447;
- bh=gnPNQSYLiix7tXGVjov4UJH1hC5zANPz0y23QKnaIxU=;
- h=From:To:Cc:Subject:Date:From;
- b=R3bclCMie3wL9XXwdxRLJhA+SFhPIiMszZ3Ke2zxKi8JQzK3+hYRpSnrm9hzl5iq9
- RwhgypwujTfdU7B3UWi3RPypWoXBMPm0KJtGxP+6YzWN6haji4yCuPuh5dT82qXL2P
- cV5FR0PwxCjpiCvj2Dzf+njOxhbPbC/U45Bp8Ftptf71UYAeISLwLFZllEhDPtpBw7
- aMwCUUsl524pNKenk4Ge9fTw9WlBc5fq9THEOtc6dA/wSM2vYzdq1It9aa0Il0aoBU
- rQEHHiIZBAU3S/KQ+BrTtIHvUGtP4F2B2iXSU84JRoO0wws1Tw1wpnlRhxFlSxUDgf
- HK7XfZ/xPcSPg==
-Received: from gca-msk-a-srv-ksmg01.astralinux.ru (localhost [127.0.0.1])
- by mail-gw02.astralinux.ru (Postfix) with ESMTP id D1A8F1F706;
- Tue, 23 Jun 2026 12:37:27 +0300 (MSK)
-Received: from new-mail.astralinux.ru (unknown [10.205.207.13])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by mail-gw02.astralinux.ru (Postfix) with ESMTPS;
- Tue, 23 Jun 2026 12:37:25 +0300 (MSK)
-Received: from rbta-msk-lt-302690.astralinux.ru
- (rbta-msk-lt-302690.astralinux.ru [10.198.19.150])
- by new-mail.astralinux.ru (Postfix) with ESMTPA id 4gl0N45RbCzJpkX;
- Tue, 23 Jun 2026 12:37:24 +0300 (MSK)
-To: stable@vger.kernel.org,
-	Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-Date: Tue, 23 Jun 2026 12:36:54 +0300
-Message-Id: <20260623093654.13440-1-adiupina@astralinux.ru>
-X-Mailer: git-send-email 2.30.2
+ id 1wc0K9-0002g5-OH for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 23 Jun 2026 12:33:56 +0000
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+ by sea.source.kernel.org (Postfix) with ESMTP id CC4C940241;
+ Tue, 23 Jun 2026 12:33:43 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 74BE61F000E9;
+ Tue, 23 Jun 2026 12:33:42 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+ s=k20260515; t=1782218023;
+ bh=/aGgBfPyMzszIzymvupBP0xmSdeKVB6i92p170gFjGU=;
+ h=Date:Cc:Subject:To:References:From:In-Reply-To;
+ b=JSrGqXLKAVSwk/AxJFD6u6nKPDz74H9gJ7TMWbmzgL4xIlBxBd+TNlaU5eEcdXcKH
+ nhMfK8KiWnmLU2njj4C0nY03eS6i7YEQmJtTe57Yej6ddd6siMUc1HlowRqZcqNbm1
+ nN8p7QOH2f6IgLOuXSG0HoQfgiRSMSI431PRXx0VLPn/eTn0vq8a9aDm0vkntrb38N
+ PIpOf56d5oCgrSUxQ8xb5j5eQ1ZyWFhoW8j340D8rnJSMiM4fNqqPetrNdb75MCIly
+ Zoic4k2TWXre6hDwu4J2bzdhWICN6y5+sPIusMs04TcTstAlJO0onNmc7XBqwwtNTt
+ cY1QuUZcwE0gA==
+Message-ID: <81f657be-1b80-4485-9719-a06cab015d6e@kernel.org>
+Date: Tue, 23 Jun 2026 20:33:40 +0800
 MIME-Version: 1.0
-X-KSMG-AntiPhishing: NotDetected
-X-KSMG-AntiSpam-Auth: dkim=none
-X-KSMG-AntiSpam-Envelope-From: adiupina@astralinux.ru
-X-KSMG-AntiSpam-Info: LuaCore: 108 0.3.108
- b3af89ff4c48cefaff455d02ab4cd72c6de3312f, {Tracking_internal2},
- {Tracking_from_domain_doesnt_match_to}, 127.0.0.199:7.1.2;
- new-mail.astralinux.ru:7.1.1; astralinux.ru:7.1.1;
- d41d8cd98f00b204e9800998ecf8427e.com:7.1.1, FromAlignment: s
-X-KSMG-AntiSpam-Interceptor-Info: scan successful
-X-KSMG-AntiSpam-Lua-Profiles: 204005 [Jun 23 2026]
-X-KSMG-AntiSpam-Method: none
-X-KSMG-AntiSpam-Rate: 0
-X-KSMG-AntiSpam-Status: not_detected
-X-KSMG-AntiSpam-Version: 6.1.1.22
-X-KSMG-AntiVirus: Kaspersky Secure Mail Gateway, version 2.1.0.7854,
- bases: 2026/06/23 08:10:00 #28271465
-X-KSMG-AntiVirus-Status: NotDetected, skipped
-X-KSMG-LinksScanning: NotDetected
-X-KSMG-Message-Action: skipped
-X-KSMG-Rule-ID: 1
+User-Agent: Mozilla Thunderbird
+To: Daeho Jeong <daeho43@gmail.com>, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, kernel-team@android.com
+References: <20260606011742.1205390-1-daeho43@gmail.com>
+Content-Language: en-US
+In-Reply-To: <20260606011742.1205390-1-daeho43@gmail.com>
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
@@ -116,10 +91,10 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: From: Dongliang Mu <mudongliangabcd@gmail.com> commit
- 5429c9dbc9025f9a166f64e22e3a69c94fd5b29b
- upstream. if2fs_fill_super -> f2fs_build_segment_manager ->
- create_discard_cmd_control -> f2fs_start_discard_thread 
+ Content preview:  On 6/6/26 09:17,
+ Daeho Jeong wrote: > From: Daeho Jeong <daehojeong@google.com>
+ > > This patch adds a dynamic management feature to the existing device >
+ aliasing functionality. It allows users to dyn [...] 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -130,8 +105,10 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-X-Headers-End: 1wbxrS-0002TK-2e
-Subject: [f2fs-dev] [PATCH 5.10] f2fs: fix UAF in f2fs_available_free_memory
+ 0.0 T_FILL_THIS_FORM_SHORT Fill in a short form with personal information
+X-Headers-End: 1wc0K9-0002g5-OH
+Subject: Re: [f2fs-dev] [PATCH v3] f2fs: support dynamic include/exclude for
+ device aliasing
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -143,14 +120,9 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Alexandra Diupina via Linux-f2fs-devel
- <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Alexandra Diupina <adiupina@astralinux.ru>
-Cc: Sahitya Tummala <quic_stummala@quicinc.com>,
- Alexandra Diupina <adiupina@astralinux.ru>,
- Dongliang Mu <mudongliangabcd@gmail.com>, linux-kernel@vger.kernel.org,
- linux-f2fs-devel@lists.sourceforge.net, Jaegeuk Kim <jaegeuk@kernel.org>,
- lvc-project@linuxtesting.org
+From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Chao Yu <chao@kernel.org>
+Cc: Daeho Jeong <daehojeong@google.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
@@ -159,95 +131,995 @@ X-Spamd-Result: default: False [-8.61 / 15.00];
 	WHITELIST_DMARC(-7.00)[sourceforge.net:D:+];
 	DMARC_POLICY_ALLOW_WITH_FAILURES(-0.50)[];
 	RWL_MAILSPIKE_EXCELLENT(-0.40)[216.105.38.7:from];
-	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7];
 	MAILLIST(-0.20)[mailman];
+	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7];
 	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	DMARC_POLICY_ALLOW(0.00)[lists.sourceforge.net,none];
-	DKIM_MIXED(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
 	RECEIVED_HELO_LOCALHOST(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	TO_DN_SOME(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:stable@vger.kernel.org,m:gregkh@linuxfoundation.org,m:quic_stummala@quicinc.com,m:adiupina@astralinux.ru,m:mudongliangabcd@gmail.com,m:linux-kernel@vger.kernel.org,m:linux-f2fs-devel@lists.sourceforge.net,m:jaegeuk@kernel.org,m:lvc-project@linuxtesting.org,s:lists@lfdr.de];
-	ARC_NA(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
-	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,astralinux.ru:s=mail];
+	DKIM_MIXED(0.00)[];
+	FORGED_RECIPIENTS(0.00)[m:daeho43@gmail.com,m:linux-kernel@vger.kernel.org,m:linux-f2fs-devel@lists.sourceforge.net,m:kernel-team@android.com,m:daehojeong@google.com,s:lists@lfdr.de];
+	FREEMAIL_TO(0.00)[gmail.com,vger.kernel.org,lists.sourceforge.net,android.com];
 	FORGED_SENDER(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
-	FREEMAIL_CC(0.00)[quicinc.com,astralinux.ru,gmail.com,vger.kernel.org,lists.sourceforge.net,kernel.org,linuxtesting.org];
-	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,astralinux.ru:-];
+	TO_DN_SOME(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	DMARC_POLICY_ALLOW(0.00)[lists.sourceforge.net,none];
+	MIME_TRACE(0.00)[0:+];
+	ARC_NA(0.00)[];
+	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
+	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,kernel.org:s=k20260515];
+	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,kernel.org:-];
 	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[6];
-	ALIAS_RESOLVED(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[5];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.sourceforge.net:helo,lists.sourceforge.net:rdns,lists.sourceforge.net:from_mime,lists.sourceforge.net:dkim,lists.sourceforge.net:from_smtp];
 	FORGED_SENDER_FORWARDING(0.00)[];
 	FROM_HAS_DN(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
 	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
-	RCPT_COUNT_SEVEN(0.00)[9];
+	ALIAS_RESOLVED(0.00)[];
 	TAGGED_RCPT(0.00)[linux-f2fs-devel];
-	HAS_REPLYTO(0.00)[adiupina@astralinux.ru];
+	RCPT_COUNT_FIVE(0.00)[5];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[astralinux.ru:replyto,astralinux.ru:email,astralinux.ru:mid,lists.sourceforge.net:helo,lists.sourceforge.net:rdns,lists.sourceforge.net:from_mime,lists.sourceforge.net:dkim,lists.sourceforge.net:from_smtp]
+	HAS_REPLYTO(0.00)[chao@kernel.org]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 6863B6B5FB5
+X-Rspamd-Queue-Id: 6C0156B71B8
 
-From: Dongliang Mu <mudongliangabcd@gmail.com>
+On 6/6/26 09:17, Daeho Jeong wrote:
+> From: Daeho Jeong <daehojeong@google.com>
+> 
+> This patch adds a dynamic management feature to the existing device
+> aliasing functionality. It allows users to dynamically exclude or
+> include specific devices from the filesystem's free pool at runtime
+> through new ioctls.
+> 
+> To support this, three new ioctls are introduced:
+> - F2FS_IOC_EXCLUDE_DEV_ALIAS: This reclaims the space occupied by a
+>   device aliasing file. It first performs a capacity check, resets GC
+>   victim information for the target range, marks the segments as in-use
+>   to prevent new allocations, and then triggers GC to migrate existing
+>   valid data out of the range. Finally, it reserves these blocks in the
+>   SIT to effectively exclude the device from the usable capacity.
+> 
+> - F2FS_IOC_INCLUDE_DEV_ALIAS: This releases the reserved space of a
+>   previously excluded device aliasing file. It truncates the blocks
+>   associated with the file, which makes them available for general
+>   filesystem allocation again.
+> 
+> - F2FS_IOC_GET_DEV_ALIAS_STATUS: This retrieves the current aliasing
+>   status of a device aliasing file, returning whether the file is
+>   included (active alias) or excluded (inactive alias, with blocks
+>   fully allocated on the device).
+> 
+> Signed-off-by: Daeho Jeong <daehojeong@google.com>
+> ---
+> v3: add CAP_SYS_ADMIN and checkpoint=disabled check.
+>     remove a f2fs specific flag exposed with getflags.
+> v2: prevent operations during checkpoint=disabled.
+> ---
+>  Documentation/filesystems/f2fs.rst |  35 ++++
+>  fs/f2fs/f2fs.h                     |   9 +-
+>  fs/f2fs/file.c                     | 272 ++++++++++++++++++++++++++++-
+>  fs/f2fs/gc.c                       |  30 ++--
+>  fs/f2fs/namei.c                    |  11 ++
+>  fs/f2fs/segment.c                  | 178 +++++++++++++------
+>  fs/f2fs/segment.h                  |  11 ++
+>  fs/f2fs/super.c                    |  34 ++++
+>  include/uapi/linux/f2fs.h          |   7 +
+>  9 files changed, 520 insertions(+), 67 deletions(-)
+> 
+> diff --git a/Documentation/filesystems/f2fs.rst b/Documentation/filesystems/f2fs.rst
+> index 7e4031631286..d154c8ac0cd7 100644
+> --- a/Documentation/filesystems/f2fs.rst
+> +++ b/Documentation/filesystems/f2fs.rst
+> @@ -1036,6 +1036,41 @@ So, the key idea is, user can do any file operations on /dev/vdc, and
+>  reclaim the space after the use, while the space is counted as /data.
+>  That doesn't require modifying partition size and filesystem format.
+>  
+> +Dynamic Device Aliasing Management
+> +----------------------------------
+> +
+> +In addition to static device aliasing by deleting the aliasing file, F2FS
+> +supports dynamic management of device aliasing. This mechanism allows the system
+> +to dynamically transition partition ownership between F2FS userdata and external
+> +entities (e.g., zRAM, raw partition) based on system requirements without
+> +deleting the master aliasing file or requiring unmount/remount.
+> +
+> +The master aliasing file is created during the initial format of the file system
+> +and remains as a persistent control entity (ioctl gateway) in the root directory.
+> +
+> +- Partition Exclusion (In-service to Aliased)
+> +  When a specific partition needs to be dedicated to external services (e.g., zRAM),
+> +  a user can exclude the device alias range via ioctl. The kernel resets GC victim
+> +  information for the target range, marks segments as in-use to prevent new
+> +  allocations, and triggers forced GC to migrate existing valid data out of the
+> +  range. Finally, it reserves these blocks in the SIT to effectively exclude the
+> +  device from the usable capacity.
+> +
+> +- Partition Inclusion (Aliased to In-service)
+> +  When external usage concludes, the space is reclaimed not by deleting the file,
+> +  but through the inclusion ioctl. The kernel truncates blocks associated with
+> +  the file, releasing them back to general filesystem allocation.
+> +
+> +.. code-block::
+> +
+> +   # f2fs_io dev_alias include /mnt/f2fs/vdc.file
 
-commit 5429c9dbc9025f9a166f64e22e3a69c94fd5b29b upstream.
+release
 
-if2fs_fill_super
--> f2fs_build_segment_manager
-   -> create_discard_cmd_control
-      -> f2fs_start_discard_thread
+> +   # df -h
+> +   /dev/vdb                            64G  753M   64G   2% /mnt/f2fs
+> +
+> +   # f2fs_io dev_alias exclude /mnt/f2fs/vdc.file
 
-It invokes kthread_run to create a thread and run issue_discard_thread.
+reserve
 
-However, if f2fs_build_node_manager fails, the control flow goes to
-free_nm and calls f2fs_destroy_node_manager. This function will free
-sbi->nm_info. However, if issue_discard_thread accesses sbi->nm_info
-after the deallocation, but before the f2fs_stop_discard_thread, it will
-cause UAF(Use-after-free).
+What do you think of renaming include/exclude to release/reserve?
 
--> f2fs_destroy_segment_manager
-   -> destroy_discard_cmd_control
-      -> f2fs_stop_discard_thread
+Means release/reserve space in /mnt/f2fs/vdc.file
 
-Fix this by stopping discard thread before f2fs_destroy_node_manager.
+> +   # df -h
+> +   /dev/vdb                            64G   33G   32G  52% /mnt/f2fs
+> +
+>  Per-file Read-Only Large Folio Support
+>  --------------------------------------
+>  
+> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+> index 29f81a496b72..5e0c5701c088 100644
+> --- a/fs/f2fs/f2fs.h
+> +++ b/fs/f2fs/f2fs.h
+> @@ -1398,6 +1398,8 @@ struct f2fs_dev_info {
+>  	unsigned int total_segments;
+>  	block_t start_blk;
+>  	block_t end_blk;
+> +	bool has_alias;
+> +	bool is_excluding;
+>  #ifdef CONFIG_BLK_DEV_ZONED
+>  	unsigned int nr_blkz;		/* Total number of zones */
+>  	unsigned long *blkz_seq;	/* Bitmap indicating sequential zones */
+> @@ -3970,7 +3972,10 @@ int f2fs_create_flush_cmd_control(struct f2fs_sb_info *sbi);
+>  int f2fs_flush_device_cache(struct f2fs_sb_info *sbi);
+>  void f2fs_destroy_flush_cmd_control(struct f2fs_sb_info *sbi, bool free);
+>  void f2fs_invalidate_blocks(struct f2fs_sb_info *sbi, block_t addr,
+> -						unsigned int len);
+> +				unsigned int len);
+> +void f2fs_reserve_device_alias(struct f2fs_sb_info *sbi, block_t addr,
+> +				unsigned int len);
+> +
+>  bool f2fs_is_checkpointed_data(struct f2fs_sb_info *sbi, block_t blkaddr);
+>  int f2fs_start_discard_thread(struct f2fs_sb_info *sbi);
+>  void f2fs_drop_discard_cmd(struct f2fs_sb_info *sbi);
+> @@ -4189,6 +4194,8 @@ void f2fs_build_gc_manager(struct f2fs_sb_info *sbi);
+>  int f2fs_gc_range(struct f2fs_sb_info *sbi,
+>  		unsigned int start_seg, unsigned int end_seg,
+>  		bool dry_run, unsigned int dry_run_sections);
+> +void f2fs_reset_gc_victim_resource(struct f2fs_sb_info *sbi,
+> +		unsigned int start, unsigned int end);
+>  int f2fs_resize_fs(struct file *filp, __u64 block_count);
+>  int __init f2fs_create_garbage_collection_cache(void);
+>  void f2fs_destroy_garbage_collection_cache(void);
+> diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
+> index abcf6f486dd7..8a25467ca4f4 100644
+> --- a/fs/f2fs/file.c
+> +++ b/fs/f2fs/file.c
+> @@ -803,13 +803,25 @@ int f2fs_do_truncate_blocks(struct inode *inode, u64 from, bool lock)
+>  
+>  	if (IS_DEVICE_ALIASING(inode)) {
+>  		struct extent_tree *et = F2FS_I(inode)->extent_tree[EX_READ];
+> -		struct extent_info ei = et->largest;
+> +		struct extent_info ei;
+> +
+> +		if (!et) {
+> +			f2fs_folio_put(ifolio, true);
+> +			err = -ENODATA;
+> +			goto out;
+> +		}
+> +
+> +		read_lock(&et->lock);
+> +		ei = et->largest;
+> +		read_unlock(&et->lock);
+>  
+>  		f2fs_invalidate_blocks(sbi, ei.blk, ei.len);
+>  
+>  		dec_valid_block_count(sbi, inode, ei.len);
+>  		f2fs_update_time(sbi, REQ_TIME);
+>  
+> +		f2fs_drop_extent_tree(inode);
+> +
+>  		f2fs_folio_put(ifolio, true);
+>  		goto out;
+>  	}
+> @@ -1092,8 +1104,9 @@ int f2fs_setattr(struct mnt_idmap *idmap, struct dentry *dentry,
+>  		return -EPERM;
+>  
+>  	if ((attr->ia_valid & ATTR_SIZE)) {
+> -		if (!f2fs_is_compress_backend_ready(inode) ||
+> -				IS_DEVICE_ALIASING(inode))
+> +		if (IS_DEVICE_ALIASING(inode))
+> +			return -EPERM;
+> +		if (!f2fs_is_compress_backend_ready(inode))
+>  			return -EOPNOTSUPP;
+>  		if (is_inode_flag_set(inode, FI_COMPRESS_RELEASED) &&
+>  			!IS_ALIGNED(attr->ia_size,
+> @@ -2115,6 +2128,9 @@ static int f2fs_setflags_common(struct inode *inode, u32 iflags, u32 mask)
+>  	if (IS_NOQUOTA(inode))
+>  		return -EPERM;
+>  
+> +	if (IS_DEVICE_ALIASING(inode))
+> +		return -EPERM;
+> +
+>  	if ((iflags ^ masked_flags) & F2FS_CASEFOLD_FL) {
+>  		if (!f2fs_sb_has_casefold(F2FS_I_SB(inode)))
+>  			return -EOPNOTSUPP;
+> @@ -2663,6 +2679,17 @@ static int f2fs_ioc_get_encryption_policy(struct file *filp, unsigned long arg)
+>  	return fscrypt_ioctl_get_policy(filp, (void __user *)arg);
+>  }
+>  
+> +static int f2fs_ioc_get_dev_alias_status(struct file *filp, unsigned long arg)
+> +{
+> +	struct inode *inode = file_inode(filp);
+> +
+> +	if (!IS_DEVICE_ALIASING(inode))
+> +		return -EINVAL;
+> +
+> +	return put_user(F2FS_HAS_BLOCKS(inode) ? F2FS_DEV_ALIAS_STATUS_EXCLUDED :
+> +				F2FS_DEV_ALIAS_STATUS_INCLUDED, (u32 __user *)arg);
+> +}
+> +
+>  static int f2fs_ioc_get_encryption_pwsalt(struct file *filp, unsigned long arg)
+>  {
+>  	struct inode *inode = file_inode(filp);
+> @@ -3599,6 +3626,236 @@ static int f2fs_ioc_get_dev_alias_file(struct file *filp, unsigned long arg)
+>  			(u32 __user *)arg);
+>  }
+>  
+> +static int f2fs_ioc_exclude_dev_alias(struct file *filp)
+> +{
+> +	struct inode *inode = file_inode(filp);
+> +	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
+> +	struct extent_tree *et = F2FS_I(inode)->extent_tree[EX_READ];
+> +	struct extent_info ei;
+> +	struct cp_control cpc = { CP_SYNC, 0, 0, 0 };
+> +	struct f2fs_lock_context lc;
+> +	blkcnt_t count;
+> +	unsigned int start, end, segno;
+> +	int type, i, err;
+> +
+> +	if (!capable(CAP_SYS_ADMIN))
+> +		return -EPERM;
+> +
+> +	if (unlikely(is_sbi_flag_set(sbi, SBI_CP_DISABLED)))
+> +		return -EINVAL;
 
-Note that, the commit d6d2b491a82e1 introduces the call of
-f2fs_available_free_memory into issue_discard_thread.
+Need to consider remount checkpoint=disable vs {exclude,include}_dev_alias
+race case?
 
-Cc: stable@vger.kernel.org
-Fixes: d6d2b491a82e ("f2fs: allow to change discard policy based on cached discard cmds")
-Signed-off-by: Dongliang Mu <mudongliangabcd@gmail.com>
-Reviewed-by: Chao Yu <chao@kernel.org>
-Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
-Signed-off-by: Alexandra Diupina <adiupina@astralinux.ru>
----
-Backport fix for CVE-2022-20148
- fs/f2fs/super.c | 2 ++
- 1 file changed, 2 insertions(+)
+> +
+> +	err = mnt_want_write_file(filp);
+> +	if (err)
+> +		return err;
+> +
+> +	inode_lock(inode);
+> +
+> +	if (!IS_DEVICE_ALIASING(inode)) {
+> +		err = -EINVAL;
+> +		goto out_inode_unlock;
+> +	}
+> +
+> +	if (F2FS_HAS_BLOCKS(inode)) {
+> +		err = 0;
+> +		goto out_inode_unlock;
+> +	}
+> +
+> +	for (i = 1; i < sbi->s_ndevs; i++) {
+> +		char *name = strrchr(FDEV(i).path, '/');
+> +
+> +		name = name ? name + 1 : FDEV(i).path;
+> +		if (!strcmp(name, filp->f_path.dentry->d_name.name)) {
+> +			ei.blk = FDEV(i).start_blk;
+> +			ei.len = FDEV(i).total_segments << sbi->log_blocks_per_seg;
+> +			ei.fofs = 0;
+> +			break;
+> +		}
+> +	}
+> +
+> +	if (i == sbi->s_ndevs) {
+> +		err = -ENODATA;
 
-diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
-index 8ab7d3f9a764b..28ec398ed0462 100644
---- a/fs/f2fs/super.c
-+++ b/fs/f2fs/super.c
-@@ -4009,6 +4009,8 @@ static int f2fs_fill_super(struct super_block *sb, void *data, int silent)
- free_stats:
- 	f2fs_destroy_stats(sbi);
- free_nm:
-+	/* stop discard thread before destroying node manager */
-+	f2fs_stop_discard_thread(sbi);
- 	f2fs_destroy_node_manager(sbi);
- free_sm:
- 	f2fs_destroy_segment_manager(sbi);
--- 
-2.47.3
+-EFSCORRUPTED?
+set SBI_NEED_FSCK
+
+> +		goto out_inode_unlock;
+> +	}
+> +
+> +	count = ei.len;
+> +	err = inc_valid_block_count(sbi, inode, &count, false);
+
+IIUC, this should be protected w/ lock_op, otherwise, in race condition,
+checkpoint may record inconsistent total block count?
+
+> +	if (err)
+> +		goto out_inode_unlock;
+> +
+> +	f2fs_down_write(&sbi->gc_lock);
+
+f2fs_down_write_trace
+
+> +	f2fs_lock_op(sbi, &lc);
+> +
+> +	FDEV(f2fs_target_device_index(sbi, ei.blk)).is_excluding = true;
+> +
+> +	start = GET_SEGNO(sbi, ei.blk);
+> +	end = GET_SEGNO(sbi, ei.blk + ei.len - 1);
+> +
+> +	/* Reset the victim information to prevent GC from targeting the range */
+> +	f2fs_reset_gc_victim_resource(sbi, start, end);
+> +
+> +	/* Mark the range as inuse to prevent new allocations in it */
+> +	for (segno = start; segno <= end; segno++)
+> +		__set_test_and_inuse(sbi, segno);
+> +
+> +	/* Move out cursegs from the target range */
+> +	for (type = CURSEG_HOT_DATA; type < NR_CURSEG_PERSIST_TYPE; type++) {
+> +		err = f2fs_allocate_segment_for_resize(sbi, type, start, end);
+> +		if (err) {
+> +			f2fs_unlock_op(sbi, &lc);
+> +			goto out_gc_unlock;
+> +		}
+> +	}
+> +
+> +	f2fs_unlock_op(sbi, &lc);
+> +	f2fs_up_write(&sbi->gc_lock);
+
+f2fs_up_write_trace
+
+> +
+> +	/* Write checkpoint synchronously to flush all pending writes and free space */
+> +	err = f2fs_write_checkpoint(sbi, &cpc);
+
+We will record wrong free_segment_count due to above __set_test_and_inuse() loop?
+
+in do_checkpoint()
+
+	ckpt->free_segment_count = cpu_to_le32(free_segments(sbi));
+
+
+> +	if (err) {
+> +		f2fs_down_write(&sbi->gc_lock);
+
+f2fs_down_write_trace
+
+> +		goto out_gc_unlock;
+> +	}
+> +
+> +	/* Re-acquire gc_lock and cp_rwsem read lock for the entire range GC */
+> +	f2fs_down_write(&sbi->gc_lock);
+
+f2fs_down_write_trace
+
+> +	f2fs_lock_op(sbi, &lc);
+> +
+> +	/* do GC to move out valid blocks in the range all at once! */
+> +	err = f2fs_gc_range(sbi, start, end, false, 0);
+
+Can we migrate all blocks in the range first, and then set inuse on all
+segment?
+
+> +	if (err) {
+> +		f2fs_unlock_op(sbi, &lc);
+> +		goto out_gc_unlock;
+> +	}
+> +
+> +	if (et) {
+> +		write_lock(&et->lock);
+> +		et->largest = ei;
+> +		write_unlock(&et->lock);
+> +	}
+> +	clear_inode_flag(inode, FI_NO_EXTENT);
+> +
+> +	f2fs_reserve_device_alias(sbi, ei.blk, ei.len);
+> +
+> +	i_size_write(inode, (loff_t)ei.len << PAGE_SHIFT);
+> +	f2fs_update_inode_page(inode);
+> +
+> +	FDEV(f2fs_target_device_index(sbi, ei.blk)).is_excluding = false;
+> +
+> +	f2fs_unlock_op(sbi, &lc);
+> +	f2fs_up_write(&sbi->gc_lock);
+
+f2fs_up_write_trace
+
+> +
+> +	inode_unlock(inode);
+> +	mnt_drop_write_file(filp);
+> +
+> +	err = f2fs_write_checkpoint(sbi, &cpc);
+> +	return err;
+> +
+> +out_gc_unlock:
+> +	FDEV(f2fs_target_device_index(sbi, ei.blk)).is_excluding = false;
+> +	f2fs_up_write(&sbi->gc_lock);
+> +
+> +	/*
+> +	 * Put successfully GC'ed segments back into PRE list so checkpoint
+> +	 * commits and frees them!
+> +	 */
+> +	f2fs_lock_op(sbi, &lc);
+> +	for (segno = start; segno <= end; segno++) {
+> +		if (get_valid_blocks(sbi, segno, false) == 0) {
+> +			mutex_lock(&DIRTY_I(sbi)->seglist_lock);
+> +			if (!test_and_set_bit(segno, DIRTY_I(sbi)->dirty_segmap[PRE]))
+> +				DIRTY_I(sbi)->nr_dirty[PRE]++;
+> +			mutex_unlock(&DIRTY_I(sbi)->seglist_lock);
+> +		}
+> +	}
+> +	f2fs_unlock_op(sbi, &lc);
+> +
+> +	count = ei.len;
+> +	dec_valid_block_count(sbi, inode, count);
+> +
+> +	inode_unlock(inode);
+> +	mnt_drop_write_file(filp);
+> +
+> +	f2fs_write_checkpoint(sbi, &cpc);
+> +	return err;
+> +
+> +out_inode_unlock:
+> +	inode_unlock(inode);
+> +	mnt_drop_write_file(filp);
+> +	return err;
+> +}
+> +
+> +static int f2fs_ioc_include_dev_alias(struct file *filp)
+> +{
+> +	struct inode *inode = file_inode(filp);
+> +	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
+> +	struct extent_tree *et = F2FS_I(inode)->extent_tree[EX_READ];
+> +	struct extent_info ei = {0, };
+> +	struct cp_control cpc = { CP_SYNC, 0, 0, 0 };
+> +	struct f2fs_lock_context lc;
+> +	int err;
+> +
+> +	if (!capable(CAP_SYS_ADMIN))
+> +		return -EPERM;
+> +
+> +	if (unlikely(is_sbi_flag_set(sbi, SBI_CP_DISABLED)))
+> +		return -EINVAL;
+> +
+> +	err = mnt_want_write_file(filp);
+> +	if (err)
+> +		return err;
+> +
+> +	inode_lock(inode);
+> +
+> +	if (!IS_DEVICE_ALIASING(inode)) {
+> +		err = -EINVAL;
+> +		goto out_inode_unlock;
+> +	}
+> +
+> +	if (!F2FS_HAS_BLOCKS(inode)) {
+> +		err = 0;
+> +		goto out_inode_unlock;
+> +	}
+> +
+> +	err = filemap_write_and_wait(inode->i_mapping);
+> +	if (err)
+> +		goto out_inode_unlock;
+> +
+> +	if (et) {
+
+et should always valid?
+
+> +		read_lock(&et->lock);
+> +		ei = et->largest;
+> +		read_unlock(&et->lock);
+> +	}
+> +
+> +	f2fs_down_write(&sbi->gc_lock);
+
+f2fs_down_write_trace
+
+> +	f2fs_lock_op(sbi, &lc);
+> +
+> +	truncate_setsize(inode, 0);
+> +
+> +	err = f2fs_truncate_blocks(inode, 0, false);
+> +	if (err) {
+
+Oh, it will be sad, in which case it will fail?
+
+> +		i_size_write(inode, (loff_t)ei.len << PAGE_SHIFT);
+> +		f2fs_unlock_op(sbi, &lc);
+> +		f2fs_up_write(&sbi->gc_lock);
+> +		goto out_inode_unlock;
+> +	}
+> +
+> +	f2fs_update_inode_page(inode);
+> +
+> +	f2fs_unlock_op(sbi, &lc);
+> +	f2fs_up_write(&sbi->gc_lock);
+
+f2fs_up_write_trace
+
+> +
+> +	inode_unlock(inode);
+> +	mnt_drop_write_file(filp);
+> +
+> +	err = f2fs_write_checkpoint(sbi, &cpc);
+> +	return err;
+> +
+> +out_inode_unlock:
+> +	inode_unlock(inode);
+> +	mnt_drop_write_file(filp);
+> +	return err;
+> +}
+> +
+>  static int f2fs_ioc_io_prio(struct file *filp, unsigned long arg)
+>  {
+>  	struct inode *inode = file_inode(filp);
+> @@ -4721,8 +4978,14 @@ static long __f2fs_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
+>  		return f2fs_ioc_compress_file(filp);
+>  	case F2FS_IOC_GET_DEV_ALIAS_FILE:
+>  		return f2fs_ioc_get_dev_alias_file(filp, arg);
+> +	case F2FS_IOC_GET_DEV_ALIAS_STATUS:
+> +		return f2fs_ioc_get_dev_alias_status(filp, arg);
+>  	case F2FS_IOC_IO_PRIO:
+>  		return f2fs_ioc_io_prio(filp, arg);
+> +	case F2FS_IOC_EXCLUDE_DEV_ALIAS:
+> +		return f2fs_ioc_exclude_dev_alias(filp);
+> +	case F2FS_IOC_INCLUDE_DEV_ALIAS:
+> +		return f2fs_ioc_include_dev_alias(filp);
+>  	default:
+>  		return -ENOTTY;
+>  	}
+> @@ -5447,7 +5710,10 @@ long f2fs_compat_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
+>  	case F2FS_IOC_DECOMPRESS_FILE:
+>  	case F2FS_IOC_COMPRESS_FILE:
+>  	case F2FS_IOC_GET_DEV_ALIAS_FILE:
+> +	case F2FS_IOC_GET_DEV_ALIAS_STATUS:
+>  	case F2FS_IOC_IO_PRIO:
+> +	case F2FS_IOC_EXCLUDE_DEV_ALIAS:
+> +	case F2FS_IOC_INCLUDE_DEV_ALIAS:
+>  		break;
+>  	default:
+>  		return -ENOIOCTLCMD;
+> diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
+> index 60378614bc54..755df9b6bbaa 100644
+> --- a/fs/f2fs/gc.c
+> +++ b/fs/f2fs/gc.c
+> @@ -2143,29 +2143,37 @@ int f2fs_gc_range(struct f2fs_sb_info *sbi,
+>  	return 0;
+>  }
+>  
+> +void f2fs_reset_gc_victim_resource(struct f2fs_sb_info *sbi,
+> +			unsigned int start, unsigned int end)
+> +{
+> +	int i;
+> +
+> +	mutex_lock(&DIRTY_I(sbi)->seglist_lock);
+> +	for (i = 0; i < MAX_GC_POLICY; i++)
+> +		if (SIT_I(sbi)->last_victim[i] >= start &&
+> +			SIT_I(sbi)->last_victim[i] <= end)
+> +			SIT_I(sbi)->last_victim[i] = 0;
+> +
+> +	for (i = BG_GC; i <= FG_GC; i++)
+> +		if (sbi->next_victim_seg[i] >= start &&
+> +			sbi->next_victim_seg[i] <= end)
+> +			sbi->next_victim_seg[i] = NULL_SEGNO;
+> +	mutex_unlock(&DIRTY_I(sbi)->seglist_lock);
+> +}
+> +
+>  static int free_segment_range(struct f2fs_sb_info *sbi,
+>  				unsigned int secs, bool dry_run)
+>  {
+>  	unsigned int next_inuse, start, end;
+>  	struct cp_control cpc = { CP_RESIZE, 0, 0, 0 };
+> -	int gc_mode, gc_type;
+>  	int err = 0;
+>  	int type;
+>  
+> -	/* Force block allocation for GC */
+>  	MAIN_SECS(sbi) -= secs;
+>  	start = MAIN_SECS(sbi) * SEGS_PER_SEC(sbi);
+>  	end = MAIN_SEGS(sbi) - 1;
+>  
+> -	mutex_lock(&DIRTY_I(sbi)->seglist_lock);
+> -	for (gc_mode = 0; gc_mode < MAX_GC_POLICY; gc_mode++)
+> -		if (SIT_I(sbi)->last_victim[gc_mode] >= start)
+> -			SIT_I(sbi)->last_victim[gc_mode] = 0;
+> -
+> -	for (gc_type = BG_GC; gc_type <= FG_GC; gc_type++)
+> -		if (sbi->next_victim_seg[gc_type] >= start)
+> -			sbi->next_victim_seg[gc_type] = NULL_SEGNO;
+> -	mutex_unlock(&DIRTY_I(sbi)->seglist_lock);
+> +	f2fs_reset_gc_victim_resource(sbi, start, end);
+>  
+>  	/* Move out cursegs from the target range */
+>  	for (type = CURSEG_HOT_DATA; type < NR_CURSEG_PERSIST_TYPE; type++) {
+> diff --git a/fs/f2fs/namei.c b/fs/f2fs/namei.c
+> index e360f08a9586..b7974242ead1 100644
+> --- a/fs/f2fs/namei.c
+> +++ b/fs/f2fs/namei.c
+
+Is f2fs_link allowed for device alias file?
+
+Thanks,
+
+> @@ -553,6 +553,9 @@ static int f2fs_unlink(struct inode *dir, struct dentry *dentry)
+>  
+>  	trace_f2fs_unlink_enter(dir, dentry);
+>  
+> +	if (IS_DEVICE_ALIASING(inode))
+> +		return -EPERM;
+> +
+>  	if (unlikely(f2fs_cp_error(sbi))) {
+>  		err = -EIO;
+>  		goto out;
+> @@ -931,6 +934,9 @@ static int f2fs_rename(struct mnt_idmap *idmap, struct inode *old_dir,
+>  	bool old_is_dir = S_ISDIR(old_inode->i_mode);
+>  	int err;
+>  
+> +	if (IS_DEVICE_ALIASING(old_inode))
+> +		return -EPERM;
+> +
+>  	if (unlikely(f2fs_cp_error(sbi)))
+>  		return -EIO;
+>  	if (!f2fs_is_checkpoint_ready(sbi))
+> @@ -1000,6 +1006,8 @@ static int f2fs_rename(struct mnt_idmap *idmap, struct inode *old_dir,
+>  	}
+>  
+>  	if (new_inode) {
+> +		if (IS_DEVICE_ALIASING(new_inode))
+> +			return -EPERM;
+>  
+>  		err = -ENOTEMPTY;
+>  		if (old_is_dir && !f2fs_empty_dir(new_inode))
+> @@ -1127,6 +1135,9 @@ static int f2fs_cross_rename(struct inode *old_dir, struct dentry *old_dentry,
+>  	int old_nlink = 0, new_nlink = 0;
+>  	int err;
+>  
+> +	if (IS_DEVICE_ALIASING(old_inode) || IS_DEVICE_ALIASING(new_inode))
+> +		return -EPERM;
+> +
+>  	if (unlikely(f2fs_cp_error(sbi)))
+>  		return -EIO;
+>  	if (!f2fs_is_checkpoint_ready(sbi))
+> diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
+> index 6a97fe76712b..c0ddc09adc51 100644
+> --- a/fs/f2fs/segment.c
+> +++ b/fs/f2fs/segment.c
+> @@ -2498,44 +2498,51 @@ static int update_sit_entry_for_alloc(struct f2fs_sb_info *sbi, struct seg_entry
+>  #ifdef CONFIG_F2FS_CHECK_FS
+>  	bool mir_exist;
+>  #endif
+> +	int del_count = del;
+> +	int i;
+> +
+> +	f2fs_bug_on(sbi, GET_SEGNO(sbi, blkaddr) != GET_SEGNO(sbi, blkaddr + del_count - 1));
+>  
+> -	exist = f2fs_test_and_set_bit(offset, se->cur_valid_map);
+> +	for (i = 0; i < del_count; i++) {
+> +		exist = f2fs_test_and_set_bit(offset + i, se->cur_valid_map);
+>  #ifdef CONFIG_F2FS_CHECK_FS
+> -	mir_exist = f2fs_test_and_set_bit(offset,
+> -					se->cur_valid_map_mir);
+> -	if (unlikely(exist != mir_exist)) {
+> -		f2fs_err(sbi, "Inconsistent error when setting bitmap, blk:%u, old bit:%d",
+> -			blkaddr, exist);
+> -		f2fs_bug_on(sbi, 1);
+> -	}
+> +		mir_exist = f2fs_test_and_set_bit(offset + i,
+> +						se->cur_valid_map_mir);
+> +		if (unlikely(exist != mir_exist)) {
+> +			f2fs_err(sbi, "Inconsistent error when setting bitmap, blk:%u, old bit:%d",
+> +				blkaddr + i, exist);
+> +			f2fs_bug_on(sbi, 1);
+> +		}
+>  #endif
+> -	if (unlikely(exist)) {
+> -		f2fs_err(sbi, "Bitmap was wrongly set, blk:%u", blkaddr);
+> -		f2fs_bug_on(sbi, 1);
+> -		se->valid_blocks--;
+> -		del = 0;
+> -	}
+> +		if (unlikely(exist)) {
+> +			f2fs_err(sbi, "Bitmap was wrongly set, blk:%u", blkaddr + i);
+> +			f2fs_bug_on(sbi, 1);
+> +			se->valid_blocks--;
+> +			del -= 1;
+> +			continue;
+> +		}
+>  
+> -	if (f2fs_block_unit_discard(sbi) &&
+> -			!f2fs_test_and_set_bit(offset, se->discard_map))
+> -		sbi->discard_blks--;
+> +		if (f2fs_block_unit_discard(sbi) &&
+> +				!f2fs_test_and_set_bit(offset + i, se->discard_map))
+> +			sbi->discard_blks--;
+>  
+> -	/*
+> -	 * SSR should never reuse block which is checkpointed
+> -	 * or newly invalidated.
+> -	 */
+> -	if (!is_sbi_flag_set(sbi, SBI_CP_DISABLED)) {
+> -		if (!f2fs_test_and_set_bit(offset, se->ckpt_valid_map)) {
+> -			se->ckpt_valid_blocks++;
+> -			if (__is_large_section(sbi))
+> -				get_sec_entry(sbi, segno)->ckpt_valid_blocks++;
+> +		/*
+> +		 * SSR should never reuse block which is checkpointed
+> +		 * or newly invalidated.
+> +		 */
+> +		if (!is_sbi_flag_set(sbi, SBI_CP_DISABLED)) {
+> +			if (!f2fs_test_and_set_bit(offset + i, se->ckpt_valid_map)) {
+> +				se->ckpt_valid_blocks++;
+> +				if (__is_large_section(sbi))
+> +					get_sec_entry(sbi, segno)->ckpt_valid_blocks++;
+> +			}
+>  		}
+> -	}
+>  
+> -	if (!f2fs_test_bit(offset, se->ckpt_valid_map)) {
+> -		se->ckpt_valid_blocks += del;
+> -		if (__is_large_section(sbi))
+> -			get_sec_entry(sbi, segno)->ckpt_valid_blocks += del;
+> +		if (!f2fs_test_bit(offset + i, se->ckpt_valid_map)) {
+> +			se->ckpt_valid_blocks += 1;
+> +			if (__is_large_section(sbi))
+> +				get_sec_entry(sbi, segno)->ckpt_valid_blocks += 1;
+> +		}
+>  	}
+>  
+>  	if (__is_large_section(sbi))
+> @@ -2590,9 +2597,14 @@ void f2fs_invalidate_blocks(struct f2fs_sb_info *sbi, block_t addr,
+>  	unsigned int segno = GET_SEGNO(sbi, addr);
+>  	struct sit_info *sit_i = SIT_I(sbi);
+>  	block_t addr_start = addr, addr_end = addr + len - 1;
+> -	unsigned int seg_num = GET_SEGNO(sbi, addr_end) - segno + 1;
+> +	unsigned int seg_num;
+>  	unsigned int i = 1, max_blocks = sbi->blocks_per_seg, cnt;
+>  
+> +	if (len == 0)
+> +		return;
+> +
+> +	seg_num = GET_SEGNO(sbi, addr_end) - segno + 1;
+> +
+>  	f2fs_bug_on(sbi, addr == NULL_ADDR);
+>  	if (addr == NEW_ADDR || addr == COMPRESS_ADDR)
+>  		return;
+> @@ -2625,6 +2637,51 @@ void f2fs_invalidate_blocks(struct f2fs_sb_info *sbi, block_t addr,
+>  	up_write(&sit_i->sentry_lock);
+>  }
+>  
+> +void f2fs_reserve_device_alias(struct f2fs_sb_info *sbi, block_t addr,
+> +				unsigned int len)
+> +{
+> +	unsigned int segno = GET_SEGNO(sbi, addr);
+> +	struct sit_info *sit_i = SIT_I(sbi);
+> +	block_t addr_start = addr, addr_end = addr + len - 1;
+> +	unsigned int seg_num;
+> +	unsigned int i = 1, max_blocks = sbi->blocks_per_seg, cnt;
+> +
+> +	if (len == 0)
+> +		return;
+> +
+> +	seg_num = GET_SEGNO(sbi, addr_end) - segno + 1;
+> +
+> +	down_write(&sit_i->sentry_lock);
+> +
+> +	if (seg_num == 1)
+> +		cnt = len;
+> +	else
+> +		cnt = max_blocks - GET_BLKOFF_FROM_SEG0(sbi, addr);
+> +
+> +	do {
+> +		update_segment_mtime(sbi, addr_start, 0);
+> +		update_sit_entry(sbi, addr_start, cnt);
+> +
+> +		/* Remove the segment from PRE (prefree) to prevent checkpoint from freeing it! */
+> +		mutex_lock(&DIRTY_I(sbi)->seglist_lock);
+> +		if (test_and_clear_bit(segno, DIRTY_I(sbi)->dirty_segmap[PRE]))
+> +			DIRTY_I(sbi)->nr_dirty[PRE]--;
+> +		mutex_unlock(&DIRTY_I(sbi)->seglist_lock);
+> +
+> +		/* add it into dirty seglist */
+> +		locate_dirty_segment(sbi, segno);
+> +
+> +		/* update @addr_start and @cnt and @segno */
+> +		addr_start = START_BLOCK(sbi, ++segno);
+> +		if (++i == seg_num)
+> +			cnt = GET_BLKOFF_FROM_SEG0(sbi, addr_end) + 1;
+> +		else
+> +			cnt = max_blocks;
+> +	} while (i <= seg_num);
+> +
+> +	up_write(&sit_i->sentry_lock);
+> +}
+> +
+>  bool f2fs_is_checkpointed_data(struct f2fs_sb_info *sbi, block_t blkaddr)
+>  {
+>  	struct sit_info *sit_i = SIT_I(sbi);
+> @@ -2783,6 +2840,7 @@ static int get_new_segment(struct f2fs_sb_info *sbi,
+>  	unsigned int alloc_policy = sbi->allocate_section_policy;
+>  	unsigned int alloc_hint = sbi->allocate_section_hint;
+>  	bool init = true;
+> +	bool looped = false;
+>  	int i;
+>  	int ret = 0;
+>  
+> @@ -2833,33 +2891,49 @@ static int get_new_segment(struct f2fs_sb_info *sbi,
+>  find_other_zone:
+>  	secno = find_next_zero_bit(free_i->free_secmap, MAIN_SECS(sbi), hint);
+>  
+> -#ifdef CONFIG_BLK_DEV_ZONED
+> -	if (secno >= MAIN_SECS(sbi) && f2fs_sb_has_blkzoned(sbi)) {
+> -		/* Write only to sequential zones */
+> -		if (sbi->blkzone_alloc_policy == BLKZONE_ALLOC_ONLY_SEQ) {
+> -			hint = GET_SEC_FROM_SEG(sbi, sbi->first_seq_zone_segno);
+> -			secno = find_next_zero_bit(free_i->free_secmap, MAIN_SECS(sbi), hint);
+> -		} else
+> -			secno = find_first_zero_bit(free_i->free_secmap,
+> -								MAIN_SECS(sbi));
+> -		if (secno >= MAIN_SECS(sbi)) {
+> -			ret = -ENOSPC;
+> -			f2fs_bug_on(sbi, 1);
+> -			goto out_unlock;
+> -		}
+> -	}
+> -#endif
+> -
+>  	if (secno >= MAIN_SECS(sbi)) {
+> -		secno = find_first_zero_bit(free_i->free_secmap,
+> -							MAIN_SECS(sbi));
+> -		if (secno >= MAIN_SECS(sbi)) {
+> +		if (looped) {
+>  			ret = -ENOSPC;
+>  			f2fs_bug_on(sbi, !pinning);
+>  			goto out_unlock;
+>  		}
+> +#ifdef CONFIG_BLK_DEV_ZONED
+> +		/* Write only to sequential zones */
+> +		if (f2fs_sb_has_blkzoned(sbi) &&
+> +			sbi->blkzone_alloc_policy == BLKZONE_ALLOC_ONLY_SEQ)
+> +			hint = GET_SEC_FROM_SEG(sbi, sbi->first_seq_zone_segno);
+> +		else
+> +#endif
+> +			hint = 0;
+> +		looped = true;
+> +		goto find_other_zone;
+>  	}
+> +
+>  	segno = GET_SEG_FROM_SEC(sbi, secno);
+> +
+> +	if (f2fs_sb_has_device_alias(sbi) && pinning && f2fs_is_multi_device(sbi)) {
+> +		int devi = f2fs_target_device_index(sbi, START_BLOCK(sbi, segno));
+> +
+> +		if (FDEV(devi).has_alias) {
+> +			unsigned int end_segno;
+> +
+> +			while (devi < sbi->s_ndevs && FDEV(devi).has_alias) {
+> +				block_t next_blk;
+> +
+> +				end_segno = GET_SEGNO(sbi, FDEV(devi).end_blk);
+> +				hint = GET_SEC_FROM_SEG(sbi, end_segno) + 1;
+> +
+> +				if (hint >= MAIN_SECS(sbi) || ++devi >= sbi->s_ndevs)
+> +					break;
+> +
+> +				next_blk = START_BLOCK(sbi, GET_SEG_FROM_SEC(sbi, hint));
+> +				if (next_blk < FDEV(devi).start_blk ||
+> +					next_blk > FDEV(devi).end_blk)
+> +					break;
+> +			}
+> +			goto find_other_zone;
+> +		}
+> +	}
+>  	zoneno = GET_ZONE_FROM_SEC(sbi, secno);
+>  
+>  	/* give up on finding another zone */
+> diff --git a/fs/f2fs/segment.h b/fs/f2fs/segment.h
+> index 068845660b0f..914523f5d3ea 100644
+> --- a/fs/f2fs/segment.h
+> +++ b/fs/f2fs/segment.h
+> @@ -980,6 +980,17 @@ static inline bool sec_usage_check(struct f2fs_sb_info *sbi, unsigned int secno)
+>  {
+>  	if (is_cursec(sbi, secno) || (sbi->cur_victim_sec == secno))
+>  		return true;
+> +	if (f2fs_sb_has_device_alias(sbi) && f2fs_is_multi_device(sbi)) {
+> +		int i;
+> +		block_t start_blk = START_BLOCK(sbi, GET_SEG_FROM_SEC(sbi, secno));
+> +
+> +		for (i = 0; i < sbi->s_ndevs; i++) {
+> +			if (FDEV(i).is_excluding &&
+> +				start_blk >= FDEV(i).start_blk &&
+> +				start_blk <= FDEV(i).end_blk)
+> +				return true;
+> +		}
+> +	}
+>  	return false;
+>  }
+>  
+> diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
+> index 9d421a07d2d5..ee599d202fc9 100644
+> --- a/fs/f2fs/super.c
+> +++ b/fs/f2fs/super.c
+> @@ -4916,6 +4916,38 @@ static void f2fs_tuning_parameters(struct f2fs_sb_info *sbi)
+>  	sbi->readdir_ra = true;
+>  }
+>  
+> +static void f2fs_restore_device_alias(struct f2fs_sb_info *sbi)
+> +{
+> +	struct inode *root = d_inode(sbi->sb->s_root);
+> +	struct f2fs_dir_entry *de;
+> +	struct folio *folio;
+> +	int i;
+> +
+> +	if (!f2fs_sb_has_device_alias(sbi))
+> +		return;
+> +
+> +	for (i = 1; i < sbi->s_ndevs; i++) {
+> +		char *name = strrchr(FDEV(i).path, '/');
+> +		struct qstr qstr;
+> +
+> +		name = name ? name + 1 : FDEV(i).path;
+> +		qstr.name = name;
+> +		qstr.len = strlen(name);
+> +
+> +		de = f2fs_find_entry(root, &qstr, &folio);
+> +		if (de) {
+> +			struct inode *inode = f2fs_iget(sbi->sb, le32_to_cpu(de->ino));
+> +
+> +			if (!IS_ERR(inode)) {
+> +				if (IS_DEVICE_ALIASING(inode))
+> +					FDEV(i).has_alias = true;
+> +				iput(inode);
+> +			}
+> +			f2fs_folio_put(folio, 0);
+> +		}
+> +	}
+> +}
+> +
+>  static int f2fs_fill_super(struct super_block *sb, struct fs_context *fc)
+>  {
+>  	struct f2fs_fs_context *ctx = fc->fs_private;
+> @@ -5341,6 +5373,8 @@ static int f2fs_fill_super(struct super_block *sb, struct fs_context *fc)
+>  	f2fs_update_time(sbi, REQ_TIME);
+>  	clear_sbi_flag(sbi, SBI_CP_DISABLED_QUICK);
+>  
+> +	f2fs_restore_device_alias(sbi);
+> +
+>  	sbi->umount_lock_holder = NULL;
+>  	return 0;
+>  
+> diff --git a/include/uapi/linux/f2fs.h b/include/uapi/linux/f2fs.h
+> index 795e26258355..6ca6ae06918e 100644
+> --- a/include/uapi/linux/f2fs.h
+> +++ b/include/uapi/linux/f2fs.h
+> @@ -45,6 +45,9 @@
+>  #define F2FS_IOC_START_ATOMIC_REPLACE	_IO(F2FS_IOCTL_MAGIC, 25)
+>  #define F2FS_IOC_GET_DEV_ALIAS_FILE	_IOR(F2FS_IOCTL_MAGIC, 26, __u32)
+>  #define F2FS_IOC_IO_PRIO		_IOW(F2FS_IOCTL_MAGIC, 27, __u32)
+> +#define F2FS_IOC_EXCLUDE_DEV_ALIAS	_IO(F2FS_IOCTL_MAGIC, 28)
+> +#define F2FS_IOC_INCLUDE_DEV_ALIAS	_IO(F2FS_IOCTL_MAGIC, 29)
+> +#define F2FS_IOC_GET_DEV_ALIAS_STATUS	_IOR(F2FS_IOCTL_MAGIC, 30, __u32)
+>  
+>  /*
+>   * should be same as XFS_IOC_GOINGDOWN.
+> @@ -70,6 +73,10 @@ enum {
+>  	F2FS_IOPRIO_MAX,
+>  };
+>  
+> +/* for F2FS_IOC_GET_DEV_ALIAS_STATUS */
+> +#define F2FS_DEV_ALIAS_STATUS_INCLUDED	0
+> +#define F2FS_DEV_ALIAS_STATUS_EXCLUDED	1
+> +
+>  struct f2fs_gc_range {
+>  	__u32 sync;
+>  	__u64 start;
+
 
 
 _______________________________________________
