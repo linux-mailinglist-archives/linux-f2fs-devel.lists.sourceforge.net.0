@@ -2,18 +2,18 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id d1nTMNllO2pAXQgAu9opvQ
+	id N3yPGdNlO2o7XQgAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 24 Jun 2026 07:06:33 +0200
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 24 Jun 2026 07:06:27 +0200
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 215BF6BB5DE
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 24 Jun 2026 07:06:33 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C56066BB5CB
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 24 Jun 2026 07:06:26 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=lists.sourceforge.net header.s=beta header.b=WqRpBFoP;
-	dkim=fail ("body hash did not verify") header.d=sourceforge.net header.s=x header.b=iic5QUf0;
-	dkim=fail ("body hash did not verify") header.d=sf.net header.s=x header.b=JRxblxmL;
-	dkim=fail ("body hash did not verify") header.d=kernel.org header.s=k20260515 header.b=deOzfmmE;
+	dkim=pass header.d=lists.sourceforge.net header.s=beta header.b=h7cmJTzp;
+	dkim=fail ("body hash did not verify") header.d=sourceforge.net header.s=x header.b=fbfNCn3S;
+	dkim=fail ("body hash did not verify") header.d=sf.net header.s=x header.b=i1PSKEon;
+	dkim=fail ("body hash did not verify") header.d=kernel.org header.s=k20260515 header.b=SWkacxRR;
 	spf=pass (mail.lfdr.de: domain of linux-f2fs-devel-bounces@lists.sourceforge.net designates 216.105.38.7 as permitted sender) smtp.mailfrom=linux-f2fs-devel-bounces@lists.sourceforge.net;
 	dmarc=pass (policy=none) header.from=lists.sourceforge.net
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
@@ -22,18 +22,18 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	List-Unsubscribe:List-Id:Subject:MIME-Version:References:In-Reply-To:
 	Message-ID:Date:To:Sender:Content-ID:Content-Description:Resent-Date:
 	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=S0vZe6hGVn0TUKxboU/p9EYUIZr5IDPyejqwJvrKowM=; b=WqRpBFoPcyZKSokrhrcPT9FTG4
-	WisUYdguZHxML/4XQ0Bk+iESG5bAQzkcKEHTZKTbmQlHSSG2aOJBM1S6VSiG7OEBcKJ+wu+sjR4/m
-	yKn7P9sf8Yaxpg7JXxA0p/PyOxSvB+I5gnpiCsth71Orksk3v/CSdsIOIUP+46hpMZQw=;
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=syk5sqOEyuLcbxs87TRkL7nSpaz3eZnEnjcJKriH5iQ=; b=h7cmJTzpPcSXfAyJNgPb0iJysx
+	0AZ2vQJ1c6YJ50pYINe5j6RwSUidCrtSkNfnY9laHufOwpJ/cL7sKUEX8mGv/twa4CRDy2XdBhMh6
+	LaBFsVorz64XilVLDlwPSE7rWQg5lFoA2e7He2fOyf41GfDpx5EI+f9ghFj6RMef7BhU=;
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1wcFoi-0006th-Hr;
-	Wed, 24 Jun 2026 05:06:28 +0000
+	id 1wcFoc-0000wk-Q3;
+	Wed, 24 Jun 2026 05:06:23 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <ebiggers@kernel.org>) id 1wcFoY-0006sa-MY
+ (envelope-from <ebiggers@kernel.org>) id 1wcFoX-0000w0-Cs
  for linux-f2fs-devel@lists.sourceforge.net;
  Wed, 24 Jun 2026 05:06:18 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
@@ -42,9 +42,9 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Mn6lr6qCjRwiUrSp6jfp28uOZlKSNZU4XGVuJV9dOYg=; b=iic5QUf0xED7zV6BYW2NG2pk3O
- 8M1Qyj+gqDS/28jZcbl13gfK9uq1ALruGBMWBpvM2EGOc35RFf/0Q9QaSVk1woUn04Vuh6wSoZ65W
- d7iNUWq44yzKsv7B8muP6PWNplvHvQPniG5WSULI/GOVxxC8WpvsfzdZRfcERobhKYbA=;
+ bh=IFP11NYXgmlrWphHBvNAvyfYE4d+s/tUyAJE1tBe8dI=; b=fbfNCn3SjSQM9kdt4TscM86ocM
+ XIlqQipJTzTVm/nO12YZ6KVtfS73l38S5cp1Fuw8MAda166MzijKkgzhf9JOOPS1mFG3f8Wk2xoB0
+ DPGgMSFTDPCq0g6oW9cUrV1xtTKptE+ULKH1pH3l0k4nHWi8FF8/B1/Yn9NRuiA76niU=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:
@@ -52,60 +52,60 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=Mn6lr6qCjRwiUrSp6jfp28uOZlKSNZU4XGVuJV9dOYg=; b=JRxblxmLoxzPlcXpzgrzjE13nA
- dkmGIkM/57nLWPVVJhZcHRxYs57TtAdHDxifOji0zgcSb87wgw0C+msriDOj9rS1S8sAbkzqTxfnw
- O0thhi7+AjOf+g9A+TXZ3el3y6DiVJdj7JBZxBhmr7akoLn1ibacuKdXXRuTPy05NOWM=;
+ bh=IFP11NYXgmlrWphHBvNAvyfYE4d+s/tUyAJE1tBe8dI=; b=i1PSKEonwykrrVRpqvbyRcbUg4
+ F7hdJvg4eSMOzQHufy0fo+1k9LLIOSuVk5mM5421QZPCXo8Hwdi3Bkwc4G6N5uub64enwX8nQnizu
+ uOiPTs12TuGVUgGBbPaKKS/H7ydbJP7Ikdn8cgmynbTPb5kSDL1859IDoC8ovZ2wzOCQ=;
 Received: from tor.source.kernel.org ([172.105.4.254])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1wcFoW-0004mw-B1 for linux-f2fs-devel@lists.sourceforge.net;
+ id 1wcFoW-0004n2-Ru for linux-f2fs-devel@lists.sourceforge.net;
  Wed, 24 Jun 2026 05:06:18 +0000
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by tor.source.kernel.org (Postfix) with ESMTP id CFA3360211;
- Wed, 24 Jun 2026 05:06:05 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 16E7B1F00A3D;
+ by tor.source.kernel.org (Postfix) with ESMTP id 6C503601F6;
+ Wed, 24 Jun 2026 05:06:06 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id A7BE91F00A3F;
  Wed, 24 Jun 2026 05:06:05 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
- s=k20260515; t=1782277565;
- bh=Mn6lr6qCjRwiUrSp6jfp28uOZlKSNZU4XGVuJV9dOYg=;
+ s=k20260515; t=1782277566;
+ bh=IFP11NYXgmlrWphHBvNAvyfYE4d+s/tUyAJE1tBe8dI=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References;
- b=deOzfmmEUqdYcKN2dPmZMd6/fcExt4/EhjfALy+7ri425ZGTchaHzk4OzqvrqGg+k
- MLuz6EshZhYz7N0KtGl6k1DqvgrSaz4/6uynrxAyuWWdKLM4SHRPw1bnAxiN5fKxmv
- NL0nZUpbGAQ0UIu3HGZswNGC3VU49e3o5sV8Hz/h6PSJ/cGXoYLN134rAwqRsYlgrT
- yqhaAZm45fbskswrhptzFLZRBD6aRaozUR94JWx9e86AaT7gVikJAIr6vyEiUF93kB
- KV26bcPITKbb9NJM5He03oSv+m/obJADyAX3IOqZ9m6A/7EKGSj3PlF4KNEpCnjclk
- 4bUJdBA6JHRow==
+ b=SWkacxRRt70//Lub46ZvIgySBsaG5i3QX+Nvn8zFdMH5/7HA+5ATdIR8+tZsNjmdl
+ tG1WfD4BAKYSNromdGvDtJy5LFuzmZUe+JgS3GiwDe/7JcjWNRwqGgx1mDjbYSwfsG
+ 99lHVmP80aDbesZ16urpnuhBHHg/sxbT/Y1lcNyVHLSsM2jm4vHwiZ7sXOu5uT6Sj2
+ 9iEPX3BuJSJ8zazA7diay48tpAzcLP9TmWNd8yqdTM1CzXkH6J9Ev+h4YMEsQ7pKjj
+ DAjwp/abDis88JHyUvHTSkQX/JG5PNoY8EnATdgYjRF2VJF/QJ4LKYz9tkvaMOp9wN
+ p7TzAjsAl0UvQ==
 To: linux-fscrypt@vger.kernel.org
-Date: Tue, 23 Jun 2026 22:03:29 -0700
-Message-ID: <20260624050334.124606-12-ebiggers@kernel.org>
+Date: Tue, 23 Jun 2026 22:03:30 -0700
+Message-ID: <20260624050334.124606-13-ebiggers@kernel.org>
 X-Mailer: git-send-email 2.54.0
 In-Reply-To: <20260624050334.124606-1-ebiggers@kernel.org>
 References: <20260624050334.124606-1-ebiggers@kernel.org>
 MIME-Version: 1.0
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: Now that fscrypt's file contents en/decryption is always
- implemented using blk-crypto when the filesystem is block-based,
- the calls to fscrypt_inode_uses_inline_crypto()
- in fs/crypto/inline_crypt.c (w [...] 
+ Content preview:  On block-based filesystems, fscrypt file contents encryption
+ is now always implemented using blk-crypto. This implementation supports
+ direct I/O. Therefore, fscrypt_dio_supported() now always returns true, except
+ in the edge case where statx(STATX_DIOALIGN) is called on an encrypted regular
+ file that hasn't had its key set up. But that was real [...] 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
-X-Headers-End: 1wcFoW-0004mw-B1
-Subject: [f2fs-dev] [PATCH 11/16] fscrypt: Replace calls to
- fscrypt_inode_uses_inline_crypto()
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+X-Headers-End: 1wcFoW-0004n2-Ru
+Subject: [f2fs-dev] [PATCH 12/16] fscrypt: Remove fscrypt_dio_supported()
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -171,114 +171,156 @@ X-Spamd-Result: default: False [-7.11 / 15.00];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.sourceforge.net:helo,lists.sourceforge.net:rdns,lists.sourceforge.net:from_mime,lists.sourceforge.net:dkim,lists.sourceforge.net:from_smtp]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 215BF6BB5DE
+X-Rspamd-Queue-Id: C56066BB5CB
 
-Now that fscrypt's file contents en/decryption is always implemented
-using blk-crypto when the filesystem is block-based, the calls to
-fscrypt_inode_uses_inline_crypto() in fs/crypto/inline_crypt.c (which
-contains functions that are called only from block-based filesystems)
-are equivalent to checking whether the file is an encrypted regular
-file, i.e. fscrypt_needs_contents_encryption().  Use that instead.
+On block-based filesystems, fscrypt file contents encryption is now
+always implemented using blk-crypto.  This implementation supports
+direct I/O.
+
+Therefore, fscrypt_dio_supported() now always returns true, except in
+the edge case where statx(STATX_DIOALIGN) is called on an encrypted
+regular file that hasn't had its key set up.  But that was really a
+workaround rather than the desired behavior, so we can disregard it.
+
+Thus, fscrypt_dio_supported() is no longer needed.  Remove it.
 
 Signed-off-by: Eric Biggers <ebiggers@kernel.org>
 ---
- fs/crypto/inline_crypt.c | 24 ++++++++++++------------
- 1 file changed, 12 insertions(+), 12 deletions(-)
+ fs/crypto/inline_crypt.c | 43 ----------------------------------------
+ fs/ext4/inode.c          |  5 +----
+ fs/f2fs/file.c           |  2 --
+ include/linux/fscrypt.h  |  7 -------
+ 4 files changed, 1 insertion(+), 56 deletions(-)
 
 diff --git a/fs/crypto/inline_crypt.c b/fs/crypto/inline_crypt.c
-index caf706215621..111ea45732f0 100644
+index 111ea45732f0..3c3a46c5af42 100644
 --- a/fs/crypto/inline_crypt.c
 +++ b/fs/crypto/inline_crypt.c
-@@ -225,12 +225,12 @@ static void fscrypt_generate_dun(const struct fscrypt_inode_info *ci,
-  * @inode: the file's inode
-  * @pos: the first file position (in bytes) in the I/O
-  * @gfp_mask: memory allocation flags - these must be a waiting mask so that
-  *					bio_crypt_set_ctx can't fail.
-  *
-- * If the contents of the file should be encrypted (or decrypted) with inline
-- * encryption, then assign the appropriate encryption context to the bio.
-+ * If the contents of the file should be encrypted (or decrypted), then assign
-+ * the appropriate encryption context to the bio.
-  *
-  * Normally the bio should be newly allocated (i.e. no pages added yet), as
-  * otherwise fscrypt_mergeable_bio() won't work as intended.
-  *
-  * The encryption context will be freed automatically when the bio is freed.
-@@ -239,11 +239,11 @@ void fscrypt_set_bio_crypt_ctx(struct bio *bio, const struct inode *inode,
- 			       loff_t pos, gfp_t gfp_mask)
- {
- 	const struct fscrypt_inode_info *ci;
- 	u64 dun[BLK_CRYPTO_DUN_ARRAY_SIZE];
- 
--	if (!fscrypt_inode_uses_inline_crypto(inode))
-+	if (!fscrypt_needs_contents_encryption(inode))
- 		return;
- 	ci = fscrypt_get_inode_info_raw(inode);
- 
- 	fscrypt_generate_dun(ci, pos, dun);
- 	bio_crypt_set_ctx(bio, ci->ci_enc_key.blk_key, dun, gfp_mask);
-@@ -254,16 +254,16 @@ EXPORT_SYMBOL_GPL(fscrypt_set_bio_crypt_ctx);
-  * fscrypt_mergeable_bio() - test whether data can be added to a bio
-  * @bio: the bio being built up
-  * @inode: the inode for the next part of the I/O
-  * @pos: the next file position (in bytes) in the I/O
-  *
-- * When building a bio which may contain data which should undergo inline
-- * encryption (or decryption) via fscrypt, filesystems should call this function
-- * to ensure that the resulting bio contains only contiguous data unit numbers.
-- * This will return false if the next part of the I/O cannot be merged with the
-- * bio because either the encryption key would be different or the encryption
-- * data unit numbers would be discontiguous.
-+ * When building a bio which may contain data which should undergo encryption
-+ * (or decryption) via fscrypt, filesystems should call this function to ensure
-+ * that the resulting bio contains only contiguous data unit numbers.  This will
-+ * return false if the next part of the I/O cannot be merged with the bio
-+ * because either the encryption key would be different or the encryption data
-+ * unit numbers would be discontiguous.
-  *
-  * fscrypt_set_bio_crypt_ctx() must have already been called on the bio.
-  *
-  * This function isn't required in cases where crypto-mergeability is ensured in
-  * another way, such as I/O targeting only a single file (and thus a single key)
-@@ -276,11 +276,11 @@ bool fscrypt_mergeable_bio(struct bio *bio, const struct inode *inode,
- {
- 	const struct bio_crypt_ctx *bc = bio->bi_crypt_context;
- 	const struct fscrypt_inode_info *ci;
- 	u64 next_dun[BLK_CRYPTO_DUN_ARRAY_SIZE];
- 
--	if (!!bc != fscrypt_inode_uses_inline_crypto(inode))
-+	if (!!bc != fscrypt_needs_contents_encryption(inode))
- 		return false;
- 	if (!bc)
- 		return true;
- 	ci = fscrypt_get_inode_info_raw(inode);
- 
-@@ -334,11 +334,11 @@ bool fscrypt_dio_supported(struct inode *inode)
- 		 * Key unavailable or couldn't be set up.  This edge case isn't
- 		 * worth worrying about; just report that DIO is unsupported.
- 		 */
- 		return false;
- 	}
--	return fscrypt_inode_uses_inline_crypto(inode);
-+	return true;
+@@ -295,53 +295,10 @@ bool fscrypt_mergeable_bio(struct bio *bio, const struct inode *inode,
+ 	fscrypt_generate_dun(ci, pos, next_dun);
+ 	return bio_crypt_dun_is_contiguous(bc, bio->bi_iter.bi_size, next_dun);
  }
- EXPORT_SYMBOL_GPL(fscrypt_dio_supported);
+ EXPORT_SYMBOL_GPL(fscrypt_mergeable_bio);
  
+-/**
+- * fscrypt_dio_supported() - check whether DIO (direct I/O) is supported on an
+- *			     inode, as far as encryption is concerned
+- * @inode: the inode in question
+- *
+- * Return: %true if there are no encryption constraints that prevent DIO from
+- *	   being supported; %false if DIO is unsupported.  (Note that in the
+- *	   %true case, the filesystem might have other, non-encryption-related
+- *	   constraints that prevent DIO from actually being supported.  Also, on
+- *	   encrypted files the filesystem is still responsible for only allowing
+- *	   DIO when requests are filesystem-block-aligned.)
+- */
+-bool fscrypt_dio_supported(struct inode *inode)
+-{
+-	int err;
+-
+-	/* If the file is unencrypted, no veto from us. */
+-	if (!fscrypt_needs_contents_encryption(inode))
+-		return true;
+-
+-	/*
+-	 * We only support DIO with inline crypto, not fs-layer crypto.
+-	 *
+-	 * To determine whether the inode is using inline crypto, we have to set
+-	 * up the key if it wasn't already done.  This is because in the current
+-	 * design of fscrypt, the decision of whether to use inline crypto or
+-	 * not isn't made until the inode's encryption key is being set up.  In
+-	 * the DIO read/write case, the key will always be set up already, since
+-	 * the file will be open.  But in the case of statx(), the key might not
+-	 * be set up yet, as the file might not have been opened yet.
+-	 */
+-	err = fscrypt_require_key(inode);
+-	if (err) {
+-		/*
+-		 * Key unavailable or couldn't be set up.  This edge case isn't
+-		 * worth worrying about; just report that DIO is unsupported.
+-		 */
+-		return false;
+-	}
+-	return true;
+-}
+-EXPORT_SYMBOL_GPL(fscrypt_dio_supported);
+-
  /**
   * fscrypt_limit_io_blocks() - limit I/O blocks to avoid discontiguous DUNs
-@@ -363,11 +363,11 @@ EXPORT_SYMBOL_GPL(fscrypt_dio_supported);
- u64 fscrypt_limit_io_blocks(const struct inode *inode, u64 lblk, u64 nr_blocks)
+  * @inode: the file on which I/O is being done
+  * @lblk: the block at which the I/O is being started from
+  * @nr_blocks: the number of blocks we want to submit starting at @lblk
+diff --git a/fs/ext4/inode.c b/fs/ext4/inode.c
+index c6faa7c751ca..dd321aaa8779 100644
+--- a/fs/ext4/inode.c
++++ b/fs/ext4/inode.c
+@@ -6144,15 +6144,12 @@ u32 ext4_dio_alignment(struct inode *inode)
+ 		return 0;
+ 	if (ext4_should_journal_data(inode))
+ 		return 0;
+ 	if (ext4_has_inline_data(inode))
+ 		return 0;
+-	if (IS_ENCRYPTED(inode)) {
+-		if (!fscrypt_dio_supported(inode))
+-			return 0;
++	if (IS_ENCRYPTED(inode))
+ 		return i_blocksize(inode);
+-	}
+ 	return 1; /* use the iomap defaults */
+ }
+ 
+ int ext4_getattr(struct mnt_idmap *idmap, const struct path *path,
+ 		 struct kstat *stat, u32 request_mask, unsigned int query_flags)
+diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
+index fb12c5c9affd..a726bc2ab66c 100644
+--- a/fs/f2fs/file.c
++++ b/fs/f2fs/file.c
+@@ -948,12 +948,10 @@ int f2fs_truncate(struct inode *inode)
+ 
+ static bool f2fs_force_buffered_io(struct inode *inode, int rw)
  {
- 	const struct fscrypt_inode_info *ci;
- 	u32 dun;
+ 	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
  
--	if (!fscrypt_inode_uses_inline_crypto(inode))
-+	if (!fscrypt_needs_contents_encryption(inode))
- 		return nr_blocks;
+-	if (!fscrypt_dio_supported(inode))
+-		return true;
+ 	if (fsverity_active(inode))
+ 		return true;
+ 	if (f2fs_compressed_file(inode))
+ 		return true;
+ 	/*
+diff --git a/include/linux/fscrypt.h b/include/linux/fscrypt.h
+index 8d19b95150f1..43bafdd67dd7 100644
+--- a/include/linux/fscrypt.h
++++ b/include/linux/fscrypt.h
+@@ -868,12 +868,10 @@ void fscrypt_set_bio_crypt_ctx(struct bio *bio, const struct inode *inode,
+ 			       loff_t pos, gfp_t gfp_mask);
  
- 	if (nr_blocks <= 1)
- 		return nr_blocks;
+ bool fscrypt_mergeable_bio(struct bio *bio, const struct inode *inode,
+ 			   loff_t pos);
  
+-bool fscrypt_dio_supported(struct inode *inode);
+-
+ u64 fscrypt_limit_io_blocks(const struct inode *inode, u64 lblk, u64 nr_blocks);
+ 
+ #else /* CONFIG_FS_ENCRYPTION_INLINE_CRYPT */
+ 
+ static inline void fscrypt_set_bio_crypt_ctx(struct bio *bio,
+@@ -885,15 +883,10 @@ static inline bool fscrypt_mergeable_bio(struct bio *bio,
+ 					 loff_t pos)
+ {
+ 	return true;
+ }
+ 
+-static inline bool fscrypt_dio_supported(struct inode *inode)
+-{
+-	return !fscrypt_needs_contents_encryption(inode);
+-}
+-
+ static inline u64 fscrypt_limit_io_blocks(const struct inode *inode, u64 lblk,
+ 					  u64 nr_blocks)
+ {
+ 	return nr_blocks;
+ }
 -- 
 2.54.0
 
