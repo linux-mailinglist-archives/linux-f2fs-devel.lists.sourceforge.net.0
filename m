@@ -2,94 +2,105 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id LfcGF1ctPGr9kwgAu9opvQ
+	id orOYJ3HSPGpgswgAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 24 Jun 2026 21:17:43 +0200
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 25 Jun 2026 09:02:09 +0200
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id EA5896C0F82
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 24 Jun 2026 21:17:42 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2062C6C331C
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 25 Jun 2026 09:02:09 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=lists.sourceforge.net header.s=beta header.b=HSiFBwbz;
-	dkim=fail ("body hash did not verify") header.d=sourceforge.net header.s=x header.b=gchsjRF0;
-	dkim=fail ("body hash did not verify") header.d=sf.net header.s=x header.b="i VEW0Hk";
-	dkim=fail ("body hash did not verify") header.d=infradead.org header.s=casper.20170209 header.b="P3Blr/FQ";
+	dkim=pass header.d=lists.sourceforge.net header.s=beta header.b=bTSV+q7S;
+	dkim=fail ("body hash did not verify") header.d=sourceforge.net header.s=x header.b=FvcinvP6;
+	dkim=fail ("body hash did not verify") header.d=sf.net header.s=x header.b="TG2/MXWJ";
+	dkim=fail ("body hash did not verify") header.d=kernel.org header.s=k20260515 header.b=dyUeAerz;
 	spf=pass (mail.lfdr.de: domain of linux-f2fs-devel-bounces@lists.sourceforge.net designates 216.105.38.7 as permitted sender) smtp.mailfrom=linux-f2fs-devel-bounces@lists.sourceforge.net;
-	dmarc=fail reason="SPF not aligned (relaxed), DKIM not aligned (relaxed)" header.from=infradead.org (policy=none)
+	dmarc=pass (policy=none) header.from=lists.sourceforge.net
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
-	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
-	Subject:MIME-Version:Message-ID:To:From:Date:Sender:Reply-To:Content-ID:
-	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
-	:Resent-Message-ID:In-Reply-To:References:List-Owner;
-	bh=QHVInfWpr7IxX/6jTdeooZMH31wCMaucKxRD8MUzUTc=; b=HSiFBwbzHje5yk5DN8hQDkf1U8
-	EmhqJZHxO58K2kxDj2edrWeiXSaU7Yi06zlQRXKWWLXdVyIr5NvPWpQAFFnL+9hXETcCDhxmqbikg
-	c57/e+5qs9Qb+IcFNrKWZFN7LwfcTQo8AW09j/2bqxiV7xSl2ZXf7SolTed+3Wwh2TQ8=;
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
+	List-Unsubscribe:List-Id:Subject:Message-Id:Date:References:In-Reply-To:To:
+	MIME-Version:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
+	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
+	bh=lF6LhTBn37EwVKkt937tWBln/2oUbfFtCC2cGxHZ+nQ=; b=bTSV+q7SwXXK93vu0OYPSZCpvq
+	PJ6lFDt+oDxjaIUg70VxyVVQkSovZje+kZTtnUKV+9HfpSTq3WeTvaTvJPsf7npFVQThgDUZFwXH4
+	4NcLfsgRMsyin5IZztJ5FOXh7NNzTIaOcO1qP0TtPCb6cl3fPGjzFmOi78vMVritPCtU=;
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1wcT6L-0006NY-Ad;
-	Wed, 24 Jun 2026 19:17:33 +0000
+	id 1wce60-0006gd-DH;
+	Thu, 25 Jun 2026 07:01:53 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <willy@infradead.org>) id 1wcT6J-0006NQ-1g
+ (envelope-from <brauner@kernel.org>) id 1wce5z-0006gW-G0
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 24 Jun 2026 19:17:31 +0000
+ Thu, 25 Jun 2026 07:01:53 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Type:MIME-Version:Message-ID:Subject:Cc:To:
- From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Message-Id:Date:References:In-Reply-To:Cc:To:From:
+ Subject:Content-Transfer-Encoding:Content-Type:MIME-Version:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=bqBc39xoDehUWuVu6AI6mn/gD7zXjqbqDQU6DrDbctI=; b=gchsjRF057wH5GYsWIE3uCKK7z
- uCtZfU6mbtZqx5mPtyrrK76CZW0IegtTNQknHBacdAloABlqifxzUVLwFXIQWbPHqZit4tQUwlIp6
- N9Bi1k75SVNy4Rid9x4i0ouV4kIrh+QGvZUBcloTLz4RYYy3jmQwcCXQNmKwpT+aLkm8=;
+ bh=+vv8SM8eUAW3MCRiYBMwLSNBJkmkWiJDn52oy/sEKaQ=; b=FvcinvP6rrvsfa8bCgPt7xP+/d
+ G1bcY/1MMfx8rNHJS32h5sZCLuoBRI8SkCRVS1NlMsQ0ClBqlIyVwARbpkEXQK0QVoBbZOikNv3lm
+ Kt3/6TonMzdkgmpPkah6IZcBEOsh2IMdidW+SqVHJWkXSAo0d1SrCgQuLJgPrcKgu4eg=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
- ;
- h=Content-Type:MIME-Version:Message-ID:Subject:Cc:To:From:Date:Sender:
- Reply-To:Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date
- :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=bqBc39xoDehUWuVu6AI6mn/gD7zXjqbqDQU6DrDbctI=; b=i
- VEW0HkHfFSefaDza4jkZdfMRWcNZk6uMuEq3v3PaJ+asQaK+UEjDS2gIj23+SlGAlRcxX7yPW+Nib
- TJlmHi9Q0MhGDWJv6U439+T/ldZFaPnV2JtbMCBBVYqmXVJzADek4d7A8agFTxU6YDnbyynhcnFTS
- gT9Twi4EhOqWhOsE=;
-Received: from [90.155.50.34] (helo=casper.infradead.org)
+ ; h=Message-Id:Date:References:In-Reply-To:Cc:To:From:Subject:
+ Content-Transfer-Encoding:Content-Type:MIME-Version:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=+vv8SM8eUAW3MCRiYBMwLSNBJkmkWiJDn52oy/sEKaQ=; b=TG2/MXWJf64a2NcRHtd7+Mbdtk
+ T7wv7n3aIVwcG42SYAewaUojb982XdaqeK/7Rhq733Gm9rklF6OB8aY3Wlf8ji+gHDLroQROkFo78
+ MC/BtuDtp4PeGFvmZKAIP2CcbGT8uhr82rM9JU1ddO7y8FeAUVP8dwHstHRLV/21DjM0=;
+Received: from tor.source.kernel.org ([172.105.4.254])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1wcT6H-0006Wn-L7 for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 24 Jun 2026 19:17:30 +0000
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=infradead.org; s=casper.20170209; h=Content-Type:MIME-Version:Message-ID:
- Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
- Content-Description:In-Reply-To:References;
- bh=bqBc39xoDehUWuVu6AI6mn/gD7zXjqbqDQU6DrDbctI=; b=P3Blr/FQoLsDznHwZjUUmuCF4A
- sZb56+wF7UCTV/Y/5WVd1/j4fTMY21gJkKubCLELbgnA7qjvYu5AnU5KUlaftQ7Tdp5QRFpkBnf1Q
- xsPtZtPJYHPsuYRowtANcexfKkz4HXgiI+rsilTZahhtJKw5IsgWQ/HyRe3bY5+u9hflDjOTiSAe6
- T+zWrOLGCrgsEhfzjLDbMJWzPpeZwOvXpUUPE6yCI/NMORylPALoZBEkHbI80ZmduQ3RAKlA6Etqe
- BKY70iGiBmTGe/HkgV2UV2+AlSd/cil7U/0+LnURnH6yypLT0JKTEKkNc1yesAjt5+nvfQ+pCsiSZ
- LWiKhpjw==;
-Received: from willy by casper.infradead.org with local (Exim 4.99.1 #2 (Red
- Hat Linux)) id 1wcT69-00000008Zuo-2VOT;
- Wed, 24 Jun 2026 19:17:22 +0000
-Date: Wed, 24 Jun 2026 20:17:21 +0100
-From: Matthew Wilcox <willy@infradead.org>
-To: Jiucheng Xu <jiucheng.xu@amlogic.com>
-Message-ID: <ajwtQRawMxcQkyo8@casper.infradead.org>
+ id 1wce5u-0003Hg-TD for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 25 Jun 2026 07:01:52 +0000
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+ by tor.source.kernel.org (Postfix) with ESMTP id A90A460217;
+ Thu, 25 Jun 2026 07:01:40 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 15D3B1F000E9;
+ Thu, 25 Jun 2026 07:01:36 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+ s=k20260515; t=1782370900;
+ bh=+vv8SM8eUAW3MCRiYBMwLSNBJkmkWiJDn52oy/sEKaQ=;
+ h=Subject:From:To:Cc:In-Reply-To:References:Date;
+ b=dyUeAerzru3xhnFxtZ+CbG65FbUdOu0DgT1EdRs+Fh5nbuoTM0kZGTsrCHmZQSZ4E
+ Mf5hx1nT9BoSHOfwF5eNt2DzQ3l9GYvzQ+EKyJCGerpBchHmAvSWAa2xGHkpYwr4b/
+ 3hGROIWH8dacrQ6f1LjyWDrVJ282Abav4LvIsn2rE0M9dHbgE0+UL+0uZBiX9FwjKB
+ oMdDPuJmhgHW6m8NbHBaRyBePCbnPFCqeepO/XS4wAsPQmL0T63OcZE6Q5ZaWn/S+X
+ uTBN9FKvdAcDTNbMASr+WpgrqFu6Da33TiS0cOOmJRUc9GfArmLx4HXm/ui2R3RWwp
+ yzJYU8tTtQNnA==
 MIME-Version: 1.0
-Content-Disposition: inline
-X-Spam-Score: 1.1 (+)
+To: Eric Biggers <ebiggers@kernel.org>
+In-Reply-To: <20260624050334.124606-11-ebiggers@kernel.org>
+References: <20260624050334.124606-1-ebiggers@kernel.org>
+ <20260624050334.124606-11-ebiggers@kernel.org>
+Date: Thu, 25 Jun 2026 09:01:34 +0200
+Message-Id: <20260625-kniefall-gemauert-strategisch-f4ad784de60d@brauner>
+X-Mailer: b4 0.16-dev-d9d01
+X-Developer-Signature: v=1; a=openpgp-sha256; l=381; i=brauner@kernel.org;
+ h=from:subject:message-id; bh=o7y3zrWWLolQ8rjHQUEvtkfJrU1SIgeSJi1z7iC+nrk=;
+ b=owGbwMvMwCU28Zj0gdSKO4sYT6slMWTZXArIvNXXXfhZxvBow6k26TVNu3SOVMs/nWLSIni5J
+ mSRaMXajlIWBjEuBlkxRRaHdpNwueU8FZuNMjVg5rAygQxh4OIUgIn8CGT4ZzTD+2Fi1YtLfesm
+ c3BFrgviP92eJvfK9aaOhcbLOkl3Fob/rhOf+5125WLY2tO6Q+q5pbTe9sLkpgtL/h5U6f9/paC
+ OBQA=
+X-Developer-Key: i=brauner@kernel.org; a=openpgp;
+ fpr=4880B8C9BD0E5106FC070F4F7B3C391EFEA93624
+X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Hi Jiucheng, I am trying to remove FGP_NOFS from the kernel
- and the last remaining user was added by you last year in commit 2308de27c03d.
- I'm trying to understand why. Did you see an actual problem if you do not
- [...] Content analysis details:   (1.1 points, 5.0 required)
+ Content preview:  On 2026-06-23 22:03 -0700, Eric Biggers wrote: > Now that
+ fscrypt's file contents en/decryption is always implemented > using blk-crypto
+ when the filesystem is block-based, the fs-layer > decryption c [...] 
+ Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
@@ -99,9 +110,9 @@ X-Spam-Report: Spam detection software,
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 1.3 RDNS_NONE Delivered to internal network by a host with no rDNS
-X-Headers-End: 1wcT6H-0006Wn-L7
-Subject: [f2fs-dev] Use of FGP_NOFS in f2fs
+X-Headers-End: 1wce5u-0003Hg-TD
+Subject: Re: [f2fs-dev] [PATCH 10/16] fs/buffer: Remove fs-layer decryption
+ code
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -113,60 +124,73 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: Jaegeuk Kim <jaegeuk@kernel.org>, linux-f2fs-devel@lists.sourceforge.net
+From: Christian Brauner via Linux-f2fs-devel
+ <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Christian Brauner <brauner@kernel.org>
+Cc: Ritesh Harjani <ritesh.list@gmail.com>, Theodore Ts'o <tytso@mit.edu>,
+ Zhang Yi <yi.zhang@huawei.com>, linux-f2fs-devel@lists.sourceforge.net,
+ linux-block@vger.kernel.org, linux-fscrypt@vger.kernel.org,
+ Andreas Dilger <adilger.kernel@dilger.ca>,
+ Ojaswin Mujoo <ojaswin@linux.ibm.com>, Baokun Li <libaokun@linux.alibaba.com>,
+ Jaegeuk Kim <jaegeuk@kernel.org>, linux-fsdevel@vger.kernel.org,
+ Jan Kara <jack@suse.cz>, linux-ext4@vger.kernel.org,
+ Christoph Hellwig <hch@lst.de>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-1.01 / 15.00];
+X-Spamd-Result: default: False [-6.61 / 15.00];
+	WHITELIST_DMARC(-7.00)[sourceforge.net:D:+];
+	SUSPICIOUS_RECIPS(1.50)[];
+	MID_RHS_NOT_FQDN(0.50)[];
+	DMARC_POLICY_ALLOW_WITH_FAILURES(-0.50)[];
 	RWL_MAILSPIKE_EXCELLENT(-0.40)[216.105.38.7:from];
-	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
-	MAILLIST(-0.20)[mailman];
 	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7];
+	MAILLIST(-0.20)[mailman];
+	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
 	MIME_GOOD(-0.10)[text/plain];
-	DMARC_POLICY_SOFTFAIL(0.10)[infradead.org : SPF not aligned (relaxed), DKIM not aligned (relaxed),none];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORGED_RECIPIENTS(0.00)[m:jiucheng.xu@amlogic.com,m:jaegeuk@kernel.org,m:linux-f2fs-devel@lists.sourceforge.net,s:lists@lfdr.de];
-	RCVD_COUNT_THREE(0.00)[4];
 	RCVD_TLS_LAST(0.00)[];
-	RECEIVED_HELO_LOCALHOST(0.00)[];
-	FORGED_SENDER(0.00)[willy@infradead.org,linux-f2fs-devel-bounces@lists.sourceforge.net];
-	ARC_NA(0.00)[];
-	TO_DN_SOME(0.00)[];
-	DKIM_MIXED(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[15];
 	MIME_TRACE(0.00)[0:+];
 	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
-	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,infradead.org:s=casper.20170209];
-	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,infradead.org:-];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	FORGED_SENDER_FORWARDING(0.00)[];
+	RECEIVED_HELO_LOCALHOST(0.00)[];
+	REPLYTO_DOM_EQ_TO_DOM(0.00)[];
+	FORGED_RECIPIENTS(0.00)[m:ebiggers@kernel.org,m:ritesh.list@gmail.com,m:tytso@mit.edu,m:yi.zhang@huawei.com,m:linux-f2fs-devel@lists.sourceforge.net,m:linux-block@vger.kernel.org,m:linux-fscrypt@vger.kernel.org,m:adilger.kernel@dilger.ca,m:ojaswin@linux.ibm.com,m:libaokun@linux.alibaba.com,m:jaegeuk@kernel.org,m:linux-fsdevel@vger.kernel.org,m:jack@suse.cz,m:linux-ext4@vger.kernel.org,m:hch@lst.de,m:riteshlist@gmail.com,s:lists@lfdr.de];
+	DKIM_MIXED(0.00)[];
+	FORGED_SENDER(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
+	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,kernel.org:s=k20260515];
+	ARC_NA(0.00)[];
+	FREEMAIL_CC(0.00)[gmail.com,mit.edu,huawei.com,lists.sourceforge.net,vger.kernel.org,dilger.ca,linux.ibm.com,linux.alibaba.com,kernel.org,suse.cz,lst.de];
+	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,kernel.org:-];
+	DMARC_POLICY_ALLOW(0.00)[lists.sourceforge.net,none];
+	RCVD_COUNT_FIVE(0.00)[5];
 	ALIAS_RESOLVED(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[willy@infradead.org,linux-f2fs-devel-bounces@lists.sourceforge.net];
+	FORGED_SENDER_FORWARDING(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	MID_RHS_MATCH_FROMTLD(0.00)[];
-	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
-	RCPT_COUNT_THREE(0.00)[3];
-	TAGGED_RCPT(0.00)[linux-f2fs-devel];
+	FROM_NEQ_ENVFROM(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
+	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	MISSING_XM_UA(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[infradead.org:from_mime,lists.sourceforge.net:dkim,lists.sourceforge.net:helo,lists.sourceforge.net:rdns,lists.sourceforge.net:from_smtp]
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	TO_DN_SOME(0.00)[];
+	TAGGED_RCPT(0.00)[linux-f2fs-devel];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	HAS_REPLYTO(0.00)[brauner@kernel.org]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: EA5896C0F82
+X-Rspamd-Queue-Id: 2062C6C331C
 
-Hi Jiucheng,
+On 2026-06-23 22:03 -0700, Eric Biggers wrote:
+> Now that fscrypt's file contents en/decryption is always implemented
+> using blk-crypto when the filesystem is block-based, the fs-layer
+> decryption code in fs/buffer.c is unused code.  Remove it.
+> 
+> Signed-off-by: Eric Biggers <ebiggers@kernel.org>
+> ---
 
-I am trying to remove FGP_NOFS from the kernel and the last remaining
-user was added by you last year in commit 2308de27c03d.  I'm trying to
-understand why.  Did you see an actual problem if you do not use it,
-or was it theoretical?  The commit message says "to avoid potential
-deadlock issues", but it's not clear to me whether you know they are
-there, or only think they are there.
+Reviewed-by: Christian Brauner (Amutable) <brauner@kernel.org>
 
-I'd really like to understand what the issues are as the normal issues
-which make calling into the filesystem (holding another folio locked,
-holding a mutex relied upon by reclaim) don't seem to be present.
-So if there is something, I'm not sure what it is.
 
 
 _______________________________________________
