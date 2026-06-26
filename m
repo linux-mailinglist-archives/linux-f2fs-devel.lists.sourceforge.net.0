@@ -2,17 +2,17 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id D+27HTQNPmrE/AgAu9opvQ
+	id UPYELlcNPmrS/AgAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 26 Jun 2026 07:25:08 +0200
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 26 Jun 2026 07:25:43 +0200
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1DDDE6CA531
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 26 Jun 2026 07:25:08 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8784E6CA557
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 26 Jun 2026 07:25:43 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=lists.sourceforge.net header.s=beta header.b=AQqF2uWs;
-	dkim=fail ("body hash did not verify") header.d=sourceforge.net header.s=x header.b=GCSynSX1;
-	dkim=fail ("body hash did not verify") header.d=sf.net header.s=x header.b=m59DwT1u;
+	dkim=pass header.d=lists.sourceforge.net header.s=beta header.b=FAhLewA9;
+	dkim=fail ("body hash did not verify") header.d=sourceforge.net header.s=x header.b=lSEl4IA5;
+	dkim=fail ("body hash did not verify") header.d=sf.net header.s=x header.b="V5en/z47";
 	spf=pass (mail.lfdr.de: domain of linux-f2fs-devel-bounces@lists.sourceforge.net designates 216.105.38.7 as permitted sender) smtp.mailfrom=linux-f2fs-devel-bounces@lists.sourceforge.net;
 	dmarc=fail reason="SPF not aligned (relaxed), DKIM not aligned (relaxed)" header.from=lst.de (policy=none)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
@@ -21,29 +21,29 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	Subject:In-Reply-To:MIME-Version:References:Message-ID:To:From:Date:Sender:
 	Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
 	:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=e8qfyoSPyPfjE0jCCqLhRQvm/sqiAGHIjfAWqfboNlU=; b=AQqF2uWsHAMDiRj8WQOy8gvI4Y
-	ozW8+cfaRwCpsovG6CIfDjgitoNdM9BQ82DjJLAs22uOXKz2bbahJAy3Plh2IQ+iWfGTR5KS3wySn
-	+FcHxTpGVWoKuv20vnAqa4F0F/jk0qhX9lSOFoP+ZMW6WMXHBo0Ew55n6sn1SATHZQg0=;
+	bh=PLw+8vTyTNY5BtHY/FoMu7daenO1a9VViBbJFOA61kY=; b=FAhLewA9i2ApFQkPX5HBvxK7+W
+	tdfcXSxOhGdZxu7H0+/LZEw+8N+2TsSOv6z0vMudLHjrF14czhP/Jddvv+nAzffnFG9aZXWqDJsiB
+	bDA8RfP7qjRx0YTg1NXt5ZzJxZqrSWNMC6tKGkeTizcFGm9T/Kh1UunH6JzzJltF2a/8=;
 Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
 	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1wcz3n-0004nz-7W;
-	Fri, 26 Jun 2026 05:25:03 +0000
+	id 1wcz4O-0004ph-Kt;
+	Fri, 26 Jun 2026 05:25:41 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
  by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <hch@lst.de>) id 1wcz3l-0004ns-8s
+ (envelope-from <hch@lst.de>) id 1wcz4J-0004pV-WC
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 26 Jun 2026 05:25:02 +0000
+ Fri, 26 Jun 2026 05:25:36 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=M7NmYC/Iylm9myghHwqILim55SAUt9QrM+UZYk0eJlw=; b=GCSynSX1TTXO0lUr9fMkI5jJCn
- gJPT2hWUYT6RMNh24mWWUugmTD0CbgMYji6aaegWdwj0vbGQJlaol128EIbQWf6aV/M0scvxCveP8
- wRyD81KlLxmFUICZ6AlhnDKl4AZWqSmeRoNx4DazZ3HozRiCtrfJhrI2opN3GVcITDt0=;
+ bh=M7NmYC/Iylm9myghHwqILim55SAUt9QrM+UZYk0eJlw=; b=lSEl4IA5Z5AEPrWiJfTjNP8tlE
+ fCK33fWQRXFAGaHrkb701xxaa85B4slBhlSdbjEbrZrPjUQPYOyXLFIq1q08i3IVSecID0IoqDWBs
+ kplvMiRO1i0AjvlpDpo/+OxSrX4qqdKrOhah6oLGDDwZC5aGtb9o0XVTc+50AMj5wH3U=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -51,29 +51,29 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=M7NmYC/Iylm9myghHwqILim55SAUt9QrM+UZYk0eJlw=; b=m59DwT1umsP2b10RZnqq3DGl98
- n9w765NlIfs67c2LE+8KbEu5+FhzKqW+DQ0mSKpElV4B0RZw9c4s4T4B4rArNEVLR79/wna8k3zm9
- Mkrnxun9g3vh5KzvscarSXsgWTXAiBLq2IvcUk9Q+FBda+9RP3b5oujJT/F/JmAR8wLQ=;
+ bh=M7NmYC/Iylm9myghHwqILim55SAUt9QrM+UZYk0eJlw=; b=V5en/z47CjRy8a9WIvXMPZY7BL
+ nqnNaGLkzRd/LH4L5gjQWO/LamGUUPQuN2dLLp9bVDjiMUpFKw4vWbJqUYsrck54zjEkHqSQy3nzP
+ BHCE8oDWUroK/7M89o4FsczpzmMvUxss1jfLH7f8xT6YMvEU+ZPXT5O2HqEIV10PZr0Q=;
 Received: from verein.lst.de ([213.95.11.211])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1wcz3j-0000pS-Q8 for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 26 Jun 2026 05:25:01 +0000
+ id 1wcz4I-0000rv-Dm for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 26 Jun 2026 05:25:36 +0000
 Received: by verein.lst.de (Postfix, from userid 2407)
- id 50DFC68B05; Fri, 26 Jun 2026 07:24:47 +0200 (CEST)
-Date: Fri, 26 Jun 2026 07:24:46 +0200
+ id 9EC6868B05; Fri, 26 Jun 2026 07:25:22 +0200 (CEST)
+Date: Fri, 26 Jun 2026 07:25:22 +0200
 From: Christoph Hellwig <hch@lst.de>
 To: Eric Biggers <ebiggers@kernel.org>
-Message-ID: <20260626052446.GF9043@lst.de>
+Message-ID: <20260626052522.GG9043@lst.de>
 References: <20260624050334.124606-1-ebiggers@kernel.org>
- <20260624050334.124606-7-ebiggers@kernel.org>
+ <20260624050334.124606-8-ebiggers@kernel.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20260624050334.124606-7-ebiggers@kernel.org>
+In-Reply-To: <20260624050334.124606-8-ebiggers@kernel.org>
 User-Agent: Mutt/1.5.17 (2007-11-01)
 X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
@@ -82,9 +82,9 @@ X-Spam-Report: Spam detection software,
  Content analysis details:   (0.0 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
-X-Headers-End: 1wcz3j-0000pS-Q8
-Subject: Re: [f2fs-dev] [PATCH 06/16] ext4: Remove fs-layer file contents
- en/decryption code
+X-Headers-End: 1wcz4I-0000rv-Dm
+Subject: Re: [f2fs-dev] [PATCH 07/16] ext4: Make ext4_bio_write_folio()
+ return void
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -102,8 +102,7 @@ Cc: Ritesh Harjani <ritesh.list@gmail.com>, Theodore Ts'o <tytso@mit.edu>,
  Andreas Dilger <adilger.kernel@dilger.ca>,
  Ojaswin Mujoo <ojaswin@linux.ibm.com>, Baokun Li <libaokun@linux.alibaba.com>,
  Jaegeuk Kim <jaegeuk@kernel.org>, linux-fsdevel@vger.kernel.org,
- Jan Kara <jack@suse.cz>, linux-ext4@vger.kernel.org,
- Christoph Hellwig <hch@lst.de>
+ Jan Kara <jack@suse.cz>, linux-ext4@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
@@ -117,17 +116,17 @@ X-Spamd-Result: default: False [0.49 / 15.00];
 	MIME_GOOD(-0.10)[text/plain];
 	DMARC_POLICY_SOFTFAIL(0.10)[lst.de : SPF not aligned (relaxed), DKIM not aligned (relaxed),none];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
 	DKIM_MIXED(0.00)[];
+	RECEIVED_HELO_LOCALHOST(0.00)[];
+	RCVD_COUNT_THREE(0.00)[4];
+	FORGED_RECIPIENTS(0.00)[m:ebiggers@kernel.org,m:ritesh.list@gmail.com,m:tytso@mit.edu,m:yi.zhang@huawei.com,m:linux-f2fs-devel@lists.sourceforge.net,m:linux-block@vger.kernel.org,m:linux-fscrypt@vger.kernel.org,m:adilger.kernel@dilger.ca,m:ojaswin@linux.ibm.com,m:libaokun@linux.alibaba.com,m:jaegeuk@kernel.org,m:linux-fsdevel@vger.kernel.org,m:jack@suse.cz,m:linux-ext4@vger.kernel.org,m:riteshlist@gmail.com,s:lists@lfdr.de];
+	RCVD_TLS_LAST(0.00)[];
+	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
+	RCPT_COUNT_TWELVE(0.00)[14];
 	ARC_NA(0.00)[];
 	FORGED_SENDER(0.00)[hch@lst.de,linux-f2fs-devel-bounces@lists.sourceforge.net];
-	RECEIVED_HELO_LOCALHOST(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:ebiggers@kernel.org,m:ritesh.list@gmail.com,m:tytso@mit.edu,m:yi.zhang@huawei.com,m:linux-f2fs-devel@lists.sourceforge.net,m:linux-block@vger.kernel.org,m:linux-fscrypt@vger.kernel.org,m:adilger.kernel@dilger.ca,m:ojaswin@linux.ibm.com,m:libaokun@linux.alibaba.com,m:jaegeuk@kernel.org,m:linux-fsdevel@vger.kernel.org,m:jack@suse.cz,m:linux-ext4@vger.kernel.org,m:hch@lst.de,m:riteshlist@gmail.com,s:lists@lfdr.de];
-	RCVD_TLS_LAST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[15];
 	MIME_TRACE(0.00)[0:+];
-	FREEMAIL_CC(0.00)[gmail.com,mit.edu,huawei.com,lists.sourceforge.net,vger.kernel.org,dilger.ca,linux.ibm.com,linux.alibaba.com,kernel.org,suse.cz,lst.de];
+	FREEMAIL_CC(0.00)[gmail.com,mit.edu,huawei.com,lists.sourceforge.net,vger.kernel.org,dilger.ca,linux.ibm.com,linux.alibaba.com,kernel.org,suse.cz];
 	TO_DN_SOME(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	ALIAS_RESOLVED(0.00)[];
@@ -143,12 +142,11 @@ X-Spamd-Result: default: False [0.49 / 15.00];
 	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.sourceforge.net:dkim,lists.sourceforge.net:helo,lists.sourceforge.net:rdns,lists.sourceforge.net:from_smtp,lst.de:email,lst.de:mid,lst.de:from_mime]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 1DDDE6CA531
+X-Rspamd-Queue-Id: 8784E6CA557
 
 Looks good:
 
 Reviewed-by: Christoph Hellwig <hch@lst.de>
-
 
 
 _______________________________________________
