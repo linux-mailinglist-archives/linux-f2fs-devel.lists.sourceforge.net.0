@@ -2,17 +2,17 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id 9NN1OiYOPmoh/QgAu9opvQ
+	id 3LgAAu0OPmpM/QgAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 26 Jun 2026 07:29:10 +0200
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 26 Jun 2026 07:32:29 +0200
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id B8AC06CA638
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 26 Jun 2026 07:29:10 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A3C596CA66D
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 26 Jun 2026 07:32:28 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=lists.sourceforge.net header.s=beta header.b=K5olLpY+;
-	dkim=fail ("body hash did not verify") header.d=sourceforge.net header.s=x header.b=kW2qnATR;
-	dkim=fail ("body hash did not verify") header.d=sf.net header.s=x header.b=awdHsqNA;
+	dkim=pass header.d=lists.sourceforge.net header.s=beta header.b=RxlfChfU;
+	dkim=fail ("body hash did not verify") header.d=sourceforge.net header.s=x header.b=MUEktW0j;
+	dkim=fail ("body hash did not verify") header.d=sf.net header.s=x header.b=FGp5qigr;
 	spf=pass (mail.lfdr.de: domain of linux-f2fs-devel-bounces@lists.sourceforge.net designates 216.105.38.7 as permitted sender) smtp.mailfrom=linux-f2fs-devel-bounces@lists.sourceforge.net;
 	dmarc=fail reason="SPF not aligned (relaxed), DKIM not aligned (relaxed)" header.from=lst.de (policy=none)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
@@ -21,29 +21,29 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	Subject:In-Reply-To:MIME-Version:References:Message-ID:To:From:Date:Sender:
 	Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
 	:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=e8qfyoSPyPfjE0jCCqLhRQvm/sqiAGHIjfAWqfboNlU=; b=K5olLpY+iptQJlz6MK1lq0Z5hd
-	moKi9QgHdf1m7Udu3+cPOb6jkWFBXfMPtSgjgfoZKRsUEBJQdJI6iehY4gEna8f70efiVgEcnBaJi
-	lWPxdqTx6Dldh8C001Lr6MFVntPdGvAdI9w1CDsIgpstpZPXbi0QrO5GFO+4WDXxXCeE=;
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=g5KHKJ4H8SLsHDaJnmjtokz/BXVJWPGaXBdGG2N6SWg=; b=RxlfChfU3NCyl66mp8WFrHv6oW
+	jjTYT8Id8Y1nI6291lZOrBIQOA3BGRaAeth4LLv/yleELLHJYYg37RHnYh6NqBWiHtWNLMG3MH5sd
+	nj5O99apakfROQZ6XpJ1mKiFWWREXgBb2T0x8WEXQWRCx62dsKC5pvcVW9uf5zNilFxo=;
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1wcz7k-0004z6-1T;
-	Fri, 26 Jun 2026 05:29:08 +0000
+	id 1wczAu-0002R4-Oh;
+	Fri, 26 Jun 2026 05:32:24 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <hch@lst.de>) id 1wcz7i-0004yy-Tq
+ (envelope-from <hch@lst.de>) id 1wczAu-0002Qy-3I
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 26 Jun 2026 05:29:07 +0000
+ Fri, 26 Jun 2026 05:32:24 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=M7NmYC/Iylm9myghHwqILim55SAUt9QrM+UZYk0eJlw=; b=kW2qnATRaMAjPERwuuZiH/IRsR
- lrmX9synWyDRT5mhr8vh2kdcm6f2z8T2uL3VIf/FB3WNO7doFDI3bMkynSATrG53i7p7GlwefNQJN
- SepnfA6hqF9T8UrXa/yg46GTeio8uLEj0Sv14qP1g/KhKGARNn3Euie0zqpKYBySz7DA=;
+ bh=e0uct1L3IgAtqbOcFCvfL9SMtjjUEZsQND8tvgvJ9a0=; b=MUEktW0jMlBuHWQgrBaLUE2RWk
+ EE45wj/mG0LKqiMHv9gUC+kGT5qkpL+SFwThiR1xs0horMNfdpjjBBgN8662BA39+YLRVcHi5qGsB
+ Yd+c0BiT4qHbyoKxUMUrmdoC5Li7wsD94nNTMxwvXlDw/wTmbwbY1bUZP7dF+WByRAYg=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -51,25 +51,25 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=M7NmYC/Iylm9myghHwqILim55SAUt9QrM+UZYk0eJlw=; b=awdHsqNAQFq5Q2CdrAC+/wArNY
- 0uBZE0GHRHsOcf+sf33LPE7NLOI7cv/fqld+iaCJh+jeAOZyZl094EHUtWdVzA+HmTihG8t/u8G8i
- wh8yqmULCt6aKIGENI9ybJxCcj+hIHjN07KGWg7KdTOzLrT/kf1+Cc63XgDxK1f7ZyvE=;
+ bh=e0uct1L3IgAtqbOcFCvfL9SMtjjUEZsQND8tvgvJ9a0=; b=FGp5qigrixR98DSEznt+dTFwAD
+ 5dIgAzNgbc0N/g6w5/aYXbAB8xgUZdwCHbviiMqE9YMQOa2UMiFK7KTta0Hr+oQDxXffqJXUpT6ZO
+ TRB1sKFvewQbQXrXJtbRWL82fyf6hCMheCeYcGC6EStUuf/bCbNMVxMlp+MbH6s8EGws=;
 Received: from verein.lst.de ([213.95.11.211])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1wcz7i-00017v-Lj for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 26 Jun 2026 05:29:07 +0000
+ id 1wczAr-0001Gh-US for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 26 Jun 2026 05:32:24 +0000
 Received: by verein.lst.de (Postfix, from userid 2407)
- id DC17C68B05; Fri, 26 Jun 2026 07:28:54 +0200 (CEST)
-Date: Fri, 26 Jun 2026 07:28:54 +0200
+ id 7065F68B05; Fri, 26 Jun 2026 07:32:08 +0200 (CEST)
+Date: Fri, 26 Jun 2026 07:32:07 +0200
 From: Christoph Hellwig <hch@lst.de>
 To: Eric Biggers <ebiggers@kernel.org>
-Message-ID: <20260626052854.GM9043@lst.de>
+Message-ID: <20260626053207.GN9043@lst.de>
 References: <20260624050334.124606-1-ebiggers@kernel.org>
- <20260624050334.124606-15-ebiggers@kernel.org>
+ <20260624050334.124606-16-ebiggers@kernel.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20260624050334.124606-15-ebiggers@kernel.org>
+In-Reply-To: <20260624050334.124606-16-ebiggers@kernel.org>
 User-Agent: Mutt/1.5.17 (2007-11-01)
 X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam detection software,
@@ -78,17 +78,15 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Looks good: Reviewed-by: Christoph Hellwig <hch@lst.de> 
+ Content preview:  On Tue, Jun 23, 2026 at 10:03:33PM -0700, Eric Biggers wrote:
+ > Now that fscrypt always uses blk-crypto on block-based filesystems, > there's
+ no meaningful difference between bio.c and inline_crypt.c. [...] 
  Content analysis details:   (0.0 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 RCVD_IN_DNSWL_BLOCKED  RBL: ADMINISTRATOR NOTICE: The query to DNSWL
- was blocked.  See
- http://wiki.apache.org/spamassassin/DnsBlocklists#DnsBlocklists-dnsbl-block
- for more information. [213.95.11.211 listed in list.dnswl.org]
-X-Headers-End: 1wcz7i-00017v-Lj
-Subject: Re: [f2fs-dev] [PATCH 14/16] fscrypt: Remove unused functions and
- workqueue
+X-Headers-End: 1wczAr-0001Gh-US
+Subject: Re: [f2fs-dev] [PATCH 15/16] fscrypt: Merge bio.c and
+ inline_crypt.c into block.c
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -106,7 +104,8 @@ Cc: Ritesh Harjani <ritesh.list@gmail.com>, Theodore Ts'o <tytso@mit.edu>,
  Andreas Dilger <adilger.kernel@dilger.ca>,
  Ojaswin Mujoo <ojaswin@linux.ibm.com>, Baokun Li <libaokun@linux.alibaba.com>,
  Jaegeuk Kim <jaegeuk@kernel.org>, linux-fsdevel@vger.kernel.org,
- Jan Kara <jack@suse.cz>, linux-ext4@vger.kernel.org
+ Jan Kara <jack@suse.cz>, linux-ext4@vger.kernel.org,
+ Christoph Hellwig <hch@lst.de>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
@@ -123,14 +122,14 @@ X-Spamd-Result: default: False [0.49 / 15.00];
 	DKIM_MIXED(0.00)[];
 	RECEIVED_HELO_LOCALHOST(0.00)[];
 	RCVD_COUNT_THREE(0.00)[4];
-	FORGED_RECIPIENTS(0.00)[m:ebiggers@kernel.org,m:ritesh.list@gmail.com,m:tytso@mit.edu,m:yi.zhang@huawei.com,m:linux-f2fs-devel@lists.sourceforge.net,m:linux-block@vger.kernel.org,m:linux-fscrypt@vger.kernel.org,m:adilger.kernel@dilger.ca,m:ojaswin@linux.ibm.com,m:libaokun@linux.alibaba.com,m:jaegeuk@kernel.org,m:linux-fsdevel@vger.kernel.org,m:jack@suse.cz,m:linux-ext4@vger.kernel.org,m:riteshlist@gmail.com,s:lists@lfdr.de];
+	FORGED_RECIPIENTS(0.00)[m:ebiggers@kernel.org,m:ritesh.list@gmail.com,m:tytso@mit.edu,m:yi.zhang@huawei.com,m:linux-f2fs-devel@lists.sourceforge.net,m:linux-block@vger.kernel.org,m:linux-fscrypt@vger.kernel.org,m:adilger.kernel@dilger.ca,m:ojaswin@linux.ibm.com,m:libaokun@linux.alibaba.com,m:jaegeuk@kernel.org,m:linux-fsdevel@vger.kernel.org,m:jack@suse.cz,m:linux-ext4@vger.kernel.org,m:hch@lst.de,m:riteshlist@gmail.com,s:lists@lfdr.de];
 	RCVD_TLS_LAST(0.00)[];
 	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
-	RCPT_COUNT_TWELVE(0.00)[14];
+	RCPT_COUNT_TWELVE(0.00)[15];
 	ARC_NA(0.00)[];
 	FORGED_SENDER(0.00)[hch@lst.de,linux-f2fs-devel-bounces@lists.sourceforge.net];
 	MIME_TRACE(0.00)[0:+];
-	FREEMAIL_CC(0.00)[gmail.com,mit.edu,huawei.com,lists.sourceforge.net,vger.kernel.org,dilger.ca,linux.ibm.com,linux.alibaba.com,kernel.org,suse.cz];
+	FREEMAIL_CC(0.00)[gmail.com,mit.edu,huawei.com,lists.sourceforge.net,vger.kernel.org,dilger.ca,linux.ibm.com,linux.alibaba.com,kernel.org,suse.cz,lst.de];
 	TO_DN_SOME(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	ALIAS_RESOLVED(0.00)[];
@@ -144,11 +143,69 @@ X-Spamd-Result: default: False [0.49 / 15.00];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.sourceforge.net:dkim,lists.sourceforge.net:helo,lists.sourceforge.net:rdns,lists.sourceforge.net:from_smtp,lst.de:email,lst.de:mid,lst.de:from_mime]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[lst.de:email,lst.de:mid,lst.de:from_mime,lists.sourceforge.net:dkim,lists.sourceforge.net:helo,lists.sourceforge.net:rdns,lists.sourceforge.net:from_smtp]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: B8AC06CA638
+X-Rspamd-Queue-Id: A3C596CA66D
 
-Looks good:
+On Tue, Jun 23, 2026 at 10:03:33PM -0700, Eric Biggers wrote:
+> Now that fscrypt always uses blk-crypto on block-based filesystems,
+> there's no meaningful difference between bio.c and inline_crypt.c.
+> Therefore merge the two files into one named block.c.
+> 
+> Note: I didn't carry over bio.c's "Copyright (C) 2015, Motorola
+> Mobility", as none of the code that applied to remained.
+
+Yeah the current from of the code is almost entirely mine,
+with some slight traces of your earlier version.
+
+> +struct fscrypt_zero_done {
+> +	atomic_t		pending;
+> +	blk_status_t		status;
+> +	struct completion	done;
+> +};
+> +
+> +static void fscrypt_zeroout_range_done(struct fscrypt_zero_done *done)
+> +{
+> +	if (atomic_dec_and_test(&done->pending))
+> +		complete(&done->done);
+> +}
+> +
+> +static void fscrypt_zeroout_range_end_io(struct bio *bio)
+> +{
+> +	struct fscrypt_zero_done *done = bio->bi_private;
+> +
+> +	if (bio->bi_status)
+> +		cmpxchg(&done->status, 0, bio->bi_status);
+> +	fscrypt_zeroout_range_done(done);
+> +	bio_put(bio);
+> +}
+> +
+> +/**
+> + * fscrypt_zeroout_range() - zero out a range of blocks in an encrypted file
+> + * @inode: the file's inode
+> + * @pos: the first file position (in bytes) to zero out
+> + * @sector: the first sector to zero out
+> + * @len: bytes to zero out
+> + *
+> + * Zero out filesystem blocks in an encrypted regular file on-disk, i.e. write
+> + * ciphertext blocks which decrypt to the all-zeroes block.  The blocks must be
+> + * both logically and physically contiguous.  It's also assumed that the
+> + * filesystem only uses a single block device, ->s_bdev.  @len must be a
+> + * multiple of the file system logical block size.
+> + *
+> + * Note that since each block uses a different IV, this involves writing a
+> + * different ciphertext to each block; we can't simply reuse the same one.
+> + *
+> + * Return: 0 on success; -errno on failure.
+> + */
+> +int fscrypt_zeroout_range(const struct inode *inode, loff_t pos,
+> +			  sector_t sector, u64 len)
+
+.. but I wonder if we should rename this and move it to libfs, as it
+works just fine without encyption and file systems could call it
+for the non-fscrypt case and consolidate on a single implementation.
+
+But maybe some other time, no need to complicate this series.
 
 Reviewed-by: Christoph Hellwig <hch@lst.de>
 
