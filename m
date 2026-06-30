@@ -2,18 +2,18 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id YBEeCcagQ2rldgoAu9opvQ
+	id I/2SBniiQ2r6dwoAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 30 Jun 2026 12:56:06 +0200
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 30 Jun 2026 13:03:20 +0200
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2F7946E3306
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 30 Jun 2026 12:56:05 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 43C546E34E5
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 30 Jun 2026 13:03:19 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=lists.sourceforge.net header.s=beta header.b=QbaB7MMN;
-	dkim=fail ("body hash did not verify") header.d=sourceforge.net header.s=x header.b=Rky7fPYu;
-	dkim=fail ("body hash did not verify") header.d=sf.net header.s=x header.b=RQaJDoQT;
-	dkim=fail ("body hash did not verify") header.d=kernel.org header.s=k20260515 header.b=NbF3gsTl;
+	dkim=pass header.d=lists.sourceforge.net header.s=beta header.b=caRZOyaL;
+	dkim=fail ("body hash did not verify") header.d=sourceforge.net header.s=x header.b=TwBfjHcf;
+	dkim=fail ("body hash did not verify") header.d=sf.net header.s=x header.b=maFnuQin;
+	dkim=fail ("body hash did not verify") header.d=kernel.org header.s=k20260515 header.b=ZoSlMyGS;
 	spf=pass (mail.lfdr.de: domain of linux-f2fs-devel-bounces@lists.sourceforge.net designates 216.105.38.7 as permitted sender) smtp.mailfrom=linux-f2fs-devel-bounces@lists.sourceforge.net;
 	dmarc=pass (policy=none) header.from=lists.sourceforge.net
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
@@ -22,29 +22,29 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	List-Unsubscribe:List-Id:Subject:In-Reply-To:References:To:MIME-Version:Date:
 	Message-ID:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
 	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=+qo6OW0w+C7qRBlKofkVBwWMBMkUTbCdUqDIBmdO3Lc=; b=QbaB7MMNT1utbswFZpaGJQyYb2
-	mf+StXzj+udMjslkvRg5ytauL2oHsiqZcQYskETuiK2Zfdo5GcXMDxPXPMB5qvg+XVEjPTvJ1XT6U
-	0aIqwqKh+ITZyuN06xDqojKGI4M8SAuBUbZe5VxEcI5gg9CKzH7wyqbPq1wubOnwMXac=;
+	bh=UaM/kA69pKIYRWmplPfOAnIEGguueGFs1P3up0AWqOM=; b=caRZOyaLEcJO4AYzwZXpLV+dG4
+	yx6cpN//hYfC7MPswB+oOBq1lfdYCUKSX6ANR9rvk0b8fx94Dr1eWSyxT8Nk9WRMaDtcjueBX9bDC
+	3IF97NI6uzK5AtBlUmOCidOHHasUealo7ICcBol5coLUU1AuTYdujT9LvG57jVjDr1Nk=;
 Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
 	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1weW8G-00072j-Te;
-	Tue, 30 Jun 2026 10:55:58 +0000
+	id 1weWFC-0007ZP-PM;
+	Tue, 30 Jun 2026 11:03:08 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
  by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1weW8F-00072c-75
+ (envelope-from <chao@kernel.org>) id 1weWEr-0007Yo-4b
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 30 Jun 2026 10:55:56 +0000
+ Tue, 30 Jun 2026 11:02:46 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  From:References:To:Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=0ey8b/L92o5zy9KlFQMm/3L9mSdMZ5wzovUEyXt142g=; b=Rky7fPYuAgkvO1MMyYAPQv3obY
- pfl5CftSYBku+3yN7F82+UPqxfErAisyhHzCtFZAyIlV6+IK8YyWiKDe/V6zScGcpySksl54HVvCf
- GkVuFk9eObnW0xKJ9nWhhcC/JGVbTNyWzwvQn0Xvw0B4vVQRPh2/X3ccX8Nr29bpaeX8=;
+ bh=WMJgU7k3s4TM2At+hKoin8UaWXfonWN6mqvCqCeU92Y=; b=TwBfjHcfcVXFdsjjqyCpxVHMWn
+ HAdMEtz+jNCDQSAuhOfAA6AS41Zeg2ngnIsf4H30VPmnzWvaOXlYOFtavkuFG0jc2XUzCk7S6Yg4f
+ ZpxSgUlbYvxI0LXMZRtAw16EcwuLyB0H0VAH4Zis6FbF4VIQ9XPpGbHdH7zH4mheyE7c=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
@@ -52,62 +52,62 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=0ey8b/L92o5zy9KlFQMm/3L9mSdMZ5wzovUEyXt142g=; b=RQaJDoQTbhwbvchzHAciQxwW+4
- QpJU6GQgDChGlZU7fRNLkB6V6Ple1rytZ3PMnXZfSRzmyUw6FGB4fnB4LunVYSJjtDuivS3FzZc6d
- bAjUMZ43IdwpGnOtJw8rgZsfXf+tKFrtbMzulAgbqTdBbA1oGaJ6N0UP1h4BBCyJ5Idc=;
-Received: from sea.source.kernel.org ([172.234.252.31])
+ bh=WMJgU7k3s4TM2At+hKoin8UaWXfonWN6mqvCqCeU92Y=; b=maFnuQin6+m45s7xvilT0H8VPx
+ N+aVi0nNhEVF7spC3L/RfcPRaUQIuWDOwy7D6OWmF/aZ/rAf7/Q+dJR5zUfCNhP14FuYwiVHu9vcA
+ w9JMeTMl601sXKg9WmNPcIy6kc/H6yi9mpHGxI1dzjZ8JN4KhyESLIrKnHEIJE+Wpp10=;
+Received: from tor.source.kernel.org ([172.105.4.254])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1weW8B-0008V4-5I for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 30 Jun 2026 10:55:56 +0000
+ id 1weWEl-0000cy-Fd for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 30 Jun 2026 11:02:46 +0000
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by sea.source.kernel.org (Postfix) with ESMTP id 5112B4028E;
- Tue, 30 Jun 2026 10:55:45 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id CE69C1F000E9;
- Tue, 30 Jun 2026 10:55:42 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id 596BE600FF;
+ Tue, 30 Jun 2026 11:02:38 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 921AE1F000E9;
+ Tue, 30 Jun 2026 11:02:36 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
- s=k20260515; t=1782816945;
- bh=0ey8b/L92o5zy9KlFQMm/3L9mSdMZ5wzovUEyXt142g=;
+ s=k20260515; t=1782817358;
+ bh=WMJgU7k3s4TM2At+hKoin8UaWXfonWN6mqvCqCeU92Y=;
  h=Date:Cc:Subject:To:References:From:In-Reply-To;
- b=NbF3gsTlRWxKkbw91ByC2+GEjU6nuKbYFfqTQzQCmxGag0ViyyiDm45tS7Zctg8Uo
- oIJH88JHLkT1UFXMN7ZMmKQHpEsRjjvdlixHUINHC+lMQraGnHPwprurK8uWXJQ7yd
- hlD4nYYND53fwVXdtvDHVEJ5vPwOigh5xXoxEiFHkFrRV/fFGniOKdoC06X30xxt4l
- yEl3FQc5nR83DZpZK1sYI9PO39bzkD0TkgIn2Sc+SY8EN68ar0MLQ1D6uMM0pqaOnw
- NGrhWEXqCN6wYJZ9nX/xn1Mf+8SQlWNYxrcKIRtpUoqNWf3hGsWaYPuYTSmfYg1rQ0
- 1WNR5MzHpHqtA==
-Message-ID: <64ce7a28-992d-4d20-bbb1-b76943911ab4@kernel.org>
-Date: Tue, 30 Jun 2026 18:55:40 +0800
+ b=ZoSlMyGSHyoiDOQ3D6rPo2K7Yd2B4u61PcS3/N8AZ60xZsRbhT473TwqQPTH9xmXL
+ dVGeJ6JbrY3j/K30qV0SwSBS1MF0sye4/wXsIkfan3kjYgteB+6WOftMkOWrKvCfkY
+ wQ0FC2ZBjslO6biu9jIuQ5iamqDiZxN8KSUrJAEqCrUcq0mbFkpm7HGotTRlYspvDj
+ 8fmTxwDRx9/25XeMeSH2bW5zd5VP1cosLKBJ8w0wL6mBLdrrYrM9aOJ49eadXTIdCs
+ CP/Baqua0HoWUPCVrssYupRO4+f4XApJWe92Ty7wr+UtzfuJBc9ayZB69zUo20HQOn
+ mgmxPpIrCo0dA==
+Message-ID: <5ad89199-f5e8-43a7-971a-575ff27c1d40@kernel.org>
+Date: Tue, 30 Jun 2026 19:02:34 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-To: Nanzhe Zhao <zhaonanzhe@xiaomi.com>, linux-f2fs-devel@lists.sourceforge.net
-References: <20260612080334.70657-1-zhaonanzhe@xiaomi.com>
- <20260612080334.70657-4-zhaonanzhe@xiaomi.com>
+To: Zhiguo Niu <niuzhiguo84@gmail.com>
+References: <20260629114918.224537-1-chao@kernel.org>
+ <CAHJ8P3LOBs0gWHM7rT-G51tQ7Q+utn_xupnp2BuBir+cAC-Xiw@mail.gmail.com>
 Content-Language: en-US
-In-Reply-To: <20260612080334.70657-4-zhaonanzhe@xiaomi.com>
+In-Reply-To: <CAHJ8P3LOBs0gWHM7rT-G51tQ7Q+utn_xupnp2BuBir+cAC-Xiw@mail.gmail.com>
 X-Spam-Score: -0.2 (/)
-X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
+X-Spam-Report: Spam detection software, running on the system "sfi-spamd-2.hosts.colo.sdot.me",
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On 6/12/26 16:03,
- Nanzhe Zhao wrote: > From: Nanzhe <zhaonanzhe@xiaomi.com>
- > > To avoid the complexity of unlocking a large folio in write_begin, >
- preallocate partial blocks for inodes that can use [...] 
+ 
+ Content preview:  On 6/30/26 16:50, Zhiguo Niu wrote: > Chao Yu via Linux-f2fs-devel
+    <linux-f2fs-devel@lists.sourceforge.net> > 于2026年6月29日周一 19:52写道：
+    >> >> Blocks of pinfile may not aligned to sectio [...] 
+ 
  Content analysis details:   (-0.2 points, 5.0 required)
- pts rule name              description
+ 
+  pts rule name              description
  ---- ---------------------- --------------------------------------------------
+  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily valid
+ -0.1 DKIM_VALID             Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
-X-Headers-End: 1weW8B-0008V4-5I
-Subject: Re: [f2fs-dev] [RFC PATCH 3/9] f2fs: support regular file buffered
- writes on large folios
+                             envelope-from domain
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from author's
+                             domain
+X-Headers-End: 1weWEl-0000cy-Fd
+Subject: Re: [f2fs-dev] [PATCH] f2fs: fix to avoid potential
+ section-unaligned pinfile
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -121,425 +121,125 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>,
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
 From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
 Reply-To: Chao Yu <chao@kernel.org>
-Cc: Barry Song <baohua@kernel.org>, Ryan Roberts <Ryan.Roberts@arm.com>,
- Juan Yescas <jyescas@google.com>, Dev Jain <Dev.Jain@arm.com>,
- David Hildenbrand <David.Hildenbrand@arm.com>,
- Pengfei Li <lipengfei28@xiaomi.com>, Bo Zhang <zhangbo56@xiaomi.com>,
- Kalesh Singh <kaleshsingh@google.com>, Jaegeuk Kim <jaegeuk@kernel.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Cc: Daeho Jeong <daehojeong@google.com>, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, jaegeuk@kernel.org, stable@kernel.org
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-8.61 / 15.00];
+X-Spamd-Result: default: False [-8.51 / 15.00];
 	WHITELIST_DMARC(-7.00)[sourceforge.net:D:+];
 	DMARC_POLICY_ALLOW_WITH_FAILURES(-0.50)[];
 	RWL_MAILSPIKE_EXCELLENT(-0.40)[216.105.38.7:from];
-	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7];
 	MAILLIST(-0.20)[mailman];
 	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
+	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7];
 	MIME_GOOD(-0.10)[text/plain];
+	MIME_BASE64_TEXT(0.10)[];
 	HAS_LIST_UNSUB(-0.01)[];
 	RCVD_TLS_LAST(0.00)[];
 	RECEIVED_HELO_LOCALHOST(0.00)[];
-	DMARC_POLICY_ALLOW(0.00)[lists.sourceforge.net,none];
-	DKIM_MIXED(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:zhaonanzhe@xiaomi.com,m:linux-f2fs-devel@lists.sourceforge.net,m:baohua@kernel.org,m:Ryan.Roberts@arm.com,m:jyescas@google.com,m:Dev.Jain@arm.com,m:David.Hildenbrand@arm.com,m:lipengfei28@xiaomi.com,m:zhangbo56@xiaomi.com,m:kaleshsingh@google.com,m:jaegeuk@kernel.org,s:lists@lfdr.de];
+	FORGED_RECIPIENTS(0.00)[m:niuzhiguo84@gmail.com,m:daehojeong@google.com,m:linux-kernel@vger.kernel.org,m:linux-f2fs-devel@lists.sourceforge.net,m:jaegeuk@kernel.org,m:stable@kernel.org,s:lists@lfdr.de];
+	FREEMAIL_TO(0.00)[gmail.com];
 	FORGED_SENDER(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
 	TO_DN_SOME(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,kernel.org:s=k20260515];
+	DKIM_MIXED(0.00)[];
 	MIME_TRACE(0.00)[0:+];
 	ARC_NA(0.00)[];
 	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
+	DMARC_POLICY_ALLOW(0.00)[lists.sourceforge.net,none];
+	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
 	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,kernel.org:-];
 	RCVD_COUNT_FIVE(0.00)[5];
 	ALIAS_RESOLVED(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
 	FROM_HAS_DN(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
-	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
-	RCPT_COUNT_SEVEN(0.00)[11];
-	TAGGED_RCPT(0.00)[linux-f2fs-devel];
-	HAS_REPLYTO(0.00)[chao@kernel.org];
+	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,kernel.org:s=k20260515];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.sourceforge.net:helo,lists.sourceforge.net:rdns,lists.sourceforge.net:from_mime,lists.sourceforge.net:dkim,lists.sourceforge.net:from_smtp]
+	RCPT_COUNT_FIVE(0.00)[6];
+	TAGGED_RCPT(0.00)[linux-f2fs-devel];
+	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,kernel.org:-];
+	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	HAS_REPLYTO(0.00)[chao@kernel.org]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 2F7946E3306
+X-Rspamd-Queue-Id: 43C546E34E5
 
-On 6/12/26 16:03, Nanzhe Zhao wrote:
-> From: Nanzhe <zhaonanzhe@xiaomi.com>
-> 
-> To avoid the complexity of unlocking a large folio in write_begin,
-> preallocate partial blocks for inodes that can use large folios.
-> During write_begin, read only the partial head and tail 4K subpages
-> that need read-before-write, and skip read I/O for the full middle
-> subpages covered by the write.
-> 
-> Signed-off-by: Nanzhe <zhaonanzhe@xiaomi.com>
-> ---
->  fs/f2fs/data.c | 215 ++++++++++++++++++++++++++++++++++++++++++++++---
->  fs/f2fs/f2fs.h |   2 +
->  fs/f2fs/file.c |  17 +++-
->  3 files changed, 222 insertions(+), 12 deletions(-)
-> 
-> diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
-> index 904cfaee139e..f5b4974e6b3c 100644
-> --- a/fs/f2fs/data.c
-> +++ b/fs/f2fs/data.c
-> @@ -2548,6 +2548,187 @@ static void ffs_detach_free(struct folio *folio)
->  	kfree(ffs);
->  }
->  
-> +bool ffs_test_blk_uptodate(const struct folio *folio, pgoff_t index)
-
-If the function is global, it needs to add f2fs_ prefix, otherwise it will
-pollute global namespace.
-
-> +{
-> +	struct f2fs_folio_state *ffs;
-> +	size_t offset;
-> +	unsigned int idx;
-> +
-> +	if (!folio_has_ffs(folio))
-> +		return folio_test_uptodate(folio);
-> +
-> +	ffs = folio->private;
-> +	offset = offset_in_folio(folio, (loff_t)index << PAGE_SHIFT);
-
-Can we add sanity check here to detect any overflow or downflow? in case
-index is not in the range of folio.
-
-> +	idx = offset >> PAGE_SHIFT;
-> +	return test_bit(idx, ffs->state);
-> +}
-> +
-> +void ffs_mark_subrange_uptodate(struct folio *folio, size_t offset, size_t len)
-> +{
-> +	struct f2fs_folio_state *ffs;
-> +	unsigned int nr_subpages, start, end;
-> +
-> +	if (!folio_has_ffs(folio)) {
-> +		folio_mark_uptodate(folio);
-> +		return;
-> +	}
-
-Add a sanity check on offset, len w/ folio size?
-
-> +
-> +	ffs = folio->private;
-> +	nr_subpages = folio_nr_pages(folio);
-> +	start = offset >> PAGE_SHIFT;
-> +	end = (offset + len + PAGE_SIZE - 1) >> PAGE_SHIFT;
-> +	end = min(end, nr_subpages);
-> +
-> +	bitmap_set(ffs->state, start, end - start);
-> +	if (bitmap_full(ffs->state, nr_subpages))
-> +		folio_mark_uptodate(folio);
-> +}
-> +
-> +static void ffs_mark_subrange_dirty(struct folio *folio,
-> +				    size_t offset, size_t len)
-> +{
-> +	struct f2fs_folio_state *ffs;
-> +	unsigned int nr_subpages, start, end;
-> +	unsigned long flags;
-> +
-> +	if (!folio_has_ffs(folio))
-> +		return;
-
-Ditto, sanity check here.
-
-> +
-> +	ffs = folio->private;
-> +	nr_subpages = folio_nr_pages(folio);
-> +	start = offset >> PAGE_SHIFT;
-> +	end = (offset + len + PAGE_SIZE - 1) >> PAGE_SHIFT;
-> +	end = min(end, nr_subpages);
-> +
-> +	spin_lock_irqsave(&ffs->state_lock, flags);
-> +	bitmap_set(ffs->state, nr_subpages + start, end - start);
-> +	spin_unlock_irqrestore(&ffs->state_lock, flags);
-> +}
-> +
-> +static bool f2fs_find_next_need_read_block(const struct folio *folio,
-
-Since it's static, we can get rid of f2fs_ prefix,
-
-find_next_invalid_block() will be better? not sure.
-
-> +					  size_t orig_off, size_t *need_off,
-> +					  size_t len)
-> +{
-> +	size_t start = orig_off;
-> +	size_t end = start + len;
-> +	size_t head, tail;
-> +	pgoff_t index;
-> +
-> +	if (start & (PAGE_SIZE - 1)) {
-> +		head = round_down(start, PAGE_SIZE);
-> +		index = folio->index + (head >> PAGE_SHIFT);
-> +		if (!ffs_test_blk_uptodate(folio, index)) {
-> +			*need_off = head;
-> +			return true;
-> +		}
-> +	}
-> +
-> +	if (end & (PAGE_SIZE - 1)) {
-> +		tail = round_down(end - 1, PAGE_SIZE);
-> +		index = folio->index + (tail >> PAGE_SHIFT);
-> +		if (!ffs_test_blk_uptodate(folio, index)) {
-> +			*need_off = tail;
-> +			return true;
-> +		}
-> +	}
-> +
-> +	return false;
-> +}
-> +
-> +static int prepare_large_folio_write_begin(struct inode *inode,
-> +					  struct address_space *mapping,
-> +					  struct folio *folio, loff_t pos,
-> +					  unsigned int len)
-> +{
-> +	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
-> +	struct dnode_of_data dn;
-> +	size_t ori_off = offset_in_folio(folio, pos);
-> +	size_t need_off = ori_off;
-> +	pgoff_t index;
-> +	bool get_dn;
-> +	int err = 0;
-> +	sector_t sector;
-> +	struct block_device *bdev;
-> +	struct bio *bio;
-> +
-> +	len = min_t(unsigned int, len, folio_size(folio) - ori_off);
-> +	if (folio_test_uptodate(folio) || len == folio_size(folio))
-> +		return err;
-> +
-> +	ffs_find_or_alloc(folio);
-> +
-> +	/* Inline data must have been converted before reaching here. */
-> +	if (WARN_ON_ONCE(f2fs_has_inline_data(inode)))
-
-Can this really happen? can we change it to f2fs_bug_on()?
-
-> +		return -EINVAL;
-> +
-> +	while (f2fs_find_next_need_read_block(folio, ori_off, &need_off, len)) {
-> +		size_t off;
-> +
-> +		index = folio->index + (need_off >> PAGE_SHIFT);
-> +		get_dn = false;
-> +
-> +		if (!f2fs_lookup_read_extent_cache_block(inode, index,
-> +						 &dn.data_blkaddr)) {
-> +			if (IS_DEVICE_ALIASING(inode))
-> +				return -ENODATA;
-> +
-> +			set_new_dnode(&dn, inode, NULL, NULL, 0);
-> +			err = f2fs_get_dnode_of_data(&dn, index, LOOKUP_NODE);
-> +			get_dn = true;
-> +			if (err)
-> +				goto out;
-
-Missed to call f2fs_put_dnode(&dn) in the loop?
-
-> +		}
-> +
-> +		if (dn.data_blkaddr == NULL_ADDR) {
-
-It's not needed, as below f2fs_is_valid_blkaddr() can cover this case.
-
-> +			err = -EFSCORRUPTED;
-> +			goto out;
-> +		}
-> +
-> +		off = offset_in_folio(folio, index << PAGE_SHIFT);
-> +
-> +		if (dn.data_blkaddr == NEW_ADDR) {
-> +			folio_zero_segment(folio, off, off + PAGE_SIZE);
-> +			ffs_mark_subrange_uptodate(folio, off, PAGE_SIZE);
-> +			continue;
-> +		}
-> +
-> +		if (!f2fs_is_valid_blkaddr(sbi, dn.data_blkaddr,
-> +				DATA_GENERIC_ENHANCE_READ)) {
-> +			err = -EFSCORRUPTED;
-> +			goto out;
-> +		}
-
-I think we can only check dn.data_blkaddr for f2fs_get_dnode_of_data() path.
-
-> +
-> +		/* Submit a synchronous read for this 4K subpage. */
-> +		f2fs_wait_on_block_writeback(inode, dn.data_blkaddr);
-> +		bdev = f2fs_target_device(sbi, dn.data_blkaddr, &sector);
-> +
-> +		bio = bio_alloc_bioset(bdev, 1, REQ_OP_READ | REQ_SYNC,
-> +				       GFP_NOIO, &f2fs_bioset);
-> +		bio->bi_iter.bi_sector = sector;
-> +		f2fs_set_bio_crypt_ctx(bio, inode, index, NULL, GFP_NOFS);
-> +
-> +		if (!bio_add_folio(bio, folio, PAGE_SIZE, off)) {
-> +			bio_put(bio);
-> +			err = -EIO;
-> +			goto out;
-> +		}
-> +
-> +		err = submit_bio_wait(bio);
-
-If we didn't call f2fs_submit_read_bio(), we may miss to handle tracepoint,
-iostat and blk_crypto stuff?
-
-Thanks,
-
-
-> +		bio_put(bio);
-> +		if (err)
-> +			goto out;
-> +
-> +		ffs_mark_subrange_uptodate(folio, off, PAGE_SIZE);
-> +
-> +	}
-> +
-> +out:
-> +		if (get_dn)
-> +			f2fs_put_dnode(&dn);
-> +
-> +		return err;
-> +}
-> +
->  static int f2fs_read_data_large_folio(struct inode *inode,
->  		struct fsverity_info *vi,
->  		struct readahead_control *rac, struct folio *folio)
-> @@ -3940,6 +4121,7 @@ static int f2fs_write_begin(const struct kiocb *iocb,
->  	bool need_balance = false;
->  	bool use_cow = false;
->  	block_t blkaddr = NULL_ADDR;
-> +	fgf_t fgp = FGP_LOCK | FGP_WRITE | FGP_CREAT | FGP_NOFS;
->  	int err = 0;
->  
->  	trace_f2fs_write_begin(inode, pos, len);
-> @@ -3987,9 +4169,9 @@ static int f2fs_write_begin(const struct kiocb *iocb,
->  	 * Do not use FGP_STABLE to avoid deadlock.
->  	 * Will wait that below with our IO control.
->  	 */
-> -	folio = f2fs_filemap_get_folio(mapping, index,
-> -				FGP_LOCK | FGP_WRITE | FGP_CREAT | FGP_NOFS,
-> -				mapping_gfp_mask(mapping));
-> +	fgp |= fgf_set_order(len);
-> +	folio = __filemap_get_folio(mapping, index, fgp,
-> +				    mapping_gfp_mask(mapping));
->  	if (IS_ERR(folio)) {
->  		err = PTR_ERR(folio);
->  		goto fail;
-> @@ -4002,7 +4184,7 @@ static int f2fs_write_begin(const struct kiocb *iocb,
->  	if (f2fs_is_atomic_file(inode))
->  		err = prepare_atomic_write_begin(sbi, folio, pos, len,
->  					&blkaddr, &need_balance, &use_cow);
-> -	else
-> +	else if (!folio_test_large(folio))
->  		err = prepare_write_begin(sbi, folio, pos, len,
->  					&blkaddr, &need_balance);
->  	if (err)
-> @@ -4023,6 +4205,14 @@ static int f2fs_write_begin(const struct kiocb *iocb,
->  
->  	f2fs_folio_wait_writeback(folio, DATA, false, true);
->  
-> +	if (folio_test_large(folio)) {
-> +		err = prepare_large_folio_write_begin(inode, mapping, folio,
-> +					pos, len);
-> +		if (!err)
-> +			return 0;
-> +		goto put_folio;
-> +	}
-> +
->  	if (len == folio_size(folio) || folio_test_uptodate(folio))
->  		return 0;
->  
-> @@ -4076,15 +4266,19 @@ static int f2fs_write_end(const struct kiocb *iocb,
->  	trace_f2fs_write_end(inode, pos, len, copied);
->  
->  	/*
-> -	 * This should be come from len == PAGE_SIZE, and we expect copied
-> -	 * should be PAGE_SIZE. Otherwise, we treat it with zero copied and
-> -	 * let generic_perform_write() try to copy data again through copied=0.
-> +	 * If a short copy happens on a folio that isn't uptodate, we treat
-> +	 * it with zero copied and let generic_perform_write() try to copy
-> +	 * data again through copied=0.
->  	 */
->  	if (!folio_test_uptodate(folio)) {
-> -		if (unlikely(copied != len))
-> +		if (unlikely(copied != len)) {
->  			copied = 0;
-> -		else
-> +		} else if (folio_test_large(folio)) {
-> +			ffs_mark_subrange_uptodate(folio,
-> +					offset_in_folio(folio, pos), len);
-> +		} else {
->  			folio_mark_uptodate(folio);
-> +		}
->  	}
->  
->  #ifdef CONFIG_F2FS_FS_COMPRESSION
-> @@ -4103,6 +4297,9 @@ static int f2fs_write_end(const struct kiocb *iocb,
->  	if (!copied)
->  		goto unlock_out;
->  
-> +	if (folio_test_large(folio))
-> +		ffs_mark_subrange_dirty(folio, offset_in_folio(folio, pos),
-> +					copied);
->  	folio_mark_dirty(folio);
->  
->  	if (f2fs_is_atomic_file(inode))
-> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-> index dd262eb41777..ac71d0d22a81 100644
-> --- a/fs/f2fs/f2fs.h
-> +++ b/fs/f2fs/f2fs.h
-> @@ -4253,6 +4253,8 @@ int f2fs_write_single_data_page(struct folio *folio, int *submitted,
->  				struct writeback_control *wbc,
->  				enum iostat_type io_type,
->  				int compr_blocks, bool allow_balance);
-> +bool ffs_test_blk_uptodate(const struct folio *folio, pgoff_t index);
-> +void ffs_mark_subrange_uptodate(struct folio *folio, size_t offset, size_t len);
->  void f2fs_write_failed(struct inode *inode, loff_t to);
->  void f2fs_invalidate_folio(struct folio *folio, size_t offset, size_t length);
->  bool f2fs_release_folio(struct folio *folio, gfp_t wait);
-> diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
-> index 633e9ade654f..eb8e237f3dad 100644
-> --- a/fs/f2fs/file.c
-> +++ b/fs/f2fs/file.c
-> @@ -5048,9 +5048,20 @@ static int f2fs_preallocate_blocks(struct kiocb *iocb, struct iov_iter *iter,
->  			return ret;
->  	}
->  
-> -	/* Do not preallocate blocks that will be written partially in 4KB. */
-> -	map.m_lblk = F2FS_BLK_ALIGN(pos);
-> -	map.m_len = F2FS_BYTES_TO_BLK(pos + count);
-> +	if (mapping_large_folio_support(inode->i_mapping)) {
-> +		/*
-> +		 * Preallocate all blocks touched by a large-folio buffered write so
-> +		 * the regular write_begin path does not need to unlock the folio for
-> +		 * f2fs_balance_fs().  Rechecking large-folio state after unlock is
-> +		 * unreliable since partial truncation can split the folio.
-> +		 */
-> +		map.m_lblk = F2FS_BYTES_TO_BLK(pos);
-> +		map.m_len = F2FS_BLK_ALIGN(pos + count);
-> +	} else {> +		/* Do not preallocate blocks that will be written partially in 4KB. */
-> +		map.m_lblk = F2FS_BLK_ALIGN(pos);
-> +		map.m_len = F2FS_BYTES_TO_BLK(pos + count);
-> +	}
->  	if (map.m_len > map.m_lblk)
->  		map.m_len -= map.m_lblk;
->  	else
-
-
-
-_______________________________________________
-Linux-f2fs-devel mailing list
-Linux-f2fs-devel@lists.sourceforge.net
-https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
+T24gNi8zMC8yNiAxNjo1MCwgWmhpZ3VvIE5pdSB3cm90ZToKPiBDaGFvIFl1IHZpYSBMaW51eC1m
+MmZzLWRldmVsIDxsaW51eC1mMmZzLWRldmVsQGxpc3RzLnNvdXJjZWZvcmdlLm5ldD4KPiDkuo4y
+MDI25bm0NuaciDI55pel5ZGo5LiAIDE5OjUy5YaZ6YGT77yaCj4+Cj4+IEJsb2NrcyBvZiBwaW5m
+aWxlIG1heSBub3QgYWxpZ25lZCB0byBzZWN0aW9uIHNpemUgZHVlIHRvIHdyb25nIHVzZQo+PiBv
+biBwaW5maWxlLCByZXN1bHQgaW4gaGVhdnkgb3ZlcmhlYWQgb2YgR0MsIGxldCBhdm9pZCB0aGlz
+IGJ5Cj4+IGFkZGluZyBhZGRpdGlvbmFsIGNoZWNrIGNvbmRpdGlvbiBpbiBmMmZzX3NldGF0dHIo
+KS4KPj4KPj4gLSB0cnVuY2F0ZSAtcyA4bWIgcGluZmlsZQo+PiA6IHJhbmRvbSBjaGVja3BvaW50
+IG1heSBwZXJzaXN0IGZpbGVzaXplIHcvIGlub2RlCj4+IC0gZmFsbG9jYXRlIC1vIDAgLWwgOG1i
+IHBpbmZpbGUKPj4gIC0gZjJmc19mYWxsb2NhdGUKPj4gICAtIGYyZnNfZXhwYW5kX2lub2RlX2Rh
+dGEKPj4gICAgLSBmMmZzX2FsbG9jYXRlX3Bpbm5pbmdfc2VjdGlvbgo+PiAgICAtIGYyZnNfbWFw
+X2Jsb2Nrcwo+PiAgICAgLSBmMmZzX21hcF9sb2NrCj4+ICAgICAtIF9fYWxsb2NhdGVfZGF0YV9i
+bG9jawo+PiAgICAgLSBmaWxlX25lZWRfdHJ1bmNhdGUKPj4gICAgIDogdy8gRkFEVklTRV9UUlVO
+Q19CSVQsIHdlIGNhbiBleHBlY3QgdW5hbGlnbmVkIG1hcHBpbmcgY2FuIGJlCj4+ICAgICAgIHRy
+dW5jYXRlZCB3aGlsZSBvcGVuKCkgaWYgZjJmcyBpcyBub3QgdW1vdW50IGFibm9ybWFsbHkKPj4g
+ICAgIC0gZjJmc19tYXBfdW5sb2NrCj4+ICAgICA6IGZvbGxvd2luZyBmMmZzIGNoZWNrcG9pbnQg
+YW5kIHN1ZGRlbiBwb3dlci1jdXQKPj4KPj4gLSBtb3VudAo+PiAtIG9wZW4gcGluZmlsZQo+PiAg
+LSBmMmZzX2ZpbGVfb3Blbgo+PiAgIC0gZmluaXNoX3ByZWFsbG9jYXRlX2Jsb2Nrcwo+PiAgICAt
+IHRydW5jYXRlX3NldHNpemUKPj4gICAgOiBmaWxlc2l6ZSBpcyA4bWIKPj4gICAgLSBmMmZzX3Ry
+dW5jYXRlCj4+ICAgIDogY2FuIG9ubHkgdHJ1bmNhdGUgYmxvY2sgb3V0c2lkZSBmaWxlc2l6ZSwg
+cmF0aGVyIHRoYW4gdHJ1bmNhdGluZwo+PiAgICAgIHVuYWxpZ25lZCBibG9ja3MgaW5zaWRlIGZp
+bGVzaXplCj4gSGkgQ2hhbywKPiA4TUIgaXMgc2VjdGlvbiBhbGluZ2VkIHdoZW4gZmFsbG9jYXRl
+ZCBieSBmMmZzX2FsbG9jYXRlX3Bpbm5pbmdfc2VjdGlvbj8/Cj4gc28gSG93IGNvdWxkIHRoZXJl
+IGFyZSB1bmFsaWduZWQgYmxvY2tzIGluc2lkZSBmaWxlc2l6ZT8KClpoaWd1bywKCkFzIHBhcnRp
+YWwgYmxrYWRkcnMgd2VyZSBwZXJzaXN0ZWQgYW5kIHJlY292ZXJlZCwgc2VlIGNvbW1lbnRzIGFy
+b3VuZApmMmZzX21hcF91bmxvY2soKS4KCj4+Cj4+IEZpeGVzOiBmNWE1M2VkY2YwMWUgKCJmMmZz
+OiBzdXBwb3J0IGFsaWduZWQgcGlubmVkIGZpbGUiKQo+PiBDYzogc3RhYmxlQGtlcm5lbC5vcmcK
+Pj4gQ2M6IERhZWhvIEplb25nIDxkYWVob2plb25nQGdvb2dsZS5jb20+Cj4+IFNpZ25lZC1vZmYt
+Ynk6IENoYW8gWXUgPGNoYW9Aa2VybmVsLm9yZz4KPj4gLS0tCj4+ICBmcy9mMmZzL2ZpbGUuYyB8
+IDI4ICsrKysrKysrKysrKysrKysrLS0tLS0tLS0tLS0KPj4gIDEgZmlsZSBjaGFuZ2VkLCAxNyBp
+bnNlcnRpb25zKCspLCAxMSBkZWxldGlvbnMoLSkKPj4KPj4gZGlmZiAtLWdpdCBhL2ZzL2YyZnMv
+ZmlsZS5jIGIvZnMvZjJmcy9maWxlLmMKPj4gaW5kZXggZjRmYWNkNDA5ZDliLi4xMWNjOGQ3OWMy
+MzUgMTAwNjQ0Cj4+IC0tLSBhL2ZzL2YyZnMvZmlsZS5jCj4+ICsrKyBiL2ZzL2YyZnMvZmlsZS5j
+Cj4+IEBAIC0xMTA3LDE3ICsxMTA3LDIzIEBAIGludCBmMmZzX3NldGF0dHIoc3RydWN0IG1udF9p
+ZG1hcCAqaWRtYXAsIHN0cnVjdCBkZW50cnkgKmRlbnRyeSwKPj4gICAgICAgICAgICAgICAgICAg
+ICAgICAgIUlTX0FMSUdORUQoYXR0ci0+aWFfc2l6ZSwKPj4gICAgICAgICAgICAgICAgICAgICAg
+ICAgRjJGU19CTEtfVE9fQllURVMoZmktPmlfY2x1c3Rlcl9zaXplKSkpCj4+ICAgICAgICAgICAg
+ICAgICAgICAgICAgIHJldHVybiAtRUlOVkFMOwo+PiAtICAgICAgICAgICAgICAgLyoKPj4gLSAg
+ICAgICAgICAgICAgICAqIFRvIHByZXZlbnQgc2NhdHRlcmVkIHBpbiBibG9jayBnZW5lcmF0aW9u
+LCB3ZSBkb24ndCBhbGxvdwo+PiAtICAgICAgICAgICAgICAgICogc21hbGxlci9lcXVhbCBzaXpl
+IHVuYWxpZ25lZCB0cnVuY2F0aW9uIGZvciBwaW5uZWQgZmlsZS4KPj4gLSAgICAgICAgICAgICAg
+ICAqIFdlIG9ubHkgc3VwcG9ydCBvdmVyd3JpdGUgSU8gdG8gcGlubmVkIGZpbGUsIHNvIGRvbid0
+Cj4+IC0gICAgICAgICAgICAgICAgKiBjYXJlIGFib3V0IGxhcmdlciBzaXplIHRydW5jYXRpb24u
+Cj4+IC0gICAgICAgICAgICAgICAgKi8KPj4gLSAgICAgICAgICAgICAgIGlmIChmMmZzX2lzX3Bp
+bm5lZF9maWxlKGlub2RlKSAmJgo+PiAtICAgICAgICAgICAgICAgICAgICAgICBhdHRyLT5pYV9z
+aXplIDw9IGlfc2l6ZV9yZWFkKGlub2RlKSAmJgo+PiAtICAgICAgICAgICAgICAgICAgICAgICAh
+SVNfQUxJR05FRChhdHRyLT5pYV9zaXplLAo+PiAtICAgICAgICAgICAgICAgICAgICAgICBGMkZT
+X0JMS19UT19CWVRFUyhDQVBfQkxLU19QRVJfU0VDKHNiaSkpKSkKPj4gLSAgICAgICAgICAgICAg
+ICAgICAgICAgcmV0dXJuIC1FSU5WQUw7Cj4+ICsKPj4gKyAgICAgICAgICAgICAgIGlmIChmMmZz
+X2lzX3Bpbm5lZF9maWxlKGlub2RlKSkgewo+PiArICAgICAgICAgICAgICAgICAgICAgICAvKgo+
+PiArICAgICAgICAgICAgICAgICAgICAgICAgKiBJdCBtYXkgYnJlYWsgc2VjdGlvbi1hbGlnbmVk
+IGZhbGxvY2F0ZSByZWNvdmVyeQo+PiArICAgICAgICAgICAgICAgICAgICAgICAgKiBtZWNoYW5p
+c20sIHNvIGRvIG5vdCBhbGxvdyBsYXJnZXIgc2l6ZSB0cnVuY2F0aW9uLgo+PiArICAgICAgICAg
+ICAgICAgICAgICAgICAgKi8KPj4gKyAgICAgICAgICAgICAgICAgICAgICAgaWYgKGF0dHItPmlh
+X3NpemUgPiBpX3NpemVfcmVhZChpbm9kZSkpCj4+ICsgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgcmV0dXJuIC1FSU5WQUw7Cj4gSXMgaXQgb2sgaWYgd2UgYWxsb3cgbGFyZ2VyIHNpemUg
+dHJ1bmNhdGlvbiBhbmQgYWxzbyAgbGltaXQgaXQgdG8KPiBhbGlnbmVkICJGMkZTX0JMS19UT19C
+WVRFUyhDQVBfQkxLU19QRVJfU0VDKHNiaSkiPwoKTm8sIEkgdGhpbmsgYWJvdmUgZXhhbXBsZSB3
+aWxsIHN0aWxsIHN1ZmZlciBzZWN0aW9uLXVuYWxpZ25lZCBpc3N1ZS4KClRoYW5rcywKCj4gdGhh
+bmtzIQo+PiArICAgICAgICAgICAgICAgICAgICAgICAvKgo+PiArICAgICAgICAgICAgICAgICAg
+ICAgICAgKiBUbyBwcmV2ZW50IHNjYXR0ZXJlZCBwaW4gYmxvY2sgZ2VuZXJhdGlvbiwgd2UgZG9u
+J3QKPj4gKyAgICAgICAgICAgICAgICAgICAgICAgICogYWxsb3cgc21hbGxlci9lcXVhbCBzaXpl
+IHVuYWxpZ25lZCB0cnVuY2F0aW9uIGZvcgo+PiArICAgICAgICAgICAgICAgICAgICAgICAgKiBw
+aW5uZWQgZmlsZS4KPj4gKyAgICAgICAgICAgICAgICAgICAgICAgICovCj4+ICsgICAgICAgICAg
+ICAgICAgICAgICAgIGVsc2UgaWYgKCFJU19BTElHTkVEKGF0dHItPmlhX3NpemUsCj4+ICsgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgRjJGU19CTEtfVE9fQllURVMoQ0FQX0JMS1NfUEVS
+X1NFQyhzYmkpKSkpCj4+ICsgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcmV0dXJuIC1F
+SU5WQUw7Cj4+ICsgICAgICAgICAgICAgICB9Cj4+ICAgICAgICAgfQo+Pgo+PiAgICAgICAgIGlm
+IChpc19xdW90YV9tb2RpZmljYXRpb24oaWRtYXAsIGlub2RlLCBhdHRyKSkgewo+PiAtLQo+PiAy
+LjQ5LjAKPj4KPj4KPj4KPj4gX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX18KPj4gTGludXgtZjJmcy1kZXZlbCBtYWlsaW5nIGxpc3QKPj4gTGludXgtZjJmcy1k
+ZXZlbEBsaXN0cy5zb3VyY2Vmb3JnZS5uZXQKPj4gaHR0cHM6Ly9saXN0cy5zb3VyY2Vmb3JnZS5u
+ZXQvbGlzdHMvbGlzdGluZm8vbGludXgtZjJmcy1kZXZlbAoKCgpfX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fXwpMaW51eC1mMmZzLWRldmVsIG1haWxpbmcgbGlz
+dApMaW51eC1mMmZzLWRldmVsQGxpc3RzLnNvdXJjZWZvcmdlLm5ldApodHRwczovL2xpc3RzLnNv
+dXJjZWZvcmdlLm5ldC9saXN0cy9saXN0aW5mby9saW51eC1mMmZzLWRldmVsCg==
