@@ -2,145 +2,112 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id wVhSIB19Q2oFZQoAu9opvQ
+	id +ckhM92AQ2qxZQoAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 30 Jun 2026 10:23:57 +0200
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 30 Jun 2026 10:39:57 +0200
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id D82286E1A16
-	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 30 Jun 2026 10:23:56 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0BDB76E1BB3
+	for <lists+linux-f2fs-devel@lfdr.de>; Tue, 30 Jun 2026 10:39:57 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=lists.sourceforge.net header.s=beta header.b=HEYMyTdO;
-	dkim=fail ("body hash did not verify") header.d=sourceforge.net header.s=x header.b=W+kA94T+;
-	dkim=fail ("body hash did not verify") header.d=sf.net header.s=x header.b="j KBFXrt";
-	dkim=fail ("body hash did not verify") header.d=gmail.com header.s=20251104 header.b=W0qnczOI;
+	dkim=pass header.d=lists.sourceforge.net header.s=beta header.b=m8PWgmxB;
+	dkim=fail ("body hash did not verify") header.d=sourceforge.net header.s=x header.b=Qj+OZgWV;
+	dkim=fail ("body hash did not verify") header.d=sf.net header.s=x header.b=P0ArbRt3;
+	dkim=fail ("body hash did not verify") header.d=kernel.org header.s=k20260515 header.b=YRn3jMfh;
 	spf=pass (mail.lfdr.de: domain of linux-f2fs-devel-bounces@lists.sourceforge.net designates 216.105.38.7 as permitted sender) smtp.mailfrom=linux-f2fs-devel-bounces@lists.sourceforge.net;
-	dmarc=fail reason="SPF not aligned (relaxed), DKIM not aligned (relaxed)" header.from=gmail.com (policy=none)
+	dmarc=pass (policy=none) header.from=lists.sourceforge.net
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
-	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
-	Subject:MIME-Version:Message-ID:Date:To:From:Sender:Reply-To:Content-ID:
-	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
-	:Resent-Message-ID:In-Reply-To:References:List-Owner;
-	bh=3/x0kiTq2yO9PH8i1/jt0Iy8drzZhoII4CCKGecrg/4=; b=HEYMyTdOPo1pt87A/dHkZzxJq6
-	RCG6vKBskfBxJhcUsvXbCduvju57WWrR1344OUqm1+uoRDQNPhqqGG2OJ9q0kDWOmqaUVh4Yrhn8B
-	lcHs9LY3PqOffKNtPwHE17h5I4ca5QcgfcSMFjHOBQGffwBj6m2PbOkAm6b7fg1uzigk=;
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
+	List-Unsubscribe:List-Id:Subject:In-Reply-To:References:To:MIME-Version:Date:
+	Message-ID:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
+	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
+	bh=vf+MK6brtWYdq42NWaNawvVKZMMKIzysYgtnGuzkUzs=; b=m8PWgmxBUhcrSKL0gFQ3H74/JJ
+	cNIu6vTz0hX6BWkUbQ4LbrMtYs9cUIT1brv2TrR9oPkMK1RWYeJ6ug2Dble0xRs54th7ERBYsQ837
+	4nh5FyXbTFhg3AXWXhTejZaMO1I4H0tmucB/s0tnU6+HG2MP+aIZeyabmHskr284GraU=;
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1weTky-0005Et-2g;
-	Tue, 30 Jun 2026 08:23:48 +0000
+	id 1weU0N-0004it-Ln;
+	Tue, 30 Jun 2026 08:39:41 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <qwjhust@gmail.com>) id 1weTkw-0005Em-Ko
+ (envelope-from <chao@kernel.org>) id 1weU06-0004g7-QZ
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 30 Jun 2026 08:23:46 +0000
+ Tue, 30 Jun 2026 08:39:24 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ From:References:To:Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Ai7j7K4SitNJNYHWTCBnxrcpwUg65/T2eSrR4aBgQtw=; b=W+kA94T+WvYk3R/w1aDyA5FhjD
- QHL5Ai9eAH9BHUBp/Lyhh2cQn1qqi+UTRHlUSsi58cq/MmJ0J21pxyedjHrVckz2phUWCTGbT+owl
- Mq6gQxiPeKo0o/fgc8j0u1vcVHDMHefEqGtl3PRvfZfDXA74v1J00AaDmBxznetf7v7Y=;
+ bh=6s71emuTHT6HBeMcxZq4xEqeVZdW3tSJGiMZGO1k7OI=; b=Qj+OZgWVP8gdq3cEN8adI6qlJi
+ EwVghmCQ6y3wRs9uwYnA0whIrVQ85SReL6NzHNZ502tq01anudQclWzhGEvgT3X8GG1qclZSJhxre
+ ESbki7iT3MbKAdODe2Iil9oCittms/UKKaXRqSUtHoy+HTy2/HiT6bI0FhxTd37UBju8=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=Ai7j7K4SitNJNYHWTCBnxrcpwUg65/T2eSrR4aBgQtw=; b=j
- KBFXrtv4656TwWsLm3NdeJuXZ+dI6BfrS8gwZML2z5d9yrm33LzAn+TGICfBDPd+mOvvfrc/RaXLW
- pdXdfhHojSugmQ9mXcoyD2UGBU0wjVceJMldlDbWtqGk5JIlQxh1mBdqUzdeN68xt/NmykzpzYbQv
- 13Gq5g7IU47XfLCI=;
-Received: from mail-pj1-f51.google.com ([209.85.216.51])
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
+ Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=6s71emuTHT6HBeMcxZq4xEqeVZdW3tSJGiMZGO1k7OI=; b=P0ArbRt3jHiELmGtQRsJtG68tn
+ p2J66AOmTXJRGmoVtfr7dIx7VJgxjGwwBOI/luEXsXqwnBjRKZM5bHAnlk5wGbWpQ+K1G/gVHa7vq
+ gI9J00f4ZO3bM0/U4vOgLpCk++vGB9pYClidbFKc5odZ/rVt62r8edfKFM8kUEvzcnK8=;
+Received: from tor.source.kernel.org ([172.105.4.254])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1weTkt-0002EO-IZ for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 30 Jun 2026 08:23:46 +0000
-Received: by mail-pj1-f51.google.com with SMTP id
- 98e67ed59e1d1-36b9d265355so2070191a91.2
- for <linux-f2fs-devel@lists.sourceforge.net>;
- Tue, 30 Jun 2026 01:23:44 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20251104; t=1782807818; x=1783412618; darn=lists.sourceforge.net;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
- bh=Ai7j7K4SitNJNYHWTCBnxrcpwUg65/T2eSrR4aBgQtw=;
- b=W0qnczOIdMZKKG8HCbHf54L+bVo7k6hmPM6lKqNksU7qCvUCZjUeMKOsN73LNV8w+A
- NYo5nmFsA4+H5kHl4jMWZz3oWjl7bgaVH1fwdZnPsKjCH2g8Lh61as5cjVcGDCuO41OH
- T1R+HLK+1MbI17z5tacZUw23cfQ9rU2ZB8QKve27JOskjs2uYkfIJm2XbzB7outqLTrf
- JyWdKIx30mUGXmX69nBpyYp08uLFAIqzLv+QYqxuMRbk1vlzfAt6DVts45s5vQjdYFP2
- +7mtrJR2gsm9IWoCf6MCwX10Ln/m/U/MIUb1yE0iDCcLkguXuEzWVex2ebnWjdbUGYlf
- 34YQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20251104; t=1782807818; x=1783412618;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to:content-type;
- bh=Ai7j7K4SitNJNYHWTCBnxrcpwUg65/T2eSrR4aBgQtw=;
- b=Zwdn6tCpaZnRg0DaeUx8UQ2POtFwqp0bRzRQOg84t8/7/oX0ggc4XK6zlzQ/aA29rn
- ZXVKOc00T8XmhxY9rA9uLkLrocGdRUiosgBqgDxXC18FXTqDBICPoc7lef8A5u241L3I
- Ul/vak2XA+O5I+d0/dAvqhP96sv4xW5EsEkTamjgZvYwgYow8MMaOJVjSA+5gYmf165I
- 4XjVQinebxP0je44TnMYQ/N3QcAl9Za5wcfz07ryvTygBKiKpLaeJPdZ36J5f9s72LBQ
- QoUFRlDShqRHcvOhw2nSx4VbGw2t9QQeV8kwpiyUpOyoRRDroJ/OVs/ALFm2LCvhQ+W0
- wgHw==
-X-Gm-Message-State: AOJu0YxbQBvj3FoDWz8uwXHQFJZtY7Deow6hxxhSSTj0+q9rdq9btVLA
- k5yUkS1kOgF/NWFaDhuoJoGojMsMW+qf0i+Zpq497drhZPT8d8/Q6WFD
-X-Gm-Gg: AfdE7ckgWd3g2I4iIbUShwH9h6juSSiryyGWHRP3Yd/RMe/L+y7ifMCKaqawWyq3AF5
- HEEGutavOFd795D7WQy+ISkPjRxrWIQzkeKq3TJ72QGrTRKR73BI5i5QsxuHMXf5ubODmKbvxa1
- cb8vO7cDioJ4w4xeps5zciJo6avbE6Gq5RcR0NGYSX6+YrCfhoGI7/CbjrBaeg+Tx86tFLVLRDo
- 1SdupF1L90SBo9aTbOaUz64sohuSYwwphJKKsIvRO+wLDKjrrr97mqVCc4b6zZ6qpr7dfTAW12O
- 02XbiIBBr+6AKv/iWo2nedhhtIJhVLH/ysB15d/7vQVgpCFTCDaxLiL+7ncLtbUk2h9f1L+C4gR
- yU87tMJi/8k2EMiO6nIHRHeMs/RkiRxPR5Zt1oaf+43rNlDLuEi1GRwb4KOSLmixjGbmr0j/TcR
- j8Ql7IS/oDhj07hVXhY7fQqs1XupujUHEXR/bdxTOFqDN7z1mn
-X-Received: by 2002:a05:6a21:3949:b0:3aa:f9cb:d438 with SMTP id
- adf61e73a8af0-3bfc50b3d1bmr2362651637.21.1782807818196; 
- Tue, 30 Jun 2026 01:23:38 -0700 (PDT)
-Received: from qiwenjie-ThinkCentre-M760t.mioffice.cn ([43.224.245.241])
- by smtp.gmail.com with ESMTPSA id
- 41be03b00d2f7-c9bbc6d9ed9sm1108183a12.7.2026.06.30.01.23.35
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 30 Jun 2026 01:23:37 -0700 (PDT)
-From: Wenjie Qi <qwjhust@gmail.com>
-X-Google-Original-From: Wenjie Qi <qiwenjie@xiaomi.com>
-To: jaegeuk@kernel.org,
-	chao@kernel.org
-Date: Tue, 30 Jun 2026 16:23:30 +0800
-Message-ID: <20260630082331.2757376-1-qiwenjie@xiaomi.com>
-X-Mailer: git-send-email 2.43.0
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
+ id 1weTzt-0004A4-NQ for linux-f2fs-devel@lists.sourceforge.net;
+ Tue, 30 Jun 2026 08:39:24 +0000
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+ by tor.source.kernel.org (Postfix) with ESMTP id 650AB600DA;
+ Tue, 30 Jun 2026 08:39:03 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id B169A1F00A3F;
+ Tue, 30 Jun 2026 08:39:00 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+ s=k20260515; t=1782808743;
+ bh=6s71emuTHT6HBeMcxZq4xEqeVZdW3tSJGiMZGO1k7OI=;
+ h=Date:Cc:Subject:To:References:From:In-Reply-To;
+ b=YRn3jMfhOtPp+kQ2fTc8VRJczrlwgZptzdLZ2nG97ptOSeRz5J7tq6Emeg0j3F9DI
+ +LKf+aGWtPay3+kKwpt5cJyLYh2+u6sUsucuoRoTgTXN0wwKujyz5L/PnTb84LfLbv
+ YzYTN/Czllsk51x3NLpTB+pxAafbcrU/wk2uohPx9cWZnp5BoozmaG20Za8Ug74nEz
+ +w1uiMHoN2lEqVP7z/Yt1x/rbH3PfyCmB1gaszxhW0hRjzp4OS1E5jP8qmsYPihyUD
+ Jyv8J/oU93PV9qO5JpGLWdWUgs5LGdcNp5jsCwkaxtncq8WO8N7zs00YBRNaLRBWFU
+ f/q8DMZoWJbVA==
+Message-ID: <bc4b29f0-8309-4a36-bdbe-b5f375aec31a@kernel.org>
+Date: Tue, 30 Jun 2026 16:38:58 +0800
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+To: Nanzhe Zhao <zhaonanzhe@xiaomi.com>, linux-f2fs-devel@lists.sourceforge.net
+References: <20260622160830.324455-1-zhaonanzhe@xiaomi.com>
+ <20260622160830.324455-3-zhaonanzhe@xiaomi.com>
+Content-Language: en-US
+In-Reply-To: <20260622160830.324455-3-zhaonanzhe@xiaomi.com>
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: F2FS stores recovery filenames as a length plus a fixed-size
- i_name buffer. The buffer is not NUL-terminated, but recover_inode() and
- recover_dentry() print it with %s. For a 255-byte filename, recovery logging
- can read past i_name into the following raw inode fields. 
+ Content preview:  On 6/23/26 00:08,
+ Nanzhe Zhao wrote: > Large folio write paths
+ need to submit I/O for a range inside a > folio instead of always submitting
+ the whole folio from offset zero. > Add idx and cnt to f2fs_ [...] 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
- 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
- [qwjhust(at)gmail.com]
- 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
- [209.85.216.51 listed in wl.mailspike.net]
- 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
-X-Headers-End: 1weTkt-0002EO-IZ
-Subject: [f2fs-dev] [PATCH] f2fs: limit recovery filename logging to stored
- length
+X-Headers-End: 1weTzt-0004A4-NQ
+Subject: Re: [f2fs-dev] [RFC PATCH v2 02/10] f2fs: carry subpage offset and
+ count in write IO
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -152,149 +119,318 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: qwjhust@gmail.com, stable@kernel.org, qiwenjie@xiaomi.com,
- linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
+From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Chao Yu <chao@kernel.org>
+Cc: Barry Song <baohua@kernel.org>, Juan Yescas <jyescas@google.com>,
+ Dev Jain <Dev.Jain@arm.com>, linux-kernel@vger.kernel.org,
+ David Hildenbrand <David.Hildenbrand@arm.com>, Bo Zhang <zhangbo56@xiaomi.com>,
+ Kalesh Singh <kaleshsingh@google.com>, Ryan Roberts <Ryan.Roberts@arm.com>,
+ Jaegeuk Kim <jaegeuk@kernel.org>, Pengfei Li <lipengfei28@xiaomi.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-1.01 / 15.00];
+X-Spamd-Result: default: False [-8.61 / 15.00];
+	WHITELIST_DMARC(-7.00)[sourceforge.net:D:+];
+	DMARC_POLICY_ALLOW_WITH_FAILURES(-0.50)[];
 	RWL_MAILSPIKE_EXCELLENT(-0.40)[216.105.38.7:from];
 	MAILLIST(-0.20)[mailman];
 	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
-	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7:c];
-	DMARC_POLICY_SOFTFAIL(0.10)[gmail.com : SPF not aligned (relaxed), DKIM not aligned (relaxed),none];
+	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORGED_RECIPIENTS(0.00)[m:jaegeuk@kernel.org,m:chao@kernel.org,m:qwjhust@gmail.com,m:stable@kernel.org,m:qiwenjie@xiaomi.com,m:linux-kernel@vger.kernel.org,m:linux-f2fs-devel@lists.sourceforge.net,s:lists@lfdr.de];
-	MIME_TRACE(0.00)[0:+];
-	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,gmail.com:s=20251104];
-	DKIM_MIXED(0.00)[];
-	RCVD_TLS_LAST(0.00)[];
-	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
-	FORGED_SENDER(0.00)[qwjhust@gmail.com,linux-f2fs-devel-bounces@lists.sourceforge.net];
-	ARC_NA(0.00)[];
-	FREEMAIL_CC(0.00)[gmail.com,kernel.org,xiaomi.com,vger.kernel.org,lists.sourceforge.net];
 	RECEIVED_HELO_LOCALHOST(0.00)[];
-	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,gmail.com:-];
-	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
-	FREEMAIL_FROM(0.00)[gmail.com];
+	RCVD_TLS_LAST(0.00)[];
+	DKIM_MIXED(0.00)[];
+	DMARC_POLICY_ALLOW(0.00)[lists.sourceforge.net,none];
+	FORGED_RECIPIENTS(0.00)[m:zhaonanzhe@xiaomi.com,m:linux-f2fs-devel@lists.sourceforge.net,m:baohua@kernel.org,m:jyescas@google.com,m:Dev.Jain@arm.com,m:linux-kernel@vger.kernel.org,m:David.Hildenbrand@arm.com,m:zhangbo56@xiaomi.com,m:kaleshsingh@google.com,m:Ryan.Roberts@arm.com,m:jaegeuk@kernel.org,m:lipengfei28@xiaomi.com,s:lists@lfdr.de];
+	FORGED_SENDER(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
+	RCPT_COUNT_TWELVE(0.00)[12];
+	TO_DN_SOME(0.00)[];
+	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,kernel.org:s=k20260515];
+	MIME_TRACE(0.00)[0:+];
+	ARC_NA(0.00)[];
+	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
+	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,kernel.org:-];
 	RCVD_COUNT_FIVE(0.00)[5];
-	TO_DN_NONE(0.00)[];
+	ALIAS_RESOLVED(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[qwjhust@gmail.com,linux-f2fs-devel-bounces@lists.sourceforge.net];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	PREVIOUSLY_DELIVERED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
-	RCPT_COUNT_SEVEN(0.00)[7];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	ALIAS_RESOLVED(0.00)[];
-	TAGGED_RCPT(0.00)[linux-f2fs-devel];
+	FROM_NEQ_ENVFROM(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
+	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[]
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	HAS_REPLYTO(0.00)[chao@kernel.org];
+	TAGGED_RCPT(0.00)[linux-f2fs-devel];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[xiaomi.com:email]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: D82286E1A16
+X-Rspamd-Queue-Id: 0BDB76E1BB3
 
-F2FS stores recovery filenames as a length plus a fixed-size i_name
-buffer.  The buffer is not NUL-terminated, but recover_inode() and
-recover_dentry() print it with %s.
+On 6/23/26 00:08, Nanzhe Zhao wrote:
+> Large folio write paths need to submit I/O for a range inside a
+> folio instead of always submitting the whole folio from offset zero.
+> Add idx and cnt to f2fs_io_info to describe the block offset inside
+> the folio and the number of contiguous blocks covered by the I/O.
+> 
+> Apply the new fields to the bio submit paths that need the subpage
+> offset or contiguous block count.
+> 
+> Signed-off-by: Nanzhe Zhao <zhaonanzhe@xiaomi.com>
+> ---
+>  fs/f2fs/data.c    | 58 ++++++++++++++++++++++++++++++++---------------
+>  fs/f2fs/f2fs.h    |  2 ++
+>  fs/f2fs/segment.c |  4 ++--
+>  3 files changed, 44 insertions(+), 20 deletions(-)
+> 
+> diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
+> index 23758c00758d..9a2bb6d982df 100644
+> --- a/fs/f2fs/data.c
+> +++ b/fs/f2fs/data.c
+> @@ -779,6 +779,8 @@ int f2fs_submit_page_bio(struct f2fs_io_info *fio)
+>  	struct folio *fio_folio = fio->folio;
+>  	struct folio *data_folio = fio->encrypted_page ?
+>  			page_folio(fio->encrypted_page) : fio_folio;
+> +	pgoff_t fio_lblk = fio_folio->index + fio->idx;
+> +	unsigned int fio_cnt = fio->cnt ? fio->cnt : 1;
 
-For a 255-byte filename, recovery logging can read past i_name into the
-following raw inode fields.
+How about cleaning up w/ below macros?
 
-Print the name with a precision bounded by i_namelen and F2FS_NAME_LEN.
+#define F2FS_FOLIO_INDEX(folio, fio)	(folio->index + fio->folio_offset)
+#define F2FS_FOLIO_BLKCNT(fio)		(fio->folio_blkcnt ? fio->folio_blkcnt : 1)
 
-Fixes: f356fe0cba0e ("f2fs: add debug msgs in the recovery routine")
-Cc: stable@kernel.org
-Assisted-by: Codex:gpt-5.5
-Signed-off-by: Wenjie Qi <qiwenjie@xiaomi.com>
----
- fs/f2fs/recovery.c | 41 +++++++++++++++++++++++++++--------------
- 1 file changed, 27 insertions(+), 14 deletions(-)
+>  
+>  	if (!f2fs_is_valid_blkaddr(fio->sbi, fio->new_blkaddr,
+>  			fio->is_por ? META_POR : (__is_meta_io(fio) ?
+> @@ -791,11 +793,13 @@ int f2fs_submit_page_bio(struct f2fs_io_info *fio)
+>  	bio = __bio_alloc(fio, 1);
+>  
+>  	f2fs_set_bio_crypt_ctx(bio, fio_folio->mapping->host,
+> -			fio_folio->index, fio, GFP_NOIO);
+> -	bio_add_folio_nofail(bio, data_folio, folio_size(data_folio), 0);
+> +			fio_lblk, fio, GFP_NOIO);
+> +	bio_add_folio_nofail(bio, data_folio,
+> +			F2FS_BLK_TO_BYTES(fio_cnt), fio->idx << PAGE_SHIFT);
+>  
+>  	if (fio->io_wbc && !is_read_io(fio->op))
+> -		wbc_account_cgroup_owner(fio->io_wbc, fio_folio, PAGE_SIZE);
+> +		wbc_account_cgroup_owner(fio->io_wbc, fio_folio,
+> +				F2FS_BLK_TO_BYTES(fio_cnt));
+>  
+>  	inc_page_count(fio->sbi, is_read_io(fio->op) ?
+>  			__read_io_type(data_folio) : WB_DATA_TYPE(fio->folio, false));
+> @@ -840,7 +844,8 @@ static bool io_is_mergeable(struct f2fs_sb_info *sbi, struct bio *bio,
+>  }
+>  
+>  static void add_bio_entry(struct f2fs_sb_info *sbi, struct bio *bio,
+> -				struct folio *folio, enum temp_type temp)
+> +				struct folio *folio, size_t len, size_t offset,
+> +				enum temp_type temp)
+>  {
+>  	struct f2fs_bio_info *io = sbi->write_io[DATA] + temp;
+>  	struct bio_entry *be;
+> @@ -849,7 +854,7 @@ static void add_bio_entry(struct f2fs_sb_info *sbi, struct bio *bio,
+>  	be->bio = bio;
+>  	bio_get(bio);
+>  
+> -	bio_add_folio_nofail(bio, folio, folio_size(folio), 0);
+> +	bio_add_folio_nofail(bio, folio, len, offset);
+>  
+>  	f2fs_down_write(&io->bio_list_lock);
+>  	list_add_tail(&be->list, &io->bio_list);
+> @@ -866,6 +871,8 @@ static int add_ipu_page(struct f2fs_io_info *fio, struct bio **bio,
+>  							struct folio *folio)
+>  {
+>  	struct folio *fio_folio = fio->folio;
+> +	pgoff_t fio_lblk = fio_folio->index + fio->idx;
+> +	unsigned int fio_cnt = fio->cnt ? fio->cnt : 1;
+>  	struct f2fs_sb_info *sbi = fio->sbi;
+>  	enum temp_type temp;
+>  	bool found = false;
+> @@ -888,8 +895,10 @@ static int add_ipu_page(struct f2fs_io_info *fio, struct bio **bio,
+>  							    fio->new_blkaddr));
+>  			if (f2fs_crypt_mergeable_bio(*bio,
+>  					fio_folio->mapping->host,
+> -					fio_folio->index, fio) &&
+> -			    bio_add_folio(*bio, folio, folio_size(folio), 0)) {
+> +					fio_lblk, fio) &&
+> +			    bio_add_folio(*bio, folio,
+> +					F2FS_BLK_TO_BYTES(fio_cnt),
+> +					fio->idx << PAGE_SHIFT)) {
+>  				ret = 0;
+>  				break;
+>  			}
+> @@ -1003,6 +1012,7 @@ int f2fs_merge_page_bio(struct f2fs_io_info *fio)
+>  	struct folio *data_folio = fio->encrypted_page ?
+>  			page_folio(fio->encrypted_page) : fio->folio;
+>  	struct folio *folio = fio->folio;
+> +	pgoff_t fio_lblk = folio->index + fio->idx;
+>  
+>  	if (!f2fs_is_valid_blkaddr(fio->sbi, fio->new_blkaddr,
+>  			__is_meta_io(fio) ? META_GENERIC : DATA_GENERIC))
+> @@ -1017,9 +1027,11 @@ int f2fs_merge_page_bio(struct f2fs_io_info *fio)
+>  	if (!bio) {
+>  		bio = __bio_alloc(fio, BIO_MAX_VECS);
+>  		f2fs_set_bio_crypt_ctx(bio, folio->mapping->host,
+> -				folio->index, fio, GFP_NOIO);
+> +				fio_lblk, fio, GFP_NOIO);
+>  
+> -		add_bio_entry(fio->sbi, bio, data_folio, fio->temp);
+> +		add_bio_entry(fio->sbi, bio, data_folio,
+> +				F2FS_BLK_TO_BYTES(fio->cnt ? fio->cnt : 1),
+> +				fio->idx << PAGE_SHIFT, fio->temp);
+>  	} else {
+>  		if (add_ipu_page(fio, &bio, data_folio))
+>  			goto alloc_new;
+> @@ -1030,7 +1042,7 @@ int f2fs_merge_page_bio(struct f2fs_io_info *fio)
+>  
+>  	inc_page_count(fio->sbi, WB_DATA_TYPE(folio, false));
+>  
+> -	*fio->last_block = fio->new_blkaddr;
+> +	*fio->last_block = fio->new_blkaddr + (fio->cnt ? fio->cnt - 1 : 0);
+>  	*fio->bio = bio;
+>  
+>  	return 0;
+> @@ -1066,6 +1078,10 @@ void f2fs_submit_page_write(struct f2fs_io_info *fio)
+>  	struct folio *bio_folio;
+>  	struct f2fs_lock_context lc;
+>  	enum count_type type;
+> +	pgoff_t fio_lblk;
+> +	unsigned int fio_cnt;
+> +	size_t bio_offset;
+> +	size_t bio_len;
+>  
+>  	f2fs_bug_on(sbi, is_read_io(fio->op));
+>  
+> @@ -1104,6 +1120,9 @@ void f2fs_submit_page_write(struct f2fs_io_info *fio)
+>  	/* set submitted = true as a return value */
+>  	fio->submitted = 1;
+>  
+> +	fio_lblk = fio->folio->index + fio->idx;
+> +	fio_cnt = fio->cnt ? fio->cnt : 1;
+> +
+>  	type = WB_DATA_TYPE(bio_folio, fio->compressed_page);
+>  	inc_page_count(sbi, type);
+>  
+> @@ -1111,26 +1130,29 @@ void f2fs_submit_page_write(struct f2fs_io_info *fio)
+>  	    (!io_is_mergeable(sbi, io->bio, io, fio, io->last_block_in_bio,
+>  			      fio->new_blkaddr) ||
+>  	     !f2fs_crypt_mergeable_bio(io->bio, fio_inode(fio),
+> -				bio_folio->index, fio)))
+> +				fio_lblk, fio)))
+>  		__submit_merged_bio(io);
+>  alloc_new:
+>  	if (io->bio == NULL) {
+>  		io->bio = __bio_alloc(fio, BIO_MAX_VECS);
+>  		f2fs_set_bio_crypt_ctx(io->bio, fio_inode(fio),
+> -				bio_folio->index, fio, GFP_NOIO);
+> +				fio_lblk, fio, GFP_NOIO);
+>  		io->fio = *fio;
+>  	}
+>  
+> -	if (!bio_add_folio(io->bio, bio_folio, folio_size(bio_folio), 0)) {
+> +	bio_offset = fio->idx << PAGE_SHIFT;
+> +	bio_len = F2FS_BLK_TO_BYTES(fio_cnt);
+> +
+> +	if (!bio_add_folio(io->bio, bio_folio, bio_len, bio_offset)) {
+>  		__submit_merged_bio(io);
+>  		goto alloc_new;
+>  	}
+>  
+>  	if (fio->io_wbc)
+>  		wbc_account_cgroup_owner(fio->io_wbc, fio->folio,
+> -				folio_size(fio->folio));
+> +				F2FS_BLK_TO_BYTES(fio_cnt));
 
-diff --git a/fs/f2fs/recovery.c b/fs/f2fs/recovery.c
-index 89af8407b667..3fecfdbd5958 100644
---- a/fs/f2fs/recovery.c
-+++ b/fs/f2fs/recovery.c
-@@ -158,6 +158,22 @@ static int init_recovered_filename(const struct inode *dir,
- 	return 0;
- }
- 
-+static const char *recover_printable_name(struct inode *inode,
-+					  struct f2fs_inode *raw,
-+					  int *name_len)
-+{
-+	static const char encrypted_name[] = "<encrypted>";
-+
-+	if (file_enc_name(inode)) {
-+		*name_len = sizeof(encrypted_name) - 1;
-+		return encrypted_name;
-+	}
-+
-+	*name_len = min_t(unsigned int, le32_to_cpu(raw->i_namelen),
-+			  F2FS_NAME_LEN);
-+	return raw->i_name;
-+}
-+
- static int recover_dentry(struct inode *inode, struct folio *ifolio,
- 						struct list_head *dir_list)
- {
-@@ -170,7 +186,8 @@ static int recover_dentry(struct inode *inode, struct folio *ifolio,
- 	struct inode *dir, *einode;
- 	struct fsync_inode_entry *entry;
- 	int err = 0;
--	char *name;
-+	const char *name;
-+	int name_len;
- 
- 	entry = get_fsync_inode(dir_list, pino);
- 	if (!entry) {
-@@ -229,12 +246,9 @@ static int recover_dentry(struct inode *inode, struct folio *ifolio,
- out_put:
- 	f2fs_folio_put(folio, false);
- out:
--	if (file_enc_name(inode))
--		name = "<encrypted>";
--	else
--		name = raw_inode->i_name;
--	f2fs_notice(F2FS_I_SB(inode), "%s: ino = %x, name = %s, dir = %llu, err = %d",
--		    __func__, ino_of_node(ifolio), name,
-+	name = recover_printable_name(inode, raw_inode, &name_len);
-+	f2fs_notice(F2FS_I_SB(inode), "%s: ino = %x, name = %.*s, dir = %llu, err = %d",
-+		    __func__, ino_of_node(ifolio), name_len, name,
- 		    IS_ERR(dir) ? 0 : dir->i_ino, err);
- 	return err;
- }
-@@ -282,7 +296,8 @@ static int recover_inode(struct inode *inode, struct folio *folio)
- {
- 	struct f2fs_inode *raw = F2FS_INODE(folio);
- 	struct f2fs_inode_info *fi = F2FS_I(inode);
--	char *name;
-+	const char *name;
-+	int name_len;
- 	int err;
- 
- 	inode->i_mode = le16_to_cpu(raw->i_mode);
-@@ -331,13 +346,11 @@ static int recover_inode(struct inode *inode, struct folio *folio)
- 
- 	f2fs_mark_inode_dirty_sync(inode, true);
- 
--	if (file_enc_name(inode))
--		name = "<encrypted>";
--	else
--		name = F2FS_INODE(folio)->i_name;
-+	name = recover_printable_name(inode, raw, &name_len);
- 
--	f2fs_notice(F2FS_I_SB(inode), "recover_inode: ino = %x, name = %s, inline = %x",
--		    ino_of_node(folio), name, raw->i_inline);
-+	f2fs_notice(F2FS_I_SB(inode), "%s: ino = %x, name = %.*s, inline = %x",
-+		    __func__, ino_of_node(folio), name_len, name,
-+		    raw->i_inline);
- 	return 0;
- }
- 
--- 
-2.43.0
+bio_len));
+
+>  
+> -	io->last_block_in_bio = fio->new_blkaddr;
+> +	io->last_block_in_bio = fio->new_blkaddr + fio_cnt - 1;
+>  
+>  	trace_f2fs_submit_folio_write(fio->folio, fio);
+>  #ifdef CONFIG_BLK_DEV_ZONED
+> @@ -2992,7 +3014,7 @@ bool f2fs_should_update_outplace(struct inode *inode, struct f2fs_io_info *fio)
+>  		return true;
+>  
+>  	if (fio) {
+> -		if (page_private_gcing(fio->page))
+> +		if (folio_test_f2fs_gcing(fio->folio))
+
+Should this change belong to patch 1?
+
+>  			return true;
+>  		if (unlikely(is_sbi_flag_set(sbi, SBI_CP_DISABLED) &&
+>  			f2fs_is_checkpointed_data(sbi, fio->old_blkaddr)))
+> @@ -3031,7 +3053,7 @@ int f2fs_do_write_data_page(struct f2fs_io_info *fio)
+>  		set_new_dnode(&dn, inode, NULL, NULL, 0);
+>  
+>  	if (need_inplace_update(fio) &&
+> -	    f2fs_lookup_read_extent_cache_block(inode, folio->index,
+> +	    f2fs_lookup_read_extent_cache_block(inode, folio->index + fio->idx,
+>  						&fio->old_blkaddr)) {
+>  		if (!f2fs_is_valid_blkaddr(fio->sbi, fio->old_blkaddr,
+>  						DATA_GENERIC_ENHANCE))
+> @@ -3050,7 +3072,7 @@ int f2fs_do_write_data_page(struct f2fs_io_info *fio)
+>  	if (fio->need_lock == LOCK_REQ && !f2fs_trylock_op(fio->sbi, &lc))
+>  		return -EAGAIN;
+>  
+> -	err = f2fs_get_dnode_of_data(&dn, folio->index, LOOKUP_NODE);
+> +	err = f2fs_get_dnode_of_data(&dn, folio->index + fio->idx, LOOKUP_NODE);
+>  	if (err)
+>  		goto out;
+>  
+> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+> index e4778c17394e..4c2902abe499 100644
+> --- a/fs/f2fs/f2fs.h
+> +++ b/fs/f2fs/f2fs.h
+> @@ -1351,6 +1351,8 @@ struct f2fs_io_info {
+>  	blk_opf_t op_flags;	/* req_flag_bits */
+>  	block_t new_blkaddr;	/* new block address to be written */
+>  	block_t old_blkaddr;	/* old block address before Cow */
+> +	pgoff_t idx;		/* start block offset in the folio */
+
+How about
+
+pgoff_t folio_offset;		/* offset in large folio */
+
+> +	unsigned int cnt;	/* block count in the folio */
+
+unsigned int folio_blkcnt;	/* block count in large folio */
+
+>  	union {
+>  		struct page *page;	/* page to be written */
+>  		struct folio *folio;
+> diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
+> index d71ddb3ee918..43d41bb3b4b1 100644
+> --- a/fs/f2fs/segment.c
+> +++ b/fs/f2fs/segment.c
+> @@ -3686,7 +3686,7 @@ static int __get_segment_type_6(struct f2fs_io_info *fio)
+>  		if (is_inode_flag_set(inode, FI_ALIGNED_WRITE))
+>  			return CURSEG_COLD_DATA_PINNED;
+>  
+> -		if (page_private_gcing(fio->page)) {
+> +		if (folio_test_f2fs_gcing(fio->folio)) {
+
+Should this change belong to patch 1?
+
+Thanks,
+
+>  			if (fio->sbi->am.atgc_enabled &&
+>  				(fio->io_type == FS_DATA_IO) &&
+>  				(fio->sbi->gc_mode != GC_URGENT_HIGH) &&
+> @@ -3699,7 +3699,7 @@ static int __get_segment_type_6(struct f2fs_io_info *fio)
+>  		if (file_is_cold(inode) || f2fs_need_compress_data(inode))
+>  			return CURSEG_COLD_DATA;
+>  
+> -		type = __get_age_segment_type(inode, fio->folio->index);
+> +		type = __get_age_segment_type(inode, fio->folio->index + fio->idx);
+>  		if (type != NO_CHECK_TYPE)
+>  			return type;
+>  
 
 
 
