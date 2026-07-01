@@ -2,116 +2,168 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id ABWeITTIRGqX0woAu9opvQ
+	id Mte+DzaJRGoiwgoAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 01 Jul 2026 09:56:36 +0200
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 01 Jul 2026 05:27:50 +0200
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id AAAC26EAE51
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 01 Jul 2026 09:56:35 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 608A46E977F
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 01 Jul 2026 05:27:49 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=lists.sourceforge.net header.s=beta header.b=RcAu41V4;
-	dkim=fail ("body hash did not verify") header.d=sourceforge.net header.s=x header.b=mPmZq4J6;
-	dkim=fail ("body hash did not verify") header.d=sf.net header.s=x header.b=QYEriCRH;
-	dkim=fail ("body hash did not verify") header.d=kernel.org header.s=k20260515 header.b=iWz+1L6g;
+	dkim=pass header.d=lists.sourceforge.net header.s=beta header.b=WsNwyK5F;
+	dkim=fail ("body hash did not verify") header.d=sourceforge.net header.s=x header.b=hJETz6dS;
+	dkim=fail ("body hash did not verify") header.d=sf.net header.s=x header.b=hOKl4IgB;
+	dkim=fail ("body hash did not verify") header.d=gmail.com header.s=20251104 header.b=Q1V57Rm+;
 	spf=pass (mail.lfdr.de: domain of linux-f2fs-devel-bounces@lists.sourceforge.net designates 216.105.38.7 as permitted sender) smtp.mailfrom=linux-f2fs-devel-bounces@lists.sourceforge.net;
-	dmarc=pass (policy=none) header.from=lists.sourceforge.net
+	dmarc=fail reason="SPF not aligned (relaxed), DKIM not aligned (relaxed)" header.from=gmail.com (policy=none);
+	arc=reject ("signature check failed: fail, {[1] = sig:google.com:reject}")
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
-	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:In-Reply-To:References:To:MIME-Version:Date:
-	Message-ID:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
-	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=bJPGSTSBRv7HPtkjSPi9JcB11FvtH3qayB90RczEUS4=; b=RcAu41V4lDiNW+CDh7YqU+HcUv
-	Gv5aRQ/n/9UJ4wLyv1W0acbDsDztF5KYKXDctFvmsFvNur9C1jrYQ6nH/Dt7x6gQdWgxrwBK1zY3H
-	z80G9m1vwtTtArF/IzKoZ5NvsCs9n+OQ97PtSAUEQlMG8jgME1gLx5NspxkPuGEp7B8o=;
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
+	Subject:To:Message-ID:Date:From:In-Reply-To:References:MIME-Version:Sender:
+	Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
+	:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
+	bh=/TuIX9iygEZv/x7iUp9raMx0Oq/nIQLgY4MtUEbfeJ0=; b=WsNwyK5FkURzJr7A87RllGCXfk
+	mqiVs74XUpDEraTBfBP47HYV5sNzp56OVDGYh8dSDZ4IcAWscpFbIinQP29KeGjkkzc0BtI3OFhcW
+	vbkQVu4aH7JLtpkj2itHt3QQPVfpFF+rx1d+dHSL4ho1u1zf9CUVAOGACyZvk5MmXpX0=;
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1weloN-0002S3-VB;
-	Wed, 01 Jul 2026 03:40:29 +0000
+	id 1welbN-0004GV-6c;
+	Wed, 01 Jul 2026 03:27:05 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <chao@kernel.org>) id 1weloA-0002Rq-EI
+ (envelope-from <niuzhiguo84@gmail.com>) id 1welb8-0004Ew-LR
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 01 Jul 2026 03:40:16 +0000
+ Wed, 01 Jul 2026 03:26:51 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- From:References:To:Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:Cc:To:
+ Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version:Sender:
+ Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
+ :Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=+kGc6vKYF0ISymtZWZiHcjnaf8azXLVbKrSZM1fXWnA=; b=mPmZq4J65rRHdYt26gDO15i3Ls
- hi3oO1RRcamN4Otu1nwaLfwiZEXfXi+cI72t7tjamjk3FU+2/nctdXgREJ3n2srfQicIW76xO+MqH
- 7vnvWBq7s5+cO6uWIW8I54iTcxAYQlNKF9Z6LP3syBnPquOaD7JE2krxpqEMfdR8k3ZA=;
+ bh=/m5Drnn29SrZM9qKZu3VRSTeAN3P5qvdiA/8UHh5wrw=; b=hJETz6dSIdczeLpcj58BfMwXeU
+ +xObept54PkJUBkAoTcos02EXZkGnlKC4v/oPWoYiWrGu23LxEN/R+drZ1RbStr73KXsAXemrUqO6
+ dv8Yh3f+LeUadh+n8bC7c9OSV/kQNn5JI+M06Lfl4XvHM/8hHxw4I6szvdku/pbIwUHU=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:To:
- Subject:Cc:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
+ h=Content-Transfer-Encoding:Content-Type:Cc:To:Subject:Message-ID:Date:From
+ :In-Reply-To:References:MIME-Version:Sender:Reply-To:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=+kGc6vKYF0ISymtZWZiHcjnaf8azXLVbKrSZM1fXWnA=; b=QYEriCRHM3oRUZ5fKEdYboCgWl
- 8GSxPh9xftsPSR61Q5mxYKpvoRkQVojQGijhnHFQZbUoaRfm4DoaNWxqFmRLEoWoeB+rDh0w2naZJ
- 6KsYCJ5kRaEJLSfQMvqVN5mXmiTRYuL4Cl6jsZLq9BNHlPQRLI+ico7g49XvmuZwJ0Ew=;
-Received: from tor.source.kernel.org ([172.105.4.254])
+ bh=/m5Drnn29SrZM9qKZu3VRSTeAN3P5qvdiA/8UHh5wrw=; b=hOKl4IgBKca8FksB8W1Nr06VBc
+ SwWxC8k9rmyqnryTp2Pj+UFP8Q+y9kFBw829BSYIMM5dk/1+iB2M7Qinonkhz8wbhb+OkkW8viWgl
+ dV2IeHByeivy/BIifC7s0mwkN10Nb8WVGVQYUskbc2yp2viFtSYXuIVAlFPZWMUqdjXo=;
+Received: from mail-wr1-f47.google.com ([209.85.221.47])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1welo0-00023m-EU for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 01 Jul 2026 03:40:15 +0000
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by tor.source.kernel.org (Postfix) with ESMTP id 6EFF26001D;
- Wed,  1 Jul 2026 02:51:48 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5C9461F000E9;
- Wed,  1 Jul 2026 02:51:45 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
- s=k20260515; t=1782874308;
- bh=+kGc6vKYF0ISymtZWZiHcjnaf8azXLVbKrSZM1fXWnA=;
- h=Date:Cc:Subject:To:References:From:In-Reply-To;
- b=iWz+1L6gw073hlnfPn+8XwuVsznY2q73WrSN37jNB7575ko2hBOQ7mN+uHOeJkYJ0
- PihogaKsAQ5JZ6hE3E6nTJjkaAG+YRFm8Ex6xcFxX1FxiGxhL9rDuEr9cHwE7/aQPW
- V97Da6ah4rPXn2dsz8ATbcfNOsSA1YJljyVT0tT+RIifjKj6v8YlSW3dByOlfYAReM
- Zk3ldizOJ55vktuRFAV1dkavmM8ZNoVWYp6iVPtbd3vgrdF2Ct+8n946psKbopsQRv
- gpIVdMRnt7mHyyJoQr7TZ8n9/DbEbusBpTwe1WZojdw0+t9biEaxo4yQu6RAkvyCrA
- TmceloRuX0rSA==
-Message-ID: <4f42a63f-3b96-4928-aaf8-70e3c1abfad2@kernel.org>
-Date: Wed, 1 Jul 2026 10:51:43 +0800
+ (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
+ id 1welb7-0001g2-A2 for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 01 Jul 2026 03:26:51 +0000
+Received: by mail-wr1-f47.google.com with SMTP id
+ ffacd0b85a97d-473987fc217so16670f8f.0
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Tue, 30 Jun 2026 20:26:48 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1782876388; cv=none;
+ d=google.com; s=arc-20260327;
+ b=VHVKUFGY29Q5OosdGVyGyJMS3U/nor8DJ2WpaOSUwS1D6XOMT0nhtN2CxTM8J+9qE6
+ +A6YAQ5X091u2i8Tw4Wlf8tfE8ZM6Q01EcBlba+MKJb/nNY6pfwTvH52X+vKoWr1cOJF
+ xYpOxgM2ZDzeJTc0j4QRLZzghANrv9r5JG2cVll+NR0qCoxhC4J+RnPHWup5uS30rB5Z
+ tk62gHDI2Xza1y4baLyqu3KuRZOfvunShh7dBpavL/uhQahBqslS9R5MHr5mepLY6KoF
+ 6s+k5iwV7y3JztqTVXKZMe3cXc/bv+cls3BBhCkBINZ3I3Vh/U55rsiQ8k5QN5nCBJq8
+ RcFw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com;
+ s=arc-20260327; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:dkim-signature;
+ bh=/m5Drnn29SrZM9qKZu3VRSTeAN3P5qvdiA/8UHh5wrw=;
+ fh=VPpaqAgbxHfFMUkULDHRsWtY3hFJN9P3DuuTGYVlMRY=;
+ b=fyoCp6F4eQbw2JjC9lOeQlvsoGoQjnVWW8bgaJR2fycNd3e41MbtTOVHq9trhnRtho
+ 8xwQ7v+mmLCKZGRsKSnWuHJRP33C67ePsELKyGZWs3tzQXy1JDnGQjpCZaEwwZtZprDY
+ 3GVN6v1jaogH6scjOBeO+5p67BYFmC4un+SpRHM7rI9N6yU8p8MMxi6LGWZhCUs3+O4a
+ KdpToU4LD9ppdzO8yNNqLgr48TC8pEx/k26Q2qeZmnDEaruNsnwRIzZDPiCmMbWPmRmZ
+ 3W19HuAFUDRj13uZeLJGnTDvjxf2oiX6Hiq//oo3knZC81GrA5BhZq+wOEuu7gq4H+gi
+ R3zQ==; darn=lists.sourceforge.net
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20251104; t=1782876388; x=1783481188; darn=lists.sourceforge.net;
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:from:to:cc:subject
+ :date:message-id:reply-to:content-type;
+ bh=/m5Drnn29SrZM9qKZu3VRSTeAN3P5qvdiA/8UHh5wrw=;
+ b=Q1V57Rm+UU08hMP+ewsbDtT/Wh8YUtwzzUyNoZ5M5E++8Bluzycv0XQpuW1NWbv3d5
+ W7duvI7UKT10bYz5KnEnjHdy4kU9VjQNfYlz/sA7fF/jpQMNYIpoo+bl112V0eEYVLt9
+ ElCHSR7tUlKQFhI/580knRvA5UMEvuxCiQI0LDsNYrnWflshnDQel7K/PAZocr+8HHvA
+ ZbyTO0grfBf61oA6ql+/RSp0l1c4YPiz9NwhYGxQJ1phJxTEnaMunvSDOMoDOhFll9iK
+ xW3FFKz951jP3ytjpVXPaDLmVbHIxPq4ESxme7otDPd7UFdpVdBNIX2+3Zfw9AYwUyNF
+ l7LQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1782876388; x=1783481188;
+ h=content-transfer-encoding:content-type:cc:to:subject:message-id
+ :date:from:in-reply-to:references:mime-version:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=/m5Drnn29SrZM9qKZu3VRSTeAN3P5qvdiA/8UHh5wrw=;
+ b=XOkmJeIzIGVccUPPaO9+Zi12nfa5Tf3Rh745GwOLrDZLRU6jz/L65GaU8nX1wuSWCW
+ A/LhImlPsNAx6Ic3aPxl7Dl1uXLTQtqxAyFLzRu0aN/UE6OsbtiHN8hnsbgdOp2I8xpR
+ HvpZlnNb4DFdmlXR3nz5dtTe4syhGo0yzqMiT1Nn0rOiMNAn3RjTSXjVD3/E9URIuSdv
+ BaB208lO13wT2EQ2x++hXzWCiKk7FY8s7maHUDnKLEY8TCAvnkCyprwwFHy02F6sCWKR
+ lk/+F3QBk+AzHSn48R1+ETlCIqneWI3koO4dpMWk1wb7b07Y0mxnqaMlFK33hcSSb6dM
+ zz5A==
+X-Forwarded-Encrypted: i=1;
+ AHgh+RrjYS2hK5I7hI0VnVopsxNgcF6OyQ/trlU4TWd8VoEhOO82xj85kSkvKDIFCfC2YZxClS/DDWuQuSWwiOXDJgTP@lists.sourceforge.net
+X-Gm-Message-State: AOJu0YxwDEkh9wzDls98XbPMfmOH/CMdl7L8kwnRrnRl4E2sDpOA9MOu
+ VG2MF6f8OHcBai+80NxUQpm8v3PHBttyGesooeExD6c7Y/JGAMj/N7gsilm7uQloUuV+607+6v0
+ 73ew8REsrOOxp5W6njpfx45W+/T+BX5Y=
+X-Gm-Gg: AfdE7cmA3NMsjUkfHu8ZbDd97AJQ8JgkwpXZMrrRWEjse+GJE+uqnQWQCSRA0Atg8uI
+ tfa05LOFB+WQMj9zWOjhdyl7KSvgYLFCJbGyLfpcxMFT14sVehv6EzwPu0xQxBZLgc8yyGaELOn
+ 5dWrnUHNjw34ZW7paUpghvKUVY6G/vu6JjmFB2ktvVqUcvJ5iK4mlrXkOU2P5BBV9ra15SSyoOk
+ JHCNz9jhB+f2bqLR2j5xh4LeWam3emeMUT1QKa2W/dhcxhSJClDmX3pnayGsAW7IFXHZvEBig==
+X-Received: by 2002:a05:6000:25c5:b0:474:77c4:b6d8 with SMTP id
+ ffacd0b85a97d-475522be0a4mr5229890f8f.3.1782876388314; Tue, 30 Jun 2026
+ 20:26:28 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-To: Nanzhe Zhao <zhaonanzhe@xiaomi.com>, Jaegeuk Kim <jaegeuk@kernel.org>
-References: <20260622160830.324455-1-zhaonanzhe@xiaomi.com>
-Content-Language: en-US
-In-Reply-To: <20260622160830.324455-1-zhaonanzhe@xiaomi.com>
-X-Spam-Score: -0.2 (/)
-X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
+References: <20260629114918.224537-1-chao@kernel.org>
+ <CAHJ8P3LOBs0gWHM7rT-G51tQ7Q+utn_xupnp2BuBir+cAC-Xiw@mail.gmail.com>
+ <5ad89199-f5e8-43a7-971a-575ff27c1d40@kernel.org>
+In-Reply-To: <5ad89199-f5e8-43a7-971a-575ff27c1d40@kernel.org>
+From: Zhiguo Niu <niuzhiguo84@gmail.com>
+Date: Wed, 1 Jul 2026 11:26:17 +0800
+X-Gm-Features: AVVi8CeTN-iEgs4Gmn-vLUSffffFMA5_G_I7nwp9FMIIF0nKdiugxXSJsVTM7YU
+Message-ID: <CAHJ8P3JFP6bdGfmHruanPFNgtHz8J7FYj0A1To7+iDpcsxzOaA@mail.gmail.com>
+To: Chao Yu <chao@kernel.org>
+X-Spam-Score: 0.1 (/)
+X-Spam-Report: Spam detection software, running on the system "sfi-spamd-1.hosts.colo.sdot.me",
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Nanzhe, I can see a lots of testcases failure in xfstests,
- can you please address all of them? On 6/23/26 00:08, Nanzhe Zhao wrote:
- > From: Nanzhe Zhao <nzzhao@126.com> > > Make some clean up based on v1, and
- support minimum folio orders > beyond zero. > > This RFC series supports
- large folios [...] 
- Content analysis details:   (-0.2 points, 5.0 required)
- pts rule name              description
+ 
+ Content preview:  Chao Yu 于2026年6月30日周二 19:02写道： > > On 6/30/26
+    16:50, Zhiguo Niu wrote: > > Chao Yu via Linux-f2fs-devel > > 于2026年6月29日周一
+    19:52写道： > >> > >> Blocks of pinfile m [...] 
+ 
+ Content analysis details:   (0.1 points, 5.0 required)
+ 
+  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 RCVD_IN_DNSWL_BLOCKED  RBL: ADMINISTRATOR NOTICE: The query to DNSWL
- was blocked.  See
- http://wiki.apache.org/spamassassin/DnsBlocklists#DnsBlocklists-dnsbl-block
- for more information. [172.105.4.254 listed in list.dnswl.org]
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
-X-Headers-End: 1welo0-00023m-EU
-Subject: Re: [f2fs-dev] [RFC PATCH v2 00/10] f2fs: support & optimize large
- folios for writable files
+                             envelope-from domain
+ -0.1 DKIM_VALID_AU          Message has a valid DKIM or DK signature from author's
+                             domain
+ -0.1 DKIM_VALID             Message has at least one valid DKIM or DK signature
+  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily valid
+  0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends in
+                             digit
+                             [niuzhiguo84(at)gmail.com]
+  0.0 FREEMAIL_FROM          Sender email is commonly abused enduser mail provider
+                             [niuzhiguo84(at)gmail.com]
+  0.0 RCVD_IN_MSPIKE_H2      RBL: Average reputation (+2)
+                             [209.85.221.47 listed in wl.mailspike.net]
+X-Headers-End: 1welb7-0001g2-A2
+Subject: Re: [f2fs-dev] [PATCH] f2fs: fix to avoid potential
+ section-unaligned pinfile
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -123,180 +175,131 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Chao Yu via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Chao Yu <chao@kernel.org>
-Cc: Barry Song <baohua@kernel.org>, Nanzhe Zhao <nzzhao@126.com>,
- Juan Yescas <jyescas@google.com>, Dev Jain <Dev.Jain@arm.com>,
- linux-kernel@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
- David Hildenbrand <David.Hildenbrand@arm.com>, Bo Zhang <zhangbo56@xiaomi.com>,
- Kalesh Singh <kaleshsingh@google.com>, Ryan Roberts <Ryan.Roberts@arm.com>,
- Pengfei Li <lipengfei28@xiaomi.com>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Cc: jaegeuk@kernel.org, linux-f2fs-devel@lists.sourceforge.net,
+ stable@kernel.org, linux-kernel@vger.kernel.org,
+ Daeho Jeong <daehojeong@google.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-8.61 / 15.00];
-	WHITELIST_DMARC(-7.00)[sourceforge.net:D:+];
-	DMARC_POLICY_ALLOW_WITH_FAILURES(-0.50)[];
+X-Spamd-Result: default: False [0.09 / 15.00];
+	ARC_REJECT(1.00)[signature check failed: fail, {[1] = sig:google.com:reject}];
 	RWL_MAILSPIKE_EXCELLENT(-0.40)[216.105.38.7:from];
-	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
-	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7:c];
+	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7];
 	MAILLIST(-0.20)[mailman];
+	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
+	MIME_BASE64_TEXT(0.10)[];
 	MIME_GOOD(-0.10)[text/plain];
+	DMARC_POLICY_SOFTFAIL(0.10)[gmail.com : SPF not aligned (relaxed), DKIM not aligned (relaxed),none];
 	HAS_LIST_UNSUB(-0.01)[];
-	DKIM_MIXED(0.00)[];
-	RCVD_TLS_LAST(0.00)[];
+	RCVD_COUNT_THREE(0.00)[4];
 	RECEIVED_HELO_LOCALHOST(0.00)[];
-	FREEMAIL_CC(0.00)[kernel.org,126.com,google.com,arm.com,vger.kernel.org,lists.sourceforge.net,xiaomi.com];
-	FORGED_RECIPIENTS(0.00)[m:zhaonanzhe@xiaomi.com,m:jaegeuk@kernel.org,m:baohua@kernel.org,m:nzzhao@126.com,m:jyescas@google.com,m:Dev.Jain@arm.com,m:linux-kernel@vger.kernel.org,m:linux-f2fs-devel@lists.sourceforge.net,m:David.Hildenbrand@arm.com,m:zhangbo56@xiaomi.com,m:kaleshsingh@google.com,m:Ryan.Roberts@arm.com,m:lipengfei28@xiaomi.com,s:lists@lfdr.de];
-	ARC_NA(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[13];
+	FORGED_RECIPIENTS(0.00)[m:chao@kernel.org,m:jaegeuk@kernel.org,m:linux-f2fs-devel@lists.sourceforge.net,m:stable@kernel.org,m:linux-kernel@vger.kernel.org,m:daehojeong@google.com,s:lists@lfdr.de];
 	TO_DN_SOME(0.00)[];
-	DMARC_POLICY_ALLOW(0.00)[lists.sourceforge.net,none];
+	RCVD_TLS_LAST(0.00)[];
 	MIME_TRACE(0.00)[0:+];
-	FORGED_SENDER(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
+	FREEMAIL_FROM(0.00)[gmail.com];
 	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
-	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,kernel.org:s=k20260515];
-	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
-	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,kernel.org:-];
-	RCVD_COUNT_FIVE(0.00)[5];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	FORGED_SENDER(0.00)[niuzhiguo84@gmail.com,linux-f2fs-devel-bounces@lists.sourceforge.net];
+	DKIM_MIXED(0.00)[];
+	RCPT_COUNT_FIVE(0.00)[6];
+	PREVIOUSLY_DELIVERED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
 	ALIAS_RESOLVED(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
-	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	HAS_REPLYTO(0.00)[chao@kernel.org];
+	FROM_NEQ_ENVFROM(0.00)[niuzhiguo84@gmail.com,linux-f2fs-devel-bounces@lists.sourceforge.net];
+	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,gmail.com:s=20251104];
+	MID_RHS_MATCH_FROMTLD(0.00)[];
+	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
+	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,gmail.com:-];
 	TAGGED_RCPT(0.00)[linux-f2fs-devel];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.sourceforge.net:helo,lists.sourceforge.net:rdns,lists.sourceforge.net:from_mime,lists.sourceforge.net:dkim,lists.sourceforge.net:from_smtp]
+	MISSING_XM_UA(0.00)[];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[mail.gmail.com:mid,lists.sourceforge.net:dkim,lists.sourceforge.net:helo,lists.sourceforge.net:rdns,lists.sourceforge.net:from_smtp]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: AAAC26EAE51
+X-Rspamd-Queue-Id: 608A46E977F
 
-Nanzhe,
-
-I can see a lots of testcases failure in xfstests, can you please address all
-of them?
-
-On 6/23/26 00:08, Nanzhe Zhao wrote:
-> From: Nanzhe Zhao <nzzhao@126.com>
-> 
-> Make some clean up based on v1, and support minimum folio orders 
-> beyond zero.
-> 
-> This RFC series supports large folios for most readable/writable files in
-> buffered I/O paths, including normal files, block-layer encrypted files,
-> and atomic files. Compressed files are still excluded.
-> 
-> Atomic files need explicit support here because Android enables atomic
-> writes through ioctls, which mark the inode as an atomic file
-> (FI_ATOMIC_FILE). Once large-folio mapping is enabled for such a file,
-> the atomic buffered write path also needs to handle large folios
-> correctly.
-> 
-> In the write path, allocating f2fs_folio_state for large folios starts
-> to conflict with f2fs page-private flags. This RFC series extends
-> f2fs_folio_state so that it can also store f2fs private flags, and
-> updates the existing PAGE_PRIVATE helpers to work correctly with
-> f2fs_folio_state.
-> 
-> In addition, fio results with max large-folio order set to 2 showed
-> that 4K read/write performance did not improve much.
-> Analysis showed that one important reason was the extra spinlock traffic
-> from incrementing read_pages_pending once per 4K subpage.
-> This RFC series therefore adds two optimizations to
-> f2fs_read_data_large_folio:
-> 
-> 1. batch read_pages_pending updates by the mapped block count instead of
->    incrementing it once per 4K subpage;
-> 
-> 2. skip f2fs_folio_state allocation when a single block mapping / BIO
->    covers the whole folio, because folio_end_read() can complete such a
->    folio without extra per-folio state.
-> 
-> In the benchmark tables below, "skip=1" means enabling the second
-> optimization above, i.e. skipping f2fs_folio_state allocation for the
-> whole-folio-in-one-bio case.
-> The "batch" optimization refers to updating read_pages_pending in
-> and add to bio in larger chunks instead of once per subpage.
-> 
-> Test environment:
-> - Device: Pixel 6 (device1A, 1A071FDF600053)
-> - Filesystem: f2fs on dm-49, inlinecrypt enabled
-> - File size: 256MB
-> - Repetitions: 10
-> - Prepare: end_fsync + sync + drop_caches
-> - Fio: psync, direct=0, iodepth=1
-> - Max folio order: 2
-> 
-> Table 1: HOLE_READ (10 repeats)
-> ------------------------------------------------------------
-> All bandwidth numbers are in MiB/s. Non-baseline entries show the
-> absolute value followed by the percentage delta relative to the
-> order=0 baseline in parentheses.
-> 
-> | bs  | order=0 | order=2 |
-> |-----|---------|---------|
-> | 4k  | 469.6   | 521.9 (+11.1%) |
-> | 64k | 668.1   | 852.4 (+27.6%) |
-> | 1M  | 653.0   | 867.2 (+32.8%) |
-> 
-> Table 2: DATA_READ (10 repeats)
-> ----------------------------------------
-> | bs  | order=0 | batch=0 | batch=1,skip=0 | batch=1,skip=1 |
-> |-----|---------|---------|----------------|----------------|
-> | 4k  | 441.6   | 456.5 (+3.4%) | 499.7 (+13.2%) | 544.4 (+23.3%) |
-> | 64k | 632.8   | 697.0 (+10.1%) | 837.8 (+32.4%) | 990.9 (+56.6%) |
-> | 1M  | 601.5   | 733.0 (+21.9%) | 927.5 (+54.2%) | 963.4 (+60.2%) |
-> 
-> Table 3: WRITE (10 reps)
-> ----------------------------------------------------------
-> O = overwrite (N = new write, Y = overwrite)
-> S = sync / fsync (Y = fsync enabled, N = no fsync)
-> W = writeback (Y = background writeback, N = no writeback)
-> 
-> | O,S,W | bs  | order=0 | order=2 |
-> |-------|-----|---------|---------|
-> | N,N,Y | 4k  | 263.4   | 286.3 (+8.7%) |
-> | N,N,Y | 64k | 683.5   | 1199.6 (+75.5%) |
-> | N,N,Y | 1M  | 767.4   | 1383.8 (+80.3%) |
-> | N,Y,N | 4k  | 10.8    | 9.1 (-15.7%) |
-> | N,Y,N | 64k | 69.3    | 50.3 (-27.4%) |
-> | N,Y,N | 1M  | 103.5   | 157.8 (+52.5%) |
-> | Y,N,Y | 4k  | 301.6   | 344.1 (+14.1%) |
-> | Y,N,Y | 64k | 691.3   | 865.9 (+25.3%) |
-> | Y,N,Y | 1M  | 742.3   | 969.2 (+30.6%) |
-> | Y,Y,N | 4k  | 9.5     | 17.1 (+80.0%) |
-> | Y,Y,N | 64k | 43.5    | 108.2 (+148.7%) |
-> | Y,Y,N | 1M  | 140.9   | 146.6 (+4.0%) |
-> 
-> Nanzhe (9):
->   f2fs: extend folio state for large folio write path
->   f2fs: carry subpage offset and count in write IO
->   f2fs: support regular file buffered writes on large folios
->   f2fs: support atomic file large folios buffered write
->   f2fs: support large folio writeback
->   f2fs: prepare mmap write faults for large folios
->   f2fs: make GC migration large-folio aware
->   f2fs: allow large folio support to writeable files
->   f2fs: optimize small block size large folio read
-> 
->  fs/f2fs/compress.c |    2 +
->  fs/f2fs/data.c     | 1015 +++++++++++++++++++++++++++++++++++++++-----
->  fs/f2fs/f2fs.h     |   75 +++-
->  fs/f2fs/file.c     |   81 ++--
->  fs/f2fs/gc.c       |   30 +-
->  fs/f2fs/inode.c    |    6 +-
->  fs/f2fs/segment.c  |    4 +-
->  7 files changed, 1064 insertions(+), 149 deletions(-)
-> 
-
-
-
-_______________________________________________
-Linux-f2fs-devel mailing list
-Linux-f2fs-devel@lists.sourceforge.net
-https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel
+Q2hhbyBZdSA8Y2hhb0BrZXJuZWwub3JnPiDkuo4yMDI25bm0NuaciDMw5pel5ZGo5LqMIDE5OjAy
+5YaZ6YGT77yaCj4KPiBPbiA2LzMwLzI2IDE2OjUwLCBaaGlndW8gTml1IHdyb3RlOgo+ID4gQ2hh
+byBZdSB2aWEgTGludXgtZjJmcy1kZXZlbCA8bGludXgtZjJmcy1kZXZlbEBsaXN0cy5zb3VyY2Vm
+b3JnZS5uZXQ+Cj4gPiDkuo4yMDI25bm0NuaciDI55pel5ZGo5LiAIDE5OjUy5YaZ6YGT77yaCj4g
+Pj4KPiA+PiBCbG9ja3Mgb2YgcGluZmlsZSBtYXkgbm90IGFsaWduZWQgdG8gc2VjdGlvbiBzaXpl
+IGR1ZSB0byB3cm9uZyB1c2UKPiA+PiBvbiBwaW5maWxlLCByZXN1bHQgaW4gaGVhdnkgb3Zlcmhl
+YWQgb2YgR0MsIGxldCBhdm9pZCB0aGlzIGJ5Cj4gPj4gYWRkaW5nIGFkZGl0aW9uYWwgY2hlY2sg
+Y29uZGl0aW9uIGluIGYyZnNfc2V0YXR0cigpLgo+ID4+Cj4gPj4gLSB0cnVuY2F0ZSAtcyA4bWIg
+cGluZmlsZQo+ID4+IDogcmFuZG9tIGNoZWNrcG9pbnQgbWF5IHBlcnNpc3QgZmlsZXNpemUgdy8g
+aW5vZGUKPiA+PiAtIGZhbGxvY2F0ZSAtbyAwIC1sIDhtYiBwaW5maWxlCj4gPj4gIC0gZjJmc19m
+YWxsb2NhdGUKPiA+PiAgIC0gZjJmc19leHBhbmRfaW5vZGVfZGF0YQo+ID4+ICAgIC0gZjJmc19h
+bGxvY2F0ZV9waW5uaW5nX3NlY3Rpb24KPiA+PiAgICAtIGYyZnNfbWFwX2Jsb2Nrcwo+ID4+ICAg
+ICAtIGYyZnNfbWFwX2xvY2sKPiA+PiAgICAgLSBfX2FsbG9jYXRlX2RhdGFfYmxvY2sKPiA+PiAg
+ICAgLSBmaWxlX25lZWRfdHJ1bmNhdGUKPiA+PiAgICAgOiB3LyBGQURWSVNFX1RSVU5DX0JJVCwg
+d2UgY2FuIGV4cGVjdCB1bmFsaWduZWQgbWFwcGluZyBjYW4gYmUKPiA+PiAgICAgICB0cnVuY2F0
+ZWQgd2hpbGUgb3BlbigpIGlmIGYyZnMgaXMgbm90IHVtb3VudCBhYm5vcm1hbGx5Cj4gPj4gICAg
+IC0gZjJmc19tYXBfdW5sb2NrCj4gPj4gICAgIDogZm9sbG93aW5nIGYyZnMgY2hlY2twb2ludCBh
+bmQgc3VkZGVuIHBvd2VyLWN1dAo+ID4+Cj4gPj4gLSBtb3VudAo+ID4+IC0gb3BlbiBwaW5maWxl
+Cj4gPj4gIC0gZjJmc19maWxlX29wZW4KPiA+PiAgIC0gZmluaXNoX3ByZWFsbG9jYXRlX2Jsb2Nr
+cwo+ID4+ICAgIC0gdHJ1bmNhdGVfc2V0c2l6ZQo+ID4+ICAgIDogZmlsZXNpemUgaXMgOG1iCj4g
+Pj4gICAgLSBmMmZzX3RydW5jYXRlCj4gPj4gICAgOiBjYW4gb25seSB0cnVuY2F0ZSBibG9jayBv
+dXRzaWRlIGZpbGVzaXplLCByYXRoZXIgdGhhbiB0cnVuY2F0aW5nCj4gPj4gICAgICB1bmFsaWdu
+ZWQgYmxvY2tzIGluc2lkZSBmaWxlc2l6ZQo+ID4gSGkgQ2hhbywKPiA+IDhNQiBpcyBzZWN0aW9u
+IGFsaW5nZWQgd2hlbiBmYWxsb2NhdGVkIGJ5IGYyZnNfYWxsb2NhdGVfcGlubmluZ19zZWN0aW9u
+Pz8KPiA+IHNvIEhvdyBjb3VsZCB0aGVyZSBhcmUgdW5hbGlnbmVkIGJsb2NrcyBpbnNpZGUgZmls
+ZXNpemU/Cj4KPiBaaGlndW8sCj4KPiBBcyBwYXJ0aWFsIGJsa2FkZHJzIHdlcmUgcGVyc2lzdGVk
+IGFuZCByZWNvdmVyZWQsIHNlZSBjb21tZW50cyBhcm91bmQKPiBmMmZzX21hcF91bmxvY2soKS4K
+Pgo+ID4+Cj4gPj4gRml4ZXM6IGY1YTUzZWRjZjAxZSAoImYyZnM6IHN1cHBvcnQgYWxpZ25lZCBw
+aW5uZWQgZmlsZSIpCj4gPj4gQ2M6IHN0YWJsZUBrZXJuZWwub3JnCj4gPj4gQ2M6IERhZWhvIEpl
+b25nIDxkYWVob2plb25nQGdvb2dsZS5jb20+Cj4gPj4gU2lnbmVkLW9mZi1ieTogQ2hhbyBZdSA8
+Y2hhb0BrZXJuZWwub3JnPgo+ID4+IC0tLQo+ID4+ICBmcy9mMmZzL2ZpbGUuYyB8IDI4ICsrKysr
+KysrKysrKysrKysrLS0tLS0tLS0tLS0KPiA+PiAgMSBmaWxlIGNoYW5nZWQsIDE3IGluc2VydGlv
+bnMoKyksIDExIGRlbGV0aW9ucygtKQo+ID4+Cj4gPj4gZGlmZiAtLWdpdCBhL2ZzL2YyZnMvZmls
+ZS5jIGIvZnMvZjJmcy9maWxlLmMKPiA+PiBpbmRleCBmNGZhY2Q0MDlkOWIuLjExY2M4ZDc5YzIz
+NSAxMDA2NDQKPiA+PiAtLS0gYS9mcy9mMmZzL2ZpbGUuYwo+ID4+ICsrKyBiL2ZzL2YyZnMvZmls
+ZS5jCj4gPj4gQEAgLTExMDcsMTcgKzExMDcsMjMgQEAgaW50IGYyZnNfc2V0YXR0cihzdHJ1Y3Qg
+bW50X2lkbWFwICppZG1hcCwgc3RydWN0IGRlbnRyeSAqZGVudHJ5LAo+ID4+ICAgICAgICAgICAg
+ICAgICAgICAgICAgICFJU19BTElHTkVEKGF0dHItPmlhX3NpemUsCj4gPj4gICAgICAgICAgICAg
+ICAgICAgICAgICAgRjJGU19CTEtfVE9fQllURVMoZmktPmlfY2x1c3Rlcl9zaXplKSkpCj4gPj4g
+ICAgICAgICAgICAgICAgICAgICAgICAgcmV0dXJuIC1FSU5WQUw7Cj4gPj4gLSAgICAgICAgICAg
+ICAgIC8qCj4gPj4gLSAgICAgICAgICAgICAgICAqIFRvIHByZXZlbnQgc2NhdHRlcmVkIHBpbiBi
+bG9jayBnZW5lcmF0aW9uLCB3ZSBkb24ndCBhbGxvdwo+ID4+IC0gICAgICAgICAgICAgICAgKiBz
+bWFsbGVyL2VxdWFsIHNpemUgdW5hbGlnbmVkIHRydW5jYXRpb24gZm9yIHBpbm5lZCBmaWxlLgo+
+ID4+IC0gICAgICAgICAgICAgICAgKiBXZSBvbmx5IHN1cHBvcnQgb3ZlcndyaXRlIElPIHRvIHBp
+bm5lZCBmaWxlLCBzbyBkb24ndAo+ID4+IC0gICAgICAgICAgICAgICAgKiBjYXJlIGFib3V0IGxh
+cmdlciBzaXplIHRydW5jYXRpb24uCj4gPj4gLSAgICAgICAgICAgICAgICAqLwo+ID4+IC0gICAg
+ICAgICAgICAgICBpZiAoZjJmc19pc19waW5uZWRfZmlsZShpbm9kZSkgJiYKPiA+PiAtICAgICAg
+ICAgICAgICAgICAgICAgICBhdHRyLT5pYV9zaXplIDw9IGlfc2l6ZV9yZWFkKGlub2RlKSAmJgo+
+ID4+IC0gICAgICAgICAgICAgICAgICAgICAgICFJU19BTElHTkVEKGF0dHItPmlhX3NpemUsCj4g
+Pj4gLSAgICAgICAgICAgICAgICAgICAgICAgRjJGU19CTEtfVE9fQllURVMoQ0FQX0JMS1NfUEVS
+X1NFQyhzYmkpKSkpCj4gPj4gLSAgICAgICAgICAgICAgICAgICAgICAgcmV0dXJuIC1FSU5WQUw7
+Cj4gPj4gKwo+ID4+ICsgICAgICAgICAgICAgICBpZiAoZjJmc19pc19waW5uZWRfZmlsZShpbm9k
+ZSkpIHsKPiA+PiArICAgICAgICAgICAgICAgICAgICAgICAvKgo+ID4+ICsgICAgICAgICAgICAg
+ICAgICAgICAgICAqIEl0IG1heSBicmVhayBzZWN0aW9uLWFsaWduZWQgZmFsbG9jYXRlIHJlY292
+ZXJ5Cj4gPj4gKyAgICAgICAgICAgICAgICAgICAgICAgICogbWVjaGFuaXNtLCBzbyBkbyBub3Qg
+YWxsb3cgbGFyZ2VyIHNpemUgdHJ1bmNhdGlvbi4KPiA+PiArICAgICAgICAgICAgICAgICAgICAg
+ICAgKi8KPiA+PiArICAgICAgICAgICAgICAgICAgICAgICBpZiAoYXR0ci0+aWFfc2l6ZSA+IGlf
+c2l6ZV9yZWFkKGlub2RlKSkKPiA+PiArICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHJl
+dHVybiAtRUlOVkFMOwo+ID4gSXMgaXQgb2sgaWYgd2UgYWxsb3cgbGFyZ2VyIHNpemUgdHJ1bmNh
+dGlvbiBhbmQgYWxzbyAgbGltaXQgaXQgdG8KPiA+IGFsaWduZWQgIkYyRlNfQkxLX1RPX0JZVEVT
+KENBUF9CTEtTX1BFUl9TRUMoc2JpKSI/Cj4KPiBObywgSSB0aGluayBhYm92ZSBleGFtcGxlIHdp
+bGwgc3RpbGwgc3VmZmVyIHNlY3Rpb24tdW5hbGlnbmVkIGlzc3VlLgo+Cj4gVGhhbmtzLApIaSBD
+aGFvLApnb3QgaXQgYW5kIHRoYW5rcyBmb3IgeW91ciBleHBsYWluYXRpb24sIHNvClJldmlld2Vk
+LWJ5OiBaaGlndW8gTml1IDx6aGlndW8ubml1QHVuaXNvYy5jb20+CnRoYW5rcyEKCj4KPiA+IHRo
+YW5rcyEKPiA+PiArICAgICAgICAgICAgICAgICAgICAgICAvKgo+ID4+ICsgICAgICAgICAgICAg
+ICAgICAgICAgICAqIFRvIHByZXZlbnQgc2NhdHRlcmVkIHBpbiBibG9jayBnZW5lcmF0aW9uLCB3
+ZSBkb24ndAo+ID4+ICsgICAgICAgICAgICAgICAgICAgICAgICAqIGFsbG93IHNtYWxsZXIvZXF1
+YWwgc2l6ZSB1bmFsaWduZWQgdHJ1bmNhdGlvbiBmb3IKPiA+PiArICAgICAgICAgICAgICAgICAg
+ICAgICAgKiBwaW5uZWQgZmlsZS4KPiA+PiArICAgICAgICAgICAgICAgICAgICAgICAgKi8KPiA+
+PiArICAgICAgICAgICAgICAgICAgICAgICBlbHNlIGlmICghSVNfQUxJR05FRChhdHRyLT5pYV9z
+aXplLAo+ID4+ICsgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgRjJGU19CTEtfVE9fQllU
+RVMoQ0FQX0JMS1NfUEVSX1NFQyhzYmkpKSkpCj4gPj4gKyAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICByZXR1cm4gLUVJTlZBTDsKPiA+PiArICAgICAgICAgICAgICAgfQo+ID4+ICAgICAg
+ICAgfQo+ID4+Cj4gPj4gICAgICAgICBpZiAoaXNfcXVvdGFfbW9kaWZpY2F0aW9uKGlkbWFwLCBp
+bm9kZSwgYXR0cikpIHsKPiA+PiAtLQo+ID4+IDIuNDkuMAo+ID4+Cj4gPj4KPiA+Pgo+ID4+IF9f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCj4gPj4gTGludXgt
+ZjJmcy1kZXZlbCBtYWlsaW5nIGxpc3QKPiA+PiBMaW51eC1mMmZzLWRldmVsQGxpc3RzLnNvdXJj
+ZWZvcmdlLm5ldAo+ID4+IGh0dHBzOi8vbGlzdHMuc291cmNlZm9yZ2UubmV0L2xpc3RzL2xpc3Rp
+bmZvL2xpbnV4LWYyZnMtZGV2ZWwKPgoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fCkxpbnV4LWYyZnMtZGV2ZWwgbWFpbGluZyBsaXN0CkxpbnV4LWYyZnMt
+ZGV2ZWxAbGlzdHMuc291cmNlZm9yZ2UubmV0Cmh0dHBzOi8vbGlzdHMuc291cmNlZm9yZ2UubmV0
+L2xpc3RzL2xpc3RpbmZvL2xpbnV4LWYyZnMtZGV2ZWwK
