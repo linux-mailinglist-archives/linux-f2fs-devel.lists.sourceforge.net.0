@@ -2,18 +2,18 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id NZzEJAC1SmodGgEAu9opvQ
+	id OoPxFgS1SmopGgEAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 05 Jul 2026 21:48:16 +0200
+	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 05 Jul 2026 21:48:20 +0200
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 24FB070B1FB
-	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 05 Jul 2026 21:48:16 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A145F70B224
+	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 05 Jul 2026 21:48:19 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=lists.sourceforge.net header.s=beta header.b=NkNBMRkz;
-	dkim=fail ("body hash did not verify") header.d=sourceforge.net header.s=x header.b=WG8Xu+Oz;
-	dkim=fail ("body hash did not verify") header.d=sf.net header.s=x header.b=iSW5ShEY;
-	dkim=fail ("body hash did not verify") header.d=kernel.org header.s=k20260515 header.b=i4pw4Myk;
+	dkim=pass header.d=lists.sourceforge.net header.s=beta header.b=C2cBT5g3;
+	dkim=fail ("body hash did not verify") header.d=sourceforge.net header.s=x header.b=gLIHLRC2;
+	dkim=fail ("body hash did not verify") header.d=sf.net header.s=x header.b=mDeZY+51;
+	dkim=fail ("body hash did not verify") header.d=kernel.org header.s=k20260515 header.b=njn1a8Hp;
 	dmarc=pass (policy=none) header.from=lists.sourceforge.net;
 	spf=pass (mail.lfdr.de: domain of linux-f2fs-devel-bounces@lists.sourceforge.net designates 216.105.38.7 as permitted sender) smtp.mailfrom=linux-f2fs-devel-bounces@lists.sourceforge.net
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
@@ -22,29 +22,29 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	List-Unsubscribe:List-Id:Subject:MIME-Version:References:In-Reply-To:
 	Message-ID:Date:To:Sender:Content-ID:Content-Description:Resent-Date:
 	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=LRyPY+J1TH12xcClI2/iaSoRZ8zD1oVl/88RyV/H3U4=; b=NkNBMRkzdr7H7eqFSRaxgsttJa
-	Om1EwkBMPtr5IPXsBHPQStvvQRVAYIgg+bMBdSnv8y7rXvvCJfqs4+7KGXCkw0rs2SxQk24a2+gAx
-	hXTmKN8oxZv/vfYDJuhAqJyXvVHKR5N4oTZI1wXlf1ZK7xGBAPsfxEPyU2A/ADhiheOA=;
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=w2kRB+qtOf2VycnPBSUcomuHUlDrVYhdf10/yDbGK2I=; b=C2cBT5g3W1ngQFyWsbgCAZAUKk
+	+DFpgaZpHTJu8Bfl6Vja2TvX+2yipzHQKqpiHn5iWmEsXP07jkHSN5vg7b2BZGEum7Z3zPOPmveFw
+	aPwtt+YOEY5xRaSpTIeONQ4u1lyzUv11KwJATgSGZItZXW7wzP3QsuULCsQiz/LeZdGI=;
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1wgSp3-0002Pl-1I;
-	Sun, 05 Jul 2026 19:48:13 +0000
+	id 1wgSp9-0004SI-PB;
+	Sun, 05 Jul 2026 19:48:17 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <ebiggers@kernel.org>) id 1wgSp1-0002PK-16
+ (envelope-from <ebiggers@kernel.org>) id 1wgSp7-0004Rt-Lh
  for linux-f2fs-devel@lists.sourceforge.net;
- Sun, 05 Jul 2026 19:48:11 +0000
+ Sun, 05 Jul 2026 19:48:15 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=xHn7nWJIEjtZGVKLUuKxbe6auJkmuo4ttsUoVDB6jng=; b=WG8Xu+Oz+KVkEV/fMSQnO/uU1+
- 2DasPYPI7yJ3OlkrtFy/j5T1T97KRjJUfdbABz3SUZacZLUyMFSdJ5aJ+U9Sc5QrNnKlXEfOSeskF
- Iqsehrk51ttmiWBk5nEWRLqDm+JBLLhCovBzEqtDZmbx3N1tBoGV3n29tBzEh5IRfQs0=;
+ bh=36KaunQMkPOZa3vTll4mceITXrqMhkLpGUNFkVAjF3Q=; b=gLIHLRC266SOgpmDku6poulqfK
+ zmEJsDz+v7BKamDXYGZO+X3JBfDbjj42K3AcxUpk7XwBWZ7AHGzH2HLLw8fvLaHtfYGs4b2wMZFPm
+ l9JBGbmNYH6B6Pgh+HfDehHyh1OLNa5n5l+XnxEjm5WrtDVqLSKwzT/olNN/9o48VlBE=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:
@@ -52,60 +52,63 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=xHn7nWJIEjtZGVKLUuKxbe6auJkmuo4ttsUoVDB6jng=; b=iSW5ShEYFf4wlAfEHfB/1W5+u4
- U8N2kNOaUbRPcZwD+nK1PIdJXt7IZnUT7fcO+xbT9noGnLR3IiaPwQh6KnGp9qHBx4DQFaIQr+Rua
- D4oNQQDlZQ8Xhrq2t9ogGrML+7MhevNz5pJXckvIvlvqtIs18hoXwfML2HHYrG4p7hr8=;
-Received: from sea.source.kernel.org ([172.234.252.31])
+ bh=36KaunQMkPOZa3vTll4mceITXrqMhkLpGUNFkVAjF3Q=; b=mDeZY+5181Rn4lXlxVBGcHH9YL
+ nVd0CWeNOvJovugHmsahm+mU4qWiGv9QXsnxJKXBc/WCZbh1eqzicPTUh+cNaYpiBXNO7Ibrq8GO7
+ 1RQnstSytmxlpDpMgg2tq+HyOtmAOjPBfgqPcTioe0orBjaIujU5ACfjFhZ/UKYLEcQg=;
+Received: from tor.source.kernel.org ([172.105.4.254])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1wgSoz-0001FX-Qf for linux-f2fs-devel@lists.sourceforge.net;
- Sun, 05 Jul 2026 19:48:10 +0000
+ id 1wgSp3-0001GG-GG for linux-f2fs-devel@lists.sourceforge.net;
+ Sun, 05 Jul 2026 19:48:15 +0000
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by sea.source.kernel.org (Postfix) with ESMTP id 0F27340DCD;
+ by tor.source.kernel.org (Postfix) with ESMTP id 5C2BA60018;
+ Sun,  5 Jul 2026 19:48:03 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3EDDB1F00A3D;
  Sun,  5 Jul 2026 19:48:00 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 700CD1F00A3A;
- Sun,  5 Jul 2026 19:47:54 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
- s=k20260515; t=1783280879;
- bh=xHn7nWJIEjtZGVKLUuKxbe6auJkmuo4ttsUoVDB6jng=;
+ s=k20260515; t=1783280883;
+ bh=36KaunQMkPOZa3vTll4mceITXrqMhkLpGUNFkVAjF3Q=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References;
- b=i4pw4MykTh3baKxXF5+8MOvAdZcKs+te6RQm/uQCm95u7VIfyJ+VL8YcZVMLFlMej
- ws2KlkY8KUaC4z1RpUVt3nK6QiULR+t7YamE1RcrltnpU7ggzP9kRIlj8qMQ4ahyjl
- oqJebufz7dXPWnGf7YiEXCu6b5VtF7G7g+YrVFHhIJ1JC8XHzd/XRWmFGlHjjZaBT8
- se7tX7emU8lN0cCv0LsurF2/vHEio0yQavtFLBAhfjdEQKaOvrvP3MJMakGVHlZ3MC
- HkZCwd1dzI4RvGbjPiQnmD43zPlU/FlaRAa6/uKUO8YXqoislIvGZVHL+flwuX7liA
- 5c671vEVDoScA==
+ b=njn1a8HptAXT0v2Wi2q/dYfH0xmmHUgjkBYoXDMKOINO4aCaf5Zdz7lNdZKkdP9UF
+ 8g5OvGg6K/zk2L7LvfBt9SPfVKgIjw3rq0VhqPjf4FnEBusZauVGHNCIRUey1WODe+
+ OdiozbPv/UH5FjsXo38GxAjnpmA9721Dvt4la5GVAEbG0YBZhC7l3FPpZgaAAoWv0s
+ i2N2dmaR3A0RO7471Lt5+wY+WlQOQ7nfMpCdcS7cut+Ej0m/mUyIY621jTccsqaYHB
+ 9mJicbnQEry7YTVl0z986bddHRZVUJ9iYS61CFoFi3l0iGRJy0oyH9jzEt+SsXPaaO
+ z7mkOZzd45Lig==
 To: linux-fscrypt@vger.kernel.org
-Date: Sun,  5 Jul 2026 12:45:46 -0700
-Message-ID: <20260705194555.75030-10-ebiggers@kernel.org>
+Date: Sun,  5 Jul 2026 12:45:47 -0700
+Message-ID: <20260705194555.75030-11-ebiggers@kernel.org>
 X-Mailer: git-send-email 2.54.0
 In-Reply-To: <20260705194555.75030-1-ebiggers@kernel.org>
 References: <20260705194555.75030-1-ebiggers@kernel.org>
 MIME-Version: 1.0
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Since the bio postprocessing code in fs/ext4/readpage.c is
- now used only for fsverity, rename things accordingly. Also: - Don't create
- the caches at all when !CONFIG_FS_VERITY. - Remove the unused inode argument
- from ext4_set_verity_work(). 
+ Content preview: Now that fscrypt's file contents en/decryption is always
+ implemented
+ using blk-crypto when the filesystem is block-based, the fs-layer en/decryption
+ code in f2fs is unused code. Remove it. Note that the struct f2fs_io_info
+ field encrypted_page is kept because it is still used by the garbage
+ collection
+ path to relocate encrypted blocks using raw meta pages from META_MAPPING.
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
-X-Headers-End: 1wgSoz-0001FX-Qf
-Subject: [f2fs-dev] [PATCH v2 09/17] ext4: Further de-generalize the bio
- postprocessing code
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+X-Headers-End: 1wgSp3-0001GG-GG
+Subject: [f2fs-dev] [PATCH v2 10/17] f2fs: Remove fs-layer file contents
+ en/decryption code
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -170,213 +173,323 @@ X-Spamd-Result: default: False [-7.11 / 15.00];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	HAS_REPLYTO(0.00)[ebiggers@kernel.org]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 24FB070B1FB
+X-Rspamd-Queue-Id: A145F70B224
 
-Since the bio postprocessing code in fs/ext4/readpage.c is now used only
-for fsverity, rename things accordingly.
+Now that fscrypt's file contents en/decryption is always implemented
+using blk-crypto when the filesystem is block-based, the fs-layer
+en/decryption code in f2fs is unused code.  Remove it.
 
-Also:
-
-- Don't create the caches at all when !CONFIG_FS_VERITY.
-- Remove the unused inode argument from ext4_set_verity_work().
+Note that the struct f2fs_io_info field encrypted_page is kept because
+it is still used by the garbage collection path to relocate encrypted
+blocks using raw meta pages from META_MAPPING.
 
 Signed-off-by: Eric Biggers <ebiggers@kernel.org>
 ---
- fs/ext4/ext4.h     |  4 +--
- fs/ext4/readpage.c | 65 ++++++++++++++++++++++------------------------
- fs/ext4/super.c    |  6 ++---
- 3 files changed, 36 insertions(+), 39 deletions(-)
+ fs/f2fs/compress.c | 31 ++--------------
+ fs/f2fs/data.c     | 93 +++++-----------------------------------------
+ fs/f2fs/f2fs.h     |  2 -
+ fs/f2fs/segment.c  |  2 -
+ fs/f2fs/super.c    |  1 -
+ 5 files changed, 12 insertions(+), 117 deletions(-)
 
-diff --git a/fs/ext4/ext4.h b/fs/ext4/ext4.h
-index 920a8ec1b948..489ed6dcee52 100644
---- a/fs/ext4/ext4.h
-+++ b/fs/ext4/ext4.h
-@@ -3829,8 +3829,8 @@ static inline void ext4_set_de_type(struct super_block *sb,
- /* readpages.c */
- int ext4_read_folio(struct file *file, struct folio *folio);
- void ext4_readahead(struct readahead_control *rac);
--extern int __init ext4_init_post_read_processing(void);
--extern void ext4_exit_post_read_processing(void);
-+int __init ext4_init_verity_caches(void);
-+void ext4_exit_verity_caches(void);
+diff --git a/fs/f2fs/compress.c b/fs/f2fs/compress.c
+index 91855d91bbdd..ce88092d9ce2 100644
+--- a/fs/f2fs/compress.c
++++ b/fs/f2fs/compress.c
+@@ -1286,8 +1286,6 @@ static int f2fs_write_compressed_pages(struct compress_ctx *cc,
+ 		.compressed_page = NULL,
+ 		.io_type = io_type,
+ 		.io_wbc = wbc,
+-		.encrypted = fscrypt_inode_uses_fs_layer_crypto(cc->inode) ?
+-									1 : 0,
+ 	};
+ 	struct folio *folio;
+ 	struct dnode_of_data dn;
+@@ -1361,14 +1359,6 @@ static int f2fs_write_compressed_pages(struct compress_ctx *cc,
  
- /* symlink.c */
- extern const struct inode_operations ext4_encrypted_symlink_inode_operations;
-diff --git a/fs/ext4/readpage.c b/fs/ext4/readpage.c
-index 8af183798a33..c7b6cdb2e124 100644
---- a/fs/ext4/readpage.c
-+++ b/fs/ext4/readpage.c
-@@ -47,12 +47,12 @@
- #include "ext4.h"
- #include <trace/events/ext4.h>
- 
--#define NUM_PREALLOC_POST_READ_CTXS	128
-+#define NUM_VERITY_WORKS 128
- 
--static struct kmem_cache *bio_post_read_ctx_cache;
--static mempool_t *bio_post_read_ctx_pool;
-+static struct kmem_cache *ext4_verity_work_cache;
-+static mempool_t *ext4_verity_work_pool;
- 
--struct bio_post_read_ctx {
-+struct ext4_verity_work {
- 	struct bio *bio;
- 	struct fsverity_info *vi;
- 	struct work_struct work;
-@@ -65,22 +65,22 @@ static void __read_end_io(struct bio *bio)
- 	bio_for_each_folio_all(fi, bio)
- 		folio_end_read(fi.folio, bio->bi_status == 0);
- 	if (bio->bi_private)
--		mempool_free(bio->bi_private, bio_post_read_ctx_pool);
-+		mempool_free(bio->bi_private, ext4_verity_work_pool);
- 	bio_put(bio);
- }
- 
- static void verity_work(struct work_struct *work)
- {
--	struct bio_post_read_ctx *ctx =
--		container_of(work, struct bio_post_read_ctx, work);
-+	struct ext4_verity_work *ctx =
-+		container_of(work, struct ext4_verity_work, work);
- 	struct bio *bio = ctx->bio;
- 	struct fsverity_info *vi = ctx->vi;
- 
- 	/*
--	 * Free the bio_post_read_ctx right away, since it's no longer needed.
-+	 * Free the ext4_verity_work right away, since it's no longer needed.
- 	 * This relieves the pressure on the mempool as much as possible.
- 	 */
--	mempool_free(ctx, bio_post_read_ctx_pool);
-+	mempool_free(ctx, ext4_verity_work_pool);
- 	bio->bi_private = NULL;
- 
- 	fsverity_verify_bio(vi, bio);
-@@ -88,12 +88,6 @@ static void verity_work(struct work_struct *work)
- 	__read_end_io(bio);
- }
- 
--static bool bio_post_read_required(struct bio *bio)
--{
--	return IS_ENABLED(CONFIG_FS_VERITY) && bio->bi_private &&
--	       !bio->bi_status;
--}
+ 		/* wait for GCed page writeback via META_MAPPING */
+ 		f2fs_wait_on_block_writeback(inode, fio.old_blkaddr);
 -
- /*
-  * I/O completion handler for multipage BIOs.
-  *
-@@ -108,8 +102,9 @@ static bool bio_post_read_required(struct bio *bio)
-  */
- static void mpage_end_io(struct bio *bio)
- {
--	if (bio_post_read_required(bio)) {
--		struct bio_post_read_ctx *ctx = bio->bi_private;
-+	if (IS_ENABLED(CONFIG_FS_VERITY) && bio->bi_private &&
-+	    !bio->bi_status) {
-+		struct ext4_verity_work *ctx = bio->bi_private;
+-		if (fio.encrypted) {
+-			fio.page = cc->rpages[i + 1];
+-			err = f2fs_encrypt_one_page(&fio);
+-			if (err)
+-				goto out_destroy_crypt;
+-			cc->cpages[i] = fio.encrypted_page;
+-		}
+ 	}
  
- 		INIT_WORK(&ctx->work, verity_work);
- 		fsverity_enqueue_verify_work(&ctx->work);
-@@ -118,14 +113,12 @@ static void mpage_end_io(struct bio *bio)
- 	__read_end_io(bio);
- }
+ 	set_cluster_writeback(cc);
+@@ -1406,21 +1396,15 @@ static int f2fs_write_compressed_pages(struct compress_ctx *cc,
  
--static void ext4_set_bio_post_read_ctx(struct bio *bio,
--				       const struct inode *inode,
--				       struct fsverity_info *vi)
-+static void ext4_set_verity_work(struct bio *bio, struct fsverity_info *vi)
- {
- 	if (vi) {
- 		/* Due to the mempool, this never fails. */
--		struct bio_post_read_ctx *ctx =
--			mempool_alloc(bio_post_read_ctx_pool, GFP_NOFS);
-+		struct ext4_verity_work *ctx =
-+			mempool_alloc(ext4_verity_work_pool, GFP_NOFS);
+ 		f2fs_bug_on(fio.sbi, blkaddr == NULL_ADDR);
  
- 		ctx->bio = bio;
- 		ctx->vi = vi;
-@@ -289,7 +282,7 @@ static int ext4_mpage_readpages(struct inode *inode, struct fsverity_info *vi,
- 			bio = bio_alloc(bdev, bio_max_segs(nr_pages),
- 					REQ_OP_READ, GFP_KERNEL);
- 			fscrypt_set_bio_crypt_ctx(bio, inode, pos, GFP_KERNEL);
--			ext4_set_bio_post_read_ctx(bio, inode, vi);
-+			ext4_set_verity_work(bio, vi);
- 			bio->bi_iter.bi_sector = first_block << (blkbits - 9);
- 			bio->bi_end_io = mpage_end_io;
- 			if (rac)
-@@ -363,27 +356,31 @@ void ext4_readahead(struct readahead_control *rac)
- 	ext4_mpage_readpages(inode, vi, rac, NULL);
- }
+-		if (fio.encrypted)
+-			fio.encrypted_page = cc->cpages[i - 1];
+-		else
+-			fio.compressed_page = cc->cpages[i - 1];
++		fio.compressed_page = cc->cpages[i - 1];
  
--int __init ext4_init_post_read_processing(void)
-+int __init ext4_init_verity_caches(void)
- {
--	bio_post_read_ctx_cache = KMEM_CACHE(bio_post_read_ctx, SLAB_RECLAIM_ACCOUNT);
-+	if (!IS_ENABLED(CONFIG_FS_VERITY))
-+		return 0;
-+	ext4_verity_work_cache =
-+		KMEM_CACHE(ext4_verity_work, SLAB_RECLAIM_ACCOUNT);
- 
--	if (!bio_post_read_ctx_cache)
-+	if (!ext4_verity_work_cache)
- 		goto fail;
--	bio_post_read_ctx_pool =
--		mempool_create_slab_pool(NUM_PREALLOC_POST_READ_CTXS,
--					 bio_post_read_ctx_cache);
--	if (!bio_post_read_ctx_pool)
-+	ext4_verity_work_pool = mempool_create_slab_pool(
-+		NUM_VERITY_WORKS, ext4_verity_work_cache);
-+	if (!ext4_verity_work_pool)
- 		goto fail_free_cache;
+ 		cc->cpages[i - 1] = NULL;
+ 		fio.submitted = 0;
+ 		f2fs_outplace_write_data(&dn, &fio);
+ 		if (unlikely(!fio.submitted)) {
+ 			cancel_cluster_writeback(cc, cic, i);
+-
+-			/* To call fscrypt_finalize_bounce_page */
+-			i = cc->valid_nr_cpages;
+ 			*submitted = 0;
+-			goto out_destroy_crypt;
++			goto out_free_page_array;
+ 		}
+ 		(*submitted)++;
+ unlock_continue:
+@@ -1452,17 +1436,8 @@ static int f2fs_write_compressed_pages(struct compress_ctx *cc,
+ 	f2fs_destroy_compress_ctx(cc, false);
  	return 0;
  
- fail_free_cache:
--	kmem_cache_destroy(bio_post_read_ctx_cache);
-+	kmem_cache_destroy(ext4_verity_work_cache);
- fail:
- 	return -ENOMEM;
+-out_destroy_crypt:
++out_free_page_array:
+ 	page_array_free(sbi, cic->rpages, cc->cluster_size);
+-
+-	if (!fio.encrypted)
+-		goto out_put_cic;
+-
+-	for (--i; i >= 0; i--) {
+-		if (!cc->cpages[i])
+-			continue;
+-		fscrypt_finalize_bounce_page(&cc->cpages[i]);
+-	}
+ out_put_cic:
+ 	kmem_cache_free(cic_entry_slab, cic);
+ out_put_dnode:
+diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
+index a765fda71536..65117dd2e123 100644
+--- a/fs/f2fs/data.c
++++ b/fs/f2fs/data.c
+@@ -65,9 +65,6 @@ bool f2fs_is_cp_guaranteed(const struct folio *folio)
+ 	struct inode *inode;
+ 	struct f2fs_sb_info *sbi;
+ 
+-	if (fscrypt_is_bounce_folio(folio))
+-		return folio_test_f2fs_gcing(fscrypt_pagecache_folio(folio));
+-
+ 	inode = mapping->host;
+ 	sbi = F2FS_I_SB(inode);
+ 
+@@ -101,11 +98,6 @@ static enum count_type __read_io_type(struct folio *folio)
+ 
+ /* postprocessing steps for read bios */
+ enum bio_post_read_step {
+-#ifdef CONFIG_FS_ENCRYPTION
+-	STEP_DECRYPT	= BIT(0),
+-#else
+-	STEP_DECRYPT	= 0,	/* compile out the decryption-related code */
+-#endif
+ #ifdef CONFIG_F2FS_FS_COMPRESSION
+ 	STEP_DECOMPRESS	= BIT(1),
+ #else
+@@ -301,11 +293,6 @@ static void f2fs_post_read_work(struct work_struct *work)
+ 		container_of(work, struct bio_post_read_ctx, work);
+ 	struct bio *bio = ctx->bio;
+ 
+-	if ((ctx->enabled_steps & STEP_DECRYPT) && !fscrypt_decrypt_bio(bio)) {
+-		f2fs_finish_read_bio(bio, true);
+-		return;
+-	}
+-
+ 	if (ctx->enabled_steps & STEP_DECOMPRESS)
+ 		f2fs_handle_step_decompress(ctx, true);
+ 
+@@ -329,18 +316,11 @@ static void f2fs_read_end_io(struct bio *bio)
+ 		return;
+ 	}
+ 
+-	if (ctx) {
+-		unsigned int enabled_steps = ctx->enabled_steps &
+-					(STEP_DECRYPT | STEP_DECOMPRESS);
+-
+-		/*
+-		 * If we have only decompression step between decompression and
+-		 * decrypt, we don't need post processing for this.
+-		 */
+-		if (enabled_steps == STEP_DECOMPRESS &&
+-				!f2fs_low_mem_mode(sbi)) {
++	if (ctx && (ctx->enabled_steps & STEP_DECOMPRESS)) {
++		if (!f2fs_low_mem_mode(sbi)) {
++			/* Decompress inline. */
+ 			f2fs_handle_step_decompress(ctx, intask);
+-		} else if (enabled_steps) {
++		} else {
+ 			INIT_WORK(&ctx->work, f2fs_post_read_work);
+ 			queue_work(ctx->sbi->wq, &ctx->work);
+ 			return;
+@@ -362,13 +342,6 @@ static void f2fs_write_end_bio(struct bio *bio)
+ 		struct folio *folio = fi.folio;
+ 		enum count_type type;
+ 
+-		if (fscrypt_is_bounce_folio(folio)) {
+-			struct folio *io_folio = folio;
+-
+-			folio = fscrypt_pagecache_folio(io_folio);
+-			fscrypt_free_bounce_page(&io_folio->page);
+-		}
+-
+ #ifdef CONFIG_F2FS_FS_COMPRESSION
+ 		if (f2fs_is_compressed_page(folio)) {
+ 			f2fs_compress_write_end_io(bio, folio);
+@@ -614,11 +587,6 @@ static bool __has_merged_page(struct bio *bio, struct inode *inode,
+ 	bio_for_each_folio_all(fi, bio) {
+ 		struct folio *target = fi.folio;
+ 
+-		if (fscrypt_is_bounce_folio(target)) {
+-			target = fscrypt_pagecache_folio(target);
+-			if (IS_ERR(target))
+-				continue;
+-		}
+ 		if (f2fs_is_compressed_page(target)) {
+ 			target = f2fs_compress_control_folio(target);
+ 			if (IS_ERR(target))
+@@ -1161,9 +1129,6 @@ static struct bio *f2fs_grab_read_bio(struct inode *inode,
+ 	f2fs_set_bio_crypt_ctx(bio, inode, first_idx, NULL, GFP_NOFS);
+ 	bio->bi_end_io = f2fs_read_end_io;
+ 
+-	if (fscrypt_inode_uses_fs_layer_crypto(inode))
+-		post_read_steps |= STEP_DECRYPT;
+-
+ 	if (vi)
+ 		post_read_steps |= STEP_VERITY;
+ 
+@@ -2852,35 +2817,6 @@ static void f2fs_readahead(struct readahead_control *rac)
+ 	f2fs_mpage_readpages(inode, vi, rac, NULL);
  }
  
--void ext4_exit_post_read_processing(void)
-+void ext4_exit_verity_caches(void)
+-int f2fs_encrypt_one_page(struct f2fs_io_info *fio)
+-{
+-	struct inode *inode = fio_inode(fio);
+-	struct folio *mfolio;
+-	struct page *page;
+-
+-	if (!f2fs_encrypted_file(inode))
+-		return 0;
+-
+-	page = fio->compressed_page ? fio->compressed_page : fio->page;
+-
+-	if (fscrypt_inode_uses_inline_crypto(inode))
+-		return 0;
+-
+-	fio->encrypted_page = fscrypt_encrypt_pagecache_blocks(page_folio(page),
+-					PAGE_SIZE, 0, GFP_NOFS);
+-	if (IS_ERR(fio->encrypted_page))
+-		return PTR_ERR(fio->encrypted_page);
+-
+-	mfolio = filemap_lock_folio(META_MAPPING(fio->sbi), fio->old_blkaddr);
+-	if (!IS_ERR(mfolio)) {
+-		if (folio_test_uptodate(mfolio))
+-			memcpy(folio_address(mfolio),
+-				page_address(fio->encrypted_page), PAGE_SIZE);
+-		f2fs_folio_put(mfolio, true);
+-	}
+-	return 0;
+-}
+-
+ static inline bool check_inplace_update_policy(struct inode *inode,
+ 				struct f2fs_io_info *fio)
  {
--	mempool_destroy(bio_post_read_ctx_pool);
--	kmem_cache_destroy(bio_post_read_ctx_cache);
-+	if (!IS_ENABLED(CONFIG_FS_VERITY))
-+		return;
-+	mempool_destroy(ext4_verity_work_pool);
-+	kmem_cache_destroy(ext4_verity_work_cache);
- }
-diff --git a/fs/ext4/super.c b/fs/ext4/super.c
-index 245f67d10ded..cb9ca0dc4664 100644
---- a/fs/ext4/super.c
-+++ b/fs/ext4/super.c
-@@ -7531,7 +7531,7 @@ static int __init ext4_init_fs(void)
- 	if (err)
- 		goto out7;
+@@ -3053,22 +2989,15 @@ int f2fs_do_write_data_page(struct f2fs_io_info *fio)
+ 	if (ipu_force ||
+ 		(__is_valid_data_blkaddr(fio->old_blkaddr) &&
+ 					need_inplace_update(fio))) {
+-		err = f2fs_encrypt_one_page(fio);
+-		if (err)
+-			goto out_writepage;
+-
+ 		folio_start_writeback(folio);
+ 		f2fs_put_dnode(&dn);
+ 		if (fio->need_lock == LOCK_REQ)
+ 			f2fs_unlock_op(fio->sbi, &lc);
+ 		err = f2fs_inplace_write_data(fio);
+-		if (err) {
+-			if (fscrypt_inode_uses_fs_layer_crypto(inode))
+-				fscrypt_finalize_bounce_page(&fio->encrypted_page);
++		if (err)
+ 			folio_end_writeback(folio);
+-		} else {
++		else
+ 			set_inode_flag(inode, FI_UPDATE_WRITE);
+-		}
+ 		trace_f2fs_do_write_data_page(folio, IPU);
+ 		return err;
+ 	}
+@@ -3087,10 +3016,6 @@ int f2fs_do_write_data_page(struct f2fs_io_info *fio)
  
--	err = ext4_init_post_read_processing();
-+	err = ext4_init_verity_caches();
- 	if (err)
- 		goto out6;
+ 	fio->version = ni.version;
  
-@@ -7580,7 +7580,7 @@ static int __init ext4_init_fs(void)
- out4:
- 	ext4_exit_pageio();
- out5:
--	ext4_exit_post_read_processing();
-+	ext4_exit_verity_caches();
- out6:
- 	ext4_exit_pending();
- out7:
-@@ -7601,7 +7601,7 @@ static void __exit ext4_exit_fs(void)
- 	ext4_exit_sysfs();
- 	ext4_exit_system_zone();
- 	ext4_exit_pageio();
--	ext4_exit_post_read_processing();
-+	ext4_exit_verity_caches();
- 	ext4_exit_es();
- 	ext4_exit_pending();
- }
+-	err = f2fs_encrypt_one_page(fio);
+-	if (err)
+-		goto out_writepage;
+-
+ 	folio_start_writeback(folio);
+ 
+ 	if (fio->compr_blocks && fio->old_blkaddr == COMPRESS_ADDR)
+@@ -4602,9 +4527,9 @@ static int f2fs_iomap_begin(struct inode *inode, loff_t offset, loff_t length,
+ 	iomap->offset = F2FS_BLK_TO_BYTES(map.m_lblk);
+ 
+ 	/*
+-	 * When inline encryption is enabled, sometimes I/O to an encrypted file
+-	 * has to be broken up to guarantee DUN contiguity.  Handle this by
+-	 * limiting the length of the mapping returned.
++	 * Sometimes I/O to an encrypted file has to be broken up to guarantee
++	 * DUN contiguity.  Handle this by limiting the length of the mapping
++	 * returned.
+ 	 */
+ 	map.m_len = fscrypt_limit_io_blocks(inode, map.m_lblk, map.m_len);
+ 
+diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+index 8f3e632f315c..8376bbe58ee3 100644
+--- a/fs/f2fs/f2fs.h
++++ b/fs/f2fs/f2fs.h
+@@ -1364,7 +1364,6 @@ struct f2fs_io_info {
+ 	unsigned int submitted:1;	/* indicate IO submission */
+ 	unsigned int in_list:1;		/* indicate fio is in io_list */
+ 	unsigned int is_por:1;		/* indicate IO is from recovery or not */
+-	unsigned int encrypted:1;	/* indicate file is encrypted */
+ 	unsigned int meta_gc:1;		/* require meta inode GC */
+ 	enum iostat_type io_type;	/* io type */
+ 	struct writeback_control *io_wbc; /* writeback control */
+@@ -4199,7 +4198,6 @@ int f2fs_do_write_data_page(struct f2fs_io_info *fio);
+ int f2fs_map_blocks(struct inode *inode, struct f2fs_map_blocks *map, int flag);
+ int f2fs_fiemap(struct inode *inode, struct fiemap_extent_info *fieinfo,
+ 			u64 start, u64 len);
+-int f2fs_encrypt_one_page(struct f2fs_io_info *fio);
+ bool f2fs_should_update_inplace(struct inode *inode, struct f2fs_io_info *fio);
+ bool f2fs_should_update_outplace(struct inode *inode, struct f2fs_io_info *fio);
+ int f2fs_write_single_data_page(struct folio *folio, int *submitted,
+diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
+index d71ddb3ee918..642668a1847c 100644
+--- a/fs/f2fs/segment.c
++++ b/fs/f2fs/segment.c
+@@ -3986,8 +3986,6 @@ static void do_write_page(struct f2fs_summary *sum, struct f2fs_io_info *fio)
+ 			"%s Failed to allocate data block, ino:%u, index:%lu, type:%d, old_blkaddr:0x%x, new_blkaddr:0x%x, err:%d",
+ 			__func__, fio->ino, folio->index, type,
+ 			fio->old_blkaddr, fio->new_blkaddr, err);
+-		if (fscrypt_inode_uses_fs_layer_crypto(folio->mapping->host))
+-			fscrypt_finalize_bounce_page(&fio->encrypted_page);
+ 		folio_end_writeback(folio);
+ 		if (f2fs_in_warm_node_list(folio))
+ 			f2fs_del_fsync_node_entry(fio->sbi, folio);
+diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
+index c04d5d7c9820..5c20acee6dc7 100644
+--- a/fs/f2fs/super.c
++++ b/fs/f2fs/super.c
+@@ -3773,7 +3773,6 @@ static const struct fscrypt_operations f2fs_cryptops = {
+ 	.inode_info_offs	= (int)offsetof(struct f2fs_inode_info, i_crypt_info) -
+ 				  (int)offsetof(struct f2fs_inode_info, vfs_inode),
+ 	.is_block_based		= 1,
+-	.needs_bounce_pages	= 1,
+ 	.has_32bit_inodes	= 1,
+ 	.supports_subblock_data_units = 1,
+ 	.legacy_key_prefix	= "f2fs:",
 -- 
 2.54.0
 
