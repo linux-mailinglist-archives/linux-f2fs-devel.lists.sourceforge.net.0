@@ -2,86 +2,87 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id dQbBKg21Smo1GgEAu9opvQ
+	id dajKJMi5SmpCGwEAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 05 Jul 2026 21:48:29 +0200
+	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 05 Jul 2026 22:08:40 +0200
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 42C3470B24D
-	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 05 Jul 2026 21:48:29 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 067C270B42E
+	for <lists+linux-f2fs-devel@lfdr.de>; Sun, 05 Jul 2026 22:08:40 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=lists.sourceforge.net header.s=beta header.b=UmdKDl+j;
-	dkim=fail ("body hash did not verify") header.d=sourceforge.net header.s=x header.b=hldsEtqM;
-	dkim=fail ("body hash did not verify") header.d=sf.net header.s=x header.b=fnBWOp3O;
-	dkim=fail ("body hash did not verify") header.d=kernel.org header.s=k20260515 header.b=SW287yyj;
+	dkim=pass header.d=lists.sourceforge.net header.s=beta header.b="FXI0+j/g";
+	dkim=fail ("body hash did not verify") header.d=sourceforge.net header.s=x header.b=Za6OGdN0;
+	dkim=fail ("body hash did not verify") header.d=sf.net header.s=x header.b=VPBIm9uE;
+	dkim=fail ("body hash did not verify") header.d=kernel.org header.s=k20260515 header.b="AGFGOhk/";
 	dmarc=pass (policy=none) header.from=lists.sourceforge.net;
 	spf=pass (mail.lfdr.de: domain of linux-f2fs-devel-bounces@lists.sourceforge.net designates 216.105.38.7 as permitted sender) smtp.mailfrom=linux-f2fs-devel-bounces@lists.sourceforge.net
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:MIME-Version:References:In-Reply-To:
-	Message-ID:Date:To:Sender:Content-ID:Content-Description:Resent-Date:
+	List-Unsubscribe:List-Id:Subject:In-Reply-To:MIME-Version:References:
+	Message-ID:To:Date:Sender:Content-ID:Content-Description:Resent-Date:
 	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=iy9R1EPKHvImQLPLVaCXXzdy8GZYj/xK55LvbaRTuO4=; b=UmdKDl+jbVW/VpY3QLYRquMb/P
-	Q67a9FGrpabt0ObEaal4AwgdsNDK3G2X99BR5X3iSOwCQN+uKaglXf3bQsj6dGHnOpUx0R2DuKg8Y
-	KfMrksBmQ782q+P4ZMv9cdBvC3+FL1Bc0xM55uEwJRZo2KugBfocoleIv+KXUCc/ReUw=;
-Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
-	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=qzmIgKVoU8FCLrTH3+alsP8q93QO4SdfQ/w02/k2M9Y=; b=FXI0+j/gCMvnvvGk/U1uyRigtT
+	pMN0RprI4bu6TBunj6qMcOiClX1HT1XHc64/hbWG1SP3/MxWo+5YZQpQ7pkNuoWYr/QL5jtl3teaW
+	H7v/vq6iA4fRn5rWfgIWjwk2kLIUAUpcL3Wovc20bibqzIChE3zHWLlfouqCCUi92kU8=;
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1wgSpJ-0004Tz-CR;
-	Sun, 05 Jul 2026 19:48:26 +0000
+	id 1wgT8i-00062W-Bn;
+	Sun, 05 Jul 2026 20:08:33 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <ebiggers@kernel.org>) id 1wgSpG-0004Tb-8k
+ (envelope-from <ebiggers@kernel.org>) id 1wgT8g-00062F-Dr
  for linux-f2fs-devel@lists.sourceforge.net;
- Sun, 05 Jul 2026 19:48:23 +0000
+ Sun, 05 Jul 2026 20:08:31 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
- In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+ d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=htUAXJYIiw7QAOgR27oV+3eHKQdd5p6jbnsdVP1KIck=; b=hldsEtqMsQqqreZR76q59hBjr1
- +DWv+55+Xe7WA6Evt+lD3Nc1BewhBHrrOW2755RixdyR+GA258LuSAnULDAAgmLTA7x6sJ2YSpKkE
- 5Zdnv4QpJns/ji3N7AznqkcRSBjFG+WInFfiwbYR+PEmgwEpi7HYLU/hY/JtWEUuHUdg=;
+ bh=9CM2wVbhyHLDtHdcSbwHJ5tP/f8SZ6JkBBSxBmdPEIY=; b=Za6OGdN0WQOvMBtEG3hQzUuSZy
+ 92nxN5IHkmX7pFCPG06WaayNKprOgLp1eAMHEntUgRJMkuMGTSBiF/uItemMukL2otErtopf/exwo
+ KCg5KoiZ24SBAvRNBbsbdfw7RLvaXZok05hyzyaUPu8bxFlRSRcJ7BNem6s34d/XlN0c=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:
- Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=htUAXJYIiw7QAOgR27oV+3eHKQdd5p6jbnsdVP1KIck=; b=fnBWOp3OtmO+4Tf/Bi1X5W4AIB
- wa2qaI8q9g88RIhJi7N15bSioWgqsejPucdJ7+2LSg6hcIRx2q0rb5uxW5j8wTp3QEaxs6zcTC2Cp
- 8trIU+i7P+RiunZtYez9bFpGxRRwKkKcHFnoKJ5lxE9iTC3ecjVTF95gQKjpQNuMYWzw=;
+ bh=9CM2wVbhyHLDtHdcSbwHJ5tP/f8SZ6JkBBSxBmdPEIY=; b=VPBIm9uEy07U/dTnf3qBh63CXs
+ KMQLdP382iIyc4VGF8S8Yfw/7zfg3vxJdxKEwnXnD5reGaANBXdwq0jmRS/aZXcQTFSX+NLhL/joi
+ U7G9m+d/kYjwI0RIrtHvG77OwbCbLbDgJo8V0G5zRxyZRTIfOIN5QB/N4T4esAP0a+9U=;
 Received: from sea.source.kernel.org ([172.234.252.31])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1wgSpC-0001IF-FK for linux-f2fs-devel@lists.sourceforge.net;
- Sun, 05 Jul 2026 19:48:23 +0000
+ id 1wgT8g-00051N-BM for linux-f2fs-devel@lists.sourceforge.net;
+ Sun, 05 Jul 2026 20:08:31 +0000
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by sea.source.kernel.org (Postfix) with ESMTP id AB1C443A0B;
- Sun,  5 Jul 2026 19:48:12 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 699B41F00A3A;
- Sun,  5 Jul 2026 19:48:11 +0000 (UTC)
+ by sea.source.kernel.org (Postfix) with ESMTP id 7FA4D411F7;
+ Sun,  5 Jul 2026 20:08:20 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 998341F000E9;
+ Sun,  5 Jul 2026 20:08:19 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
- s=k20260515; t=1783280892;
- bh=htUAXJYIiw7QAOgR27oV+3eHKQdd5p6jbnsdVP1KIck=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References;
- b=SW287yyjVhn0pZnV2uEnSBjWk1jrrf3oUlJHzLBwmsa6yDlZZ4wCxcn4WUobtL8kd
- b8zgfZEXjwsOG0hKzb4SNC1m5YG95araHg5WNV6r3PMpPpjoTkSKsCyrQ1sN6zGCFh
- AwraNsPLJ9D/Yffq0KgVwTdHRu54f+ov2gm++CRKnmSel4cPKAUqCQwsYBH6C/9h2L
- 8l4ZBLWiVW25uhxJw698uAuf2s43hO9KOHaQIwWpMjfThbwHMTlkUDcU80iUWppQX2
- wsjjLb5uAXiW43K89+fzREZnTBXdEOJlVigHM4zH9ZxgM3ZAvJkSjjdBScIymLKSVJ
- 8Kpx8EHYRWxQA==
+ s=k20260515; t=1783282100;
+ bh=9CM2wVbhyHLDtHdcSbwHJ5tP/f8SZ6JkBBSxBmdPEIY=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To;
+ b=AGFGOhk/VoXIOfqZakNksTm9cB9kUoQy3LTGkLM0HcAPxl6/kIl3CzWgnpVmQX247
+ uX66+jr6L+LgeQifhoIeIf/X9WbbF4u6YO2O224FtIdR88BYvhJXgBVErqAv1qYAQG
+ BrBPNqqepnxhkahgILgJluwb8nqXRvfTpdmd7b0PCOPPOfWJt2NqqupFD8aebiy8XU
+ 88n644xK/cTr98yc1ql5fZt0ZouO3k+FieKZI8yxhs49BQY3tFy6EP5duynfslihcy
+ QaJ7HPjV3Mobx0ZWqgxUl2C7b+E2QguMK5ODWC/FI2mMgzvTwY/ybiqGJcQg+fd5wc
+ 891wd3RQZ/kUA==
+Date: Sun, 5 Jul 2026 13:08:17 -0700
 To: linux-fscrypt@vger.kernel.org
-Date: Sun,  5 Jul 2026 12:45:54 -0700
-Message-ID: <20260705194555.75030-18-ebiggers@kernel.org>
-X-Mailer: git-send-email 2.54.0
-In-Reply-To: <20260705194555.75030-1-ebiggers@kernel.org>
+Message-ID: <20260705200817.GF41916@quark>
 References: <20260705194555.75030-1-ebiggers@kernel.org>
+ <20260705194555.75030-3-ebiggers@kernel.org>
 MIME-Version: 1.0
+Content-Disposition: inline
+In-Reply-To: <20260705194555.75030-3-ebiggers@kernel.org>
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
@@ -89,10 +90,10 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  fscrypt_encrypt_pagecache_blocks(),
- fscrypt_encrypt_block_inplace(), 
- fscrypt_decrypt_block_inplace() would dereference a NULL fscrypt_inode_info
- pointer if they were to be called on a file that hasn't [...] 
+ Content preview:  On Sun, Jul 05, 2026 at 12:45:39PM -0700, Eric Biggers wrote:
+ > __blk_crypto_cfg_supported() is called only by >
+ blk_crypto_config_supported_natively(), 
+ so fold it in. > > Reviewed-by: Christoph Hellw [...] 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -103,9 +104,9 @@ X-Spam-Report: Spam detection software,
  not necessarily valid
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
-X-Headers-End: 1wgSpC-0001IF-FK
-Subject: [f2fs-dev] [PATCH v2 17/17] fscrypt: Add safety checks to
- non-block-based en/decryption
+X-Headers-End: 1wgT8g-00051N-BM
+Subject: Re: [f2fs-dev] [PATCH v2 02/17] blk-crypto: Fold
+ __blk_crypto_cfg_supported() into its caller
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -126,190 +127,70 @@ Cc: Ritesh Harjani <ritesh.list@gmail.com>, Theodore Ts'o <tytso@mit.edu>,
  Ojaswin Mujoo <ojaswin@linux.ibm.com>, Baokun Li <libaokun@linux.alibaba.com>,
  Jaegeuk Kim <jaegeuk@kernel.org>, linux-fsdevel@vger.kernel.org,
  Jan Kara <jack@suse.cz>, linux-ext4@vger.kernel.org,
- Christoph Hellwig <hch@lst.de>, Eric Biggers <ebiggers@kernel.org>
+ Christoph Hellwig <hch@lst.de>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-7.11 / 15.00];
+X-Spamd-Result: default: False [-6.61 / 15.00];
 	WHITELIST_DMARC(-7.00)[sourceforge.net:D:+];
 	SUSPICIOUS_RECIPS(1.50)[];
 	DMARC_POLICY_ALLOW_WITH_FAILURES(-0.50)[];
+	MID_RHS_NOT_FQDN(0.50)[];
 	RWL_MAILSPIKE_EXCELLENT(-0.40)[216.105.38.7:from];
 	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
+	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7];
 	MAILLIST(-0.20)[mailman];
-	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7:c];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORGED_RECIPIENTS(0.00)[m:linux-fscrypt@vger.kernel.org,m:ritesh.list@gmail.com,m:tytso@mit.edu,m:yi.zhang@huawei.com,m:linux-f2fs-devel@lists.sourceforge.net,m:linux-block@vger.kernel.org,m:adilger.kernel@dilger.ca,m:ojaswin@linux.ibm.com,m:libaokun@linux.alibaba.com,m:jaegeuk@kernel.org,m:linux-fsdevel@vger.kernel.org,m:jack@suse.cz,m:linux-ext4@vger.kernel.org,m:hch@lst.de,m:ebiggers@kernel.org,m:riteshlist@gmail.com,s:lists@lfdr.de];
-	RECEIVED_HELO_LOCALHOST(0.00)[];
-	RCVD_TLS_LAST(0.00)[];
 	DKIM_MIXED(0.00)[];
-	FREEMAIL_CC(0.00)[gmail.com,mit.edu,huawei.com,lists.sourceforge.net,vger.kernel.org,dilger.ca,linux.ibm.com,linux.alibaba.com,kernel.org,suse.cz,lst.de];
-	ARC_NA(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[15];
-	TO_DN_SOME(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[14];
 	DMARC_POLICY_ALLOW(0.00)[lists.sourceforge.net,none];
-	MIME_TRACE(0.00)[0:+];
+	TO_DN_SOME(0.00)[];
 	FORGED_SENDER(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
-	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
+	MIME_TRACE(0.00)[0:+];
+	FORGED_RECIPIENTS(0.00)[m:linux-fscrypt@vger.kernel.org,m:ritesh.list@gmail.com,m:tytso@mit.edu,m:yi.zhang@huawei.com,m:linux-f2fs-devel@lists.sourceforge.net,m:linux-block@vger.kernel.org,m:adilger.kernel@dilger.ca,m:ojaswin@linux.ibm.com,m:libaokun@linux.alibaba.com,m:jaegeuk@kernel.org,m:linux-fsdevel@vger.kernel.org,m:jack@suse.cz,m:linux-ext4@vger.kernel.org,m:hch@lst.de,m:riteshlist@gmail.com,s:lists@lfdr.de];
 	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,kernel.org:s=k20260515];
-	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,kernel.org:-];
+	RECEIVED_HELO_LOCALHOST(0.00)[];
+	ARC_NA(0.00)[];
+	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
+	FREEMAIL_CC(0.00)[gmail.com,mit.edu,huawei.com,lists.sourceforge.net,vger.kernel.org,dilger.ca,linux.ibm.com,linux.alibaba.com,kernel.org,suse.cz,lst.de];
 	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
+	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,kernel.org:-];
 	RCVD_COUNT_FIVE(0.00)[5];
 	ALIAS_RESOLVED(0.00)[];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
 	FROM_HAS_DN(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
 	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	HAS_REPLYTO(0.00)[ebiggers@kernel.org];
 	TAGGED_RCPT(0.00)[linux-f2fs-devel];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
+	HAS_REPLYTO(0.00)[ebiggers@kernel.org];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	MISSING_XM_UA(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lst.de:email]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.sourceforge.net:from_smtp,lists.sourceforge.net:dkim,lists.sourceforge.net:helo,lists.sourceforge.net:rdns,lists.sourceforge.net:from_mime]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 42C3470B24D
+X-Rspamd-Queue-Id: 067C270B42E
 
-fscrypt_encrypt_pagecache_blocks(), fscrypt_encrypt_block_inplace(),
-fscrypt_decrypt_block_inplace() would dereference a NULL
-fscrypt_inode_info pointer if they were to be called on a file that
-hasn't been opened yet or on a block-based filesystem.  Since they have
-the ability to report errors anyway, add WARN_ON_ONCE checks for this.
+On Sun, Jul 05, 2026 at 12:45:39PM -0700, Eric Biggers wrote:
+> __blk_crypto_cfg_supported() is called only by
+> blk_crypto_config_supported_natively(), so fold it in.
+> 
+> Reviewed-by: Christoph Hellwig <hch@lst.de>
+> Signed-off-by: Eric Biggers <ebiggers@kernel.org>
+> ---
+>  block/blk-crypto-profile.c | 22 ----------------------
+>  block/blk-crypto.c         | 23 +++++++++++++++++++++--
+>  2 files changed, 21 insertions(+), 24 deletions(-)
 
-Reviewed-by: Christoph Hellwig <hch@lst.de>
-Signed-off-by: Eric Biggers <ebiggers@kernel.org>
----
- fs/crypto/crypto.c | 61 +++++++++++++++++++++++++++++-----------------
- 1 file changed, 39 insertions(+), 22 deletions(-)
+Sashiko pointed out that I forgot to remove the prototype of
+__blk_crypto_cfg_supported().  I'll fix that in the next version.
 
-diff --git a/fs/crypto/crypto.c b/fs/crypto/crypto.c
-index 27663f4d8705..c91eda62f9a4 100644
---- a/fs/crypto/crypto.c
-+++ b/fs/crypto/crypto.c
-@@ -105,12 +105,17 @@ static int fscrypt_crypt_data_unit(const struct fscrypt_inode_info *ci,
- 				   struct page *dest_page, unsigned int len,
- 				   unsigned int offs)
- {
--	struct crypto_sync_skcipher *tfm = ci->ci_enc_key.tfm;
--	SYNC_SKCIPHER_REQUEST_ON_STACK(req, tfm);
-+	struct crypto_sync_skcipher *tfm;
- 	union fscrypt_iv iv;
- 	struct scatterlist dst, src;
- 	int err;
- 
-+	if (WARN_ON_ONCE(ci == NULL)) /* File hasn't been opened yet? */
-+		return -ENOKEY;
-+	tfm = ci->ci_enc_key.tfm;
-+	if (WARN_ON_ONCE(tfm == NULL)) /* Called on block-based filesystem? */
-+		return -ENOKEY;
-+
- 	if (WARN_ON_ONCE(len <= 0))
- 		return -EINVAL;
- 	if (WARN_ON_ONCE(len % FSCRYPT_CONTENTS_ALIGNMENT != 0))
-@@ -118,18 +123,22 @@ static int fscrypt_crypt_data_unit(const struct fscrypt_inode_info *ci,
- 
- 	fscrypt_generate_iv(&iv, index, ci);
- 
--	skcipher_request_set_callback(
--		req, CRYPTO_TFM_REQ_MAY_BACKLOG | CRYPTO_TFM_REQ_MAY_SLEEP,
--		NULL, NULL);
--	sg_init_table(&dst, 1);
--	sg_set_page(&dst, dest_page, len, offs);
--	sg_init_table(&src, 1);
--	sg_set_page(&src, src_page, len, offs);
--	skcipher_request_set_crypt(req, &src, &dst, len, &iv);
--	if (rw == FS_DECRYPT)
--		err = crypto_skcipher_decrypt(req);
--	else
--		err = crypto_skcipher_encrypt(req);
-+	{
-+		SYNC_SKCIPHER_REQUEST_ON_STACK(req, tfm);
-+		skcipher_request_set_callback(req,
-+					      CRYPTO_TFM_REQ_MAY_BACKLOG |
-+						      CRYPTO_TFM_REQ_MAY_SLEEP,
-+					      NULL, NULL);
-+		sg_init_table(&dst, 1);
-+		sg_set_page(&dst, dest_page, len, offs);
-+		sg_init_table(&src, 1);
-+		sg_set_page(&src, src_page, len, offs);
-+		skcipher_request_set_crypt(req, &src, &dst, len, &iv);
-+		if (rw == FS_DECRYPT)
-+			err = crypto_skcipher_decrypt(req);
-+		else
-+			err = crypto_skcipher_encrypt(req);
-+	}
- 	if (err)
- 		fscrypt_err(ci->ci_inode,
- 			    "%scryption failed for data unit %llu: %d",
-@@ -153,7 +162,7 @@ static int fscrypt_crypt_data_unit(const struct fscrypt_inode_info *ci,
-  * which the plaintext data was located in the source page.  Any other parts of
-  * the bounce page will be left uninitialized.
-  *
-- * This is for use by the filesystem's ->writepages() method.
-+ * This is for use by the ->writepages() method of non-block-based filesystems.
-  *
-  * The bounce page allocation is mempool-backed, so it will always succeed when
-  * @gfp_flags includes __GFP_DIRECT_RECLAIM, e.g. when it's GFP_NOFS.  However,
-@@ -167,14 +176,20 @@ struct page *fscrypt_encrypt_pagecache_blocks(struct folio *folio,
- {
- 	const struct inode *inode = folio->mapping->host;
- 	const struct fscrypt_inode_info *ci = fscrypt_get_inode_info_raw(inode);
--	const unsigned int du_bits = ci->ci_data_unit_bits;
--	const unsigned int du_size = 1U << du_bits;
-+	unsigned int du_bits;
-+	unsigned int du_size;
- 	struct page *ciphertext_page;
--	u64 index = ((u64)folio->index << (PAGE_SHIFT - du_bits)) +
--		    (offs >> du_bits);
-+	u64 index;
- 	unsigned int i;
- 	int err;
- 
-+	if (WARN_ON_ONCE(ci == NULL)) /* File hasn't been opened yet? */
-+		return ERR_PTR(-ENOKEY);
-+
-+	du_bits = ci->ci_data_unit_bits;
-+	du_size = 1U << du_bits;
-+	index = (folio_pos(folio) + offs) >> du_bits;
-+
- 	VM_BUG_ON_FOLIO(folio_test_large(folio), folio);
- 	if (WARN_ON_ONCE(!folio_test_locked(folio)))
- 		return ERR_PTR(-EINVAL);
-@@ -215,7 +230,8 @@ EXPORT_SYMBOL(fscrypt_encrypt_pagecache_blocks);
-  * arbitrary page, not necessarily in the original pagecache page.  The @inode
-  * and @lblk_num must be specified, as they can't be determined from @page.
-  *
-- * This is not compatible with fscrypt_operations::supports_subblock_data_units.
-+ * This function only supports non-block-based filesystems that don't support
-+ * sub-block data units (as indicated by the fscrypt_operations fields).
-  *
-  * Return: 0 on success; -errno on failure
-  */
-@@ -245,7 +261,8 @@ EXPORT_SYMBOL(fscrypt_encrypt_block_inplace);
-  * arbitrary page, not necessarily in the original pagecache page.  The @inode
-  * and @lblk_num must be specified, as they can't be determined from @page.
-  *
-- * This is not compatible with fscrypt_operations::supports_subblock_data_units.
-+ * This function only supports non-block-based filesystems that don't support
-+ * sub-block data units (as indicated by the fscrypt_operations fields).
-  *
-  * Return: 0 on success; -errno on failure
-  */
-@@ -275,7 +292,7 @@ int fscrypt_initialize(struct super_block *sb)
- 	mempool_t *pool;
- 
- 	/* pairs with smp_store_release() below */
--	if (likely(smp_load_acquire(&fscrypt_bounce_page_pool)))
-+	if (smp_load_acquire(&fscrypt_bounce_page_pool))
- 		return 0;
- 
- 	/* No need to allocate a bounce page pool if this FS won't use it. */
--- 
-2.54.0
-
+- Eric
 
 
 _______________________________________________
