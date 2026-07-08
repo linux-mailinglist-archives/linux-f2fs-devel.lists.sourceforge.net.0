@@ -2,133 +2,148 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id KTepJtmDTWoY1gEAu9opvQ
+	id WV4dEausTWrp8gEAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 08 Jul 2026 00:55:21 +0200
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 08 Jul 2026 03:49:31 +0200
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id DFE2D72050F
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 08 Jul 2026 00:55:20 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2891F720EB5
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 08 Jul 2026 03:49:30 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=lists.sourceforge.net header.s=beta header.b=AHu715tJ;
-	dkim=fail ("body hash did not verify") header.d=sourceforge.net header.s=x header.b=Becy8CNF;
-	dkim=fail ("body hash did not verify") header.d=sf.net header.s=x header.b=P5OVATzI;
-	dkim=fail ("body hash did not verify") header.d=samsung.com header.s=mail20170921 header.b=fKRXIAYU;
-	dmarc=fail reason="SPF not aligned (relaxed), DKIM not aligned (relaxed)" header.from=samsung.com (policy=none);
+	dkim=pass header.d=lists.sourceforge.net header.s=beta header.b=E0N42eh7;
+	dkim=fail ("body hash did not verify") header.d=sourceforge.net header.s=x header.b=iReRC5SJ;
+	dkim=fail ("body hash did not verify") header.d=sf.net header.s=x header.b="L hYFzHp";
+	dkim=fail ("body hash did not verify") header.d=meta.com header.s=s2048-2025-q2 header.b=FvBFwN5b;
+	dmarc=pass (policy=none) header.from=lists.sourceforge.net;
 	spf=pass (mail.lfdr.de: domain of linux-f2fs-devel-bounces@lists.sourceforge.net designates 216.105.38.7 as permitted sender) smtp.mailfrom=linux-f2fs-devel-bounces@lists.sourceforge.net
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
-	Reply-To:List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:
-	List-Id:Subject:References:Date:Message-ID:In-Reply-To:To:From:Mime-Version:
-	Sender:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
-	Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=xPBFoY+/xisk7JU0BGF3V+PvjiRNBDyOna8tUz0V/tE=; b=AHu715tJO2aKDgJqxiBUFlxC5H
-	BIHuv8a2diSo8lD7Ju+W0arXPrthjFNO0gjun3WFEnrFzdWfLmFQfBsCpizpURUhLGdomV4aTONbq
-	AEkAbwHqpYhCjLPIZmypjqexKsqgTe/CZ3BM8VOt/v4ozOFglnf0GXTFCtTsiQCsmlHw=;
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
+	List-Unsubscribe:List-Id:Subject:MIME-Version:Message-ID:Date:To:Sender:
+	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+	Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Owner;
+	bh=9IBhx3uSCoptNNZ59grFkGKBS7sbKIdbNvuTKw8GT+c=; b=E0N42eh7WRrt7n9OcFG/nzvVmJ
+	4krtQbhvzoib+5tJkeIhdlVSG/2JgVDXeYW1Q0eOptkJQRLibGM6sPJVMICEESmaWvAZf8O2T6D+y
+	F2pFog478zev8Xm5fI92/c2WU0V59KPMS+tzN1DqaitTenYKZGi/PK981+Mro5yiO2j0=;
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1whEhA-0001DP-Up;
-	Tue, 07 Jul 2026 22:55:16 +0000
+	id 1whHPc-0000MB-DZ;
+	Wed, 08 Jul 2026 01:49:17 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <yonggil.song@samsung.com>) id 1whEh3-0001DD-MW
+ (envelope-from <prvs=56493de926=kbusch@meta.com>) id 1whHPa-0000M5-M9
  for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 07 Jul 2026 22:55:10 +0000
+ Wed, 08 Jul 2026 01:49:16 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=References:Content-Type:Content-Transfer-Encoding:
- Date:Message-ID:In-Reply-To:CC:To:From:Sender:Reply-To:Subject:Mime-Version:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Type:Content-Transfer-Encoding:MIME-Version
+ :Message-ID:Date:Subject:CC:To:From:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=L/s6Gk379gIrLO0+Fxt0VgNVNOBKqPfsig6TjrNo11Y=; b=Becy8CNFz6pC5Y5fU75wvuiEXW
- 5FljasLBmHO9+D7a+n1kd0nyErCSV1Xii1M4B7u1WSpAvIND9QTe1mbs85ys1UrbJ8C/KqzZ89Bhc
- +UKI5st9RjCn7us+BB12QYuNVgOxivafL3OsEZpSpycOXip9MCbGa9yGdEVypx3a+cBw=;
+ bh=WmX7B5dJ+39POYiokelurwpKpRJDV2EEYvpyPDj0H/M=; b=iReRC5SJ0dCRZjx8PG29kHWnHS
+ R2R7AhFtMCTQwsAYJp6xED1CacwYWIsJtoid98y5g34ikmRD2XgwZwtzaZf8mOzc32C3sm2YAvtnE
+ NF5mSNyKw2E33w22TZvza1yBPQhQjv6TI0h6Cchh/NRHN3nS395t/9FvZxPG71X/lTLs=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=References:Content-Type:Content-Transfer-Encoding:Date:Message-ID:
- In-Reply-To:CC:To:From:Sender:Reply-To:Subject:Mime-Version:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=L/s6Gk379gIrLO0+Fxt0VgNVNOBKqPfsig6TjrNo11Y=; b=P5OVATzIdlVrCk0FdQD04/wRO2
- nNuaill3IzvS+d/yd0oinnQBzCMkI/bh5RUyTsX/qTmeZ/IHYmOB+cUkBWlJd2VKyCK8Jw3ZBVAhc
- BCmh+aHTHv8V8rPgQwdEnP7ENpL3sPpcVtNE1K3Mb+sj8ZR/cPEDf8DBEKm72jqTk8e0=;
-Received: from mailout2.samsung.com ([203.254.224.25])
+ h=Content-Type:Content-Transfer-Encoding:MIME-Version:Message-ID:Date:
+ Subject:CC:To:From:Sender:Reply-To:Content-ID:Content-Description:Resent-Date
+ :Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=WmX7B5dJ+39POYiokelurwpKpRJDV2EEYvpyPDj0H/M=; b=L
+ hYFzHpN7tGI0OOle/hjDrDepE92ACnaPqzR/0Zac6IFgk4grBkzHYvsOmdNfZM+opYO6CdW8fSuCQ
+ LHIUD7Rthdb2HO+RkxxV8oznyqqLwr6B8zdyDP9SSPnAp10O0RCITeMN+29A91xdyDVCUmL4S3Jnd
+ f6EZc3BrhI8rA1jc=;
+Received: from mx0a-00082601.pphosted.com ([67.231.145.42])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1whEh0-00016k-Rg for linux-f2fs-devel@lists.sourceforge.net;
- Tue, 07 Jul 2026 22:55:09 +0000
-Received: from epcas2p2.samsung.com (unknown [182.195.41.54])
- by mailout2.samsung.com (KnoxPortal) with ESMTP id
- 20260707225454epoutp0294cb28eac74615bd78f5c4d4c804bc18~AI99oSZfu0264702647epoutp02C
+ id 1whHPX-0002wd-15 for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 08 Jul 2026 01:49:16 +0000
+Received: from pps.filterd (m0044010.ppops.net [127.0.0.1])
+ by mx0a-00082601.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 667NTPqG1606081
+ for <linux-f2fs-devel@lists.sourceforge.net>; Tue, 7 Jul 2026 18:36:17 -0700
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=meta.com; h=cc
+ :content-transfer-encoding:content-type:date:from:message-id
+ :mime-version:subject:to; s=s2048-2025-q2; bh=WmX7B5dJ+39POYioke
+ lurwpKpRJDV2EEYvpyPDj0H/M=; b=FvBFwN5b9pmiuofAFKsos6T/pvMcrlKL/G
+ 28Da9I7CU1OA8hvs+7usFpy/ecxXoaASayeayyX+5JmptOAM5UzVdN+0b3HjsSNf
+ gQt1w45QTgFKRm0uTxn8GUE/Gz4z3VZFX4ZMYGrO+KlsDbcX1OhB/XgJ9zyh4gdx
+ hmyTUpIzBF9kPQtXqkI0bnVJKc0PueKb4C2cZULqzG+nQrYKjS6EGsQAZBaPThPy
+ Uvv9gnjoh6FLFTmWQ8q2YUXECyPc2gemNygQY0PKRIpFcR/pTATwjkH0+r5lGIvb
+ qGR6dzkj0fmGH+TI/P26Q2cSy5aXDR2vSHSPxrqsf+4BJOB6H5Rg==
+Received: from maileast.thefacebook.com ([163.114.135.16])
+ by mx0a-00082601.pphosted.com (PPS) with ESMTPS id 4f8y8xpxhw-4
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=NOT)
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Tue,  7 Jul 2026 22:54:54 +0000 (GMT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mailout2.samsung.com
- 20260707225454epoutp0294cb28eac74615bd78f5c4d4c804bc18~AI99oSZfu0264702647epoutp02C
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
- s=mail20170921; t=1783464894;
- bh=L/s6Gk379gIrLO0+Fxt0VgNVNOBKqPfsig6TjrNo11Y=;
- h=Subject:Reply-To:From:To:CC:In-Reply-To:Date:References:From;
- b=fKRXIAYUX/A4eqhR2xV0xNfOQ7x09BToqbOcdPfvVCzoUK3VO9KhRcbfe3s0xzPs0
- bE76vYV71JBi1O1+OXdzPRyp9SpmYw42yo7hHWilQ4xId76r8wGAA3teFf+9+dhUbW
- LZzcZBvB1B8tmeZGZj+jTp0kih4scyK5Tlgc6xoo=
-Received: from epsnrtp04.localdomain (unknown [182.195.42.156]) by
- epcas2p2.samsung.com (KnoxPortal) with ESMTPS id
- 20260707225454epcas2p226f4c419f00a58a752f0a36fb39f8305~AI99JzSEy2736727367epcas2p2a;
- Tue,  7 Jul 2026 22:54:54 +0000 (GMT)
-Received: from epcas2p1.samsung.com (unknown [182.195.38.202]) by
- epsnrtp04.localdomain (Postfix) with ESMTP id 4gvxPp0Lsxz6B9m5; Tue,  7 Jul
- 2026 22:54:54 +0000 (GMT)
-Mime-Version: 1.0
-From: Yonggil Song <yonggil.song@samsung.com>
-To: "jaegeuk@kernel.org" <jaegeuk@kernel.org>, "chao@kernel.org"
- <chao@kernel.org>, "corbet@lwn.net" <corbet@lwn.net>
-X-Priority: 3
-X-Content-Kind-Code: NORMAL
-In-Reply-To: <20260707225035epcms2p812b92e6001afb57eb06d98225f1acd87@epcms2p8>
-X-CPGS-Detection: blocking_info_exchange
-X-Drm-Type: N,general
-X-Msg-Generator: Mail
-X-Msg-Type: PERSONAL
-X-Reply-Demand: N
-Message-ID: <20260707225453epcms2p4f8323f4f8b88f3ee892cddc126da51a6@epcms2p4>
-Date: Wed, 08 Jul 2026 07:54:53 +0900
-X-CMS-MailID: 20260707225453epcms2p4f8323f4f8b88f3ee892cddc126da51a6
-X-Sendblock-Type: AUTO_CONFIDENTIAL
-CMS-TYPE: 102P
-cpgsPolicy: CPGSC10-223,Y
-X-CFilter-Loop: Reflected
-X-CMS-RootMailID: 20260707225035epcms2p812b92e6001afb57eb06d98225f1acd87
-References: <20260707225035epcms2p812b92e6001afb57eb06d98225f1acd87@epcms2p8>
- <CGME20260707225035epcms2p812b92e6001afb57eb06d98225f1acd87@epcms2p4>
-X-Spam-Score: -0.6 (/)
+ Tue, 07 Jul 2026 18:36:16 -0700 (PDT)
+Received: from twshared2511.04.snb2.facebook.com (2620:10d:c0a8:1b::2d) by
+ mail.thefacebook.com (2620:10d:c0a9:6f::8fd4) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.2.2562.41; Wed, 8 Jul 2026 01:36:13 +0000
+Received: by devbig197.nha3.facebook.com (Postfix, from userid 544533)
+ id 89A0824B668F9; Tue,  7 Jul 2026 18:19:13 -0700 (PDT)
+To: <linux-block@vger.kernel.org>, <linux-ext4@vger.kernel.org>,
+ <linux-f2fs-devel@lists.sourceforge.net>,
+ <linux-fsdevel@vger.kernel.org>, <linux-xfs@vger.kernel.org>
+Date: Tue, 7 Jul 2026 18:18:43 -0700
+Message-ID: <20260708011843.1036846-1-kbusch@meta.com>
+X-Mailer: git-send-email 2.52.0
+MIME-Version: 1.0
+X-FB-Internal: Safe
+X-Proofpoint-GUID: -b5s4zCvlnyCOYl9qc4SKuSpJbA50TyM
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzA4MDAxNCBTYWx0ZWRfX0QsRaiKBJVsJ
+ I5aUlV2VE2+4YkI718eXr5HEy2GCu3NQucYwpCpTFX75luxKYxVN5uQKwZ39F/P8/39O4BipyW/
+ bE+Cfz3xnKit6hIcSjA74GjDRLsSmvZVnFMvHqLGCqSwxBJGsvgyaySi3tCpNab1sDf0bm5K4mY
+ VzthM0HwO1RfYMvdDZRiTDilruHIBeiESidaFcxGtBAhFoOLq1dicW/KKu2csjk+mzpSTIK0Z/m
+ FLrY5DFw4i/rxLTpiEDGHNpdUxGenFkY5Kx+wuqTJr1sTyHOUcL6zM80wxA81DFxwZlbwgxBkFY
+ /6I9B2BqpIxE9mdZ+9G/LqcY/E/fEdK/4iMwiZozSZD4ie59y5xbFV9HuW1E9ainRtaeLHkuPEy
+ dknj3lrMDYUazeYGlKSTnjbbLD6TJIYlsL88nX/u7EHQE9S2pg4wq3PdS5BBOAbSkTPscQuOGUB
+ 2zIMOIgBdxszQKudrTg==
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzA4MDAxNCBTYWx0ZWRfXxV+KvQSFmeiO
+ HBjvzypA4p0B4locoBZgGVUepNVLmKnxOyuWjBM50wCb6ZLWfvj1wM5aW3h4ur3KpoEqUH/2pHW
+ QnkR+SjXZ/t48uEgVORli9+WTMwvwm4=
+X-Proofpoint-ORIG-GUID: -b5s4zCvlnyCOYl9qc4SKuSpJbA50TyM
+X-Authority-Analysis: v=2.4 cv=e8M2j6p/ c=1 sm=1 tr=0 ts=6a4da990 cx=c_pps
+ a=MfjaFnPeirRr97d5FC5oHw==:117 a=MfjaFnPeirRr97d5FC5oHw==:17
+ a=RAioF0-LDSMA:10 a=VkNPw1HP01LnGYTKEx00:22 a=7x6HtfJdh03M6CCDgxCd:22
+ a=8elwO82fXORLTBIkMd32:22 a=VwQbUJbxAAAA:8 a=x8z3rCZMdUOG9FrYzOQA:9
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-07-07_06,2026-07-06_02,2025-10-01_01
+X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Under heavy out-of-place overwrite at near-full utilization, 
- foreground GC picks nearly-fully-valid victims and relocates almost every
- block, while the scattered invalid space is not SSR-reusable unti [...] 
- Content analysis details:   (-0.6 points, 5.0 required)
+ Content preview: From: Keith Busch <kbusch@kernel.org> Memory alignment
+ constraints
+ for direct io can vary depending on the backing storage hardware. Provide
+ support through file_getattr to report the attributes necessary for
+ applications to know how to c [...] 
+ Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- 0.0 RCVD_IN_MSPIKE_H4      RBL: Very Good reputation (+4)
- [203.254.224.25 listed in wl.mailspike.net]
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.0 RCVD_IN_DNSWL_BLOCKED  RBL: ADMINISTRATOR NOTICE: The query to DNSWL
+ was blocked.  See
+ http://wiki.apache.org/spamassassin/DnsBlocklists#DnsBlocklists-dnsbl-block
+ for more information. [67.231.145.42 listed in list.dnswl.org]
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
  envelope-from domain
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
- -0.4 DKIMWL_WL_HIGH         DKIMwl.org - High trust sender
-X-Headers-End: 1whEh0-00016k-Rg
-Subject: [f2fs-dev] [PATCH v2 2/2] f2fs: introduce gcless mount option to
- avoid foreground GC
+ domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [67.231.145.42 listed in wl.mailspike.net]
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+X-Headers-End: 1whHPX-0002wd-15
+Subject: [f2fs-dev] [PATCH] fs: report direct io constraints through
+ file_getattr
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -140,359 +155,363 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Reply-To: yonggil.song@samsung.com
-Cc: Seokhwan Kim <sukka.kim@samsung.com>,
- "linux-f2fs-devel@lists.sourceforge.net"
- <linux-f2fs-devel@lists.sourceforge.net>,
- "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
- Dongjin Kim <dongjin_.kim@samsung.com>,
- "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>
+From: Keith Busch via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Keith Busch <kbusch@meta.com>
+Cc: axboe@kernel.dk, brauner@kernel.org, aalbersh@kernel.org, jack@suse.cz,
+ Christoph Hellwig <hch@lst.de>, tytso@mit.edu, Keith Busch <kbusch@kernel.org>,
+ jaegeuk@kernel.org, cem@kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-0.01 / 15.00];
-	MV_CASE(0.50)[];
-	MID_RHS_NOT_FQDN(0.50)[];
+X-Spamd-Result: default: False [-8.61 / 15.00];
+	WHITELIST_DMARC(-7.00)[sourceforge.net:D:+];
+	DMARC_POLICY_ALLOW_WITH_FAILURES(-0.50)[];
 	RWL_MAILSPIKE_EXCELLENT(-0.40)[216.105.38.7:from];
-	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
-	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7:c];
 	MAILLIST(-0.20)[mailman];
-	DMARC_POLICY_SOFTFAIL(0.10)[samsung.com : SPF not aligned (relaxed), DKIM not aligned (relaxed),none];
+	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7];
+	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORGED_SENDER(0.00)[yonggil.song@samsung.com,linux-f2fs-devel-bounces@lists.sourceforge.net];
-	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,samsung.com:s=mail20170921];
-	HAS_X_PRIO_THREE(0.00)[3];
-	RCVD_TLS_LAST(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	FORGED_RECIPIENTS(0.00)[m:jaegeuk@kernel.org,m:chao@kernel.org,m:corbet@lwn.net,m:sukka.kim@samsung.com,m:linux-f2fs-devel@lists.sourceforge.net,m:linux-kernel@vger.kernel.org,m:dongjin_.kim@samsung.com,m:linux-doc@vger.kernel.org,s:lists@lfdr.de];
-	TO_DN_SOME(0.00)[];
-	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
-	RECEIVED_HELO_LOCALHOST(0.00)[];
-	TO_DN_EQ_ADDR_SOME(0.00)[];
+	DMARC_POLICY_ALLOW(0.00)[lists.sourceforge.net,none];
 	DKIM_MIXED(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	RECEIVED_HELO_LOCALHOST(0.00)[];
+	FORGED_RECIPIENTS(0.00)[m:linux-block@vger.kernel.org,m:linux-ext4@vger.kernel.org,m:linux-f2fs-devel@lists.sourceforge.net,m:linux-fsdevel@vger.kernel.org,m:linux-xfs@vger.kernel.org,m:axboe@kernel.dk,m:brauner@kernel.org,m:aalbersh@kernel.org,m:jack@suse.cz,m:hch@lst.de,m:tytso@mit.edu,m:kbusch@kernel.org,m:jaegeuk@kernel.org,m:cem@kernel.org,s:lists@lfdr.de];
+	FORGED_SENDER(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
+	RCPT_COUNT_TWELVE(0.00)[14];
+	TO_DN_SOME(0.00)[];
+	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,meta.com:s=s2048-2025-q2];
+	MIME_TRACE(0.00)[0:+];
 	ARC_NA(0.00)[];
-	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
+	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
+	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	HAS_REPLYTO(0.00)[yonggil.song@samsung.com];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[6];
+	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,meta.com:-];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.sourceforge.net:from_smtp,lists.sourceforge.net:dkim,lists.sourceforge.net:helo,lists.sourceforge.net:rdns,lists.sourceforge.net:from_mime];
 	PREVIOUSLY_DELIVERED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
-	REPLYTO_ADDR_EQ_FROM(0.00)[];
+	FORGED_SENDER_FORWARDING(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[yonggil.song@samsung.com,linux-f2fs-devel-bounces@lists.sourceforge.net];
-	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,samsung.com:-];
+	FROM_NEQ_ENVFROM(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
+	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
 	ALIAS_RESOLVED(0.00)[];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	MISSING_XM_UA(0.00)[];
-	RCPT_COUNT_SEVEN(0.00)[8];
-	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
 	TAGGED_RCPT(0.00)[linux-f2fs-devel];
+	HAS_REPLYTO(0.00)[kbusch@meta.com];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	FORGED_SENDER_MAILLIST(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[epcms2p4:mid,samsung.com:from_mime,samsung.com:replyto,samsung.com:email,intel.com:email]
+	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
+	RCVD_COUNT_SEVEN(0.00)[7]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: DFE2D72050F
+X-Rspamd-Queue-Id: 2891F720EB5
 
-Under heavy out-of-place overwrite at near-full utilization, foreground
-GC picks nearly-fully-valid victims and relocates almost every block,
-while the scattered invalid space is not SSR-reusable until a checkpoint
-stabilizes it.  WAF explodes even though reclaimable space exists.
+From: Keith Busch <kbusch@kernel.org>
 
-Add a "gcless" mount option that counts checkpoint-stable invalid blocks
-(invalid as of the last checkpoint, hence SSR-reusable) and credits them
-as free sections in has_not_enough_free_secs().  The watermark then sees
-the slack as free, so f2fs_balance_fs() skips foreground GC and
-allocation reclaims the space through SSR instead.  The count is
-recomputed at mount and after each successful checkpoint under
-block_operations(), where it is exact and needs no locking.
+Memory alignment constraints for direct io can vary depending on the
+backing storage hardware. Provide support through file_getattr to report
+the attributes necessary for applications to know how to construct valid
+read and write requests.
 
-The option is limited to adaptive (non-LFS) mode.
-
-8 GiB UFS, 2 GiB random overwrite at 99% utilization:
-  baseline: WAF 76.7, foreground GC calls 578k
-  gcless:   WAF  1.2, foreground GC calls 504
-
-Signed-off-by: Yonggil Song <yonggil.song@samsung.com>
+Suggested-by: Christoph Hellwig <hch@lst.de>
+Signed-off-by: Keith Busch <kbusch@kernel.org>
 ---
-v2:
- - split out the BIT_ULL() conversion for mount option bits into a
-   preparation patch, fixing the 32-bit shift-count-overflow warning
-   reported by kernel test robot <lkp@intel.com>
- Documentation/filesystems/f2fs.rst |  8 +++++
- fs/f2fs/checkpoint.c               |  1 +
- fs/f2fs/debug.c                    |  4 +++
- fs/f2fs/f2fs.h                     | 12 ++++++++
- fs/f2fs/gc.c                       |  5 ++--
- fs/f2fs/segment.c                  | 47 ++++++++++++++++++++++++++++++
- fs/f2fs/segment.h                  | 15 ++++++++++
- fs/f2fs/super.c                    | 17 +++++++++++
- 8 files changed, 107 insertions(+), 2 deletions(-)
+ block/bdev.c             | 27 +++++++++++++++++++++++++++
+ fs/ext4/ioctl.c          | 22 ++++++++++++++++++++++
+ fs/f2fs/file.c           | 16 ++++++++++++++++
+ fs/file_attr.c           | 16 ++++++++++++++--
+ fs/xfs/xfs_ioctl.c       | 16 ++++++++++++++++
+ include/linux/blkdev.h   | 12 ++++++++++++
+ include/linux/fileattr.h | 10 ++++++++--
+ include/uapi/linux/fs.h  | 10 +++++++++-
+ 8 files changed, 124 insertions(+), 5 deletions(-)
 
-diff --git a/Documentation/filesystems/f2fs.rst b/Documentation/filesystems/f2fs.rst
-index 7e4031631286..05ac3f76bfba 100644
---- a/Documentation/filesystems/f2fs.rst
-+++ b/Documentation/filesystems/f2fs.rst
-@@ -409,6 +409,14 @@ lookup_mode=%s		 Control the directory lookup behavior for casefolded
- 					        on-disk `SB_ENC_NO_COMPAT_FALLBACK_FL`
- 					        flag.
- 			     ================== ========================================
-+gcless			 Avoid foreground GC by crediting checkpoint-stable invalid
-+			 blocks (invalid at the last checkpoint and thus SSR-reusable)
-+			 as free space in the free section watermark, so allocation
-+			 recycles that slack via SSR instead of relocating valid
-+			 blocks. Intended for heavy out-of-place overwrite at
-+			 near-full utilization, where it reduces write amplification.
-+			 Not allowed in LFS mode (including zoned block devices),
-+			 by default it's disabled.
- ======================== ============================================================
+diff --git a/block/bdev.c b/block/bdev.c
+index 85ce57bd2ae4f..5b3e27339854e 100644
+--- a/block/bdev.c
++++ b/block/bdev.c
+@@ -28,6 +28,7 @@
+ #include <linux/part_stat.h>
+ #include <linux/uaccess.h>
+ #include <linux/stat.h>
++#include <linux/fileattr.h>
+ #include "../fs/internal.h"
+ #include "blk.h"
  
- Debugfs Entries
-diff --git a/fs/f2fs/checkpoint.c b/fs/f2fs/checkpoint.c
-index 01e1ba77263e..0d83e90b583c 100644
---- a/fs/f2fs/checkpoint.c
-+++ b/fs/f2fs/checkpoint.c
-@@ -1932,6 +1932,7 @@ int f2fs_write_checkpoint(struct f2fs_sb_info *sbi, struct cp_control *cpc)
- 		f2fs_release_discard_addrs(sbi);
- 	} else {
- 		f2fs_clear_prefree_segments(sbi, cpc);
-+		f2fs_update_cib(sbi);
- 	}
- 
- 	f2fs_restore_inmem_curseg(sbi);
-diff --git a/fs/f2fs/debug.c b/fs/f2fs/debug.c
-index af88db8fdb71..b1435e01447d 100644
---- a/fs/f2fs/debug.c
-+++ b/fs/f2fs/debug.c
-@@ -285,6 +285,8 @@ static void update_general_status(struct f2fs_sb_info *sbi)
- 	for (i = 0; i < MAX_CALL_TYPE; i++)
- 		si->cp_call_count[i] = atomic_read(&sbi->cp_call_count[i]);
- 
-+	si->cib_total_blocks = READ_ONCE(sbi->cib_total_blocks);
-+
- 	for (i = 0; i < 2; i++) {
- 		si->segment_count[i] = sbi->segment_count[i];
- 		si->block_count[i] = sbi->block_count[i];
-@@ -623,6 +625,8 @@ static int stat_show(struct seq_file *s, void *v)
- 		seq_printf(s, "  - Total : %4d\n", si->nr_total_ckpt);
- 		seq_printf(s, "  - Cur time : %4d(ms)\n", si->cur_ckpt_time);
- 		seq_printf(s, "  - Peak time : %4d(ms)\n", si->peak_ckpt_time);
-+		seq_printf(s, "GCless CIB budget : %u blocks\n",
-+			   si->cib_total_blocks);
- 		seq_printf(s, "GC calls: %d (gc_thread: %d)\n",
- 			   si->gc_call_count[BACKGROUND] +
- 			   si->gc_call_count[FOREGROUND],
-diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-index 20a1e2353f60..a2a85eaa636d 100644
---- a/fs/f2fs/f2fs.h
-+++ b/fs/f2fs/f2fs.h
-@@ -137,6 +137,7 @@ enum f2fs_mount_opt {
- 	 * string rather than using the MS_LAZYTIME flag, so this must remain.
- 	 */
- 	F2FS_MOUNT_LAZYTIME,
-+	F2FS_MOUNT_GCLESS,
- 	F2FS_MOUNT_RESERVE_NODE,
- };
- 
-@@ -1870,6 +1871,15 @@ struct f2fs_sb_info {
- 
- 	struct f2fs_mount_info mount_opt;	/* mount options */
- 
-+	/*
-+	 * Checkpoint-stable invalid blocks: sum of blocks that were invalid at
-+	 * the last checkpoint and are thus SSR-eligible while their section stays
-+	 * dirty.  Written only by f2fs_update_cib() (mount and after each
-+	 * successful checkpoint, under block_operations()), read locklessly, so a
-+	 * plain block_t with READ_ONCE()/WRITE_ONCE() suffices -- no atomic.
-+	 */
-+	block_t cib_total_blocks;
-+
- 	/* for cleaning operations */
- 	struct f2fs_rwsem gc_lock;		/*
- 						 * semaphore for GC, avoid
-@@ -4000,6 +4010,7 @@ bool f2fs_issue_discard_timeout(struct f2fs_sb_info *sbi, bool need_check);
- void f2fs_clear_prefree_segments(struct f2fs_sb_info *sbi,
- 					struct cp_control *cpc);
- void f2fs_dirty_to_prefree(struct f2fs_sb_info *sbi);
-+void f2fs_update_cib(struct f2fs_sb_info *sbi);
- block_t f2fs_get_unusable_blocks(struct f2fs_sb_info *sbi);
- int f2fs_disable_cp_again(struct f2fs_sb_info *sbi, block_t unusable);
- void f2fs_release_discard_addrs(struct f2fs_sb_info *sbi);
-@@ -4289,6 +4300,7 @@ struct f2fs_stat_info {
- 	int dirty_count, node_pages, meta_pages, compress_pages;
- 	int compress_page_hit;
- 	int prefree_count, free_segs, free_secs;
-+	block_t cib_total_blocks;
- 	int cp_call_count[MAX_CALL_TYPE], cp_count;
- 	int gc_call_count[MAX_CALL_TYPE];
- 	int gc_segs[2][2];
-diff --git a/fs/f2fs/gc.c b/fs/f2fs/gc.c
-index e60c1106f70b..ebf47ef5fff0 100644
---- a/fs/f2fs/gc.c
-+++ b/fs/f2fs/gc.c
-@@ -1964,10 +1964,11 @@ int f2fs_gc(struct f2fs_sb_info *sbi, struct f2fs_gc_control *gc_control)
- 		 * threshold, we can make them free by checkpoint. Then, we
- 		 * secure free segments which doesn't need fggc any more.
- 		 */
--		if (prefree_segments(sbi)) {
-+		if (prefree_segments(sbi) || test_opt(sbi, GCLESS)) {
- 			stat_inc_cp_call_count(sbi, TOTAL_CALL);
- 			ret = f2fs_write_checkpoint(sbi, &cpc);
--			if (ret)
-+			if (ret ||
-+			    (test_opt(sbi, GCLESS) && has_enough_free_secs(sbi, 0, 0)))
- 				goto stop;
- 			/* Reset due to checkpoint */
- 			sec_freed = 0;
-diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
-index 788f8b050249..e020714261ff 100644
---- a/fs/f2fs/segment.c
-+++ b/fs/f2fs/segment.c
-@@ -305,6 +305,53 @@ static void __complete_revoke_list(struct inode *inode, struct list_head *head,
- 		f2fs_do_truncate_blocks(inode, start_index * PAGE_SIZE, false);
+@@ -1353,6 +1354,32 @@ void bdev_statx(const struct path *path, struct kstat *stat, u32 request_mask)
+ 	blkdev_put_no_open(bdev);
  }
  
-+static inline u32 cib_contrib_of_se(struct f2fs_sb_info *sbi, unsigned long seg)
-+{
-+	struct dirty_seglist_info *dirty_i = DIRTY_I(sbi);
-+	struct free_segmap_info *free_i = SM_I(sbi)->free_info;
-+	struct seg_entry *se = get_seg_entry(sbi, seg);
-+	u32 usable = f2fs_usable_blks_in_seg(sbi, seg);
-+	u32 ckpt_v = se->ckpt_valid_blocks;
-+
-+	/* free, prefree and current segments hold no reusable SSR slack */
-+	if (test_bit(seg, free_i->free_segmap))
-+		return 0;
-+	if (test_bit(seg, dirty_i->dirty_segmap[PRE]))
-+		return 0;
-+	if (is_curseg(sbi, seg))
-+		return 0;
-+	if (ckpt_v >= usable)
-+		return 0;
-+
-+	return usable - ckpt_v;
-+}
-+
 +/*
-+ * Recompute the checkpoint-stable invalid-block budget by scanning all main
-+ * segments via ckpt_valid_blocks (free/prefree/current segments contribute
-+ * nothing).  Called at mount and after every successful checkpoint, both under
-+ * block_operations(), so it is the only writer and needs no atomic; readers use
-+ * READ_ONCE().  ckpt_valid_blocks is fixed between checkpoints, so the value is
-+ * exact at each checkpoint -- gcless checkpoints often enough to keep it fresh,
-+ * which is why no per-allocation delta hooks are needed.
++ * Handle DIO alignment for block devices via fileattr.
 + */
-+void f2fs_update_cib(struct f2fs_sb_info *sbi)
++void bdev_fileattr(const struct inode *inode, struct file_kattr *fa)
 +{
-+	unsigned long nsegs = MAIN_SEGS(sbi);
-+	unsigned long seg;
-+	block_t total = 0;
++	struct block_device *bdev;
 +
-+	if (!test_opt(sbi, GCLESS)) {
-+		WRITE_ONCE(sbi->cib_total_blocks, 0);
++	memset(fa, 0, sizeof(*fa));
++	fa->fsx_valid = true;
++	fa->flags_valid = true;
++
++	bdev = blkdev_get_no_open(inode->i_rdev, false);
++	if (!bdev)
 +		return;
++
++	fa->fsx_dio_mem_align = bdev_dma_alignment(bdev) + 1;
++	fa->fsx_dio_offset_align = bdev_logical_block_size(bdev);
++	fa->fsx_dio_read_offset_align = bdev_logical_block_size(bdev);
++	fa->fsx_dio_virt_boundary_align = bdev_virt_boundary_alignment(bdev);
++	fa->fsx_max_segments = bdev_max_segments(bdev);
++	fa->fsx_xflags |= FS_XFLAG_DIO;
++
++	blkdev_put_no_open(bdev);
++}
++EXPORT_SYMBOL_GPL(bdev_fileattr);
++
+ bool disk_live(struct gendisk *disk)
+ {
+ 	return !inode_unhashed(BD_INODE(disk->part0));
+diff --git a/fs/ext4/ioctl.c b/fs/ext4/ioctl.c
+index c8387e6a2c6e9..70b25f9e0ad5a 100644
+--- a/fs/ext4/ioctl.c
++++ b/fs/ext4/ioctl.c
+@@ -21,6 +21,7 @@
+ #include <linux/iversion.h>
+ #include <linux/fileattr.h>
+ #include <linux/uuid.h>
++#include <linux/blkdev.h>
+ #include "ext4_jbd2.h"
+ #include "ext4.h"
+ #include <linux/fsmap.h>
+@@ -1005,6 +1006,27 @@ int ext4_fileattr_get(struct dentry *dentry, struct file_kattr *fa)
+ 	if (ext4_has_feature_project(inode->i_sb))
+ 		fa->fsx_projid = from_kprojid(&init_user_ns, ei->i_projid);
+ 
++	if (S_ISREG(inode->i_mode)) {
++		u32 dio_align = ext4_dio_alignment(inode);
++
++		if (dio_align != 0) {
++			struct block_device *bdev = inode->i_sb->s_bdev;
++
++			if (dio_align == 1) {
++				fa->fsx_dio_mem_align = bdev_dma_alignment(bdev) + 1;
++				fa->fsx_dio_offset_align = bdev_logical_block_size(bdev);
++				fa->fsx_dio_read_offset_align = bdev_logical_block_size(bdev);
++			} else {
++				fa->fsx_dio_mem_align = dio_align;
++				fa->fsx_dio_offset_align = dio_align;
++				fa->fsx_dio_read_offset_align = dio_align;
++			}
++			fa->fsx_dio_virt_boundary_align = bdev_virt_boundary_alignment(bdev);
++			fa->fsx_max_segments = bdev_max_segments(bdev);
++			fa->fsx_xflags |= FS_XFLAG_DIO;
++		}
 +	}
 +
-+	for (seg = 0; seg < nsegs; seg++)
-+		total += cib_contrib_of_se(sbi, seg);
+ 	return 0;
+ }
+ 
+diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
+index 4b52c56d71f07..72036ef1d7a8a 100644
+--- a/fs/f2fs/file.c
++++ b/fs/f2fs/file.c
+@@ -3472,6 +3472,22 @@ int f2fs_fileattr_get(struct dentry *dentry, struct file_kattr *fa)
+ 	if (f2fs_sb_has_project_quota(F2FS_I_SB(inode)))
+ 		fa->fsx_projid = from_kprojid(&init_user_ns, fi->i_projid);
+ 
++	if (S_ISREG(inode->i_mode)) {
++		unsigned int bsize = i_blocksize(inode);
++		struct block_device *bdev = inode->i_sb->s_bdev;
 +
-+	WRITE_ONCE(sbi->cib_total_blocks, total);
++		if (!f2fs_force_buffered_io(inode, WRITE)) {
++			fa->fsx_dio_mem_align = bsize;
++			fa->fsx_dio_offset_align = bsize;
++			fa->fsx_dio_read_offset_align = bsize;
++			if (bdev) {
++				fa->fsx_dio_virt_boundary_align = bdev_virt_boundary_alignment(bdev);
++				fa->fsx_max_segments = bdev_max_segments(bdev);
++			}
++			fa->fsx_xflags |= FS_XFLAG_DIO;
++		}
++	}
++
+ 	return 0;
+ }
+ 
+diff --git a/fs/file_attr.c b/fs/file_attr.c
+index bfb00d256dd56..09804ef9901b8 100644
+--- a/fs/file_attr.c
++++ b/fs/file_attr.c
+@@ -7,6 +7,7 @@
+ #include <linux/export.h>
+ #include <linux/syscalls.h>
+ #include <linux/namei.h>
++#include <linux/blkdev.h>
+ 
+ #include "internal.h"
+ 
+@@ -88,8 +89,12 @@ int vfs_fileattr_get(struct dentry *dentry, struct file_kattr *fa)
+ 	struct inode *inode = d_inode(dentry);
+ 	int error;
+ 
+-	if (!inode->i_op->fileattr_get)
+-		return -ENOIOCTLCMD;
++	if (!inode->i_op->fileattr_get) {
++		if (!S_ISBLK(inode->i_mode))
++			return -ENOIOCTLCMD;
++		bdev_fileattr(inode, fa);
++		return 0;
++	}
+ 
+ 	error = security_inode_file_getattr(dentry, fa);
+ 	if (error)
+@@ -110,6 +115,11 @@ static void fileattr_to_file_attr(const struct file_kattr *fa,
+ 	fattr->fa_nextents = fa->fsx_nextents;
+ 	fattr->fa_projid = fa->fsx_projid;
+ 	fattr->fa_cowextsize = fa->fsx_cowextsize;
++	fattr->fa_dio_mem_align = fa->fsx_dio_mem_align;
++	fattr->fa_dio_offset_align = fa->fsx_dio_offset_align;
++	fattr->fa_dio_read_offset_align = fa->fsx_dio_read_offset_align;
++	fattr->fa_dio_virt_boundary_align = fa->fsx_dio_virt_boundary_align;
++	fattr->fa_max_segments = fa->fsx_max_segments;
+ }
+ 
+ /**
+@@ -145,6 +155,8 @@ static int file_attr_to_fileattr(const struct file_attr *fattr,
+ 
+ 	if (fattr->fa_xflags & ~mask)
+ 		return -EINVAL;
++	if (fattr->fa_pad)
++		return -EINVAL;
+ 
+ 	fileattr_fill_xflags(fa, fattr->fa_xflags & ~FS_XFLAG_RDONLY_MASK);
+ 	fa->fsx_extsize = fattr->fa_extsize;
+diff --git a/fs/xfs/xfs_ioctl.c b/fs/xfs/xfs_ioctl.c
+index 1b53701bebea1..15e14d1525281 100644
+--- a/fs/xfs/xfs_ioctl.c
++++ b/fs/xfs/xfs_ioctl.c
+@@ -49,6 +49,7 @@
+ 
+ #include <linux/mount.h>
+ #include <linux/fileattr.h>
++#include <linux/blkdev.h>
+ 
+ /* Return 0 on success or positive error */
+ int
+@@ -517,6 +518,21 @@ xfs_fill_fsxattr(
+ 		fa->fsx_nextents = xfs_iext_count(ifp);
+ 	else
+ 		fa->fsx_nextents = xfs_ifork_nextents(ifp);
++
++	if (whichfork == XFS_DATA_FORK && S_ISREG(VFS_I(ip)->i_mode)) {
++		struct xfs_buftarg *target = xfs_inode_buftarg(ip);
++		struct block_device *bdev = target->bt_bdev;
++
++		fa->fsx_dio_mem_align = bdev_dma_alignment(bdev) + 1;
++		fa->fsx_dio_read_offset_align = bdev_logical_block_size(bdev);
++		if (xfs_is_cow_inode(ip))
++			fa->fsx_dio_offset_align = xfs_inode_alloc_unitsize(ip);
++		else
++			fa->fsx_dio_offset_align = fa->fsx_dio_read_offset_align;
++		fa->fsx_dio_virt_boundary_align = bdev_virt_boundary_alignment(bdev);
++		fa->fsx_max_segments = bdev_max_segments(bdev);
++		fa->fsx_xflags |= FS_XFLAG_DIO;
++	}
+ }
+ 
+ STATIC int
+diff --git a/include/linux/blkdev.h b/include/linux/blkdev.h
+index 9213a5716f95a..5e83572d15286 100644
+--- a/include/linux/blkdev.h
++++ b/include/linux/blkdev.h
+@@ -1607,6 +1607,16 @@ static inline unsigned int bdev_dma_alignment(struct block_device *bdev)
+ 	return queue_dma_alignment(bdev_get_queue(bdev));
+ }
+ 
++static inline unsigned long bdev_virt_boundary_mask(struct block_device *bdev)
++{
++	return bdev_get_queue(bdev)->limits.virt_boundary_mask;
 +}
 +
- static int __f2fs_commit_atomic_write(struct inode *inode)
- {
- 	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
-diff --git a/fs/f2fs/segment.h b/fs/f2fs/segment.h
-index 068845660b0f..3226930d759a 100644
---- a/fs/f2fs/segment.h
-+++ b/fs/f2fs/segment.h
-@@ -702,6 +702,21 @@ static inline bool has_not_enough_free_secs(struct f2fs_sb_info *sbi,
- 	free_secs = free_sections(sbi) + freed;
- 	required_secs = needed + reserved_sections(sbi) +
- 			__get_secs_required(sbi);
-+	/*
-+	 * Credit the checkpoint-stable invalid-block budget (SSR-reusable slack)
-+	 * to free_secs, so the watermark lets allocation recycle that slack via
-+	 * SSR instead of running foreground GC.  cib_total_blocks is a section/
-+	 * block count (always non-negative), so the math stays in unsigned int and
-+	 * is capped at the sections still unaccounted for.
-+	 */
-+	if (test_opt(sbi, GCLESS)) {
-+		unsigned int sec_blks = CAP_BLKS_PER_SEC(sbi);
-+		unsigned int add_secs = READ_ONCE(sbi->cib_total_blocks) / sec_blks;
-+		unsigned int room = free_secs < MAIN_SECS(sbi) ?
-+					MAIN_SECS(sbi) - free_secs : 0;
++static inline unsigned int bdev_virt_boundary_alignment(struct block_device *bdev)
++{
++	return bdev_virt_boundary_mask(bdev) + 1;
++}
 +
-+		free_secs += min(add_secs, room);
-+	}
+ static inline unsigned int
+ blk_lim_dma_alignment_and_pad(struct queue_limits *lim)
+ {
+@@ -1805,6 +1815,8 @@ int sync_blockdev_range(struct block_device *bdev, loff_t lstart, loff_t lend);
+ int sync_blockdev_nowait(struct block_device *bdev);
+ void sync_bdevs(bool wait);
+ void bdev_statx(const struct path *path, struct kstat *stat, u32 request_mask);
++struct file_kattr;
++void bdev_fileattr(const struct inode *inode, struct file_kattr *fa);
+ void printk_all_partitions(void);
+ int __init early_lookup_bdev(const char *pathname, dev_t *dev);
+ #else
+diff --git a/include/linux/fileattr.h b/include/linux/fileattr.h
+index 58044b5980162..9eca31b8289fe 100644
+--- a/include/linux/fileattr.h
++++ b/include/linux/fileattr.h
+@@ -17,11 +17,11 @@
+ /* Read-only inode flags */
+ #define FS_XFLAG_RDONLY_MASK \
+ 	(FS_XFLAG_PREALLOC | FS_XFLAG_HASATTR | FS_XFLAG_VERITY | \
+-	 FS_XFLAG_CASEFOLD | FS_XFLAG_CASENONPRESERVING)
++	 FS_XFLAG_CASEFOLD | FS_XFLAG_CASENONPRESERVING | FS_XFLAG_DIO)
  
- 	return free_secs < required_secs;
- }
-diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
-index 62d3a58cb1b2..07c7d88719a6 100644
---- a/fs/f2fs/super.c
-+++ b/fs/f2fs/super.c
-@@ -234,6 +234,7 @@ enum {
- 	Opt_jqfmt,
- 	Opt_checkpoint,
- 	Opt_lookup_mode,
-+	Opt_gcless,
- 	Opt_err,
+ /* Flags to indicate valid value of fsx_ fields */
+ #define FS_XFLAG_VALUES_MASK \
+-	(FS_XFLAG_EXTSIZE | FS_XFLAG_COWEXTSIZE)
++	(FS_XFLAG_EXTSIZE | FS_XFLAG_COWEXTSIZE | FS_XFLAG_DIO)
+ 
+ /* Flags for directories */
+ #define FS_XFLAG_DIRONLY_MASK \
+@@ -49,6 +49,12 @@ struct file_kattr {
+ 	u32	fsx_nextents;	/* nextents field value (get)	*/
+ 	u32	fsx_projid;	/* project identifier (get/set) */
+ 	u32	fsx_cowextsize;	/* CoW extsize field value (get/set)*/
++	/* struct file_attr dio alignment: */
++	u32	fsx_dio_mem_align;
++	u32	fsx_dio_offset_align;
++	u32	fsx_dio_read_offset_align;
++	u32	fsx_dio_virt_boundary_align;
++	u32	fsx_max_segments;
+ 	/* selectors: */
+ 	bool	flags_valid:1;
+ 	bool	fsx_valid:1;
+diff --git a/include/uapi/linux/fs.h b/include/uapi/linux/fs.h
+index bd87262f2e349..2716fc6fefd6b 100644
+--- a/include/uapi/linux/fs.h
++++ b/include/uapi/linux/fs.h
+@@ -229,10 +229,17 @@ struct file_attr {
+ 	__u32 fa_nextents;	/* nextents field value (get)   */
+ 	__u32 fa_projid;	/* project identifier (get/set) */
+ 	__u32 fa_cowextsize;	/* CoW extsize field value (get/set) */
++	__u32 fa_dio_mem_align;	/* memory buffer alignment for direct I/O (get) */
++	__u32 fa_dio_offset_align;	/* file offset alignment for direct I/O (get) */
++	__u32 fa_dio_read_offset_align;	/* file offset alignment for direct I/O reads (get) */
++	__u32 fa_dio_virt_boundary_align;	/* virtual boundary alignment for direct I/O (get) */
++	__u32 fa_max_segments;	/* max number of segments for direct I/O (get) */
++	__u32 fa_pad;		/* padding for 8-byte alignment */
  };
  
-@@ -336,6 +337,7 @@ static const struct fs_parameter_spec f2fs_param_specs[] = {
- 	fsparam_flag("usrquota", Opt_usrquota),
- 	fsparam_flag("grpquota", Opt_grpquota),
- 	fsparam_flag("prjquota", Opt_prjquota),
-+	fsparam_flag("gcless", Opt_gcless),
- 	fsparam_string("usrjquota", Opt_usrjquota),
- 	fsparam_flag("usrjquota", Opt_usrjquota),
- 	fsparam_string("grpjquota", Opt_grpjquota),
-@@ -1230,6 +1232,9 @@ static int f2fs_parse_param(struct fs_context *fc, struct fs_parameter *param)
- 	case Opt_nat_bits:
- 		ctx_set_opt(ctx, F2FS_MOUNT_NAT_BITS);
- 		break;
-+	case Opt_gcless:
-+		ctx_set_opt(ctx, F2FS_MOUNT_GCLESS);
-+		break;
- 	case Opt_lookup_mode:
- 		F2FS_CTX_INFO(ctx).lookup_mode = result.uint_32;
- 		ctx->spec_mask |= F2FS_SPEC_lookup_mode;
-@@ -1603,6 +1608,13 @@ static int f2fs_check_opt_consistency(struct fs_context *fc,
- 		f2fs_err(sbi, "Allow to mount readonly mode only");
- 		return -EROFS;
- 	}
-+
-+	/* Only for adaptive mode */
-+	if (test_opt(sbi, GCLESS) && f2fs_lfs_mode(sbi)) {
-+		f2fs_err(sbi, "gcless is not allowed in LFS mode");
-+		return -EINVAL;
-+	}
-+
- 	return 0;
- }
+ #define FILE_ATTR_SIZE_VER0 24
+-#define FILE_ATTR_SIZE_LATEST FILE_ATTR_SIZE_VER0
++#define FILE_ATTR_SIZE_VER1 48
++#define FILE_ATTR_SIZE_LATEST FILE_ATTR_SIZE_VER1
  
-@@ -2542,6 +2554,9 @@ static int f2fs_show_options(struct seq_file *seq, struct dentry *root)
- 	else if (F2FS_OPTION(sbi).lookup_mode == LOOKUP_AUTO)
- 		seq_show_option(seq, "lookup_mode", "auto");
+ /*
+  * Flags for the fsx_xflags field
+@@ -261,6 +268,7 @@ struct file_attr {
+  */
+ #define FS_XFLAG_CASEFOLD	0x00040000	/* case-insensitive lookups */
+ #define FS_XFLAG_CASENONPRESERVING 0x00080000	/* case not preserved */
++#define FS_XFLAG_DIO		0x00100000	/* DIO alignment info valid */
+ #define FS_XFLAG_HASATTR	0x80000000	/* no DIFLAG for this	*/
  
-+	if (test_opt(sbi, GCLESS))
-+		seq_puts(seq, ",gcless");
-+
- 	return 0;
- }
- 
-@@ -5344,6 +5359,8 @@ static int f2fs_fill_super(struct super_block *sb, struct fs_context *fc)
- 	if (err)
- 		goto sync_free_meta;
- 
-+	f2fs_update_cib(sbi);
-+
- 	/*
- 	 * If filesystem is not mounted as read-only then
- 	 * do start the gc_thread.
+ /* the read-only stuff doesn't really belong here, but any other place is
 -- 
-2.43.0
+2.52.0
 
 
 
