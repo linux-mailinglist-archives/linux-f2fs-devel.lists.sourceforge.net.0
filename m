@@ -2,105 +2,126 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id QqAzB1/oTWrG/wEAu9opvQ
+	id txPcJ1T0TWqNAgIAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 08 Jul 2026 08:04:15 +0200
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 08 Jul 2026 08:55:16 +0200
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id B30F17220D3
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 08 Jul 2026 08:04:14 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id AB99C722623
+	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 08 Jul 2026 08:55:15 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=lists.sourceforge.net header.s=beta header.b="Yq0t/gcR";
-	dkim=fail ("body hash did not verify") header.d=sourceforge.net header.s=x header.b=ZIk6bzlz;
-	dkim=fail ("body hash did not verify") header.d=sf.net header.s=x header.b=RXByeDU1;
-	dkim=fail ("body hash did not verify") header.d=kernel.org header.s=k20260515 header.b=gGcFJCVR;
-	dmarc=pass (policy=none) header.from=lists.sourceforge.net;
+	dkim=pass header.d=lists.sourceforge.net header.s=beta header.b=P2116NUv;
+	dkim=fail ("body hash did not verify") header.d=sourceforge.net header.s=x header.b=KGY48Aq2;
+	dkim=fail ("body hash did not verify") header.d=sf.net header.s=x header.b="A TEfX7+";
+	dkim=fail ("body hash did not verify") header.d=gmail.com header.s=20251104 header.b=qhSZQ9I1;
+	dmarc=fail reason="SPF not aligned (relaxed), DKIM not aligned (relaxed)" header.from=gmail.com (policy=none);
 	spf=pass (mail.lfdr.de: domain of linux-f2fs-devel-bounces@lists.sourceforge.net designates 216.105.38.7 as permitted sender) smtp.mailfrom=linux-f2fs-devel-bounces@lists.sourceforge.net
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
-	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:In-Reply-To:References:To:MIME-Version:Date:
-	Message-ID:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
-	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=gQnocsrFT4f7h7B5JbEP7567n1gm7prZ2GCF3JO5Y7A=; b=Yq0t/gcRG6nCnHn1zk2wL2HOPV
-	JVz5TS1a82PU7xNn8cGBHdtzoXnCsqUq6sYrYN9t+snPPONLGehqVZH4AN/dB5oH/5TEusNvy640z
-	RHFVT1sNxhwzMa4R40bOHZTs1qnJmMCrwVle/rWuuQd4omULMbNvRZVt+9C7ERhYDsqg=;
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
+	Subject:MIME-Version:Message-ID:Date:To:From:Sender:Reply-To:Content-ID:
+	Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+	:Resent-Message-ID:In-Reply-To:References:List-Owner;
+	bh=Tb6F7oIrrr0ao+jlfXlg/OkgJHroXrJZAQOLAGMsKys=; b=P2116NUvr6HPdipbuWbQy+tsRL
+	Spk1OMl3QDs0FoSiPzfUsGyo6p0TRVGUwSioiWwdkH0KuwU+jV7P8+Vgd0mND7zpYMRLoxKNoVklu
+	5i3VAYVWe+H/Bmd20e4jL8lG5eGSMQUrMx0KkdXgbgEUN3hXpGrOV9+quo7reZPbEjB8=;
+Received: from [127.0.0.1] (helo=sfs-ml-1.v29.lw.sourceforge.com)
+	by sfs-ml-1.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1whLO6-00040t-CM;
-	Wed, 08 Jul 2026 06:04:03 +0000
+	id 1whMBQ-00040O-JL;
+	Wed, 08 Jul 2026 06:54:58 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-1.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <asj@kernel.org>) id 1whLO3-00040n-DX
+ (envelope-from <alvinhuang0603@gmail.com>) id 1whMBO-00040G-MB
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 08 Jul 2026 06:04:00 +0000
+ Wed, 08 Jul 2026 06:54:56 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Message-ID:
+ Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=llkLKsOR9PknoEgDWcnrGWfV30HkU1bLr89lbeUvfJY=; b=ZIk6bzlz71wSd29tzWT/+4V5lv
- F6pQtsAgb194TetE74iN3MVSyV34VV/Q5DKRs9EBrbm2e0ew7Wds6TCdya5WhqmE6kGfV8ocDVGDm
- bI7+az+FmkpQuRw5U0w/2XKI5y2ruv5RpH0UA6hAKMS0NkW5WV3EAbuG2eaeY0rrt3kg=;
+ bh=/B8K3OwEfLGyztVIceSp+/GraQ767IL1vulmM4eozHs=; b=KGY48Aq2q1XOBYZ1KhksUUokJ7
+ sBYSh5tzOprQ8XUfwe4XgAbchLXYEsFCBN1ZU5qIw6LjFMWUFFXPgD1L77ySMS8uP+prepEasTgFI
+ U1PpN9+pf9A0IjjO4zLUiOH1dbSSryw1aUoPPWrPIor4ZTjL1sjgAwd0pcRzIjom7Ysc=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:
- Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=llkLKsOR9PknoEgDWcnrGWfV30HkU1bLr89lbeUvfJY=; b=RXByeDU166ddXKvU0uyAGV9VKY
- XUg2NrLTWZMtYSHGOGv9XAc3069YEeflabHE1jPPkIcpnMcdKu4UOXQ114ckTCpUs92XxH6/J3Qlh
- lWxfaOfiKBIZ9uVHDU22svC8zUadn6+SDlOeXIqfAsAL23sSVVM+OXg5jIwF4+gttCnE=;
-Received: from sea.source.kernel.org ([172.234.252.31])
+ h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From
+ :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
+ References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
+ List-Owner:List-Archive; bh=/B8K3OwEfLGyztVIceSp+/GraQ767IL1vulmM4eozHs=; b=A
+ TEfX7+o116x5wXLtOalZDbxWvfITW3r4YKa/+VwkTeN4oLex4iAZtueakuRzCgL0b+tc9mU23hDbR
+ ZQ5vXduKGwnaVyJf4bEYCO8Pabw5paCgSHOlzEDNtw+1pMdlDIvGPq2ushYcp5flyWw6xANvzbKNn
+ QTIgocIIKC8osKU8=;
+Received: from mail-pf1-f178.google.com ([209.85.210.178])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1whLO3-0006aQ-MC for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 08 Jul 2026 06:04:00 +0000
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by sea.source.kernel.org (Postfix) with ESMTP id 501C642DBB
+ (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
+ id 1whMBL-0000X9-OV for linux-f2fs-devel@lists.sourceforge.net;
+ Wed, 08 Jul 2026 06:54:56 +0000
+Received: by mail-pf1-f178.google.com with SMTP id
+ d2e1a72fcca58-8481fb4324aso250838b3a.2
  for <linux-f2fs-devel@lists.sourceforge.net>;
- Wed,  8 Jul 2026 06:03:54 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id B09E51F000E9;
- Wed,  8 Jul 2026 06:03:52 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
- s=k20260515; t=1783490634;
- bh=llkLKsOR9PknoEgDWcnrGWfV30HkU1bLr89lbeUvfJY=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To;
- b=gGcFJCVRcR5EzSNtHGS9CBvLKRUnkJbPoC7EsjgwU+EryVB4Ys3tKrTmPZOBKYzLW
- KB8oXfUqcH9nR8dDVvr4X6rLpOSOsC/+EJrQJFySWUEKKPQ227oIljD6P4Vt1vud+5
- GRbOfQJJYC6iqk44OghzPzM3j5pqxp41nP4WJEvE1Z9LH4UDUW+0/mqgOE8fOIbfEx
- zQfD3BOcMsCBo4IN2HVPqnAji5BgHUlDNHpu4TjL3ar4v6B6GuVM20GYFpaKmd2u7Q
- drgA4dMDW2f4klH6t0r51RtXNJH/P14G7QzMJbwhrYdt5Xddlgkg7s6cKWOJvajaPQ
- /ofD0r8G1ReRw==
-Message-ID: <e19e5b1b-ba0a-463b-8bde-c9f31f4e961b@kernel.org>
-Date: Wed, 8 Jul 2026 14:03:50 +0800
+ Tue, 07 Jul 2026 23:54:55 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20251104; t=1783493685; x=1784098485; darn=lists.sourceforge.net;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+ bh=/B8K3OwEfLGyztVIceSp+/GraQ767IL1vulmM4eozHs=;
+ b=qhSZQ9I1lPw/NDE+3FVzY8jWWWo0O2qJdfhfecGYWjSoovCwvOK+Uy2UYmgz0SMbf3
+ WpkPlR3xcUxgdruxN0YXDLGE1LKzGrAcxcHwTl+LZVPAywDN4sZECBEG9nIbX5Srv3HA
+ 8kQegKWMB0rWDdVp0+IGOmaw6kClaYALoRTZCdcaAC/UIP+eXVHZ2tUAZX0wNfWobQ2d
+ /UeDCSYesQXt7XlKOFO/FUu/D2nzsI8c7Qu1ejtEH2OmvbjOZHrgUzp1RKSektvGcXfm
+ m8oyX0VD8OLXziQa9Tj8Qo0j8AjGAyWvSSv89IK4zEVeUmPojSeHzWQCKWl3fJ4bqjb6
+ Q69Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1783493685; x=1784098485;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to:content-type;
+ bh=/B8K3OwEfLGyztVIceSp+/GraQ767IL1vulmM4eozHs=;
+ b=BUMv8hbqAExwPqqUgi9XJAUSSi7MtiW6FLMKzb39qlNekKwmIiKI0ocnNAsHiSDlCs
+ GVbdrjnQH05azJYuPQrM1i3a5RcJr/xoemeAti/m2Nk9BKVT2BWmZkOZkJJOSbqbLqF/
+ LmcYI2di7PfFDHEuVT9AVtClDEIjLPraFHTQp/OKEo87kI7uhq3z8BeO1rCK9voiEmhz
+ i5YEchqxIm+ha3r6TRRAOm7tqcvk2ul4/oXIDv27AZqG56A4oADdC7egEltMggZYSQZ/
+ mGB2xIHESZBwDPqb/gyyoG7oDKwYsMX0CGD1hpWjiaRqaej5CgOjYp5ReMnFvl56deNd
+ Bvtg==
+X-Gm-Message-State: AOJu0YzZmqxulqJXGonbj3MovlGbkPY6jf+C7aYR+Tqovxrvr1DarYP9
+ SN3iVQ0z8Jt2d6IHX9lcUyB6bttZRKAlWskJrj1N1Phqm2mA6xYWf/v1
+X-Gm-Gg: AfdE7clKagMZU4+5AwrEmaRfes6Spjfi9ci0F8cTJQjI6cEtKJxNjgf0zX/zTVlkvYR
+ JBwE27/reAxrfnGlXpp4VyjBcsv3QNZhKqZOrgPG547PV7M5m9NRstnomCBI/rw6g+lKc4cfLTq
+ kJMP+/1VzJogBklgEKeiIXVp9fAKxyToLMY0Vu3iO/LgrfDbumherfuVr+cEj0Xh9R1nCC9Pfqv
+ 7siIL1t9P2w9ZCMxcyvmq7XQQAvkq/Qhh9rIO5JdHl0DbA7WU84ijIg4ynSt/PifV5Y7f/lzJIf
+ +xPzguA8+oRs+LlkdBUao8IpEMEIbou3zLLW7MVeb/v9uUXmoC56Br5sLhEccYxVis0eTg82XRr
+ yyfzYyt2JY+qjE77M638OkHwDwyxWVN5if72lRAyOw4MURGagY3dYPqqrqaRqtxbm3SFlJRHTX/
+ ND8OhXla0KLIWS3LXkRCfJqP0RHve5jEM0LQ==
+X-Received: by 2002:a05:6a00:3e12:b0:848:3dae:66e2 with SMTP id
+ d2e1a72fcca58-84842ee541bmr1343367b3a.26.1783493684900; 
+ Tue, 07 Jul 2026 23:54:44 -0700 (PDT)
+Received: from Alvin.tail8ccd9a.ts.net ([49.216.173.166])
+ by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-847f6dbfd41sm6643216b3a.57.2026.07.07.23.54.43
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 07 Jul 2026 23:54:44 -0700 (PDT)
+From: Hao-Qun Huang <alvinhuang0603@gmail.com>
+To: Jaegeuk Kim <jaegeuk@kernel.org>,
+	Chao Yu <chao@kernel.org>
+Date: Wed,  8 Jul 2026 14:54:39 +0800
+Message-ID: <20260708065439.1139937-1-alvinhuang0603@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-To: Chao Yu <chao@kernel.org>, Zorro Lang <zlang@kernel.org>,
- fstests@vger.kernel.org
-References: <20260706064326.3657995-1-chao@kernel.org>
- <af5f0eb1-0197-4952-a37b-0602799929ec@kernel.org>
- <5c11cd98-bb41-46e0-9765-e2aad57a08e4@kernel.org>
-Content-Language: en-US
-In-Reply-To: <5c11cd98-bb41-46e0-9765-e2aad57a08e4@kernel.org>
-X-Spam-Score: -0.2 (/)
+X-Spam-Score: 0.1 (/)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview: > How about this? > > f2fs) > local
- feat_file="/sys/fs/f2fs/features/fserror"
- > if [ -f "$feat_file" ] && [ "$(cat "$feat_file")" = "supported" ]; then
- > return 0 > fi > ;; This is a check we will use often. Why not add a helper
- like the untested code below [1]? Furthermore,
- I can clean up _require_btrfs_fs_feature() to use [1] as well. 
- Content analysis details:   (-0.2 points, 5.0 required)
+ Content preview: F2FS_IOC_MOVE_RANGE treats a zero length as a request to move
+ data from pos_in to EOF. However, the same-file overlap check runs before
+ that expansion, so a request with len == 0 bypasses the overlap [...] 
+ Content analysis details:   (0.1 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
  -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
@@ -110,9 +131,16 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-X-Headers-End: 1whLO3-0006aQ-MC
-Subject: Re: [f2fs-dev] [PATCH v2] common/rc: support f2fs in
- _require_fanotify_ioerrors()
+ 0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
+ [alvinhuang0603(at)gmail.com]
+ 0.2 FREEMAIL_ENVFROM_END_DIGIT Envelope-from freemail username ends in
+ digit [alvinhuang0603(at)gmail.com]
+ 0.0 RCVD_IN_MSPIKE_H3      RBL: Good reputation (+3)
+ [209.85.210.178 listed in wl.mailspike.net]
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+X-Headers-End: 1whMBL-0000X9-OV
+Subject: [f2fs-dev] [PATCH] f2fs: reject overlapping move range after len
+ expansion
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -124,95 +152,96 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-From: Anand Suveer Jain via Linux-f2fs-devel
- <linux-f2fs-devel@lists.sourceforge.net>
-Reply-To: Anand Suveer Jain <asj@kernel.org>
-Cc: jaegeuk@kernel.org, "Darrick J. Wong" <djwong@kernel.org>,
- linux-f2fs-devel@lists.sourceforge.net
+Cc: Hao-Qun Huang <alvinhuang0603@gmail.com>, linux-kernel@vger.kernel.org,
+ stable@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-7.61 / 15.00];
-	WHITELIST_DMARC(-7.00)[sourceforge.net:D:+];
-	MID_RHS_MATCH_TO(1.00)[];
-	DMARC_POLICY_ALLOW_WITH_FAILURES(-0.50)[];
+X-Spamd-Result: default: False [-0.01 / 15.00];
+	MID_CONTAINS_FROM(1.00)[];
 	RWL_MAILSPIKE_EXCELLENT(-0.40)[216.105.38.7:from];
-	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7];
 	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
+	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7];
 	MAILLIST(-0.20)[mailman];
+	DMARC_POLICY_SOFTFAIL(0.10)[gmail.com : SPF not aligned (relaxed), DKIM not aligned (relaxed),none];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	FORGED_RECIPIENTS(0.00)[m:chao@kernel.org,m:zlang@kernel.org,m:fstests@vger.kernel.org,m:jaegeuk@kernel.org,m:djwong@kernel.org,m:linux-f2fs-devel@lists.sourceforge.net,s:lists@lfdr.de];
-	REPLYTO_DOM_EQ_TO_DOM(0.00)[];
 	RECEIVED_HELO_LOCALHOST(0.00)[];
-	DKIM_MIXED(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
-	FORGED_SENDER(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
-	ARC_NA(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,kernel.org:s=k20260515];
+	DKIM_MIXED(0.00)[];
+	FORGED_RECIPIENTS(0.00)[m:jaegeuk@kernel.org,m:chao@kernel.org,m:alvinhuang0603@gmail.com,m:linux-kernel@vger.kernel.org,m:stable@vger.kernel.org,m:linux-f2fs-devel@lists.sourceforge.net,s:lists@lfdr.de];
+	FREEMAIL_FROM(0.00)[gmail.com];
 	TO_DN_SOME(0.00)[];
-	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
 	MIME_TRACE(0.00)[0:+];
-	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
-	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,kernel.org:-];
-	FORGED_SENDER_FORWARDING(0.00)[];
-	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	TAGGED_RCPT(0.00)[linux-f2fs-devel];
-	ALIAS_RESOLVED(0.00)[];
+	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
+	ARC_NA(0.00)[];
+	FORGED_SENDER(0.00)[alvinhuang0603@gmail.com,linux-f2fs-devel-bounces@lists.sourceforge.net];
+	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,gmail.com:s=20251104];
+	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,gmail.com:-];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[5];
 	PREVIOUSLY_DELIVERED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.sourceforge.net:from_smtp,lists.sourceforge.net:dkim,lists.sourceforge.net:helo,lists.sourceforge.net:rdns,lists.sourceforge.net:from_mime];
-	DMARC_POLICY_ALLOW(0.00)[lists.sourceforge.net,none];
-	FROM_NEQ_ENVFROM(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
-	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	RCPT_COUNT_FIVE(0.00)[6];
+	FORGED_SENDER_FORWARDING(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	HAS_REPLYTO(0.00)[asj@kernel.org]
+	FROM_NEQ_ENVFROM(0.00)[alvinhuang0603@gmail.com,linux-f2fs-devel-bounces@lists.sourceforge.net];
+	FREEMAIL_CC(0.00)[gmail.com,vger.kernel.org,lists.sourceforge.net];
+	ALIAS_RESOLVED(0.00)[];
+	TAGGED_RCPT(0.00)[linux-f2fs-devel];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	FORGED_RECIPIENTS_FORWARDING(0.00)[];
+	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	RCPT_COUNT_FIVE(0.00)[6]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: B30F17220D3
+X-Rspamd-Queue-Id: AB99C722623
 
+F2FS_IOC_MOVE_RANGE treats a zero length as a request to move data
+from pos_in to EOF. However, the same-file overlap check runs before
+that expansion, so a request with len == 0 bypasses the overlap
+rejection added for same-file moves.
 
+For example, with a four-block file, moving from block 0 to block 1
+with len == 0 is accepted by the old check because pos_in + len is
+still pos_in at that point. The code then expands len to cover the
+rest of the file and calls __exchange_data_block() on overlapping
+source and destination ranges in the same inode, which is the
+data-corruption case the overlap check was meant to reject.
 
-> How about this?
-> 
-> f2fs)
->     local feat_file="/sys/fs/f2fs/features/fserror"
->     if [ -f "$feat_file" ] && [ "$(cat "$feat_file")" = "supported" ]; then
->         return 0
->     fi
->     ;;
+Move the overlap check after the source range has been validated and
+len == 0 has been expanded, so it sees the effective length. This is a
+no-op for non-zero len (the value is unchanged there) and keeps the
+existing early return for identical positions.
 
-
-This is a check we will use often.
-Why not add a helper like the untested code below [1]?
-Furthermore, I can clean up _require_btrfs_fs_feature()
-to use [1] as well.
-
-
-[1]
-common/rc:
-
-_require_fs_feature_attr()
-{
-	local feat="$1"
-	local attr="$2"
-
-	modprobe $FSTYP > /dev/null 2>&1
-
-	[ -e /sys/fs/$FSTYP/features/$feat ] || \
-		_notrun "Feature $feat not supported on $FSTYP"
-
-	if [ -n "$attr" ]; then
-		if ! grep -qw "$attr" /sys/fs/$FSTYP/features/$feat; then
-			_notrun "Feature $feat attribute $attr missing"
-		fi
-	fi
-}
-
+Fixes: d95fd91c1ac1 ("f2fs: exclude special cases for f2fs_move_file_range")
+Cc: stable@vger.kernel.org
+Assisted-by: Claude:claude-fable-5
+Signed-off-by: Hao-Qun Huang <alvinhuang0603@gmail.com>
+---
+diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
+index 4b52c56d71f0..fdfef01dc799 100644
+--- a/fs/f2fs/file.c
++++ b/fs/f2fs/file.c
+@@ -3144,8 +3144,6 @@ static int f2fs_move_file_range(struct file *file_in, loff_t pos_in,
+ 	if (src == dst) {
+ 		if (pos_in == pos_out)
+ 			return 0;
+-		if (pos_out > pos_in && pos_out < pos_in + len)
+-			return -EINVAL;
+ 	}
+ 
+ 	inode_lock(src);
+@@ -3171,6 +3169,8 @@ static int f2fs_move_file_range(struct file *file_in, loff_t pos_in,
+ 		goto out_unlock;
+ 	if (len == 0)
+ 		olen = len = src->i_size - pos_in;
++	if (src == dst && pos_out > pos_in && pos_out < pos_in + len)
++		goto out_unlock;
+ 	if (pos_in + len == src->i_size)
+ 		len = ALIGN(src->i_size, F2FS_BLKSIZE) - pos_in;
+ 	if (len == 0) {
+-- 
+2.43.0
 
 
 _______________________________________________
