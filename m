@@ -2,21 +2,18 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id Fh+FE3h0TmpsNAIAu9opvQ
+	id ix5sIUdKT2p5dgIAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 08 Jul 2026 18:02:00 +0200
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 09 Jul 2026 09:14:15 +0200
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id D90D472864B
-	for <lists+linux-f2fs-devel@lfdr.de>; Wed, 08 Jul 2026 18:01:54 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B38A372D7E7
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 09 Jul 2026 09:14:14 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=lists.sourceforge.net header.s=beta header.b=KznaGn1I;
-	dkim=fail ("body hash did not verify") header.d=sourceforge.net header.s=x header.b=f+QCROD2;
-	dkim=fail ("body hash did not verify") header.d=sf.net header.s=x header.b=iurg8tIb;
-	dkim=fail ("body hash did not verify") header.d=suse.cz header.s=susede2_rsa header.b=WNKDs7kz;
-	dkim=fail ("body hash did not verify") header.d=suse.cz header.s=susede2_ed25519 header.b="noLT/CiE";
-	dkim=fail ("body hash did not verify") header.d=suse.cz header.s=susede2_rsa header.b=Uc5xxRgo;
-	dmarc=none;
+	dkim=pass header.d=lists.sourceforge.net header.s=beta header.b=JSc4OF0Z;
+	dkim=fail ("body hash did not verify") header.d=sourceforge.net header.s=x header.b=R8qg1Vwy;
+	dkim=fail ("body hash did not verify") header.d=sf.net header.s=x header.b=Hl4liBEq;
+	dmarc=fail reason="SPF not aligned (relaxed), DKIM not aligned (relaxed)" header.from=lst.de (policy=none);
 	spf=pass (mail.lfdr.de: domain of linux-f2fs-devel-bounces@lists.sourceforge.net designates 216.105.38.7 as permitted sender) smtp.mailfrom=linux-f2fs-devel-bounces@lists.sourceforge.net
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
@@ -24,29 +21,29 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	Subject:In-Reply-To:MIME-Version:References:Message-ID:To:From:Date:Sender:
 	Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
 	:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=HSDe4ZPk1g1pp6CvxXslu62eqqqRyxIvUFw9gUOzdWw=; b=KznaGn1Il3wgJkuK5E6GFH6gRH
-	/Wp4Rfc9ZbKlKs9knSXpoKqktiYVsKABCNuDD/slylPkbLKE5y7GUl667wb5CIyQkbLHKMFjPS+gy
-	C/La0/C7ZvG+A3TiG6h2HdfFVaBxvbTOLuPBGpxZuAr/zia8+RubmT7bhzwppnsBFxJE=;
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=AsKFuw0fZiRLbwbj6PJgofSkvM6+USvX+R7Yvxkkzv4=; b=JSc4OF0ZTtLeO0t38Uep+1e4RJ
+	w3TcwW7ifsa66LrrC0OTD/2YEgnRd107vnT9CCcrlaoTZRwvuaH2eCyFvXqLkD5G8PXXzZ98X47sQ
+	XzkRDRWvr5ouyy+5mo24vrC9BAdUjUIdQlhEPuvJ+b0vYX+VBs601RQk3FrezRmviG1Q=;
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1whUiH-0007is-5I;
-	Wed, 08 Jul 2026 16:01:29 +0000
+	id 1whixP-0003MI-UI;
+	Thu, 09 Jul 2026 07:14:03 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <jack@suse.cz>) id 1whUi5-0007hw-QB
+ (envelope-from <hch@lst.de>) id 1whixO-0003M9-TQ
  for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 08 Jul 2026 16:01:18 +0000
+ Thu, 09 Jul 2026 07:14:02 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=dEdqVpLfo0zxiVHZ5Hca2wH1NA58KJPOna1s5syEqgY=; b=f+QCROD2PWKz4EPC0YqceZEEHh
- u5G2O1qSmzvQJZ4MagMZBbkQnwnGNiXUzOPCHLu/NDc7h4if1RFv9DcvtyCrRTFpvu+GH19pKK5VJ
- cVKx58HxxnybCLC9yjxp6jF+wrJZvaeuZAvt5uio0bAM4y9NAAGrTarGsH+DUuwYbePE=;
+ bh=uUk4afLBrSDIwMa6a8RIK4B1YBtoNsyPXhiSuipiPrs=; b=R8qg1VwyAYj3PzIO2td+/o7KWB
+ sIVEP0/GlcNFHB7a6S55rzAWRxr3pyZNO6aqKNp4o79LWJGzZXYZwm63TPRzeom5RuIcHvMDe0A4v
+ t26O665TfMUY+YYaYzTo3kbnLw9D5RGisB0fDyRgXr2yedaJ6IW0fku8rw1s1MT+XQHo=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -54,99 +51,41 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=dEdqVpLfo0zxiVHZ5Hca2wH1NA58KJPOna1s5syEqgY=; b=iurg8tIbOA+3Vogl+0U0EECuMV
- /z9mkERtKaSkKzyu7TwqVYZsWvPEuizIhUP33JWZCIHCi5zAuBmRGUxheNz8PilXE+NudyQ4reh3N
- RhTaSk9SRSRPSgHKj/nZs8ltpDaDvZmjJ2Qo1bCLlE72mB2y3j/GWD55+5jXqoQ/m+Ec=;
-Received: from smtp-out2.suse.de ([195.135.223.131])
+ bh=uUk4afLBrSDIwMa6a8RIK4B1YBtoNsyPXhiSuipiPrs=; b=Hl4liBEqqjFbzWNzZQHii/xl1Y
+ vIOQwXGC7e0TRkuWF3JcpyfXs7IpSYqJWedD+hY/dcgHvGcc7sXuyQECNl6FjJYGn4h4YTKuxORex
+ MucMMQyL4rLt7rK49zs59oReMERKnp68zLcMc1+f5gDB8KpF/MvSOlaFPYGeCtgDi2rc=;
+Received: from verein.lst.de ([213.95.11.211])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
- (TLS1.2:ECDHE-RSA-AES128-GCM-SHA256:128) (Exim 4.95)
- id 1whUi3-0001mt-4i for linux-f2fs-devel@lists.sourceforge.net;
- Wed, 08 Jul 2026 16:01:18 +0000
-Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org
- [IPv6:2a07:de40:b281:104:10:150:64:97])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id 0AD1E75E59;
- Wed,  8 Jul 2026 16:01:05 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.cz; s=susede2_rsa;
- t=1783526468; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=dEdqVpLfo0zxiVHZ5Hca2wH1NA58KJPOna1s5syEqgY=;
- b=WNKDs7kzsD+ejDCxTKpxh/4UTMXqRiwxqZCiY1OD1pWBkjLU2rt74Dml3QmeOC1IFOkdtW
- Pxj/JFWBJLRnNeYcces4x6xwoj3w3OA2MGYqXsnoZSHlh8+pZMDeyXqWQLcIuMQMx0kr6r
- e9EceKJSkjqq3s9V5zZ9wkpvoJGjkTE=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.cz;
- s=susede2_ed25519; t=1783526468;
- h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=dEdqVpLfo0zxiVHZ5Hca2wH1NA58KJPOna1s5syEqgY=;
- b=noLT/CiEA53ybMrIWsCOxXzY+gZEBmg/NRs1+ck8oaQ7jT31lPW5/RJYo1+J7LagCqdjMp
- wO2mJUvdaK/kexAg==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.cz; s=susede2_rsa;
- t=1783526465; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=dEdqVpLfo0zxiVHZ5Hca2wH1NA58KJPOna1s5syEqgY=;
- b=Uc5xxRgoIzNp6zzYFJDKsFKGAMc3FBTT5Ybkvy1VjhQSiV2qAFh0Hko6vSQ8bm7pDSwYE1
- YbRKrlp8L2/e4YOG3kUyb5sEsEl/waFn0XySSyDP0ANsyPxjAYRyVb/R3ECEtiCNGSFDoj
- UxyUFNaDRYdsvCQmImLdVnj3h179DPg=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.cz;
- s=susede2_ed25519; t=1783526465;
- h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=dEdqVpLfo0zxiVHZ5Hca2wH1NA58KJPOna1s5syEqgY=;
- b=UnRPN2+Cgqe2o697vJKHkgoiBj4qT4nlVGmgjBXwxXguByKxHUSGI/B3w9rwapT+VITE6U
- sTAVfMTej8ersqAw==
-Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 0216A779AE;
- Wed,  8 Jul 2026 16:01:05 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
- by imap1.dmz-prg2.suse.org with ESMTPSA id ks94AEF0TmpqXAAAD6G6ig
- (envelope-from <jack@suse.cz>); Wed, 08 Jul 2026 16:01:05 +0000
-Received: by quack3.suse.cz (Postfix, from userid 1000)
- id 9E77BA12D6; Wed, 08 Jul 2026 18:01:04 +0200 (CEST)
-Date: Wed, 8 Jul 2026 18:01:04 +0200
-From: Jan Kara <jack@suse.cz>
-To: Chao Yu <chao@kernel.org>
-Message-ID: <xdicd4lsm44vsidxkrrul6waqdnb4gcof35e2pwurpnz7rvh6g@xjvhdqnen3vy>
-References: <20260707113934.3003158-1-chao@kernel.org>
+ (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
+ id 1whixM-0004cG-Tm for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 09 Jul 2026 07:14:02 +0000
+Received: by verein.lst.de (Postfix, from userid 2407)
+ id 69E5C68AFE; Thu,  9 Jul 2026 09:13:52 +0200 (CEST)
+Date: Thu, 9 Jul 2026 09:13:52 +0200
+From: Christoph Hellwig <hch@lst.de>
+To: Keith Busch <kbusch@meta.com>
+Message-ID: <20260709071352.GA20180@lst.de>
+References: <20260708011843.1036846-1-kbusch@meta.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20260707113934.3003158-1-chao@kernel.org>
-X-Spam-Flag: NO
-X-Spam-Score: -4.01
-X-Spam-Level: 
-X-Spam-Score: -0.2 (/)
+In-Reply-To: <20260708011843.1036846-1-kbusch@meta.com>
+User-Agent: Mutt/1.5.17 (2007-11-01)
+X-Spam-Score: 0.0 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Tue 07-07-26 19:39:33,
- Chao Yu wrote: > Commit 02117b8ae9c0
- ("f2fs: Set GF_NOFS in read_cache_page_gfp while doing > f2fs_quota_read")
- adds GFP_NOFS in f2fs_quota_read() to avoid below deadlock: > [...] 
- Content analysis details:   (-0.2 points, 5.0 required)
+ Content preview:  On Tue, Jul 07, 2026 at 06:18:43PM -0700, Keith Busch wrote:
+ > From: Keith Busch <kbusch@kernel.org> > > Memory alignment constraints
+ for direct io can vary depending on the > backing storage hardware [...] 
+ Content analysis details:   (0.0 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
- -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
- domain
- -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
- -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
- envelope-from domain
- 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
- not necessarily valid
-X-Headers-End: 1whUi3-0001mt-4i
-Subject: Re: [f2fs-dev] [PATCH v2 1/2] f2fs: quota: do not use GFP_NOFS in
- f2fs_quota_read()
+X-Headers-End: 1whixM-0004cG-Tm
+Subject: Re: [f2fs-dev] [PATCH] fs: report direct io constraints through
+ file_getattr
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -158,115 +97,190 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
-Cc: jaegeuk@kernel.org, Jan Kara <jack@suse.cz>, linux-kernel@vger.kernel.org,
- Matthew Wilcox <willy@infradead.org>, linux-f2fs-devel@lists.sourceforge.net
+Cc: axboe@kernel.dk, linux-xfs@vger.kernel.org, brauner@kernel.org,
+ jack@suse.cz, cem@kernel.org, aalbersh@kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, linux-block@vger.kernel.org,
+ Keith Busch <kbusch@kernel.org>, tytso@mit.edu, linux-fsdevel@vger.kernel.org,
+ jaegeuk@kernel.org, linux-ext4@vger.kernel.org, Christoph Hellwig <hch@lst.de>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-0.61 / 15.00];
-	MID_RHS_NOT_FQDN(0.50)[];
+X-Spamd-Result: default: False [-1.01 / 15.00];
 	RWL_MAILSPIKE_EXCELLENT(-0.40)[216.105.38.7:from];
 	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7];
-	MAILLIST(-0.20)[mailman];
 	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
+	MAILLIST(-0.20)[mailman];
 	MIME_GOOD(-0.10)[text/plain];
+	DMARC_POLICY_SOFTFAIL(0.10)[lst.de : SPF not aligned (relaxed), DKIM not aligned (relaxed),none];
 	HAS_LIST_UNSUB(-0.01)[];
-	RECEIVED_HELO_LOCALHOST(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:chao@kernel.org,m:jaegeuk@kernel.org,m:jack@suse.cz,m:linux-kernel@vger.kernel.org,m:willy@infradead.org,m:linux-f2fs-devel@lists.sourceforge.net,s:lists@lfdr.de];
-	RCVD_TLS_LAST(0.00)[];
-	DMARC_NA(0.00)[suse.cz];
-	FORGED_SENDER(0.00)[jack@suse.cz,linux-f2fs-devel-bounces@lists.sourceforge.net];
 	ARC_NA(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,suse.cz:s=susede2_rsa,suse.cz:s=susede2_ed25519];
-	TO_DN_SOME(0.00)[];
-	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
+	RECEIVED_HELO_LOCALHOST(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
 	MIME_TRACE(0.00)[0:+];
-	DKIM_MIXED(0.00)[];
+	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
+	RCVD_COUNT_THREE(0.00)[4];
+	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x];
+	FORGED_SENDER(0.00)[hch@lst.de,linux-f2fs-devel-bounces@lists.sourceforge.net];
+	FORGED_RECIPIENTS(0.00)[m:kbusch@meta.com,m:axboe@kernel.dk,m:linux-xfs@vger.kernel.org,m:brauner@kernel.org,m:jack@suse.cz,m:cem@kernel.org,m:aalbersh@kernel.org,m:linux-f2fs-devel@lists.sourceforge.net,m:linux-block@vger.kernel.org,m:kbusch@kernel.org,m:tytso@mit.edu,m:linux-fsdevel@vger.kernel.org,m:jaegeuk@kernel.org,m:linux-ext4@vger.kernel.org,m:hch@lst.de,s:lists@lfdr.de];
 	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	RCPT_COUNT_FIVE(0.00)[6];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[suse.com:email,infradead.org:email,suse.cz:from_mime,suse.cz:email];
-	ALIAS_RESOLVED(0.00)[];
+	DKIM_MIXED(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[15];
 	FORGED_SENDER_FORWARDING(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[hch@lst.de,linux-f2fs-devel-bounces@lists.sourceforge.net];
 	FROM_HAS_DN(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[jack@suse.cz,linux-f2fs-devel-bounces@lists.sourceforge.net];
-	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,suse.cz:-];
+	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-];
+	ALIAS_RESOLVED(0.00)[];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	RSPAMD_EMAILBL_FAIL(0.00)[chao.kernel.org:query timed out,jack.suse.cz:query timed out,linux-f2fs-devel.lists.sourceforge.net:query timed out,jack@suse.cz:query timed out,linux-f2fs-devel-bounces@lists.sourceforge.net:query timed out];
-	TAGGED_RCPT(0.00)[linux-f2fs-devel];
-	MISSING_XM_UA(0.00)[];
+	MID_RHS_MATCH_FROM(0.00)[];
 	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
-	RCVD_COUNT_SEVEN(0.00)[7]
+	TAGGED_RCPT(0.00)[linux-f2fs-devel];
+	TO_DN_SOME(0.00)[]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: D90D472864B
+X-Rspamd-Queue-Id: B38A372D7E7
 
-On Tue 07-07-26 19:39:33, Chao Yu wrote:
-> Commit 02117b8ae9c0 ("f2fs: Set GF_NOFS in read_cache_page_gfp while doing
-> f2fs_quota_read") adds GFP_NOFS in f2fs_quota_read() to avoid below deadlock:
+On Tue, Jul 07, 2026 at 06:18:43PM -0700, Keith Busch wrote:
+> From: Keith Busch <kbusch@kernel.org>
 > 
-> - do_sys_open
->  - vfs_open
->   - dquot_file_open
->    - dquot_initialize
->     - dqget
->      - dquot_acquire
->       : locks &dqopt->dqio_mutex (VFS Quota Mutex)
->       - qtree_read_dquot
->        - f2fs_quota_read
->         - read_mapping_page (GFP_KERNEL / allows GFP_FS)
->          - __alloc_pages_nodemask
->           - try_to_free_pages (Direct Reclaim)
->            - prune_icache_sb
->             - evict
->              - f2fs_evict_inode
->               - dquot_drop
->                - dqput
->                 - dquot_commit
->                  : tries to lock &dqopt->dqio_mutex again
->                  ==> DEADLOCK (waiting for itself)
-> 
-> As Jan Kara mentioned, quota system has fixed this issue w/ commit
-> 537e11cdc7a6 ("quota: Prevent memory allocation recursion while holding
-> dq_lock"), so this GFP_NOFS flag should be relic, let's use GFP_KERNEL
-> instead.
-> 
-> Cc: Jan Kara <jack@suse.cz>
-> Cc: Matthew Wilcox <willy@infradead.org>
-> Signed-off-by: Chao Yu <chao@kernel.org>
+> Memory alignment constraints for direct io can vary depending on the
+> backing storage hardware. Provide support through file_getattr to report
+> the attributes necessary for applications to know how to construct valid
+> read and write requests.
 
-Looks sound to me. Feel free to add:
+This probably wants to be split in one patch for the new UAPI,
+one for the helper and one for each user.
 
-Reviewed-by: Jan Kara <jack@suse.cz>
+And especially the UAPI one needs a much more detailed commit log
+explaining it, including why this duplicates some of the informastion
+already in statx and documenting the semantics for all the fields.
 
-								Honza
+Andrey, is there a man page or other official documentation for
+file_setattr/file_getattr?
 
-> ---
-> v2:
-> - fix to use GFP_KERNEL instead of 0.
->  fs/f2fs/super.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
-> 
-> diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
-> index da468df058eb..b1725ca68010 100644
-> --- a/fs/f2fs/super.c
-> +++ b/fs/f2fs/super.c
-> @@ -3168,7 +3168,7 @@ static ssize_t f2fs_quota_read(struct super_block *sb, int type, char *data,
+> +/*
+> + * Handle DIO alignment for block devices via fileattr.
+> + */
+
+Maybe note that this purely about the block device constraints,
+and file systems may expose additional ones?
+
+> +void bdev_fileattr(const struct inode *inode, struct file_kattr *fa)
+> +{
+> +	struct block_device *bdev;
+> +
+> +	memset(fa, 0, sizeof(*fa));
+> +	fa->fsx_valid = true;
+> +	fa->flags_valid = true;
+
+Doing the basic file_kattr initialization here feels dangerous
+if we want to be able to call this from file system implementations.
+I'd rather leave the initialization to the caller.
+
+> +
+> +	bdev = blkdev_get_no_open(inode->i_rdev, false);
+> +	if (!bdev)
+> +		return;
+
+.. and explicitly pass in the block device.  ->i_rdev always is
+i_sb->s_dev, which might not be the relevant backing device, e.g. for XFS
+it could be that or the block device in m_rtdev_targp.
+
+If i_rdev is i_sb->s_dev we can just use sb->s_bdev without needing a new
+open.
+
+> +	fa->fsx_dio_mem_align = bdev_dma_alignment(bdev) + 1;
+> +	fa->fsx_dio_offset_align = bdev_logical_block_size(bdev);
+> +	fa->fsx_dio_read_offset_align = bdev_logical_block_size(bdev);
+> +	fa->fsx_dio_virt_boundary_align = bdev_virt_boundary_alignment(bdev);
+> +	fa->fsx_max_segments = bdev_max_segments(bdev);
+
+How is the max_segments value defined in a way that is meaningful to
+userspace?
+
+> @@ -1005,6 +1006,27 @@ int ext4_fileattr_get(struct dentry *dentry, struct file_kattr *fa)
+>  	if (ext4_has_feature_project(inode->i_sb))
+>  		fa->fsx_projid = from_kprojid(&init_user_ns, ei->i_projid);
 >  
->  repeat:
->  		folio = mapping_read_folio_gfp(mapping, off >> PAGE_SHIFT,
-> -				GFP_NOFS);
-> +				GFP_KERNEL);
->  		if (IS_ERR(folio)) {
->  			if (PTR_ERR(folio) == -ENOMEM) {
->  				memalloc_retry_wait(GFP_NOFS);
-> -- 
-> 2.49.0
-> 
--- 
-Jan Kara <jack@suse.com>
-SUSE Labs, CR
+> +	if (S_ISREG(inode->i_mode)) {
+
+You'll probably want to split this into a helper to keep it easily
+readable.
+
+> +		u32 dio_align = ext4_dio_alignment(inode);
+> +
+> +		if (dio_align != 0) {
+
+
+> +			struct block_device *bdev = inode->i_sb->s_bdev;
+> +
+> +			if (dio_align == 1) {
+> +				fa->fsx_dio_mem_align = bdev_dma_alignment(bdev) + 1;
+> +				fa->fsx_dio_offset_align = bdev_logical_block_size(bdev);
+> +				fa->fsx_dio_read_offset_align = bdev_logical_block_size(bdev);
+> +			} else {
+> +				fa->fsx_dio_mem_align = dio_align;
+> +				fa->fsx_dio_offset_align = dio_align;
+> +				fa->fsx_dio_read_offset_align = dio_align;
+> +			}
+
+Call bdev_fileattr and override the relevant field as needed?
+
+Question to the ext4 maintainers: why does ext4_dio_alignment
+affect the in-memory alignment?  If it does so, it should probably
+also affect the virt boundry alignment..
+
+> +	if (S_ISREG(inode->i_mode)) {
+> +		unsigned int bsize = i_blocksize(inode);
+> +		struct block_device *bdev = inode->i_sb->s_bdev;
+> +
+> +		if (!f2fs_force_buffered_io(inode, WRITE)) {
+
+Same comments as for ext4.  Also f2fs does support multiple devices,
+but I'm not sure how data is placed on them, or if a file can be
+on multiple devices.  We'll need input from the f2fs
+maintainers/contributors here.
+
+> @@ -88,8 +89,12 @@ int vfs_fileattr_get(struct dentry *dentry, struct file_kattr *fa)
+>  	struct inode *inode = d_inode(dentry);
+>  	int error;
+>  
+> -	if (!inode->i_op->fileattr_get)
+> -		return -ENOIOCTLCMD;
+> +	if (!inode->i_op->fileattr_get) {
+> +		if (!S_ISBLK(inode->i_mode))
+> +			return -ENOIOCTLCMD;
+> +		bdev_fileattr(inode, fa);
+> +		return 0;
+
+Don't we also want to fill out the attributes for block devices
+on file systems that provide a ->fileattr_get?.   Also if we fill
+out something, we need the security_inode_file_getattr as well.
+
+>  /**
+> @@ -145,6 +155,8 @@ static int file_attr_to_fileattr(const struct file_attr *fattr,
+>  
+>  	if (fattr->fa_xflags & ~mask)
+>  		return -EINVAL;
+> +	if (fattr->fa_pad)
+> +		return -EINVAL;
+
+How is this related?
+
+> +	if (whichfork == XFS_DATA_FORK && S_ISREG(VFS_I(ip)->i_mode)) {
+
+This probably wants a separate helper.
+
+> +		struct xfs_buftarg *target = xfs_inode_buftarg(ip);
+> +		struct block_device *bdev = target->bt_bdev;
+
+.. and if the generic helpers gets an explicitl bdev we can use it
+here and just override one value for for xfs_is_cow_inode().
+
+> +static inline unsigned int bdev_virt_boundary_alignment(struct block_device *bdev)
+
+Overly long line.
+
 
 
 _______________________________________________
