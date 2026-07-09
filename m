@@ -2,88 +2,154 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id ix5sIUdKT2p5dgIAu9opvQ
+	id 1vIdLjdhT2ovfgIAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 09 Jul 2026 09:14:15 +0200
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 09 Jul 2026 10:52:07 +0200
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id B38A372D7E7
-	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 09 Jul 2026 09:14:14 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id BF71F72E7F6
+	for <lists+linux-f2fs-devel@lfdr.de>; Thu, 09 Jul 2026 10:52:06 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=lists.sourceforge.net header.s=beta header.b=JSc4OF0Z;
-	dkim=fail ("body hash did not verify") header.d=sourceforge.net header.s=x header.b=R8qg1Vwy;
-	dkim=fail ("body hash did not verify") header.d=sf.net header.s=x header.b=Hl4liBEq;
-	dmarc=fail reason="SPF not aligned (relaxed), DKIM not aligned (relaxed)" header.from=lst.de (policy=none);
+	dkim=pass header.d=lists.sourceforge.net header.s=beta header.b=mfo8peCc;
+	dkim=fail ("body hash did not verify") header.d=sourceforge.net header.s=x header.b=NDxhkHMq;
+	dkim=fail ("body hash did not verify") header.d=sf.net header.s=x header.b=UEurA2Ev;
+	dkim=fail ("body hash did not verify") header.d=redhat.com header.s=mimecast20190719 header.b=iza834L5;
+	dmarc=pass (policy=none) header.from=lists.sourceforge.net;
 	spf=pass (mail.lfdr.de: domain of linux-f2fs-devel-bounces@lists.sourceforge.net designates 216.105.38.7 as permitted sender) smtp.mailfrom=linux-f2fs-devel-bounces@lists.sourceforge.net
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
-	List-Subscribe:List-Help:List-Post:List-Archive:List-Unsubscribe:List-Id:
-	Subject:In-Reply-To:MIME-Version:References:Message-ID:To:From:Date:Sender:
-	Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
-	:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=AsKFuw0fZiRLbwbj6PJgofSkvM6+USvX+R7Yvxkkzv4=; b=JSc4OF0ZTtLeO0t38Uep+1e4RJ
-	w3TcwW7ifsa66LrrC0OTD/2YEgnRd107vnT9CCcrlaoTZRwvuaH2eCyFvXqLkD5G8PXXzZ98X47sQ
-	XzkRDRWvr5ouyy+5mo24vrC9BAdUjUIdQlhEPuvJ+b0vYX+VBs601RQk3FrezRmviG1Q=;
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
+	List-Unsubscribe:List-Id:Subject:In-Reply-To:MIME-Version:References:
+	Message-ID:To:Date:Sender:Content-ID:Content-Description:Resent-Date:
+	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
+	bh=Y7ducKSF+AyLZy9aEkKdn71QjiNHu7yWNGMdpD+I6dw=; b=mfo8peCchQ8veHISZ5FLY1t9DX
+	EbbqD2rqGusAs+STda7hEonxf7i4csew07BDkHTSr1qHYSXCnLo4ExYNyGjApXFwXjPYuXX1C236f
+	B0yHunUWaBQO4aPulIOMXX5T01uSCWdyv8iAS4abj8/cQJoFLUqEA854ss4SYcB1KRRs=;
+Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
+	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1whixP-0003MI-UI;
-	Thu, 09 Jul 2026 07:14:03 +0000
+	id 1whkU8-0008ML-Cc;
+	Thu, 09 Jul 2026 08:51:57 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <hch@lst.de>) id 1whixO-0003M9-TQ
+ (envelope-from <aalbersh@redhat.com>) id 1whkU5-0008ME-1Y
  for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 09 Jul 2026 07:14:02 +0000
+ Thu, 09 Jul 2026 08:51:53 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
+ d=sourceforge.net; s=x; h=Content-Type:In-Reply-To:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=uUk4afLBrSDIwMa6a8RIK4B1YBtoNsyPXhiSuipiPrs=; b=R8qg1VwyAYj3PzIO2td+/o7KWB
- sIVEP0/GlcNFHB7a6S55rzAWRxr3pyZNO6aqKNp4o79LWJGzZXYZwm63TPRzeom5RuIcHvMDe0A4v
- t26O665TfMUY+YYaYzTo3kbnLw9D5RGisB0fDyRgXr2yedaJ6IW0fku8rw1s1MT+XQHo=;
+ bh=eb5jDTkXBTPOE342mmNfwm5lDoBFxjZ2KPIK/Aydl/0=; b=NDxhkHMqaBe94Vqwbije6TtYlp
+ Nl+ghoYltbYQr65iXL1vemoiDtiKq8IRxonqE/fQc3VZA47mSnclthOGftdU/HMHVNbY4e4Ikz5Zv
+ xS+qGTiT7NJnRmxTNb0EQcdv1MI20dpmsdaHC+DV8vRtDjxSE4MMPnQl8V/fg/pMHl2M=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
+ h=Content-Type:In-Reply-To:MIME-Version:References:Message-ID:Subject:Cc:To
  :From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=uUk4afLBrSDIwMa6a8RIK4B1YBtoNsyPXhiSuipiPrs=; b=Hl4liBEqqjFbzWNzZQHii/xl1Y
- vIOQwXGC7e0TRkuWF3JcpyfXs7IpSYqJWedD+hY/dcgHvGcc7sXuyQECNl6FjJYGn4h4YTKuxORex
- MucMMQyL4rLt7rK49zs59oReMERKnp68zLcMc1+f5gDB8KpF/MvSOlaFPYGeCtgDi2rc=;
-Received: from verein.lst.de ([213.95.11.211])
+ bh=eb5jDTkXBTPOE342mmNfwm5lDoBFxjZ2KPIK/Aydl/0=; b=UEurA2EvdivaKNJ+3B8pQ7Be9h
+ uHmcW3+wl2DwUKPNIoK4Wibrvp4VNyeQeGlKgH43VAPeYsZdyqHbvbhVvpljJfnA/Ao03saQLoT/b
+ 7rHD5VsycsUTk65GjyOnU5nbzMELxF/xySNJlZVHkiFRuYJFsY92cF88pvRpTwQiTjI4=;
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1whixM-0004cG-Tm for linux-f2fs-devel@lists.sourceforge.net;
- Thu, 09 Jul 2026 07:14:02 +0000
-Received: by verein.lst.de (Postfix, from userid 2407)
- id 69E5C68AFE; Thu,  9 Jul 2026 09:13:52 +0200 (CEST)
-Date: Thu, 9 Jul 2026 09:13:52 +0200
-From: Christoph Hellwig <hch@lst.de>
-To: Keith Busch <kbusch@meta.com>
-Message-ID: <20260709071352.GA20180@lst.de>
+ id 1whkU4-0005Cg-Bc for linux-f2fs-devel@lists.sourceforge.net;
+ Thu, 09 Jul 2026 08:51:53 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1783587106;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=eb5jDTkXBTPOE342mmNfwm5lDoBFxjZ2KPIK/Aydl/0=;
+ b=iza834L5VL4ghd3uS/qwfK26v06iCDCHiZ2z7zsaJ0ylLcpa1eWADTc9i9X/fWm19bl264
+ QgI4N5jNYKNxZTzfat48yOmrhvb4Ppip5zPTruRZhbA8nwMVjFxHxJrVCipqrgHMlrH0Qy
+ 8cA6E9aJVUxYbReHXlmNFov4FiM2kHE=
+Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
+ [209.85.128.72]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-246-Ff0D0h69MxmM5HUaClMz5w-1; Thu, 09 Jul 2026 04:51:44 -0400
+X-MC-Unique: Ff0D0h69MxmM5HUaClMz5w-1
+X-Mimecast-MFC-AGG-ID: Ff0D0h69MxmM5HUaClMz5w_1783587104
+Received: by mail-wm1-f72.google.com with SMTP id
+ 5b1f17b1804b1-493c55d5ce5so9840945e9.0
+ for <linux-f2fs-devel@lists.sourceforge.net>;
+ Thu, 09 Jul 2026 01:51:44 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20251104; t=1783587103; x=1784191903;
+ h=in-reply-to:content-disposition:content-type:mime-version
+ :references:message-id:subject:cc:to:from:date:x-gm-gg
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+ :content-type;
+ bh=eb5jDTkXBTPOE342mmNfwm5lDoBFxjZ2KPIK/Aydl/0=;
+ b=OTpQDC6qxPR/3ELRsjAIiachCyKGYwflj7WFqu1QXBCfUcytXWCrZrzcCMhDUCUKNz
+ awAC91/usxrA15JOIxXMSPy9hqD2MunZq3Z75mvgznPzq9QcIe+z8ZUez8ronXL5z7Cp
+ 2fq3RV3kMqvJLNV8zMiYBYzrrPe61I4NHhbR2yx65BIGJ0kr8ODbEQss8j6hM9+DGCbz
+ dYa9Aiuf6Ud4xO2+vdpq4ZrW3i+CWuv2Wt9q3/CYTeemPZMZrYoS/JAggSY8yVXtW/im
+ upjBYyPd1AD8Kx4Iim9XFtgPvdIRs0Xr3+v1HuoSLU46ATW8DcE8qo7Kw2VxqYXNqorq
+ 9SgA==
+X-Forwarded-Encrypted: i=1;
+ AHgh+Roi/14TgYaV9Crbq9FFXEfozkVavkrpX2pGHhYss71YKDRAA4ZueGogdcHU9IvkJ9fpkxdKgzR0dkmPROV8Uzh7@lists.sourceforge.net
+X-Gm-Message-State: AOJu0YzH1c6svoSMZYQ2xAAMl5rcMdP1wILK2en44hGj919pHxoqYpH6
+ OMpQUIZjdXheWNLLI5sCrKnYhc10ogv7Yqjb0cfJXWF8UmtcI+Dx766PogWhbK2kNP52+sdEkDW
+ UaRsL6JTqN94FdUObg5GQkV+UmgLO7jrZqZAXGA61FhSNpFY7U1ukK8RXCCn4pkVo403V/4CUTN
+ rDoA==
+X-Gm-Gg: AfdE7cmc04SqTKX+4VzJOw8imrN4PaezEq9XDPadf16ZEvXmSEI73BE0PVRySi5IZDZ
+ DQvO3WiI2BcoHF6D45WNDxKelIWOrEPZSeltryk3P06DcTCLbMe6mz5Jldcc/iLM0HxE4R7Ecl5
+ bxS7uoDKAfilmE5maw9JrxIKCHHtPaJzyr8K2rokOAH7lj0JgPUQhD0qtdTFcaNRDIscPYIOnPP
+ 2EfkK0qDZtN2vOMaaJqewYK2vFAOP1TN9De7rB+XaBPsGsgGLiUnnAsO9FMPPVCe7rjpNQKMITb
+ nd6N6Bm8hCAM357MzKQvppa12ycYCAdNTJ5QK8SFWAyq4YgH24Zuywr+Hno1fJHaAhr+yLDsH5L
+ igVWVh8Cu0tsIq3mZcWr3MJ0OQx+5uB8cGzoWv19yTBvwrg==
+X-Received: by 2002:a05:600c:628d:b0:493:bcef:5646 with SMTP id
+ 5b1f17b1804b1-493e6862b68mr57369605e9.12.1783587103515; 
+ Thu, 09 Jul 2026 01:51:43 -0700 (PDT)
+X-Received: by 2002:a05:600c:628d:b0:493:bcef:5646 with SMTP id
+ 5b1f17b1804b1-493e6862b68mr57369285e9.12.1783587102989; 
+ Thu, 09 Jul 2026 01:51:42 -0700 (PDT)
+Received: from aalbersh-thinkpadx1carbongen13.rmtcz.csb ([217.30.74.39])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-493e5a5d174sm144100205e9.2.2026.07.09.01.51.41
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 09 Jul 2026 01:51:41 -0700 (PDT)
+Date: Thu, 9 Jul 2026 10:51:39 +0200
+To: Christoph Hellwig <hch@lst.de>
+Message-ID: <ak9f0CXSegLq8l5w@aalbersh-thinkpadx1carbongen13.rmtcz.csb>
 References: <20260708011843.1036846-1-kbusch@meta.com>
+ <20260709071352.GA20180@lst.de>
 MIME-Version: 1.0
+In-Reply-To: <20260709071352.GA20180@lst.de>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-MFC-PROC-ID: Hf3KFJvqITjCumMo7N2QONY44lQUEoxPPtP7QF6kN3w_1783587104
+X-Mimecast-Originator: redhat.com
 Content-Disposition: inline
-In-Reply-To: <20260708011843.1036846-1-kbusch@meta.com>
-User-Agent: Mutt/1.5.17 (2007-11-01)
-X-Spam-Score: 0.0 (/)
+X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
- running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
+ running on the system "sfi-spamd-2.hosts.colo.sdot.me", 
  has NOT identified this incoming email as spam.  The original
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Tue, Jul 07, 2026 at 06:18:43PM -0700, Keith Busch wrote:
- > From: Keith Busch <kbusch@kernel.org> > > Memory alignment constraints
- for direct io can vary depending on the > backing storage hardware [...] 
- Content analysis details:   (0.0 points, 5.0 required)
+ Content preview:  On 2026-07-09 09:13:52, Christoph Hellwig wrote: > On Tue,
+ Jul 07, 2026 at 06:18:43PM -0700, Keith Busch wrote: > > From: Keith Busch
+ <kbusch@kernel.org> > > > > Memory alignment constraints for direc [...] 
+ Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
-X-Headers-End: 1whixM-0004cG-Tm
+ -0.1 DKIM_VALID_EF          Message has a valid DKIM or DK signature from
+ envelope-from domain
+ -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
+ -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
+ domain
+ 0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
+ not necessarily valid
+ 0.0 RCVD_IN_MSPIKE_H4      RBL: Very Good reputation (+4)
+ [170.10.133.124 listed in wl.mailspike.net]
+ 0.0 RCVD_IN_MSPIKE_WL      Mailspike good senders
+X-Headers-End: 1whkU4-0005Cg-Bc
 Subject: Re: [f2fs-dev] [PATCH] fs: report direct io constraints through
  file_getattr
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
@@ -97,189 +163,84 @@ List-Post: <mailto:linux-f2fs-devel@lists.sourceforge.net>
 List-Help: <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=help>
 List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>, 
  <mailto:linux-f2fs-devel-request@lists.sourceforge.net?subject=subscribe>
+From: Andrey Albershteyn via Linux-f2fs-devel
+ <linux-f2fs-devel@lists.sourceforge.net>
+Reply-To: Andrey Albershteyn <aalbersh@redhat.com>
 Cc: axboe@kernel.dk, linux-xfs@vger.kernel.org, brauner@kernel.org,
- jack@suse.cz, cem@kernel.org, aalbersh@kernel.org,
- linux-f2fs-devel@lists.sourceforge.net, linux-block@vger.kernel.org,
- Keith Busch <kbusch@kernel.org>, tytso@mit.edu, linux-fsdevel@vger.kernel.org,
- jaegeuk@kernel.org, linux-ext4@vger.kernel.org, Christoph Hellwig <hch@lst.de>
+ jack@suse.cz, Keith Busch <kbusch@meta.com>, cem@kernel.org,
+ aalbersh@kernel.org, linux-f2fs-devel@lists.sourceforge.net,
+ linux-block@vger.kernel.org, Keith Busch <kbusch@kernel.org>, tytso@mit.edu,
+ linux-fsdevel@vger.kernel.org, jaegeuk@kernel.org, linux-ext4@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-1.01 / 15.00];
+X-Spamd-Result: default: False [-8.61 / 15.00];
+	WHITELIST_DMARC(-7.00)[sourceforge.net:D:+];
+	DMARC_POLICY_ALLOW_WITH_FAILURES(-0.50)[];
 	RWL_MAILSPIKE_EXCELLENT(-0.40)[216.105.38.7:from];
 	R_SPF_ALLOW(-0.20)[+ip4:216.105.38.7];
 	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
 	MAILLIST(-0.20)[mailman];
 	MIME_GOOD(-0.10)[text/plain];
-	DMARC_POLICY_SOFTFAIL(0.10)[lst.de : SPF not aligned (relaxed), DKIM not aligned (relaxed),none];
 	HAS_LIST_UNSUB(-0.01)[];
-	ARC_NA(0.00)[];
 	RECEIVED_HELO_LOCALHOST(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
-	RCVD_COUNT_THREE(0.00)[4];
-	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x];
-	FORGED_SENDER(0.00)[hch@lst.de,linux-f2fs-devel-bounces@lists.sourceforge.net];
-	FORGED_RECIPIENTS(0.00)[m:kbusch@meta.com,m:axboe@kernel.dk,m:linux-xfs@vger.kernel.org,m:brauner@kernel.org,m:jack@suse.cz,m:cem@kernel.org,m:aalbersh@kernel.org,m:linux-f2fs-devel@lists.sourceforge.net,m:linux-block@vger.kernel.org,m:kbusch@kernel.org,m:tytso@mit.edu,m:linux-fsdevel@vger.kernel.org,m:jaegeuk@kernel.org,m:linux-ext4@vger.kernel.org,m:hch@lst.de,s:lists@lfdr.de];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	DKIM_MIXED(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[15];
+	FORGED_RECIPIENTS(0.00)[m:hch@lst.de,m:axboe@kernel.dk,m:linux-xfs@vger.kernel.org,m:brauner@kernel.org,m:jack@suse.cz,m:kbusch@meta.com,m:cem@kernel.org,m:aalbersh@kernel.org,m:linux-f2fs-devel@lists.sourceforge.net,m:linux-block@vger.kernel.org,m:kbusch@kernel.org,m:tytso@mit.edu,m:linux-fsdevel@vger.kernel.org,m:jaegeuk@kernel.org,m:linux-ext4@vger.kernel.org,s:lists@lfdr.de];
+	DMARC_POLICY_ALLOW(0.00)[lists.sourceforge.net,none];
 	FORGED_SENDER_FORWARDING(0.00)[];
-	FORGED_SENDER_MAILLIST(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[hch@lst.de,linux-f2fs-devel-bounces@lists.sourceforge.net];
-	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-];
-	ALIAS_RESOLVED(0.00)[];
+	FORGED_SENDER(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
+	ARC_NA(0.00)[];
+	TO_DN_SOME(0.00)[];
+	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,redhat.com:s=mimecast20190719];
+	RCPT_COUNT_TWELVE(0.00)[15];
+	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
+	MIME_TRACE(0.00)[0:+];
+	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
+	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,redhat.com:-];
+	FROM_NEQ_ENVFROM(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
-	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
 	TAGGED_RCPT(0.00)[linux-f2fs-devel];
-	TO_DN_SOME(0.00)[]
+	ALIAS_RESOLVED(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[6];
+	PREVIOUSLY_DELIVERED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
+	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	HAS_REPLYTO(0.00)[aalbersh@redhat.com];
+	MISSING_XM_UA(0.00)[];
+	FORGED_SENDER_MAILLIST(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[aalbersh-thinkpadx1carbongen13.rmtcz.csb:mid]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: B38A372D7E7
+X-Rspamd-Queue-Id: BF71F72E7F6
 
-On Tue, Jul 07, 2026 at 06:18:43PM -0700, Keith Busch wrote:
-> From: Keith Busch <kbusch@kernel.org>
+On 2026-07-09 09:13:52, Christoph Hellwig wrote:
+> On Tue, Jul 07, 2026 at 06:18:43PM -0700, Keith Busch wrote:
+> > From: Keith Busch <kbusch@kernel.org>
+> > 
+> > Memory alignment constraints for direct io can vary depending on the
+> > backing storage hardware. Provide support through file_getattr to report
+> > the attributes necessary for applications to know how to construct valid
+> > read and write requests.
 > 
-> Memory alignment constraints for direct io can vary depending on the
-> backing storage hardware. Provide support through file_getattr to report
-> the attributes necessary for applications to know how to construct valid
-> read and write requests.
+> This probably wants to be split in one patch for the new UAPI,
+> one for the helper and one for each user.
+> 
+> And especially the UAPI one needs a much more detailed commit log
+> explaining it, including why this duplicates some of the informastion
+> already in statx and documenting the semantics for all the fields.
+> 
+> Andrey, is there a man page or other official documentation for
+> file_setattr/file_getattr?
 
-This probably wants to be split in one patch for the new UAPI,
-one for the helper and one for each user.
+No, I had a draft in cover letter but haven't got to sending it to
+man-pages. I will prepare a man page.
 
-And especially the UAPI one needs a much more detailed commit log
-explaining it, including why this duplicates some of the informastion
-already in statx and documenting the semantics for all the fields.
-
-Andrey, is there a man page or other official documentation for
-file_setattr/file_getattr?
-
-> +/*
-> + * Handle DIO alignment for block devices via fileattr.
-> + */
-
-Maybe note that this purely about the block device constraints,
-and file systems may expose additional ones?
-
-> +void bdev_fileattr(const struct inode *inode, struct file_kattr *fa)
-> +{
-> +	struct block_device *bdev;
-> +
-> +	memset(fa, 0, sizeof(*fa));
-> +	fa->fsx_valid = true;
-> +	fa->flags_valid = true;
-
-Doing the basic file_kattr initialization here feels dangerous
-if we want to be able to call this from file system implementations.
-I'd rather leave the initialization to the caller.
-
-> +
-> +	bdev = blkdev_get_no_open(inode->i_rdev, false);
-> +	if (!bdev)
-> +		return;
-
-.. and explicitly pass in the block device.  ->i_rdev always is
-i_sb->s_dev, which might not be the relevant backing device, e.g. for XFS
-it could be that or the block device in m_rtdev_targp.
-
-If i_rdev is i_sb->s_dev we can just use sb->s_bdev without needing a new
-open.
-
-> +	fa->fsx_dio_mem_align = bdev_dma_alignment(bdev) + 1;
-> +	fa->fsx_dio_offset_align = bdev_logical_block_size(bdev);
-> +	fa->fsx_dio_read_offset_align = bdev_logical_block_size(bdev);
-> +	fa->fsx_dio_virt_boundary_align = bdev_virt_boundary_alignment(bdev);
-> +	fa->fsx_max_segments = bdev_max_segments(bdev);
-
-How is the max_segments value defined in a way that is meaningful to
-userspace?
-
-> @@ -1005,6 +1006,27 @@ int ext4_fileattr_get(struct dentry *dentry, struct file_kattr *fa)
->  	if (ext4_has_feature_project(inode->i_sb))
->  		fa->fsx_projid = from_kprojid(&init_user_ns, ei->i_projid);
->  
-> +	if (S_ISREG(inode->i_mode)) {
-
-You'll probably want to split this into a helper to keep it easily
-readable.
-
-> +		u32 dio_align = ext4_dio_alignment(inode);
-> +
-> +		if (dio_align != 0) {
-
-
-> +			struct block_device *bdev = inode->i_sb->s_bdev;
-> +
-> +			if (dio_align == 1) {
-> +				fa->fsx_dio_mem_align = bdev_dma_alignment(bdev) + 1;
-> +				fa->fsx_dio_offset_align = bdev_logical_block_size(bdev);
-> +				fa->fsx_dio_read_offset_align = bdev_logical_block_size(bdev);
-> +			} else {
-> +				fa->fsx_dio_mem_align = dio_align;
-> +				fa->fsx_dio_offset_align = dio_align;
-> +				fa->fsx_dio_read_offset_align = dio_align;
-> +			}
-
-Call bdev_fileattr and override the relevant field as needed?
-
-Question to the ext4 maintainers: why does ext4_dio_alignment
-affect the in-memory alignment?  If it does so, it should probably
-also affect the virt boundry alignment..
-
-> +	if (S_ISREG(inode->i_mode)) {
-> +		unsigned int bsize = i_blocksize(inode);
-> +		struct block_device *bdev = inode->i_sb->s_bdev;
-> +
-> +		if (!f2fs_force_buffered_io(inode, WRITE)) {
-
-Same comments as for ext4.  Also f2fs does support multiple devices,
-but I'm not sure how data is placed on them, or if a file can be
-on multiple devices.  We'll need input from the f2fs
-maintainers/contributors here.
-
-> @@ -88,8 +89,12 @@ int vfs_fileattr_get(struct dentry *dentry, struct file_kattr *fa)
->  	struct inode *inode = d_inode(dentry);
->  	int error;
->  
-> -	if (!inode->i_op->fileattr_get)
-> -		return -ENOIOCTLCMD;
-> +	if (!inode->i_op->fileattr_get) {
-> +		if (!S_ISBLK(inode->i_mode))
-> +			return -ENOIOCTLCMD;
-> +		bdev_fileattr(inode, fa);
-> +		return 0;
-
-Don't we also want to fill out the attributes for block devices
-on file systems that provide a ->fileattr_get?.   Also if we fill
-out something, we need the security_inode_file_getattr as well.
-
->  /**
-> @@ -145,6 +155,8 @@ static int file_attr_to_fileattr(const struct file_attr *fattr,
->  
->  	if (fattr->fa_xflags & ~mask)
->  		return -EINVAL;
-> +	if (fattr->fa_pad)
-> +		return -EINVAL;
-
-How is this related?
-
-> +	if (whichfork == XFS_DATA_FORK && S_ISREG(VFS_I(ip)->i_mode)) {
-
-This probably wants a separate helper.
-
-> +		struct xfs_buftarg *target = xfs_inode_buftarg(ip);
-> +		struct block_device *bdev = target->bt_bdev;
-
-.. and if the generic helpers gets an explicitl bdev we can use it
-here and just override one value for for xfs_is_cow_inode().
-
-> +static inline unsigned int bdev_virt_boundary_alignment(struct block_device *bdev)
-
-Overly long line.
+-- 
+- Andrey
 
 
 
