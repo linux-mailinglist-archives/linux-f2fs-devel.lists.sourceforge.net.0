@@ -2,18 +2,18 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id 2qj6ByuzUGqU3gIAu9opvQ
+	id wW7/EECzUGqZ3gIAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 10 Jul 2026 10:54:03 +0200
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 10 Jul 2026 10:54:24 +0200
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id DB1B6738B1D
-	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 10 Jul 2026 10:54:02 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E6749738B33
+	for <lists+linux-f2fs-devel@lfdr.de>; Fri, 10 Jul 2026 10:54:23 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=lists.sourceforge.net header.s=beta header.b=HJENWZr7;
-	dkim=fail ("body hash did not verify") header.d=sourceforge.net header.s=x header.b=QWlCDWln;
-	dkim=fail ("body hash did not verify") header.d=sf.net header.s=x header.b=gzwlD8Wm;
-	dkim=fail ("body hash did not verify") header.d=kernel.org header.s=k20260515 header.b="JpHW8/4h";
+	dkim=pass header.d=lists.sourceforge.net header.s=beta header.b=CxHxk8V0;
+	dkim=fail ("body hash did not verify") header.d=sourceforge.net header.s=x header.b=Ogv6a3zE;
+	dkim=fail ("body hash did not verify") header.d=sf.net header.s=x header.b=gRpnqhJ9;
+	dkim=fail ("body hash did not verify") header.d=kernel.org header.s=k20260515 header.b=fOPGIi2q;
 	dmarc=pass (policy=none) header.from=lists.sourceforge.net;
 	spf=pass (mail.lfdr.de: domain of linux-f2fs-devel-bounces@lists.sourceforge.net designates 216.105.38.7 as permitted sender) smtp.mailfrom=linux-f2fs-devel-bounces@lists.sourceforge.net
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
@@ -22,29 +22,29 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	List-Unsubscribe:List-Id:Subject:MIME-Version:References:In-Reply-To:
 	Message-ID:Date:To:Sender:Content-ID:Content-Description:Resent-Date:
 	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=peiF+ZCve6au7MOusZ3JGQr6+IRBAJffmJNJ0x2V1W0=; b=HJENWZr7X+GLztdy5H5+u2YLJA
-	XG0ypFX7UIvrRr5o4d+/jfdsxTt2BQVfN15Ae38XdsM5wvdLrAhTpf47MUWwTSZn4FMwU/gopum5j
-	0UDr4f7Hr3r1l6w1W2pQ900Hv5dSJld9IwPaW1/K5ai+cgqbPBVZaD6UJQVJ9WA777xs=;
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=rgdRltfYZPVAZa9rEsAO18dzS/C2P1NRwMGB66PS+UU=; b=CxHxk8V0x310PxCMQiGb4l8Lwl
+	hggGdTuMEFPilEGetYjoHMetydHFtucFlm6LnEx0hlqwg1l1OgXv8DGVcq1oj1aSoe3R7VjYTqHfJ
+	/uo3V1yh1AhM+eBI3P3e6yCIc0cITs7aSvL0Ytny/QTVIlG4l6MzuN0sC2/683+eI3Hg=;
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1wi6zg-0001dd-5T;
-	Fri, 10 Jul 2026 08:54:00 +0000
+	id 1wi701-0003VK-5c;
+	Fri, 10 Jul 2026 08:54:21 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <aalbersh@kernel.org>) id 1wi6zc-0001dQ-VF
+ (envelope-from <aalbersh@kernel.org>) id 1wi700-0003Uv-5w
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 10 Jul 2026 08:53:57 +0000
+ Fri, 10 Jul 2026 08:54:20 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=AufMkm+nEeCieeEcnf+ZJSfHdxMb9GSGIeKul87lEHs=; b=QWlCDWlnLJ1uBR+N0v+HeH/+Zc
- 9qqKvrELzSxAoYBRIEcVj5YdJTLfhPx0dKSuRPtDvx4X2I0CzSobJTp9qHn8iQGX3CgY8HDZl38I3
- BZInW3pYMp6Yj5V2yioMmmMYUDM10+Vf88qsw1jLweD5kf8G6/vboTNgCjINFAxOkJyw=;
+ bh=wjtx2lzB3uvb4xU+DIuox4Zw+1tx5e8JwgBOS4wBSrM=; b=Ogv6a3zEWzQX8otuMAPu/eS/Sx
+ tc3tLtm9REp37KVqNjB7N8b7wa/rF07rtVG/H8eqxMJ+iVArkFfLjDNVqYvil8TzdGjN5HkQpKS/0
+ CRQUGMCm5WoMUimJG8Mx67XNl1k0duhXXOCrmH3RsDGciOp6DYphA9FRjAb9fC+GdUtg=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:
@@ -52,33 +52,33 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=AufMkm+nEeCieeEcnf+ZJSfHdxMb9GSGIeKul87lEHs=; b=gzwlD8WmhjssjP0Blv+ZFhU2pp
- lMCiouMRhCItcE7rkFBMsdWP9uDBaQ+Ps/USlfAvMM4jq4vgZMe1T7yjSaGEy1pSiwTQnIcVgCIzV
- GfH0joiQ9GDVEIqIrTNrBJ7r/OU3lTQ4XrvKnxsKxMqZduAO/knGkmpn2hWutdrw7hXM=;
+ bh=wjtx2lzB3uvb4xU+DIuox4Zw+1tx5e8JwgBOS4wBSrM=; b=gRpnqhJ9yfntb+jgwUxfj+NVtb
+ aaonZvdEqnw36zFxV/iiRQfDSTqutK0HR3tJFUX9FUZzpg6oFipwL42A4YEZosNftgLHFDi9iH2Dd
+ lNlwZLZr3ZwO27Ky2YPTMkz3sjNs3q3P7sgsW+SI6P0OcD22Kyfx/rL6eTa4jQ4zPQsA=;
 Received: from tor.source.kernel.org ([172.105.4.254])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1wi6zd-0007Ue-9H for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 10 Jul 2026 08:53:57 +0000
+ id 1wi6zl-0007Vm-96 for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 10 Jul 2026 08:54:20 +0000
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by tor.source.kernel.org (Postfix) with ESMTP id B5C2E60051;
+ by tor.source.kernel.org (Postfix) with ESMTP id AE77B6132C;
+ Fri, 10 Jul 2026 08:53:54 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 02C9E1F00A3E;
  Fri, 10 Jul 2026 08:53:51 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0A7001F000E9;
- Fri, 10 Jul 2026 08:53:48 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
- s=k20260515; t=1783673631;
- bh=AufMkm+nEeCieeEcnf+ZJSfHdxMb9GSGIeKul87lEHs=;
+ s=k20260515; t=1783673634;
+ bh=wjtx2lzB3uvb4xU+DIuox4Zw+1tx5e8JwgBOS4wBSrM=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References;
- b=JpHW8/4hhlbrsOcO6ZafXnA0IDkVXTol2jQ+7eP1XhicYKgQ4BBeBoPDTrWRPpV+z
- eljExR63J378GwzWaRjDyM/2IFg8M9htrY7Jy9LSRYn/bL+6wBls7zlJd1ILn0tb9z
- pAR8zGRiHnf/C03iQUvczhznYye1P6MUfvuesYlsJ0GaMcaKTkgjlEE/CDh7gNZBKh
- jSj/ZHIXtN550HH+qoCZAkld8wrv+5/WowazTHsQ+7ZT5uRZ2u4i9Hzhg+rUMPQvth
- 8ar40ri19VQKYIrP53v00eKCTJzAh0oYO3vPksc2wwaZJ3EiDGWm0sfkxePJEQER2+
- sVjS+S1Y38Mjw==
+ b=fOPGIi2qT/sDSUu1YE04vKmbro26o2XNX87EpoLSHZ3+O7hcik009cJCb7S5J7fMY
+ v+rKRa2zqfBXE+UIOFnKDKbZUrntwXpfq415MoxBdLiOsfOyNKhocJCVmwLFLrmjD6
+ jQ9zwTMbFkrBmSPTJD7b4eO8PJYhs3Il4cvjKC/QcaaDEAfN0zh6Aw/JNaEegHIC7r
+ 2bQL7Juuo2BShXDLOQsfRSu1Tynw5LRMJupkDupzUok7+M4x+TmekBERhqQOxAofBG
+ /jeU1WsJp1zbEw47ibS360In0xhg7L7SEnY5uDIP6uYKpvJDLgma/1FDaJ4ZQX3AZj
+ SmVS2/vV6NCYw==
 To: linux-xfs@vger.kernel.org, fsverity@lists.linux.dev,
  linux-fsdevel@vger.kernel.org, ebiggers@kernel.org
-Date: Fri, 10 Jul 2026 10:52:37 +0200
-Message-ID: <20260710085256.3464201-10-aalbersh@kernel.org>
+Date: Fri, 10 Jul 2026 10:52:38 +0200
+Message-ID: <20260710085256.3464201-11-aalbersh@kernel.org>
 X-Mailer: git-send-email 2.54.0
 In-Reply-To: <20260710085256.3464201-1-aalbersh@kernel.org>
 References: <20260710085256.3464201-1-aalbersh@kernel.org>
@@ -90,13 +90,12 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  fs-verity doesn't support DAX. Forbid filesystem to enable
- DAX on inodes which already have fs-verity enabled. The opposite is checked
- when fs-verity is enabled, it won't be enabled if DAX is. Signed-off-by:
- Darrick J. Wong <djwong@kernel.org> Reviewed-by: Christoph Hellwig
- <hch@lst.de>
- Signed-off-by: Andrey Albershteyn <aalbersh@kernel.org> --- fs/xfs/xfs_iops.c
- | 2 ++ 1 file changed, 2 in [...] 
+ Content preview:  Sashiko.dev reported that while fsverity files falls back
+ to the buffered IO for Direct I/O, they should not report non-zero values
+ in dio_mem_align and dio_offset_align,
+ meaning it's not supported. Signed-off-by:
+ Andrey Albershteyn <aalbersh@kernel.org> --- fs/xfs/xfs_iops.c | 5 +++++
+ 1 file changed, 5 insertions(+) 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -107,9 +106,9 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-X-Headers-End: 1wi6zd-0007Ue-9H
-Subject: [f2fs-dev] [PATCH v11 09/20] xfs: don't allow to enable DAX on
- fs-verity sealed inode
+X-Headers-End: 1wi6zl-0007Vm-96
+Subject: [f2fs-dev] [PATCH v11 10/20] xfs: don't report dio_mem_align and
+ dio_offset_align for fsverity files
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -167,34 +166,42 @@ X-Spamd-Result: default: False [-8.61 / 15.00];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.sourceforge.net:from_smtp,lists.sourceforge.net:dkim,lists.sourceforge.net:helo,lists.sourceforge.net:rdns,lists.sourceforge.net:from_mime,lst.de:email]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.sourceforge.net:from_smtp,lists.sourceforge.net:dkim,lists.sourceforge.net:helo,lists.sourceforge.net:rdns,lists.sourceforge.net:from_mime,sashiko.dev:url]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: DB1B6738B1D
+X-Rspamd-Queue-Id: E6749738B33
 
-fs-verity doesn't support DAX. Forbid filesystem to enable DAX on
-inodes which already have fs-verity enabled. The opposite is checked
-when fs-verity is enabled, it won't be enabled if DAX is.
+Sashiko.dev reported that while fsverity files falls back to the
+buffered IO for Direct I/O, they should not report non-zero values in
+dio_mem_align and dio_offset_align, meaning it's not supported.
 
-Signed-off-by: Darrick J. Wong <djwong@kernel.org>
-Reviewed-by: Christoph Hellwig <hch@lst.de>
 Signed-off-by: Andrey Albershteyn <aalbersh@kernel.org>
 ---
- fs/xfs/xfs_iops.c | 2 ++
- 1 file changed, 2 insertions(+)
+ fs/xfs/xfs_iops.c | 5 +++++
+ 1 file changed, 5 insertions(+)
 
 diff --git a/fs/xfs/xfs_iops.c b/fs/xfs/xfs_iops.c
-index 11dc1a485ca7..55667cc762f8 100644
+index 55667cc762f8..70637cdcc299 100644
 --- a/fs/xfs/xfs_iops.c
 +++ b/fs/xfs/xfs_iops.c
-@@ -1370,6 +1370,8 @@ xfs_inode_should_enable_dax(
- 		return false;
- 	if (!xfs_inode_supports_dax(ip))
- 		return false;
-+	if (ip->i_diflags2 & XFS_DIFLAG2_VERITY)
-+		return false;
- 	if (xfs_has_dax_always(ip->i_mount))
- 		return true;
- 	if (ip->i_diflags2 & XFS_DIFLAG2_DAX)
+@@ -35,6 +35,7 @@
+ #include <linux/security.h>
+ #include <linux/iversion.h>
+ #include <linux/fiemap.h>
++#include <linux/fsverity.h>
+ 
+ /*
+  * Directories have different lock order w.r.t. mmap_lock compared to regular
+@@ -580,6 +581,10 @@ xfs_report_dioalign(
+ 	struct block_device	*bdev = target->bt_bdev;
+ 
+ 	stat->result_mask |= STATX_DIOALIGN | STATX_DIO_READ_ALIGN;
++
++	if (fsverity_active(VFS_I(ip)))
++		return;
++
+ 	stat->dio_mem_align = bdev_dma_alignment(bdev) + 1;
+ 
+ 	/*
 -- 
 2.54.0
 
