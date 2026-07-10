@@ -2,18 +2,18 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id nZMPJxx5UWp5FQMAu9opvQ
+	id qKDLNTB8UWrjFQMAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 11 Jul 2026 00:58:36 +0200
+	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 11 Jul 2026 01:11:44 +0200
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id C713273FAB0
-	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 11 Jul 2026 00:58:35 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 61C1673FB6B
+	for <lists+linux-f2fs-devel@lfdr.de>; Sat, 11 Jul 2026 01:11:44 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=lists.sourceforge.net header.s=beta header.b=I+pi2Kd5;
-	dkim=fail ("body hash did not verify") header.d=sourceforge.net header.s=x header.b=mo6xGhJt;
-	dkim=fail ("body hash did not verify") header.d=sf.net header.s=x header.b=Y+82l3ou;
-	dkim=fail ("body hash did not verify") header.d=kernel.org header.s=k20260515 header.b=mQbZWvrM;
+	dkim=pass header.d=lists.sourceforge.net header.s=beta header.b=VKzaUV8s;
+	dkim=fail ("body hash did not verify") header.d=sourceforge.net header.s=x header.b=ExrKHpS7;
+	dkim=fail ("body hash did not verify") header.d=sf.net header.s=x header.b=ioj0Ldm0;
+	dkim=fail ("body hash did not verify") header.d=kernel.org header.s=k20260515 header.b=dvg9bD0f;
 	dmarc=pass (policy=none) header.from=lists.sourceforge.net;
 	spf=pass (mail.lfdr.de: domain of linux-f2fs-devel-bounces@lists.sourceforge.net designates 216.105.38.7 as permitted sender) smtp.mailfrom=linux-f2fs-devel-bounces@lists.sourceforge.net
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
@@ -22,29 +22,29 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	List-Unsubscribe:List-Id:Subject:In-Reply-To:MIME-Version:References:
 	Message-ID:To:Date:Sender:Content-ID:Content-Description:Resent-Date:
 	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=023wf5ebHXckWZx3j475stV7X2Ru9psCZmdS1wDOOek=; b=I+pi2Kd5BzmRXv2pXkK6zahdKH
-	h8+tjtiKuv+9y1D3zYzfYqtxQHpTb8gCzORyjhZcHAHPAaM5BexaxX7kt+Pdr4JYyYHKLWicVdgCU
-	3/pbEsJJrtOMtR7WH0sWwu8pQ/KTFBSBSu5MxQfzHig/3Eq9fL/bwp9ND8f8+UkWLY18=;
-Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
-	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=TfhGkpG2yxx7Y3a5lJAFk/o6Az2xYFOiARmYx4p3d24=; b=VKzaUV8sWJ30Ozg5t8t6zodj5a
+	psJNfzRmnb4/qAo7GqvwM+CZ78QQjKkLQ/JgTLBO7RCOySHZI95AesbKoGq3TqCkx7GSGM4MVC9g1
+	UE1ecFntYzhXpqSt5xOSdJx7CFy/U1W+QW9FbnM01ivAceObfAjcWNcWC4VSJIBibdrg=;
+Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
+	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1wiKAr-0006Vk-Tz;
-	Fri, 10 Jul 2026 22:58:25 +0000
+	id 1wiKNc-0004RH-Qk;
+	Fri, 10 Jul 2026 23:11:37 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <kbusch@kernel.org>) id 1wiKAr-0006Ve-2Q
+ (envelope-from <kbusch@kernel.org>) id 1wiKNb-0004R5-SY
  for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 10 Jul 2026 22:58:25 +0000
+ Fri, 10 Jul 2026 23:11:36 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=In-Reply-To:Content-Type:MIME-Version:References:
  Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=NkeORe+bO7UNqmqDFJw/AxpC9nvY1tbNbvdLo/yNIQE=; b=mo6xGhJtyV96OVGXbmPTxlDc16
- MWEYySgh18dFDBI2LOckxsvW+DtBNsOVmkeiBvDG6PeSyoG+d9TviK/7betTN01RV04nvOb5vEXhL
- aUQNRp9mOFkA78vdhtQ9gvBv4c30+RXrcnc3/QxpHgLMgAtR3bS8yac5udLGQdyCOxJg=;
+ bh=lmReB4YfsUmYlBzVCb27IBmpsFMAZFKysWECQFUPa44=; b=ExrKHpS7c5Ut3UoySfbE/gn6SG
+ xUKwdyEhhNQIBwupeBHmvIMFwq0vvGCtUx5kaXNaS+XFXOLiTh2FudNYTJZCqZebW6WoK02Zk8ZA5
+ GD3/X4lxqvkerlgJIyZiIEMDyY1H/P6nUJKk1hFMFs0UPjMeGmEqgR/nG9/4UcuAqhT0=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To
@@ -52,37 +52,39 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=NkeORe+bO7UNqmqDFJw/AxpC9nvY1tbNbvdLo/yNIQE=; b=Y+82l3ouAGaDe8kiVJWTnIyagB
- YXYeqejlBnX6tLe8t6X7HB+sNBbPmmloOmYe1nJtZIRBejT5DLjof/DZIpcvJo3Hp0PEtgAkT7JA+
- /DAV0FuJjIuuuuL72QH3HMHovzERkCoKXeAdqcB+dSsP77aofxN3Gb8b77UwMHY1TpOI=;
-Received: from sea.source.kernel.org ([172.234.252.31])
+ bh=lmReB4YfsUmYlBzVCb27IBmpsFMAZFKysWECQFUPa44=; b=ioj0Ldm05OpTBGZcBY9bxUxeOk
+ b55oAZJH9dkuMOGBdEwsrwLAU2zhG6APQrNBpFeyP0WJpwOTJBwYtzmkhLne32cTs2nIvQcPAQ4Vm
+ pk8ea2HUo3FlW62/oPKc6egdLGtZ6RBI3LcJY1tyf4IN6YWa+tW7I2jKqD8BzxVT6ff0=;
+Received: from tor.source.kernel.org ([172.105.4.254])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1wiKAq-0002Gw-Ja for linux-f2fs-devel@lists.sourceforge.net;
- Fri, 10 Jul 2026 22:58:25 +0000
+ id 1wiKNc-0002nm-2r for linux-f2fs-devel@lists.sourceforge.net;
+ Fri, 10 Jul 2026 23:11:36 +0000
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by sea.source.kernel.org (Postfix) with ESMTP id 4CB4B43B4A;
- Fri, 10 Jul 2026 22:58:14 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id A8CCD1F000E9;
- Fri, 10 Jul 2026 22:58:13 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id 6D56660051;
+ Fri, 10 Jul 2026 23:11:25 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 90E9F1F000E9;
+ Fri, 10 Jul 2026 23:11:24 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
- s=k20260515; t=1783724294;
- bh=NkeORe+bO7UNqmqDFJw/AxpC9nvY1tbNbvdLo/yNIQE=;
+ s=k20260515; t=1783725085;
+ bh=lmReB4YfsUmYlBzVCb27IBmpsFMAZFKysWECQFUPa44=;
  h=Date:From:To:Cc:Subject:References:In-Reply-To;
- b=mQbZWvrMX0flq/z1MA3Kytgtdx6+fyTYu3dK/X7c4oh70mKhm8ZwVnKRtqylnCqv/
- GTDsEKO+4rGVvyaM2mD1j7XtNnoVYfg9A1AOmzG6sclc+zG56GXVsqzxwRSOtvElVu
- um63FKHXWR3AmeCcw/Yg+9uwD1cWn19jV+QkE0c/Jb38Grx3fOYKsz5qarVCVc0AqL
- 9qYipa2T4SbgN4sJp+jr6MSgFwVJ4Qe6zclXuIrbIum7ByL4E36JBYGIEEtdqfat/J
- gjmy1hI2SlX0c3whMXkKadmd4vp3erA/l0Z30LVFBF2+NYTlrMfcq5tegUMtBMSvng
- L9Zd8PjyE7LuA==
-Date: Fri, 10 Jul 2026 16:58:12 -0600
+ b=dvg9bD0fAOmbip2lkwOOscdHwsK7ch300TBNdvvQq/0HxjjXmZrU7/t41ylG+gO2+
+ qCbmItV/TjWEGHuFZ9Nltuf6Eem48B0wenIu0jgNaijCqweAqL+IQbRQrCOAAm21xn
+ 5VtabOFJbCAQ1dL3dsvtGlHmsPGRo5UDayIFpRDJBJFSIhFULc676oM6CiWkewdl7V
+ LTjLIry6cv7caZfnruDM3GbeeWEXpQx+ogi9OWbWfRfeyjhB05fNbKeivlZhvb2la0
+ dk/IbnaoE7qLFBM2w8EHuvDUIW8dIE3UqU40LM+hqZF8XJBf9jm5AglobEJxTknKot
+ fCioOsZmBN2TA==
+Date: Fri, 10 Jul 2026 17:11:23 -0600
 To: Eric Biggers <ebiggers@kernel.org>
-Message-ID: <alF5BHEZ5czyJWaY@kbusch-mbp>
-References: <20260710210646.3576365-1-kbusch@meta.com>
- <20260710215328.GE1911@quark>
+Message-ID: <alF8G6Fw2aFh-2_o@kbusch-mbp>
+References: <20260708011843.1036846-1-kbusch@meta.com>
+ <20260709071352.GA20180@lst.de>
+ <neamg3phll7hjwd765ddtqebtxasdvkoskff75dqzmgzv2xy5i@mf4agr6yoizn>
+ <20260710212058.GA1911@quark>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20260710215328.GE1911@quark>
+In-Reply-To: <20260710212058.GA1911@quark>
 X-Spam-Score: -0.2 (/)
 X-Spam-Report: Spam detection software,
  running on the system "sfi-spamd-1.hosts.colo.sdot.me", 
@@ -90,9 +92,9 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  On Fri, Jul 10, 2026 at 05:53:28PM -0400, Eric Biggers wrote:
- > On Fri, Jul 10, 2026 at 02:06:41PM -0700, Keith Busch via Linux-f2fs-devel
- wrote: > > From: Keith Busch <kbusch@kernel.org> > > > > The [...] 
+ Content preview:  On Fri, Jul 10, 2026 at 05:20:58PM -0400, Eric Biggers wrote:
+ > So far I haven't seen the point. Yes, applications can benefit from the
+ > lower alignment in theory. But especially with encryption/decr [...] 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -103,8 +105,9 @@ X-Spam-Report: Spam detection software,
  -0.1 DKIM_VALID_AU Message has a valid DKIM or DK signature from author's
  domain
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-X-Headers-End: 1wiKAq-0002Gw-Ja
-Subject: Re: [f2fs-dev] [PATCHv2 0/5] direct-io file extended attributes
+X-Headers-End: 1wiKNc-0002nm-2r
+Subject: Re: [f2fs-dev] [PATCH] fs: report direct io constraints through
+ file_getattr
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -119,10 +122,10 @@ List-Subscribe: <https://lists.sourceforge.net/lists/listinfo/linux-f2fs-devel>,
 From: Keith Busch via Linux-f2fs-devel <linux-f2fs-devel@lists.sourceforge.net>
 Reply-To: Keith Busch <kbusch@kernel.org>
 Cc: axboe@kernel.dk, linux-xfs@vger.kernel.org, brauner@kernel.org,
- aalbersh@kernel.org, Keith Busch <kbusch@meta.com>, cem@kernel.org,
- linux-f2fs-devel@lists.sourceforge.net, linux-block@vger.kernel.org,
- tytso@mit.edu, jaegeuk@kernel.org, linux-fsdevel@vger.kernel.org, jack@suse.cz,
- linux-ext4@vger.kernel.org
+ Jan Kara <jack@suse.cz>, Keith Busch <kbusch@meta.com>, cem@kernel.org,
+ aalbersh@kernel.org, linux-f2fs-devel@lists.sourceforge.net,
+ linux-block@vger.kernel.org, tytso@mit.edu, linux-fsdevel@vger.kernel.org,
+ jaegeuk@kernel.org, linux-ext4@vger.kernel.org, Christoph Hellwig <hch@lst.de>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linux-f2fs-devel-bounces@lists.sourceforge.net
@@ -137,16 +140,16 @@ X-Spamd-Result: default: False [-8.11 / 15.00];
 	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
-	RCPT_COUNT_TWELVE(0.00)[14];
+	RCPT_COUNT_TWELVE(0.00)[15];
 	TO_DN_SOME(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
 	DKIM_MIXED(0.00)[];
 	RECEIVED_HELO_LOCALHOST(0.00)[];
 	ARC_NA(0.00)[];
-	REPLYTO_DOM_EQ_TO_DOM(0.00)[];
+	FORGED_RECIPIENTS(0.00)[m:ebiggers@kernel.org,m:axboe@kernel.dk,m:linux-xfs@vger.kernel.org,m:brauner@kernel.org,m:jack@suse.cz,m:kbusch@meta.com,m:cem@kernel.org,m:aalbersh@kernel.org,m:linux-f2fs-devel@lists.sourceforge.net,m:linux-block@vger.kernel.org,m:tytso@mit.edu,m:linux-fsdevel@vger.kernel.org,m:jaegeuk@kernel.org,m:linux-ext4@vger.kernel.org,m:hch@lst.de,s:lists@lfdr.de];
 	MIME_TRACE(0.00)[0:+];
 	FORGED_SENDER(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
-	FORGED_RECIPIENTS(0.00)[m:ebiggers@kernel.org,m:axboe@kernel.dk,m:linux-xfs@vger.kernel.org,m:brauner@kernel.org,m:aalbersh@kernel.org,m:kbusch@meta.com,m:cem@kernel.org,m:linux-f2fs-devel@lists.sourceforge.net,m:linux-block@vger.kernel.org,m:tytso@mit.edu,m:jaegeuk@kernel.org,m:linux-fsdevel@vger.kernel.org,m:jack@suse.cz,m:linux-ext4@vger.kernel.org,s:lists@lfdr.de];
+	REPLYTO_DOM_EQ_TO_DOM(0.00)[];
 	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,kernel.org:s=k20260515];
 	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
 	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
@@ -167,50 +170,19 @@ X-Spamd-Result: default: False [-8.11 / 15.00];
 	MISSING_XM_UA(0.00)[];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[kbusch-mbp:mid]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: C713273FAB0
+X-Rspamd-Queue-Id: 61C1673FB6B
 
-On Fri, Jul 10, 2026 at 05:53:28PM -0400, Eric Biggers wrote:
-> On Fri, Jul 10, 2026 at 02:06:41PM -0700, Keith Busch via Linux-f2fs-devel wrote:
-> > From: Keith Busch <kbusch@kernel.org>
-> > 
-> > The attributes reported through statx are incomplete for applications to
-> > fully know exactly how IO construction is valid or not. The statx call
-> > can report minimum memory alignment and total granularity, but it
-> > doesn't show the underlying gap boundary requirements or max segments
-> > per granule.
-> > 
-> > This series adds the minimum to the extended file attributes through
-> > file_getattr. I hear this is the preferred interface for reporting such
-> > things over adding more fields to statx. In order to get everything
-> > under a single syscall, some of the attributes are duplicated from
-> > statx.
-> 
-> Okay, in v2 we at least now know that the existing statx UAPI was
-> considered.  Could you give a specific real-world example (with the
-> actual values of each parameter) where it's not sufficient?  Without
-> that there isn't really any way to evaluate this proposal.
+On Fri, Jul 10, 2026 at 05:20:58PM -0400, Eric Biggers wrote:
+> So far I haven't seen the point.  Yes, applications can benefit from the
+> lower alignment in theory.  But especially with encryption/decryption,
+> it isn't at all easy to support.  This has apparently been getting
+> learned the hard way, as (for example) alignment was initially relaxed
+> for dm-crypt without testing it, and it had to be reverted
+> (https://lore.kernel.org/dm-devel/20221103152559.1909328-1-kbusch@meta.com/).
 
-Yes, we can consider nvme. This protocol supports two different transfer
-modes called PRP and SGL. PRP requires 4k aligned segments, though you
-can have an arbitrary 4-byte aligned offset at the start. SGL on the
-other hand allows completely arbitrary size and alignments for each
-segment.
-
-statx reports information sufficient to know that you can have dword
-aligned page offsets for a virtually contiguous buffer, but it doesn't
-report PRP's boundary gap requirement, so applications can't tell if the
-file follows PRP or SGL rules for direct-io.
-
-And if you have a device using SGL, statx doesn't report the max number
-of sub-sector segments you can submit in a single command.
-
-This series provides both limits so user space has the complete picture.
-
-A typical nvme that supports only PRP has a DMA alignment of 4 bytes, a
-dio offset alignment of 4k, and a virtual boundary of 4k.
-
-If SGL were supported, there would be no virtual boundary gap, and max
-segments is 256.
+To be fair, that was most certainly tested in production, and it was
+reverted for a bug not related to alignment. It was just a mishandled
+early exit corner case accessing uninitialized fields; a trivial fixup.
 
 
 _______________________________________________
