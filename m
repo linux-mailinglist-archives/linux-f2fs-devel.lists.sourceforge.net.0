@@ -2,18 +2,18 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id 9eDuIANQVGoDkgMAu9opvQ
+	id UTgCNANQVGoEkgMAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
 	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 13 Jul 2026 04:40:03 +0200
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 095E0746AFD
+	by mail.lfdr.de (Postfix) with ESMTPS id 614FC746AFE
 	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 13 Jul 2026 04:40:03 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=lists.sourceforge.net header.s=beta header.b=IF0oQDQb;
-	dkim=fail ("body hash did not verify") header.d=sourceforge.net header.s=x header.b=eeTsPphw;
-	dkim=fail ("body hash did not verify") header.d=sf.net header.s=x header.b=INrowA7b;
-	dkim=fail ("body hash did not verify") header.d=kernel.org header.s=k20260515 header.b=lvaFIXAr;
+	dkim=pass header.d=lists.sourceforge.net header.s=beta header.b=JthMOInS;
+	dkim=fail ("body hash did not verify") header.d=sourceforge.net header.s=x header.b=FWMnItg3;
+	dkim=fail ("body hash did not verify") header.d=sf.net header.s=x header.b=UI+lrL5e;
+	dkim=fail ("body hash did not verify") header.d=kernel.org header.s=k20260515 header.b=Y5W71pCc;
 	dmarc=pass (policy=none) header.from=lists.sourceforge.net;
 	spf=pass (mail.lfdr.de: domain of linux-f2fs-devel-bounces@lists.sourceforge.net designates 216.105.38.7 as permitted sender) smtp.mailfrom=linux-f2fs-devel-bounces@lists.sourceforge.net
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
@@ -22,29 +22,29 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	List-Unsubscribe:List-Id:Subject:MIME-Version:References:In-Reply-To:
 	Message-ID:Date:To:Sender:Content-ID:Content-Description:Resent-Date:
 	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=E87dgvHg5raG/Aqgv1xQiIlJoLVa3U4NnV+jtD4XlyY=; b=IF0oQDQbjiNlSeB39Xnm5VFok9
-	eqX9Hkn65gJjvPTcnGXpaf1/D5IDQHms/8c2xncXRNRvLRFigayIhweSnm770bEeFpItPooKfu8FY
-	bWCCc2H8juszuRCnK9w6eRVzXx5khf4g/IUG2jVcOUsrL31piLSX8cU1VIf3IsC2xTHM=;
+	bh=9BkoDEkuUoHUUeR0JWwdmOPfqo97U3vcJOmqIxUwzCs=; b=JthMOInSupS9yEMpjJrD8PSRCb
+	a/oA0PsFAn3i72Mz+zMalZWOZnksbQIVljmfTZSqYIAlVkIQg8caFJKjkxTc+XCRma4YfvanDAnEb
+	c5pwkibOQ5Xaf8dMvv3IkX4TucB1r57Y5X7SpHEV3UyS70XWufF28APZ4Pso9rOKFkpk=;
 Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
 	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1wj6aN-00065m-Ob;
+	id 1wj6aO-000669-3q;
 	Mon, 13 Jul 2026 02:40:00 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
  by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <ebiggers@kernel.org>) id 1wj6aJ-00064j-I8
+ (envelope-from <ebiggers@kernel.org>) id 1wj6aM-00065U-1a
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 13 Jul 2026 02:39:56 +0000
+ Mon, 13 Jul 2026 02:39:58 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=bbMgc3U9Wrf7V5sNOplnNKhU5giKnGr9y8HSKK/IOoE=; b=eeTsPphw6X9EwtiFkLigNcA8Ts
- SGF3yOWbNg598/qOvvm0kT7yf7c4KB3OjtzSvVNkFyfErSaGeRwuKW1+21/MNty+i7ydFujg3KxaN
- 1r2ElJlQk1uixMjKKtuyp8ecyhntUjIXAgHVS0wxRrmp5/LYqEnIdeWW9lDZuoIoV430=;
+ bh=J5lMqtVI9y4q28CYeXopPGl3o5JEbpZ2Hmblb9x1Xmc=; b=FWMnItg395RsvdZPeV+VeE6vkv
+ bf3RczKEOIcqGN+jdxuVfB9IaF5XvfqcJVz8wnsVo6BBiMP3i7B0uafTqu+ZVDgTanwRRXK98j/fX
+ a9SE3TcZgyaBxXxY9+uLVhvYzdTRezD3IewRkVB6WhHhKB6k3J7i+3yZVJxIYTudKm2U=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:
@@ -52,32 +52,32 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=bbMgc3U9Wrf7V5sNOplnNKhU5giKnGr9y8HSKK/IOoE=; b=INrowA7b/XA9PvGBwRNEOoy6T2
- wvJP4bmFYcxa02H627gsDYrX8dxzUFkqXgOLogX5M/TjUezaLZGA04aUUvxeGhzi00S5stahO6kiD
- 8XCp4iAydfDfqfThehdDoeAEbKZPu73x1U2BD8eBsqPhTJF/hNbTpBO64s29Bk4EIRl4=;
-Received: from sea.source.kernel.org ([172.234.252.31])
+ bh=J5lMqtVI9y4q28CYeXopPGl3o5JEbpZ2Hmblb9x1Xmc=; b=UI+lrL5eQAK9Ay7BzMxUc6ROrU
+ ulfpkoeHTZ8CUzUCYbEX4oih/50RXeJ7JgneOS2e8Vn9BF2g+v9cAbOEXbXU3X1hbZVhenJRjv0CX
+ uaJebwqmwNWs49mwYlScTnfWgcAp7cidPUU2zuSMKr8gPnQM335irkqKGf9eF4dwDcqQ=;
+Received: from tor.source.kernel.org ([172.105.4.254])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1wj6aJ-0003C2-Ev for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 13 Jul 2026 02:39:56 +0000
+ id 1wj6aL-0003CD-Ek for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 13 Jul 2026 02:39:58 +0000
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by sea.source.kernel.org (Postfix) with ESMTP id 220B843626;
+ by tor.source.kernel.org (Postfix) with ESMTP id 95AAC60018;
+ Mon, 13 Jul 2026 02:39:46 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3A4A81F00A3E;
  Mon, 13 Jul 2026 02:39:45 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id E64651F00A3A;
- Mon, 13 Jul 2026 02:39:43 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
- s=k20260515; t=1783910385;
- bh=bbMgc3U9Wrf7V5sNOplnNKhU5giKnGr9y8HSKK/IOoE=;
+ s=k20260515; t=1783910386;
+ bh=J5lMqtVI9y4q28CYeXopPGl3o5JEbpZ2Hmblb9x1Xmc=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References;
- b=lvaFIXArLqICM5szm+vl81pwVdZL5fMmNahe8lrR36btpVkegVkNqO89r876W1H7M
- zI+Q539Q1Ugke8ZXLk1DntEFXfV/7iMTw5X5f1PajHTRHFHujTxy8eVkhxUm//9gpF
- hpa5UxqGAMHGEmAmca/8tCxLpJuTxqH45dj0XDn4ADKZVGCHMomAJ0hiWxG0rZ1t6k
- wWcSdD4hbsEBVB1/FHT8A7/ySlMi8PYl6yiOpuiDj0LJTknhw93QY/xBJ2j9G2bWYk
- rCEF5Ckr/VyeGllKIB8avRL4unmeb5Eo3KxQNnVjBpA+AAz8EQUqRTpvAARzYVX4OG
- K5J6C1a/RfFRQ==
+ b=Y5W71pCc2oPPvWxaduUd81NIPKGVuhBATznBLJccaYVG4ngMLTA+0C/44XcPrr4hr
+ KlVQLBeqhFmMvV92ely+j/FeA3HcOz0HBKyNVCSJQZcNJF+o1wkSx2m3Ig+0X/2qvT
+ li5WOEkC6AVrtkCRnskVO4drvbPsUY1YJ/gIiNAfevNLL4mYxPIiFoya9EWCkZ43kZ
+ 6oUEAWerOcpu2zzWDLuaKmMXrByVPRugfk6uqf4dLtoeCGaEErn1CITInfPj9kqS5W
+ kgrpGonS0ZfIsY3d4ttPWuhy1/ypQmX9lWRLGlG0IWkPJe9uy4Z58vkT7XIwDLN7zE
+ rmdc4znCnniSw==
 To: linux-fscrypt@vger.kernel.org
-Date: Sun, 12 Jul 2026 22:36:59 -0400
-Message-ID: <20260713023708.9245-9-ebiggers@kernel.org>
+Date: Sun, 12 Jul 2026 22:37:00 -0400
+Message-ID: <20260713023708.9245-10-ebiggers@kernel.org>
 X-Mailer: git-send-email 2.55.0
 In-Reply-To: <20260713023708.9245-1-ebiggers@kernel.org>
 References: <20260713023708.9245-1-ebiggers@kernel.org>
@@ -89,12 +89,10 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Since the fs-layer file contents encryption implementation
- was removed, ext4_bio_write_folio() now always returns 0. Change it to return
- void, and likewise for its caller mpage_submit_folio(). Reviewed-by: Christoph
- Hellwig <hch@lst.de> Signed-off-by: Eric Biggers <ebiggers@kernel.org> ---
- fs/ext4/ext4.h | 2 +- fs/ext4/inode.c | 32 +++++++++ fs/ext4/page-io.c |
- 6 ++-- [...] 
+ Content preview:  Since the bio postprocessing code in fs/ext4/readpage.c is
+ now used only for fsverity, rename things accordingly. Also: - Don't create
+ the caches at all when !CONFIG_FS_VERITY. - Remove the unused inode argument
+ from ext4_set_verity_work(). 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -105,9 +103,9 @@ X-Spam-Report: Spam detection software,
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-X-Headers-End: 1wj6aJ-0003C2-Ev
-Subject: [f2fs-dev] [PATCH v3 08/17] ext4: Make ext4_bio_write_folio()
- return void
+X-Headers-End: 1wj6aL-0003CD-Ek
+Subject: [f2fs-dev] [PATCH v3 09/17] ext4: Further de-generalize the bio
+ postprocessing code
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -173,172 +171,212 @@ X-Spamd-Result: default: False [-7.11 / 15.00];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.sourceforge.net:from_smtp,lists.sourceforge.net:dkim,lists.sourceforge.net:helo,lists.sourceforge.net:rdns,lists.sourceforge.net:from_mime]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 095E0746AFD
+X-Rspamd-Queue-Id: 614FC746AFE
 
-Since the fs-layer file contents encryption implementation was removed,
-ext4_bio_write_folio() now always returns 0.  Change it to return void,
-and likewise for its caller mpage_submit_folio().
+Since the bio postprocessing code in fs/ext4/readpage.c is now used only
+for fsverity, rename things accordingly.
 
-Reviewed-by: Christoph Hellwig <hch@lst.de>
+Also:
+
+- Don't create the caches at all when !CONFIG_FS_VERITY.
+- Remove the unused inode argument from ext4_set_verity_work().
+
 Signed-off-by: Eric Biggers <ebiggers@kernel.org>
 ---
- fs/ext4/ext4.h    |  2 +-
- fs/ext4/inode.c   | 32 +++++++++-----------------------
- fs/ext4/page-io.c |  6 ++----
- 3 files changed, 12 insertions(+), 28 deletions(-)
+ fs/ext4/ext4.h     |  4 +--
+ fs/ext4/readpage.c | 65 ++++++++++++++++++++++------------------------
+ fs/ext4/super.c    |  6 ++---
+ 3 files changed, 36 insertions(+), 39 deletions(-)
 
 diff --git a/fs/ext4/ext4.h b/fs/ext4/ext4.h
-index b37c136ea3ab..920a8ec1b948 100644
+index 920a8ec1b948..489ed6dcee52 100644
 --- a/fs/ext4/ext4.h
 +++ b/fs/ext4/ext4.h
-@@ -3945,7 +3945,7 @@ extern void ext4_io_submit_init(struct ext4_io_submit *io,
- 				struct writeback_control *wbc);
- extern void ext4_end_io_rsv_work(struct work_struct *work);
- extern void ext4_io_submit(struct ext4_io_submit *io);
--int ext4_bio_write_folio(struct ext4_io_submit *io, struct folio *page,
-+void ext4_bio_write_folio(struct ext4_io_submit *io, struct folio *page,
- 		size_t len);
- extern struct ext4_io_end_vec *ext4_alloc_io_end_vec(ext4_io_end_t *io_end);
- extern struct ext4_io_end_vec *ext4_last_io_end_vec(ext4_io_end_t *io_end);
-diff --git a/fs/ext4/inode.c b/fs/ext4/inode.c
-index 8eb2af481129..567d62032bc5 100644
---- a/fs/ext4/inode.c
-+++ b/fs/ext4/inode.c
-@@ -2064,11 +2064,10 @@ static void mpage_folio_done(struct mpage_da_data *mpd, struct folio *folio)
- 	folio_unlock(folio);
+@@ -3829,8 +3829,8 @@ static inline void ext4_set_de_type(struct super_block *sb,
+ /* readpages.c */
+ int ext4_read_folio(struct file *file, struct folio *folio);
+ void ext4_readahead(struct readahead_control *rac);
+-extern int __init ext4_init_post_read_processing(void);
+-extern void ext4_exit_post_read_processing(void);
++int __init ext4_init_verity_caches(void);
++void ext4_exit_verity_caches(void);
+ 
+ /* symlink.c */
+ extern const struct inode_operations ext4_encrypted_symlink_inode_operations;
+diff --git a/fs/ext4/readpage.c b/fs/ext4/readpage.c
+index 8af183798a33..c7b6cdb2e124 100644
+--- a/fs/ext4/readpage.c
++++ b/fs/ext4/readpage.c
+@@ -47,12 +47,12 @@
+ #include "ext4.h"
+ #include <trace/events/ext4.h>
+ 
+-#define NUM_PREALLOC_POST_READ_CTXS	128
++#define NUM_VERITY_WORKS 128
+ 
+-static struct kmem_cache *bio_post_read_ctx_cache;
+-static mempool_t *bio_post_read_ctx_pool;
++static struct kmem_cache *ext4_verity_work_cache;
++static mempool_t *ext4_verity_work_pool;
+ 
+-struct bio_post_read_ctx {
++struct ext4_verity_work {
+ 	struct bio *bio;
+ 	struct fsverity_info *vi;
+ 	struct work_struct work;
+@@ -65,22 +65,22 @@ static void __read_end_io(struct bio *bio)
+ 	bio_for_each_folio_all(fi, bio)
+ 		folio_end_read(fi.folio, bio->bi_status == 0);
+ 	if (bio->bi_private)
+-		mempool_free(bio->bi_private, bio_post_read_ctx_pool);
++		mempool_free(bio->bi_private, ext4_verity_work_pool);
+ 	bio_put(bio);
  }
  
--static int mpage_submit_folio(struct mpage_da_data *mpd, struct folio *folio)
-+static void mpage_submit_folio(struct mpage_da_data *mpd, struct folio *folio)
+ static void verity_work(struct work_struct *work)
  {
- 	size_t len;
- 	loff_t size;
--	int err;
+-	struct bio_post_read_ctx *ctx =
+-		container_of(work, struct bio_post_read_ctx, work);
++	struct ext4_verity_work *ctx =
++		container_of(work, struct ext4_verity_work, work);
+ 	struct bio *bio = ctx->bio;
+ 	struct fsverity_info *vi = ctx->vi;
  
- 	WARN_ON_ONCE(folio_pos(folio) != mpd->start_pos);
- 	folio_clear_dirty_for_io(folio);
-@@ -2090,9 +2089,7 @@ static int mpage_submit_folio(struct mpage_da_data *mpd, struct folio *folio)
- 	if (folio_pos(folio) + len > size &&
- 	    !ext4_verity_in_progress(mpd->inode))
- 		len = size & (len - 1);
--	err = ext4_bio_write_folio(&mpd->io_submit, folio, len);
--
--	return err;
-+	ext4_bio_write_folio(&mpd->io_submit, folio, len);
- }
- 
- #define BH_FLAGS (BIT(BH_Unwritten) | BIT(BH_Delay))
-@@ -2169,8 +2166,7 @@ static bool mpage_add_bh_to_extent(struct mpage_da_data *mpd, ext4_lblk_t lblk,
-  * accumulated extent of buffers to map or add buffers in the page to the
-  * extent of buffers to map. The function returns 1 if the caller can continue
-  * by processing the next page, 0 if it should stop adding buffers to the
-- * extent to map because we cannot extend it anymore. It can also return value
-- * < 0 in case of error during IO submission.
-+ * extent to map because we cannot extend it anymore.
-  */
- static int mpage_process_page_bufs(struct mpage_da_data *mpd,
- 				   struct buffer_head *head,
-@@ -2178,7 +2174,6 @@ static int mpage_process_page_bufs(struct mpage_da_data *mpd,
- 				   ext4_lblk_t lblk)
- {
- 	struct inode *inode = mpd->inode;
--	int err;
- 	ext4_lblk_t blocks = (i_size_read(inode) + i_blocksize(inode) - 1)
- 							>> inode->i_blkbits;
- 
-@@ -2201,9 +2196,7 @@ static int mpage_process_page_bufs(struct mpage_da_data *mpd,
- 	} while (lblk++, (bh = bh->b_this_page) != head);
- 	/* So far everything mapped? Submit the page for IO. */
- 	if (mpd->map.m_len == 0) {
--		err = mpage_submit_folio(mpd, head->b_folio);
--		if (err < 0)
--			return err;
-+		mpage_submit_folio(mpd, head->b_folio);
- 		mpage_folio_done(mpd, head->b_folio);
- 	}
- 	if (lblk >= blocks) {
-@@ -2333,9 +2326,7 @@ static int mpage_map_and_submit_buffers(struct mpage_da_data *mpd)
- 			if (err < 0 || map_bh)
- 				goto out;
- 			/* Page fully mapped - let IO run! */
--			err = mpage_submit_folio(mpd, folio);
--			if (err < 0)
--				goto out;
-+			mpage_submit_folio(mpd, folio);
- 			mpage_folio_done(mpd, folio);
- 		}
- 		folio_batch_release(&fbatch);
-@@ -2408,7 +2399,6 @@ static int mpage_submit_partial_folio(struct mpage_da_data *mpd)
- 	struct inode *inode = mpd->inode;
- 	struct folio *folio;
- 	loff_t pos;
--	int ret;
- 
- 	folio = filemap_get_folio(inode->i_mapping,
- 				  mpd->start_pos >> PAGE_SHIFT);
-@@ -2423,9 +2413,7 @@ static int mpage_submit_partial_folio(struct mpage_da_data *mpd)
- 			 !folio_contains(folio, pos >> PAGE_SHIFT)))
- 		return -EINVAL;
- 
--	ret = mpage_submit_folio(mpd, folio);
--	if (ret)
--		goto out;
-+	mpage_submit_folio(mpd, folio);
  	/*
- 	 * Update start_pos to prevent this folio from being released in
- 	 * mpage_release_unused_pages(), it will be reset to the aligned folio
-@@ -2434,10 +2422,9 @@ static int mpage_submit_partial_folio(struct mpage_da_data *mpd)
- 	 * entire folio has finished processing.
+-	 * Free the bio_post_read_ctx right away, since it's no longer needed.
++	 * Free the ext4_verity_work right away, since it's no longer needed.
+ 	 * This relieves the pressure on the mempool as much as possible.
  	 */
- 	mpd->start_pos = pos;
--out:
- 	folio_unlock(folio);
- 	folio_put(folio);
--	return ret;
-+	return 0;
+-	mempool_free(ctx, bio_post_read_ctx_pool);
++	mempool_free(ctx, ext4_verity_work_pool);
+ 	bio->bi_private = NULL;
+ 
+ 	fsverity_verify_bio(vi, bio);
+@@ -88,12 +88,6 @@ static void verity_work(struct work_struct *work)
+ 	__read_end_io(bio);
  }
  
- /*
-@@ -2724,9 +2711,8 @@ static int mpage_prepare_extent_to_map(struct mpage_da_data *mpd)
- 			 * through a pin.
- 			 */
- 			if (!mpd->can_map) {
--				err = mpage_submit_folio(mpd, folio);
--				if (err < 0)
--					goto out;
-+				mpage_submit_folio(mpd, folio);
-+				err = 0;
- 				/* Pending dirtying of journalled data? */
- 				if (folio_test_checked(folio)) {
- 					err = mpage_journal_page_buffers(handle,
-diff --git a/fs/ext4/page-io.c b/fs/ext4/page-io.c
-index 557f44178d87..0236b6b9785a 100644
---- a/fs/ext4/page-io.c
-+++ b/fs/ext4/page-io.c
-@@ -459,7 +459,7 @@ static void io_submit_add_bh(struct ext4_io_submit *io,
- 	io->io_next_block++;
- }
- 
--int ext4_bio_write_folio(struct ext4_io_submit *io, struct folio *folio,
-+void ext4_bio_write_folio(struct ext4_io_submit *io, struct folio *folio,
- 		size_t len)
- {
- 	struct inode *inode = folio->mapping->host;
-@@ -533,7 +533,7 @@ int ext4_bio_write_folio(struct ext4_io_submit *io, struct folio *folio,
- 		 */
- 		__folio_start_writeback(folio, keep_towrite);
- 		folio_end_writeback(folio);
--		return 0;
-+		return;
- 	}
- 
- 	bh = head = folio_buffers(folio);
-@@ -546,6 +546,4 @@ int ext4_bio_write_folio(struct ext4_io_submit *io, struct folio *folio,
- 			continue;
- 		io_submit_add_bh(io, inode, folio, bh);
- 	} while ((bh = bh->b_this_page) != head);
+-static bool bio_post_read_required(struct bio *bio)
+-{
+-	return IS_ENABLED(CONFIG_FS_VERITY) && bio->bi_private &&
+-	       !bio->bi_status;
+-}
 -
--	return 0;
+ /*
+  * I/O completion handler for multipage BIOs.
+  *
+@@ -108,8 +102,9 @@ static bool bio_post_read_required(struct bio *bio)
+  */
+ static void mpage_end_io(struct bio *bio)
+ {
+-	if (bio_post_read_required(bio)) {
+-		struct bio_post_read_ctx *ctx = bio->bi_private;
++	if (IS_ENABLED(CONFIG_FS_VERITY) && bio->bi_private &&
++	    !bio->bi_status) {
++		struct ext4_verity_work *ctx = bio->bi_private;
+ 
+ 		INIT_WORK(&ctx->work, verity_work);
+ 		fsverity_enqueue_verify_work(&ctx->work);
+@@ -118,14 +113,12 @@ static void mpage_end_io(struct bio *bio)
+ 	__read_end_io(bio);
+ }
+ 
+-static void ext4_set_bio_post_read_ctx(struct bio *bio,
+-				       const struct inode *inode,
+-				       struct fsverity_info *vi)
++static void ext4_set_verity_work(struct bio *bio, struct fsverity_info *vi)
+ {
+ 	if (vi) {
+ 		/* Due to the mempool, this never fails. */
+-		struct bio_post_read_ctx *ctx =
+-			mempool_alloc(bio_post_read_ctx_pool, GFP_NOFS);
++		struct ext4_verity_work *ctx =
++			mempool_alloc(ext4_verity_work_pool, GFP_NOFS);
+ 
+ 		ctx->bio = bio;
+ 		ctx->vi = vi;
+@@ -289,7 +282,7 @@ static int ext4_mpage_readpages(struct inode *inode, struct fsverity_info *vi,
+ 			bio = bio_alloc(bdev, bio_max_segs(nr_pages),
+ 					REQ_OP_READ, GFP_KERNEL);
+ 			fscrypt_set_bio_crypt_ctx(bio, inode, pos, GFP_KERNEL);
+-			ext4_set_bio_post_read_ctx(bio, inode, vi);
++			ext4_set_verity_work(bio, vi);
+ 			bio->bi_iter.bi_sector = first_block << (blkbits - 9);
+ 			bio->bi_end_io = mpage_end_io;
+ 			if (rac)
+@@ -363,27 +356,31 @@ void ext4_readahead(struct readahead_control *rac)
+ 	ext4_mpage_readpages(inode, vi, rac, NULL);
+ }
+ 
+-int __init ext4_init_post_read_processing(void)
++int __init ext4_init_verity_caches(void)
+ {
+-	bio_post_read_ctx_cache = KMEM_CACHE(bio_post_read_ctx, SLAB_RECLAIM_ACCOUNT);
++	if (!IS_ENABLED(CONFIG_FS_VERITY))
++		return 0;
++	ext4_verity_work_cache =
++		KMEM_CACHE(ext4_verity_work, SLAB_RECLAIM_ACCOUNT);
+ 
+-	if (!bio_post_read_ctx_cache)
++	if (!ext4_verity_work_cache)
+ 		goto fail;
+-	bio_post_read_ctx_pool =
+-		mempool_create_slab_pool(NUM_PREALLOC_POST_READ_CTXS,
+-					 bio_post_read_ctx_cache);
+-	if (!bio_post_read_ctx_pool)
++	ext4_verity_work_pool = mempool_create_slab_pool(
++		NUM_VERITY_WORKS, ext4_verity_work_cache);
++	if (!ext4_verity_work_pool)
+ 		goto fail_free_cache;
+ 	return 0;
+ 
+ fail_free_cache:
+-	kmem_cache_destroy(bio_post_read_ctx_cache);
++	kmem_cache_destroy(ext4_verity_work_cache);
+ fail:
+ 	return -ENOMEM;
+ }
+ 
+-void ext4_exit_post_read_processing(void)
++void ext4_exit_verity_caches(void)
+ {
+-	mempool_destroy(bio_post_read_ctx_pool);
+-	kmem_cache_destroy(bio_post_read_ctx_cache);
++	if (!IS_ENABLED(CONFIG_FS_VERITY))
++		return;
++	mempool_destroy(ext4_verity_work_pool);
++	kmem_cache_destroy(ext4_verity_work_cache);
+ }
+diff --git a/fs/ext4/super.c b/fs/ext4/super.c
+index 245f67d10ded..cb9ca0dc4664 100644
+--- a/fs/ext4/super.c
++++ b/fs/ext4/super.c
+@@ -7531,7 +7531,7 @@ static int __init ext4_init_fs(void)
+ 	if (err)
+ 		goto out7;
+ 
+-	err = ext4_init_post_read_processing();
++	err = ext4_init_verity_caches();
+ 	if (err)
+ 		goto out6;
+ 
+@@ -7580,7 +7580,7 @@ static int __init ext4_init_fs(void)
+ out4:
+ 	ext4_exit_pageio();
+ out5:
+-	ext4_exit_post_read_processing();
++	ext4_exit_verity_caches();
+ out6:
+ 	ext4_exit_pending();
+ out7:
+@@ -7601,7 +7601,7 @@ static void __exit ext4_exit_fs(void)
+ 	ext4_exit_sysfs();
+ 	ext4_exit_system_zone();
+ 	ext4_exit_pageio();
+-	ext4_exit_post_read_processing();
++	ext4_exit_verity_caches();
+ 	ext4_exit_es();
+ 	ext4_exit_pending();
  }
 -- 
 2.55.0
