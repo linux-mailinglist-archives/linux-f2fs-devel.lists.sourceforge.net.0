@@ -2,18 +2,18 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id jyRzAf5PVGr7kQMAu9opvQ
+	id JK0BCftPVGr2kQMAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 13 Jul 2026 04:39:58 +0200
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 13 Jul 2026 04:39:55 +0200
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8482B746ADB
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 13 Jul 2026 04:39:57 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9FF1A746AC8
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 13 Jul 2026 04:39:54 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=lists.sourceforge.net header.s=beta header.b=alJ625vv;
-	dkim=fail ("body hash did not verify") header.d=sourceforge.net header.s=x header.b="VKR/RmN5";
-	dkim=fail ("body hash did not verify") header.d=sf.net header.s=x header.b=GFE3icmZ;
-	dkim=fail ("body hash did not verify") header.d=kernel.org header.s=k20260515 header.b=VmZHZRFy;
+	dkim=pass header.d=lists.sourceforge.net header.s=beta header.b=giG6AhDg;
+	dkim=fail ("body hash did not verify") header.d=sourceforge.net header.s=x header.b=Qy6dblRU;
+	dkim=fail ("body hash did not verify") header.d=sf.net header.s=x header.b="f/ZHhVMt";
+	dkim=fail ("body hash did not verify") header.d=kernel.org header.s=k20260515 header.b=cKafiTwT;
 	dmarc=pass (policy=none) header.from=lists.sourceforge.net;
 	spf=pass (mail.lfdr.de: domain of linux-f2fs-devel-bounces@lists.sourceforge.net designates 216.105.38.7 as permitted sender) smtp.mailfrom=linux-f2fs-devel-bounces@lists.sourceforge.net
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
@@ -22,29 +22,29 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	List-Unsubscribe:List-Id:Subject:MIME-Version:References:In-Reply-To:
 	Message-ID:Date:To:Sender:Content-ID:Content-Description:Resent-Date:
 	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
-	bh=Bf5SCJ56M6NJUgxiPpVOcEExEpPndkYsc4EBHONoQSY=; b=alJ625vveYVKiq7xgLiqx9DUrm
-	zPi/LeTYgtB7RWPmBbjZ6iW5s0FnNHFi4+7FgJMhrmYX9036lk+Fa22HNKJk1elsIAmAEJluwn3N1
-	6zd2D3PXxR3Tj3n/CFbvPJdoCCG7gQsiMNFRoXVVrEozWTFTVF453lKluFHxHYzBxXS8=;
-Received: from [127.0.0.1] (helo=sfs-ml-2.v29.lw.sourceforge.com)
-	by sfs-ml-2.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	bh=g9qIKjp+NQQVWlE8uSn+uFJcFx+mmMwX529HUc4YoDk=; b=giG6AhDgK3Zo4EdQ5okRVKu7kL
+	qkAUCAew4O9thWABNWgxZlWYvvsoeneB/q+wwBGPj3J01IfzX9XIW5bQ/9OK7HIhtCaY2HI2CtOHJ
+	7K5MjS87vyVNgLm2MhVmzrADqZrXFHHtORnrBn6H8DUIsKt2qPQ5C/9jaSuypay2g8rE=;
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1wj6aI-00064J-DB;
-	Mon, 13 Jul 2026 02:39:55 +0000
+	id 1wj6aG-0003vS-7O;
+	Mon, 13 Jul 2026 02:39:52 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-2.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <ebiggers@kernel.org>) id 1wj6aG-000640-OP
+ (envelope-from <ebiggers@kernel.org>) id 1wj6aE-0003vK-GC
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 13 Jul 2026 02:39:53 +0000
+ Mon, 13 Jul 2026 02:39:50 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=m3huENAtNragvz5r4Qp0pJND/8Cyxcra8X09kjAT3Wg=; b=VKR/RmN5W7oojtnOnTKLWpQZPt
- PlZ/LOTEKllnGxjG9msJWzeKbEGRiweOUwcL2Ju/+nPWMJEhtZkHjQa02bL7jN1xFX/k37qIC2ZGt
- 97XXLPcNgmZgDNVVEUFCZo4a3HOxOUFS9RkIWNDvgtE/eoucTqaZjwkT30AEXFRf2F9s=;
+ bh=vPlgEL+uDNg1eQ+5+x98EAlAhGO/4A1VGEm0Ti0TVI4=; b=Qy6dblRUuAMpU3GpsihbqzriHw
+ IgmuhtvCix8RYMpue4C5uBiw7qLcphYJKTZrWcoOOE3z/MvJoSOLHXN58chZ/1KDkkdpoARsX3hRa
+ qY9PPtVDjV0ZJnXrjtPum+jsooZbB55WE0pxy0QD3KTK19e57yj5cuh/HTwCMCTv/v7Q=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
  h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:
@@ -52,32 +52,32 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
  :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
  List-Post:List-Owner:List-Archive;
- bh=m3huENAtNragvz5r4Qp0pJND/8Cyxcra8X09kjAT3Wg=; b=GFE3icmZNMtYtmPkkYUFrkSGni
- 8rxBD7X/k21WuOiZ7V+zFKn4TNLqwofDX0MzmUCCQqeFJrWtBKmK1LHoODTl4E/8gjivlfslCrkbv
- 0hSG8ugGZHBVy7QgIBzFO6hSYAqAm8E55gdPKXn3kW9B098fcyhNraoZibz9WpULniW4=;
+ bh=vPlgEL+uDNg1eQ+5+x98EAlAhGO/4A1VGEm0Ti0TVI4=; b=f/ZHhVMtMHoWafmKR7hwxrr4o4
+ NfmEqx/CUmdSVxwALuisgMTG7u1t9arWr8HUhQ9IEGuQADaUGWr3d22gF/3dEc3GmYm1qFlMgG0UR
+ WL55aZOb1Isk/nI+DUjAMRIaqBtSv2MqhoAzIm8cCAeGg6hZetsZVKWdGZtNTR3w9qR8=;
 Received: from sea.source.kernel.org ([172.234.252.31])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1wj6aG-0003Bm-QL for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 13 Jul 2026 02:39:53 +0000
+ id 1wj6aD-0003BR-3p for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 13 Jul 2026 02:39:50 +0000
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by sea.source.kernel.org (Postfix) with ESMTP id 8382A43627;
+ by sea.source.kernel.org (Postfix) with ESMTP id CDBA94362C;
+ Mon, 13 Jul 2026 02:39:43 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9C64C1F000E9;
  Mon, 13 Jul 2026 02:39:42 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6AC291F00A3D;
- Mon, 13 Jul 2026 02:39:40 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
- s=k20260515; t=1783910382;
- bh=m3huENAtNragvz5r4Qp0pJND/8Cyxcra8X09kjAT3Wg=;
+ s=k20260515; t=1783910383;
+ bh=vPlgEL+uDNg1eQ+5+x98EAlAhGO/4A1VGEm0Ti0TVI4=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References;
- b=VmZHZRFyn92wa4cbZ6q0YeacYmnePCqY3poWZ+eNZkfey9boo3dY6QnuMUOArwtKA
- QrJWNEMmgME16v8oLLA8e/58shoq0+van7ONH6QePsaX8Yczo71uRy/GnpL5R2tyY1
- ZvLBB5w8bmD58rzb4ZivD+IyBV1A7RkaMgCxKtUzor8u1ZqoBskNZ7/raGnh6c9fEg
- zV1+WQMkjTJ7hiVyINRdSWnnhkulRTRNmCd8HhJGMIaYdQgBqj7Ilfaxw3eQmnTRFY
- 5tWTtSaVOmhEvCUcRa537/OTypFagjarq87yh5uTdaT24MjreMjoY2owe9EZYzoURZ
- u3nTUmyqvu2dA==
+ b=cKafiTwT1TEF5FNYrukrS0qlT0TJ/IOijJqeWWaG1C1E/crSdkP6JIvq52GV1DnVi
+ 4CEww82cVFczJifXB1enZ22xrwfSrSiMK9UxX6qxJjEGvXh9mYKw7f78wGTbhxph6d
+ 4hiv9L5FFWsMUPEH2l9zmwxpAXzCnlUi3y08kbCua+G6mHTXf9F9ARN8Wy6r4HZ9aK
+ xVVzAGUYOOowEJjTQAlhEdCFb8r+z0EsP9yr2iDqtMHtGMbsGY3zBxyEjFx6C7I7ZW
+ tM60Z1OO+0j/nilcYVpwz4SiZOsclA/0kOF3yb5HsdYeNe2WvugMSaswGWl6tZoQqg
+ 9601hC5cSFt3g==
 To: linux-fscrypt@vger.kernel.org
-Date: Sun, 12 Jul 2026 22:36:57 -0400
-Message-ID: <20260713023708.9245-7-ebiggers@kernel.org>
+Date: Sun, 12 Jul 2026 22:36:58 -0400
+Message-ID: <20260713023708.9245-8-ebiggers@kernel.org>
 X-Mailer: git-send-email 2.55.0
 In-Reply-To: <20260713023708.9245-1-ebiggers@kernel.org>
 References: <20260713023708.9245-1-ebiggers@kernel.org>
@@ -89,12 +89,11 @@ X-Spam-Report: Spam detection software,
  message has been attached to this so you can view it or label
  similar future email.  If you have any questions, see
  the administrator of that system for details.
- Content preview:  Update the documentation for the inlinecrypt mount option
- to reflect that it's now just about the choice of whether to use inline
- encryption
- hardware, not whether the blk-crypto framework is used. Also remove an outdated
- statement about the data unit size, and make the ext4 and f2fs docs reference
- the fscrypt docs rather than the block layer docs directly. 
+ Content preview: Now that fscrypt's file contents en/decryption is always
+ implemented
+ using blk-crypto when the filesystem is block-based, the fs-layer en/decryption
+ code in ext4 is unused code. Remove it. Note that this makes possible some
+ additional cleanups, but they're left to later commits: 
  Content analysis details:   (-0.2 points, 5.0 required)
  pts rule name              description
  ---- ---------------------- --------------------------------------------------
@@ -105,9 +104,9 @@ X-Spam-Report: Spam detection software,
  0.1 DKIM_SIGNED            Message has a DKIM or DK signature,
  not necessarily valid
  -0.1 DKIM_VALID Message has at least one valid DKIM or DK signature
-X-Headers-End: 1wj6aG-0003Bm-QL
-Subject: [f2fs-dev] [PATCH v3 06/17] Documentation: fscrypt: Update docs for
- inlinecrypt
+X-Headers-End: 1wj6aD-0003BR-3p
+Subject: [f2fs-dev] [PATCH v3 07/17] ext4: Remove fs-layer file contents
+ en/decryption code
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -173,160 +172,362 @@ X-Spamd-Result: default: False [-7.11 / 15.00];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.sourceforge.net:from_smtp,lists.sourceforge.net:dkim,lists.sourceforge.net:helo,lists.sourceforge.net:rdns,lists.sourceforge.net:from_mime]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 8482B746ADB
+X-Rspamd-Queue-Id: 9FF1A746AC8
 
-Update the documentation for the inlinecrypt mount option to reflect
-that it's now just about the choice of whether to use inline encryption
-hardware, not whether the blk-crypto framework is used.
+Now that fscrypt's file contents en/decryption is always implemented
+using blk-crypto when the filesystem is block-based, the fs-layer
+en/decryption code in ext4 is unused code.  Remove it.
 
-Also remove an outdated statement about the data unit size, and make the
-ext4 and f2fs docs reference the fscrypt docs rather than the block
-layer docs directly.
+Note that this makes possible some additional cleanups, but they're left
+to later commits:
 
+  - Making ext4_bio_write_folio() return void
+  - Renaming bio_post_read_ctx to fsverity_ctx or similar, and
+    allocating the pool only when fsverity support is needed
+
+Reviewed-by: Christoph Hellwig <hch@lst.de>
 Signed-off-by: Eric Biggers <ebiggers@kernel.org>
 ---
- Documentation/admin-guide/ext4.rst    |  8 ++--
- Documentation/filesystems/f2fs.rst    | 10 ++---
- Documentation/filesystems/fscrypt.rst | 55 ++++++++++-----------------
- 3 files changed, 28 insertions(+), 45 deletions(-)
+ fs/ext4/crypto.c   |  1 -
+ fs/ext4/inode.c    | 28 ++--------------
+ fs/ext4/page-io.c  | 68 ++-------------------------------------
+ fs/ext4/readpage.c | 80 ++++------------------------------------------
+ 4 files changed, 13 insertions(+), 164 deletions(-)
 
-diff --git a/Documentation/admin-guide/ext4.rst b/Documentation/admin-guide/ext4.rst
-index ac0c709ea9e7..742a48e6fc0c 100644
---- a/Documentation/admin-guide/ext4.rst
-+++ b/Documentation/admin-guide/ext4.rst
-@@ -385,11 +385,9 @@ When mounting an ext4 filesystem, the following option are accepted:
-         incompatible with data=journal.
- 
-   inlinecrypt
--        When possible, encrypt/decrypt the contents of encrypted files using the
--        blk-crypto framework rather than filesystem-layer encryption. This
--        allows the use of inline encryption hardware. The on-disk format is
--        unaffected. For more details, see
--        Documentation/block/inline-encryption.rst.
-+        When possible, encrypt/decrypt the contents of encrypted files using
-+        inline encryption hardware rather than the CPU. For more details, see
-+        Documentation/filesystems/fscrypt.rst.
- 
- Data Mode
- =========
-diff --git a/Documentation/filesystems/f2fs.rst b/Documentation/filesystems/f2fs.rst
-index 8c4a14ae444f..b45d7a687625 100644
---- a/Documentation/filesystems/f2fs.rst
-+++ b/Documentation/filesystems/f2fs.rst
-@@ -351,12 +351,10 @@ compress_mode=%s	 Control file compression mode. This supports "fs" and "user"
- compress_cache		 Support to use address space of a filesystem managed inode to
- 			 cache compressed block, in order to improve cache hit ratio of
- 			 random read.
--inlinecrypt		 When possible, encrypt/decrypt the contents of encrypted
--			 files using the blk-crypto framework rather than
--			 filesystem-layer encryption. This allows the use of
--			 inline encryption hardware. The on-disk format is
--			 unaffected. For more details, see
--			 Documentation/block/inline-encryption.rst.
-+inlinecrypt		 When possible, encrypt/decrypt the contents of
-+			 encrypted files using inline encryption hardware rather
-+			 than the CPU. For more details, see
-+			 Documentation/filesystems/fscrypt.rst.
- atgc			 Enable age-threshold garbage collection, it provides high
- 			 effectiveness and efficiency on background GC.
- discard_unit=%s		 Control discard unit, the argument can be "block", "segment"
-diff --git a/Documentation/filesystems/fscrypt.rst b/Documentation/filesystems/fscrypt.rst
-index 92b8f311e211..5f1b5b53aa16 100644
---- a/Documentation/filesystems/fscrypt.rst
-+++ b/Documentation/filesystems/fscrypt.rst
-@@ -1318,32 +1318,20 @@ Inline encryption support
- 
- Many newer systems (especially mobile SoCs) have *inline encryption
- hardware* that can encrypt/decrypt data while it is on its way to/from
--the storage device.  Linux supports inline encryption through a set of
--extensions to the block layer called *blk-crypto*.  blk-crypto allows
--filesystems to attach encryption contexts to bios (I/O requests) to
--specify how the data will be encrypted or decrypted in-line.  For more
--information about blk-crypto, see
--:ref:`Documentation/block/inline-encryption.rst <inline_encryption>`.
-+the storage device.
- 
- On supported filesystems (currently ext4 and f2fs), fscrypt can use
--blk-crypto instead of the kernel crypto API to encrypt/decrypt file
--contents.  To enable this, set CONFIG_FS_ENCRYPTION_INLINE_CRYPT=y in
--the kernel configuration, and specify the "inlinecrypt" mount option
--when mounting the filesystem.
+diff --git a/fs/ext4/crypto.c b/fs/ext4/crypto.c
+index 6b809ac80ef7..9265cfe62c83 100644
+--- a/fs/ext4/crypto.c
++++ b/fs/ext4/crypto.c
+@@ -237,7 +237,6 @@ const struct fscrypt_operations ext4_cryptops = {
+ 	.inode_info_offs	= (int)offsetof(struct ext4_inode_info, i_crypt_info) -
+ 				  (int)offsetof(struct ext4_inode_info, vfs_inode),
+ 	.is_block_based		= 1,
+-	.needs_bounce_pages	= 1,
+ 	.has_32bit_inodes	= 1,
+ 	.supports_subblock_data_units = 1,
+ 	.legacy_key_prefix	= "ext4:",
+diff --git a/fs/ext4/inode.c b/fs/ext4/inode.c
+index ce99807c5f5b..8eb2af481129 100644
+--- a/fs/ext4/inode.c
++++ b/fs/ext4/inode.c
+@@ -1262,17 +1262,6 @@ int ext4_block_write_begin(handle_t *handle, struct folio *folio,
+ 							 from, to);
+ 		else
+ 			folio_zero_new_buffers(folio, from, to);
+-	} else if (fscrypt_inode_uses_fs_layer_crypto(inode)) {
+-		for (i = 0; i < nr_wait; i++) {
+-			int err2;
 -
--Note that the "inlinecrypt" mount option just specifies to use inline
--encryption when possible; it doesn't force its use.  fscrypt will
--still fall back to using the kernel crypto API on files where the
--inline encryption hardware doesn't have the needed crypto capabilities
--(e.g. support for the needed encryption algorithm and data unit size)
--and where blk-crypto-fallback is unusable.  (For blk-crypto-fallback
--to be usable, it must be enabled in the kernel configuration with
--CONFIG_BLK_INLINE_ENCRYPTION_FALLBACK=y, and the file must be
--protected by a raw key rather than a hardware-wrapped key.)
+-			err2 = fscrypt_decrypt_pagecache_blocks(folio,
+-						blocksize, bh_offset(wait[i]));
+-			if (err2) {
+-				clear_buffer_uptodate(wait[i]);
+-				err = err2;
+-			}
+-		}
+ 	}
+ 
+ 	return err;
+@@ -3829,9 +3818,9 @@ static int ext4_iomap_begin(struct inode *inode, loff_t offset, loff_t length,
+ 		return ret;
+ out:
+ 	/*
+-	 * When inline encryption is enabled, sometimes I/O to an encrypted file
+-	 * has to be broken up to guarantee DUN contiguity.  Handle this by
+-	 * limiting the length of the mapping returned.
++	 * Sometimes I/O to an encrypted file has to be broken up to guarantee
++	 * DUN contiguity.  Handle this by limiting the length of the mapping
++	 * returned.
+ 	 */
+ 	map.m_len = fscrypt_limit_io_blocks(inode, map.m_lblk, map.m_len);
+ 
+@@ -4081,17 +4070,6 @@ static struct buffer_head *ext4_load_tail_bh(struct inode *inode, loff_t from)
+ 		err = ext4_read_bh_lock(bh, 0, true);
+ 		if (err)
+ 			goto unlock;
+-		if (fscrypt_inode_uses_fs_layer_crypto(inode)) {
+-			/* We expect the key to be set. */
+-			BUG_ON(!fscrypt_has_encryption_key(inode));
+-			err = fscrypt_decrypt_pagecache_blocks(folio,
+-							       blocksize,
+-							       bh_offset(bh));
+-			if (err) {
+-				clear_buffer_uptodate(bh);
+-				goto unlock;
+-			}
+-		}
+ 	}
+ 	return bh;
+ 
+diff --git a/fs/ext4/page-io.c b/fs/ext4/page-io.c
+index bc674aa4a656..557f44178d87 100644
+--- a/fs/ext4/page-io.c
++++ b/fs/ext4/page-io.c
+@@ -103,18 +103,12 @@ static void ext4_finish_bio(struct bio *bio)
+ 
+ 	bio_for_each_folio_all(fi, bio) {
+ 		struct folio *folio = fi.folio;
+-		struct folio *io_folio = NULL;
+ 		struct buffer_head *bh, *head;
+ 		size_t bio_start = fi.offset;
+ 		size_t bio_end = bio_start + fi.length;
+ 		unsigned under_io = 0;
+ 		unsigned long flags;
+ 
+-		if (fscrypt_is_bounce_folio(folio)) {
+-			io_folio = folio;
+-			folio = fscrypt_pagecache_folio(folio);
+-		}
 -
--Currently fscrypt always uses the filesystem block size (which is
--usually 4096 bytes) as the data unit size.  Therefore, it can only use
--inline encryption hardware that supports that data unit size.
-+inline encryption hardware instead of the CPU to encrypt/decrypt file
-+contents.  To enable this, specify the "inlinecrypt" mount option when
-+mounting the filesystem.
-+
-+This causes the filesystem to use inline encryption hardware whenever
-+possible, falling back to the CPU only if such hardware is absent or
-+doesn't provide the needed crypto capabilities.
-+
-+For more information about the kernel's support for inline encryption
-+hardware, see :ref:`Documentation/block/inline-encryption.rst
-+<inline_encryption>`.
+ 		if (bio->bi_status) {
+ 			int err = blk_status_to_errno(bio->bi_status);
+ 			mapping_set_error(folio->mapping, err);
+@@ -139,10 +133,8 @@ static void ext4_finish_bio(struct bio *bio)
+ 			}
+ 		} while ((bh = bh->b_this_page) != head);
+ 		spin_unlock_irqrestore(&head->b_uptodate_lock, flags);
+-		if (!under_io) {
+-			fscrypt_free_bounce_page(&io_folio->page);
++		if (!under_io)
+ 			folio_end_writeback(folio);
+-		}
+ 	}
+ }
  
- Inline encryption doesn't affect the ciphertext or other aspects of
- the on-disk format, so users may freely switch back and forth between
-@@ -1425,10 +1413,8 @@ For direct I/O on an encrypted file to work, the following conditions
- must be met (in addition to the conditions for direct I/O on an
- unencrypted file):
+@@ -453,7 +445,6 @@ static bool io_submit_need_new_bio(struct ext4_io_submit *io,
+ static void io_submit_add_bh(struct ext4_io_submit *io,
+ 			     struct inode *inode,
+ 			     struct folio *folio,
+-			     struct folio *io_folio,
+ 			     struct buffer_head *bh)
+ {
+ 	if (io->io_bio && io_submit_need_new_bio(io, inode, folio, bh)) {
+@@ -462,7 +453,7 @@ static void io_submit_add_bh(struct ext4_io_submit *io,
+ 	}
+ 	if (io->io_bio == NULL)
+ 		io_submit_init_bio(io, inode, folio, bh);
+-	if (!bio_add_folio(io->io_bio, io_folio, bh->b_size, bh_offset(bh)))
++	if (!bio_add_folio(io->io_bio, folio, bh->b_size, bh_offset(bh)))
+ 		goto submit_and_retry;
+ 	wbc_account_cgroup_owner(io->io_wbc, folio, bh->b_size);
+ 	io->io_next_block++;
+@@ -471,11 +462,9 @@ static void io_submit_add_bh(struct ext4_io_submit *io,
+ int ext4_bio_write_folio(struct ext4_io_submit *io, struct folio *folio,
+ 		size_t len)
+ {
+-	struct folio *io_folio = folio;
+ 	struct inode *inode = folio->mapping->host;
+ 	unsigned block_start;
+ 	struct buffer_head *bh, *head;
+-	int ret = 0;
+ 	int nr_to_submit = 0;
+ 	struct writeback_control *wbc = io->io_wbc;
+ 	bool keep_towrite = false;
+@@ -549,64 +538,13 @@ int ext4_bio_write_folio(struct ext4_io_submit *io, struct folio *folio,
  
--* The file must be using inline encryption.  Usually this means that
--  the filesystem must be mounted with ``-o inlinecrypt`` and inline
--  encryption hardware must be present.  However, a software fallback
--  is also available.  For details, see `Inline encryption support`_.
-+* The filesystem must be block-based.  (Before Linux v7.3, the
-+  filesystem also needed to be mounted with ``-o inlinecrypt``.)
+ 	bh = head = folio_buffers(folio);
  
- * The I/O request must be fully aligned to the filesystem block size.
-   This means that the file position the I/O is targeting, the lengths
-@@ -1555,14 +1541,11 @@ Tests
+-	/*
+-	 * If any blocks are being written to an encrypted file, encrypt them
+-	 * into a bounce page.  For simplicity, just encrypt until the last
+-	 * block which might be needed.  This may cause some unneeded blocks
+-	 * (e.g. holes) to be unnecessarily encrypted, but this is rare and
+-	 * can't happen in the common case of blocksize == PAGE_SIZE.
+-	 */
+-	if (fscrypt_inode_uses_fs_layer_crypto(inode)) {
+-		gfp_t gfp_flags = GFP_NOFS;
+-		unsigned int enc_bytes = round_up(len, i_blocksize(inode));
+-		struct page *bounce_page;
+-
+-		/*
+-		 * Since bounce page allocation uses a mempool, we can only use
+-		 * a waiting mask (i.e. request guaranteed allocation) on the
+-		 * first page of the bio.  Otherwise it can deadlock.
+-		 */
+-		if (io->io_bio)
+-			gfp_flags = GFP_NOWAIT;
+-	retry_encrypt:
+-		bounce_page = fscrypt_encrypt_pagecache_blocks(folio,
+-					enc_bytes, 0, gfp_flags);
+-		if (IS_ERR(bounce_page)) {
+-			ret = PTR_ERR(bounce_page);
+-			if (ret == -ENOMEM &&
+-			    (io->io_bio || wbc->sync_mode == WB_SYNC_ALL)) {
+-				gfp_t new_gfp_flags = GFP_NOFS;
+-				if (io->io_bio)
+-					ext4_io_submit(io);
+-				else
+-					new_gfp_flags |= __GFP_NOFAIL;
+-				memalloc_retry_wait(gfp_flags);
+-				gfp_flags = new_gfp_flags;
+-				goto retry_encrypt;
+-			}
+-
+-			printk_ratelimited(KERN_ERR "%s: ret = %d\n", __func__, ret);
+-			folio_redirty_for_writepage(wbc, folio);
+-			do {
+-				if (buffer_async_write(bh)) {
+-					clear_buffer_async_write(bh);
+-					set_buffer_dirty(bh);
+-				}
+-				bh = bh->b_this_page;
+-			} while (bh != head);
+-
+-			return ret;
+-		}
+-		io_folio = page_folio(bounce_page);
+-	}
+-
+ 	__folio_start_writeback(folio, keep_towrite);
  
- To test fscrypt, use xfstests, which is Linux's de facto standard
- filesystem test suite.  First, run all the tests in the "encrypt"
--group on the relevant filesystem(s).  One can also run the tests
--with the 'inlinecrypt' mount option to test the implementation for
--inline encryption support.  For example, to test ext4 and
-+group on the relevant filesystem(s).  For example, to test ext4 and
- f2fs encryption using `kvm-xfstests
- <https://github.com/tytso/xfstests-bld/blob/master/Documentation/kvm-quickstart.md>`_::
+ 	/* Now submit buffers to write */
+ 	do {
+ 		if (!buffer_async_write(bh))
+ 			continue;
+-		io_submit_add_bh(io, inode, folio, io_folio, bh);
++		io_submit_add_bh(io, inode, folio, bh);
+ 	} while ((bh = bh->b_this_page) != head);
  
-     kvm-xfstests -c ext4,f2fs -g encrypt
--    kvm-xfstests -c ext4,f2fs -g encrypt -m inlinecrypt
+ 	return 0;
+diff --git a/fs/ext4/readpage.c b/fs/ext4/readpage.c
+index dd3627c71732..8af183798a33 100644
+--- a/fs/ext4/readpage.c
++++ b/fs/ext4/readpage.c
+@@ -52,20 +52,10 @@
+ static struct kmem_cache *bio_post_read_ctx_cache;
+ static mempool_t *bio_post_read_ctx_pool;
  
- UBIFS encryption can also be tested this way, but it should be done in
- a separate command, and it takes some time for kvm-xfstests to set up
-@@ -1584,7 +1567,6 @@ This tests the encrypted I/O paths more thoroughly.  To do this with
- kvm-xfstests, use the "encrypt" filesystem configuration::
+-/* postprocessing steps for read bios */
+-enum bio_post_read_step {
+-	STEP_INITIAL = 0,
+-	STEP_DECRYPT,
+-	STEP_VERITY,
+-	STEP_MAX,
+-};
+-
+ struct bio_post_read_ctx {
+ 	struct bio *bio;
+ 	struct fsverity_info *vi;
+ 	struct work_struct work;
+-	unsigned int cur_step;
+-	unsigned int enabled_steps;
+ };
  
-     kvm-xfstests -c ext4/encrypt,f2fs/encrypt -g auto
--    kvm-xfstests -c ext4/encrypt,f2fs/encrypt -g auto -m inlinecrypt
+ static void __read_end_io(struct bio *bio)
+@@ -79,20 +69,6 @@ static void __read_end_io(struct bio *bio)
+ 	bio_put(bio);
+ }
  
- Because this runs many more tests than "-g encrypt" does, it takes
- much longer to run; so also consider using `gce-xfstests
-@@ -1592,4 +1574,9 @@ much longer to run; so also consider using `gce-xfstests
- instead of kvm-xfstests::
+-static void bio_post_read_processing(struct bio_post_read_ctx *ctx);
+-
+-static void decrypt_work(struct work_struct *work)
+-{
+-	struct bio_post_read_ctx *ctx =
+-		container_of(work, struct bio_post_read_ctx, work);
+-	struct bio *bio = ctx->bio;
+-
+-	if (fscrypt_decrypt_bio(bio))
+-		bio_post_read_processing(ctx);
+-	else
+-		__read_end_io(bio);
+-}
+-
+ static void verity_work(struct work_struct *work)
+ {
+ 	struct bio_post_read_ctx *ctx =
+@@ -101,13 +77,9 @@ static void verity_work(struct work_struct *work)
+ 	struct fsverity_info *vi = ctx->vi;
  
-     gce-xfstests -c ext4/encrypt,f2fs/encrypt -g auto
--    gce-xfstests -c ext4/encrypt,f2fs/encrypt -g auto -m inlinecrypt
-+
-+To test inline encryption hardware on a platform that supports such
-+hardware, run xfstests directly with the ``inlinecrypt`` mount option
-+enabled.  For example::
-+
-+    EXT_MOUNT_OPTIONS="-o inlinecrypt" ./check -g encrypt
+ 	/*
+-	 * fsverity_verify_bio() may call readahead() again, and although verity
+-	 * will be disabled for that, decryption may still be needed, causing
+-	 * another bio_post_read_ctx to be allocated.  So to guarantee that
+-	 * mempool_alloc() never deadlocks we must free the current ctx first.
+-	 * This is safe because verity is the last post-read step.
++	 * Free the bio_post_read_ctx right away, since it's no longer needed.
++	 * This relieves the pressure on the mempool as much as possible.
+ 	 */
+-	BUILD_BUG_ON(STEP_VERITY + 1 != STEP_MAX);
+ 	mempool_free(ctx, bio_post_read_ctx_pool);
+ 	bio->bi_private = NULL;
+ 
+@@ -116,39 +88,10 @@ static void verity_work(struct work_struct *work)
+ 	__read_end_io(bio);
+ }
+ 
+-static void bio_post_read_processing(struct bio_post_read_ctx *ctx)
+-{
+-	/*
+-	 * We use different work queues for decryption and for verity because
+-	 * verity may require reading metadata pages that need decryption, and
+-	 * we shouldn't recurse to the same workqueue.
+-	 */
+-	switch (++ctx->cur_step) {
+-	case STEP_DECRYPT:
+-		if (ctx->enabled_steps & (1 << STEP_DECRYPT)) {
+-			INIT_WORK(&ctx->work, decrypt_work);
+-			fscrypt_enqueue_decrypt_work(&ctx->work);
+-			return;
+-		}
+-		ctx->cur_step++;
+-		fallthrough;
+-	case STEP_VERITY:
+-		if (IS_ENABLED(CONFIG_FS_VERITY) &&
+-		    ctx->enabled_steps & (1 << STEP_VERITY)) {
+-			INIT_WORK(&ctx->work, verity_work);
+-			fsverity_enqueue_verify_work(&ctx->work);
+-			return;
+-		}
+-		ctx->cur_step++;
+-		fallthrough;
+-	default:
+-		__read_end_io(ctx->bio);
+-	}
+-}
+-
+ static bool bio_post_read_required(struct bio *bio)
+ {
+-	return bio->bi_private && !bio->bi_status;
++	return IS_ENABLED(CONFIG_FS_VERITY) && bio->bi_private &&
++	       !bio->bi_status;
+ }
+ 
+ /*
+@@ -168,8 +111,8 @@ static void mpage_end_io(struct bio *bio)
+ 	if (bio_post_read_required(bio)) {
+ 		struct bio_post_read_ctx *ctx = bio->bi_private;
+ 
+-		ctx->cur_step = STEP_INITIAL;
+-		bio_post_read_processing(ctx);
++		INIT_WORK(&ctx->work, verity_work);
++		fsverity_enqueue_verify_work(&ctx->work);
+ 		return;
+ 	}
+ 	__read_end_io(bio);
+@@ -179,22 +122,13 @@ static void ext4_set_bio_post_read_ctx(struct bio *bio,
+ 				       const struct inode *inode,
+ 				       struct fsverity_info *vi)
+ {
+-	unsigned int post_read_steps = 0;
+-
+-	if (fscrypt_inode_uses_fs_layer_crypto(inode))
+-		post_read_steps |= 1 << STEP_DECRYPT;
+-
+-	if (vi)
+-		post_read_steps |= 1 << STEP_VERITY;
+-
+-	if (post_read_steps) {
++	if (vi) {
+ 		/* Due to the mempool, this never fails. */
+ 		struct bio_post_read_ctx *ctx =
+ 			mempool_alloc(bio_post_read_ctx_pool, GFP_NOFS);
+ 
+ 		ctx->bio = bio;
+ 		ctx->vi = vi;
+-		ctx->enabled_steps = post_read_steps;
+ 		bio->bi_private = ctx;
+ 	}
+ }
 -- 
 2.55.0
 
