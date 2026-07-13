@@ -2,95 +2,98 @@ Return-Path: <linux-f2fs-devel-bounces@lists.sourceforge.net>
 Delivered-To: lists+linux-f2fs-devel@lfdr.de
 Received: from mail.lfdr.de
 	by mail.lfdr.de with LMTP
-	id x96sBKZ/VGq1mgMAu9opvQ
+	id 9Fn5FrqCVGoimwMAu9opvQ
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 13 Jul 2026 08:03:18 +0200
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 13 Jul 2026 08:16:26 +0200
 X-Original-To: lists+linux-f2fs-devel@lfdr.de
 Received: from lists.sourceforge.net (lists.sourceforge.net [216.105.38.7])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4CBA17476B2
-	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 13 Jul 2026 08:03:17 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 85F1874777B
+	for <lists+linux-f2fs-devel@lfdr.de>; Mon, 13 Jul 2026 08:16:25 +0200 (CEST)
 Authentication-Results: mail.lfdr.de;
-	dkim=pass header.d=lists.sourceforge.net header.s=beta header.b=O03BDILZ;
-	dkim=fail ("body hash did not verify") header.d=sourceforge.net header.s=x header.b="Ka0/T3h0";
-	dkim=fail ("body hash did not verify") header.d=sf.net header.s=x header.b="W AuZGkQ";
-	dkim=fail ("body hash did not verify") header.d=qq.com header.s=s201512 header.b=uVkf2Jdp;
+	dkim=pass header.d=lists.sourceforge.net header.s=beta header.b=YYre18pI;
+	dkim=fail ("body hash did not verify") header.d=sourceforge.net header.s=x header.b=XbDLs6es;
+	dkim=fail ("body hash did not verify") header.d=sf.net header.s=x header.b=VbWxma82;
+	dkim=fail ("body hash did not verify") header.d=qq.com header.s=s201512 header.b=trJR+V1W;
 	dmarc=pass (policy=none) header.from=lists.sourceforge.net;
 	spf=pass (mail.lfdr.de: domain of linux-f2fs-devel-bounces@lists.sourceforge.net designates 216.105.38.7 as permitted sender) smtp.mailfrom=linux-f2fs-devel-bounces@lists.sourceforge.net
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=lists.sourceforge.net; s=beta; h=Content-Transfer-Encoding:Content-Type:Cc:
 	Reply-To:From:List-Subscribe:List-Help:List-Post:List-Archive:
-	List-Unsubscribe:List-Id:Subject:MIME-Version:Date:To:Message-ID:Sender:
-	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
-	Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Owner;
-	bh=yBrP+oN/7FUQpiGuSP5wx2AUbAywF0wbynbAHfvUE1A=; b=O03BDILZcnbu7MY6/zssE8ZZCs
-	QFnFLSQGgwIqyCNDZ7VQUwU4iMAByaPUGTqpLAILXfppWfwQYFJGo065HbPg+uh+AfFwFlSNydtVf
-	2W9CVWjd+SyeSDhLSxhW/rGwfcmDWVNW34/qq3USiMH43TAqi3CoxF2tozoXsh7aZr+A=;
-Received: from [127.0.0.1] (helo=sfs-ml-3.v29.lw.sourceforge.com)
-	by sfs-ml-3.v29.lw.sourceforge.com with esmtp (Exim 4.95)
+	List-Unsubscribe:List-Id:Subject:MIME-Version:References:In-Reply-To:Date:To:
+	Message-ID:Sender:Content-ID:Content-Description:Resent-Date:Resent-From:
+	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Owner;
+	bh=oFeEZaGNv78/os9ZxrVnNQRS2H5ocNfwIWm29hTjw00=; b=YYre18pIsZ60LJBojyHCAxf82F
+	h+4WeGO3682OcrXsGhmKoxtioGAaH9sAhIr/YSB3szTfOsIiMV1c6x5yqFUTIRJuQXV3kUCBJdyHZ
+	6NH+zIGngjnIPL/2KHm0TPvV+x4OaJU17FMUat+y02irMIjxskm8alpB0AeTWK8myrL8=;
+Received: from [127.0.0.1] (helo=sfs-ml-4.v29.lw.sourceforge.com)
+	by sfs-ml-4.v29.lw.sourceforge.com with esmtp (Exim 4.95)
 	(envelope-from <linux-f2fs-devel-bounces@lists.sourceforge.net>)
-	id 1wj9l1-0001vw-RV;
-	Mon, 13 Jul 2026 06:03:12 +0000
+	id 1wj9xh-0007vc-Jg;
+	Mon, 13 Jul 2026 06:16:17 +0000
 Received: from [172.30.29.66] (helo=mx.sourceforge.net)
- by sfs-ml-3.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
+ by sfs-ml-4.v29.lw.sourceforge.com with esmtps (TLS1.2) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <3497809730@qq.com>) id 1wj9ky-0001vo-5h
+ (envelope-from <3497809730@qq.com>) id 1wj9xg-0007vV-JM
  for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 13 Jul 2026 06:03:09 +0000
+ Mon, 13 Jul 2026 06:16:16 +0000
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:Date:Subject
- :Cc:To:From:Message-ID:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ d=sourceforge.net; s=x; h=Content-Transfer-Encoding:MIME-Version:References:
+ In-Reply-To:Date:Subject:Cc:To:From:Message-ID:Sender:Reply-To:Content-Type:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=fPnUTBnX9rEUlFodo3utzbAQ5Y2INf72HuDM7nHGsLM=; b=Ka0/T3h0apPoRWJ/GulJtU0T2z
- L/n+vSLZyKYcKxlXlIIUhEEo2pPTF7Y8LEiWJsysqTkFPAIumJF7oLUW1qEv+VFtcsZtLkEKrC1Qm
- 3/LAHrajIw4H0U9KyGnT2lslloUhaHiWrYpcsXh7hUVQvktDJwpUOdgjy16qpYPRmGhg=;
+ bh=9E9llBN5BbvgowJzmsoaHolN7PYccrnfQ67fnUQ2Yvk=; b=XbDLs6escDfjcq9CwXwOs3XwQy
+ YcgBXSVq+P+Bpsu0u11wz5cpWRy7CACb+1XmlK0bpyaI12D61Bn7XLyD05Aya14WdiS4cQo3gmVS0
+ IVhFgZhCWbUmckorNLhKk7T1fpvJQFKxJ1AasOkffnkdf7elUECegcSWwSIU36zoeig8=;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=sf.net; s=x
  ;
- h=Content-Transfer-Encoding:MIME-Version:Date:Subject:Cc:To:From:Message-ID
- :Sender:Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:
- References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:List-Post:
- List-Owner:List-Archive; bh=fPnUTBnX9rEUlFodo3utzbAQ5Y2INf72HuDM7nHGsLM=; b=W
- AuZGkQCafDvhAHwe8E7xauzHB46aVbRky4n5h+o6i1j+exXiyNmogwjwqbV13KUelNTdJz1AiNuMh
- 91Dpz74M+J/tnL/w/0waWkuwfF5rZNG4CljH2mOsqePFajihoQp+yz+g0UDIBc064mAt6ws5/gz+5
- IysXejMYXe/pb+gk=;
-Received: from out203-205-221-209.mail.qq.com ([203.205.221.209])
+ h=Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Date:
+ Subject:Cc:To:From:Message-ID:Sender:Reply-To:Content-Type:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=9E9llBN5BbvgowJzmsoaHolN7PYccrnfQ67fnUQ2Yvk=; b=VbWxma82olyRsA2bu+CfcTOi2z
+ 4f7bFQhe07jPoqxV2NN00d1mLjsfsd6XEOEL7tOBzPnyLIiYkYIA7fm6d9hy/aRuT0H1RPXH1Ceyv
+ T/UmKKhpZFuB1R5AyQLn/OmF+iepxEudSiBykAi/FgRvuUhTqjqbLK7xkdjvEiEKbOmw=;
+Received: from out203-205-221-205.mail.qq.com ([203.205.221.205])
  by sfi-mx-2.v28.lw.sourceforge.com with esmtps
  (TLS1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.95)
- id 1wj9kx-0001NQ-Vw for linux-f2fs-devel@lists.sourceforge.net;
- Mon, 13 Jul 2026 06:03:08 +0000
+ id 1wj9xf-000262-SK for linux-f2fs-devel@lists.sourceforge.net;
+ Mon, 13 Jul 2026 06:16:16 +0000
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qq.com; s=s201512;
- t=1783922580; bh=fPnUTBnX9rEUlFodo3utzbAQ5Y2INf72HuDM7nHGsLM=;
- h=From:To:Cc:Subject:Date;
- b=uVkf2Jdp5yL72Ed+0WsgqQxoOmKiMJpRpvTJ3RhZVJpEkiMlu6D1GXItgcZM+64IX
- dEGg1gQdwnVC7oJOCbMG4BmEKYUdjjBSQ8eD/nPnjcKvyafPP9o7FoqvKkwwaIi72f
- GSiiPBYrqZRvDG63zFjjWTB9d8KnvUX5NphbISHk=
+ t=1783923366; bh=9E9llBN5BbvgowJzmsoaHolN7PYccrnfQ67fnUQ2Yvk=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References;
+ b=trJR+V1WDIuuND4QuZKEJWXNcxaPRTKdp6Tr04Z/XqRZqcgE/xuDSiXGl3FVlvQwU
+ Yqz6hB8iuUOdvN6sKkHXlknnsaSsrutUMBruWm2YHCzUB1vnUgMD7a46H80hTp4GbA
+ U6Z4d8hQ+sHg5Z+YR9/w/KzT+1K916Ltl9x1B2j8=
 Received: from ikun ([221.176.157.250])
- by newxmesmtplogicsvrsza73-0.qq.com (NewEsmtp) with SMTP
- id A7374EB; Mon, 13 Jul 2026 14:02:39 +0800
-X-QQ-mid: xmsmtpt1783922559tbrq6dkau
-Message-ID: <tencent_AF84C3AD07E239869DCA86274251CDB33905@qq.com>
-X-QQ-XMAILINFO: NVJ0hJNx7N5SXgPSVEYKvnhA1jm6i3a0BfEJEoRmvuWlYtYNoiTmODQhO4/YlG
- DcqAd18pnmdNL7MOyzIgWyapmCOqjmNx0jsxy9S9sJW2nC7ClMG0dDQvUaqI9fzA+rW+WsYoTzm1
- hFDaaVVD3kByE2DnM8LdO2J/ZPPhpVWJhMHyvsE4v6riQur/Ll2HgkpI9yH0Or6cH6wuibpb9lR5
- 61/zKYU6PF4c7PFczix9WTNDQmxbutB26yH1Eflkh9Di6K4FoF8fbMxkSpB8RNYlF4+mosUPJTFg
- XJ2pavgdNvUO2bICkdkQUOOxtFz6KQZtuRAIST1jpWJtf+Uq+JDX2EOdUbtFro7ceRSnEB4DZBAb
- L6183O3loblS0+ZnClcblBkn8LMOMgR8D8P2mZc6xS0mFy30lQu1Z/+JGgz15deiNinMw28IoVjW
- 7x8+EjQZ4goLLAZGlZQ4ig9GirZkNDIn3aCHHbEZmQUnj+97vAUgCjfYojwh4GqsMh0pU2RM7JM6
- ff/swKvor0QeP4AiZnAKxHve4KwowwkN7z2TCdiuRXiKFH8V1/umwVDg+9+LR0mEIsLnZxBJpLon
- s9sEZZ2qBeEQDN8N0KLtmOWQvusgXQbSeSSqvugRFkVmywb68yuzB5dQMujtM1zVze+fLZk63mKh
- xFNfM45ZM5uMry7RXFjWMHXh+xGjKYzgqDYVZU8Zo6UnqwvAeEq9a/Qi4uQsgIwFMQ4d3A28GMkc
- Nb2DkabSc+4sYyN21q78jOhQWG0FwPI0prWWD2EPGMe/8AKhygNGpm4sJVHf30KkGd9uEVLM1vfB
- 6qZLZo0aWv5G/TGwEVe2I/3wj9GhXEsV6zJXncQGmdrtqX1UEFYYvzA2DCaH9QOwVnwug+4nTBxY
- nOoWnjnw1+brezWpC5lH2Lp3prumMsAsI42xzZhhwKpi4Z7VUVFse7aTqwdqnbLTUt0ESo6oxuqc
- Jt+Jiqb15LJqf25mQkyYgS54VOZVmUVOWw5ZDmY+PbpIF5odN486Qr+APFl5NPMWfwpcy8H+POts
- nY0Ifx2EjfAX6PG2bFJZ/54Kho+Bg=
-X-QQ-XMRINFO: M/715EihBoGS47X28/vv4NpnfpeBLnr4Qg==
+ by newxmesmtplogicsvrsza63-0.qq.com (NewEsmtp) with SMTP
+ id 40327604; Mon, 13 Jul 2026 14:16:03 +0800
+X-QQ-mid: xmsmtpt1783923363toj50uo25
+Message-ID: <tencent_90E4200062E0A9E878FE14F33C2142E0DC09@qq.com>
+X-QQ-XMAILINFO: MvUAcPkRmFBfvGucvIW0S0ovxLtGqMxThm81AO11hogivdm8ub6GHPzED5BWtV
+ Fw1//pJyj8vkmMZFYJSLmQWQaMVcUjuq8yknQw/0S1iyX2m8L43Ahs6jrEqpl2p35eHkxKv4HBU0
+ /KQrjWfdUbMxP97n5t/Is/aRAw1/YX6h+PMjmyM4C0nBkTtE0WN1AwCKz3e1uExJpOJ6Snih7//h
+ V0O0PXKXVguaQfyAzvo6OhUe8iFGhWnVToOdnz7gPaDGUBA5gAq/K9s+5gaveo6hj1nvSjNxc1Uh
+ ltQ5Dp99XgAzEQ8hJ8gxP0nMewRXJZbG0PPpfPFO1lgX35Me267qVzussi5apWYjbLY4vZw4u6K7
+ rOG7DJNolAgAp3lI3zqYS4KnP0IcCH5c7GssQAYfO8m895ZgKcz4jwR1VsXjXPlpPzCGosg3KKrM
+ DT3i+cjQRxTN+P+awznlY1w2K8tUHbwCpQ5OsiCywNYJ4V3Xd5MOqV1++xKZAi8TQAGZ875xMkTd
+ m/0Q6Zaf6+dluR2xZqKK4I3C2lFuI9/5EAsQgty2LlfCvHGXbrWg81ot0RK0CnShZy3JJkjqA0bC
+ dkYrXSg49DVw5O5XWWTvdgT9KjbpTIxNKFwe+46bCVTxOG+13+DySd/dd+A3W/eFtgFm3lzmbhou
+ l5KamGEdIYG/8toTobWutInYTH2mUGRv5UOItAp7/lMet+AHYa3FEvO8DoWLIZe3j0L7MeWIbAVC
+ q/N8ktYk+G8deAhhmaFQHqPVFdv3GIj+Tytgnwk5lHLU52I6XeFjjDLCp2+qe3BEx0/b+E16JrhS
+ zKYRFe4yz6Nn/Rtu0MCMZCcd44fMbK/me72FwPy9FxXaFy4Xr80LlGo12UvFYG+a5AKV8Z37Azum
+ VuBVkvD5Vrd7tfRfsa3yg2txMBLaHg5wa9HbeQ5hKoWsTwqItL9O5V/TG6rTCYhQepD4hcyK7rFV
+ pm+TpTnuAHouPtMOV9l/tZ7Vmfl+sOoUn3YR4b5FECk+tyD6w81R/5A2FIq83r8aKEuLmfX8oB6d
+ yVd+x2DvX2cXayP1egRW5jQ/XPeBf7966L7ZYeYikPt1eK5Mu18ZyL8cFcdReoHJEl2b3T45IukW
+ pDPpv/Gv2qr3ACrY06thvYpfy3Mw==
+X-QQ-XMRINFO: MPJ6Tf5t3I/ylTmHUqvI8+Wpn+Gzalws3A==
 To: Jaegeuk Kim <jaegeuk@kernel.org>
-Date: Mon, 13 Jul 2026 14:02:37 +0800
-X-OQ-MSGID: <20260713060237.548-1-3497809730@qq.com>
+Date: Mon, 13 Jul 2026 14:16:01 +0800
+X-OQ-MSGID: <20260713061601.712-1-3497809730@qq.com>
 X-Mailer: git-send-email 2.52.0.windows.1
+In-Reply-To: <20260713055959.1865-1-3497809730@qq.com>
+References: <20260713055959.1865-1-3497809730@qq.com>
 MIME-Version: 1.0
 X-Spam-Score: 0.1 (/)
 X-Spam-Report: Spam detection software,
@@ -119,8 +122,9 @@ X-Spam-Report: Spam detection software,
  0.0 FREEMAIL_FROM Sender email is commonly abused enduser mail provider
  [3497809730(at)qq.com]
  -0.0 HELO_STATIC_HOST       Relay HELO'd using static hostname
-X-Headers-End: 1wj9kx-0001NQ-Vw
-Subject: [f2fs-dev] [PATCH] f2fs: fix ifolio leak in f2fs_get_new_data_folio
+X-Headers-End: 1wj9xf-000262-SK
+Subject: [f2fs-dev] [PATCH v2] f2fs: fix ifolio leak in
+ f2fs_get_new_data_folio
 X-BeenThere: linux-f2fs-devel@lists.sourceforge.net
 X-Mailman-Version: 2.1.21
 Precedence: list
@@ -151,27 +155,27 @@ X-Spamd-Result: default: False [-6.61 / 15.00];
 	R_DKIM_ALLOW(-0.20)[lists.sourceforge.net:s=beta];
 	MIME_GOOD(-0.10)[text/plain];
 	HAS_LIST_UNSUB(-0.01)[];
+	FORGED_RECIPIENTS(0.00)[m:jaegeuk@kernel.org,m:3497809730@qq.com,m:linux-kernel@vger.kernel.org,m:linux-f2fs-devel@lists.sourceforge.net,s:lists@lfdr.de];
+	FORGED_RECIPIENTS_MAILLIST(0.00)[];
 	RECEIVED_HELO_LOCALHOST(0.00)[];
 	RCVD_COUNT_THREE(0.00)[4];
-	RCVD_TLS_LAST(0.00)[];
 	DKIM_MIXED(0.00)[];
-	FORGED_RECIPIENTS(0.00)[m:jaegeuk@kernel.org,m:3497809730@qq.com,m:linux-kernel@vger.kernel.org,m:linux-f2fs-devel@lists.sourceforge.net,s:lists@lfdr.de];
 	FORGED_SENDER(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
 	TO_DN_SOME(0.00)[];
 	FREEMAIL_REPLYTO(0.00)[qq.com];
-	DMARC_POLICY_ALLOW(0.00)[lists.sourceforge.net,none];
+	RCVD_TLS_LAST(0.00)[];
 	MIME_TRACE(0.00)[0:+];
 	ARC_NA(0.00)[];
 	FORWARDED(0.00)[linux-f2fs-devel@lists.sourceforge.net];
-	FORGED_RECIPIENTS_MAILLIST(0.00)[];
-	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
 	FREEMAIL_CC(0.00)[qq.com,vger.kernel.org,lists.sourceforge.net];
+	REPLYTO_DOM_NEQ_FROM_DOM(0.00)[];
+	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,qq.com:s=s201512];
 	FORGED_SENDER_MAILLIST(0.00)[];
 	ALIAS_RESOLVED(0.00)[];
 	FORGED_SENDER_FORWARDING(0.00)[];
 	FROM_HAS_DN(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[linux-f2fs-devel@lists.sourceforge.net,linux-f2fs-devel-bounces@lists.sourceforge.net];
-	R_DKIM_REJECT(0.00)[sourceforge.net:s=x,sf.net:s=x,qq.com:s=s201512];
+	DMARC_POLICY_ALLOW(0.00)[lists.sourceforge.net,none];
 	FORGED_RECIPIENTS_FORWARDING(0.00)[];
 	ASN(0.00)[asn:11320, ipnet:216.105.32.0/21, country:US];
 	HAS_REPLYTO(0.00)[3497809730@qq.com];
@@ -179,9 +183,9 @@ X-Spamd-Result: default: False [-6.61 / 15.00];
 	REPLYTO_DOM_NEQ_TO_DOM(0.00)[];
 	RCPT_COUNT_THREE(0.00)[4];
 	DKIM_TRACE(0.00)[lists.sourceforge.net:+,sourceforge.net:-,sf.net:-,qq.com:-];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[lists.sourceforge.net:from_smtp,lists.sourceforge.net:dkim,lists.sourceforge.net:helo,lists.sourceforge.net:rdns,lists.sourceforge.net:from_mime,qq.com:replyto,qq.com:mid,qq.com:email]
+	DBL_BLOCKED_OPENRESOLVER(0.00)[qq.com:replyto,qq.com:mid,qq.com:email]
 X-Rspamd-Server: lfdr
-X-Rspamd-Queue-Id: 4CBA17476B2
+X-Rspamd-Queue-Id: 85F1874777B
 
 f2fs_get_new_data_folio() documents that ifolio is only set by
 make_empty_dir(), and that ifolio should be released by this function on
@@ -189,26 +193,33 @@ any error.
 
 The allocation failure path already follows this rule, but the
 f2fs_reserve_block() failure path only drops the newly grabbed folio and
-returns the error.  When make_empty_dir() passes a non-NULL ifolio, this
-leaves the extra inode folio reference held by the caller.
+returns the error.  When make_empty_dir() passes a non-NULL ifolio, an
+early f2fs_reserve_block() failure can leave the extra inode folio
+reference held by the caller.
 
-Release ifolio before returning from the f2fs_reserve_block() failure
-path.
+Release ifolio on this error path if f2fs_reserve_block() has not already
+cleared dn.inode_folio.
 
 Signed-off-by: Guanghui Yang <3497809730@qq.com>
 ---
- fs/f2fs/data.c | 1 +
- 1 file changed, 1 insertion(+)
+
+Changes since v1:
+- Check dn.inode_folio before releasing ifolio to avoid a double put when
+  f2fs_reserve_block() has already cleared the dnode.
+
+ fs/f2fs/data.c | 2 ++
+ 1 file changed, 2 insertions(+)
 
 diff --git a/fs/f2fs/data.c b/fs/f2fs/data.c
-index a765fda71536..e66aefc573d9 100644
+index a765fda71536..6c573d392dac 100644
 --- a/fs/f2fs/data.c
 +++ b/fs/f2fs/data.c
-@@ -1477,6 +1477,7 @@ struct folio *f2fs_get_new_data_folio(struct inode *inode,
+@@ -1477,6 +1477,8 @@ struct folio *f2fs_get_new_data_folio(struct inode *inode,
  	err = f2fs_reserve_block(&dn, index);
  	if (err) {
  		f2fs_folio_put(folio, true);
-+		f2fs_folio_put(ifolio, true);
++		if (dn.inode_folio)
++			f2fs_folio_put(ifolio, true);
  		return ERR_PTR(err);
  	}
  	if (!ifolio)
@@ -216,6 +227,7 @@ index a765fda71536..e66aefc573d9 100644
 base-commit: a13c140cc289c0b7b3770bce5b3ad42ab35074aa
 -- 
 2.52.0.windows.1
+
 
 
 
